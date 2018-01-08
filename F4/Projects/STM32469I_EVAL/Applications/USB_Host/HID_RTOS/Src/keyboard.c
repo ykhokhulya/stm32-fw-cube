@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_RTOS/Src/keyboard.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements the HID keyboard functions
   ******************************************************************************
   * @attention
@@ -44,25 +42,25 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define KYBRD_FIRST_COLUMN               (uint16_t)7
-#define KYBRD_LAST_COLUMN                (uint16_t)479
-#define KYBRD_FIRST_LINE                 (uint8_t) 90
+#define KYBRD_FIRST_COLUMN               (uint16_t)10
+#define KYBRD_LAST_COLUMN                (uint16_t)794
+#define KYBRD_FIRST_LINE                 (uint16_t) 80
 #define SMALL_FONT_COLUMN_WIDTH                    8
-#define SMALL_FONT_LINE_WIDTH                      15
-#define KYBRD_LAST_LINE                  (uint16_t)200
-
+#define SMALL_FONT_LINE_WIDTH                      20
+#define KYBRD_LAST_LINE                  (uint16_t)320
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern HID_DEMO_StateMachine hid_demo;
 extern uint8_t *DEMO_KEYBOARD_menu[];
 extern uint8_t prev_select;
 extern uint32_t hid_demo_ready;
-uint8_t KeybrdCharYpos = 0;
+uint16_t KeybrdCharYpos = 0;
 uint16_t KeybrdCharXpos = 0;
 uint16_t CurrentLastXpos[KYBRD_LAST_LINE] = {0};
 /* Private function prototypes -----------------------------------------------*/
@@ -89,7 +87,7 @@ void HID_KeyboardMenuProcess(void)
   case HID_KEYBOARD_WAIT:
     if(hid_demo.select != prev_select)
     {
-      prev_select = hid_demo.select ;
+      prev_select = hid_demo.select;
       HID_SelectItem(DEMO_KEYBOARD_menu, hid_demo.select & 0x7F);
       /* Handle select item */
       if(hid_demo.select & 0x80)
@@ -135,7 +133,7 @@ static void USR_KEYBRD_Init(void)
   LCD_LOG_ClearTextZone();
   BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
 
-  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"Use Keyboard to tape characters:                                                            ");
+  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"Use Keyboard to type characters:");
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
 
   KeybrdCharYpos = KYBRD_FIRST_LINE;

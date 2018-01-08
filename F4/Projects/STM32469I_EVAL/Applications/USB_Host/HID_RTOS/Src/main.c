@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_RTOS/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB host HID Mouse and Keyboard demo main file
   ******************************************************************************
   * @attention
@@ -136,8 +134,6 @@ static void StartThread(void const * argument)
         break;
       }
     }
-
-    Toggle_Leds();
   }
 }
 
@@ -178,13 +174,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
   */
 static void HID_InitApplication(void)
 {
-  /* Configure LED1s */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-
-  /* Configure KEY Button */
+  /* Configure Tamper Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
 
   /* Configure Joystick in EXTI mode */
@@ -209,25 +199,6 @@ static void HID_InitApplication(void)
   /* Start HID Interface */
   USBH_UsrLog("Starting HID Demo");
   HID_MenuInit();
-}
-
-/**
-  * @brief  Toggles LEDs to show user input state.
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-
-  if(ticks++ == 100)
-  {
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    BSP_LED_Toggle(LED4);
-    ticks = 0;
-  }
 }
 
 /**

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/dual_menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Dual Core Process
   ******************************************************************************
   * @attention
@@ -60,7 +58,9 @@ uint8_t *DEMO_main_menu[] =
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint8_t prev_select = 0;
+uint8_t joy_select = 0;
 DEMO_StateMachine demo;
+JOYState_TypeDef JoyState = JOY_NONE;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -78,8 +78,8 @@ void DUAL_MenuInit(void)
   LCD_UsrLogY("USB Host High speed initialized.\n");
 
   BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(18, (uint8_t *)"Use [Joystick Up/Down] to scroll DUAL menu");
+  BSP_LCD_DisplayStringAtLine(24, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
+  BSP_LCD_DisplayStringAtLine(25, (uint8_t *)"Use [Joystick Up/Down] to scroll DUAL menu");
   Demo_SelectItem(DEMO_main_menu, 0);
 }
 
@@ -189,6 +189,29 @@ void DUAL_MenuProcess(void)
     break;
   }
 
+  if(joy_select == 1)
+  {
+    Demo_ProbeKey(JoyState);
+
+    switch(JoyState)
+    {
+    case JOY_LEFT:
+      LCD_LOG_ScrollBack();
+      break;
+
+    case JOY_RIGHT:
+      LCD_LOG_ScrollForward();
+      break;
+
+    default:
+      break;
+    }
+
+    joy_select = 0;
+
+    /* Clear joystick interrupt pending bits */
+    BSP_IO_ITClear();
+  }
   if(Appli_FS_state == APPLICATION_FS_DISCONNECT)
   {
     Appli_FS_state = APPLICATION_IDLE;
@@ -245,37 +268,41 @@ void Demo_SelectItem(uint8_t **menu, uint8_t item)
   {
   case 0:
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
+    BSP_LCD_DisplayStringAtLine(26, menu[0]);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    BSP_LCD_DisplayStringAtLine(27, menu[1]);
+    BSP_LCD_DisplayStringAtLine(28, menu[2]);
+    BSP_LCD_DisplayStringAtLine(29, menu[3]);
     break;
 
   case 1:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
+    BSP_LCD_DisplayStringAtLine(26, menu[0]);
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
+    BSP_LCD_DisplayStringAtLine(27, menu[1]);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    BSP_LCD_DisplayStringAtLine(28, menu[2]);
+    BSP_LCD_DisplayStringAtLine(29, menu[3]);
     break;
 
   case 2:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
+    BSP_LCD_DisplayStringAtLine(26, menu[0]);
+    BSP_LCD_DisplayStringAtLine(27, menu[1]);
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    BSP_LCD_DisplayStringAtLine(28, menu[2]);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_DisplayStringAtLine(29, menu[3]);
     break;
 
   case 3:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[2]);
+    BSP_LCD_DisplayStringAtLine(26, menu[0]);
+    BSP_LCD_DisplayStringAtLine(27, menu[1]);
+    BSP_LCD_DisplayStringAtLine(28, menu[2]);
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[3]);
+    BSP_LCD_DisplayStringAtLine(29, menu[3]);
+
     break;
 
   default:
@@ -291,8 +318,6 @@ void Demo_SelectItem(uint8_t **menu, uint8_t item)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  static JOYState_TypeDef JoyState = JOY_NONE;
-
   if(GPIO_Pin == MFX_IRQOUT_PIN)
   {
     /* The different functionalities of MFX (TS, Joystick, SD detection, etc. )
@@ -305,29 +330,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     In order to avoid to use "blocking I2C communication" on interrupt service routines
     it's suggested (as alternative to this implementation) to use dedicated semaphore*/
 
+    joy_select = 1;
+
     /* Get the Joystick State */
     JoyState = BSP_JOY_GetState();
-    HAL_Delay(200);
-
-    Demo_ProbeKey(JoyState);
-
-    switch(JoyState)
-    {
-    case JOY_LEFT:
-      LCD_LOG_ScrollBack();
-      break;
-
-    case JOY_RIGHT:
-      LCD_LOG_ScrollForward();
-      break;
-
-    default:
-      break;
-    }
-
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
   }
+   HAL_Delay(400);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

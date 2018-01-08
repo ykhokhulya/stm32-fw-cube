@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/command.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file provides all the IAP command functions.
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -156,7 +155,7 @@ void COMMAND_Download(void)
   /* Open the binary file to be downloaded */
   if(f_open(&MyFileR, DOWNLOAD_FILENAME, FA_READ) == FR_OK)
   {
-    if(MyFileR.fsize > USER_FLASH_SIZE)
+if(f_size(&MyFileR) > USER_FLASH_SIZE)
     {
       /* No available Flash memory size for the binary file: Turn LED4 On and
          Toggle LED3 in infinite loop */

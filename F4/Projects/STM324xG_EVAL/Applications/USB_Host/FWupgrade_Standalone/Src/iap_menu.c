@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/iap_menu.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   COMMAND IAP Execute Application
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -59,6 +58,7 @@ __IO uint32_t UploadCondition = 0x00;
 DIR dir;
 FILINFO fno;
 static uint8_t Demo_State = DEMO_INIT;
+extern char USBDISKPath[4];
 
 /* Private function prototypes -----------------------------------------------*/
 static void IAP_UploadTimeout(void);
@@ -77,11 +77,14 @@ void FW_UPGRADE_Process(void)
   {
   case DEMO_INIT:
     /* Register the file system object to the FatFs module */
-    if(f_mount(&USBH_fatfs, "", 0 ) != FR_OK )
+	if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
     {
-      /* FatFs initialization fails */
-      /* Toggle LED3 and LED4 in infinite loop */
-      FatFs_Fail_Handler();
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        /* FatFs initialization fails */
+        /* Toggle LED3 and LED4 in infinite loop */
+        FatFs_Fail_Handler();
+      }
     }
 
     /* Go to IAP menu */

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -52,6 +51,8 @@
 #include "usbh_core.h"
 #include "usbh_msc.h"
 #include "ff.h"
+#include "ff_gen_drv.h"
+#include "usbh_diskio_dma.h"
 #include "stm324x9i_eval.h"
 #include "flash_if.h"
 #include "command.h"

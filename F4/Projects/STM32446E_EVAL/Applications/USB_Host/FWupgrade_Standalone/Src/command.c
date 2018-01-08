@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/command.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   This file provides all the IAP command functions.
   ******************************************************************************
   * @attention
@@ -44,31 +42,31 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private defines -----------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private defines ----------------------------------------------------------- */
 #define UPLOAD_FILENAME            "0:UPLOAD.BIN"
 #define DOWNLOAD_FILENAME          "0:image.BIN"
 
-/* Private macros ------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private macros ------------------------------------------------------------ */
+/* Private variables --------------------------------------------------------- */
 static uint32_t TmpReadSize = 0x00;
 static uint32_t RamAddress = 0x00;
 static __IO uint32_t LastPGAddress = APPLICATION_ADDRESS;
-static uint8_t RAM_Buf[BUFFER_SIZE] = {0x00};
+static uint8_t RAM_Buf[BUFFER_SIZE] = { 0x00 };
 
 FATFS USBH_fatfs;
-FIL MyFile; /* File object for upload operation */
-FIL MyFileR;  /* File object for download operation */
+FIL MyFile;                     /* File object for upload operation */
+FIL MyFileR;                    /* File object for download operation */
 extern DIR dir;
 extern FILINFO fno;
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 static void COMMAND_ProgramFlashMemory(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  IAP Read all flash memory.
@@ -156,7 +154,7 @@ void COMMAND_Download(void)
   /* Open the binary file to be downloaded */
   if(f_open(&MyFileR, DOWNLOAD_FILENAME, FA_READ) == FR_OK)
   {
-    if(MyFileR.fsize > USER_FLASH_SIZE)
+if(f_size(&MyFileR) > USER_FLASH_SIZE)
     {
       /* No available Flash memory size for the binary file: Turn LED4 On and
          Toggle LED3 in infinite loop */
@@ -243,7 +241,7 @@ static void COMMAND_ProgramFlashMemory(void)
       readflag = FALSE;
     }
 
-     /* Program flash memory */
+    /* Program flash memory */
     for (programcounter = 0; programcounter < TmpReadSize; programcounter += 4)
     {
       /* Write word into flash memory */

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/hid_menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements HID Menu Functions
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -76,13 +75,13 @@ void HID_MenuProcess(void)
         hid_demo.keyboard_state = HID_KEYBOARD_IDLE;
         hid_demo.state = HID_DEMO_KEYBOARD;
         BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-        BSP_LCD_DisplayStringAtLine(19, (uint8_t *)"Press User button to start");
+        BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"Press User button to start");
 
         /* Wait for User Input */
         while((BSP_PB_GetState(BUTTON_WAKEUP) != SET) && (Appli_state != APPLICATION_DISCONNECT))
         {
         }
-        BSP_LCD_ClearStringLine(19);
+        BSP_LCD_ClearStringLine(27);
 
         HID_KeyboardMenuProcess();
       }
@@ -92,13 +91,13 @@ void HID_MenuProcess(void)
         hid_demo.state = HID_DEMO_MOUSE;
 
         BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-        BSP_LCD_DisplayStringAtLine(19, (uint8_t *)"Press User button to start");
+        BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"Press User button to start");
 
         /* Wait for User Input */
         while((BSP_PB_GetState(BUTTON_WAKEUP) != SET) && (Appli_state != APPLICATION_DISCONNECT))
         {
         }
-        BSP_LCD_ClearStringLine(19);
+        BSP_LCD_ClearStringLine(27);
 
         HID_MouseMenuProcess();
       }
@@ -139,12 +138,13 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
   HID_MOUSE_Info_TypeDef *m_pinfo;
 
   m_pinfo = USBH_HID_GetMouseInfo(phost);
+
   if(m_pinfo != NULL)
   {
     /* Handle Mouse data position */
     USR_MOUSE_ProcessData(&mouse_info);
 
-    if( m_pinfo->buttons[0])
+    if(m_pinfo->buttons[0])
     {
       HID_MOUSE_ButtonPressed(0);
     }
@@ -153,7 +153,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
       HID_MOUSE_ButtonReleased(0);
     }
 
-    if( m_pinfo->buttons[1])
+    if(m_pinfo->buttons[1])
     {
       HID_MOUSE_ButtonPressed(2);
     }
@@ -162,7 +162,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
       HID_MOUSE_ButtonReleased(2);
     }
 
-    if( m_pinfo->buttons[2])
+    if(m_pinfo->buttons[2])
     {
       HID_MOUSE_ButtonPressed(1);
     }

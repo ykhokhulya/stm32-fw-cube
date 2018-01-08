@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -55,6 +54,8 @@
 #include "stm32469i_discovery_lcd.h"
 #include "usbh_msc.h"
 #include "ff.h"
+#include "ff_gen_drv.h"
+#include "usbh_diskio_dma.h"
 #include "flash_if.h"
 #include "command.h"
 
@@ -65,7 +66,6 @@ typedef enum {
   APPLICATION_CONNECT,
   APPLICATION_DISCONNECT,
 }FW_ApplicationTypeDef;
-
 
 extern USBH_HandleTypeDef hUSBHost;
 extern FATFS USBH_fatfs;

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Inc/usbh_conf.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   General low level driver configuration
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USBH_CONF_H
 #define __USBH_CONF_H

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/mouse.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements Functions for mouse menu
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -66,18 +65,18 @@ extern USBH_HandleTypeDef  hUSBHost;
 #define MOUSE_RIGHT_DIR                 0x00
 
 #define MOUSE_WINDOW_X                  120
-#define MOUSE_WINDOW_Y                  110
+#define MOUSE_WINDOW_Y                  120
 #define MOUSE_WINDOW_X_MAX              181
 #define MOUSE_WINDOW_Y_MIN              101
-#define MOUSE_WINDOW_HEIGHT             70
-#define MOUSE_WINDOW_WIDTH              145
+#define MOUSE_WINDOW_HEIGHT             200
+#define MOUSE_WINDOW_WIDTH              500
 
-#define HID_MOUSE_BUTTON_HEIGHT         10
-#define HID_MOUSE_BUTTON_WIDTH          24
+#define HID_MOUSE_BUTTON_HEIGHT         30
+#define HID_MOUSE_BUTTON_WIDTH          50
 #define HID_MOUSE_BUTTON1_XCHORD        120
-#define HID_MOUSE_BUTTON2_XCHORD        180
-#define HID_MOUSE_BUTTON3_XCHORD        240
-#define HID_MOUSE_BUTTON_YCHORD         190
+#define HID_MOUSE_BUTTON2_XCHORD        340
+#define HID_MOUSE_BUTTON3_XCHORD        570
+#define HID_MOUSE_BUTTON_YCHORD         340
 
 #define MOUSE_LEFT_MOVE                  1
 #define MOUSE_RIGHT_MOVE                 2
@@ -116,14 +115,13 @@ void HID_MouseMenuProcess(void)
   case HID_MOUSE_WAIT:
     if(hid_demo.select != prev_select)
     {
-      prev_select = hid_demo.select ;
+      prev_select = hid_demo.select;
       HID_SelectItem(DEMO_MOUSE_menu, hid_demo.select & 0x7F);
 
       /* Handle select item */
       if(hid_demo.select & 0x80)
       {
-        hid_demo.select &= 0x7F;
-        switch(hid_demo.select)
+        switch(hid_demo.select & 0x7F)
         {
         case 0:
           hid_demo.mouse_state = HID_MOUSE_START;
@@ -205,15 +203,15 @@ static void HID_MOUSE_UpdatePosition(int8_t x, int8_t y)
   if((x != 0) || (y != 0))
   {
     x_loc += x/2;
-    y_loc += y/10;
+    y_loc += y/2;
 
-    if(y_loc > MOUSE_WINDOW_HEIGHT - 20)
+    if(y_loc > (MOUSE_WINDOW_HEIGHT - 16))
     {
-      y_loc = MOUSE_WINDOW_HEIGHT - 20;
+      y_loc = MOUSE_WINDOW_HEIGHT - 16;
     }
-    if(x_loc > MOUSE_WINDOW_WIDTH - 15)
+    if(x_loc > (MOUSE_WINDOW_WIDTH - 12))
     {
-      x_loc = MOUSE_WINDOW_WIDTH - 15;
+      x_loc = MOUSE_WINDOW_WIDTH - 12;
     }
 
     if(y_loc < 2)

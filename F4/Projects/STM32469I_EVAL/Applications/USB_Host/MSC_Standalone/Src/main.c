@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB host Mass storage demo main file
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -53,6 +52,7 @@
 /* Private variables ---------------------------------------------------------*/
 USBH_HandleTypeDef hUSBHost;
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
+char USBDISKPath[4];            /* USB Host logical drive path */
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -89,12 +89,6 @@ int main(void)
   /* Start Host Process */
   USBH_Start(&hUSBHost);
 
-  /* Register the file system object to the FatFs module */
-  if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
-  {
-    LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
-  }
-
   /* Run Application (Blocking mode) */
   while (1)
   {
@@ -103,8 +97,6 @@ int main(void)
 
     /* MSC Menu Process */
     MSC_MenuProcess();
-
-    Toggle_Leds();
   }
 }
 
@@ -115,17 +107,11 @@ int main(void)
   */
 static void MSC_InitApplication(void)
 {
-  /* Configure Key Button */
-  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+  /* Configure Tamper Button */
+  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
 
   /* Configure Joystick in EXTI mode */
   BSP_JOY_Init(JOY_MODE_EXTI);
-
-  /* Configure LED1, LED2, LED3 and LED4 */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
 
   /* Initialize the LCD */
   BSP_LCD_Init();
@@ -136,7 +122,11 @@ static void MSC_InitApplication(void)
   LCD_LOG_Init();
 
 #ifdef USE_USB_HS
+#ifdef USE_USB_HS_IN_FS
+  LCD_LOG_SetHeader((uint8_t *)" USB OTG HS-IN-FS MSC Host");
+#else
   LCD_LOG_SetHeader((uint8_t *)" USB OTG HS MSC Host");
+#endif
 #else
   LCD_LOG_SetHeader((uint8_t *)" USB OTG FS MSC Host");
 #endif
@@ -156,18 +146,21 @@ static void MSC_InitApplication(void)
   */
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 {
-  switch(id)
+  switch (id)
   {
   case HOST_USER_SELECT_CONFIGURATION:
     break;
 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
-    if(f_mount(NULL, "", 0) != FR_OK)
+    if (f_mount(NULL, "", 0) != FR_OK)
     {
       LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
     }
-
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink FatFS Driver! \n");
+    }
     break;
 
   case HOST_USER_CLASS_ACTIVE:
@@ -175,33 +168,17 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     break;
 
   case HOST_USER_CONNECTION:
-    if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
+    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
     {
-      LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+      }
     }
     break;
 
   default:
     break;
-  }
-}
-
-/**
-  * @brief  Toggles LEDs to show user input state.
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-
-  if(ticks++ == 100)
-  {
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    BSP_LED_Toggle(LED4);
-    ticks = 0;
   }
 }
 

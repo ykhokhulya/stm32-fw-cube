@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/menu.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file implements MSC Menu Functions
   ******************************************************************************
   * @attention
@@ -129,7 +127,15 @@ void MSC_MenuProcess(void)
     /* Display disk content */
     if(Appli_state == APPLICATION_MSC)
     {
-      Explore_Disk("0:/", 1);
+      /* Register the file system object to the FatFs module */
+      if(f_mount(&USBH_fatfs, "", 0 ) != FR_OK)
+      {
+        LCD_ErrLog("Cannot Initialize FatFs! \n");
+      }
+      else
+      {
+        Explore_Disk("0:/", 1);
+      }
     }
     msc_demo.state = MSC_DEMO_WAIT;
     break;

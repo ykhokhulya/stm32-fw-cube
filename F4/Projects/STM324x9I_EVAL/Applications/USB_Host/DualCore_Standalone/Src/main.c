@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   USB host DUALCORE demo main file
   ******************************************************************************
   * @attention
@@ -55,6 +53,7 @@ USBH_HandleTypeDef hUSBHost_FS;
 USBH_HandleTypeDef hUSBHost_HS;
 DUAL_ApplicationTypeDef Appli_FS_state = APPLICATION_IDLE;
 DUAL_ApplicationTypeDef Appli_HS_state = APPLICATION_IDLE;
+char USBDISKPath[4];            /* USB Host logical drive path */
 
 /* Private function prototypes ----------------------------------------------- */
 static void SystemClock_Config(void);
@@ -96,12 +95,6 @@ int main(void)
   /* Start Host Process */
   USBH_Start(&hUSBHost_FS);
   USBH_Start(&hUSBHost_HS);
-
-  /* Register the file system object to the FatFs module */
-  if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
-  {
-    LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
-  }
 
   /* Run Application (Blocking mode) */
   while (1)
@@ -201,6 +194,14 @@ static void USBH_HS_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
 
   case HOST_USER_DISCONNECTION:
     Appli_HS_state = APPLICATION_HS_DISCONNECT;
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink FatFS Driver! \n");
+    }
     break;
 
   case HOST_USER_CLASS_ACTIVE:
@@ -209,6 +210,13 @@ static void USBH_HS_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
 
   case HOST_USER_CONNECTION:
     Appli_HS_state = APPLICATION_HS_START;
+    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
+    {
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+      }
+    }
     break;
   }
 }

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -44,19 +42,22 @@
   *
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "stdio.h"
-#include "usbh_core.h"
-#include "usbh_msc.h"
 #include "stm32469i_eval.h"
 #include "stm32469i_eval_io.h"
 #include "stm32469i_eval_lcd.h"
 #include "lcd_log.h"
+#include "usbh_core.h"
+#include "usbh_msc.h"
 #include "ff.h"
+#include "ff_gen_drv.h"
+#include "usbh_diskio_dma.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
@@ -89,7 +90,6 @@ extern MSC_ApplicationTypeDef Appli_state;
 /* Exported functions ------------------------------------------------------- */
 FRESULT Explore_Disk(char *path, uint8_t recu_level);
 void MSC_File_Operations(void);
-void Toggle_Leds(void);
 void Menu_Init(void);
 void MSC_MenuProcess(void);
 

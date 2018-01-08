@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -52,24 +51,24 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 HID_DEMO_StateMachine hid_demo;
-uint8_t               prev_select = 0;
+uint8_t prev_select = 0;
 
 uint8_t *DEMO_KEYBOARD_menu[] =
 {
-  (uint8_t *)"      1 - Start Keyboard / Clear                                            ",
-  (uint8_t *)"      2 - Return                                                            ",
+  (uint8_t *)"      1 - Start Keyboard / Clear                                                                                   ",
+  (uint8_t *)"      2 - Return                                                                                                   ",
 };
 
 uint8_t *DEMO_MOUSE_menu[] =
 {
-  (uint8_t *)"      1 - Start Mouse / Re-Initialize                                       ",
-  (uint8_t *)"      2 - Return                                                            ",
+  (uint8_t *)"      1 - Start Mouse / Re-Initialize                                                                              ",
+  (uint8_t *)"      2 - Return                                                                                                   ",
 };
 
 uint8_t *DEMO_HID_menu[] =
 {
-  (uint8_t *)"      1 - Start HID                                                         ",
-  (uint8_t *)"      2 - Re-Enumerate                                                      ",
+  (uint8_t *)"      1 - Start HID                                                                                                ",
+  (uint8_t *)"      2 - Re-Enumerate                                                                                             ",
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -90,8 +89,8 @@ void HID_MenuInit(void)
   USBH_UsrLog("Starting HID Demo");
 
   BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll HID menu");
+  BSP_LCD_DisplayStringAtLine(26, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
+  BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"Use [Joystick Up/Down] to scroll HID menu");
   hid_demo.state = HID_DEMO_IDLE;
   HID_MenuProcess();
 }
@@ -209,21 +208,20 @@ void HID_SelectItem(uint8_t **menu, uint8_t item)
   {
   case 0:
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(18, menu [0]);
+    BSP_LCD_DisplayStringAtLine(28, menu [0]);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19,  menu [1]);
+    BSP_LCD_DisplayStringAtLine(29,  menu [1]);
     break;
 
   case 1:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(18, menu [0]);
+    BSP_LCD_DisplayStringAtLine(28, menu [0]);
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu [1]);
+    BSP_LCD_DisplayStringAtLine(29, menu [1]);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     break;
   }
   BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-
 }
 
 /**
@@ -255,7 +253,7 @@ static void HID_DEMO_ProbeKey(JOYState_TypeDef state)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  static JOYState_TypeDef JoyState = JOY_NONE;
+  __IO JOYState_TypeDef JoyState = JOY_NONE;
 
   if(GPIO_Pin == MFX_IRQOUT_PIN)
   {
@@ -304,6 +302,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
   HID_MOUSE_Info_TypeDef *m_pinfo;
 
   m_pinfo = USBH_HID_GetMouseInfo(phost);
+
   if(m_pinfo != NULL)
   {
     /* Handle Mouse data position */
@@ -347,6 +346,7 @@ static void USBH_KeybdDemo(USBH_HandleTypeDef *phost)
 {
   HID_KEYBD_Info_TypeDef *k_pinfo;
   char c;
+
   k_pinfo = USBH_HID_GetKeybdInfo(phost);
 
   if(k_pinfo != NULL)

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Inc/command.h
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Header file for command.c
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __COMMAND_H
 #define __COMMAND_H

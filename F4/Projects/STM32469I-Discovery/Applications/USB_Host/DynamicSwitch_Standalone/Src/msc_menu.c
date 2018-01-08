@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements MSC Menu Functions
   ******************************************************************************
   * @attention
@@ -44,13 +42,13 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 MSC_DEMO_StateMachine msc_demo;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,7 +67,7 @@ void MSC_MenuProcess(void)
     if(Appli_state == APPLICATION_MSC)
     {
       BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-      BSP_LCD_DisplayStringAtLine(19, (uint8_t *)"Press User button to start read and write operations");
+      BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"Press User button to start read and write operations");
 
       /* Wait for User Input */
       while((BSP_PB_GetState(BUTTON_WAKEUP) != SET) && (Appli_state != APPLICATION_DISCONNECT))
@@ -80,7 +78,7 @@ void MSC_MenuProcess(void)
       /* Prevent debounce effect for user key */
       HAL_Delay(400);
 
-      BSP_LCD_ClearStringLine(19);
+      BSP_LCD_ClearStringLine(27);
     }
     break;
 
@@ -91,7 +89,7 @@ void MSC_MenuProcess(void)
       MSC_File_Operations();
 
       BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-      BSP_LCD_DisplayStringAtLine(19, (uint8_t *)"Press User button to display disk content");
+      BSP_LCD_DisplayStringAtLine(27, (uint8_t *)"Press User button to display disk content");
 
       /* Wait for User Input */
       while((BSP_PB_GetState(BUTTON_WAKEUP) != SET) && (Appli_state != APPLICATION_DISCONNECT))
@@ -102,7 +100,7 @@ void MSC_MenuProcess(void)
       /* Prevent debounce effect for user key */
       HAL_Delay(400);
 
-      BSP_LCD_ClearStringLine(19);
+      BSP_LCD_ClearStringLine(27);
     }
     break;
 
@@ -110,19 +108,11 @@ void MSC_MenuProcess(void)
     /* Display disk content */
     if(Appli_state == APPLICATION_MSC)
     {
-      /* Register the file system object to the FatFs module */
-      if(f_mount(&USBH_fatfs, "", 0 ) != FR_OK )
-      {
-        LCD_ErrLog("Cannot Initialize FatFs! \n");
-      }
-      else
-      {
-        Explore_Disk("0:/", 1);
-        msc_demo.state = MSC_DEMO_START;
+      Explore_Disk("0:/", 1);
+      msc_demo.state = MSC_DEMO_START;
 
-        /* Prevent debounce effect for user key */
-        HAL_Delay(400);
-      }
+      /* Prevent debounce effect for user key */
+      HAL_Delay(400);
     }
     break;
 

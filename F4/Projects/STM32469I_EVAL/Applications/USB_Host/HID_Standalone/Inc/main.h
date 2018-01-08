@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -106,7 +104,6 @@ extern uint8_t prev_select;
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void Toggle_Leds(void);
 void HID_SelectItem(uint8_t **menu, uint8_t item);
 void HID_MenuInit(void);
 void HID_MenuProcess(void);

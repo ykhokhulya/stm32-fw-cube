@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -62,12 +60,12 @@ HCD_HandleTypeDef hhcd;
   */
 void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct;
+  GPIO_InitTypeDef GPIO_InitStruct;
 
   if(hhcd->Instance == USB_OTG_FS)
   {
     /* Configure USB FS GPIOs */
-     __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
 
     GPIO_InitStruct.Pin = (GPIO_PIN_11 | GPIO_PIN_12);
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -118,7 +116,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* D1 D2 D3 D4 D5 D6 D7 */
-    GPIO_InitStruct.Pin = GPIO_PIN_0  | GPIO_PIN_1  | GPIO_PIN_5 |\
+    GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_5 |\
       GPIO_PIN_10 | GPIO_PIN_2 | GPIO_PIN_12 | GPIO_PIN_13;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;

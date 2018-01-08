@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD_RTOS/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -31,14 +29,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
+#include "cmsis_os.h"
 /* EVAL includes component */
 #include "stm32446e_eval.h"
-#include "stm32446e_eval_camera.h"
 
 /* FatFs includes component */
 #include "ff_gen_drv.h"
-#include "sd_diskio.h"
+#include "sd_diskio_dma.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

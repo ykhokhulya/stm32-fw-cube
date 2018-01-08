@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   LCD Log configuration file.
   ******************************************************************************
   * @attention
@@ -74,9 +72,9 @@
 
 /* Define the cache depth */
 #define     CACHE_SIZE              100
-#define     YWINDOW_SIZE            10
+#define     YWINDOW_SIZE            20
 
-#if (YWINDOW_SIZE > 14)
+#if (YWINDOW_SIZE > 20)
   #error "Wrong YWINDOW SIZE"
 #endif
 

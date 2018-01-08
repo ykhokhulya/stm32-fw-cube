@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB host Dual core HID and MSC demo main file
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -55,6 +54,7 @@ USBH_HandleTypeDef hUSBHost_FS;
 USBH_HandleTypeDef hUSBHost_HS;
 DUAL_ApplicationTypeDef Appli_FS_state = APPLICATION_IDLE;
 DUAL_ApplicationTypeDef Appli_HS_state = APPLICATION_IDLE;
+char USBDISKPath[4];            /* USB Host logical drive path */
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -97,12 +97,6 @@ int main(void)
   USBH_Start(&hUSBHost_FS);
   USBH_Start(&hUSBHost_HS);
 
-  /* Register the file system object to the FatFs module */
-  if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
-  {
-    LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
-  }
-
   /* Run Application (Blocking mode)*/
   while (1)
   {
@@ -112,8 +106,6 @@ int main(void)
 
     /* DUAL Menu Process */
     DUAL_MenuProcess();
-
-    Toggle_Leds();
   }
 }
 
@@ -130,7 +122,7 @@ static void DUAL_InitApplication(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
-  /* Configure KEY Button */
+  /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
 
   /* Configure Joystick in EXTI mode */
@@ -169,7 +161,6 @@ static void USBH_FS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 
   case HOST_USER_DISCONNECTION:
     Appli_FS_state = APPLICATION_FS_DISCONNECT;
-
     break;
 
   case HOST_USER_CLASS_ACTIVE:
@@ -190,13 +181,21 @@ static void USBH_FS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
   */
 static void USBH_HS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 {
-  switch(id)
+  switch (id)
   {
   case HOST_USER_SELECT_CONFIGURATION:
     break;
 
   case HOST_USER_DISCONNECTION:
     Appli_HS_state = APPLICATION_HS_DISCONNECT;
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink USB FatFS Driver! \n");
+    }
     break;
 
   case HOST_USER_CLASS_ACTIVE:
@@ -205,6 +204,13 @@ static void USBH_HS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 
   case HOST_USER_CONNECTION:
     Appli_HS_state = APPLICATION_HS_START;
+    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
+    {
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+      }
+    }
     break;
   }
 }

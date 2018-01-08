@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   USB host Dynamic Class Switch demo main file
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -53,7 +52,7 @@
 /* Private variables ---------------------------------------------------------*/
 USBH_HandleTypeDef hUSBHost;
 DS_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
-extern char USBDISKPath[4];
+char USBDISKPath[4];
 extern char SD_Path[4];
 
 /* Private function prototypes -----------------------------------------------*/
@@ -95,12 +94,6 @@ int main(void)
   /* Start Host Process */
   USBH_Start(&hUSBHost);
 
-  /* Register the file system object to the FatFs module */
-  if(f_mount(&USBH_fatfs, "", 0 ) != FR_OK )
-  {
-    LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
-  }
-
   /* Run Application (Blocking mode)*/
   while (1)
   {
@@ -131,6 +124,29 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     {
       Audio_ChangeSelectMode(AUDIO_SELECT_MENU);
     }
+
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink USB FatFS Driver! \n");
+    }
+
+    /* Unlink the micro SD disk I/O driver */
+    if (FATFS_UnLinkDriver(SD_Path) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink SD FatFS Driver! \n");
+    }
+    /* Init the LCD Log module */
+    LCD_LOG_Init();
+
+#ifdef USE_USB_HS
+  LCD_LOG_SetHeader((uint8_t *)" USB HS DynamicSwitch Host");
+#else
+  LCD_LOG_SetHeader((uint8_t *)" USB FS DynamicSwitch Host");
+#endif
     break;
 
   case HOST_USER_CONNECTION:
@@ -142,7 +158,13 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     case USB_MSC_CLASS:
       Appli_state = APPLICATION_MSC;
       /* Link the USB disk I/O driver */
-      FATFS_LinkDriver(&USBH_Driver, USBDISKPath);
+      if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
+      {
+        if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+        {
+          LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+        }
+      }
       break;
 
     case AC_CLASS:

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FatFs/FatFs_uSD/readme.txt
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Description of the FatFs with uSD card drive application
   ******************************************************************************
   * @attention
@@ -85,6 +83,15 @@ It is possible to fine tune needed FatFs features by modifying defines values
 in FatFs configuration file “ffconf.h” available under the project includes
 directory, in a way to fit the application requirements.
 
+It is possible to dynamically hot plug/unplug the uSD card, as the application will
+handle the plug/unplug events.
+
+@note: for some uSD's, replacing it  while the application is running makes the application
+       fail. It is recommended to reset the board using the "Reset button" after replacing
+       the uSD.
+
+@note: if the uSD is not initially plugged,the LED3 is on and the application will wait until the uSD is detected.
+
 STM32 Eval board's LEDs can be used to monitor the application status:
   - LED1 is ON when the application runs successfully.
   - LED3 is ON when any error occurs.
@@ -108,9 +115,11 @@ on STM32Cube with FatFs".
   - FatFs/FatFs_uSD/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - FatFs/FatFs_uSD/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_uSD/Inc/main.h                  Main program header file
+  - FatFs/FatFs_uSD/Src/sd_diskio.h             uSD diskio header file
   - FatFs/FatFs_uSD/Inc/ffconf.h                FAT file system module configuration file
   - FatFs/FatFs_uSD/Src/stm32f4xx_it.c          Interrupt handlers
   - FatFs/FatFs_uSD/Src/main.c                  Main program
+  - FatFs/FatFs_uSD/Src/sd_diskio.c             FatFs uSD diskio driver
   - FatFs/FatFs_uSD/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
 

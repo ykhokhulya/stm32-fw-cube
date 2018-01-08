@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   LCD Log configuration file.
   ******************************************************************************
   * @attention
@@ -61,6 +59,7 @@
 /* Comment the line below to disable the scroll back and forward features */
 #define     LCD_SCROLL_ENABLED      1
 
+/* Define the Fonts  */
 #define     LCD_LOG_HEADER_FONT                   Font16
 #define     LCD_LOG_FOOTER_FONT                   Font16
 #define     LCD_LOG_TEXT_FONT                     Font16
@@ -74,9 +73,9 @@
 
 /* Define the cache depth */
 #define     CACHE_SIZE              100
-#define     YWINDOW_SIZE            10
+#define     YWINDOW_SIZE            20
 
-#if (YWINDOW_SIZE > 14)
+#if (YWINDOW_SIZE > 20)
   #error "Wrong YWINDOW SIZE"
 #endif
 

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -101,6 +99,9 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef * hhcd)
   else if (hhcd->Instance == USB_OTG_HS)
   {
 #ifdef USE_USB_HS_IN_FS
+
+    /* Initializes and configures the IO */
+    BSP_IO_Init();
 
     /* Configure POWER_SWITCH IO pin */
     BSP_IO_ConfigPin(OTG_FS2_POWER_SWITCH_PIN, IO_MODE_OUTPUT);
@@ -278,7 +279,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef * phost)
   /* Set the LL driver parameters */
   hhcd.Instance = USB_OTG_HS;
   hhcd.Init.Host_channels = 11;
-  hhcd.Init.dma_enable = 1;
+  hhcd.Init.dma_enable = 0;
   hhcd.Init.low_power_enable = 0;
 #ifdef USE_USB_HS_IN_FS
   hhcd.Init.phy_itface = HCD_PHY_EMBEDDED;
@@ -454,9 +455,8 @@ USBH_StatusTypeDef USBH_LL_SubmitURB(USBH_HandleTypeDef * phost,
                                      uint8_t * pbuff,
                                      uint16_t length, uint8_t do_ping)
 {
-  HAL_HCD_HC_SubmitRequest(phost->pData,
-                           pipe,
-                           direction, ep_type, token, pbuff, length, do_ping);
+  HAL_HCD_HC_SubmitRequest(phost->pData, pipe, direction, ep_type,
+                           token, pbuff, length, do_ping);
   return USBH_OK;
 }
 

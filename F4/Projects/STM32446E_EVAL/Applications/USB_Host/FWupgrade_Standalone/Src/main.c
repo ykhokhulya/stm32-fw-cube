@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   USB host Firmware Upgrade demo main file
   ******************************************************************************
   * @attention
@@ -44,24 +42,26 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 USBH_HandleTypeDef hUSBHost;
 FW_ApplicationTypeDef Appli_state = APPLICATION_DISCONNECT;
+char USBDISKPath[4];            /* USB Host logical drive path */
 uint32_t JumpAddress;
 pFunction Jump_To_Application;
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 static void SystemClock_Config(void);
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id);
 static void FW_InitApplication(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Main program
@@ -113,7 +113,7 @@ int main(void)
   /* Start Host Process */
   USBH_Start(&hUSBHost);
 
-  /* Run Application (Blocking mode)*/
+  /* Run Application (Blocking mode) */
   while (1)
   {
     /* USB Host Background task */
@@ -146,13 +146,21 @@ static void FW_InitApplication(void)
   */
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 {
-  switch(id)
+  switch (id)
   {
   case HOST_USER_SELECT_CONFIGURATION:
     break;
 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
+    if (f_mount(NULL, "", 0) != FR_OK)
+    {
+      FatFs_Fail_Handler();
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      FatFs_Fail_Handler();
+    }
     break;
 
   case HOST_USER_CLASS_ACTIVE:
@@ -201,9 +209,10 @@ void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
-     regarding system frequency refer to product datasheet.  */
+  /* The voltage scaling allows optimizing the power consumption when the
+   * device is clocked below the maximum system frequency, to update the
+   * voltage scaling value regarding system frequency refer to product
+   * datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /* Enable HSE Oscillator and activate PLL with HSE as source */
@@ -230,8 +239,10 @@ void SystemClock_Config(void)
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
-     clocks dividers */
-  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+   * clocks dividers */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK |
+                                RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -284,7 +282,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
     /* Set the LL driver parameters */
     hhcd_HS.Instance = USB_OTG_HS;
     hhcd_HS.Init.Host_channels = 11;
-    hhcd_HS.Init.dma_enable = 1;
+    hhcd_HS.Init.dma_enable = 0;
     hhcd_HS.Init.low_power_enable = 0;
 
 #ifdef USE_USB_HS_IN_FS
@@ -514,31 +512,36 @@ USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef *phost, uint8_t pipe
   */
 USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *phost, uint8_t state)
 {
+
 #ifdef USE_USB_FS
-
-  if(state == 0)
+  if(phost->id == 0)
   {
-    /* Configure Low Charge pump */
-    BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, BSP_IO_PIN_RESET);
+    if(state == 0)
+    {
+      /* Configure Low Charge pump */
+      BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, BSP_IO_PIN_RESET);
+    }
+    else
+    {
+      /* Drive High Charge pump */
+      BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, BSP_IO_PIN_SET);
+    }
   }
-  else
-  {
-    /* Drive High Charge pump */
-    BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, BSP_IO_PIN_SET);
-  }
-
 #endif
 
 #ifdef USE_USB_HS_IN_FS
-  if(state == 0)
+  if(phost->id == 1)
   {
-    /* Configure Low Charge pump */
-    BSP_IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, BSP_IO_PIN_RESET);
-  }
-  else
-  {
-    /* Drive High Charge pump */
-    BSP_IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, BSP_IO_PIN_SET);
+    if(state == 0)
+    {
+      /* Configure Low Charge pump */
+      BSP_IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, BSP_IO_PIN_RESET);
+    }
+    else
+    {
+      /* Drive High Charge pump */
+      BSP_IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, BSP_IO_PIN_SET);
+    }
   }
 #endif
   HAL_Delay(200);

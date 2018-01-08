@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/audio_menu.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file implements Audio Menu Functions
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -83,7 +82,7 @@ void AUDIO_MenuProcess(void)
   case AUDIO_DEMO_IDLE:
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
     BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                                 ");
-    BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down       ");
+    BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down       ");
     BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll audio menu      ");
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     AUDIO_MenuSelectItem(AUDIO_main_menu, 0);
@@ -113,7 +112,7 @@ void AUDIO_MenuProcess(void)
           BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
           BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                             ");
           BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"                                             ");
-          BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [User Key] To Stop and return from player");
+          BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [User Tamper] To Stop and return from player");
           BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
 
           /* Set PLAYBACK state and start playing 1st file */
@@ -182,10 +181,7 @@ void AUDIO_MenuProcess(void)
 
   case AUDIO_REENUMERATE:
     /* Force Audio Device to re-enumerate */
-    if(Appli_state == APPLICATION_AUDIO)
-    {
-      USBH_ReEnumerate(&hUSBHost);
-    }
+    USBH_ReEnumerate(&hUSBHost);
     audio_demo.state = AUDIO_DEMO_WAIT;
     break;
 
@@ -316,10 +312,10 @@ static uint8_t Audio_ShowWavFiles(void)
       if(line_idx > 9)
       {
         line_idx = 0;
-        LCD_UsrLog("> Press [Key] To Continue.\n");
+        LCD_UsrLog("> Press [Tamper] To Continue.\n");
 
-        /* KEY Button in polling */
-        while(BSP_PB_GetState(BUTTON_KEY) != RESET)
+        /* Tamper Button in polling */
+        while(BSP_PB_GetState(BUTTON_TAMPER) != SET)
         {
           /* Wait for User Input */
         }

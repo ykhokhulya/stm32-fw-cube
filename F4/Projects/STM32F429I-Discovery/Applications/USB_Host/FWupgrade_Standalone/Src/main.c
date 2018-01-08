@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   USB host Firmware Upgrade demo main file
   ******************************************************************************
   * @attention
@@ -53,6 +51,7 @@
 /* Private variables --------------------------------------------------------- */
 USBH_HandleTypeDef hUSBHost;
 FW_ApplicationTypeDef Appli_state = APPLICATION_DISCONNECT;
+char USBDISKPath[4];            /* USB Host logical drive path */
 uint32_t JumpAddress;
 pFunction Jump_To_Application;
 
@@ -153,6 +152,14 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
+    if (f_mount(NULL, "", 0) != FR_OK)
+    {
+      FatFs_Fail_Handler();
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      FatFs_Fail_Handler();
+    }
     break;
 
   case HOST_USER_CLASS_ACTIVE:

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -74,8 +72,8 @@ static void MSC_DEMO_ProbeKey(JOYState_TypeDef state);
 void Menu_Init(void)
 {
   BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
-  BSP_LCD_DisplayStringAtLine(18, (uint8_t *)"Use [Joystick Up/Down] to scroll MSC menu");
+  BSP_LCD_DisplayStringAtLine(25, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
+  BSP_LCD_DisplayStringAtLine(26, (uint8_t *)"Use [Joystick Up/Down] to scroll MSC menu");
   msc_demo.state = MSC_DEMO_IDLE;
   MSC_SelectItem(MSC_main_menu, 0);
 }
@@ -169,28 +167,27 @@ static void MSC_SelectItem(uint8_t **menu, uint8_t item)
   {
   case 0:
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
+    BSP_LCD_DisplayStringAtLine(27, menu[0]);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    BSP_LCD_DisplayStringAtLine(28, menu[1]);
+    BSP_LCD_DisplayStringAtLine(29, menu[2]);
     break;
 
   case 1:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
+    BSP_LCD_DisplayStringAtLine(27, menu[0]);
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
+    BSP_LCD_DisplayStringAtLine(28, menu[1]);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    BSP_LCD_DisplayStringAtLine(29, menu[2]);
     break;
 
   case 2:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
+    BSP_LCD_DisplayStringAtLine(27, menu[0]);
+    BSP_LCD_DisplayStringAtLine(28, menu[1]);
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    BSP_LCD_DisplayStringAtLine(29, menu[2]);
     break;
   }
   BSP_LCD_SetBackColor(LCD_COLOR_BLACK);

@@ -2,13 +2,14 @@
   ******************************************************************************
   * @file    ff_gen_drv.h
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    14-February-2017
+  * @version V2.0.1
+  * @date    10-July-2017
   * @brief   Header for ff_gen_drv.c module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
@@ -55,6 +56,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "diskio.h"
 #include "ff.h"
+#include "stdint.h"
+
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -81,19 +84,18 @@ typedef struct
 typedef struct
 {
   uint8_t                 is_initialized[_VOLUMES];
-  Diskio_drvTypeDef       *drv[_VOLUMES];
+  const Diskio_drvTypeDef *drv[_VOLUMES];
   uint8_t                 lun[_VOLUMES];
-  __IO uint8_t            nbr;
+  volatile uint8_t        nbr;
 
 }Disk_drvTypeDef;
 
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-uint8_t FATFS_LinkDriverEx(Diskio_drvTypeDef *drv, char *path, uint8_t lun);
-uint8_t FATFS_LinkDriver(Diskio_drvTypeDef *drv, char *path);
+uint8_t FATFS_LinkDriver(const Diskio_drvTypeDef *drv, char *path);
 uint8_t FATFS_UnLinkDriver(char *path);
-uint8_t FATFS_LinkDriverEx(Diskio_drvTypeDef *drv, char *path, BYTE lun);
+uint8_t FATFS_LinkDriverEx(const Diskio_drvTypeDef *drv, char *path, BYTE lun);
 uint8_t FATFS_UnLinkDriverEx(char *path, BYTE lun);
 uint8_t FATFS_GetAttachedDriversNbr(void);
 

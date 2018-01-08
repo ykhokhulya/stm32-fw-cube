@@ -1,25 +1,20 @@
 /*-----------------------------------------------------------------------*/
-/* Low level disk I/O module skeleton for FatFs     (C)ChaN, 2014        */
+/* Low level disk I/O module skeleton for FatFs     (C)ChaN, 2017        */
 /*                                                                       */
 /*   Portions COPYRIGHT 2017 STMicroelectronics                          */
-/*   Portions Copyright (C) 2014, ChaN, all right reserved               */
+/*   Portions Copyright (C) 2017, ChaN, all right reserved               */
 /*-----------------------------------------------------------------------*/
 /* If a working storage control module is available, it should be        */
 /* attached to the FatFs via a glue function rather than modifying it.   */
-/* This is an example of glue functions to attach various exsisting      */
+/* This is an example of glue functions to attach various existing      */
 /* storage control modules to the FatFs module with a defined API.       */
 /*-----------------------------------------------------------------------*/
 
 /**
   ******************************************************************************
-  * @file    diskio.c
-  * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    14-February-2017
-  * @brief   FatFs low level disk I/O module.
-  ******************************************************************************
-  * @attention
   *
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
@@ -59,6 +54,12 @@
 #include "diskio.h"
 #include "ff_gen_drv.h"
 
+#if defined ( __GNUC__ )
+#ifndef __weak
+#define __weak __attribute__((weak))
+#endif
+#endif
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -73,7 +74,7 @@ extern Disk_drvTypeDef  disk;
   * @retval DSTATUS: Operation status
   */
 DSTATUS disk_status (
-	BYTE pdrv		/* Physical drive nmuber to identify the drive */
+	BYTE pdrv		/* Physical drive number to identify the drive */
 )
 {
   DSTATUS stat;

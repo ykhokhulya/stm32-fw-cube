@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/file_operations.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Write/read file on the disk.
   ******************************************************************************
   * @attention
@@ -71,7 +69,7 @@ void MSC_File_Operations(void)
   uint16_t bytesread;
 
   /* Register the file system object to the FatFs module */
-  if(f_mount(&USBH_fatfs, "", 0 ) != FR_OK )
+  if(f_mount(&USBH_fatfs, "", 0) != FR_OK )
   {
     LCD_ErrLog("Cannot Initialize FatFs! \n");
   }
@@ -132,7 +130,5 @@ void MSC_File_Operations(void)
     }
   }
 }
-
-
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

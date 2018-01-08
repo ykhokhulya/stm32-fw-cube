@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/mouse.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements Functions for mouse menu
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -65,19 +64,19 @@ extern USBH_HandleTypeDef  hUSBHost;
 #define MOUSE_LEFT_DIR                  0x80
 #define MOUSE_RIGHT_DIR                 0x00
 
-#define MOUSE_WINDOW_X                  140
-#define MOUSE_WINDOW_Y                  90
+#define MOUSE_WINDOW_X                  120
+#define MOUSE_WINDOW_Y                  120
 #define MOUSE_WINDOW_X_MAX              181
 #define MOUSE_WINDOW_Y_MIN              101
-#define MOUSE_WINDOW_HEIGHT             80
-#define MOUSE_WINDOW_WIDTH              200
+#define MOUSE_WINDOW_HEIGHT             200
+#define MOUSE_WINDOW_WIDTH              500
 
-#define HID_MOUSE_BUTTON_HEIGHT         15
-#define HID_MOUSE_BUTTON_WIDTH          25
-#define HID_MOUSE_BUTTON1_XCHORD        145
-#define HID_MOUSE_BUTTON2_XCHORD        225
-#define HID_MOUSE_BUTTON3_XCHORD        315
-#define HID_MOUSE_BUTTON_YCHORD         190
+#define HID_MOUSE_BUTTON_HEIGHT         30
+#define HID_MOUSE_BUTTON_WIDTH          50
+#define HID_MOUSE_BUTTON1_XCHORD        120
+#define HID_MOUSE_BUTTON2_XCHORD        340
+#define HID_MOUSE_BUTTON3_XCHORD        570
+#define HID_MOUSE_BUTTON_YCHORD         340
 
 #define MOUSE_LEFT_MOVE                  1
 #define MOUSE_RIGHT_MOVE                 2
@@ -160,15 +159,15 @@ static void HID_MOUSE_UpdatePosition(int8_t x, int8_t y)
   if((x != 0) || (y != 0))
   {
     x_loc += x/2;
-    y_loc += y/10;
+    y_loc += y/2;
 
-    if(y_loc > MOUSE_WINDOW_HEIGHT - 12)
+    if(y_loc > (MOUSE_WINDOW_HEIGHT - 16))
     {
-      y_loc = MOUSE_WINDOW_HEIGHT - 12;
+      y_loc = MOUSE_WINDOW_HEIGHT - 16;
     }
-    if(x_loc > MOUSE_WINDOW_WIDTH - 10)
+    if(x_loc > (MOUSE_WINDOW_WIDTH - 12))
     {
-      x_loc = MOUSE_WINDOW_WIDTH - 10;
+      x_loc = MOUSE_WINDOW_WIDTH - 12;
     }
 
     if(y_loc < 2)

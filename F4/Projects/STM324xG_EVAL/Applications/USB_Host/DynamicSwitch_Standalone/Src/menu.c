@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/menu.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -51,9 +50,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern char SD_Path[4];  /* SD logical drive path */
-char USBDISKPath[4];     /* USB Host logical drive path */
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -99,11 +95,10 @@ void DS_MenuProcess(void)
   if(Appli_state == APPLICATION_DISCONNECT)
   {
     Appli_state = APPLICATION_IDLE;
+    LCD_ErrLog("USB device disconnected!\n");
     Menu_Init();
-    /* Unlink the micro SD disk I/O driver */
-    FATFS_UnLinkDriver(SD_Path);
-    /* Unlink the USB disk I/O driver */
-    FATFS_UnLinkDriver(USBDISKPath);
+
+    LCD_UsrLog("Plug your device To Continue...\n");
   }
 }
 

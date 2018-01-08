@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -92,9 +91,10 @@ void DS_MenuProcess(void)
   if(Appli_state == APPLICATION_DISCONNECT)
   {
     Appli_state = APPLICATION_IDLE;
-    LCD_LOG_ClearTextZone();
     LCD_ErrLog("USB device disconnected!\n");
     Menu_Init();
+
+    LCD_UsrLog("Plug your device To Continue...\n");
   }
 }
 

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -52,6 +50,8 @@
 #include "usbh_core.h"
 #include "usbh_msc.h"
 #include "ff.h"
+#include "ff_gen_drv.h"
+#include "usbh_diskio_dma.h"
 #include "stm32f429i_discovery.h"
 #include "flash_if.h"
 #include "command.h"

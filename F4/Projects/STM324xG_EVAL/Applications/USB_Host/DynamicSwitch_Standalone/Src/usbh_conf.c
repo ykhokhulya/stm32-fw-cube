@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -243,7 +241,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   /* Set the LL driver parameters */
   hhcd.Instance = USB_OTG_HS;
   hhcd.Init.Host_channels = 11;
-  hhcd.Init.dma_enable = 1;
+  hhcd.Init.dma_enable = 0;
   hhcd.Init.low_power_enable = 0;
   hhcd.Init.phy_itface = HCD_PHY_ULPI;
   hhcd.Init.Sof_enable = 0;

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to use FatFs with SD disk drive.
   ******************************************************************************
@@ -56,10 +54,24 @@ FATFS SDFatFs;  /* File system object for SD disk logical drive */
 FIL MyFile;     /* File object */
 char SDPath[4]; /* SD disk logical drive path */
 
+typedef enum {
+  APPLICATION_IDLE = 0,
+  APPLICATION_RUNNING,
+  APPLICATION_SD_UNPLUGGED,
+}FS_FileOperationsTypeDef;
+
+FS_FileOperationsTypeDef Appli_state = APPLICATION_IDLE;
+
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
+static void FS_FileOperations(void);
+static void SD_Initialize(void);
 static void Error_Handler(void);
 
+static uint8_t isInitialized = 0;
+static uint8_t isFsCreated = 0;
+
+uint8_t workBuffer[_MAX_SS];
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -69,12 +81,7 @@ static void Error_Handler(void);
   */
 int main(void)
 {
-  FRESULT res;                                          /* FatFs function common result code */
-  uint32_t byteswritten, bytesread;                     /* File write/read counts */
-  uint8_t wtext[] = "This is STM32 working with FatFs"; /* File write buffer */
-  uint8_t rtext[100];                                   /* File read buffer */
-
-  /* STM32F4xx HAL library initialization:
+   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
        - Set NVIC Group Priority to 4
@@ -99,101 +106,132 @@ int main(void)
      Otherwise, you have to set camera sensor in Power Down mode, by calling the
      BSP_CAMERA_PwrDown() available under stm32446e_eval_camera.c BSP driver */
 
-      BSP_IO_Init();
+   /* Camera power down sequence */
+  BSP_IO_ConfigPin(RSTI_PIN, IO_MODE_OUTPUT);
+  BSP_IO_ConfigPin(XSDN_PIN, IO_MODE_OUTPUT);
 
-     /* Assert the camera RSTI pin */
-     /* Camera power down sequence */
-     BSP_IO_ConfigPin(RSTI_PIN, IO_MODE_OUTPUT);
-     /* Assert the camera RSTI pin (active low) */
-     BSP_IO_WritePin(RSTI_PIN, BSP_IO_PIN_RESET);
+  /* De-assert the camera STANDBY pin (active high) */
+  BSP_IO_WritePin(XSDN_PIN, BSP_IO_PIN_RESET);
 
-  /*##-1- Link the SD disk I/O driver ########################################*/
+  /* Assert the camera RSTI pin (active low) */
+  BSP_IO_WritePin(RSTI_PIN, BSP_IO_PIN_RESET);
+
+    /*##-1- Link the micro SD disk I/O driver ##################################*/
   if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
   {
-    /*##-2- Register the file system object to the FatFs module ##############*/
-    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+    /*##-2- Init the SD Card #################################################*/
+
+    SD_Initialize();
+
+    /* Create FAT volume */
+
+    /* Make sure that the SD detecion IT has a lower priority than the Systick */
+    HAL_NVIC_SetPriority(SysTick_IRQn, 0x0E ,0);
+
+    if(BSP_SD_IsDetected())
     {
-      /* FatFs Initialization Error */
-      Error_Handler();
+      Appli_state = APPLICATION_RUNNING;
     }
-    else
+
+    /* Infinite loop */
+    while (1)
     {
-      /*##-3- Create a FAT file system (format) on the logical drive #########*/
-      if(f_mkfs((TCHAR const*)SDPath, 0, 0) != FR_OK)
+      /* Mass Storage Application State Machine */
+      switch(Appli_state)
       {
-        Error_Handler();
-      }
-      else
-      {
-        /*##-4- Create and Open a new text file object with write access #####*/
-        if(f_open(&MyFile, "STM32.TXT", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
+      case APPLICATION_RUNNING:
+        BSP_LED_Off(LED_RED);
+        SD_Initialize();
+        FS_FileOperations();
+        Appli_state = APPLICATION_IDLE;
+        break;
+
+      case APPLICATION_IDLE:
+        break;
+
+      case APPLICATION_SD_UNPLUGGED:
+        if (isInitialized == 1)
         {
-          /* 'STM32.TXT' file Open for write Error */
           Error_Handler();
+          isInitialized = 0;
         }
-        else
-        {
-          /*##-5- Write data to the text file ################################*/
-          res = f_write(&MyFile, wtext, sizeof(wtext), (void *)&byteswritten);
 
-          if((byteswritten == 0) || (res != FR_OK))
-          {
-            /* 'STM32.TXT' file Write or EOF Error */
-            Error_Handler();
-          }
-          else
-          {
-            /*##-6- Close the open text file #################################*/
-            f_close(&MyFile);
+        Appli_state = APPLICATION_IDLE;
+        break;
 
-            /*##-7- Open the text file object with read access ###############*/
-            if(f_open(&MyFile, "STM32.TXT", FA_READ) != FR_OK)
-            {
-              /* 'STM32.TXT' file Open for read Error */
-              Error_Handler();
-            }
-            else
-            {
-              /*##-8- Read data from the text file ###########################*/
-              res = f_read(&MyFile, rtext, sizeof(rtext), (UINT*)&bytesread);
-
-              if((bytesread == 0) || (res != FR_OK))
-              {
-                /* 'STM32.TXT' file Read or EOF Error */
-                Error_Handler();
-              }
-              else
-              {
-                /*##-9- Close the open text file #############################*/
-                f_close(&MyFile);
-
-                /*##-10- Compare read data with the expected data ############*/
-                if ((bytesread != byteswritten))
-                {
-                  /* Read data is different from the expected data */
-                  Error_Handler();
-                }
-                else
-                {
-                  /* Success of the demo: no error occurrence */
-                  BSP_LED_On(LED1);
-                }
-              }
-            }
-          }
-        }
+      default:
+        break;
       }
     }
   }
 
-  /*##-11- Unlink the SD disk I/O driver ####################################*/
-  FATFS_UnLinkDriver(SDPath);
 
   /* Infinite loop */
   while (1)
   {
   }
 }
+
+
+static void FS_FileOperations(void)
+{
+  FRESULT res;                                          /* FatFs function common result code */
+  uint32_t byteswritten, bytesread;                     /* File write/read counts */
+  uint8_t wtext[] = "This is STM32 working with FatFs"; /* File write buffer */
+  uint8_t rtext[100];                                   /* File read buffer */
+
+  /* Register the file system object to the FatFs module */
+  if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
+  {
+    /* Create the Filesystem the first time the uSD is detected */
+    if (isFsCreated == 0)
+    {
+      if(f_mkfs(SDPath, FM_ANY, 0, workBuffer, sizeof(workBuffer)) != FR_OK)
+      {
+        BSP_LED_On(LED3);
+        return;
+      }
+      isFsCreated = 1;
+    }
+
+    /* Create and Open a new text file object with write access */
+    if(f_open(&MyFile, "STM32.TXT", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
+    {
+      /* Write data to the text file */
+      res = f_write(&MyFile, wtext, sizeof(wtext), (void *)&byteswritten);
+
+      if((byteswritten > 0) && (res == FR_OK))
+      {
+        /* Close the open text file */
+        f_close(&MyFile);
+
+        /* Open the text file object with read access */
+        if(f_open(&MyFile, "STM32.TXT", FA_READ) == FR_OK)
+        {
+          /* Read data from the text file */
+          res = f_read(&MyFile, rtext, sizeof(rtext), (void *)&bytesread);
+
+          if((bytesread > 0) && (res == FR_OK))
+          {
+            /* Close the open text file */
+            f_close(&MyFile);
+
+            /* Compare read data with the expected data */
+            if((bytesread == byteswritten))
+            {
+              /* Success of the demo: no error occurrence */
+              BSP_LED_On(LED1);
+              return;
+            }
+          }
+        }
+      }
+    }
+  }
+  /* Error */
+  Error_Handler();
+}
+
 
 /**
   * @brief  System Clock Configuration
@@ -280,18 +318,48 @@ static void SystemClock_Config(void)
   }
 }
 
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
+
+static void SD_Initialize(void)
+{
+  if (isInitialized == 0)
+  {
+    if (BSP_SD_Init() == MSD_OK)
+    {
+      BSP_SD_ITConfig();
+      isInitialized = 1;
+    }
+    else
+    {
+      BSP_LED_On(LED3);
+      /* wait until the uSD is plugged */
+      while (BSP_SD_IsDetected() != SD_PRESENT)
+      {}
+    }
+  }
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(MFX_IRQOUT_PIN == GPIO_Pin)
+  {
+    if(BSP_SD_IsDetected())
+    {
+      Appli_state = APPLICATION_RUNNING;
+
+    }
+    else
+    {
+      Appli_state = APPLICATION_SD_UNPLUGGED;
+      f_mount(NULL, (TCHAR const*)"", 0);
+
+    }
+  }
+}
+
 static void Error_Handler(void)
 {
-  /* Turn LED3 on */
-  BSP_LED_On(LED3);
-  while(1)
-  {
-  }
+  BSP_LED_Off(LED_GREEN);
+  BSP_LED_On(LED_RED);
 }
 
 #ifdef  USE_FULL_ASSERT

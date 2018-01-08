@@ -2,13 +2,11 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/msc_explorer.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Explore the USB flash disk content
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics International N.V.
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without
@@ -44,19 +42,21 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+
+/* Includes ----------------------------------------------------------------- */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+/* Private typedef ---------------------------------------------------------- */
+/* Private define ----------------------------------------------------------- */
+/* Private macro ------------------------------------------------------------ */
+/* Private variables -------------------------------------------------------- */
+static int32_t recurseLevel = -1;
+/* Private function prototypes ---------------------------------------------- */
+/* Private functions -------------------------------------------------------- */
 
 /**
   * @brief  Displays disk content.
-  * @param  path: pointer to root path
+  * @param  path: Pointer to root path
   * @param  recu_level: Disk content level
   * @retval Operation result
   */
@@ -65,78 +65,74 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
   FRESULT res = FR_OK;
   FILINFO fno;
   DIR dir;
-  char *fn;
   char tmp[14];
   uint8_t line_idx = 0;
-#if _USE_LFN
-  static char lfn[_MAX_LFN + 1];   /* Buffer to store the LFN */
-  fno.lfname = lfn;
-  fno.lfsize = sizeof lfn;
-#endif
 
-    res = f_opendir(&dir, path);
-    if(res == FR_OK)
+  recurseLevel++;
+  res = f_opendir(&dir, path);
+  if (res == FR_OK)
+  {
+    while (USBH_MSC_IsReady(&hUSBHost))
     {
-      while( USBH_MSC_IsReady(&hUSBHost))
+      res = f_readdir(&dir, &fno);
+      if (res != FR_OK || fno.fname[0] == 0)
       {
-        res = f_readdir(&dir, &fno);
-        if(res != FR_OK || fno.fname[0] == 0)
-        {
-          break;
-        }
-        if(fno.fname[0] == '.')
-        {
-          continue;
-        }
+        break;
+      }
+      if (fno.fname[0] == '.')
+      {
+        continue;
+      }
 
-#if _USE_LFN
-      fn = *fno.lfname ? fno.lfname : fno.fname;
-#else
-      fn = fno.fname;
-#endif
-        strcpy(tmp, fn);
+      strcpy(tmp, fno.fname);
 
-        line_idx++;
-        if(line_idx > 9)
-        {
-          line_idx = 0;
-          LCD_UsrLog("> Press [Key] To Continue.\n" );
+      line_idx++;
+      if (line_idx > YWINDOW_SIZE)
+      {
+        line_idx = 0;
+        LCD_UsrLog("> Press [KEY] To Continue.\n");
 
-          /* KEY Button in polling */
-          while(BSP_PB_GetState(BUTTON_KEY) != RESET)
-          {
-            /* Wait for User Input */
-          }
-        }
-
-        if(recu_level == 1)
+        /* KEY Button in polling */
+        while ((BSP_PB_GetState(BUTTON_KEY) != SET) &&
+               (Appli_state != APPLICATION_DISCONNECT))
         {
-          LCD_DbgLog("   |__");
-        }
-        else if(recu_level == 2)
-        {
-          LCD_DbgLog("   |   |__");
-        }
-        if((fno.fattrib & AM_MASK) == AM_DIR)
-        {
-          strcat(tmp, "\n");
-          LCD_UsrLog((void *)tmp);
-          Explore_Disk(fn, 2);
-        }
-        else
-        {
-          strcat(tmp, "\n");
-          LCD_DbgLog((void *)tmp);
-        }
-
-        if(((fno.fattrib & AM_MASK) == AM_DIR)&&(recu_level == 2))
-        {
-          Explore_Disk(fn, 2);
+          /* Wait for User Input */
         }
       }
-	f_closedir(&dir);
-	LCD_UsrLog("> Select an operation to Continue.\n" );
+
+      if (recu_level == 1)
+      {
+        LCD_DbgLog("   |__");
+      }
+      else if (recu_level == 2)
+      {
+        LCD_DbgLog("   |   |__");
+      }
+      if (fno.fattrib & AM_DIR)
+      {
+        strcat(tmp, "\n");
+        LCD_UsrLog((void *)tmp);
+        Explore_Disk(fno.fname, 2);
+      }
+      else
+      {
+        strcat(tmp, "\n");
+        LCD_DbgLog((void *)tmp);
+      }
+
+      if ((fno.fattrib & AM_DIR) && (recu_level == 2))
+      {
+        Explore_Disk(fno.fname, 2);
+      }
     }
+    f_closedir(&dir);
+  }
+
+  if (--recurseLevel == -1)
+  {
+    LCD_UsrLog("> Select an operation to Continue.\n");
+  }
+
   return res;
 }
 

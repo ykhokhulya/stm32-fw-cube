@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_dsi.h
   * @author  MCD Application Team
-  * @version V1.7.1
-  * @date    14-April-2017
   * @brief   Header file of DSI HAL module.
   ******************************************************************************
   * @attention
@@ -43,7 +41,7 @@
  extern "C" {
 #endif
 
-#if defined(STM32F469xx) || defined(STM32F479xx)
+#if defined(DSI)
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal_def.h"
 
@@ -863,7 +861,7 @@ typedef struct
 /** @defgroup DSI_Lane_Select DSI Lane Select
   * @{
   */
-#define DSI_CLOCK_LANE              0x00000000U
+#define DSI_CLK_LANE                0x00000000U
 #define DSI_DATA_LANE0              0x00000001U
 #define DSI_DATA_LANE1              0x00000002U
 /**
@@ -889,64 +887,112 @@ typedef struct
 /* Exported macros -----------------------------------------------------------*/
 /**
   * @brief  Enables the DSI host.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_ENABLE(__HANDLE__) ((__HANDLE__)->Instance->CR |= DSI_CR_EN)
+#define __HAL_DSI_ENABLE(__HANDLE__) do { \
+                                          __IO uint32_t tmpreg = 0x00U; \
+                                          SET_BIT((__HANDLE__)->Instance->CR, DSI_CR_EN);\
+                                          /* Delay after an DSI Host enabling */ \
+                                          tmpreg = READ_BIT((__HANDLE__)->Instance->CR, DSI_CR_EN);\
+                                          UNUSED(tmpreg); \
+                                        }while(0U)
 
 /**
   * @brief  Disables the DSI host.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_DISABLE(__HANDLE__) ((__HANDLE__)->Instance->CR &= ~DSI_CR_EN)
+#define __HAL_DSI_DISABLE(__HANDLE__) do { \
+                                          __IO uint32_t tmpreg = 0x00U; \
+                                          CLEAR_BIT((__HANDLE__)->Instance->CR, DSI_CR_EN);\
+                                          /* Delay after an DSI Host disabling */ \
+                                          tmpreg = READ_BIT((__HANDLE__)->Instance->CR, DSI_CR_EN);\
+                                          UNUSED(tmpreg); \
+                                         }while(0U)
 
 /**
   * @brief  Enables the DSI wrapper.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_WRAPPER_ENABLE(__HANDLE__) ((__HANDLE__)->Instance->WCR |= DSI_WCR_DSIEN)
+#define __HAL_DSI_WRAPPER_ENABLE(__HANDLE__) do { \
+                                                 __IO uint32_t tmpreg = 0x00U; \
+                                                 SET_BIT((__HANDLE__)->Instance->WCR, DSI_WCR_DSIEN);\
+                                                 /* Delay after an DSI warpper enabling */ \
+                                                 tmpreg = READ_BIT((__HANDLE__)->Instance->WCR, DSI_WCR_DSIEN);\
+                                                 UNUSED(tmpreg); \
+                                                }while(0U)
 
 /**
   * @brief  Disable the DSI wrapper.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_WRAPPER_DISABLE(__HANDLE__) ((__HANDLE__)->Instance->WCR &= ~DSI_WCR_DSIEN)
+#define __HAL_DSI_WRAPPER_DISABLE(__HANDLE__) do { \
+                                                  __IO uint32_t tmpreg = 0x00U; \
+                                                  CLEAR_BIT((__HANDLE__)->Instance->WCR, DSI_WCR_DSIEN);\
+                                                  /* Delay after an DSI warpper disabling*/ \
+                                                  tmpreg = READ_BIT((__HANDLE__)->Instance->WCR, DSI_WCR_DSIEN);\
+                                                  UNUSED(tmpreg); \
+                                                 }while(0U)
 
 /**
   * @brief  Enables the DSI PLL.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_PLL_ENABLE(__HANDLE__) ((__HANDLE__)->Instance->WRPCR |= DSI_WRPCR_PLLEN)
+#define __HAL_DSI_PLL_ENABLE(__HANDLE__) do { \
+                                             __IO uint32_t tmpreg = 0x00U; \
+                                             SET_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_PLLEN);\
+                                             /* Delay after an DSI PLL enabling */ \
+                                             tmpreg = READ_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_PLLEN);\
+                                             UNUSED(tmpreg); \
+                                            }while(0U)
 
 /**
   * @brief  Disables the DSI PLL.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_PLL_DISABLE(__HANDLE__) ((__HANDLE__)->Instance->WRPCR &= ~DSI_WRPCR_PLLEN)
+#define __HAL_DSI_PLL_DISABLE(__HANDLE__) do { \
+                                              __IO uint32_t tmpreg = 0x00U; \
+                                              CLEAR_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_PLLEN);\
+                                              /* Delay after an DSI PLL disabling */ \
+                                              tmpreg = READ_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_PLLEN);\
+                                              UNUSED(tmpreg); \
+                                             }while(0U)
 
 /**
   * @brief  Enables the DSI regulator.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_REG_ENABLE(__HANDLE__) ((__HANDLE__)->Instance->WRPCR |= DSI_WRPCR_REGEN)
+#define __HAL_DSI_REG_ENABLE(__HANDLE__) do { \
+                                              __IO uint32_t tmpreg = 0x00U; \
+                                              SET_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_REGEN);\
+                                              /* Delay after an DSI regulator enabling */ \
+                                              tmpreg = READ_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_REGEN);\
+                                              UNUSED(tmpreg); \
+                                            }while(0U)
 
 /**
   * @brief  Disables the DSI regulator.
-  * @param  __HANDLE__: DSI handle
+  * @param  __HANDLE__  DSI handle
   * @retval None.
   */
-#define __HAL_DSI_REG_DISABLE(__HANDLE__) ((__HANDLE__)->Instance->WRPCR &= ~DSI_WRPCR_REGEN)
+#define __HAL_DSI_REG_DISABLE(__HANDLE__) do { \
+                                              __IO uint32_t tmpreg = 0x00U; \
+                                              CLEAR_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_REGEN);\
+                                              /* Delay after an DSI regulator disabling */ \
+                                              tmpreg = READ_BIT((__HANDLE__)->Instance->WRPCR, DSI_WRPCR_REGEN);\
+                                              UNUSED(tmpreg); \
+                                             }while(0U)
 
 /**
   * @brief  Get the DSI pending flags.
-  * @param  __HANDLE__: DSI handle.
-  * @param  __FLAG__: Get the specified flag.
+  * @param  __HANDLE__  DSI handle.
+  * @param  __FLAG__  Get the specified flag.
   *          This parameter can be any combination of the following values:
   *            @arg DSI_FLAG_TE   : Tearing Effect Interrupt Flag
   *            @arg DSI_FLAG_ER   : End of Refresh Interrupt Flag
@@ -962,8 +1008,8 @@ typedef struct
 
 /**
   * @brief  Clears the DSI pending flags.
-  * @param  __HANDLE__: DSI handle.
-  * @param  __FLAG__: specifies the flag to clear.
+  * @param  __HANDLE__  DSI handle.
+  * @param  __FLAG__  specifies the flag to clear.
   *          This parameter can be any combination of the following values:
   *            @arg DSI_FLAG_TE   : Tearing Effect Interrupt Flag
   *            @arg DSI_FLAG_ER   : End of Refresh Interrupt Flag
@@ -976,8 +1022,8 @@ typedef struct
 
 /**
   * @brief  Enables the specified DSI interrupts.
-  * @param  __HANDLE__: DSI handle.
-  * @param __INTERRUPT__: specifies the DSI interrupt sources to be enabled.
+  * @param  __HANDLE__  DSI handle.
+  * @param __INTERRUPT__  specifies the DSI interrupt sources to be enabled.
   *          This parameter can be any combination of the following values:
   *            @arg DSI_IT_TE  : Tearing Effect Interrupt
   *            @arg DSI_IT_ER  : End of Refresh Interrupt
@@ -990,8 +1036,8 @@ typedef struct
 
 /**
   * @brief  Disables the specified DSI interrupts.
-  * @param  __HANDLE__: DSI handle
-  * @param __INTERRUPT__: specifies the DSI interrupt sources to be disabled.
+  * @param  __HANDLE__  DSI handle
+  * @param __INTERRUPT__  specifies the DSI interrupt sources to be disabled.
   *          This parameter can be any combination of the following values:
   *            @arg DSI_IT_TE  : Tearing Effect Interrupt
   *            @arg DSI_IT_ER  : End of Refresh Interrupt
@@ -1003,9 +1049,9 @@ typedef struct
 #define __HAL_DSI_DISABLE_IT(__HANDLE__, __INTERRUPT__) ((__HANDLE__)->Instance->WIER &= ~(__INTERRUPT__))
 
 /**
-  * @brief  Checks whether the specified DSI interrupt has occurred or not.
-  * @param  __HANDLE__: DSI handle
-  * @param  __INTERRUPT__: specifies the DSI interrupt source to check.
+  * @brief  Checks whether the specified DSI interrupt source is enabled or not.
+  * @param  __HANDLE__  DSI handle
+  * @param  __INTERRUPT__  specifies the DSI interrupt source to check.
   *          This parameter can be one of the following values:
   *            @arg DSI_IT_TE  : Tearing Effect Interrupt
   *            @arg DSI_IT_ER  : End of Refresh Interrupt
@@ -1117,7 +1163,7 @@ HAL_DSI_StateTypeDef HAL_DSI_GetState(DSI_HandleTypeDef *hdsi);
 /** @defgroup DSI_Private_Constants DSI Private Constants
   * @{
   */
-#define DSI_MAX_RETURN_PKT_SIZE ((uint32_t)0x00000037U) /*!< Maximum return packet configuration */
+#define DSI_MAX_RETURN_PKT_SIZE (0x00000037U) /*!< Maximum return packet configuration */
 /**
   * @}
   */
@@ -1231,7 +1277,7 @@ HAL_DSI_StateTypeDef HAL_DSI_GetState(DSI_HandleTypeDef *hdsi);
 /**
   * @}
   */
-#endif /* STM32F469xx || STM32F479xx */
+#endif /* DSI */
 
 #ifdef __cplusplus
 }

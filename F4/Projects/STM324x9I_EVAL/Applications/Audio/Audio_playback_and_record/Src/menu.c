@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/menu.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -480,7 +478,7 @@ static void LCD_ClearTextZone(void)
 {
   uint8_t i = 0;
 
-  for(i= 0; i < 13; i++)
+  for(i= 0; i < 15; i++)
   {
     BSP_LCD_ClearStringLine(i + 3);
   }

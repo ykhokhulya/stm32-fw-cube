@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -488,33 +486,36 @@ USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef * phost,
   */
 USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef * phost, uint8_t state)
 {
+  if (phost->id == 0)
+  {
 #ifdef USE_USB_FS
-
-  if (state == 0)
-  {
-    /* Configure Low Charge pump */
-    BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, RESET);
+    if (state == 0)
+    {
+      /* Configure Low Charge pump */
+      BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, RESET);
+    }
+    else
+    {
+      /* Drive High Charge pump */
+      BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, SET);
+    }
+#endif
   }
   else
   {
-    /* Drive High Charge pump */
-    BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, SET);
-  }
-
-#endif
-
 #ifdef USE_USB_HS_IN_FS
-  if (state == 0)
-  {
-    /* Configure Low Charge pump */
-    IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, RESET);
-  }
-  else
-  {
-    /* Drive High Charge pump */
-    IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, SET);
-  }
+    if (state == 0)
+    {
+      /* Configure Low Charge pump */
+      IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, RESET);
+    }
+    else
+    {
+      /* Drive High Charge pump */
+      IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, SET);
+    }
 #endif
+  }
   HAL_Delay(200);
   return USBH_OK;
 }

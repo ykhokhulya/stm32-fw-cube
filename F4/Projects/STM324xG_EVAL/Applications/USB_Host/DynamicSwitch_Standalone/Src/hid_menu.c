@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/hid_menu.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file implements HID Menu Functions
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -90,7 +89,7 @@ void HID_MenuProcess(void)
   case HID_DEMO_IDLE:
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
     BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                                 ");
-    BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down       ");
+    BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down       ");
     BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll HID menu        ");
     BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"                                                 ");
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
@@ -150,10 +149,7 @@ void HID_MenuProcess(void)
 
   case HID_DEMO_REENUMERATE:
     /* Force HID Device to re-enumerate */
-    if(Appli_state == APPLICATION_HID)
-    {
-      USBH_ReEnumerate(&hUSBHost);
-    }
+    USBH_ReEnumerate(&hUSBHost);
     hid_demo.state = HID_DEMO_WAIT;
     break;
 

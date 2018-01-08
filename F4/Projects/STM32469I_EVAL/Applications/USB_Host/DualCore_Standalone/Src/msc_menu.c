@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/msc_menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Mass Storage Process
   ******************************************************************************
   * @attention
@@ -57,6 +55,7 @@ uint8_t *MSC_main_menu[] =
   (uint8_t *)"      1 - File Operations                                                   ",
   (uint8_t *)"      2 - Explorer Disk                                                     ",
   (uint8_t *)"      3 - Return                                                            ",
+  (uint8_t *)"                                                                            ",
 };
 
 /* Private function prototypes -----------------------------------------------*/

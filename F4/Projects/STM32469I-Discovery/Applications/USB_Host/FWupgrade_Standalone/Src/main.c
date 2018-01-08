@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB host Firmware Upgrade demo main file
   ******************************************************************************
   * @attention
@@ -44,26 +42,28 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 USBH_HandleTypeDef hUSBHost;
 FW_ApplicationTypeDef Appli_state = APPLICATION_DISCONNECT;
+char USBDISKPath[4];            /* USB Host logical drive path */
 uint32_t JumpAddress;
 pFunction Jump_To_Application;
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 static void SystemClock_Config(void);
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id);
 static void FW_InitApplication(void);
 static void Error_Handler(void);
 void Toggle_Leds(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Main program
@@ -151,6 +151,14 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
+    if (f_mount(NULL, "", 0) != FR_OK)
+    {
+      FatFs_Fail_Handler();
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      FatFs_Fail_Handler();
+    }
     break;
 
   case HOST_USER_CLASS_ACTIVE:
@@ -163,25 +171,6 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 
   default:
     break;
-  }
-}
-
-/**
-  * @brief  Toggles LEDs to show user input state.
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-
-  if(ticks++ == 100)
-  {
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    BSP_LED_Toggle(LED4);
-    ticks = 0;
   }
 }
 

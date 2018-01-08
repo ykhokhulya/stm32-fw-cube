@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/hid_menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements HID Menu Functions
   ******************************************************************************
   * @attention
@@ -55,25 +53,28 @@ extern DEMO_StateMachine demo;
 extern HID_MOUSE_Info_TypeDef mouse_info;
 extern uint8_t prev_select;
 
-uint8_t *DEMO_HID_menu[] =
-{
-  (uint8_t *)"      1 - Start HID                                                         ",
-  (uint8_t *)"      2 - Return                                                            ",
-  (uint8_t *)"                                                                            ",
-};
-
 uint8_t *DEMO_KEYBOARD_menu[] =
 {
-  (uint8_t *)"      1 - Start Keyboard / Clear                                            ",
-  (uint8_t *)"      2 - Return                                                            ",
-  (uint8_t *)"                                                                            ",
+  (uint8_t *)"      1 - Start Keyboard / Clear                                                                                   ",
+  (uint8_t *)"      2 - Return                                                                                                   ",
+  (uint8_t *)"                                                                                                                   ",
+  (uint8_t *)"                                                                                                                   ",
 };
 
 uint8_t *DEMO_MOUSE_menu[] =
 {
-  (uint8_t *)"      1 - Start Mouse / Re-Initialize                                       ",
-  (uint8_t *)"      2 - Return                                                            ",
-  (uint8_t *)"                                                                            ",
+  (uint8_t *)"      1 - Start Mouse / Re-Initialize                                                                              ",
+  (uint8_t *)"      2 - Return                                                                                                   ",
+  (uint8_t *)"                                                                                                                   ",
+  (uint8_t *)"                                                                                                                   ",
+};
+
+uint8_t *DEMO_HID_menu[] =
+{
+  (uint8_t *)"      1 - Start HID                                                                                                ",
+  (uint8_t *)"      2 - Re-Enumerate                                                                                             ",
+  (uint8_t *)"                                                                                                                   ",
+  (uint8_t *)"                                                                                                                   ",
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -193,7 +194,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
       HID_MOUSE_ButtonReleased(0);
     }
 
-    if( m_pinfo->buttons[1])
+    if(m_pinfo->buttons[1])
     {
       HID_MOUSE_ButtonPressed(2);
     }
@@ -202,7 +203,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
       HID_MOUSE_ButtonReleased(2);
     }
 
-    if( m_pinfo->buttons[2])
+    if(m_pinfo->buttons[2])
     {
       HID_MOUSE_ButtonPressed(1);
     }

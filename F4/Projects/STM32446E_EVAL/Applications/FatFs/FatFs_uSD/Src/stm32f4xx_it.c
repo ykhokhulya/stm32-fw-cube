@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD/Src/stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
@@ -177,6 +175,16 @@ void BSP_SD_DMA_Tx_IRQHandler(void)
 void SDIO_IRQHandler(void)
 {
   HAL_SD_IRQHandler(&uSdHandle);
+}
+
+/**
+  * @brief  This function handles SD detection interrupty
+  * @param  None
+  * @retval None
+  */
+void EXTI0_IRQHandler(void)
+{
+  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN);
 }
 
 /**

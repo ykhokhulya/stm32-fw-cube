@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_it.h
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
@@ -53,6 +51,7 @@ void SysTick_Handler(void);
 void BSP_SD_DMA_Rx_IRQHandler(void);
 void BSP_SD_DMA_Tx_IRQHandler(void);
 void SDIO_IRQHandler(void);
+void EXTI0_IRQHandler(void);
 #ifdef __cplusplus
 }
 #endif

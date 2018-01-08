@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB host Dynamic Class Switch demo main file
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -53,6 +52,7 @@
 /* Private variables ---------------------------------------------------------*/
 USBH_HandleTypeDef hUSBHost;
 DS_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
+char USBDISKPath[4];   /* USB Host logical drive path */
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -113,6 +113,19 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
+
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink USB FatFS Driver! \n");
+    }
+
+    /* Init the LCD Log module */
+    LCD_LOG_Init();
+    LCD_LOG_SetHeader((uint8_t *)" USB FS DynamicSwitch Host");
     break;
 
   case HOST_USER_CONNECTION:
@@ -123,6 +136,14 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     {
     case USB_MSC_CLASS:
       Appli_state = APPLICATION_MSC;
+      /* Link the USB disk I/O driver */
+      if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
+      {
+        if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+        {
+          LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+        }
+      }
       break;
 
     case USB_HID_CLASS:

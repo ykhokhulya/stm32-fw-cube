@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FatFs/FatFs_uSD_RTOS/readme.txt
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Description of the FatFs with uSD card drive in RTOS mode application
   ******************************************************************************
   * @attention
@@ -66,7 +64,7 @@ The application is based on writing and reading back a text file from a drive,
 it creates a normal priority thread and it's performed using FatFs APIs to
 access the FAT volume as described in the following steps:
 
- - Link the uSD disk I/O driver;
+ - Link the uSD/DMA disk I/O driver;
  - Register the file system object (mount) to the FatFs module for the uSD drive;
  - Create a FAT file system (format) on the uSD drive;
  - Create and Open new text file object with write access;
@@ -90,6 +88,14 @@ STM32 Eval board's LEDs can be used to monitor the application status:
   - LED1 is ON when the application runs successfully.
   - LED3 is ON when any error occurs.
 
+It is possible to dynamically hotplug/unplug the uSD, as the application is handling
+the insert/remove events.
+
+@note: for some uSD's, replacing it  while the application is running makes the application
+       fail. It is recommended to reset the board using the "Reset button" after replacing
+       the uSD.
+
+@note: if the uSD is not initially plugged,the LED3 is on and the application will wait until the uSD is detected.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in HAL time base ISR. This implies that if HAL_Delay() is called from
@@ -108,13 +114,17 @@ on STM32Cube with FatFs".
 
 @par Directory contents
 
-  - FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_hal_conf.h    HAL configuration file
-  - FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - FatFs/FatFs_uSD_RTOS/Inc/main.h                  Main program header file
-  - FatFs/FatFs_uSD_RTOS/Inc/ffconf.h                FAT file system module configuration file
-  - FatFs/FatFs_uSD_RTOS/Src/stm32f4xx_it.c          Interrupt handlers
-  - FatFs/FatFs_uSD_RTOS/Src/main.c                  Main program
-  - FatFs/FatFs_uSD_RTOS/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
+  - FatFs/FatFs_uSD_RTOS/Inc/stm32h7xx_hal_conf.h                HAL configuration file
+  - FatFs/FatFs_uSD_RTOS/Inc/stm32h7xx_it.h                      Interrupt handlers header file
+  - FatFs/FatFs_uSD_RTOS/Inc/main.h                              Main program header file
+  - FatFs/FatFs_uSD_RTOS/Inc/sd_diskio_dma.h                     FatFS sd/dma diskio driver header file
+  - FatFs/FatFs_uSD_RTOS/Inc/ffconf.h                            FAT file system module configuration file
+  - FatFs/FatFs_uSD_RTOS/Inc/FreeRTOSConfig.h                    FreeRTOS configuration file
+  - FatFs/FatFs_uSD_RTOS/Src/stm32h7xx_it.c                      Interrupt handlers
+  - FatFs/FatFs_uSD_RTOS/Src/main.c                              Main program
+  - FatFs/FatFs_uSD_RTOS/Inc/sd_diskio_dma.c                     FatFS sd/dma diskio driver implementation
+  - FatFs/FatFs_uSD_RTOS/Src/system_stm32h7xx.c                  stm32h7xx system clock configuration file
+  - FatFs/FatFs_uSD_RTOS/Src/stm32h7xx_hal_timebase_tim.c        HAL time base functions.
 
 
 @par Hardware and Software environment
@@ -127,9 +137,6 @@ on STM32Cube with FatFs".
 
   - STM32446E-EVAL Set-up
     - Connect a uSD Card to the MSD connector (CN4).
-
-@note  When the uSD Card is used; the Camera module must be unplugged, this is due to
-       the shared pins between the two devices.
 
 
 @par How to use it ?

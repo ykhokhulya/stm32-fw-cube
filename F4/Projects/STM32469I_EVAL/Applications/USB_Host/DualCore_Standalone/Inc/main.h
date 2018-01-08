@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -44,21 +42,24 @@
   *
   ******************************************************************************
   */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "stdio.h"
-#include "usbh_core.h"
 #include "stm32469i_eval.h"
 #include "stm32469i_eval_io.h"
 #include "stm32469i_eval_lcd.h"
 #include "lcd_log.h"
-#include "usbh_msc.h"
+#include "usbh_core.h"
 #include "usbh_hid.h"
 #include "usbh_hid_parser.h"
+#include "usbh_msc.h"
 #include "ff.h"
+#include "ff_gen_drv.h"
+#include "usbh_diskio_dma.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
@@ -131,6 +132,7 @@ extern uint8_t *DEMO_MOUSE_menu[];
 extern uint8_t prev_select;
 
 /* Exported constants --------------------------------------------------------*/
+#define hUSBHost                           hUSBHost_HS
 /* Exported macro ------------------------------------------------------------*/
 #define LCD_UsrLogY(...)                   LCD_LineColor = LCD_COLOR_YELLOW;\
                                            printf(__VA_ARGS__);\

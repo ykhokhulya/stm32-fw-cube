@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   HAL configuration file.
   ******************************************************************************
   * @attention
@@ -152,7 +150,7 @@
   * @brief This is the HAL system configuration section
   */
 #define  VDD_VALUE                    (3300U) /*!< Value of VDD in mv */
-#define  TICK_INT_PRIORITY            (0x0FU) /*!< tick interrupt priority */
+#define  TICK_INT_PRIORITY            (0x0EU) /*!< tick interrupt priority */
 #define  USE_RTOS                     0
 #define  PREFETCH_ENABLE              1
 #define  INSTRUCTION_CACHE_ENABLE     1

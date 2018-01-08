@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_RTOS/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "usbh_core.h"
@@ -140,7 +139,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* D1 D2 D3 D4 D5 D6 D7 */
-    GPIO_InitStruct.Pin = GPIO_PIN_0  | GPIO_PIN_1  | GPIO_PIN_5 |\
+    GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_5 |\
       GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -284,7 +283,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   /* Set the LL driver parameters */
   hhcd.Instance = USB_OTG_HS;
   hhcd.Init.Host_channels = 11;
-  hhcd.Init.dma_enable = 1;
+  hhcd.Init.dma_enable = 0;
   hhcd.Init.low_power_enable = 0;
 
 #ifdef USE_USB_HS_IN_FS

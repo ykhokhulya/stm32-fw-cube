@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/audio_explorer.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file provides uSD Card drive configuration
   ******************************************************************************
   * @attention
@@ -44,6 +42,7 @@
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -77,12 +76,12 @@ uint8_t SD_StorageInit(void)
       if((f_mount(&SD_FatFs, (TCHAR const*)SD_Path, 0) != FR_OK))
       {
         /* FatFs Initialization Error */
-        LCD_ErrLog("Cannot Initialize FatFs! \n");
+        LCD_ErrLog("Cannot Initialize SD FatFs! \n");
         return 1;
       }
       else
       {
-        LCD_DbgLog ("INFO : FatFs Initialized! \n");
+        LCD_DbgLog ("INFO : SD FatFs Initialized! \n");
       }
     }
   }
@@ -91,7 +90,7 @@ uint8_t SD_StorageInit(void)
     LCD_ErrLog("SD card NOT plugged \n");
     return 1;
   }
-return 0;
+  return 0;
 }
 
 /**
@@ -105,12 +104,6 @@ FRESULT SD_StorageParse(void)
   FILINFO fno;
   DIR dir;
   char *fn;
-
-#if _USE_LFN
-  static char lfn[_MAX_LFN];
-  fno.lfname = lfn;
-  fno.lfsize = sizeof(lfn);
-#endif
 
   res = f_opendir(&dir, SD_Path);
   FileList.ptr = 0;
@@ -129,11 +122,8 @@ FRESULT SD_StorageParse(void)
       {
         continue;
       }
-#if _USE_LFN
-      fn = *fno.lfname ? fno.lfname : fno.fname;
-#else
+
       fn = fno.fname;
-#endif
 
       if(FileList.ptr < FILEMGR_LIST_DEPDTH)
       {

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/iap_menu.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   COMMAND IAP Execute Application
   ******************************************************************************
   * @attention
@@ -44,27 +42,28 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
 /* State Machine for the DEMO State */
 #define DEMO_INIT       ((uint8_t)0x00)
 #define DEMO_IAP        ((uint8_t)0x01)
 
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 __IO uint32_t UploadCondition = 0x00;
 DIR dir;
 FILINFO fno;
 static uint8_t Demo_State = DEMO_INIT;
+extern char USBDISKPath[4];
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 static void IAP_UploadTimeout(void);
 static void USBH_USR_BufferSizeControl(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Demo application for IAP through USB mass storage.
@@ -73,15 +72,18 @@ static void USBH_USR_BufferSizeControl(void);
   */
 void FW_UPGRADE_Process(void)
 {
-  switch(Demo_State)
+  switch (Demo_State)
   {
   case DEMO_INIT:
     /* Register the file system object to the FatFs module */
-    if(f_mount(&USBH_fatfs, "", 0 ) != FR_OK )
+	if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
     {
-      /* FatFs initialization fails */
-      /* Toggle LED3 and LED4 in infinite loop */
-      FatFs_Fail_Handler();
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        /* FatFs initialization fails */
+        /* Toggle LED3 and LED4 in infinite loop */
+        FatFs_Fail_Handler();
+      }
     }
 
     /* Go to IAP menu */
@@ -89,7 +91,7 @@ void FW_UPGRADE_Process(void)
     break;
 
   case DEMO_IAP:
-    while(USBH_MSC_IsReady(&hUSBHost))
+    while (USBH_MSC_IsReady(&hUSBHost))
     {
       /* Control BUFFER_SIZE value */
       USBH_USR_BufferSizeControl();
@@ -105,7 +107,7 @@ void FW_UPGRADE_Process(void)
       COMMAND_Download();
 
       /* Check if KEY Button is already pressed */
-      if((UploadCondition == 0x01))
+      if ((UploadCondition == 0x01))
       {
         /* Reads all flash memory */
         COMMAND_Upload();
@@ -119,18 +121,18 @@ void FW_UPGRADE_Process(void)
       }
 
       /* Waiting KEY Button Released */
-      while((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
-      {}
+      while ((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET)
+             && (Appli_state == APPLICATION_READY))
+      {
+      }
 
       /* Waiting KEY Button Pressed */
-      while((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
-      {}
+      while ((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET)
+             && (Appli_state == APPLICATION_READY))
+      {
+      }
 
-      /* Waiting KEY Button Released */
-      while((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
-      {}
-
-      if(Appli_state == APPLICATION_READY)
+      if (Appli_state == APPLICATION_READY)
       {
         /* Jump to user application code located in the internal Flash memory */
         COMMAND_Jump();
@@ -141,7 +143,7 @@ void FW_UPGRADE_Process(void)
   default:
     break;
   }
-  if(Appli_state == APPLICATION_DISCONNECT)
+  if (Appli_state == APPLICATION_DISCONNECT)
   {
     /* Toggle LED3: USB device disconnected */
     BSP_LED_Toggle(LED3);
@@ -157,16 +159,16 @@ void FW_UPGRADE_Process(void)
 static void IAP_UploadTimeout(void)
 {
   /* Check if KEY button is pressed */
-  if(BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET)
+  if (BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET)
   {
     /* To execute the UPLOAD command the KEY button should be kept pressed 3s
-       just after a board reset, at firmware startup */
-    HAL_Delay (3000);
+     * just after a board reset, at firmware startup */
+    HAL_Delay(3000);
 
-    if(BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET)
+    if (BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET)
     {
-      /* UPLOAD command will be executed immediately after
-      completed execution of the DOWNLOAD command */
+      /* UPLOAD command will be executed immediately after completed execution
+       * of the DOWNLOAD command */
 
       UploadCondition = 0x01;
 
@@ -188,7 +190,7 @@ static void IAP_UploadTimeout(void)
   */
 void Fail_Handler(void)
 {
-  while(1)
+  while (1)
   {
     /* Toggle LED3 */
     BSP_LED_Toggle(LED3);
@@ -203,7 +205,7 @@ void Fail_Handler(void)
   */
 void Erase_Fail_Handler(void)
 {
-  while(1)
+  while (1)
   {
     /* Toggle LED2 and LED3 */
     BSP_LED_Toggle(LED2);
@@ -219,7 +221,7 @@ void Erase_Fail_Handler(void)
   */
 void FatFs_Fail_Handler(void)
 {
-  while(1)
+  while (1)
   {
     /* Toggle LED3 and LED4 */
     BSP_LED_Toggle(LED3);
@@ -236,9 +238,9 @@ void FatFs_Fail_Handler(void)
 static void USBH_USR_BufferSizeControl(void)
 {
   /* Control BUFFER_SIZE and limit this value to 32Kbyte maximum */
-  if((BUFFER_SIZE % 4 != 0x00) || (BUFFER_SIZE / 4 > 8192))
+  if ((BUFFER_SIZE % 4 != 0x00) || (BUFFER_SIZE / 4 > 8192))
   {
-    while(1)
+    while (1)
     {
       /* Toggle LED2, LED3 and LED4 */
       BSP_LED_Toggle(LED2);
