@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FMC/FMC_SDRAM/Inc/main.h
+  * @file    FMC/FMC_SDRAM/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -52,7 +52,7 @@
 #define SDCLOCK_PERIOD                   FMC_SDRAM_CLOCK_PERIOD_2
 /* #define SDCLOCK_PERIOD                FMC_SDRAM_CLOCK_PERIOD_3 */
 
-#define SDRAM_TIMEOUT     ((uint32_t)0xFFFF)
+#define SDRAM_TIMEOUT     ((uint32_t)0xFFFF) 
 
 #define SDRAM_MODEREG_BURST_LENGTH_1             ((uint16_t)0x0000)
 #define SDRAM_MODEREG_BURST_LENGTH_2             ((uint16_t)0x0001)
@@ -63,8 +63,8 @@
 #define SDRAM_MODEREG_CAS_LATENCY_2              ((uint16_t)0x0020)
 #define SDRAM_MODEREG_CAS_LATENCY_3              ((uint16_t)0x0030)
 #define SDRAM_MODEREG_OPERATING_MODE_STANDARD    ((uint16_t)0x0000)
-#define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
-#define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
+#define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000) 
+#define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200) 
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

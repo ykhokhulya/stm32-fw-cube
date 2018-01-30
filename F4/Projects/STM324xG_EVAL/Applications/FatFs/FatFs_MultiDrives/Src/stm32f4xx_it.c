@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_MultiDrives/Src/stm32f4xx_it.c
+  * @file    FatFs/FatFs_MultiDrives/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -27,7 +27,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32f4xx_it.h"
+#include "stm32f4xx_it.h" 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -163,7 +163,7 @@ void BSP_SD_DMA_Rx_IRQHandler(void)
   */
 void DMA2_Stream6_IRQHandler(void)
 {
-  BSP_SD_DMA_Tx_IRQHandler();
+  BSP_SD_DMA_Tx_IRQHandler(); 
 }
 
 /**

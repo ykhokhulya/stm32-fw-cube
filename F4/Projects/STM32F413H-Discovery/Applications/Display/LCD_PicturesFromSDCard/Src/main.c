@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -51,7 +51,7 @@
 
 /** @addtogroup LCD_PicturesFromSDCard
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -81,7 +81,7 @@ int main(void)
 {
   uint32_t counter = 0;
   uint8_t str[30];
-
+  
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch
        - Systick timer is configured by default as source of time base, but user
@@ -96,24 +96,24 @@ int main(void)
 
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED4 */
   BSP_LED_Init(LED4);
-
+  
   /*##-1- Configure LCD ######################################################*/
-
+  
   /* LCD Initialization */
   BSP_LCD_Init();
-
+  
   /* Clear the LCD */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Configure Key Button */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
-
+  
   /* SD Initialization */
   BSP_SD_Init();
-
+  
   /* Set the font Size */
   BSP_LCD_SetFont(&Font16);
   /* Set the Text Color */
@@ -167,38 +167,38 @@ int main(void)
   while(1)
   {
     counter = 0;
-
+    
     while (counter < ubNumberOfFiles)
-    {
+    {      
       /* Format the string */
       sprintf ((char*)str, "Media/%-11.11s", pDirectoryFiles[counter]);
-
+      
       if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0)
       {
         /* Open a file and copy its content to an internal buffer */
         Storage_OpenReadFile(uwInternelBuffer, (const char*)str);
-
+        
         /* Write bmp file on LCD frame buffer */
         BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
-
+        
         /* Wait for Key button pressed */
         while (BSP_PB_GetState(BUTTON_WAKEUP) == RESET)
         {
         }
-
+        
         /* Wait for Key button released */
         while (BSP_PB_GetState(BUTTON_WAKEUP) == SET)
         {
         }
-
+        
         /* Clear the LCD */
         BSP_LCD_Clear(LCD_COLOR_BLACK);
-
+        
         while(BSP_SD_IsDetected() != SD_PRESENT)
         {
           BSP_LCD_DisplayStringAt(0, 112, (uint8_t*)"Please insert SD Card  ", CENTER_MODE);
           BSP_LCD_DisplayStringAt(0, 128, (uint8_t*)"Reset the board        ", CENTER_MODE);
-        }
+        }        
         /* Jump to the next image */
         counter++;
       }
@@ -269,7 +269,7 @@ static void SystemClock_Config(void)
 
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    while(1) { ; } 
   }
 
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2

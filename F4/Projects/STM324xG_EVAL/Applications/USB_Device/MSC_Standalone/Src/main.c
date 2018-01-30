@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -70,22 +70,22 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Init MSC Application */
   USBD_Init(&USBD_Device, &MSC_Desc, 0);
-
+  
   /* Add Supported Class */
   USBD_RegisterClass(&USBD_Device, USBD_MSC_CLASS);
-
+  
   /* Add Storage callbacks for MSC Class */
   USBD_MSC_RegisterStorage(&USBD_Device, &USBD_DISK_fops);
-
+  
   /* Start Device Process */
   USBD_Start(&USBD_Device);
-
+  
   /* Run Application (Interrupt mode) */
   while (1)
   {
@@ -94,7 +94,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -120,8 +120,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -135,15 +135,15 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* RCC Clocks: All parameters can be changed according to user’s needs */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK |RCC_CLOCKTYPE_HCLK |RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-
+  
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
   if (HAL_GetREVID() == 0x1001)
   {
@@ -162,10 +162,10 @@ void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   static DMA_HandleTypeDef dmaRxHandle;
   static DMA_HandleTypeDef dmaTxHandle;
   GPIO_InitTypeDef GPIO_Init_Structure;
-
+  
   /* Enable SDIO clock */
   __HAL_RCC_SDIO_CLK_ENABLE();
-
+  
   /* Enable DMA2 clocks */
   __DMAx_TxRx_CLK_ENABLE();
 
@@ -173,16 +173,16 @@ void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __SD_DETECT_GPIO_CLK_ENABLE();
-
+  
   /* Common GPIO configuration */
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;
   GPIO_Init_Structure.Pull      = GPIO_PULLUP;
   GPIO_Init_Structure.Speed     = GPIO_SPEED_HIGH;
   GPIO_Init_Structure.Alternate = GPIO_AF12_SDIO;
-
+  
   /* GPIOC configuration */
   GPIO_Init_Structure.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
-
+   
   HAL_GPIO_Init(GPIOC, &GPIO_Init_Structure);
 
   /* GPIOD configuration */
@@ -195,11 +195,11 @@ void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   GPIO_Init_Structure.Speed     = GPIO_SPEED_HIGH;
   GPIO_Init_Structure.Pin       = SD_DETECT_PIN;
   HAL_GPIO_Init(SD_DETECT_GPIO_PORT, &GPIO_Init_Structure);
-
+    
   /* NVIC configuration for SDIO interrupts */
   HAL_NVIC_SetPriority(SDIO_IRQn, 0x05, 0);
   HAL_NVIC_EnableIRQ(SDIO_IRQn);
-
+    
   /* Configure DMA Rx parameters */
   dmaRxHandle.Init.Channel             = SD_DMAx_Rx_CHANNEL;
   dmaRxHandle.Init.Direction           = DMA_PERIPH_TO_MEMORY;
@@ -213,18 +213,18 @@ void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   dmaRxHandle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   dmaRxHandle.Init.MemBurst            = DMA_MBURST_INC4;
   dmaRxHandle.Init.PeriphBurst         = DMA_PBURST_INC4;
-
+  
   dmaRxHandle.Instance = SD_DMAx_Rx_STREAM;
-
+  
   /* Associate the DMA handle */
   __HAL_LINKDMA(hsd, hdmarx, dmaRxHandle);
-
+  
   /* Deinitialize the stream for new transfer */
   HAL_DMA_DeInit(&dmaRxHandle);
-
+  
   /* Configure the DMA stream */
   HAL_DMA_Init(&dmaRxHandle);
-
+  
   /* Configure DMA Tx parameters */
   dmaTxHandle.Init.Channel             = SD_DMAx_Tx_CHANNEL;
   dmaTxHandle.Init.Direction           = DMA_MEMORY_TO_PERIPH;
@@ -238,22 +238,22 @@ void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   dmaTxHandle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   dmaTxHandle.Init.MemBurst            = DMA_MBURST_INC4;
   dmaTxHandle.Init.PeriphBurst         = DMA_PBURST_INC4;
-
+  
   dmaTxHandle.Instance = SD_DMAx_Tx_STREAM;
-
+  
   /* Associate the DMA handle */
   __HAL_LINKDMA(hsd, hdmatx, dmaTxHandle);
-
+  
   /* Deinitialize the stream for new transfer */
   HAL_DMA_DeInit(&dmaTxHandle);
-
+  
   /* Configure the DMA stream */
-  HAL_DMA_Init(&dmaTxHandle);
-
+  HAL_DMA_Init(&dmaTxHandle); 
+  
   /* NVIC configuration for DMA transfer complete interrupt */
   HAL_NVIC_SetPriority(SD_DMAx_Rx_IRQn, 0x06, 0);
   HAL_NVIC_EnableIRQ(SD_DMAx_Rx_IRQn);
-
+  
   /* NVIC configuration for DMA transfer complete interrupt */
   HAL_NVIC_SetPriority(SD_DMAx_Tx_IRQn, 0x06, 0);
   HAL_NVIC_EnableIRQ(SD_DMAx_Tx_IRQn);
@@ -268,7 +268,7 @@ void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

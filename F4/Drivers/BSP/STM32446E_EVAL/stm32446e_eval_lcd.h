@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32446E_EVAL_LCD_H
@@ -40,10 +40,10 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32446e_eval.h"
+#include "stm32446e_eval.h" 
 #include "../Components/ili9325/ili9325.h"
 #include "../../../Utilities/Fonts/fonts.h"
 
@@ -54,43 +54,43 @@
 /** @addtogroup STM32446E_EVAL
   * @{
   */
-
-/** @addtogroup STM32446E_EVAL_LCD
+    
+/** @addtogroup STM32446E_EVAL_LCD 
   * @{
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_LCD_Exported_Types STM32446E EVAL LCD Exported Types
   * @{
   */
-typedef struct
-{
+typedef struct 
+{ 
   uint32_t TextColor;
   uint32_t BackColor;
-  sFONT    *pFont;
+  sFONT    *pFont; 
 }LCD_DrawPropTypeDef;
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_LCD_Exported_Constants STM32446E EVAL LCD Exported Constants
   * @{
   */
-/**
-  * @brief  LCD status structure definition
-  */
+/** 
+  * @brief  LCD status structure definition  
+  */     
 #define LCD_OK         ((uint8_t)0x00)
 #define LCD_ERROR      ((uint8_t)0x01)
 #define LCD_TIMEOUT    ((uint8_t)0x02)
-
-typedef struct
+    
+typedef struct 
 {
   int16_t X;
   int16_t Y;
-}Point, * pPoint;
+}Point, * pPoint; 
 
-/**
+/** 
   * @brief  Line mode structures definition
-  */
+  */ 
 typedef enum
 {
   CENTER_MODE          = 0x01,    /* Center mode */
@@ -98,9 +98,9 @@ typedef enum
   LEFT_MODE            = 0x03     /* Left mode   */
 }Line_ModeTypdef;
 
-/**
-  * @brief  LCD color
-  */
+/** 
+  * @brief  LCD color  
+  */ 
 #define LCD_COLOR_BLUE          ((uint16_t)0x001F)
 #define LCD_COLOR_GREEN         ((uint16_t)0x07E0)
 #define LCD_COLOR_RED           ((uint16_t)0xF800)
@@ -126,9 +126,9 @@ typedef enum
 #define LCD_COLOR_BROWN         ((uint16_t)0xA145)
 #define LCD_COLOR_ORANGE        ((uint16_t)0xFD20)
 
-/**
-  * @brief LCD default font
-  */
+/** 
+  * @brief LCD default font 
+  */ 
 #define LCD_DEFAULT_FONT         Font24
 
 /**
@@ -137,12 +137,12 @@ typedef enum
 
 /** @defgroup STM32446E_EVAL_LCD_Exported_Functions STM32446E EVAL LCD Exported Functions
   * @{
-  */
+  */   
 uint8_t  BSP_LCD_Init(void);
 uint8_t  BSP_LCD_DeInit(void);
 uint32_t BSP_LCD_GetXSize(void);
 uint32_t BSP_LCD_GetYSize(void);
-
+ 
 uint16_t BSP_LCD_GetTextColor(void);
 uint16_t BSP_LCD_GetBackColor(void);
 void     BSP_LCD_SetTextColor(__IO uint16_t Color);
@@ -174,22 +174,22 @@ void     BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
 
 void     BSP_LCD_DisplayOff(void);
 void     BSP_LCD_DisplayOn(void);
-
+ 
 /**
   * @}
   */
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 #ifdef __cplusplus
 }

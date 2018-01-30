@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_TimeBase/Inc/main.h
+  * @file    TIM/TIM_TimeBase/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -44,7 +44,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
-/* User can use this section to tailor TIMx instance used and associated
+/* User can use this section to tailor TIMx instance used and associated 
    resources */
 /* Definition for TIMx clock resources */
 #define TIMx                           TIM3

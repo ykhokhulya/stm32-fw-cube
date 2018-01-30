@@ -1,9 +1,9 @@
 /**
   @page Templates  Description of the Templates example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Templates/readme.txt
+  * @file    Templates/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the Templates example.
   ******************************************************************************
@@ -37,7 +37,7 @@
 
 This directory provides a reference template project that can be used to build any firmware application for
 STM32F469xx/STM32F479xx devices using STM32CubeF4 HAL and running on STM32469I-EVAL/STM32479I-EVAL board from
-STMicroelectronics.
+STMicroelectronics. 
 
 Two workspaces are provided for STM32469I-EVAL and STM32479I-EVAL (respectively STM32F469xx and STM32F479xx devices),
 which include the right set of peripherals, linker and startup files.
@@ -47,7 +47,7 @@ which include the right set of peripherals, linker and startup files.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
@@ -55,30 +55,30 @@ which include the right set of peripherals, linker and startup files.
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - Templates/Src/main.c                 Main program
   - Templates/Src/system_stm32f4xx.c     STM32F4xx system clock configuration file
-  - Templates/Src/stm32f4xx_it.c         Interrupt handlers
+  - Templates/Src/stm32f4xx_it.c         Interrupt handlers 
   - Templates/Src/stm32f4xx_hal_msp.c    HAL MSP module
-  - Templates/Inc/main.h                 Main program header file
+  - Templates/Inc/main.h                 Main program header file  
   - Templates/Inc/stm32f4xx_hal_conf.h   HAL Configuration file
   - Templates/Inc/stm32f4xx_it.h         Interrupt handlers header file
 
-
-@par Hardware and Software environment
+        
+@par Hardware and Software environment  
 
   - This example runs on STM32F469xx/STM32F479xx devices.
-
-  - This example has been tested with STMicroelectronics STM32469I-EVAL RevC
-    evaluation boards and can be easily tailored to any other supported device
+    
+  - This example has been tested with STMicroelectronics STM32469I-EVAL RevC 
+    evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

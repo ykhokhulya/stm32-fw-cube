@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_InputCapture/Src/main.c
+  * @file    TIM/TIM_InputCapture/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example shows how to use the TIM peripheral to measure only
+  * @brief   This example shows how to use the TIM peripheral to measure only 
   *          the frequency of an external signal.
   ******************************************************************************
   * @attention
@@ -44,7 +44,7 @@
 
 /** @addtogroup TIM_InputCapture
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -88,17 +88,17 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
-  /*##-1- Configure the TIM peripheral #######################################*/
+  
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* Set TIMx instance */
   TimHandle.Instance = TIMx;
-
+ 
   /* Initialize TIMx peripheral as follows:
        + Period = 0xFFFF
        + Prescaler = 0
@@ -110,40 +110,40 @@ int main(void)
   TimHandle.Init.ClockDivision     = 0;
   TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
   TimHandle.Init.RepetitionCounter = 0;
-
+    
   if(HAL_TIM_IC_Init(&TimHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the Input Capture channel ################################*/
+  
+  /*##-2- Configure the Input Capture channel ################################*/ 
   /* Configure the Input Capture of channel 2 */
   sICConfig.ICPolarity  = TIM_ICPOLARITY_RISING;
   sICConfig.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sICConfig.ICPrescaler = TIM_ICPSC_DIV1;
-  sICConfig.ICFilter    = 0;
+  sICConfig.ICFilter    = 0;   
   if(HAL_TIM_IC_ConfigChannel(&TimHandle, &sICConfig, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /*##-3- Start the Input Capture in interrupt mode ##########################*/
   if(HAL_TIM_IC_Start_IT(&TimHandle, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
-  }
+  } 
 }
 
 /**
-  * @brief  Conversion complete callback in non blocking mode
+  * @brief  Conversion complete callback in non blocking mode 
   * @param  htim: TIM handle
   * @retval None
   */
@@ -160,23 +160,23 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
     else if(uhCaptureIndex == 1)
     {
       /* Get the 2nd Input Capture value */
-      uwIC2Value2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
-
+      uwIC2Value2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2); 
+      
       /* Capture computation */
       if (uwIC2Value2 > uwIC2Value1)
       {
-        uwDiffCapture = (uwIC2Value2 - uwIC2Value1);
+        uwDiffCapture = (uwIC2Value2 - uwIC2Value1); 
       }
       else  /* (uwIC2Value2 <= uwIC2Value1) */
       {
-        uwDiffCapture = ((0xFFFF - uwIC2Value1) + uwIC2Value2);
+        uwDiffCapture = ((0xFFFF - uwIC2Value1) + uwIC2Value2); 
       }
 
       /* Frequency computation: for this example TIMx (TIM1) is clocked by
-         2xAPB2Clk */
+         2xAPB2Clk */      
       uwFrequency = (2*HAL_RCC_GetPCLK2Freq()) / uwDiffCapture;
       uhCaptureIndex = 0;
-    }
+    } 
   }
 }
 
@@ -196,7 +196,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -222,8 +222,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -240,14 +240,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+    
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -260,7 +260,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

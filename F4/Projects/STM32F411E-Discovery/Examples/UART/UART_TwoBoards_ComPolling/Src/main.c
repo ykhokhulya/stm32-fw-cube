@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_TwoBoards_ComPolling/Src/main.c
+  * @file    UART/UART_TwoBoards_ComPolling/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx UART HAL API to transmit
+  * @brief   This sample code shows how to use STM32F4xx UART HAL API to transmit 
   *          and receive a data buffer with a communication process based on
-  *          polling transfer.
+  *          polling transfer. 
   *          The communication is done using 2 Boards.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup UART_TwoBoards_ComPolling
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -84,7 +84,7 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
@@ -103,7 +103,7 @@ int main(void)
       - BaudRate = 9600 baud
       - Hardware flow control disabled (RTS and CTS signals) */
   UartHandle.Instance          = USARTx;
-
+  
   UartHandle.Init.BaudRate     = 9600;
   UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
   UartHandle.Init.StopBits     = UART_STOPBITS_1;
@@ -111,96 +111,96 @@ int main(void)
   UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
   UartHandle.Init.Mode         = UART_MODE_TX_RX;
   UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
-
+    
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
     Error_Handler();
   }
-
+ 
 
 #ifdef TRANSMITTER_BOARD
 
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-
+	
   /* Wait for USER Button press before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) == RESET)
   {
     /* Toggle LED3 waiting for user to press button */
     BSP_LED_Toggle(LED3);
-    HAL_Delay(40);
+    HAL_Delay(40);		
   }
   /* Wait for USER Button to be release before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) == SET)
   {
   }
-
+  
   /* Turn LED3 off */
   BSP_LED_Off(LED3);
 
   /* The board sends the message and expects to receive it back */
-
-  /*##-2- Start the transmission process #####################################*/
-  /* While the UART in reception process, user can transmit data through
+  
+  /*##-2- Start the transmission process #####################################*/  
+  /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   if(HAL_UART_Transmit(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE, 5000)!= HAL_OK)
   {
-    Error_Handler();
+    Error_Handler();   
   }
-
+  
   /* Turn LED6 on: Transfer in transmission process is correct */
   BSP_LED_On(LED6);
-
-  /*##-3- Put UART peripheral in reception process ###########################*/
+  
+  /*##-3- Put UART peripheral in reception process ###########################*/  
   if(HAL_UART_Receive(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE, 5000) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler();  
   }
-
+    
   /* Turn LED4 on: Transfer in reception process is correct */
   BSP_LED_On(LED4);
-
+  
 #else
-
+  
   /* The board receives the message and sends it back */
 
   /*##-2- Put UART peripheral in reception process ###########################*/
   if(HAL_UART_Receive(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE, 5000) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler();    
   }
-
+  
   /* Turn LED4 on: Transfer in reception process is correct */
   BSP_LED_On(LED4);
-
-  /*##-3- Start the transmission process #####################################*/
-  /* While the UART in reception process, user can transmit data through
+  
+  /*##-3- Start the transmission process #####################################*/  
+  /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   if(HAL_UART_Transmit(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE, 5000)!= HAL_OK)
   {
     Error_Handler();
   }
-
+  
   /* Turn LED6 on: Transfer in transmission process is correct */
   BSP_LED_On(LED6);
-
+  
 #endif /* TRANSMITTER_BOARD */
-
+  
   /*##-4- Compare the sent and received buffers ##############################*/
   if(Buffercmp((uint8_t*)aTxBuffer,(uint8_t*)aRxBuffer,RXBUFFERSIZE))
   {
-    Error_Handler();
+    Error_Handler();  
   }
-
+  
   /* Infinite loop */
   while (1)
-  {
+  {    
   }
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSI)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -225,12 +225,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -245,14 +245,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
@@ -269,7 +269,7 @@ static void SystemClock_Config(void)
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
 {
   /* Turn LED3 on: Transfer error in reception/transmission process */
-  BSP_LED_On(LED3);
+  BSP_LED_On(LED3); 
 }
 
 /**
@@ -317,7 +317,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

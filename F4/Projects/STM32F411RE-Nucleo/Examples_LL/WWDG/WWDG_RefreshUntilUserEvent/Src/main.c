@@ -70,16 +70,16 @@ int main(void)
 {
   /* Configure the system clock to 2MHz */
   SystemClock_Config();
-
+  
   /* Initialize LED2 */
   LED_Init();
 
   /* Initialize button in EXTI mode */
   UserButton_Init();
-
+  
   /* Check if the system has resumed from WWDG reset*/
   Check_WWDG_Reset();
-
+  
   /* Configure the WWDG                    */
   /*   - Configure the Window to ~2s       */
   /*   - Configure the Prescaler           */
@@ -94,7 +94,7 @@ int main(void)
     {
       /* Refresh WWDG Downcounter to initial value ~2s*/
       LL_WWDG_SetCounter(WWDG, 0X7E);
-
+      
       LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
       LL_mDelay(LED_BLINK_FAST);
     }
@@ -110,7 +110,7 @@ void Configure_WWDG(void)
 {
   /* Enable the peripheral clock of DBG register (uncomment for debug purpose) */
   /*LL_DBGMCU_APB1_GRP1_FreezePeriph(LL_DBGMCU_APB1_GRP1_WWDG_STOP); */
-
+  
   /* Enable the peripheral clock WWDG */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_WWDG);
 
@@ -139,7 +139,7 @@ void Check_WWDG_Reset(void)
 
     /* turn Led on and wait for user event to perform example again */
     LED_On();
-
+    
     while(KeyPressed != 1)
     {
     }
@@ -189,18 +189,18 @@ void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+  
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
-  /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
+  
+  /* Configure NVIC for USER_BUTTON_EXTI_IRQn */ 
   NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
   NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
 }

@@ -1,9 +1,9 @@
 /**
   @page CEC CEC_DataExchange example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CEC/CEC_DataExchange/readme.txt
+  * @file    CEC/CEC_DataExchange/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CEC Data Exchangeexample.
   ******************************************************************************
@@ -33,15 +33,13 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to configure and use the CEC peripheral to receive and
-transmit messages.
-
+How to configure and use the CEC peripheral to receive and transmit messages.
 
 - Hardware Description
 
-To use this example, two STM32446E-EVAL boards (called Device_1 and
+To use this example, two STM32446E-EVAL boards (called Device_1 and 
 Device_2) are loaded with the same software then connected through CEC lines
 
  /|\  In the firmware file main.h, uncomment the dedicated line to use
@@ -53,10 +51,10 @@ Device_2) are loaded with the same software then connected through CEC lines
 |         Device Address :0x01                    Device Address :0x03         |
 |         ____________________                   ____________________          |
 |        |                    |                 |                    |         |
-|        |             3.3V   |                 |                    |         |
-|        |               |    |                 |                    |         |
-|        |             27Kohm |                 |                    |         |
-|        |               |    |                 |                    |         |
+|        |             3.3V   |                 |                    |         | 
+|        |               |    |                 |                    |         | 
+|        |             27Kohm |                 |                    |         | 
+|        |               |    |                 |                    |         | 
 |        |         PB3/PB6 O--|-----------------|--O PB3/PB6         |         |
 |        |                    |                 |                    |         |
 |        |  O LD1             |                 |  O LD1             |         |
@@ -85,20 +83,20 @@ below on the transmitting board:
 
 Accordingly, the following happens on the RX side in case of successful
 reception:
- - when User push-button is pressed on TX side,
-     * all RX side LEDs are turned off
+ - when User push-button is pressed on TX side, 
+     * all RX side LEDs are turned off 
  - when Joystick Selection push-button is pressed on TX side, on RX side
      *  LED1 and LED2 are turned on
-     *  LED3 and LED4 are turned off
- - when Joystick UP push-button is pressed on TX side,
+     *  LED3 and LED4 are turned off 
+ - when Joystick UP push-button is pressed on TX side, 
      *  all RX side LEDs are turned on
- - when Joystick DOWN push-button is pressed on TX side, on RX side
+ - when Joystick DOWN push-button is pressed on TX side, on RX side 
      * LED1 and LED2 are turned off
-     * LED3 and LED4 are turned on
+     * LED3 and LED4 are turned on    
 In case of unsuccessful reception, LED3 is turned on.
 
-Practically, 2 EXTI lines (EXTI15_10 and EXTI0) are configured to
-generate an interrupt on each falling or rising edge.
+Practically, 2 EXTI lines (EXTI15_10 and EXTI0) are configured to 
+generate an interrupt on each falling or rising edge. 
 A specific message is then transmitted by the CEC IP
 and a LED connected to a specific MFX GPIO pin is toggled.
     - EXTI0 is mapped to MFX used to manage Joystick pins
@@ -110,32 +108,32 @@ Then, on TX side,
     on PC.13, LED1 toggles
   - when falling edge is detected on EXTI0-UP joystick button, LED3 toggles
   - when falling edge is detected on EXTI0-DOWN joystick button LED4 toggles
-
+   
 
 In this example, HCLK is configured at 180 MHz.
 
-@par Directory contents
+@par Directory contents 
 
   - CEC/CEC_DataExchange/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CEC/CEC_DataExchange/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CEC/CEC_DataExchange/Inc/main.h                  Header for main.c module
+  - CEC/CEC_DataExchange/Inc/main.h                  Header for main.c module  
   - CEC/CEC_DataExchange/Src/stm32f4xx_it.c          Interrupt handlers
   - CEC/CEC_DataExchange/Src/system_stm32f4xx.c      STM32F4xx system source file
   - CEC/CEC_DataExchange/Src/main.c                  Main program
   - CEC/CEC_DataExchange/Src/stm32f4xx_hal_msp.c     IP hardware resources initialization
-
+  
 @par Hardware and Software environment
 
   - This example runs on STM32F446xx devices.
-
+    
   - This example has been tested with STM32446E-EVAL board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.      
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - in main.h, uncomment DEVICE_1 for first board, uncomment DEVICE_2 for second board
  - Rebuild all files and load your image into target memory
  - Be aware that PB6 pin is missing but PB3 is connected directly to it (SB23 is closed).

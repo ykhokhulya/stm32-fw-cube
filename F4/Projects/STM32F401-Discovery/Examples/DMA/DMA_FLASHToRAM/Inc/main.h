@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/DMA_FLASHToRAM/Inc/main.h
+  * @file    DMA/DMA_FLASHToRAM/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -48,7 +48,7 @@
    a different DMA Stream and/or channel.
    But note that only DMA2 Streams are capable of Memory to Memory transfers. */
 #define DMA_STREAM               DMA2_Stream0
-#define DMA_CHANNEL              DMA_CHANNEL_0
+#define DMA_CHANNEL              DMA_CHANNEL_0 
 #define DMA_STREAM_IRQ           DMA2_Stream0_IRQn
 #define DMA_STREAM_IRQHANDLER    DMA2_Stream0_IRQHandler
 

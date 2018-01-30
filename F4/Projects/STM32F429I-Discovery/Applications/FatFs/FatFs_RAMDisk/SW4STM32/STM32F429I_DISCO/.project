@@ -133,6 +133,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

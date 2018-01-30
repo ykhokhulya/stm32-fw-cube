@@ -34,7 +34,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __LS016B8UY_H
@@ -42,7 +42,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
@@ -50,12 +50,12 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup Components
   * @{
-  */
-
+  */ 
+  
 /** @addtogroup ls016b8uy
   * @{
   */
@@ -63,28 +63,28 @@
 /** @defgroup LS016B8UY_Exported_Types
   * @{
   */
-
+   
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup LS016B8UY_Exported_Constants
   * @{
   */
-/**
-  * @brief  LS016B8UY ID
-  */
+/** 
+  * @brief  LS016B8UY ID  
+  */  
 #define  LS016B8UY_ID    0xFFFF
-
-/**
-  * @brief  LS016B8UY Size
-  */
+   
+/** 
+  * @brief  LS016B8UY Size  
+  */  
 #define  LS016B8UY_LCD_PIXEL_WIDTH    ((uint16_t)180)
 #define  LS016B8UY_LCD_PIXEL_HEIGHT   ((uint16_t)180)
-
-/**
-  * @brief  LS016B8UY Registers
-  */
+   
+/** 
+  * @brief  LS016B8UY Registers  
+  */ 
 #define LCD_CMD_SLEEP_IN           0x10
 #define LCD_CMD_SLEEP_OUT          0x11
 #define LCD_CMD_DISPLAY_OFF        0x28
@@ -117,10 +117,10 @@
 /**
   * @}
   */
-
+  
 /** @defgroup LS016B8UY_Exported_Functions
   * @{
-  */
+  */ 
 void     ls016b8uy_Init(void);
 uint16_t ls016b8uy_ReadID(void);
 void     ls016b8uy_WriteReg(uint8_t Command, uint8_t *Parameters, uint8_t NbParameters);
@@ -156,8 +156,8 @@ void     LCD_IO_Delay(uint32_t delay);
 
 /**
   * @}
-  */
-
+  */ 
+      
 #ifdef __cplusplus
 }
 #endif
@@ -166,14 +166,14 @@ void     LCD_IO_Delay(uint32_t delay);
 
 /**
   * @}
-  */
+  */ 
+
+/**
+  * @}
+  */ 
 
 /**
   * @}
   */
-
-/**
-  * @}
-  */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

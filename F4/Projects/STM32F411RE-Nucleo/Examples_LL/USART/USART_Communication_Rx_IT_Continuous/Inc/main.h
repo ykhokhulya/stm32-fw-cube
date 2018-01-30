@@ -53,20 +53,20 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-/* Define used to enable Virtual Com Port use :
+/* Define used to enable Virtual Com Port use : 
      USE_VCP_CONNECTION == 0
        USART1 instance is used. (TX on PA.09, RX on PA.10)
        (requires wiring USART1 TX/Rx Pins to PC connection (could be achieved thanks to a USB to UART adapter)
      USE_VCP_CONNECTION == 1
        USART2 instance is used. (TX on PA.02, RX on PA.03)
-       (please ensure that USART communication between the target MCU and ST-LINK MCU is properly enabled
+       (please ensure that USART communication between the target MCU and ST-LINK MCU is properly enabled 
        on HW board in order to support Virtual Com Port)
 */
 #define USE_VCP_CONNECTION       1
 
-/* Private definitions covering GPIO clock and USART pins
+/* Private definitions covering GPIO clock and USART pins 
    depending on selected USART instance. */
-#if (USE_VCP_CONNECTION == 0)
+#if (USE_VCP_CONNECTION == 0) 
 
 /* USART1 instance is used. (TX on PA.09, RX on PA.10)
    (requires wiring USART1 TX/Rx Pins to USB to UART adapter) */
@@ -84,9 +84,9 @@
 #define USARTx_SET_RX_GPIO_AF()       LL_GPIO_SetAFPin_8_15(GPIOA, LL_GPIO_PIN_10, LL_GPIO_AF_7)
 #define APB_Div 1
 #else
-
+    
 /* USART2 instance is used. (TX on PA.02, RX on PA.03)
-   (please ensure that USART communication between the target MCU and ST-LINK MCU is properly enabled
+   (please ensure that USART communication between the target MCU and ST-LINK MCU is properly enabled 
     on HW board in order to support Virtual Com Port) */
 #define USARTx_INSTANCE               USART2
 #define USARTx_CLK_ENABLE()           LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2)
@@ -104,7 +104,7 @@
 #endif /* (USE_VCP_CONNECTION == 0) */
 
 /**
-  * @brief LED2
+  * @brief LED2 
   */
 #define LED2_PIN                           LL_GPIO_PIN_5
 #define LED2_GPIO_PORT                     GPIOA
@@ -123,11 +123,11 @@
   */
 #define USER_BUTTON_PIN                         LL_GPIO_PIN_13
 #define USER_BUTTON_GPIO_PORT                   GPIOC
-#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
+#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)   
 #define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_13
 #define USER_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
-#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)
-#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)
+#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)   
+#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)   
 #define USER_BUTTON_SYSCFG_SET_EXTI()           do {                                                                     \
                                                   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                  \
                                                   LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTC, LL_SYSCFG_EXTI_LINE13);  \
@@ -137,9 +137,9 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 /* IRQ Handler treatment functions */
-void UserButton_Callback(void);
-void USART_CharReception_Callback(void);
-void Error_Callback(void);
+void UserButton_Callback(void); 
+void USART_CharReception_Callback(void); 
+void Error_Callback(void); 
 
 #endif /* __MAIN_H */
 

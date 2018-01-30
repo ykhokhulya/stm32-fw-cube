@@ -6,42 +6,42 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */  
 /* Includes ------------------------------------------------------------------*/
 #include "audio_recorder_app.h"
 
@@ -89,25 +89,25 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_Init(uint8_t volume)
 {
   /* Initialize internal audio structure */
 
-  haudio.in.volume = DEFAULT_REC_AUDIO_VOLUME;
-
-
+  haudio.in.volume = DEFAULT_REC_AUDIO_VOLUME;  
+   
+ 
   /* Register audio BSP drivers callbacks */
-  AUDIO_IF_RegisterCallbacks(AUDIO_TransferComplete_CallBack,
-                             AUDIO_HalfTransfer_CallBack,
+  AUDIO_IF_RegisterCallbacks(AUDIO_TransferComplete_CallBack, 
+                             AUDIO_HalfTransfer_CallBack, 
                              AUDIO_Error_CallBack);
-
+  
   /* Create Audio Queue */
   osMessageQDef(AUDIO_Queue, 1, uint16_t);
-  AudioEvent = osMessageCreate (osMessageQ(AUDIO_Queue), NULL);
-
+  AudioEvent = osMessageCreate (osMessageQ(AUDIO_Queue), NULL); 
+  
   /* Create Audio task */
   osThreadDef(osAudio_Thread, Audio_Thread, osPriorityNormal, 0, 1024);
-  AudioThreadId = osThreadCreate (osThread(osAudio_Thread), NULL);
+  AudioThreadId = osThreadCreate (osThread(osAudio_Thread), NULL);  
   haudio.in.state  = AUDIO_RECORDER_IDLE;
   return AUDIO_RECORDER_ERROR_NONE;
 }
-
+   
 /**
   * @brief  Get audio state
   * @param  None.
@@ -136,12 +136,12 @@ uint32_t  AUDIO_RECORDER_GetVolume(void)
 AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_StartRec(uint32_t frequency)
 {
   uint32_t byteswritten = 0;
-
+  
   /* Initialize header file */
   WavProcess_EncInit(DEFAULT_AUDIO_IN_FREQ, pHeaderBuff);
   haudio.ppcm = 0;
 
-
+  
   /* Write header file */
   if(f_write(&wav_file, pHeaderBuff, 44, (void*)&byteswritten) == FR_OK)
   {
@@ -149,20 +149,20 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_StartRec(uint32_t frequency)
     {
       BSP_AUDIO_IN_Init(DEFAULT_AUDIO_IN_FREQ, DEFAULT_AUDIO_IN_BIT_RESOLUTION, DEFAULT_AUDIO_IN_CHANNEL_NBR);
       BSP_AUDIO_IN_Record((uint16_t*)&haudio.pdm[0], AUDIO_IN_PDM_BUFFER_SIZE);
-
+      
       if(haudio.in.state == AUDIO_RECORDER_SUSPENDED)
       {
         osThreadResume(AudioThreadId);
       }
       haudio.in.state = AUDIO_RECORDER_RECORDING;
-
-
+      
+      
       haudio.in.fptr = byteswritten;
       return AUDIO_RECORDER_ERROR_NONE;
     }
   }
   return AUDIO_RECORDER_ERROR_IO;
-
+  
 }
 
 /**
@@ -195,9 +195,9 @@ void AUDIO_RECORDER_RemoveAudioFile(char const *fname)
 AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_SelectFile(char* file, uint8_t mode)
 {
   int numOfReadBytes;
-
+  
   AUDIO_RECORDER_ErrorTypdef ret = AUDIO_RECORDER_ERROR_IO;
-  if( f_open(&wav_file, file, mode) == FR_OK)
+  if( f_open(&wav_file, file, mode) == FR_OK) 
   {
     if (mode & FA_READ)
     {
@@ -207,7 +207,7 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_SelectFile(char* file, uint8_t mode)
       }
     }
   }
-  return ret;
+  return ret;  
 }
 
 /**
@@ -219,16 +219,16 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_Play(uint32_t frequency)
 {
   uint32_t numOfReadBytes;
 
-
+  
   BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, DEFAULT_REC_AUDIO_VOLUME, DEFAULT_AUDIO_IN_FREQ);
   BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
-
+  
   /* Fill whole buffer @ first time */
-  if(f_read(&wav_file,
-            &haudio.buff[0],
-            AUDIO_OUT_BUFFER_SIZE,
+  if(f_read(&wav_file, 
+            &haudio.buff[0], 
+            AUDIO_OUT_BUFFER_SIZE, 
             (void *)&numOfReadBytes) == FR_OK)
-  {
+  { 
     if(numOfReadBytes != 0)
     {
       if(haudio.in.state == AUDIO_RECORDER_SUSPENDED)
@@ -236,12 +236,12 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_Play(uint32_t frequency)
         osThreadResume(AudioThreadId);
       }
       haudio.in.state = AUDIO_RECORDER_PLAYING;
-      BSP_AUDIO_OUT_Play((uint16_t*)&haudio.buff[0], AUDIO_OUT_BUFFER_SIZE);
+      BSP_AUDIO_OUT_Play((uint16_t*)&haudio.buff[0], AUDIO_OUT_BUFFER_SIZE);   
       return AUDIO_RECORDER_ERROR_NONE;
     }
   }
   return AUDIO_RECORDER_ERROR_IO;
-
+  
 }
 
 /**
@@ -255,24 +255,24 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_DeInit(void)
   {
     BSP_AUDIO_IN_Stop();
     BSP_AUDIO_IN_DeInit();
-    f_close(&wav_file);
+    f_close(&wav_file); 
   }
-
+  
   if(haudio.in.state == AUDIO_RECORDER_PLAYING)
-  {
+  {  
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW);
-    BSP_AUDIO_OUT_DeInit();
-    f_close(&wav_file);
+    BSP_AUDIO_OUT_DeInit();  
+    f_close(&wav_file); 
   }
-
-  haudio.in.state = AUDIO_RECORDER_IDLE;
-
+  
+  haudio.in.state = AUDIO_RECORDER_IDLE; 
+  
     if(AudioEvent != 0)
   {
-    vQueueDelete(AudioEvent);
+    vQueueDelete(AudioEvent); 
     AudioEvent = 0;
   }
-
+  
   if(AudioThreadId != 0)
   {
     osThreadTerminate(AudioThreadId);
@@ -290,17 +290,17 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_StopRec(void)
 {
   uint32_t byteswritten = 0;
   AUDIO_RECORDER_ErrorTypdef audio_error = AUDIO_RECORDER_ERROR_IO;
+  
 
-
-  BSP_AUDIO_IN_Stop();
-  haudio.in.state = AUDIO_RECORDER_IDLE;
+  BSP_AUDIO_IN_Stop();  
+  haudio.in.state = AUDIO_RECORDER_IDLE;      
   if(f_lseek(&wav_file, 0) == FR_OK)
   {
     /* Update the wav file header save it into wav file */
     WavProcess_HeaderUpdate(pHeaderBuff, &AudioInfo);
-
+    
     if(f_write(&wav_file, pHeaderBuff, sizeof(WAV_InfoTypedef), (void*)&byteswritten) == FR_OK)
-    {
+    {   
       audio_error = AUDIO_RECORDER_ERROR_NONE;
     }
   }
@@ -309,10 +309,10 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_StopRec(void)
   f_close(&wav_file);
 
   _cbNotifyStateChange();
-
+  
   if(AudioThreadId != 0)
-  {
-    osThreadSuspend(AudioThreadId);
+  {  
+    osThreadSuspend(AudioThreadId); 
   }
   return audio_error;
 }
@@ -326,15 +326,15 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_StopRec(void)
 AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_StopPlayer(void)
 {
   BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW);
-  BSP_AUDIO_OUT_DeInit();
-  haudio.in.state = AUDIO_RECORDER_SUSPENDED;
+  BSP_AUDIO_OUT_DeInit();  
+  haudio.in.state = AUDIO_RECORDER_SUSPENDED;      
   f_close(&wav_file);
-  _cbNotifyStateChange();
-
+  _cbNotifyStateChange(); 
+  
   if(AudioThreadId != 0)
-  {
-    osThreadSuspend(AudioThreadId);
-  }
+  {  
+    osThreadSuspend(AudioThreadId); 
+  } 
   return AUDIO_RECORDER_ERROR_NONE;
 }
 
@@ -346,30 +346,30 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_StopPlayer(void)
 AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_PauseResume(void)
 {
   if(haudio.in.state == AUDIO_RECORDER_PLAYING)
-  {
-    osThreadSuspend(AudioThreadId);
+  {  
+    osThreadSuspend(AudioThreadId);     
     BSP_AUDIO_OUT_Pause();
     haudio.in.state = AUDIO_RECORDER_PLAY_PAUSE;
   }
   else if(haudio.in.state == AUDIO_RECORDER_RECORDING)
   {
-    osThreadSuspend(AudioThreadId);
+    osThreadSuspend(AudioThreadId);     
     BSP_AUDIO_IN_Pause();
-    haudio.in.state = AUDIO_RECORDER_RECORD_PAUSE;
+    haudio.in.state = AUDIO_RECORDER_RECORD_PAUSE;    
   }
-
+  
   else if(haudio.in.state == AUDIO_RECORDER_PLAY_PAUSE)
-  {
-    osThreadResume(AudioThreadId);
+  { 
+    osThreadResume(AudioThreadId);  
     BSP_AUDIO_OUT_Resume();
     haudio.in.state = AUDIO_RECORDER_PLAYING;
   }
   else if(haudio.in.state == AUDIO_RECORDER_RECORD_PAUSE)
   {
-    osThreadResume(AudioThreadId);
+    osThreadResume(AudioThreadId);  
     BSP_AUDIO_IN_Resume();
-    haudio.in.state = AUDIO_RECORDER_RECORDING;
-  }
+    haudio.in.state = AUDIO_RECORDER_RECORDING;    
+  }  
   return AUDIO_RECORDER_ERROR_NONE;
 }
 
@@ -382,16 +382,16 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_Resume(void)
 {
 
   if(haudio.in.state == AUDIO_RECORDER_PLAY_PAUSE)
-  {
-      osThreadResume(AudioThreadId);
+  { 
+      osThreadResume(AudioThreadId);  
     BSP_AUDIO_OUT_Resume();
     haudio.in.state = AUDIO_RECORDER_PLAYING;
   }
   else if(haudio.in.state == AUDIO_RECORDER_RECORD_PAUSE)
   {
-      osThreadResume(AudioThreadId);
+      osThreadResume(AudioThreadId);  
     BSP_AUDIO_IN_Resume();
-    haudio.in.state = AUDIO_RECORDER_RECORDING;
+    haudio.in.state = AUDIO_RECORDER_RECORDING;    
   }
   return AUDIO_RECORDER_ERROR_NONE;
 }
@@ -405,19 +405,19 @@ AUDIO_RECORDER_ErrorTypdef  AUDIO_RECORDER_Resume(void)
 void BSP_AUDIO_IN_TransferComplete_CallBack(void)
 {
   /* PDM to PCM data convert */
-  BSP_AUDIO_IN_PDMToPCM((uint16_t*)&haudio.pdm[AUDIO_IN_PDM_BUFFER_SIZE/2],
+  BSP_AUDIO_IN_PDMToPCM((uint16_t*)&haudio.pdm[AUDIO_IN_PDM_BUFFER_SIZE/2], 
                         (uint16_t*)&haudio.buff[haudio.ppcm]);
-
+  
   haudio.ppcm += AUDIO_IN_PDM_BUFFER_SIZE/4;
-
+  
   if (haudio.ppcm == AUDIO_IN_BUFFER_SIZE/2)
   {
-    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_HALF, 0);
+    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_HALF, 0); 
   }
   else if (haudio.ppcm >= AUDIO_IN_BUFFER_SIZE)
   {
-    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_FULL, 0);
-    haudio.ppcm = 0;
+    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_FULL, 0); 
+    haudio.ppcm = 0;    
   }
 }
 
@@ -427,21 +427,21 @@ void BSP_AUDIO_IN_TransferComplete_CallBack(void)
   * @retval None
   */
 void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
-{
+{ 
   /* PDM to PCM data convert */
-  BSP_AUDIO_IN_PDMToPCM((uint16_t*)&haudio.pdm[0],
+  BSP_AUDIO_IN_PDMToPCM((uint16_t*)&haudio.pdm[0], 
                         (uint16_t*)&haudio.buff[haudio.ppcm]);
-
+  
   haudio.ppcm += AUDIO_IN_PDM_BUFFER_SIZE/4;
-
+  
   if (haudio.ppcm == AUDIO_IN_BUFFER_SIZE/2)
   {
-    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_HALF, 0);
+    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_HALF, 0); 
   }
   else if (haudio.ppcm >= AUDIO_IN_BUFFER_SIZE)
   {
-    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_FULL, 0);
-    haudio.ppcm = 0;
+    osMessagePut ( AudioEvent, REC_BUFFER_OFFSET_FULL, 0); 
+    haudio.ppcm = 0;    
   }
 }
 
@@ -466,7 +466,7 @@ static void AUDIO_TransferComplete_CallBack(void)
   if(haudio.in.state == AUDIO_RECORDER_PLAYING)
   {
     BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&haudio.buff[0], AUDIO_OUT_BUFFER_SIZE /2);
-    osMessagePut ( AudioEvent, PLAY_BUFFER_OFFSET_FULL, 0);
+    osMessagePut ( AudioEvent, PLAY_BUFFER_OFFSET_FULL, 0);    
   }
 }
 
@@ -476,11 +476,11 @@ static void AUDIO_TransferComplete_CallBack(void)
   * @retval None
   */
 static void AUDIO_HalfTransfer_CallBack(void)
-{
+{ 
   if(haudio.in.state == AUDIO_RECORDER_PLAYING)
   {
     BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&haudio.buff[AUDIO_OUT_BUFFER_SIZE /2], AUDIO_OUT_BUFFER_SIZE /2);
-    osMessagePut ( AudioEvent, PLAY_BUFFER_OFFSET_HALF, 0);
+    osMessagePut ( AudioEvent, PLAY_BUFFER_OFFSET_HALF, 0);    
   }
 }
 
@@ -501,12 +501,12 @@ static void AUDIO_Error_CallBack(void)
   */
 static void Audio_Thread(void const * argument)
 {
-  uint32_t numOfReadBytes, numOfWrittenBytes;
-  osEvent event;
+  uint32_t numOfReadBytes, numOfWrittenBytes;    
+  osEvent event;  
   for(;;)
   {
     event = osMessageGet(AudioEvent, 100 );
-
+    
     if( event.status == osEventMessage )
     {
       if(haudio.in.state == AUDIO_RECORDER_PLAYING)
@@ -514,40 +514,40 @@ static void Audio_Thread(void const * argument)
         switch(event.value.v)
         {
         case PLAY_BUFFER_OFFSET_HALF:
-          if(f_read(&wav_file,
-                    &haudio.buff[0],
-                    AUDIO_OUT_BUFFER_SIZE/2,
+          if(f_read(&wav_file, 
+                    &haudio.buff[0], 
+                    AUDIO_OUT_BUFFER_SIZE/2, 
                     (void *)&numOfReadBytes) == FR_OK)
-          {
+          { 
             if(numOfReadBytes == 0)
-            {
+            {  
               AUDIO_RECORDER_StopPlayer();
-            }
-
+            } 
+            
           }
           else
           {
-            AUDIO_RECORDER_StopPlayer();
+            AUDIO_RECORDER_StopPlayer(); 
           }
-          break;
-
+          break;  
+          
         case PLAY_BUFFER_OFFSET_FULL:
-          if(f_read(&wav_file,
-                    &haudio.buff[AUDIO_OUT_BUFFER_SIZE/2],
-                    AUDIO_OUT_BUFFER_SIZE/2,
+          if(f_read(&wav_file, 
+                    &haudio.buff[AUDIO_OUT_BUFFER_SIZE/2], 
+                    AUDIO_OUT_BUFFER_SIZE/2, 
                     (void *)&numOfReadBytes) == FR_OK)
-          {
+          { 
             if(numOfReadBytes == 0)
-            {
-              AUDIO_RECORDER_StopPlayer();
-            }
+            { 
+              AUDIO_RECORDER_StopPlayer();  
+            } 
           }
           else
           {
-            AUDIO_RECORDER_StopPlayer();
+            AUDIO_RECORDER_StopPlayer();          
           }
-          break;
-
+          break;   
+          
         default:
           break;
         }
@@ -557,48 +557,48 @@ static void Audio_Thread(void const * argument)
       {
         switch(event.value.v)
         {
-
+          
         case REC_BUFFER_OFFSET_HALF:
-          if(f_write(&wav_file, (uint8_t*)(haudio.buff),
-                     AUDIO_IN_BUFFER_SIZE/2,
+          if(f_write(&wav_file, (uint8_t*)(haudio.buff), 
+                     AUDIO_IN_BUFFER_SIZE/2, 
                      (void*)&numOfWrittenBytes) == FR_OK)
-          {
+          { 
             if(numOfWrittenBytes == 0)
-            {
+            { 
               AUDIO_RECORDER_StopRec();
-            }
+            } 
           }
           else
           {
             AUDIO_RECORDER_StopRec();
           }
           haudio.in.fptr += numOfWrittenBytes;
-          break;
-
-
+          break; 
+          
+          
         case REC_BUFFER_OFFSET_FULL:
-          if(f_write(&wav_file, (uint8_t*)(haudio.buff + AUDIO_IN_BUFFER_SIZE/2),
-                     AUDIO_IN_BUFFER_SIZE/2,
+          if(f_write(&wav_file, (uint8_t*)(haudio.buff + AUDIO_IN_BUFFER_SIZE/2), 
+                     AUDIO_IN_BUFFER_SIZE/2, 
                      (void*)&numOfWrittenBytes) == FR_OK)
-          {
+          { 
             if(numOfWrittenBytes == 0)
-            {
+            { 
               AUDIO_RECORDER_StopRec();
-            }
+            } 
           }
           else
           {
             AUDIO_RECORDER_StopRec();
           }
           haudio.in.fptr += numOfWrittenBytes;
-          break;
-
-
+          break; 
+          
+          
         default:
           break;
         }
       }
-
+      
     }
 
   }
@@ -613,10 +613,10 @@ static void Audio_Thread(void const * argument)
 uint32_t AUDIO_RECORDER_GetElapsedTime(void)
 {
   uint32_t duration;
-
-  duration = haudio.in.fptr / AudioInfo.ByteRate;
+  
+  duration = haudio.in.fptr / AudioInfo.ByteRate;    
   return duration;
-
+  
 }
 
 /**
@@ -628,10 +628,10 @@ uint32_t AUDIO_RECORDER_GetElapsedTime(void)
 uint32_t AUDIO_RECORDER_GetPlayedTime(void)
 {
   uint32_t duration;
-
-  duration = (wav_file.fptr) / AudioInfo.ByteRate;
+  
+  duration = (wav_file.fptr) / AudioInfo.ByteRate;    
   return duration;
-
+  
 }
 
 
@@ -644,10 +644,10 @@ uint32_t AUDIO_RECORDER_GetPlayedTime(void)
 uint32_t AUDIO_RECORDER_GetTotalTime(void)
 {
   uint32_t duration;
-
-  duration = (f_size(&wav_file)) / AudioInfo.ByteRate;
+  
+  duration = (f_size(&wav_file)) / AudioInfo.ByteRate;    
   return duration;
-
+  
 }
 /*******************************************************************************
                             Static Functions
@@ -656,11 +656,11 @@ uint32_t AUDIO_RECORDER_GetTotalTime(void)
 /**
   * @brief  Encoder initialization.
   * @param  Freq: Sampling frequency.
-  * @param  pHeader: Pointer to the WAV file header to be written.
+  * @param  pHeader: Pointer to the WAV file header to be written.  
   * @retval 0 if success, !0 else.
   */
 static uint32_t WavProcess_EncInit(uint32_t Freq, uint8_t *pHeader)
-{
+{  
   /* Initialize the encoder structure */
   AudioInfo.SampleRate = Freq;        /* Audio sampling frequency */
   AudioInfo.NbrChannels = 2;          /* Number of channels: 1:Mono or 2:Stereo */
@@ -672,7 +672,7 @@ static uint32_t WavProcess_EncInit(uint32_t Freq, uint8_t *pHeader)
                          AudioInfo.NbrChannels);     /* Number of bytes per second  (sample rate * block align)  */
   AudioInfo.BlockAlign = AudioInfo.NbrChannels * \
                          (AudioInfo.BitPerSample/8); /* channels * bits/sample / 8 */
-
+  
   /* Parse the wav file header and extract required information */
   if(WavProcess_HeaderInit(pHeader, &AudioInfo))
   {
@@ -694,9 +694,9 @@ static uint32_t WavProcess_HeaderInit(uint8_t* pHeader, WAV_InfoTypedef* pAudioI
   pHeader[1] = 'I';
   pHeader[2] = 'F';
   pHeader[3] = 'F';
-
+  
   /* Write the file length ---------------------------------------------------*/
-  /* The sampling time: this value will be written back at the end of the
+  /* The sampling time: this value will be written back at the end of the 
      recording operation.  Example: 661500 Btyes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
   pHeader[4] = 0x00;
   pHeader[5] = 0x4C;
@@ -707,61 +707,61 @@ static uint32_t WavProcess_HeaderInit(uint8_t* pHeader, WAV_InfoTypedef* pAudioI
   pHeader[9]  = 'A';
   pHeader[10] = 'V';
   pHeader[11] = 'E';
-
+  
   /* Write the format chunk, must be'fmt ' -----------------------------------*/
   pHeader[12]  = 'f';
   pHeader[13]  = 'm';
   pHeader[14]  = 't';
   pHeader[15]  = ' ';
-
+  
   /* Write the length of the 'fmt' data, must be 0x10 ------------------------*/
   pHeader[16]  = 0x10;
   pHeader[17]  = 0x00;
   pHeader[18]  = 0x00;
   pHeader[19]  = 0x00;
-
+  
   /* Write the audio format, must be 0x01 (PCM) ------------------------------*/
   pHeader[20]  = 0x01;
   pHeader[21]  = 0x00;
-
+  
   /* Write the number of channels, ie. 0x01 (Mono) ---------------------------*/
   pHeader[22]  = pAudioInfoStruct->NbrChannels;
   pHeader[23]  = 0x00;
-
+  
   /* Write the Sample Rate in Hz ---------------------------------------------*/
   /* Write Little Endian ie. 8000 = 0x00001F40 => byte[24]=0x40, byte[27]=0x00*/
   pHeader[24]  = (uint8_t)((pAudioInfoStruct->SampleRate & 0xFF));
   pHeader[25]  = (uint8_t)((pAudioInfoStruct->SampleRate >> 8) & 0xFF);
   pHeader[26]  = (uint8_t)((pAudioInfoStruct->SampleRate >> 16) & 0xFF);
   pHeader[27]  = (uint8_t)((pAudioInfoStruct->SampleRate >> 24) & 0xFF);
-
+  
   /* Write the Byte Rate -----------------------------------------------------*/
   pHeader[28]  = (uint8_t)((pAudioInfoStruct->ByteRate & 0xFF));
   pHeader[29]  = (uint8_t)((pAudioInfoStruct->ByteRate >> 8) & 0xFF);
   pHeader[30]  = (uint8_t)((pAudioInfoStruct->ByteRate >> 16) & 0xFF);
   pHeader[31]  = (uint8_t)((pAudioInfoStruct->ByteRate >> 24) & 0xFF);
-
+  
   /* Write the block alignment -----------------------------------------------*/
   pHeader[32]  = pAudioInfoStruct->BlockAlign;
   pHeader[33]  = 0x00;
-
+  
   /* Write the number of bits per sample -------------------------------------*/
   pHeader[34]  = pAudioInfoStruct->BitPerSample;
   pHeader[35]  = 0x00;
-
+  
   /* Write the Data chunk, must be 'data' ------------------------------------*/
   pHeader[36]  = 'd';
   pHeader[37]  = 'a';
   pHeader[38]  = 't';
   pHeader[39]  = 'a';
-
+  
   /* Write the number of sample data -----------------------------------------*/
   /* This variable will be written back at the end of the recording operation */
   pHeader[40]  = 0x00;
   pHeader[41]  = 0x4C;
   pHeader[42]  = 0x1D;
   pHeader[43]  = 0x00;
-
+  
   /* Return 0 if all operations are OK */
   return 0;
 }
@@ -775,7 +775,7 @@ static uint32_t WavProcess_HeaderInit(uint8_t* pHeader, WAV_InfoTypedef* pAudioI
 static uint32_t WavProcess_HeaderUpdate(uint8_t* pHeader, WAV_InfoTypedef* pAudioInfoStruct)
 {
   /* Write the file length ---------------------------------------------------*/
-  /* The sampling time: this value will be written back at the end of the
+  /* The sampling time: this value will be written back at the end of the 
      recording operation.  Example: 661500 Btyes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
   pHeader[4] = (uint8_t)(haudio.in.fptr);
   pHeader[5] = (uint8_t)(haudio.in.fptr >> 8);
@@ -784,11 +784,11 @@ static uint32_t WavProcess_HeaderUpdate(uint8_t* pHeader, WAV_InfoTypedef* pAudi
   /* Write the number of sample data -----------------------------------------*/
   /* This variable will be written back at the end of the recording operation */
   haudio.in.fptr -=44;
-  pHeader[40] = (uint8_t)(haudio.in.fptr);
+  pHeader[40] = (uint8_t)(haudio.in.fptr); 
   pHeader[41] = (uint8_t)(haudio.in.fptr >> 8);
   pHeader[42] = (uint8_t)(haudio.in.fptr >> 16);
-  pHeader[43] = (uint8_t)(haudio.in.fptr >> 24);
-
+  pHeader[43] = (uint8_t)(haudio.in.fptr >> 24); 
+  
   /* Return 0 if all operations are OK */
   return 0;
 }

@@ -3,50 +3,50 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    EEPROM/EEPROM_Emulation/readme.txt
+  * @file    EEPROM/EEPROM_Emulation/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the EEPROM_Emulation application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   @endverbatim
 
-@par Application Description
+@par Application Description 
 
 This application describes the software solution for substituting standalone EEPROM
 by emulating the EEPROM mechanism using the on-chip Flash of STM32F4xx devices.
@@ -69,30 +69,30 @@ STM32 Eval board's LEDs can be used to monitor the application status:
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
  - EEPROM/EEPROM_Emulation/Inc/stm32f4xx_hal_conf.h          HAL Configuration file
  - EEPROM/EEPROM_Emulation/Inc/main.h                        Header for main.c module
- - EEPROM/EEPROM_Emulation/Inc/eeprom.h                      Header for eeprom.c module
+ - EEPROM/EEPROM_Emulation/Inc/eeprom.h                      Header for eeprom.c module 
  - EEPROM/EEPROM_Emulation/Inc/stm32f4xx_it.h                Header for stm32f4xx_it.c
  - EEPROM/EEPROM_Emulation/Src/main.c                        Main program
  - EEPROM/EEPROM_Emulation/Src/eeprom.c                      EEPROM program
  - EEPROM/EEPROM_Emulation/Src/stm32f4xx_it.c                Interrupt handlers
- - EEPROM/EEPROM_Emulation/Src/system_stm32f4xx.c            STM32F4xx system clock configuration file
+ - EEPROM/EEPROM_Emulation/Src/system_stm32f4xx.c            STM32F4xx system clock configuration file 
+    
 
-
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This application runs on STM32F40xxx/STM32F41xxx devices.
-
-  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC
-    evaluation boards and can be easily tailored to any other supported device
-    and development board.
+    
+  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC 
+    evaluation boards and can be easily tailored to any other supported device 
+    and development board.  
 
 Table 1. EEPROM application implementation on STM324xG-EVAL
 /*** Platform ***|************* Implementation **************************|***** Configuration *****\
@@ -101,16 +101,16 @@ Table 1. EEPROM application implementation on STM324xG-EVAL
 |                | routines (program/erase) are executed from the Flash  |                         |
 |                | memory.                                               |                         |
 |                | The size of this program is about 6 Kbytes and        |                         |
-|                | programmed on:                                        | Sector 0                |
+|                | programmed on:                                        | Sector 0                |  
 |                | ------------------------------------------------------|-------------------------|
-|                |                                                       |                         |
+|                |                                                       |                         | 
 |                | The flash zone used for the EEPROM emulation is       | Sector 2 and Sector 3   |
 |                | located at 0x08008000                                 | each one has a size of  |
-|                |                                                       |           16KB          |
+|                |                                                       |           16KB          | 
 \**************************************************************************************************/
 
 @note
-Before using the application, ensure that dedicated sectors for EEPROM (FLASH_SECTOR_2 and FLASH_SECTOR_3)
+Before using the application, ensure that dedicated sectors for EEPROM (FLASH_SECTOR_2 and FLASH_SECTOR_3) 
 are erased to avoid a match with a valid page OPCODE.
 
 Following picture illustrates the situation in program memory:
@@ -138,10 +138,10 @@ Following picture illustrates the situation in program memory:
                           |          emulation mechanism(6KB)         |
                           \-------------------------------------------/	 0x08000000
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the application
 

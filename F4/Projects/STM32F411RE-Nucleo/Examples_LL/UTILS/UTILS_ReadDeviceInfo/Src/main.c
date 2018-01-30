@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/UTILS/UTILS_ReadDeviceInfo/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to read UID, Device ID and Revision ID
+  * @brief   This example describes how to read UID, Device ID and Revision ID 
   *          through the STM32F4xx UTILS LL API.
   ******************************************************************************
   * @attention
@@ -70,7 +70,7 @@ int main(void)
 {
   /* Get different information available in the MCU */
   GetMCUInfo();
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -88,13 +88,13 @@ void GetMCUInfo(void)
 
   /* Display Device ID in string format */
   sprintf((char*)aShowDeviceID,"Device ID = 0x%lX", LL_DBGMCU_GetDeviceID());
-
+  
   /* Display Revision ID in string format */
   sprintf((char*)aShowRevisionID,"Revision ID = 0x%lX", LL_DBGMCU_GetRevisionID());
 
   /* Display  X and Y coordinates on the wafer expressed in BCD format */
   sprintf((char*)aShowCoordinate,"X and Y coordinates = 0x%lX", LL_GetUID_Word0());
-
+  
   /* Display Waver number and lot number in string format */
   read_info = LL_GetUID_Word1();
   read_info2 = LL_GetUID_Word2();

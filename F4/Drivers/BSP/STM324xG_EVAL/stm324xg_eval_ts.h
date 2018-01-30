@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324xG_EVAL_TS_H
@@ -40,24 +40,24 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
-
+#endif   
+   
 /* Includes ------------------------------------------------------------------*/
-#include "stm324xg_eval.h"
-/* Include IOExpander(STMPE811) component Driver */
-#include "../Components/stmpe811/stmpe811.h"
+#include "stm324xg_eval.h"  
+/* Include IOExpander(STMPE811) component Driver */ 
+#include "../Components/stmpe811/stmpe811.h" 
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM324xG_EVAL
   * @{
   */
-
+    
 /** @addtogroup STM324xG_EVAL_TS
   * @{
-  */
+  */    
 
 /** @defgroup STM324xG_EVAL_TS_Exported_Types STM324xG EVAL TS Exported Types
   * @{
@@ -68,10 +68,10 @@ typedef struct
   uint16_t x;
   uint16_t y;
   uint16_t z;
-}TS_StateTypeDef;
+}TS_StateTypeDef; 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324xG_EVAL_TS_Exported_Constants STM324xG EVAL TS Exported Constants
   * @{
@@ -81,7 +81,7 @@ typedef struct
 #define TS_SWAP_Y                       0x02
 #define TS_SWAP_XY                      0x04
 
-typedef enum
+typedef enum 
 {
   TS_OK       = 0x00,
   TS_ERROR    = 0x01,
@@ -89,7 +89,7 @@ typedef enum
 }TS_StatusTypeDef;
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324xG_EVAL_TS_Exported_Functions STM324xG EVAL TS Exported Functions
   * @{
@@ -102,7 +102,7 @@ void    BSP_TS_ITClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -110,7 +110,7 @@ void    BSP_TS_ITClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32412G_DISCOVERY_H
@@ -44,7 +44,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
+   
 /** @addtogroup BSP
   * @{
   */
@@ -52,15 +52,15 @@
 /** @addtogroup STM32412G_DISCOVERY
   * @{
   */
-
+      
 /** @addtogroup STM32412G_DISCOVERY_LOW_LEVEL
   * @{
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_LOW_LEVEL_Exported_Types STM32412G DISCOVERY Low Level Exported Types
   * @{
   */
-typedef enum
+typedef enum 
 {
 LED1 = 0,
 LED_GREEN = LED1,
@@ -73,25 +73,25 @@ LED_BLUE = LED4
 }Led_TypeDef;
 
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_WAKEUP = 0
 }Button_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
 }ButtonMode_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   JOY_MODE_GPIO = 0,
   JOY_MODE_EXTI = 1
 }JOYMode_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{ 
   JOY_SEL   = 0,
   JOY_DOWN  = 1,
   JOY_LEFT  = 2,
@@ -100,22 +100,22 @@ typedef enum
   JOY_NONE  = 5
 }JOYState_TypeDef;
 
-typedef enum
+typedef enum 
 {
   COM1 = 0,
   COM2 = 1
 }COM_TypeDef;
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_LOW_LEVEL_Exported_Constants STM32412G DISCOVERY Low Level Exported Constants
   * @{
-  */
+  */ 
 
-/**
+/** 
   * @brief  Define for STM32412G_DISCOVERY board
-  */
+  */ 
 #if !defined (USE_STM32412G_DISCOVERY)
  #define USE_STM32412G_DISCOVERY
 #endif
@@ -135,11 +135,11 @@ typedef enum
 
 /**
   * @}
-  */
-
+  */ 
+  
 /** @addtogroup STM32412G_DISCOVERY_LOW_LEVEL_BUTTON STM32412G DISCOVERY Low Level Button
   * @{
-  */
+  */ 
 /* Push buttons (wakeup) mapped on joystick middle select button */
 #define BUTTONn                             ((uint8_t)1)
 
@@ -215,7 +215,7 @@ typedef enum
 
 /**
   * @}
-  */
+  */ 
 
 /** @addtogroup STM32412G_DISCOVERY_LOW_LEVEL_SIGNAL
   * @{
@@ -258,7 +258,7 @@ typedef enum
 #define TS_RST_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOF_CLK_ENABLE()
 #define TS_RST_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOF_CLK_DISABLE()
 #define TS_RST_EXTI_IRQn                  EXTI15_10_IRQn
-
+                                                 
 /**
   * @}
   */
@@ -270,21 +270,21 @@ typedef enum
 
 /**
  * @brief Definition for COM port1, connected to USART2
- */
+ */ 
 #define DISCOVERY_COM1                          USART2
 #define DISCOVERY_COM1_CLK_ENABLE()             __HAL_RCC_USART2_CLK_ENABLE()
 #define DISCOVERY_COM1_CLK_DISABLE()            __HAL_RCC_USART2_CLK_DISABLE()
 
 #define DISCOVERY_COM1_TX_PIN                   GPIO_PIN_2
 #define DISCOVERY_COM1_TX_GPIO_PORT             GPIOA
-#define DISCOVERY_COM1_TX_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()
-#define DISCOVERY_COM1_TX_GPIO_CLK_DISABLE()    __HAL_RCC_GPIOA_CLK_DISABLE()
+#define DISCOVERY_COM1_TX_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()   
+#define DISCOVERY_COM1_TX_GPIO_CLK_DISABLE()    __HAL_RCC_GPIOA_CLK_DISABLE()  
 #define DISCOVERY_COM1_TX_AF                    GPIO_AF7_USART2
 
 #define DISCOVERY_COM1_RX_PIN                   GPIO_PIN_3
 #define DISCOVERY_COM1_RX_GPIO_PORT             GPIOA
-#define DISCOVERY_COM1_RX_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()
-#define DISCOVERY_COM1_RX_GPIO_CLK_DISABLE()    __HAL_RCC_GPIOA_CLK_DISABLE()
+#define DISCOVERY_COM1_RX_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()   
+#define DISCOVERY_COM1_RX_GPIO_CLK_DISABLE()    __HAL_RCC_GPIOA_CLK_DISABLE()  
 #define DISCOVERY_COM1_RX_AF                    GPIO_AF7_USART2
 
 #define DISCOVERY_COM1_IRQn                     USART2_IRQn
@@ -299,18 +299,18 @@ typedef enum
 #define DISCOVERY_COMx_RX_GPIO_CLK_DISABLE(__INDEX__)   (((__INDEX__) == 0) ? DISCOVERY_COM1_RX_GPIO_CLK_DISABLE() : 0)
 
 /**
-  * @brief Joystick Pins definition
-  */
+  * @brief Joystick Pins definition 
+  */ 
 
 
 /* Exported constant IO ------------------------------------------------------*/
 
 #define AUDIO_I2C_ADDRESS                ((uint16_t)0x34)
 #define EEPROM_I2C_ADDRESS_A01           ((uint16_t)0xA0)
-#define EEPROM_I2C_ADDRESS_A02           ((uint16_t)0xA6)
+#define EEPROM_I2C_ADDRESS_A02           ((uint16_t)0xA6)  
 #define TS_I2C_ADDRESS                   ((uint16_t)0x70)
 
-/* User can use this section to tailor I2Cx/I2Cx instance used and associated
+/* User can use this section to tailor I2Cx/I2Cx instance used and associated 
    resources */
 /* Definition for AUDIO I2Cx resources */
 #define DISCOVERY_AUDIO_I2Cx                             I2C1
@@ -361,16 +361,16 @@ typedef enum
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_LOW_LEVEL_Exported_Functions STM32412G DISCOVERY Low Level Exported Functions
   * @{
   */
-uint32_t         BSP_GetVersion(void);
+uint32_t         BSP_GetVersion(void);  
 void             BSP_LED_Init(Led_TypeDef Led);
 void             BSP_LED_DeInit(Led_TypeDef Led);
 void             BSP_LED_On(Led_TypeDef Led);
@@ -391,11 +391,11 @@ void             BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

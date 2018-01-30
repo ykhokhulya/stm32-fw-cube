@@ -102,16 +102,16 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
-
+    
   /*##-1- Configure the SPI peripheral #######################################*/
   /* Set the SPI parameters */
   SpiHandle.Instance               = SPIx;
@@ -125,33 +125,33 @@ int main(void)
   SpiHandle.Init.FirstBit          = SPI_FIRSTBIT_MSB;
   SpiHandle.Init.NSS               = SPI_NSS_SOFT;
   SpiHandle.Init.TIMode            = SPI_TIMODE_DISABLE;
-  SpiHandle.Init.Mode              = SPI_MODE_MASTER;
+  SpiHandle.Init.Mode              = SPI_MODE_MASTER;  
   if(HAL_SPI_Init(&SpiHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
-
+  
   /* Wait for user Button press before starting the communication. Toggles LED3 until then */
   while(TestReady != SET)
   {
     BSP_LED_Toggle(LED3);
     HAL_Delay(40);
   }
-
+  
   /* Turn Off LED3 */
   BSP_LED_Off(LED3);
-
-  /* Infinite loop */
+  
+  /* Infinite loop */  
   while(1)
   {
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
-    /* Receive Data from the Slave ###########################################*/
+    
+    /* Receive Data from the Slave ###########################################*/ 
     addrcmd[0] = (uint8_t) (ADDRCMD_MASTER_READ >> 8);
     addrcmd[1] = (uint8_t) ADDRCMD_MASTER_READ;
     addrcmd[2] = (uint8_t) (DATA_LENGTH >> 8);
@@ -171,7 +171,7 @@ int main(void)
     {}
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
+    
     /* Receive ACK from the Slave */
     ackbytes = 0;
     if(HAL_SPI_Receive_IT(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes)) != HAL_OK)
@@ -185,7 +185,7 @@ int main(void)
     {
       /* Synchronization between Master and Slave */
       Master_Synchro();
-
+      
       /* Receive the requested data from the slave */
       if(HAL_SPI_Receive_IT(&SpiHandle, aRxBuffer, DATA_LENGTH) != HAL_OK)
       {
@@ -195,7 +195,7 @@ int main(void)
       {}
       /* Synchronization between Master and Slave */
       Master_Synchro();
-
+      
       /* Send ACK to the Slave */
       ackbytes = SPI_ACK_BYTES;
       if(HAL_SPI_Transmit_IT(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes)) != HAL_OK)
@@ -204,13 +204,13 @@ int main(void)
       }
       while(HAL_SPI_GetState(&SpiHandle) != HAL_SPI_STATE_READY)
       {}
-    }
+    }    
     else
     {
       /* Transfer error in transmission process */
       Error_Handler();
     }
-
+    
     /* Compare received buffer with one expected from slave */
     if(Buffercmp((uint8_t*)aTxSlaveBuffer, (uint8_t*)aRxBuffer, CMD_LENGTH))
     {
@@ -225,7 +225,7 @@ int main(void)
 
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
+    
     /* Transmit Data To Slave ################################################*/
     addrcmd[0] = (uint8_t) (ADDRCMD_MASTER_WRITE >> 8);
     addrcmd[1] = (uint8_t) ADDRCMD_MASTER_WRITE;
@@ -240,7 +240,7 @@ int main(void)
     {}
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
+    
     /* Receive ACK from the Slave */
     ackbytes = 0;
     if(HAL_SPI_Receive_IT(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes)) != HAL_OK)
@@ -263,7 +263,7 @@ int main(void)
       {}
       /* Synchronization between Master and Slave */
       Master_Synchro();
-
+      
       /* Receive ACK from the Slave */
       ackbytes = 0;
       if(HAL_SPI_Receive_IT(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes)) != HAL_OK)
@@ -272,19 +272,19 @@ int main(void)
       }
       while(HAL_SPI_GetState(&SpiHandle) != HAL_SPI_STATE_READY)
       {}
-    }
+    }    
     else
     {
       /* Transfer error in transmission process */
       Error_Handler();
     }
-
+   
     /* Flush Rx buffer for next transmission */
     Flush_Buffer(aRxBuffer, DATA_LENGTH);
-
+    
     /* Toggle LED4 */
     BSP_LED_Toggle(LED4);
-
+    
     /* This delay permit to user to see LED4 toggling*/
     HAL_Delay(100);
   }

@@ -1,9 +1,9 @@
 /**
   @page PWR_PVD PWR Programmable Voltage Detector (PVD) example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    PWR/PWR_STOP/readme.txt
+  * @file    PWR/PWR_STOP/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PWR Programmable Voltage Detector (PVD) example.
   ******************************************************************************
@@ -33,15 +33,15 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 This example shows how to configure the programmable voltage detector using
-an external interrupt line. In this example, EXTI line 16 is configured to generate
-an interrupt on each rising or falling edge of the PVD output signal (which
+an external interrupt line. In this example, EXTI line 16 is configured to generate 
+an interrupt on each rising or falling edge of the PVD output signal (which 
 indicates that the Vdd voltage is below the PVD threshold).
-In the interrupt routine a LED connected to a specific GPIO pin is toggled every
+In the interrupt routine a LED connected to a specific GPIO pin is toggled every 
 time the voltage drops below or above the target threshold.
 
-A LED connected to a specific GPIO pin is toggling to indicate that the system
+A LED connected to a specific GPIO pin is toggling to indicate that the system 
 is in RUN.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -49,12 +49,12 @@ is in RUN.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - PWR/PWR_PVD/Inc/stm32f4xx_hal_conf.h     HAL configuration file
   - PWR/PWR_PVD/Inc/stm32f4xx_it.h           Interrupt handlers header file
@@ -68,9 +68,9 @@ is in RUN.
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx/STM32F439xx devices.
-
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB
-    evaluation boards and can be easily tailored to any other supported device
+  
+  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+    evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
   - STM324x9I-EVAL RevB Set-up
@@ -78,10 +78,10 @@ is in RUN.
       @note This example can't run on the STM324x9I-EVAL board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

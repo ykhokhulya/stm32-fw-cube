@@ -1,55 +1,54 @@
 /**
   @page AUDIO_Standalone USB Host AUDIO application
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    USB_Host/AUDIO_Standalone/readme.txt
+  * @file    USB_Host/AUDIO_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Host AUDIO application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   @endverbatim
-
+  
 @par Application Description
 
-This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
-USB host application based on the Audio OUT class on the STM32F4xx devices.
+This application shows how to use the USB host application based on the Audio OUT class on the STM32F4xx devices.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
 initialize the Flash interface and the systick. The user is provided with the SystemClock_Config()
@@ -63,17 +62,17 @@ It's worth noting that the system clock (SYSCLK) can be configured, depending on
                              is set to 168 MHz.
  - SYSCLK is set to 180 MHz: for only HS Core, since no embedded PHY is used.
 
-When the application is started, the connected USB headset device is detected in AUDIO mode and gets
-initialized. The STM32 MCU behaves as a AUDIO Host, it enumerates the device and extracts VID, PID,
-manufacturer name, Serial no and product name information and displays it on the LCD screen.
+When the application is started, the connected USB headset device is detected in AUDIO mode and gets 
+initialized. The STM32 MCU behaves as a AUDIO Host, it enumerates the device and extracts VID, PID, 
+manufacturer name, Serial no and product name information and displays it on the LCD screen. 
 
 A menu is displayed and the user can select any operation from the menu using the Joystick buttons:
  - "Explore audio file" operation searches for all .Wav files in the uSD and displays it on the LCD screen.
- - "Start audio Player" operation starts playing the song from the uSD. The files are read using the
+ - "Start audio Player" operation starts playing the song from the uSD. The files are read using the 
    FatFs file system then USBH_AUDIO_ChangeOutBuffer() function is called while playing songs and the
-   bytes are stored in a circular buffer. Sampling frequency, Channels number and File size (duration)
-   are detected. The audio.c file contains a set of APIs for Audio Out playback, for example when the
-   WAV file is playing, USBH_AUDIO_SetVolume() is called to change the volume setting. This application does not
+   bytes are stored in a circular buffer. Sampling frequency, Channels number and File size (duration) 
+   are detected. The audio.c file contains a set of APIs for Audio Out playback, for example when the 
+   WAV file is playing, USBH_AUDIO_SetVolume() is called to change the volume setting. This application does not 
    support compressed WAV formats.
  - "Re-Enumerate" operation performs a new Enumeration of the device.
 
@@ -82,11 +81,11 @@ A menu is displayed and the user can select any operation from the menu using th
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-For more details about the STM32Cube USB Host library, please refer to UM1720
+For more details about the STM32Cube USB Host library, please refer to UM1720  
 "STM32Cube USB Host library".
 
 
@@ -95,7 +94,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 To select the appropriate USB Core to work with, user must add the following macro defines within the
 compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
-      - "USE_USB_FS" when using USB Full Speed (FS) Core
+      - "USE_USB_FS" when using USB Full Speed (FS) Core 
       - "USE_USB_HS" and "USE_USB_HS_IN_FS" when using USB High Speed (HS) Core in FS mode
 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
@@ -127,22 +126,22 @@ requirements, such as:
   - USB_Host/AUDIO_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/AUDIO_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/AUDIO_Standalone/Inc/ffconf.h                FAT file system module configuration file
-
+ 
 
 @par Hardware and Software environment
 
   - This application runs on STM32F429xx/STM32F439xx devices.
-
-  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB
-    evaluation boards and can be easily tailored to any other supported device
+    
+  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+    evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
-  - STM324x9I-EVAL RevB Set-up
-    - Connect a uSD Card,containing .Wav audio file, to the MSD connector (CN17).
-    - Plug the USB headset for sound playback into the STM324x9I-EVAL board through
+  - STM324x9I-EVAL RevB Set-up 
+    - Connect a uSD Card,containing .Wav audio file, to the MSD connector (CN17).    
+    - Plug the USB headset for sound playback into the STM324x9I-EVAL board through 
       'USB micro A-Male to A-Female' cable to the connector:
       - CN9 : to use USB High Speed (HS)  with embedded PHY(U7)
-      - CN14: to use USB Full Speed (FS)
+      - CN14: to use USB Full Speed (FS) 
               Please ensure that jumper JP16 is not fitted.
       - CN15: to use USB HS-IN-FS.
               Note that some FS signals are shared with the HS ULPI bus, so some PCB rework is needed.
@@ -155,14 +154,15 @@ requirements, such as:
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - In the workspace toolbar select the project configuration:
    - STM324x9I-EVAL_USBH-HS: to configure the project for STM32F4xx devices using USB OTG HS peripheral
    - STM324x9I-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
-   - STM324x9I-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices and use USB OTG HS
+   - STM324x9I-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices and use USB OTG HS 
                                    peripheral In FS (using embedded PHY).
  - Run the application
-
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
+ 

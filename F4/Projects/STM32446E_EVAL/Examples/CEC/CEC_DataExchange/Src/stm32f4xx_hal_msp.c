@@ -1,7 +1,7 @@
 
 /**
   ******************************************************************************
-  * @file    CEC/CEC_DataExchange/Src/stm32f0xx_hal_msp.c
+  * @file    CEC/CEC_DataExchange/Src/stm32f0xx_hal_msp.c 
   * @author  MCD Application Team
   * @brief   HAL MSP module.
   ******************************************************************************
@@ -57,22 +57,22 @@
   */
 
 /**
-  * @brief CEC MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief CEC MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hcec: CEC handle pointer
   * @retval None
-  */
+  */  
 void HAL_CEC_MspInit(CEC_HandleTypeDef *hcec)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef RCC_PeriphClkInit;
-
+  
   /* Enable CEC clock */
-  __HAL_RCC_CEC_CLK_ENABLE();
-
+  __HAL_RCC_CEC_CLK_ENABLE();  
+    
   /* Enable GPIO clock and initialize GPIO */
   __HAL_RCC_GPIOB_CLK_ENABLE();
   GPIO_InitStruct.Pin = GPIO_PIN_6;
@@ -81,7 +81,7 @@ void HAL_CEC_MspInit(CEC_HandleTypeDef *hcec)
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF3_CEC;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
+  
   /* Enable and set CEC Interrupt to the lowest priority */
   HAL_NVIC_SetPriority(CEC_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(CEC_IRQn);
@@ -99,14 +99,14 @@ void HAL_CEC_MspInit(CEC_HandleTypeDef *hcec)
 }
 
 /**
-  * @brief CEC MSP De-Initialization
+  * @brief CEC MSP De-Initialization 
   *        This function disable the Peripheral's clock
   * @param hcec: CEC handle pointer
   * @retval None
   */
 void HAL_CEC_MspDeInit(CEC_HandleTypeDef *hcec)
-{
-  /* Disable CEC clock */
+{ 
+  /* Disable CEC clock */ 
   __HAL_RCC_CEC_CLK_DISABLE();
   /* Disable GPIO TX/RX clock */
   __HAL_RCC_GPIOB_CLK_DISABLE();

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    DAC/DAC_SimpleConversion/Src/main.c
+  * @file    DAC/DAC_SimpleConversion/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example provides a short description of how to use the DAC
+  * @brief   This example provides a short description of how to use the DAC 
   *          peripheral to do a simple conversation.
   ******************************************************************************
   * @attention
@@ -44,7 +44,7 @@
 
 /** @addtogroup DAC_SimpleConversion
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -66,7 +66,7 @@ static void Error_Handler(void);
   */
 int main(void)
 {
-
+  
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -74,46 +74,46 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the DAC peripheral #######################################*/
   DacHandle.Instance = DACx;
-
+  
   if(HAL_DAC_Init(&DacHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure DAC channel1 #############################################*/
+  
+  /*##-2- Configure DAC channel1 #############################################*/  
   sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
-  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
-
+  sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;  
+  
   if(HAL_DAC_ConfigChannel(&DacHandle, &sConfig, DACx_CHANNEL) != HAL_OK)
   {
     /* Channel configuration Error */
     Error_Handler();
   }
-
-  /*##-3- Set DAC Channel1 DHR register ######################################*/
+  
+  /*##-3- Set DAC Channel1 DHR register ######################################*/ 
   if(HAL_DAC_SetValue(&DacHandle, DACx_CHANNEL, DAC_ALIGN_8B_R, 0xFF) != HAL_OK)
   {
     /* Setting value Error */
     Error_Handler();
   }
-
-  /*##-4- Enable DAC Channel1 ################################################*/
+  
+  /*##-4- Enable DAC Channel1 ################################################*/ 
   if(HAL_DAC_Start(&DacHandle, DACx_CHANNEL) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -122,7 +122,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -148,8 +148,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -163,17 +163,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -200,7 +200,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

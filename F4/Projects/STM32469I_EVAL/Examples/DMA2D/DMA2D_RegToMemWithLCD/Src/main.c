@@ -109,7 +109,7 @@ int main(void)
   lcd_status = BSP_LCD_Init();
   LCD_LayerDefaultInit(1, (uint32_t)&aBufferResult);
   BSP_LCD_SelectLayer(1);
-
+  
   OnError_Handler(lcd_status != LCD_OK);
 
   HAL_Delay(100);
@@ -117,7 +117,7 @@ int main(void)
   /*##-3- DMA2D configuration ################################################*/
   DMA2D_Config();
 
-  /*##-4- Start DMA2D transfer ###############################################*/
+  /*##-4- Start DMA2D transfer ###############################################*/  
   hal_status = HAL_DMA2D_Start_IT(&Dma2dHandle,
       (uint32_t)LCD_COLOR_GREEN, /* Fill the DMA2D output register with this color */
       (uint32_t)&aBufferResult,    /* DMA2D output register */
@@ -134,7 +134,7 @@ int main(void)
 static void LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
 {
   LCD_LayerCfgTypeDef  Layercfg;
-
+  
   Layercfg.FBStartAdress = (uint32_t)&aBufferResult;
   Layercfg.Alpha = 255;
   Layercfg.Alpha0 = 0;
@@ -145,14 +145,14 @@ static void LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
   Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   Layercfg.ImageWidth = 200;
   Layercfg.ImageHeight = 200;
-
+  
     /* Layer Init */
   Layercfg.WindowX0 = (BSP_LCD_GetXSize()/2) - (Layercfg.ImageWidth/2) ;
   Layercfg.WindowX1 = Layercfg.WindowX0 + Layercfg.ImageWidth;
   Layercfg.WindowY0 = (BSP_LCD_GetYSize()/2) - (Layercfg.ImageHeight/2) ;
   Layercfg.WindowY1 = Layercfg.WindowY0 + Layercfg.ImageHeight;
   Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
-
+  
   HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex);
 }
 
@@ -169,10 +169,10 @@ static void DMA2D_Config(void)
 {
   HAL_StatusTypeDef hal_status = HAL_OK;
 
-  /* Register to memory mode with ARGB8888 as colorMode */
+  /* Register to memory mode with ARGB8888 as colorMode */  
   Dma2dHandle.Init.Mode         = DMA2D_R2M;
   Dma2dHandle.Init.ColorMode    = DMA2D_ARGB8888;
-  Dma2dHandle.Init.OutputOffset = 0x0;
+  Dma2dHandle.Init.OutputOffset = 0x0;     
 
   Dma2dHandle.XferCpltCallback  = TransferComplete;
   Dma2dHandle.XferErrorCallback = TransferError;

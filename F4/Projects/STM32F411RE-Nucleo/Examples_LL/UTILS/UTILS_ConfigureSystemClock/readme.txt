@@ -1,9 +1,9 @@
 /**
   @page UTILS_ConfigureSystemClock UTILS example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/UTILS/UTILS_ConfigureSystemClock/readme.txt
+  * @file    Examples_LL/UTILS/UTILS_ConfigureSystemClock/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the UTILS example.
   ******************************************************************************
@@ -45,9 +45,9 @@ is tuned according to system constraints described in the reference manual.
 
 User can easily set its own PLL parameters in changing global variable used to store them.
 
-A LED2 toggle of 1sec provides this information that system is well configured to requested frequency.
+A LED2 toggle of 1sec provides this information that system is well configured to requested frequency.  
 
-Anyway, signal on PA.08 can be monitored with an oscilloscope (in connecting PA.08 connected to pin 23 of CN10 connector )
+Anyway, signal on PA.08 can be monitored with an oscilloscope (in connecting PA.08 connected to pin 23 of CN10 connector ) 
 to check the requested frequency:
  - SYSCLK frequency with frequency value around @100MHz divided by 4.
 
@@ -55,7 +55,7 @@ to check the requested frequency:
 
 Utils, system, Clock, HSI, PLL, flash latency, SYSCLK, frequencyn Oscilloscope
 
-@par Directory contents
+@par Directory contents 
 
   - UTILS/UTILS_ConfigureSystemClock/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - UTILS/UTILS_ConfigureSystemClock/Inc/main.h                  Header for main.c module
@@ -68,12 +68,12 @@ Utils, system, Clock, HSI, PLL, flash latency, SYSCLK, frequencyn Oscilloscope
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

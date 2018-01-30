@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_PWMInput/Src/main.c
+  * @file    TIM/TIM_PWMInput/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example shows how to use the TIM peripheral to measure the
   *          frequency and duty cycle of an external signal.
@@ -44,7 +44,7 @@
 
 /** @addtogroup TIM_PWMInput
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -86,32 +86,32 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the TIM peripheral #######################################*/
-  /* ---------------------------------------------------------------------------
+  /* --------------------------------------------------------------------------- 
   TIM4 configuration: PWM Input mode
 
-    In this example TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1),
-    since APB1 prescaler is different from 1.
-      TIM4CLK = 2 * PCLK1
-      PCLK1 = HCLK / 4
+    In this example TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1), 
+    since APB1 prescaler is different from 1.   
+      TIM4CLK = 2 * PCLK1  
+      PCLK1 = HCLK / 4 
       => TIM4CLK = HCLK / 2 = SystemCoreClock /2
 
-    External Signal Frequency = TIM4 counter clock / TIM4_CCR2 in Hz.
+    External Signal Frequency = TIM4 counter clock / TIM4_CCR2 in Hz. 
 
     External Signal DutyCycle = (TIM4_CCR1*100)/(TIM4_CCR2) in %.
 
   --------------------------------------------------------------------------- */
-
+  
   /* Set TIMx instance */
   TimHandle.Instance = TIM4;
-
+ 
   /* Initialize TIMx peripheral as follow:
        + Period = 0xFFFF
        + Prescaler = 0
@@ -121,27 +121,27 @@ int main(void)
   TimHandle.Init.Period = 0xFFFF;
   TimHandle.Init.Prescaler = 0;
   TimHandle.Init.ClockDivision = 0;
-  TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
+  TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;  
   if(HAL_TIM_IC_Init(&TimHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the Input Capture channels ###############################*/
+  
+  /*##-2- Configure the Input Capture channels ###############################*/ 
   /* Common configuration */
   sConfig.ICPrescaler = TIM_ICPSC_DIV1;
-  sConfig.ICFilter = 0;
-
+  sConfig.ICFilter = 0;  
+  
   /* Configure the Input Capture of channel 1 */
   sConfig.ICPolarity = TIM_ICPOLARITY_FALLING;
-  sConfig.ICSelection = TIM_ICSELECTION_INDIRECTTI;
+  sConfig.ICSelection = TIM_ICSELECTION_INDIRECTTI;    
   if(HAL_TIM_IC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure the Input Capture of channel 2 */
   sConfig.ICPolarity = TIM_ICPOLARITY_RISING;
   sConfig.ICSelection = TIM_ICSELECTION_DIRECTTI;
@@ -159,29 +159,29 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /*##-4- Start the Input Capture in interrupt mode ##########################*/
   if(HAL_TIM_IC_Start_IT(&TimHandle, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /*##-5- Start the Input Capture in interrupt mode ##########################*/
   if(HAL_TIM_IC_Start_IT(&TimHandle, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
-  }
+  } 
 }
 
 /**
-  * @brief  Input Capture callback in non blocking mode
+  * @brief  Input Capture callback in non blocking mode 
   * @param  htim : TIM IC handle
   * @retval None
   */
@@ -191,14 +191,14 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
   {
     /* Get the Input Capture value */
     uwIC2Value = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
-
+    
     if (uwIC2Value != 0)
     {
       /* Duty cycle computation */
       uwDutyCycle = ((HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1)) * 100) / uwIC2Value;
-
+      
       /* uwFrequency computation
-      TIM4 counter clock = (RCC_Clocks.HCLK_Frequency)/2 */
+      TIM4 counter clock = (RCC_Clocks.HCLK_Frequency)/2 */      
       uwFrequency = (HAL_RCC_GetHCLKFreq())/2 / uwIC2Value;
     }
     else
@@ -225,7 +225,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -251,8 +251,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -266,14 +266,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -293,7 +293,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

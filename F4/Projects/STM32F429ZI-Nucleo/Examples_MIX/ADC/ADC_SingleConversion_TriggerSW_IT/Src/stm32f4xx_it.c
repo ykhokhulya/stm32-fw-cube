@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_MIX/ADC/ADC_SingleConversion_TriggerSW_IT/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -200,9 +200,9 @@ void ADC_IRQHandler(void)
 {
   /* Customize process using LL interface to improve the performance          */
   /* (exhaustive feature management not handled).                             */
-
+  
   /* ########## Starting from this point HAL API must not be used ########### */
-
+  
   /* Check whether ADC group regular end of unitary conversion caused         */
   /* the ADC interruption.                                                    */
   /* Note: On this STM32 serie, ADC group regular end of conversion           */
@@ -213,17 +213,17 @@ void ADC_IRQHandler(void)
   {
     /* Clear flag ADC group regular end of unitary conversion */
     LL_ADC_ClearFlag_EOCS(ADCx);
-
+    
     /* Call interruption treatment function */
     AdcGrpRegularUnitaryConvComplete_Callback();
   }
-
+  
   /* Check whether ADC group regular overrun caused the ADC interruption */
   if(LL_ADC_IsActiveFlag_OVR(ADCx) != 0)
   {
     /* Clear flag ADC group regular overrun */
     LL_ADC_ClearFlag_OVR(ADCx);
-
+    
     /* Call interruption treatment function */
     AdcGrpRegularOverrunError_Callback();
   }

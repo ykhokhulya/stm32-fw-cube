@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/sd.c
+  * @file    BSP/Src/sd.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the SD Driver
   ******************************************************************************
@@ -42,7 +42,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -70,12 +70,12 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
   * @retval None
   */
 void SD_demo (void)
-{
+{ 
   uint8_t SD_state = SD_OK;
 
   SD_SetHint();
   SD_state = BSP_SD_Init();
-
+  
   if(SD_state != SD_OK)
   {
     BSP_LCD_DisplayStringAt(5, 90, (uint8_t *)"SD Initialization", LEFT_MODE);
@@ -85,9 +85,9 @@ void SD_demo (void)
   else
   {
     BSP_LCD_DisplayStringAt(5, 75, (uint8_t *)"SD Init : OK.", LEFT_MODE);
-
+    
     SD_state = BSP_SD_Erase(BLOCK_START_ADDR, NUM_OF_BLOCKS);
-
+    
     if(SD_state != SD_OK)
     {
       BSP_LCD_DisplayStringAt(5, 90, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
@@ -96,11 +96,11 @@ void SD_demo (void)
     else
     {
       BSP_LCD_DisplayStringAt(5, 90, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
-
+      
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
       SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, 1);
-
+      
       if(SD_state != SD_OK)
       {
         BSP_LCD_DisplayStringAt(5, 105, (uint8_t *)"SD WRITE : FAILED.", LEFT_MODE);
@@ -132,7 +132,7 @@ void SD_demo (void)
       }
     }
   }
-
+  
   while (1)
   {
     if(CheckForUserInput() > 0)
@@ -150,14 +150,14 @@ void SD_demo (void)
   */
 static void SD_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set SD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 55);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
 
   BSP_LCD_SetFont(&Font12);
@@ -166,7 +166,7 @@ static void SD_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 40, (uint8_t *)"& read data on SD", CENTER_MODE);
 
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
 }
 
 /**
@@ -211,9 +211,9 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
 }
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

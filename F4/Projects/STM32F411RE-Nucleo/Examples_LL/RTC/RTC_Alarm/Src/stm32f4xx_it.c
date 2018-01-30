@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/RTC/RTC_Alarm/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -175,9 +175,9 @@ void RTC_Alarm_IRQHandler(void)
     /* Get the pending status of the Alarm Interrupt */
     if(LL_RTC_IsActiveFlag_ALRA(RTC) != 0)
     {
-      /* Alarm callback */
+      /* Alarm callback */ 
       Alarm_Callback();
-
+      
       /* Clear the Alarm interrupt pending bit */
       LL_RTC_ClearFlag_ALRA(RTC);
     }

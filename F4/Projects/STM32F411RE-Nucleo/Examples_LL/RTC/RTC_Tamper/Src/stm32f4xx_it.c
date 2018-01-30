@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/RTC/RTC_Tamper/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -175,9 +175,9 @@ void TAMP_STAMP_IRQHandler(void)
     /* Get the pending status of the Tamper Interrupt */
     if(LL_RTC_IsActiveFlag_TAMP1(RTC) != 0)
     {
-      /* Tamper callback */
+      /* Tamper callback */ 
       Tamper_Callback();
-
+      
       /* Clear the Tamper interrupt pending bit */
       LL_RTC_ClearFlag_TAMP1(RTC);
     }

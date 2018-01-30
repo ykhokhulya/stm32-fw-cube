@@ -7,37 +7,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -115,7 +115,7 @@ uint32_t BytesRead = 0;
 uint32_t Storage_Init(void)
 {
   BSP_SD_Init();
-
+  
   /****************** FatFs Volume Acess ******************************/
   if(f_mount(&fs, (TCHAR const*)"",0))
   {
@@ -142,34 +142,34 @@ uint32_t Storage_OpenReadFile(uint8_t *Address, const char* BmpName)
   {
     while(1)
     {
-    }
+    } 
   }
   if (f_read (&F1, sector, 30, (UINT *)&BytesRead) != FR_OK)
   {
     while(1)
     {
-    }
+    } 
   }
-
+  
   BmpAddress = (uint32_t)sector;
 
   /* Read bitmap size */
   size = *(uint16_t *) (BmpAddress + 2);
-  size |= (*(uint16_t *) (BmpAddress + 4)) << 16;
-
+  size |= (*(uint16_t *) (BmpAddress + 4)) << 16;  
+ 
   /* Get bitmap data address offset */
   index = *(uint16_t *) (BmpAddress + 10);
-  index |= (*(uint16_t *) (BmpAddress + 12)) << 16;
-
+  index |= (*(uint16_t *) (BmpAddress + 12)) << 16;  
+  
   f_close (&F1);
-
+  
   f_open (&F1, BmpName, FA_READ);
 
   if (size > 240*240*2)
   {
     size = 240*240*2;
   }
-
+  
   do
   {
     if (size < 256*2)
@@ -186,17 +186,17 @@ uint32_t Storage_OpenReadFile(uint8_t *Address, const char* BmpName)
     for (index = 0; index < i1; index++)
     {
       *(__IO uint8_t*) (Address) = *(__IO uint8_t *)BmpAddress;
-
-      BmpAddress++;
+      
+      BmpAddress++;  
       Address++;
-    }
-
+    }  
+    
     BmpAddress = (uint32_t)sector;
   }
   while (size > 0);
 
   f_close (&F1);
-
+  
   return 1;
 }
 
@@ -218,9 +218,9 @@ uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
   {
     return 2;
   }
-
+  
   f_read (&F, sector, 6, (UINT *)&BytesRead);
-
+  
   if (Buffercmp((uint8_t *)SlidesCheck, (uint8_t *) sector, 2) != 0)
   {
     return 3;
@@ -249,7 +249,7 @@ uint32_t Storage_GetDirectoryBitmapFiles (const char* DirName, char* Files[])
 
   /* Open directory */
   res = f_opendir(&dir, DirName);
-
+  
   if (res == FR_OK)
   {
     for (;;)

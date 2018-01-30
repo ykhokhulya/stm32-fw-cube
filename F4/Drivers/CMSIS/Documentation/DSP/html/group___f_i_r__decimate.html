@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___f_i_r__decimate.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -150,16 +150,16 @@ Components included in the FIR Decimator functions</div></div>
 <p> When decimating by a factor of <code>M</code>, the signal should be prefiltered by a lowpass filter with a normalized cutoff frequency of <code>1/M</code> in order to prevent aliasing distortion. The user of the function is responsible for providing the filter coefficients.</p>
 <p>The FIR decimator functions provided in the CMSIS DSP Library combine the FIR filter and the decimator in an efficient manner. Instead of calculating all of the FIR filter outputs and discarding <code>M-1</code> out of every <code>M</code>, only the samples output by the decimator are computed. The functions operate on blocks of input and output data. <code>pSrc</code> points to an array of <code>blockSize</code> input values and <code>pDst</code> points to an array of <code>blockSize/M</code> output values. In order to have an integer number of output samples <code>blockSize</code> must always be a multiple of the decimation factor <code>M</code>.</p>
 <p>The library provides separate functions for Q15, Q31 and floating-point data types.</p>
-<dl class="section user"><dt>Algorithm: </dt><dd>The FIR portion of the algorithm uses the standard form filter: <pre>
-     y[n] = b[0] * x[n] + b[1] * x[n-1] + b[2] * x[n-2] + ...+ b[numTaps-1] * x[n-numTaps+1]
+<dl class="section user"><dt>Algorithm: </dt><dd>The FIR portion of the algorithm uses the standard form filter: <pre>    
+     y[n] = b[0] * x[n] + b[1] * x[n-1] + b[2] * x[n-2] + ...+ b[numTaps-1] * x[n-numTaps+1]    
   </pre> where, <code>b[n]</code> are the filter coefficients. </dd></dl>
 <dl class="section user"><dt></dt><dd>The <code>pCoeffs</code> points to a coefficient array of size <code>numTaps</code>. Coefficients are stored in time reversed order. </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-     {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><pre>    
+     {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
   </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to a state array of size <code>numTaps + blockSize - 1</code>. Samples in the state buffer are stored in the order: </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-     {x[n-numTaps+1], x[n-numTaps], x[n-numTaps-1], x[n-numTaps-2]....x[0], x[1], ..., x[blockSize-1]}
+<dl class="section user"><dt></dt><dd><pre>    
+     {x[n-numTaps+1], x[n-numTaps], x[n-numTaps-1], x[n-numTaps-2]....x[0], x[1], ..., x[blockSize-1]}    
   </pre> The state variables are updated after each block of data is processed, the coefficients are untouched.</dd></dl>
 <dl class="section user"><dt>Instance Structure </dt><dd>The coefficients and state variables for a filter are stored together in an instance data structure. A separate instance structure must be defined for each filter. Coefficient arrays may be shared among several instances while state variable array should be allocated separately. There are separate instance structure declarations for each of the 3 supported data types.</dd></dl>
 <dl class="section user"><dt>Initialization Functions </dt><dd>There is also an associated initialization function for each data type. The initialization function performs the following operations:<ul>
@@ -168,10 +168,10 @@ Components included in the FIR Decimator functions</div></div>
 <li>Checks to make sure that the size of the input is a multiple of the decimation factor. To do this manually without calling the init function, assign the follow subfields of the instance structure: numTaps, pCoeffs, M (decimation factor), pState. Also set all of the values in pState to zero.</li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. The code below statically initializes each of the 3 different data type filter instance structures <pre>
-*arm_fir_decimate_instance_f32 S = {M, numTaps, pCoeffs, pState};
-*arm_fir_decimate_instance_q31 S = {M, numTaps, pCoeffs, pState};
-*arm_fir_decimate_instance_q15 S = {M, numTaps, pCoeffs, pState};
+<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. The code below statically initializes each of the 3 different data type filter instance structures <pre>    
+*arm_fir_decimate_instance_f32 S = {M, numTaps, pCoeffs, pState};    
+*arm_fir_decimate_instance_q31 S = {M, numTaps, pCoeffs, pState};    
+*arm_fir_decimate_instance_q15 S = {M, numTaps, pCoeffs, pState};    
   </pre> where <code>M</code> is the decimation factor; <code>numTaps</code> is the number of filter coefficients in the filter; <code>pCoeffs</code> is the address of the coefficient buffer; <code>pState</code> is the address of the state buffer. Be sure to set the values in the state buffer to zeros when doing static initialization.</dd></dl>
 <dl class="section user"><dt>Fixed-Point Behavior </dt><dd>Care must be taken when using the fixed-point versions of the FIR decimate filter functions. In particular, the overflow and saturation behavior of the accumulator used in each function must be considered. Refer to the function specific documentation below for usage guidelines. </dd></dl>
 <h2 class="groupheader">Function Documentation</h2>
@@ -392,8 +392,8 @@ Components included in the FIR Decimator functions</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The function returns ARM_MATH_SUCCESS if initialization was successful or ARM_MATH_LENGTH_ERROR if <code>blockSize</code> is not a multiple of <code>M</code>.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
 </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to the array of state variables. <code>pState</code> is of length <code>numTaps+blockSize-1</code> words where <code>blockSize</code> is the number of input samples passed to <code><a class="el" href="group___f_i_r__decimate.html#ga25aa3d58a90bf91b6a82272a0bc518f7" title="Processing function for the floating-point FIR decimator.">arm_fir_decimate_f32()</a></code>. <code>M</code> is the decimation factor. </dd></dl>
 
@@ -461,8 +461,8 @@ Components included in the FIR Decimator functions</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The function returns ARM_MATH_SUCCESS if initialization was successful or ARM_MATH_LENGTH_ERROR if <code>blockSize</code> is not a multiple of <code>M</code>.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
 </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to the array of state variables. <code>pState</code> is of length <code>numTaps+blockSize-1</code> words where <code>blockSize</code> is the number of input samples to the call <code><a class="el" href="group___f_i_r__decimate.html#gab8bef6d0f6a26fdbfce9485727713ce5" title="Processing function for the Q15 FIR decimator.">arm_fir_decimate_q15()</a></code>. <code>M</code> is the decimation factor. </dd></dl>
 
@@ -530,8 +530,8 @@ Components included in the FIR Decimator functions</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The function returns ARM_MATH_SUCCESS if initialization was successful or ARM_MATH_LENGTH_ERROR if <code>blockSize</code> is not a multiple of <code>M</code>.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
 </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to the array of state variables. <code>pState</code> is of length <code>numTaps+blockSize-1</code> words where <code>blockSize</code> is the number of input samples passed to <code><a class="el" href="group___f_i_r__decimate.html#gaef8e86add28f15fdc5ecc484e9dd7a4e" title="Processing function for the Q31 FIR decimator.">arm_fir_decimate_q31()</a></code>. <code>M</code> is the decimation factor. </dd></dl>
 
@@ -653,7 +653,7 @@ Components included in the FIR Decimator functions</div></div>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

@@ -1,13 +1,13 @@
 /**
   ******************************************************************************
-  * @file    CAN/CAN_LoopBack/Src/main.c
+  * @file    CAN/CAN_LoopBack/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example provides a description of how to set a communication
+  * @brief   This example provides a description of how to set a communication 
   *          with the CAN in loopback mode.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -37,7 +37,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
@@ -50,8 +49,12 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-CAN_HandleTypeDef    CanHandle;
-
+CAN_HandleTypeDef     CanHandle;
+CAN_TxHeaderTypeDef   TxHeader;
+CAN_RxHeaderTypeDef   RxHeader;
+uint8_t               TxData[8];
+uint8_t               RxData[8];
+uint32_t              TxMailbox;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -67,6 +70,7 @@ static HAL_StatusTypeDef CAN_Polling(void);
   */
 int main(void)
 {
+
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -77,29 +81,27 @@ int main(void)
 
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
 
-  if (CAN_Polling() ==  HAL_OK)
-  { /* OK */
-
-    /* Turn on LED1 */
+  if(CAN_Polling() == HAL_OK)
+  {
+    /* OK: Turn on LED1 */
     BSP_LED_On(LED1);
   }
   else
-  { /* KO */
-
-    /* Turn on LED2 */
+  {
+    /* KO: Turn on LED2 */
     BSP_LED_On(LED2);
   }
-
+  
   /* Infinite loop */
   while (1)
   {
-  }
+  } 
 }
 
 /**
@@ -109,27 +111,23 @@ int main(void)
   */
 HAL_StatusTypeDef CAN_Polling(void)
 {
-  CAN_FilterConfTypeDef  sFilterConfig;
-  static CanTxMsgTypeDef        TxMessage;
-  static CanRxMsgTypeDef        RxMessage;
-
+  CAN_FilterTypeDef  sFilterConfig;
+  
   /*##-1- Configure the CAN peripheral #######################################*/
   CanHandle.Instance = CANx;
-  CanHandle.pTxMsg = &TxMessage;
-  CanHandle.pRxMsg = &RxMessage;
-
-  CanHandle.Init.TTCM = DISABLE;
-  CanHandle.Init.ABOM = DISABLE;
-  CanHandle.Init.AWUM = DISABLE;
-  CanHandle.Init.NART = DISABLE;
-  CanHandle.Init.RFLM = DISABLE;
-  CanHandle.Init.TXFP = DISABLE;
+    
+  CanHandle.Init.TimeTriggeredMode = DISABLE;
+  CanHandle.Init.AutoBusOff = DISABLE;
+  CanHandle.Init.AutoWakeUp = DISABLE;
+  CanHandle.Init.AutoRetransmission = ENABLE;
+  CanHandle.Init.ReceiveFifoLocked = DISABLE;
+  CanHandle.Init.TransmitFifoPriority = DISABLE;
   CanHandle.Init.Mode = CAN_MODE_LOOPBACK;
-  CanHandle.Init.SJW = CAN_SJW_1TQ;
-  CanHandle.Init.BS1 = CAN_BS1_6TQ;
-  CanHandle.Init.BS2 = CAN_BS2_8TQ;
-  CanHandle.Init.Prescaler = 2;
-
+  CanHandle.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  CanHandle.Init.TimeSeg1 = CAN_BS1_4TQ;
+  CanHandle.Init.TimeSeg2 = CAN_BS2_2TQ;
+  CanHandle.Init.Prescaler = 6;
+  
   if(HAL_CAN_Init(&CanHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -137,80 +135,79 @@ HAL_StatusTypeDef CAN_Polling(void)
   }
 
   /*##-2- Configure the CAN Filter ###########################################*/
-  sFilterConfig.FilterNumber = 0;
+  sFilterConfig.FilterBank = 0;
   sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
   sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
   sFilterConfig.FilterIdHigh = 0x0000;
   sFilterConfig.FilterIdLow = 0x0000;
   sFilterConfig.FilterMaskIdHigh = 0x0000;
   sFilterConfig.FilterMaskIdLow = 0x0000;
-  sFilterConfig.FilterFIFOAssignment = 0;
+  sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
   sFilterConfig.FilterActivation = ENABLE;
-  sFilterConfig.BankNumber = 14;
-
+  sFilterConfig.SlaveStartFilterBank = 14;
+  
   if(HAL_CAN_ConfigFilter(&CanHandle, &sFilterConfig) != HAL_OK)
   {
     /* Filter configuration Error */
     Error_Handler();
   }
 
-  /*##-3- Start the Transmission process #####################################*/
-  CanHandle.pTxMsg->StdId = 0x11;
-  CanHandle.pTxMsg->RTR = CAN_RTR_DATA;
-  CanHandle.pTxMsg->IDE = CAN_ID_STD;
-  CanHandle.pTxMsg->DLC = 2;
-  CanHandle.pTxMsg->Data[0] = 0xCA;
-  CanHandle.pTxMsg->Data[1] = 0xFE;
-
-  if(HAL_CAN_Transmit(&CanHandle, 10) != HAL_OK)
+  /*##-3- Start the CAN peripheral ###########################################*/
+  if (HAL_CAN_Start(&CanHandle) != HAL_OK)
   {
-    /* Transmission Error */
+    /* Start Error */
     Error_Handler();
   }
 
-  if(HAL_CAN_GetState(&CanHandle) != HAL_CAN_STATE_READY)
+  /*##-4- Start the Transmission process #####################################*/
+  TxHeader.StdId = 0x11;
+  TxHeader.RTR = CAN_RTR_DATA;
+  TxHeader.IDE = CAN_ID_STD;
+  TxHeader.DLC = 2;
+  TxHeader.TransmitGlobalTime = DISABLE;
+  TxData[0] = 0xCA;
+  TxData[1] = 0xFE;
+  
+  /* Request transmission */
+  if(HAL_CAN_AddTxMessage(&CanHandle, &TxHeader, TxData, &TxMailbox) != HAL_OK)
   {
-    return HAL_ERROR;
+    /* Transmission request Error */
+    Error_Handler();
+  }
+  
+  /* Wait transmission complete */
+  while(HAL_CAN_GetTxMailboxesFreeLevel(&CanHandle) != 3) {}
+
+  /*##-5- Start the Reception process ########################################*/
+  if(HAL_CAN_GetRxFifoFillLevel(&CanHandle, CAN_RX_FIFO0) != 1)
+  {
+    /* Reception Missing */
+    Error_Handler();
   }
 
-  /*##-4- Start the Reception process ########################################*/
-  if(HAL_CAN_Receive(&CanHandle, CAN_FIFO0,10) != HAL_OK)
+  if(HAL_CAN_GetRxMessage(&CanHandle, CAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK)
   {
     /* Reception Error */
     Error_Handler();
   }
 
-  if(HAL_CAN_GetState(&CanHandle) != HAL_CAN_STATE_READY)
+  if((RxHeader.StdId != 0x11)                     ||
+     (RxHeader.RTR != CAN_RTR_DATA)               ||
+     (RxHeader.IDE != CAN_ID_STD)                 ||
+     (RxHeader.DLC != 2)                          ||
+     ((RxData[0]<<8 | RxData[1]) != 0xCAFE))
   {
-    return HAL_ERROR;
-  }
-
-  if (CanHandle.pRxMsg->StdId != 0x11)
-  {
-    return HAL_ERROR;
-  }
-
-  if (CanHandle.pRxMsg->IDE != CAN_ID_STD)
-  {
-    return HAL_ERROR;
-  }
-
-  if (CanHandle.pRxMsg->DLC != 2)
-  {
-    return HAL_ERROR;
-  }
-
-  if ((CanHandle.pRxMsg->Data[0]<<8|RxMessage.Data[1]) != 0xCAFE)
-  {
+    /* Rx message Error */
     return HAL_ERROR;
   }
 
   return HAL_OK; /* Test Passed */
 }
 
+
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -236,8 +233,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -251,14 +248,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -269,6 +266,7 @@ static void SystemClock_Config(void)
   }
 }
 
+
 /**
   * @brief  This function is executed in case of error occurrence.
   * @param  None
@@ -276,11 +274,12 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-    /* Turn LED3 on */
-    BSP_LED_On(LED3);
-    while(1)
-    {
-    }
+  /* User may add here some code to deal with this error */
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while(1)
+  {
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -291,7 +290,7 @@ static void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
+void assert_failed(char *file, uint32_t line)
 {
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

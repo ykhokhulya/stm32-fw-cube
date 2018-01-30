@@ -121,6 +121,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4_MPU/port.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

@@ -1,11 +1,11 @@
 /**
   @page TIM_OCToggle TIM_OCToggle example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_OCToggle/readme.txt
+  * @file    TIM/TIM_OCToggle/readme.txt 
   * @author  MCD Application Team
-  * @brief   This example shows how to configure the Timer to generate four different
+  * @brief   This example shows how to configure the Timer to generate four different 
   *          signals with four different frequencies.
   ******************************************************************************
   *
@@ -34,15 +34,15 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-  This example shows how to configure the TIM peripheral to generate four different
+  This example shows how to configure the TIM peripheral to generate four different 
   signals with four different frequencies.
 
   The TIM3 frequency is set to SystemCoreClock, and the objective is
   to get TIM3 counter clock at 12.5 MHz so the Prescaler is computed as following:
      - Prescaler = (TIM3CLK /TIM3 counter clock) - 1
-
+   
   SystemCoreClock is set to 100 MHz for STM32F413xx/STM32F423xx Devices.
 
   The TIM3 CCR1 register value is equal to 32051:
@@ -64,21 +64,21 @@
 @note PWM signal frequency values mentioned above are theoretical (obtained when the system clock frequency
       is exactly 100 MHz). Since the generated system clock frequency may vary from one board to another observed
       PWM signal frequency might be slightly different.
-
+	  
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OCToggle/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_OCToggle/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_OCToggle/Inc/main.h                  Header for main.c module
+  - TIM/TIM_OCToggle/Inc/main.h                  Header for main.c module  
   - TIM/TIM_OCToggle/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_OCToggle/Src/main.c                  Main program
   - TIM/TIM_OCToggle/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -88,10 +88,10 @@
 @par Hardware and Software environment
 
   - This example runs on STM32F413xx/STM32F423xx devices.
-
-  - This example has been tested with STMicroelectronics STM32F413ZH-Nucleo
-    board and can be easily tailored to any other supported device
-    and development board.
+    
+  - This example has been tested with STMicroelectronics STM32F413ZH-Nucleo 
+    board and can be easily tailored to any other supported device 
+    and development board.      
 
   - STM32F413ZH-Nucleo Set-up
    Connect the following pins to an oscilloscope to monitor the different waveforms:
@@ -100,7 +100,7 @@
       - PB.00: (TIM3_CH3) (connected to PB.00 (pin 31 in CN10 connector))
       - PB.01: (TIM3_CH4) (connected to PB.01 (pin 7 in CN10 connector))
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

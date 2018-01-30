@@ -89,10 +89,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization
@@ -126,7 +126,7 @@ int main(void)
       /* Turn LED2 on*/
       BSP_LED_On(LED2);
       transferCompleteDetected = 0;
-    }
+    } 
   }
 }
 
@@ -173,7 +173,7 @@ static void DMA_Config(void)
 
   /* Enable the DMA Channel global Interrupt */
   HAL_NVIC_EnableIRQ(DMA_INSTANCE_IRQ);
-
+  
   /*##-6- Configure and start the DMA transfer using the interrupt mode ######*/
   /* Enable All the DMA interrupts */
 
@@ -192,9 +192,9 @@ static void DMA_Config(void)
   /* ########## Starting from this point HAL API must not be used ########## */
   DmaInstance        = __LL_DMA_GET_INSTANCE(DmaHandle.Instance);
   DmaStream          = __LL_DMA_GET_STREAM(DmaHandle.Instance);
-  LL_DMA_ConfigAddresses(DmaInstance, DmaStream,
-                               (uint32_t)&aSRC_Const_Buffer,
-                               (uint32_t)&aDST_Buffer,
+  LL_DMA_ConfigAddresses(DmaInstance, DmaStream, 
+                               (uint32_t)&aSRC_Const_Buffer, 
+                               (uint32_t)&aDST_Buffer, 
                                LL_DMA_DIRECTION_MEMORY_TO_MEMORY);
 
   LL_DMA_SetDataLength(DmaInstance, DmaStream, BUFFER_SIZE);
@@ -228,7 +228,7 @@ void TransferError(DMA_HandleTypeDef *DmaHandle)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -253,12 +253,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -272,14 +272,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();

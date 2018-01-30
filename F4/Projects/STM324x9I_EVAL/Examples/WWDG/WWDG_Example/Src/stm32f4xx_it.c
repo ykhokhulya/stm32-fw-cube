@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    WWDG/WWDG_Example/Src/stm32f4xx_it.c
+  * @file    WWDG/WWDG_Example/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup WWDG_Example
   * @{
-  */
+  */  
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -169,9 +169,9 @@ void SysTick_Handler(void)
   * @retval None
   */
 void EXTI15_10_IRQHandler(void)
-{
+{ 
   /* As the following address is invalid (not mapped), a Hardfault exception
-     will be generated with an infinite loop and when the WWDG counter falls to
+     will be generated with an infinite loop and when the WWDG counter falls to 
      63 the WWDG reset occurs */
   *(__IO uint32_t *) 0xA0001000 = 0xFF;
 }
@@ -187,10 +187,10 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

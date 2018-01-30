@@ -1,9 +1,9 @@
 /**
   @page SDIO_EXAMPLES SDIO examples
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    SDIO/readme.txt
+  * @file    SDIO/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of SDIO examples.
   ******************************************************************************
@@ -45,4 +45,4 @@
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-
+ 

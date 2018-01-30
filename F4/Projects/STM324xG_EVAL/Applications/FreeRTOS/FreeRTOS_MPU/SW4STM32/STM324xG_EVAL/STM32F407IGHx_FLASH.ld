@@ -76,14 +76,14 @@ SECTIONS
     KEEP(*(.isr_vector)) /* Startup code */
     . = ALIGN(4);
   } >FLASH_priv
-
-  .privileged_functions :
+  
+  .privileged_functions : 
   {
     . = ALIGN(4);
     *(privileged_functions)
     *(privileged_functions*)
     . = ALIGN(4);
-  } >FLASH_priv
+  } >FLASH_priv  
 
   /* The program code and other data goes into FLASH */
   .text :
@@ -139,7 +139,7 @@ SECTIONS
     PROVIDE_HIDDEN (__fini_array_end = .);
   } >FLASH
 
-.pbss :
+.pbss : 
   {
     . = ALIGN(4);
     _spbss = .;
@@ -147,12 +147,12 @@ SECTIONS
     *(privileged_data*)
     . = ALIGN(4);
     _epbss = .;
-  } >RAM_priv
-
+  } >RAM_priv 
+  
   /* used by the startup to initialize data */
   _sipdata = LOADADDR(.pdata);
 
-  .pdata :
+  .pdata : 
   {
     . = ALIGN(4);
     _spdata = .;
@@ -166,7 +166,7 @@ SECTIONS
   _sidata = LOADADDR(.data);
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
-  .data :
+  .data : 
   {
     . = ALIGN(4);
     _sdata = .;        /* create a global symbol at data start */
@@ -179,11 +179,11 @@ SECTIONS
 
   _siccmram = LOADADDR(.ccmram);
 
-  /* CCM-RAM section
-  *
-  * IMPORTANT NOTE!
+  /* CCM-RAM section 
+  * 
+  * IMPORTANT NOTE! 
   * If initialized variables will be placed in this section,
-  * the startup code needs to be modified to copy the init-values.
+  * the startup code needs to be modified to copy the init-values.  
   */
   .ccmram :
   {
@@ -191,12 +191,12 @@ SECTIONS
     _sccmram = .;       /* create a global symbol at ccmram start */
     *(.ccmram)
     *(.ccmram*)
-
+    
     . = ALIGN(4);
     _eccmram = .;       /* create a global symbol at ccmram end */
   } >CCMRAM AT> FLASH
 
-
+  
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -224,7 +224,7 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-
+  
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

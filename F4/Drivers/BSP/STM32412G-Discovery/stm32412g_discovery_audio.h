@@ -40,7 +40,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 /* Include audio component Driver */
@@ -49,19 +49,19 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM32412G_DISCOVERY
   * @{
   */
-
+    
 /** @addtogroup STM32412G_DISCOVERY_AUDIO
   * @{
   */
 
 /** @defgroup STM32412G_DISCOVERY_AUDIO_Exported_Types STM32412G DISCOVERY Audio Exported Types
   * @{
-  */
+  */  
 typedef struct
 {
   uint32_t               Frequency;      /* Record Frequency */
@@ -75,7 +75,7 @@ typedef struct
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_AUDIO_Exported_Constants  STM32412G DISCOVERY Audio Exported Constants
   * @{
@@ -122,9 +122,9 @@ typedef struct
 #define AUDIO_OUT_I2Sx_DMAx_PERIPH_DATA_SIZE     DMA_PDATAALIGN_HALFWORD
 #define AUDIO_OUT_I2Sx_DMAx_MEM_DATA_SIZE        DMA_MDATAALIGN_HALFWORD
 #define DMA_MAX_SIZE                             0xFFFF
-
+   
 #define AUDIO_OUT_I2Sx_DMAx_IRQHandler           DMA1_Stream5_IRQHandler
-
+  
    /* Select the interrupt preemption priority for the DMA interrupt */
 #define AUDIO_OUT_IRQ_PREPRIO                    ((uint32_t)0x0E)   /* Select the preemption priority level(0 is the highest) */
 
@@ -159,7 +159,7 @@ typedef struct
 #define AUDIO_DFSDMx_DMAx_MIC2_IRQ                      DMA2_Stream4_IRQn
 #define AUDIO_DFSDMx_DMAx_PERIPH_DATA_SIZE              DMA_PDATAALIGN_WORD
 #define AUDIO_DFSDMx_DMAx_MEM_DATA_SIZE                 DMA_MDATAALIGN_WORD
-
+   
 #define AUDIO_DFSDM_DMAx_MIC1_IRQHandler                DMA2_Stream6_IRQHandler
 #define AUDIO_DFSDM_DMAx_MIC2_IRQHandler                DMA2_Stream4_IRQHandler
 
@@ -191,12 +191,12 @@ typedef struct
 #define AUDIO_IN_I2Sx_DMAx_IRQ                  DMA1_Stream0_IRQn
 #define AUDIO_IN_I2Sx_DMAx_PERIPH_DATA_SIZE     DMA_PDATAALIGN_HALFWORD
 #define AUDIO_IN_I2Sx_DMAx_MEM_DATA_SIZE        DMA_MDATAALIGN_HALFWORD
-
+   
 #define AUDIO_IN_I2Sx_DMAx_IRQHandler           DMA1_Stream0_IRQHandler
 #define AUDIO_IN_I2Sx_DMAx_IRQ                  DMA1_Stream0_IRQn
 
 /* Two channels are used:
-   - one channel as input which is connected to I2S SCK in stereo mode
+   - one channel as input which is connected to I2S SCK in stereo mode 
    - one channel as output which divides the frequency on the input
 */
 
@@ -218,7 +218,7 @@ typedef struct
 
 #define AUDIODATA_SIZE                      2   /* 16-bits audio data size */
 
-/* Audio status definition */
+/* Audio status definition */     
 #define AUDIO_OK                            ((uint8_t)0)
 #define AUDIO_ERROR                         ((uint8_t)1)
 #define AUDIO_TIMEOUT                       ((uint8_t)2)
@@ -246,17 +246,17 @@ typedef struct
 /*------------------------------------------------------------------------------
                            INPUT DEVICES definition
 ------------------------------------------------------------------------------*/
-/* Analog microphone input from 3.5 audio jack connector */
-#define INPUT_DEVICE_ANALOG_MIC        ((uint32_t)0x00000001)
+/* Analog microphone input from 3.5 audio jack connector */    
+#define INPUT_DEVICE_ANALOG_MIC        ((uint32_t)0x00000001)     
 /* MP34DT01TR digital microphone on PCB top side */
 #define INPUT_DEVICE_DIGITAL_MIC1      ((uint32_t)0x00000010)
-#define INPUT_DEVICE_DIGITAL_MIC2      ((uint32_t)0x00000020)
+#define INPUT_DEVICE_DIGITAL_MIC2      ((uint32_t)0x00000020)    
 #define INPUT_DEVICE_DIGITAL_MIC       ((uint32_t)(INPUT_DEVICE_DIGITAL_MIC1 | INPUT_DEVICE_DIGITAL_MIC2))
 #define DFSDM_MIC_NUMBER               (2)
 /**
   * @}
   */
-
+ 
 /** @defgroup STM32412G_DISCOVERY_AUDIO_Exported_Variables  STM32412G DISCOVERY Audio Exported Variables
   * @{
   */
@@ -264,15 +264,15 @@ extern __IO uint16_t AudioInVolume;
  /**
   * @}
   */
-
+   
 /** @defgroup STM32412G_DISCOVERY_AUDIO_Exported_Macros  STM32412G DISCOVERY Audio Exported Macros
   * @{
   */
 #define DMA_MAX(x)           (((x) <= DMA_MAX_SIZE)? (x):DMA_MAX_SIZE)
-#define POS_VAL(VAL)         (POSITION_VAL(VAL) - 4)
+#define POS_VAL(VAL)         (POSITION_VAL(VAL) - 4) 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_AUDIO_OUT_Exported_Functions  STM32412G DISCOVERY AUDIO OUT Exported Functions
   * @{
@@ -308,7 +308,7 @@ void  BSP_AUDIO_OUT_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_AUDIO_IN_Exported_Functions  STM32412G DISCOVERY AUDIO IN Exported Functions
   * @{
@@ -316,7 +316,7 @@ void  BSP_AUDIO_OUT_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr);
 uint8_t BSP_AUDIO_IN_InitEx(uint32_t InputDevice, uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr);
 uint8_t BSP_AUDIO_IN_ConfigMicDefault(uint32_t InputDevice);
-uint8_t BSP_AUDIO_IN_ConfigDigitalMic(uint32_t InputDevice, void *Params);
+uint8_t BSP_AUDIO_IN_ConfigDigitalMic(uint32_t InputDevice, void *Params);   
 uint8_t BSP_AUDIO_IN_AllocScratch (int32_t *pScratch, uint32_t size);
 uint8_t BSP_AUDIO_IN_Record(uint16_t *pBuf, uint32_t Size);
 uint8_t BSP_AUDIO_IN_RecordEx(uint32_t *pBuf, uint32_t Size);
@@ -351,11 +351,11 @@ void    BSP_AUDIO_IN_MspDeInit(void *Params);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

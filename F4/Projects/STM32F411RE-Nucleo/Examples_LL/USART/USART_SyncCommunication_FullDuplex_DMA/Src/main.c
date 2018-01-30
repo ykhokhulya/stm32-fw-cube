@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Examples_LL/USART/USART_SyncCommunication_FullDuplex_DMA/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to transfer bytes from/to an USART peripheral
-  *          to/from an SPI peripheral (in slave mode) using DMA mode
+  * @brief   This example describes how to transfer bytes from/to an USART peripheral 
+  *          to/from an SPI peripheral (in slave mode) using DMA mode 
   *          through the STM32F4xx USART LL API.
   *          Peripheral initialization done using LL unitary services functions.
   ******************************************************************************
@@ -122,10 +122,10 @@ int main(void)
 
   /* Wait for User push-button press to start transfer */
   WaitForUserButtonPress();
-
+  
   /* Initiate DMA transfers */
   StartTransfers();
-
+  
   /* Wait for the end of the transfer and check received data */
   WaitAndCheckEndOfTransfer();
 
@@ -161,13 +161,13 @@ void Configure_USART1_DMA(void)
 
   /* (3) Configure the DMA2 functional parameters for transmission */
   LL_DMA_SetChannelSelection(DMA2, LL_DMA_STREAM_7, LL_DMA_CHANNEL_4);
-  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_7,
-                        LL_DMA_DIRECTION_MEMORY_TO_PERIPH |
-                        LL_DMA_PRIORITY_HIGH              |
-                        LL_DMA_MODE_NORMAL                |
-                        LL_DMA_PERIPH_NOINCREMENT         |
-                        LL_DMA_MEMORY_INCREMENT           |
-                        LL_DMA_PDATAALIGN_BYTE            |
+  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_7, 
+                        LL_DMA_DIRECTION_MEMORY_TO_PERIPH | 
+                        LL_DMA_PRIORITY_HIGH              | 
+                        LL_DMA_MODE_NORMAL                | 
+                        LL_DMA_PERIPH_NOINCREMENT         | 
+                        LL_DMA_MEMORY_INCREMENT           | 
+                        LL_DMA_PDATAALIGN_BYTE            | 
                         LL_DMA_MDATAALIGN_BYTE);
   LL_DMA_ConfigAddresses(DMA2, LL_DMA_STREAM_7,
                          (uint32_t)aUSART1TxBuffer,
@@ -177,13 +177,13 @@ void Configure_USART1_DMA(void)
 
   /* (4) Configure the DMA functional parameters for reception */
   LL_DMA_SetChannelSelection(DMA2, LL_DMA_STREAM_5, LL_DMA_CHANNEL_4);
-  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_5,
-                        LL_DMA_DIRECTION_PERIPH_TO_MEMORY |
-                        LL_DMA_PRIORITY_HIGH              |
-                        LL_DMA_MODE_NORMAL                |
-                        LL_DMA_PERIPH_NOINCREMENT         |
-                        LL_DMA_MEMORY_INCREMENT           |
-                        LL_DMA_PDATAALIGN_BYTE            |
+  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_5, 
+                        LL_DMA_DIRECTION_PERIPH_TO_MEMORY | 
+                        LL_DMA_PRIORITY_HIGH              | 
+                        LL_DMA_MODE_NORMAL                | 
+                        LL_DMA_PERIPH_NOINCREMENT         | 
+                        LL_DMA_MEMORY_INCREMENT           | 
+                        LL_DMA_PDATAALIGN_BYTE            | 
                         LL_DMA_MDATAALIGN_BYTE);
   LL_DMA_ConfigAddresses(DMA2, LL_DMA_STREAM_5,
                          LL_USART_DMA_GetRegAddr(USART1),
@@ -224,13 +224,13 @@ void Configure_SPI1_DMA(void)
 
   /* (3) Configure the DMA2 functional parameters for transmission */
   LL_DMA_SetChannelSelection(DMA2, LL_DMA_STREAM_3, LL_DMA_CHANNEL_3);
-  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_3,
-                        LL_DMA_DIRECTION_MEMORY_TO_PERIPH |
-                        LL_DMA_PRIORITY_HIGH              |
-                        LL_DMA_MODE_NORMAL                |
-                        LL_DMA_PERIPH_NOINCREMENT         |
-                        LL_DMA_MEMORY_INCREMENT           |
-                        LL_DMA_PDATAALIGN_BYTE            |
+  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_3, 
+                        LL_DMA_DIRECTION_MEMORY_TO_PERIPH | 
+                        LL_DMA_PRIORITY_HIGH              | 
+                        LL_DMA_MODE_NORMAL                | 
+                        LL_DMA_PERIPH_NOINCREMENT         | 
+                        LL_DMA_MEMORY_INCREMENT           | 
+                        LL_DMA_PDATAALIGN_BYTE            | 
                         LL_DMA_MDATAALIGN_BYTE);
   LL_DMA_ConfigAddresses(DMA2, LL_DMA_STREAM_3,
                          (uint32_t)aSPI1TxBuffer,
@@ -241,13 +241,13 @@ void Configure_SPI1_DMA(void)
 
   /* (4) Configure the DMA functional parameters for reception */
   LL_DMA_SetChannelSelection(DMA2, LL_DMA_STREAM_2, LL_DMA_CHANNEL_3);
-  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_2,
-                        LL_DMA_DIRECTION_PERIPH_TO_MEMORY |
-                        LL_DMA_PRIORITY_HIGH              |
-                        LL_DMA_MODE_NORMAL                |
-                        LL_DMA_PERIPH_NOINCREMENT         |
-                        LL_DMA_MEMORY_INCREMENT           |
-                        LL_DMA_PDATAALIGN_BYTE            |
+  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_2, 
+                        LL_DMA_DIRECTION_PERIPH_TO_MEMORY | 
+                        LL_DMA_PRIORITY_HIGH              | 
+                        LL_DMA_MODE_NORMAL                | 
+                        LL_DMA_PERIPH_NOINCREMENT         | 
+                        LL_DMA_MEMORY_INCREMENT           | 
+                        LL_DMA_PDATAALIGN_BYTE            | 
                         LL_DMA_MDATAALIGN_BYTE);
   LL_DMA_ConfigAddresses(DMA2, LL_DMA_STREAM_2,
                          (uint32_t)&(SPI1->DR),
@@ -327,10 +327,10 @@ void Configure_USART1(void)
   /* Frequency available for USART peripheral can also be calculated through LL RCC macro */
   /* Ex :
       Periphclk = LL_RCC_GetUSARTClockFreq(Instance);
-
+  
       In this example, Peripheral Clock is expected to be equal to 10000000 Hz => equal to SystemCoreClock
   */
-  LL_USART_SetBaudRate(USART1, SystemCoreClock, LL_USART_OVERSAMPLING_8, 115200);
+  LL_USART_SetBaudRate(USART1, SystemCoreClock, LL_USART_OVERSAMPLING_8, 115200); 
 
   /* Configure peripheral in USART mode for synchronous communication (CLK signal delivered by USRAT peripheral)
   *  Call of this function is equivalent to following function call sequence :
@@ -387,11 +387,11 @@ void Configure_SPI1(void)
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SPI1);
 
   /* (3) Configure SPI1 functional parameters ********************************/
-  LL_SPI_SetBaudRatePrescaler(SPI1, LL_SPI_BAUDRATEPRESCALER_DIV256);
-  LL_SPI_SetTransferDirection(SPI1,LL_SPI_FULL_DUPLEX);
+  LL_SPI_SetBaudRatePrescaler(SPI1, LL_SPI_BAUDRATEPRESCALER_DIV256);  
+  LL_SPI_SetTransferDirection(SPI1,LL_SPI_FULL_DUPLEX);  
   LL_SPI_SetClockPhase(SPI1, LL_SPI_PHASE_2EDGE);
   LL_SPI_SetClockPolarity(SPI1, LL_SPI_POLARITY_LOW);
-  LL_SPI_SetTransferBitOrder(SPI1, LL_SPI_LSB_FIRST);
+  LL_SPI_SetTransferBitOrder(SPI1, LL_SPI_LSB_FIRST);  
   LL_SPI_SetDataWidth(SPI1, LL_SPI_DATAWIDTH_8BIT);
   LL_SPI_SetNSSMode(SPI1, LL_SPI_NSS_SOFT);
   LL_SPI_SetMode(SPI1, LL_SPI_MODE_SLAVE);
@@ -430,7 +430,7 @@ void StartTransfers(void)
 
   /* Enable DMA TX Interrupt */
   LL_USART_EnableDMAReq_TX(USART1);
-
+  
   /* Enable DMA Channel Rx */
   LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_5);
 
@@ -494,21 +494,21 @@ void LED_Blinking(uint32_t Period)
   /* Toggle LED2 in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -521,13 +521,13 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);  
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
 }
 
 /**
   * @brief  Wait for User push-button press to start transfer.
-  * @param  None
+  * @param  None 
   * @retval None
   */
   /*  */
@@ -544,7 +544,7 @@ void WaitForUserButtonPress(void)
 
 /**
   * @brief  Wait end of transfer and check if received Data are well.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void WaitAndCheckEndOfTransfer(void)
@@ -581,13 +581,13 @@ void WaitAndCheckEndOfTransfer(void)
   if(Buffercmp8((uint8_t*)aUSART1TxBuffer, (uint8_t*)aSPI1RxBuffer, ubUSART1NbDataToTransmit))
   {
     /* Processing Error */
-    LED_Blinking(LED_BLINK_ERROR);
+    LED_Blinking(LED_BLINK_ERROR);    
   }
   /* 6 - Compare received data to transmitted one (SPI1 => USART1) */
   else if(Buffercmp8((uint8_t*)aSPI1TxBuffer, (uint8_t*)aUSART1RxBuffer, ubSPI1NbDataToTransmit))
   {
     /* Processing Error */
-    LED_Blinking(LED_BLINK_ERROR);
+    LED_Blinking(LED_BLINK_ERROR);    
   }
   else
   {

@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/RTC/RTC_TimeStamp/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -175,9 +175,9 @@ void TAMP_STAMP_IRQHandler(void)
     /* Get the pending status of the TIMESTAMP Interrupt */
     if(LL_RTC_IsActiveFlag_TS(RTC) != 0)
     {
-      /* TIMESTAMP callback */
+      /* TIMESTAMP callback */ 
       TimeStampEvent_Callback();
-
+      
       /* Clear the TIMESTAMP interrupt pending bit */
       LL_RTC_ClearFlag_TS(RTC);
     }

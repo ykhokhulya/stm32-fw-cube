@@ -47,7 +47,7 @@
  /** @defgroup Master
   * @{
   */
-
+ 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -71,14 +71,14 @@
 void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
-
+  
   /*##-1- Enable GPIO Clocks #################################################*/
   /* Enable GPIO TX/RX clock */
   SPIx_SCK_GPIO_CLK_ENABLE();
   SPIx_MISO_GPIO_CLK_ENABLE();
   SPIx_MOSI_GPIO_CLK_ENABLE();
 
-  /*##-2- Configure peripheral GPIO ##########################################*/
+  /*##-2- Configure peripheral GPIO ##########################################*/  
   /* SPI SCK GPIO pin configuration  */
   GPIO_InitStruct.Pin       = SPIx_SCK_PIN;
   GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
@@ -86,16 +86,16 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
   GPIO_InitStruct.Speed     = GPIO_SPEED_FAST;
   GPIO_InitStruct.Alternate = SPIx_SCK_AF;
   HAL_GPIO_Init(SPIx_SCK_GPIO_PORT, &GPIO_InitStruct);
-
+    
   /* SPI MISO GPIO pin configuration  */
   GPIO_InitStruct.Pull      = GPIO_PULLUP;
   GPIO_InitStruct.Pin       = SPIx_MISO_PIN;
   HAL_GPIO_Init(SPIx_MISO_GPIO_PORT, &GPIO_InitStruct);
-
+  
   /* SPI MOSI GPIO pin configuration  */
   GPIO_InitStruct.Pin       = SPIx_MOSI_PIN;
   HAL_GPIO_Init(SPIx_MOSI_GPIO_PORT, &GPIO_InitStruct);
-
+  
   /*##-3- Enable SPI peripheral Clock ########################################*/
   SPIx_CLK_ENABLE();
 

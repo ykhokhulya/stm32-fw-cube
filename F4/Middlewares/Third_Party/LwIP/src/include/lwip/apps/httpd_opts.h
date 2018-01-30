@@ -120,7 +120,7 @@
 #define HTTPD_DEBUG         LWIP_DBG_OFF
 #endif
 
-/** Set this to 1 to use a memp pool for allocating
+/** Set this to 1 to use a memp pool for allocating 
  * struct http_state instead of the heap.
  */
 #if !defined HTTPD_USE_MEM_POOL || defined __DOXYGEN__
@@ -243,8 +243,7 @@
 #define LWIP_HTTPD_KILL_OLD_ON_CONNECTIONS_EXCEEDED 0
 #endif
 
-/** Set this to 1 to send URIs without extension without headers
- * (who uses this at all??) */
+/** Set this to 1 to send URIs without extension without headers */
 #if !defined LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI || defined __DOXYGEN__
 #define LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI 0
 #endif

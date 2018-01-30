@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    HASH/HASH_SHA1_MD5/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -58,7 +58,7 @@
 
 /**
   * @brief  Initializes the HASH MSP.
-  *        This function configures the hardware resources used in this example:
+  *        This function configures the hardware resources used in this example: 
   *           - HASH's clock enable
   * @param  hhash: HASH handle pointer
   * @retval None
@@ -67,7 +67,7 @@ void HAL_HASH_MspInit(HASH_HandleTypeDef *hhash)
 {
   /* Enable HASH clock */
   __HAL_RCC_HASH_CLK_ENABLE();
-
+  
 }
 
 /**

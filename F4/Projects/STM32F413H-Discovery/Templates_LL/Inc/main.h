@@ -72,7 +72,7 @@
 
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE BEGIN    ============== */
 /**
-  * @brief LED3
+  * @brief LED3 
   */
 
 #define LED3_PIN                           LL_GPIO_PIN_5
@@ -80,7 +80,7 @@
 #define LED3_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
 
 /**
-  * @brief LED4
+  * @brief LED4 
   */
 
 #define LED4_PIN                           LL_GPIO_PIN_3
@@ -92,17 +92,17 @@
   */
 #define USER_BUTTON_PIN                         LL_GPIO_PIN_11
 #define USER_BUTTON_GPIO_PORT                   GPIOF
-#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF)
+#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF)   
 #define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_11
 #define USER_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
-#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)
-#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)
+#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)   
+#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)   
 #define USER_BUTTON_SYSCFG_SET_EXTI()           do {                                                                     \
                                                   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                  \
                                                   LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTF, LL_SYSCFG_EXTI_LINE11);  \
                                                 } while(0)
 #define USER_BUTTON_IRQHANDLER                  EXTI15_10_IRQHandler
-
+                                                  
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE END      ============== */
 
 /**
@@ -111,7 +111,7 @@
 #define LED_BLINK_FAST  200
 #define LED_BLINK_SLOW  500
 #define LED_BLINK_ERROR 1000
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

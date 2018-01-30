@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___n_v_i_c__gr.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -115,31 +115,31 @@ $(document).ready(function(){initNavTree('group___n_v_i_c__gr.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Explains how to use interrupts and exceptions and access functions for the Nested Vector Interrupt Controller (NVIC).
+<p>Explains how to use interrupts and exceptions and access functions for the Nested Vector Interrupt Controller (NVIC).  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:ga7e1129cd8a196f4284d41db3e82ad5c8"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___n_v_i_c__gr.html#ga7e1129cd8a196f4284d41db3e82ad5c8">IRQn_Type</a> { <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8ade177d9c70c89e084093024b932a4e30">NonMaskableInt_IRQn</a> = -14,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8ade177d9c70c89e084093024b932a4e30">NonMaskableInt_IRQn</a> = -14, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8ab1a222a34a32f0ef5ac65e714efc1f85">HardFault_IRQn</a> = -13,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8ab1a222a34a32f0ef5ac65e714efc1f85">HardFault_IRQn</a> = -13, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a33ff1cf7098de65d61b6354fee6cd5aa">MemoryManagement_IRQn</a> = -12,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a33ff1cf7098de65d61b6354fee6cd5aa">MemoryManagement_IRQn</a> = -12, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a8693500eff174f16119e96234fee73af">BusFault_IRQn</a> = -11,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a8693500eff174f16119e96234fee73af">BusFault_IRQn</a> = -11, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a6895237c9443601ac832efa635dd8bbf">UsageFault_IRQn</a> = -10,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a6895237c9443601ac832efa635dd8bbf">UsageFault_IRQn</a> = -10, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a4ce820b3cc6cf3a796b41aadc0cf1237">SVCall_IRQn</a> = -5,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a4ce820b3cc6cf3a796b41aadc0cf1237">SVCall_IRQn</a> = -5, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a8e033fcef7aed98a31c60a7de206722c">DebugMonitor_IRQn</a> = -4,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a8e033fcef7aed98a31c60a7de206722c">DebugMonitor_IRQn</a> = -4, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a03c3cc89984928816d81793fc7bce4a2">PendSV_IRQn</a> = -2,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a03c3cc89984928816d81793fc7bce4a2">PendSV_IRQn</a> = -2, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a6dbff8f8543325f3474cbae2446776e7">SysTick_IRQn</a> = -1,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a6dbff8f8543325f3474cbae2446776e7">SysTick_IRQn</a> = -1, 
 <br/>
-&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8aa62e040960b4beb6cba107e4703c12d2">WWDG_STM_IRQn</a> = 0,
+&#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8aa62e040960b4beb6cba107e4703c12d2">WWDG_STM_IRQn</a> = 0, 
 <br/>
 &#160;&#160;<a class="el" href="group___n_v_i_c__gr.html#gga7e1129cd8a196f4284d41db3e82ad5c8a853e0f318108110e0527f29733d11f86">PVD_STM_IRQn</a> = 1
 <br/>
@@ -503,7 +503,7 @@ Code Example 2</h1>
 </div><div class="memdoc">
 <p>The core exception enumeration names for IRQn values are defined in the file <b>device.h</b>. </p>
 <pre class="fragment">Negative IRQn values represent processor core exceptions (internal interrupts).
-Positive IRQn values represent device-specific exceptions (external interrupts).
+Positive IRQn values represent device-specific exceptions (external interrupts). 
 The first device-specific interrupt has the IRQn value 0.
 </pre><p>The table below describes the core exception names and their availability in various Cortex-M cores. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
@@ -1052,7 +1052,7 @@ The first device-specific interrupt has the IRQn value 0.
     <li class="footer">Generated on Tue Oct 27 2015 14:35:21 for CMSIS-CORE by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

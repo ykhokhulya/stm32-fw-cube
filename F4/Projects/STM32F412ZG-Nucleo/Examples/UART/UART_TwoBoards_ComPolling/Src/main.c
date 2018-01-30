@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_TwoBoards_ComPolling/Src/main.c
+  * @file    UART/UART_TwoBoards_ComPolling/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use UART HAL API to transmit
   *          and receive a data buffer with a communication process based on
-  *          polling transfer.
+  *          polling transfer. 
   *          The communication is done using 2 Boards.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup UART_TwoBoards_ComPolling
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -79,10 +79,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization
@@ -91,7 +91,7 @@ int main(void)
 
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
@@ -118,53 +118,53 @@ int main(void)
   if(HAL_UART_DeInit(&UartHandle) != HAL_OK)
   {
     Error_Handler();
-  }
+  }  
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
     Error_Handler();
   }
-
+  
 #ifdef TRANSMITTER_BOARD
 
   /* Configure User push-button in Interrupt mode */
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
-
+  
   /* Wait for User push-button press before starting the Communication.
      In the meantime, LED_GREEN is blinking */
   while(UserButtonStatus == 0)
   {
       /* Toggle LED_GREEN*/
-      BSP_LED_Toggle(LED_GREEN);
+      BSP_LED_Toggle(LED_GREEN); 
       HAL_Delay(100);
   }
-
-  BSP_LED_Off(LED_GREEN);
+  
+  BSP_LED_Off(LED_GREEN); 
   /* The board sends the message and expects to receive it back */
-
-  /*##-2- Start the transmission process #####################################*/
-  /* While the UART in reception process, user can transmit data through
+  
+  /*##-2- Start the transmission process #####################################*/  
+  /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   if(HAL_UART_Transmit(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE, 5000)!= HAL_OK)
   {
-    Error_Handler();
+    Error_Handler();   
   }
-
+  
 
   /* Turn LED_BLUE on: Transfer in transmission process is correct */
-  BSP_LED_On(LED_BLUE);
+  BSP_LED_On(LED_BLUE); 
 
-
-  /*##-3- Put UART peripheral in reception process ###########################*/
+  
+  /*##-3- Put UART peripheral in reception process ###########################*/  
   if(HAL_UART_Receive(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE, 5000) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler();  
   }
-
+   
   /* Turn LED_BLUE off: Transfer in reception process is correct */
-  BSP_LED_Off(LED_BLUE);
-
+  BSP_LED_Off(LED_BLUE); 
+ 
 #else
-
+  
   /* The board receives the message and sends it back */
 
   /*##-2- Put UART peripheral in reception process ###########################*/
@@ -172,32 +172,32 @@ int main(void)
   {
     Error_Handler();
   }
-
+ 
   /* Turn LED_BLUE on: Transfer in reception process is correct */
   BSP_LED_On(LED_BLUE);
-
-  /*##-3- Start the transmission process #####################################*/
-  /* While the UART in reception process, user can transmit data through
+  
+  /*##-3- Start the transmission process #####################################*/  
+  /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   if(HAL_UART_Transmit(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE, 5000)!= HAL_OK)
   {
     Error_Handler();
   }
-
+  
   /* Turn LED_BLUE off: Transfer in transmission process is correct */
-  BSP_LED_Off(LED_BLUE);
-
+  BSP_LED_Off(LED_BLUE); 
+ 
 #endif /* TRANSMITTER_BOARD */
-
+  
   /*##-4- Compare the sent and received buffers ##############################*/
   if(Buffercmp((uint8_t*)aTxBuffer,(uint8_t*)aRxBuffer,RXBUFFERSIZE))
   {
     Error_Handler();
   }
-
+   
   /* Turn on LED_GREEN if test passes then enter infinite loop */
-  BSP_LED_On(LED_GREEN);
-
+  BSP_LED_On(LED_GREEN); 
+ 
   /* Infinite loop */
   while (1)
   {
@@ -206,7 +206,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -234,8 +234,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -250,23 +250,23 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    while(1) { ; } 
   }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    while(1) { ; }  
   }
 }
 
@@ -291,7 +291,7 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == USER_BUTTON_PIN)
-  {
+  {  
     UserButtonStatus = 1;
   }
 }
@@ -342,7 +342,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

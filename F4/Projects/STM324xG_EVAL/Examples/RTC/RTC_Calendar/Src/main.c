@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_Calendar/Src/main.c
+  * @file    RTC/RTC_Calendar/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx RTC HAL API to configure
+  * @brief   This sample code shows how to use STM32F4xx RTC HAL API to configure 
   *          Time and Date.
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup RTC_Calendar
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -69,7 +69,7 @@ static void RTC_CalendarShow(uint8_t* showtime, uint8_t* showdate);
   * @retval None
   */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -77,7 +77,7 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
@@ -85,8 +85,8 @@ int main(void)
   BSP_LED_Init(LED4);
 
   /* Configure the system clock to 168 MHz */
-  SystemClock_Config();
-
+  SystemClock_Config();  
+  
   /* Turn on LED1 */
   BSP_LED_On(LED1);
 
@@ -101,7 +101,7 @@ int main(void)
       - Synch Prediv   = Value according to source clock
       - OutPut         = Output Disable
       - OutPutPolarity = High Polarity
-      - OutPutType     = Open Drain */
+      - OutPutType     = Open Drain */ 
   RtcHandle.Init.HourFormat = RTC_HOURFORMAT_24;
   RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
   RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
@@ -112,19 +112,19 @@ int main(void)
   if(HAL_RTC_Init(&RtcHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-2- Check if Data stored in BackUp register0: No Need to reconfigure RTC#*/
   /* Read the Back Up Register 0 Data */
   if(HAL_RTCEx_BKUPRead(&RtcHandle, RTC_BKP_DR0) != 0x32F2)
-  {
+  {  
     /* Configure RTC Calendar */
     RTC_CalendarConfig();
   }
   else
   {
-    /* Check if the Power On Reset flag is set */
+    /* Check if the Power On Reset flag is set */  
     if(__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET)
     {
       /* Turn on LED2: Power on reset occurred */
@@ -140,7 +140,7 @@ int main(void)
     __HAL_RCC_CLEAR_RESET_FLAGS();
   }
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
   {
     /*##-3- Display the updated Time and Date ################################*/
@@ -150,7 +150,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -176,8 +176,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -194,14 +194,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
@@ -238,20 +238,20 @@ static void RTC_CalendarConfig(void)
 {
   RTC_DateTypeDef sdatestructure;
   RTC_TimeTypeDef stimestructure;
-
+    
   /*##-1- Configure the Date #################################################*/
   /* Set Date: Tuesday February 18th 2014 */
   sdatestructure.Year = 0x14;
   sdatestructure.Month = RTC_MONTH_FEBRUARY;
   sdatestructure.Date = 0x18;
   sdatestructure.WeekDay = RTC_WEEKDAY_TUESDAY;
-
+  
   if(HAL_RTC_SetDate(&RtcHandle,&sdatestructure,RTC_FORMAT_BCD) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
-  }
-
+    Error_Handler(); 
+  } 
+  
   /*##-2- Configure the Time #################################################*/
   /* Set Time: 02:00:00 */
   stimestructure.Hours = 0x02;
@@ -260,15 +260,15 @@ static void RTC_CalendarConfig(void)
   stimestructure.TimeFormat = RTC_HOURFORMAT12_AM;
   stimestructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   stimestructure.StoreOperation = RTC_STOREOPERATION_RESET;
-
+  
   if(HAL_RTC_SetTime(&RtcHandle,&stimestructure,RTC_FORMAT_BCD) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-3- Writes a data in a RTC Backup data Register0 #######################*/
-  HAL_RTCEx_BKUPWrite(&RtcHandle,RTC_BKP_DR0,0x32F2);
+  HAL_RTCEx_BKUPWrite(&RtcHandle,RTC_BKP_DR0,0x32F2);  
 }
 
 /**
@@ -281,7 +281,7 @@ static void RTC_CalendarShow(uint8_t* showtime, uint8_t* showdate)
 {
   RTC_DateTypeDef sdatestructureget;
   RTC_TimeTypeDef stimestructureget;
-
+  
   /* Get the RTC current Time */
   HAL_RTC_GetTime(&RtcHandle, &stimestructureget, RTC_FORMAT_BIN);
   /* Get the RTC current Date */
@@ -290,7 +290,7 @@ static void RTC_CalendarShow(uint8_t* showtime, uint8_t* showdate)
   sprintf((char*)showtime,"%02d:%02d:%02d",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
   /* Display date Format : mm-dd-yy */
   sprintf((char*)showdate,"%02d-%02d-%02d",sdatestructureget.Month, sdatestructureget.Date, 2000 + sdatestructureget.Year);
-}
+} 
 
 #ifdef  USE_FULL_ASSERT
 /**
@@ -301,7 +301,7 @@ static void RTC_CalendarShow(uint8_t* showtime, uint8_t* showdate)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -314,10 +314,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -99,10 +99,10 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef * hhcd)
   else if (hhcd->Instance == USB_OTG_HS)
   {
 #ifdef USE_USB_HS_IN_FS
-
+    
     /* Initializes and configures the IO */
     BSP_IO_Init();
-
+    
     /* Configure POWER_SWITCH IO pin */
     BSP_IO_ConfigPin(OTG_FS2_POWER_SWITCH_PIN, IO_MODE_OUTPUT);
 

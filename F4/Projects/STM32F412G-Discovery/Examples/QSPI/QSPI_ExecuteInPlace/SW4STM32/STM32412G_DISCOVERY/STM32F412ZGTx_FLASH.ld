@@ -84,7 +84,7 @@ SECTIONS
   } >FLASH
 _qspi_init_base = LOADADDR(.qspi);
   _qspi_init_length = SIZEOF(.qspi);
-
+  
    .qspi :
   {
     . = ALIGN(4);
@@ -93,7 +93,7 @@ _qspi_init_base = LOADADDR(.qspi);
     *(.qspi*)        /* .qspi* sections */
     . = ALIGN(4);
     _qspi_end = .;         /* define a global symbols at end of qspi */
-
+    
   } >QSPI AT> FLASH
   .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
   .ARM : {
@@ -127,7 +127,7 @@ _qspi_init_base = LOADADDR(.qspi);
   _sidata = LOADADDR(.data);
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
-  .data :
+  .data : 
   {
     . = ALIGN(4);
     _sdata = .;        /* create a global symbol at data start */
@@ -138,7 +138,7 @@ _qspi_init_base = LOADADDR(.qspi);
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
-
+  
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -166,7 +166,7 @@ _qspi_init_base = LOADADDR(.qspi);
     . = ALIGN(8);
   } >RAM
 
-
+  
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

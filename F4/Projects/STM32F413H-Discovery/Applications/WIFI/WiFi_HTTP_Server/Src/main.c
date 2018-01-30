@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -47,8 +47,8 @@
 
 /* Private defines -----------------------------------------------------------*/
 /* Update SSID and PASSWORD with own Access point settings */
-#define SSID     "MySSID"
-#define PASSWORD "MyPassword"
+#define SSID     "MySSID" 
+#define PASSWORD "MyPassword" 
 
 #define LCD_USE
 
@@ -63,12 +63,12 @@ typedef enum
 } WebServerState_t;
 
 /* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/  
 static   uint8_t http[1024];
 static   uint8_t resp[1024];
 uint16_t respLen;
-uint8_t  IP_Addr[4];
-uint8_t  MAC_Addr[6];
+uint8_t  IP_Addr[4]; 
+uint8_t  MAC_Addr[6]; 
 int32_t Socket = -1;
 static   WebServerState_t  State = WS_ERROR;
 static ADC_HandleTypeDef    AdcHandle;
@@ -91,52 +91,52 @@ int main(void)
 {
 #if defined (LCD_USE)
   uint8_t modulestr[10] = {0};
-#endif /* LCD_USE */
+#endif /* LCD_USE */ 
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
+  
   /* Configure the system clock */
   SystemClock_Config();
-
+  
   /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /*Initialize Temperature sensor */
   TEMP_SENSOR_Init();
-
+  
   /* WIFI Web Server demonstration */
 #if defined (LCD_USE)
   BSP_LCD_InitEx(LCD_ORIENTATION_LANDSCAPE_ROT180);
   BSP_LCD_DisplayOn();
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   BSP_LCD_Clear(LCD_COLOR_WHITE);
   BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
 
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), (BSP_LCD_GetYSize() -200));
 
   BSP_LCD_SetFont(&Font16);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
   BSP_LCD_DisplayStringAt(10, 10, (uint8_t *)"WIFI Web", CENTER_MODE );
-  BSP_LCD_DisplayStringAt(10, 23, (uint8_t *)"Server demonstration", CENTER_MODE );
+  BSP_LCD_DisplayStringAt(10, 23, (uint8_t *)"Server demonstration", CENTER_MODE );   
 #endif /* LCD_USE */
-
+ 
   /*Initialize and use WIFI module */
   if(WIFI_Init() ==  WIFI_STATUS_OK)
   {
 #if defined (LCD_USE)
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
     BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"ES-WIFI Initialized.");
-#endif /* LCD_USE */
-
+#endif /* LCD_USE */     
+    
       if(WIFI_GetMAC_Address(MAC_Addr) == WIFI_STATUS_OK)
-      {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+      {       
+#if defined (LCD_USE)    
+      BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
       BSP_LCD_DisplayStringAtLine(6, (uint8_t *)"es-wifi MAC Address:");
       sprintf((char*)modulestr,"%X:%X:%X:%X:%X:%X.", MAC_Addr[0],
               MAC_Addr[1],
@@ -144,48 +144,48 @@ int main(void)
               MAC_Addr[3],
               MAC_Addr[4],
               MAC_Addr[5]);
-
+      
       BSP_LCD_DisplayStringAtLine(7, (uint8_t *) modulestr);
 #endif /* LCD_USE */
       }
       else
       {
-#if defined (LCD_USE)
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+        BSP_LCD_SetTextColor(LCD_COLOR_RED); 
         BSP_LCD_DisplayStringAtLine(6, (uint8_t *)"CANNOT get MAC address");
-#endif /* LCD_USE */
+#endif /* LCD_USE */  
         BSP_LED_On(LED4);
       }
-
+    
    if( WIFI_Connect(SSID, PASSWORD, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK)
     {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
       BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"es-wifi connected");
-#endif /* LCD_USE */
-
+#endif /* LCD_USE */ 
+      
       if(WIFI_GetIP_Address(IP_Addr) == WIFI_STATUS_OK)
       {
 #if defined (LCD_USE)
-        BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+        BSP_LCD_SetTextColor(LCD_COLOR_BLACK);         
         BSP_LCD_DisplayStringAtLine(10, (uint8_t *)"es-wifi IP Address :");
         sprintf((char*)modulestr,"%d.%d.%d.%d",  IP_Addr[0],
                 IP_Addr[1],
                 IP_Addr[2],
-                IP_Addr[3]);
-
+                IP_Addr[3]); 
+        
         BSP_LCD_DisplayStringAtLine(11, (uint8_t *) modulestr);
-        BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+        BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
         BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"Start HTTP Server... ");
         BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"Wait for connection...  ");
 #endif /* LCD_USE */
         State = WS_IDLE;
-
+        
       }
       else
-      {
-#if defined (LCD_USE)
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+      {    
+#if defined (LCD_USE)  
+        BSP_LCD_SetTextColor(LCD_COLOR_RED); 
         BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"es-wifi CANNOT get IP address");
 #endif /* LCD_USE */
         BSP_LED_On(LED4);
@@ -193,23 +193,23 @@ int main(void)
     }
     else
     {
-
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+      
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_RED); 
       BSP_LCD_DisplayStringAtLine(11, (uint8_t *)"es-wifi NOT connected\n");
-#endif /* LCD_USE */
+#endif /* LCD_USE */ 
       BSP_LED_On(LED4);
     }
   }
   else
-  {
-#if defined (LCD_USE)
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+  {   
+#if defined (LCD_USE)  
+    BSP_LCD_SetTextColor(LCD_COLOR_RED); 
     BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"WIFI cannot be initialized.\n");
 #endif /* LCD_USE */
     BSP_LED_On(LED4);
   }
-
+    
   while(1)
   {
       WebServerProcess ();
@@ -224,16 +224,16 @@ int main(void)
 static void WebServerProcess(void)
 {
   uint8_t LedState = 0, temp;
-
+  
   switch(State)
   {
   case WS_IDLE:
     Socket = 0;
     WIFI_StartServer(Socket, WIFI_TCP_PROTOCOL, "", PORT);
-
+    
     if(Socket != -1)
     {
-#if defined (LCD_USE)
+#if defined (LCD_USE) 
       BSP_LCD_ClearStringLine(14);
       BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"HTTP Server Started");
 #endif /* LCD_USE */
@@ -241,18 +241,18 @@ static void WebServerProcess(void)
     }
     else
     {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_RED); 
       BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"ERROR : Connection cannot be established");
 #endif /* LCD_USE */
       State = WS_ERROR;
-    }
+    }    
     break;
-
+    
   case WS_CONNECTED:
-
+    
     WIFI_ReceiveData(Socket, resp, 1200, &respLen);
-
+    
     if( respLen > 0)
     {
       if(strstr((char *)resp, "GET")) /* GET: put web page */
@@ -260,8 +260,8 @@ static void WebServerProcess(void)
         temp = TEMP_SENSOR_GetValue();
         if(SendWebPage(LedState, temp) != WIFI_STATUS_OK)
         {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_RED); 
       BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"ERROR : Cannot send web page");
 #endif /* LCD_USE */
           State = WS_ERROR;
@@ -270,7 +270,7 @@ static void WebServerProcess(void)
       else if(strstr((char *)resp, "POST"))/* POST: received info */
       {
           if(strstr((char *)resp, "radio"))
-          {
+          {          
             if(strstr((char *)resp, "radio=0"))
             {
               LedState = 0;
@@ -280,13 +280,13 @@ static void WebServerProcess(void)
             {
               LedState = 1;
               BSP_LED_On(LED3);
-            }
-
+            } 
+            
             temp = TEMP_SENSOR_GetValue();
             if(SendWebPage(LedState, temp) != WIFI_STATUS_OK)
             {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_RED); 
       BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"ERROR : Cannot send web page");
 #endif /* LCD_USE */
               State = WS_ERROR;
@@ -300,10 +300,10 @@ static void WebServerProcess(void)
     }
     else
     {
-      State = WS_ERROR;
+      State = WS_ERROR;  
     }
     break;
-  case WS_ERROR:
+  case WS_ERROR:   
   default:
     break;
   }
@@ -319,7 +319,7 @@ static WIFI_Status_t SendWebPage(uint8_t ledIsOn, uint8_t temperature)
   uint8_t  temp[50];
   uint16_t SentDataLength;
   WIFI_Status_t ret;
-
+  
   /* construct web page content */
   strcpy((char *)http, (char *)"HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nPragma: no-cache\r\n\r\n");
   strcat((char *)http, (char *)"<html>\r\n<body>\r\n");
@@ -330,13 +330,13 @@ static WIFI_Status_t SendWebPage(uint8_t ledIsOn, uint8_t temperature)
   sprintf((char *)temp, "%d", temperature);
   strcat((char *)http, (char *)temp);
   strcat((char *)http, (char *)"\"> <sup>O</sup>C");
-
-  if (ledIsOn)
+  
+  if (ledIsOn) 
   {
     strcat((char *)http, (char *)"<p><input type=\"radio\" name=\"radio\" value=\"0\" >LED off");
     strcat((char *)http, (char *)"<br><input type=\"radio\" name=\"radio\" value=\"1\" checked>LED on");
-  }
-  else
+  } 
+  else 
   {
     strcat((char *)http, (char *)"<p><input type=\"radio\" name=\"radio\" value=\"0\" checked>LED off");
     strcat((char *)http, (char *)"<br><input type=\"radio\" name=\"radio\" value=\"1\" >LED on");
@@ -344,14 +344,14 @@ static WIFI_Status_t SendWebPage(uint8_t ledIsOn, uint8_t temperature)
 
   strcat((char *)http, (char *)"</strong><p><input type=\"submit\"></form></span>");
   strcat((char *)http, (char *)"</body>\r\n</html>\r\n");
-
-  ret = WIFI_SendData(0, (uint8_t *)http, strlen((char *)http), &SentDataLength);
-
+  
+  ret = WIFI_SendData(0, (uint8_t *)http, strlen((char *)http), &SentDataLength); 
+  
   if((ret == WIFI_STATUS_OK) && (SentDataLength != strlen((char *)http)))
   {
     ret = WIFI_STATUS_ERROR;
   }
-
+    
   return ret;
 }
 
@@ -364,13 +364,13 @@ static WIFI_Status_t SendWebPage(uint8_t ledIsOn, uint8_t temperature)
 static uint32_t TEMP_SENSOR_Init(void)
 {
   ADC_ChannelConfTypeDef sConfig;
-
+  
    /* ADC1 Periph clock enable */
   __HAL_RCC_ADC1_CLK_ENABLE();
-
+  
   /* Configure the ADC peripheral */
   AdcHandle.Instance          = ADC1;
-
+  
   AdcHandle.Init.ClockPrescaler        = ADC_CLOCKPRESCALER_PCLK_DIV4;
   AdcHandle.Init.Resolution            = ADC_RESOLUTION_12B;
   AdcHandle.Init.ScanConvMode          = DISABLE;                       /* Sequencer disabled (ADC conversion on only 1 channel: channel set on rank 1) */
@@ -383,7 +383,7 @@ static uint32_t TEMP_SENSOR_Init(void)
   AdcHandle.Init.NbrOfConversion       = 1;
   AdcHandle.Init.DMAContinuousRequests = DISABLE;
   AdcHandle.Init.EOCSelection          = DISABLE;
-
+  
   if (HAL_ADC_Init(&AdcHandle)== HAL_OK)
   {
     /* Configure ADC Temperature Sensor Channel */
@@ -391,7 +391,7 @@ static uint32_t TEMP_SENSOR_Init(void)
     sConfig.Rank = 1;
     sConfig.SamplingTime = ADC_SAMPLETIME_56CYCLES;
     sConfig.Offset = 0;
-
+    
     if (HAL_ADC_ConfigChannel(&AdcHandle, &sConfig) == HAL_OK)
     {
       return 0;
@@ -406,14 +406,14 @@ static uint32_t TEMP_SENSOR_Init(void)
   * @retval JunctionTemp level(0..0xFFF) / 0xFFFFFFFF : Error
   */
 static uint32_t TEMP_SENSOR_GetValue(void)
-{
-
+{   
+ 
   if(HAL_ADC_Start(&AdcHandle) == HAL_OK)
   {
     if(HAL_ADC_PollForConversion(&AdcHandle, 1000)== HAL_OK)
     {
       return ((((HAL_ADC_GetValue(&AdcHandle) * VREF)/MAX_CONVERTED_VALUE) - VSENS_AT_AMBIENT_TEMP) * 10 / AVG_SLOPE) + AMBIENT_TEMP;
-    }
+    } 
   }
   return  0xFFFFFFFF;
 }

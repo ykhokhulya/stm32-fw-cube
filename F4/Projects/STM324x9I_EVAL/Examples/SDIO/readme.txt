@@ -1,9 +1,9 @@
 /**
   @page SDIO_EXAMPLES SDIO Example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    SDIO/readme.txt
+  * @file    SDIO/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of SDIO example.
   ******************************************************************************
@@ -42,7 +42,7 @@
     - /Projects/STM324x9I_EVAL/Applications/Display/LTDC_AnimatedPictureFromSDCard
     - /Projects/STM324x9I_EVAL/Applications/Display/LTDC_PicturesFromSDCard
     - /Projects/STM324x9I_EVAL/Applications/USB_Device/MSC_Standalone
-
+    
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-
+ 

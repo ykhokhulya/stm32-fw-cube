@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -48,8 +48,8 @@
 #include "videoplayer_res.c"
 #include "k_modules_res.h"
 #include "k_storage.h"
-#include "k_rtc.h"
-#include "k_mem.h"
+#include "k_rtc.h"    
+#include "k_mem.h"    
 #include "../Modules/filebrowser/filebrowser_app.h"
 
 /** @addtogroup VIDEO_PLAYER_MODULE
@@ -71,7 +71,7 @@ typedef union
   struct
   {
     uint32_t repeat         : 2;
-    uint32_t pause          : 2;
+    uint32_t pause          : 2;    
     uint32_t reserved       : 28;
   }b;
 }
@@ -144,11 +144,11 @@ static void _ResumePlay(void);
 /* _aDialogCreate */
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { WINDOW_CreateIndirect,   "Video Player", ID_FRAMEWIN_INFO,     0,   0,   320, 215, 0, 0x64, 0 },
-  { LISTVIEW_CreateIndirect, "Listview",     ID_VIDEO_LIST,        217, 05, 100, 130, 0, 0x0,  0 },
+  { LISTVIEW_CreateIndirect, "Listview",     ID_VIDEO_LIST,        217, 05, 100, 130, 0, 0x0,  0 },   
   { SLIDER_CreateIndirect,   "Slider",      ID_PROGRESS_SLIDER,   9, 139, 170, 20,  0, 0x0,  0 },
 };
 
-static WM_HWIN VIDEOPLAYER_hWin, hFrame;
+static WM_HWIN VIDEOPLAYER_hWin, hFrame; 
 static char const                *apDrives[2] = {"0:", "1:"};
 static const char                acMask_video[] = ".video";
 static const char                acMask_dir[] = ".dir";
@@ -174,10 +174,10 @@ static VideoSettingsTypeDef       PlayerSettings;
   * @retval None
   */
 static void _OnPaint_repeat(uint32_t repeat_status) {
-
+  
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+    
   if(PlayerSettings.b.repeat == REPEAT_NONE)
   {
     GUI_DrawBitmap(&bmrepeat_off, 0, 0);
@@ -204,10 +204,10 @@ static void _OnPaint_play(BUTTON_Handle hObj) {
 
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   if((VideoPlayer_State == VIDEO_IDLE) || (VideoPlayer_State == VIDEO_PAUSE))
   {
-
+    
     if(Index)
     {
       GUI_DrawBitmap(&bmplay_pressed, 0, 0);
@@ -240,7 +240,7 @@ static void _OnPaint_stop(BUTTON_Handle hObj) {
 
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
 
   if(Index)
@@ -263,7 +263,7 @@ static void _OnPaint_previous(BUTTON_Handle hObj) {
 
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
 
   if(Index)
@@ -286,7 +286,7 @@ static void _OnPaint_next(BUTTON_Handle hObj) {
 
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
 
   if(Index)
@@ -309,7 +309,7 @@ static void _OnPaint_add(BUTTON_Handle hObj) {
 
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
 
   if(Index)
@@ -332,7 +332,7 @@ static void _OnPaint_open(BUTTON_Handle hObj) {
 
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
 
   if(Index)
@@ -355,7 +355,7 @@ static void _OnPaint_close(BUTTON_Handle hObj) {
 
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
 
   if(Index)
@@ -367,7 +367,7 @@ static void _OnPaint_close(BUTTON_Handle hObj) {
     GUI_DrawBitmap(&bmclose_not_pressed, 0, 0);
   }
 }
-
+  
 /**
   * @brief  callback for play button
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
@@ -482,7 +482,7 @@ static void _cbButton_open(WM_MESSAGE * pMsg) {
       break;
     default:
       /* The original callback */
-      BUTTON_Callback(pMsg);
+      BUTTON_Callback(pMsg); 
       break;
   }
 }
@@ -509,7 +509,7 @@ static void _cbButton_close(WM_MESSAGE * pMsg) {
   * @param  p: Handle to file structure
   * @param  ppData: pointer to data buffer to be read
   * @param  NumBytesReq: number of bytes to be read
-  * @param  Off: offset in the file
+  * @param  Off: offset in the file    
   * @retval number of read bytes
   */
 static int _GetData(void * p, const U8 ** ppData, unsigned NumBytesReq, U32 Off)
@@ -518,15 +518,15 @@ static int _GetData(void * p, const U8 ** ppData, unsigned NumBytesReq, U32 Off)
   FIL * phFile;
 
   phFile = (FIL *)p;
-
+  
   /* Set file pointer to the required position */
   f_lseek(phFile, Off);
-
+  
   /* Read data into buffer */
   f_read(phFile, (U8 *)*ppData, NumBytesReq, &NumBytesRead);
-
+   
   /* Return number of available bytes */
-  return NumBytesRead;
+  return NumBytesRead;  
 }
 
 /**
@@ -537,15 +537,15 @@ static int _GetData(void * p, const U8 ** ppData, unsigned NumBytesReq, U32 Off)
   * @param  CurrentFrame: current playing frame
   * @retval None
   */
-void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame)
+void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame) 
 {
   long progress;
-  WM_HWIN hItem;
-
+  WM_HWIN hItem;  
+  
   switch (Notification) {
   case GUI_MOVIE_NOTIFICATION_PREDRAW:
     GUI_MULTIBUF_Begin();
-
+    
     break;
   case GUI_MOVIE_NOTIFICATION_POSTDRAW:
     GUI_MULTIBUF_End();
@@ -554,11 +554,11 @@ void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame)
     SLIDER_SetValue(hItem, progress);
     break;
   case GUI_MOVIE_NOTIFICATION_STOP:
-
+    
     if(GUI_MOVIE_GetFrameIndex(hMovie) >= (Video_Info.NumFrames - 1))
-    {
+    {      
       _StopPlay();
-
+      
       if(PlayerSettings.b.repeat != REPEAT_NONE)
       {
         if (PlayerSettings.b.repeat == REPEAT_ALL)
@@ -567,13 +567,13 @@ void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame)
           {
             Video_file_pos++;
           }
-          else
-          {
-            Video_file_pos = 0;
+          else 
+          {        
+            Video_file_pos = 0; 
           }
-          LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);
+          LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);          
         }
-
+        
         _StartPlay((char *)pVideoList->file[Video_file_pos].name);
       }
       else
@@ -581,7 +581,7 @@ void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame)
         hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PLAY_BUTTON);
         WM_InvalidateWindow(hItem);
         WM_Update(hItem);
-      }
+      }   
     }
     break;
   }
@@ -591,7 +591,7 @@ void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame)
   * @brief  callback for mute button
   * @param  Xpos:  window X position
   * @param  Ypos:  window Y position
-  * @param  Xsize: window X size
+  * @param  Xsize: window X size 
   * @param  Ysize: window Y size
   * @retval None
   */
@@ -608,36 +608,36 @@ void __GetWindowRect(int *XPos, int *YPos, int *XSize, int *YSize)
   * @param  filename: pointer to the video file name
   * @retval None
   */
-static uint8_t _StartPlay(char * filename)
+static uint8_t _StartPlay(char * filename) 
 {
   int XPos, YPos, XSize, YSize, nx, ny, n;
-
-
+  
+  
   if(f_open(&Video_File, filename, FA_OPEN_EXISTING | FA_READ) == FR_OK)
   {
-
+    
     GUI_MOVIE_GetInfoEx(_GetData, &Video_File, &Video_Info);
-
-    if((Video_Info.xSize == 0) || (Video_Info.ySize == 0) ||
+    
+    if((Video_Info.xSize == 0) || (Video_Info.ySize == 0) || 
        (Video_Info.xSize > 320) || (Video_Info.ySize > 240))
     {
       return 1;
     }
-
+    
     hMovie = GUI_MOVIE_CreateEx(_GetData, &Video_File, _cbNotify);
     VideoPlayer_State = VIDEO_PLAY;
 
       __GetWindowRect(&XPos, &YPos, &XSize, &YSize);
-
+      
       nx = (XSize * 1000) / Video_Info.xSize;
-      ny = (YSize * 1000) / Video_Info.ySize;
-
+      ny = (YSize * 1000) / Video_Info.ySize; 
+      
       if (nx < ny) {
         n = nx;
       } else {
         n = ny;
       }
-
+      
       XPos = XPos + (XSize - ((Video_Info.xSize * n) / 1000)) / 2;
       YPos = YPos + (YSize - ((Video_Info.ySize * n) / 1000)) / 2;
       GUI_MOVIE_ShowScaled(hMovie, XPos, YPos, n, 1000, 0);
@@ -646,11 +646,11 @@ static uint8_t _StartPlay(char * filename)
 }
 
 /**
-  * @brief  Stop play
+  * @brief  Stop play 
   * @param  None
   * @retval None
   */
-static void _StopPlay(void)
+static void _StopPlay(void) 
 {
   if(hMovie != 0)
   {
@@ -658,7 +658,7 @@ static void _StopPlay(void)
     hMovie = 0;
   }
   VideoPlayer_State = VIDEO_IDLE;
-  f_close(&Video_File);
+  f_close(&Video_File);  
 }
 
 /**
@@ -666,13 +666,13 @@ static void _StopPlay(void)
   * @param  None
   * @retval None
   */
-static void _PausePlay(void)
+static void _PausePlay(void) 
 {
   if( VideoPlayer_State == VIDEO_PLAY)
   {
     GUI_MOVIE_Pause(hMovie);
-
-    VideoPlayer_State = VIDEO_PAUSE;
+    
+    VideoPlayer_State = VIDEO_PAUSE; 
   }
 }
 
@@ -682,13 +682,13 @@ static void _PausePlay(void)
   * @param  None
   * @retval None
   */
-static void _ResumePlay(void)
+static void _ResumePlay(void) 
 {
   if( VideoPlayer_State == VIDEO_PAUSE)
   {
     GUI_MOVIE_Play(hMovie);
-
-    VideoPlayer_State = VIDEO_PLAY;
+    
+    VideoPlayer_State = VIDEO_PLAY; 
   }
 }
 /**
@@ -696,17 +696,17 @@ static void _ResumePlay(void)
   * @param  pMsg: pointer to a data structure of type WM_MESSAGE
   * @retval None
   */
-static void _cbVideoWindow(WM_MESSAGE * pMsg)
+static void _cbVideoWindow(WM_MESSAGE * pMsg) 
 {
   GUI_RECT r;
-
-  switch (pMsg->MsgId)
+ 
+  switch (pMsg->MsgId) 
   {
   case WM_PAINT:
     WM_GetInsideRect(&r);
     GUI_ClearRectEx(&r);
     break;
-
+    
   default:
     WM_DefaultProc(pMsg);
   }
@@ -723,18 +723,18 @@ static void _AddEntireFolder(char *Foldername)
   FILINFO fno;
   DIR dir;
   char *fn;
-  char tmp[FILEMGR_FULL_PATH_SIZE];
-  WM_HWIN hItem;
-
+  char tmp[FILEMGR_FULL_PATH_SIZE]; 
+  WM_HWIN hItem;  
+  
   res = f_opendir(&dir, Foldername);
-
+  
   if (res == FR_OK)
   {
-
+    
     while (1)
     {
       res = f_readdir(&dir, &fno);
-
+      
       if (res != FR_OK || fno.fname[0] == 0)
       {
         break;
@@ -757,13 +757,13 @@ static void _AddEntireFolder(char *Foldername)
             strcat(tmp, fn);
             strncpy((char *)pVideoList->file[pVideoList->ptr].name, (char *)tmp, FILEMGR_FILE_NAME_SIZE);
             hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST);
-            LISTVIEW_AddRow(hItem, NULL);
+            LISTVIEW_AddRow(hItem, NULL);  
             FILEMGR_GetFileOnly (tmp, fn);
             LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, fn);
             pVideoList->ptr++;
           }
         }
-      }
+      }   
     }
   }
   f_closedir(&dir);
@@ -775,21 +775,21 @@ static void _AddEntireFolder(char *Foldername)
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
   * @retval None
   */
-static void _cbMediaConnection(WM_MESSAGE * pMsg)
+static void _cbMediaConnection(WM_MESSAGE * pMsg) 
 {
   WM_HWIN hItem;
-  static WM_HTIMER      hStatusTimer;
+  static WM_HTIMER      hStatusTimer;  
   static uint8_t        prev_sd_status = 0;
   static uint8_t        prev_usb_status = 0;
-
-  switch (pMsg->MsgId)
+   
+  switch (pMsg->MsgId) 
   {
   case WM_CREATE:
     prev_sd_status = k_StorageGetStatus(MSD_DISK_UNIT);
-    prev_usb_status = k_StorageGetStatus(USB_DISK_UNIT);
-    hStatusTimer = WM_CreateTimer(pMsg->hWin, 0, 500, 0);
+    prev_usb_status = k_StorageGetStatus(USB_DISK_UNIT);    
+    hStatusTimer = WM_CreateTimer(pMsg->hWin, 0, 500, 0);      
     break;
-
+    
   case WM_TIMER:
     if(prev_sd_status != k_StorageGetStatus(MSD_DISK_UNIT))
     {
@@ -798,14 +798,14 @@ static void _cbMediaConnection(WM_MESSAGE * pMsg)
       {
         if(VideoPlayer_State != VIDEO_IDLE)
         {
-          _StopPlay();
+          _StopPlay();  
           hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PROGRESS_SLIDER);
           SLIDER_SetValue(hItem, 0);
-
+          
           hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PLAY_BUTTON);
           WM_InvalidateWindow(hItem);
-          WM_Update(hItem);
-          WM_InvalidateWindow(hFrame);
+          WM_Update(hItem); 
+          WM_InvalidateWindow(hFrame);  
         }
       }
     }
@@ -816,28 +816,28 @@ static void _cbMediaConnection(WM_MESSAGE * pMsg)
       {
         if(VideoPlayer_State != VIDEO_IDLE)
         {
-          _StopPlay();
+          _StopPlay();  
           hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PROGRESS_SLIDER);
           SLIDER_SetValue(hItem, 0);
-
+          
           hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PLAY_BUTTON);
           WM_InvalidateWindow(hItem);
-          WM_Update(hItem);
-          WM_InvalidateWindow(hFrame);
+          WM_Update(hItem); 
+          WM_InvalidateWindow(hFrame);  
         }
       }
     }
     WM_RestartTimer(pMsg->Data.v, 500);
     break;
-
+    
   case WM_DELETE:
     if(hStatusTimer != 0)
     {
       WM_DeleteTimer(hStatusTimer);
       hStatusTimer = 0;
     }
-    break;
-
+    break;   
+    
   default:
     WM_DefaultProc(pMsg);
   }
@@ -854,19 +854,19 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   int      result;
   GUI_RECT r;
   int  ItemNbr;
-  static char tmp[FILEMGR_FILE_NAME_SIZE];
-
+  static char tmp[FILEMGR_FILE_NAME_SIZE];  
+  
   switch (pMsg->MsgId) {
   case WM_INIT_DIALOG:
 
-
+    
     pVideoList = (FILELIST_FileTypeDef *)k_malloc(sizeof(FILELIST_FileTypeDef));
     pFileInfo = (CHOOSEFILE_INFO *)k_malloc(sizeof(CHOOSEFILE_INFO));
     pVideoList->ptr = 0;
-
-
+    
+    
     PlayerSettings.d32 = k_BkupRestoreParameter(CALIBRATION_VIDEOPLAYER_SETTING_BKP);
-
+    
     /* Initialization of 'Listview' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
     LISTVIEW_AddColumn(hItem, 120, "Video", GUI_TA_VCENTER | GUI_TA_LEFT);
@@ -876,75 +876,75 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     LISTVIEW_SetTextColor(hItem, LISTVIEW_CI_UNSEL, GUI_CYAN);
 
     hItem = BUTTON_CreateEx(173, 172, 35,  35, pMsg->hWin, WM_CF_SHOW, 0, ID_STOP_BUTTON);
-    WM_SetCallback(hItem, _cbButton_stop);
-
+    WM_SetCallback(hItem, _cbButton_stop);    
+    
     hItem = BUTTON_CreateEx(41, 172, 35, 35, pMsg->hWin, WM_CF_SHOW, 0, ID_PREVIOUS_BUTTON);
-    WM_SetCallback(hItem, _cbButton_previous);
-
+    WM_SetCallback(hItem, _cbButton_previous);     
+    
     hItem = BUTTON_CreateEx(81, 159, 50, 50, pMsg->hWin, WM_CF_SHOW, 0, ID_PLAY_BUTTON);
     WM_SetCallback(hItem, _cbButton_play);
-
+    
     hItem = BUTTON_CreateEx(134, 172, 35, 35, pMsg->hWin, WM_CF_SHOW, 0, ID_NEXT_BUTTON);
     WM_SetCallback(hItem, _cbButton_next);
-
+    
     hItem = BUTTON_CreateEx(212, 177, 70, 30, pMsg->hWin, WM_CF_SHOW, 0, ID_ADD_BUTTON);
-    WM_SetCallback(hItem, _cbButton_add);
-
+    WM_SetCallback(hItem, _cbButton_add);      
+    
     hItem = BUTTON_CreateEx(213, 143, 70, 30, pMsg->hWin, WM_CF_SHOW, 0, ID_OPEN_BUTTON);
-    WM_SetCallback(hItem, _cbButton_open);
+    WM_SetCallback(hItem, _cbButton_open); 
 
     hItem = BUTTON_CreateEx(1, 173, 30,  30, pMsg->hWin, WM_CF_SHOW, 0, ID_REPEAT_BUTTON);
-    WM_SetCallback(hItem, _cbButton_repeat);
+    WM_SetCallback(hItem, _cbButton_repeat); 
 
     hItem = BUTTON_CreateEx(287, 177, 30,  30, pMsg->hWin, WM_CF_SHOW, 0, ID_CLOSE_BUTTON);
-    WM_SetCallback(hItem, _cbButton_close);
-
+    WM_SetCallback(hItem, _cbButton_close);   
+    
     hClient = WM_GetClientWindow(pMsg->hWin);
     WM_GetClientRectEx(hClient, &r);
     hFrame = WM_CreateWindowAsChild(r.x0 + 5, r.y0 + 5, r.x1 - 119, r.y1 - 80, hClient, WM_CF_SHOW, _cbVideoWindow , 0);
-    hItem = WM_GetDialogItem(pMsg->hWin, ID_PLAY_BUTTON);
-
+    hItem = WM_GetDialogItem(pMsg->hWin, ID_PLAY_BUTTON);    
+    
     hItem = WM_GetDialogItem(pMsg->hWin, ID_PROGRESS_SLIDER);
     SLIDER_SetNumTicks(hItem, 25);
-
+    
     WM_CreateWindowAsChild(319, 220, 1, 1, pMsg->hWin, WM_CF_SHOW | WM_CF_HASTRANS, _cbMediaConnection , 0);
     break;
-
+        
   case WM_TIMER:
     Id = WM_GetTimerId(pMsg->Data.v);
     if (Id == ID_PLAYLIST_TIMER)
     {
       playlist_select = 0;
-    }
-    break;
-
-  case WM_DELETE:
-    k_BkupSaveParameter(CALIBRATION_VIDEOPLAYER_SETTING_BKP, PlayerSettings.d32);
+    }    
+    break; 
+    
+  case WM_DELETE:       
+    k_BkupSaveParameter(CALIBRATION_VIDEOPLAYER_SETTING_BKP, PlayerSettings.d32);    
     WM_DeleteTimer(hPlaylistTimer);
     break;
 
-
+    
 case WM_NOTIFY_PARENT:
     Id    = WM_GetId(pMsg->hWinSrc);
-    NCode = pMsg->Data.v;
+    NCode = pMsg->Data.v; 
 
-    switch(Id) {
+    switch(Id) {      
     /* Notifications sent by 'Add' Button */
-    case ID_ADD_BUTTON:
+    case ID_ADD_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-
+        
         pFileInfo->pfGetData = k_GetData;
-        pFileInfo->pMask = acMask_video;
-        hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Add video file to playlist", 0, pFileInfo);
-
+        pFileInfo->pMask = acMask_video;     
+        hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Add video file to playlist", 0, pFileInfo);        
+        
         if(VideoPlayer_State == VIDEO_PLAY)
         {
           GUI_MOVIE_Pause(hMovie);
         }
         WM_MakeModal(hItem);
         result = GUI_ExecCreatedDialog(hItem);
-        if (result == 0)
+        if (result == 0) 
         {
           if((strstr(pFileInfo->pRoot, ".emf")) || (strstr(pFileInfo->pRoot, ".EMF")))
           {
@@ -953,8 +953,8 @@ case WM_NOTIFY_PARENT:
               strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
               FILEMGR_GetFileOnly ((char *)tmp, (char *)pFileInfo->pRoot);
               hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
-
-              LISTVIEW_AddRow(hItem, NULL);
+              
+              LISTVIEW_AddRow(hItem, NULL);         
               LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
               pVideoList->ptr++;
             }
@@ -963,32 +963,32 @@ case WM_NOTIFY_PARENT:
         }
         if(VideoPlayer_State == VIDEO_PLAY)
         {
-          GUI_MOVIE_Play(hMovie);
-        }
-        break;
+          GUI_MOVIE_Play(hMovie);  
+        } 
+        break;        
       }
-      break;
-
+      break;       
+      
     /* Notifications sent by 'Open' Button */
-    case ID_OPEN_BUTTON:
+    case ID_OPEN_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-
+        
           pFileInfo->pfGetData = k_GetData;
-          pFileInfo->pMask = acMask_dir;
+          pFileInfo->pMask = acMask_dir;     
           hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Add a folder", 0, pFileInfo);
-
+          
           if(VideoPlayer_State == VIDEO_PLAY)
           {
             GUI_MOVIE_Pause(hMovie);
           }
           WM_MakeModal(hItem);
           result = GUI_ExecCreatedDialog(hItem);
-          if (result == 0)
-          {
+          if (result == 0) 
+          {          
             _AddEntireFolder(pFileInfo->pRoot);
-
-            WM_InvalidateWindow(hFrame);
+            
+            WM_InvalidateWindow(hFrame);       
           }
           if(VideoPlayer_State == VIDEO_PLAY)
           {
@@ -996,93 +996,93 @@ case WM_NOTIFY_PARENT:
           }
         break;
       }
-      break;
-
-      /* Notification sent by "Close button" */
-    case ID_CLOSE_BUTTON:
+      break;      
+      
+      /* Notification sent by "Close button" */  
+    case ID_CLOSE_BUTTON: 
       switch (NCode) {
       case WM_NOTIFICATION_RELEASED:
-        k_free(pVideoList);
-        k_free(pFileInfo);
+        k_free(pVideoList); 
+        k_free(pFileInfo);   
         _StopPlay();
         GUI_EndDialog(pMsg->hWin, 0);
         module_active = (-1);
         break;
       }
-      break;
-
-      /* Notification sent by "Play Button" */
-    case ID_PLAY_BUTTON:
+      break;      
+      
+      /* Notification sent by "Play Button" */  
+    case ID_PLAY_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-
+        
         if(VideoPlayer_State == VIDEO_IDLE)
         {
           if (pVideoList->ptr > 0)
           {
             _StartPlay((char *)pVideoList->file[Video_file_pos].name);
             LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);
-
+            
           }
           else
           {
             pFileInfo->pfGetData = k_GetData;
-            pFileInfo->pMask = acMask_video;
-            hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Open a video file", 0, pFileInfo);
+            pFileInfo->pMask = acMask_video;     
+            hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Open a video file", 0, pFileInfo);  
             WM_MakeModal(hItem);
             result = GUI_ExecCreatedDialog(hItem);
-            if (result == 0)
-            {
+            if (result == 0) 
+            { 
               if((strstr(pFileInfo->pRoot, ".emf")) || (strstr(pFileInfo->pRoot, ".EMF")))
-              {
-
+              {                   
+                
                 pVideoList->ptr = 0;
-
+                
                 strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
                 FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
                 hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
-
+                
                 /* Update Play list */
                 strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
-
+                
                 ItemNbr = LISTVIEW_GetNumRows(hItem);
                 while(ItemNbr--)
                 {
                   LISTVIEW_DeleteRow(hItem, ItemNbr);
                 }
-
-                LISTVIEW_AddRow(hItem, NULL);
+                
+                LISTVIEW_AddRow(hItem, NULL);         
                 LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
-                pVideoList->ptr++;
+                pVideoList->ptr++;  
                 Video_file_pos = 0;
                 LISTVIEW_SetSel(hItem, 0);
                 _StartPlay((char *)pVideoList->file[Video_file_pos].name);
                 hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PLAY_BUTTON);
                 WM_InvalidateWindow(hItem);
-                WM_Update(hItem);
+                WM_Update(hItem); 
                 WM_InvalidateWindow(hFrame);
-              }
-            }
-          }
-
+              }             
+            }            
+          }        
+          
         }
         else if(VideoPlayer_State == VIDEO_PLAY)
         {
-          _PausePlay();
+          _PausePlay();         
         }
         else if(VideoPlayer_State == VIDEO_PAUSE)
         {
-          _ResumePlay();
-        }
+          _ResumePlay();  
+        }        
         break;
       }
       break;
 
-    case ID_REPEAT_BUTTON:
+    case ID_REPEAT_BUTTON:      
       if(NCode == WM_NOTIFICATION_RELEASED)
       {
-        hItem = WM_GetDialogItem(pMsg->hWin, ID_REPEAT_BUTTON);
-
+        hItem = WM_GetDialogItem(pMsg->hWin, ID_REPEAT_BUTTON);   
+        
         if(PlayerSettings.b.repeat == REPEAT_NONE)
         {
           PlayerSettings.b.repeat = REPEAT_ONCE;
@@ -1097,15 +1097,15 @@ case WM_NOTIFY_PARENT:
         }
       }
       break;
-
+      
     case ID_STOP_BUTTON:
-      _StopPlay();
+      _StopPlay();  
       hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PROGRESS_SLIDER);
       SLIDER_SetValue(hItem, 0);
       WM_InvalidateWindow(hFrame);
       break;
-
-    case ID_NEXT_BUTTON:
+      
+    case ID_NEXT_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
         if(Video_file_pos < (pVideoList->ptr - 1))
@@ -1115,9 +1115,9 @@ case WM_NOTIFY_PARENT:
         }
         else if(PlayerSettings.b.repeat == REPEAT_ALL)
         {
-          Video_file_pos = 0;
-        }
-        LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);
+          Video_file_pos = 0; 
+        }           
+        LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);        
 
         if(VideoPlayer_State == VIDEO_PLAY)
         {
@@ -1128,37 +1128,37 @@ case WM_NOTIFY_PARENT:
         break;
       }
       break;
-
-
-    case ID_PREVIOUS_BUTTON:
+      
+      
+    case ID_PREVIOUS_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-
+        
         if( pVideoList->ptr > 0)
         {
           if(Video_file_pos > 0)
-          {
-            Video_file_pos--;
+          {   
+            Video_file_pos--;             
           }
           else if(PlayerSettings.b.repeat == REPEAT_ALL)
           {
-            Video_file_pos = (pVideoList->ptr - 1);
-          }
-          LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);
+            Video_file_pos = (pVideoList->ptr - 1); 
+          } 
+          LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);          
           if(VideoPlayer_State == VIDEO_PLAY)
           {
             _StopPlay();
             _StartPlay((char *)pVideoList->file[Video_file_pos].name);
             WM_InvalidateWindow(hFrame);
           }
-        }
+        }    
         break;
-
+        
       }
       break;
-
+      
     /* Notifications sent by 'progress' Slider */
-    case ID_PROGRESS_SLIDER:
+    case ID_PROGRESS_SLIDER: 
       if(NCode == WM_NOTIFICATION_CLICKED)
       {
         if(VideoPlayer_State != VIDEO_IDLE)
@@ -1174,47 +1174,47 @@ case WM_NOTIFY_PARENT:
         }
       }
       break;
-
+      
     /* Notifications sent by 'ListView' Slider */
-    case ID_VIDEO_LIST:
+    case ID_VIDEO_LIST: 
       if(NCode == WM_NOTIFICATION_CLICKED)
       {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
         Index = LISTVIEW_GetSel(hItem);
-
+        
         if(Index < pVideoList->ptr)
         {
           Video_file_pos = Index;
-
+          
           if(playlist_select == 0)
           {
-            hPlaylistTimer = WM_CreateTimer(pMsg->hWin, ID_PLAYLIST_TIMER, 500, 0);
+            hPlaylistTimer = WM_CreateTimer(pMsg->hWin, ID_PLAYLIST_TIMER, 500, 0);           
             playlist_select = (Index + 1);
           }
-
+          
           else if(playlist_select == (Index + 1))
           {
-            WM_DeleteTimer(hPlaylistTimer);
-            hPlaylistTimer = 0;
+            WM_DeleteTimer(hPlaylistTimer); 
+            hPlaylistTimer = 0;          
             playlist_select = 0;
-
+            
             if(Index < pVideoList->ptr)
             {
               if(VideoPlayer_State != VIDEO_IDLE)
               {
                 _StopPlay();
-              }
-
-              _StartPlay((char *)pVideoList->file[Index].name);
+              } 
+              
+              _StartPlay((char *)pVideoList->file[Index].name); 
               hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PLAY_BUTTON);
               WM_InvalidateWindow(hItem);
-              WM_Update(hItem);
+              WM_Update(hItem); 
               WM_InvalidateWindow(hFrame);
             }
           }
         }
       }
-      break;
+      break;   
     }
     break;
   default:
@@ -1226,7 +1226,7 @@ case WM_NOTIFY_PARENT:
 /**
   * @brief  Video window Starup
   * @param  hWin: pointer to the parent handle.
-  * @param  xpos: X position
+  * @param  xpos: X position 
   * @param  ypos: Y position
   * @retval None
   */
@@ -1236,7 +1236,7 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
   pVideoList->ptr = 0;
   VideoPlayer_State = VIDEO_IDLE;
   VIDEOPLAYER_hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, hWin, xpos, ypos);
-
+  
 }
 
 
@@ -1248,34 +1248,34 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
 static void VideoDirectOpen(char *filename)
 {
   WM_HWIN hItem;
-  int ItemNbr;
-  static char tmp[FILEMGR_FILE_NAME_SIZE];
-
+  int ItemNbr;  
+  static char tmp[FILEMGR_FILE_NAME_SIZE];    
+  
   VIDEOPLAYER_hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_GetDesktopWindowEx(1), 0, 26);
-
+  
   if(VIDEOPLAYER_hWin != 0)
-  {
+  {      
       pVideoList->ptr = 0;
-
+      
       FILEMGR_GetFileOnly (tmp, filename);
       hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST);
-
+      
       /* Update Playlist */
       strcpy((char *)pVideoList->file[pVideoList->ptr].name, filename);
-
+      
       ItemNbr = LISTVIEW_GetNumRows(hItem);
       while(ItemNbr--)
       {
         LISTVIEW_DeleteRow(hItem, ItemNbr);
       }
-
-      LISTVIEW_AddRow(hItem, NULL);
+      
+      LISTVIEW_AddRow(hItem, NULL);         
       LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
-      pVideoList->ptr++;
+      pVideoList->ptr++;  
       Video_file_pos = 0;
       LISTVIEW_SetSel(hItem, 0);
       _StartPlay((char *)pVideoList->file[Video_file_pos].name);
-
+      
       WM_InvalidateWindow(hFrame);
 
   }

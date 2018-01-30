@@ -35,7 +35,7 @@
 
 @par Example Description
 
-This example provides a description of how to use the embedded LCD DSI controller
+This example provides a description of how to use the embedded LCD DSI controller 
 (using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board.
 
 The goal of this example is to display a QVGA landscape (320x240) images on LCD glass
@@ -46,7 +46,7 @@ used for images display also.
 
 End of Refresh callback (LTDC) is used to swap image to be draw to display buffer.
 Each image is displayed for two secondes. A first image is prepared in the back
-buffer while a second image is displayed.
+buffer while a second image is displayed.  
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This
@@ -64,7 +64,7 @@ buffer while a second image is displayed.
   - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Inc/stm32f4xx_it.h                Interrupt handlers header file
   - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Inc/main.h                        Header for main.c module
   - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Inc/life_augmented_argb8888.h     Image 320x240 in ARGB8888 to display on LCD
-  - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Inc/image_320x240_argb8888.h      Image 320x240 in ARGB8888 to display on LCD
+  - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Inc/image_320x240_argb8888.h      Image 320x240 in ARGB8888 to display on LCD  
   - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Src/stm32f4xx_it.c                Interrupt handlers
   - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Src/main.c                        Main program
   - LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Src/stm32f4xx_hal_msp.c           HAL MSP file

@@ -22,7 +22,7 @@
  * With DHCP:
  * - define @ref LWIP_DHCP_AUTOIP_COOP 1 in your lwipopts.h.
  * - Configure your DHCP Client.
- *
+ * 
  * @see netifapi_autoip
  */
 
@@ -68,7 +68,6 @@
 #include "lwip/etharp.h"
 #include "lwip/prot/autoip.h"
 
-#include <stdlib.h>
 #include <string.h>
 
 /** Pseudo random macro based on netif informations.
@@ -95,10 +94,8 @@
 static err_t autoip_arp_announce(struct netif *netif);
 static void autoip_start_probing(struct netif *netif);
 
-#define netif_autoip_data(netif) ((struct autoip*)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_AUTOIP))
-
 /**
- * @ingroup autoip
+ * @ingroup autoip 
  * Set a statically allocated struct autoip to work with.
  * Using this prevents autoip_start to allocate it using mem_malloc.
  *
@@ -248,7 +245,7 @@ autoip_bind(struct netif *netif)
 }
 
 /**
- * @ingroup autoip
+ * @ingroup autoip 
  * Start AutoIP client
  *
  * @param netif network interface on which start the AutoIP client
@@ -342,7 +339,7 @@ autoip_network_changed(struct netif *netif)
 }
 
 /**
- * @ingroup autoip
+ * @ingroup autoip 
  * Stop AutoIP client
  *
  * @param netif network interface on which stop the AutoIP client
@@ -482,7 +479,8 @@ autoip_arp_reply(struct netif *netif, struct etharp_hdr *hdr)
       * ip.dst == llipaddr && hw.src != own hwaddr
       */
       if ((ip4_addr_cmp(&sipaddr, &autoip->llipaddr)) ||
-          (ip4_addr_cmp(&dipaddr, &autoip->llipaddr) &&
+          (ip4_addr_isany_val(sipaddr) &&
+           ip4_addr_cmp(&dipaddr, &autoip->llipaddr) &&
            !eth_addr_cmp(&netifaddr, &hdr->shwaddr))) {
         LWIP_DEBUGF(AUTOIP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_STATE | LWIP_DBG_LEVEL_WARNING,
           ("autoip_arp_reply(): Probe Conflict detected\n"));

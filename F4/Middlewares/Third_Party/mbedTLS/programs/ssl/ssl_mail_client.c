@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define mbedtls_time       time
-#define mbedtls_time_t     time_t
+#define mbedtls_time_t     time_t 
 #define mbedtls_fprintf    fprintf
 #define mbedtls_printf     printf
 #endif
@@ -494,13 +494,13 @@ int main( int argc, char *argv[] )
         ret = mbedtls_x509_crt_parse_file( &cacert, opt.ca_file );
     else
 #endif
-#if defined(MBEDTLS_CERTS_C)
+#if defined(MBEDTLS_CERTS_C) && defined(MBEDTLS_PEM_PARSE_C)
         ret = mbedtls_x509_crt_parse( &cacert, (const unsigned char *) mbedtls_test_cas_pem,
                               mbedtls_test_cas_pem_len );
 #else
     {
         ret = 1;
-        mbedtls_printf("MBEDTLS_CERTS_C not defined.");
+        mbedtls_printf("MBEDTLS_CERTS_C and/or MBEDTLS_PEM_PARSE_C not defined.");
     }
 #endif
     if( ret < 0 )

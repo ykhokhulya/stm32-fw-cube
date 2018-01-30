@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    stm32f4xx_hal_timebase_tim.c
+  * @file    stm32f4xx_hal_timebase_tim.c 
   * @author  MCD Application Team
   * @brief   HAL time base based on the hardware TIM.
-  *
+  *    
   *          This file override the native HAL time base functions (defined as weak)
   *          the TIM time base:
   *           + Intializes the TIM peripheral generate a Period elapsed Event each 1ms
   *           + HAL_IncTick is called inside HAL_TIM_PeriodElapsedCallback ie each 1ms
-  *
+  * 
   ******************************************************************************
   * @attention
   *
@@ -48,7 +48,7 @@
 
 /** @addtogroup HAL_TimeBase
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -60,11 +60,11 @@ void TIM5_IRQHandler(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  This function configures the TIM5 as a time base source.
-  *         The time source is configured  to have 1ms time base with a dedicated
-  *         Tick interrupt priority.
+  * @brief  This function configures the TIM5 as a time base source. 
+  *         The time source is configured  to have 1ms time base with a dedicated 
+  *         Tick interrupt priority. 
   * @note   This function is called  automatically at the beginning of program after
-  *         reset by HAL_Init() or at any time when clock is configured, by HAL_RCC_ClockConfig().
+  *         reset by HAL_Init() or at any time when clock is configured, by HAL_RCC_ClockConfig(). 
   * @param  TickPriority: Tick interrupt priority.
   * @retval HAL status
   */
@@ -74,7 +74,7 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
   uint32_t uwTimclock, uwAPB1Prescaler = 0;
   uint32_t uwPrescalerValue = 0;
   uint32_t pFLatency;
-
+  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* Enable TIM5 clock */
   __HAL_RCC_TIM5_CLK_ENABLE();
@@ -82,21 +82,21 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
   /*##-2- Configure the NVIC for TIMx ########################################*/
   /* Set the TIM5 priority */
   HAL_NVIC_SetPriority(TIM5_IRQn, TICK_INT_PRIORITY, 0);
-
+  
   /* Enable the TIM5 global Interrupt */
   HAL_NVIC_EnableIRQ(TIM5_IRQn);
 
   /* Configure the TIM5 IRQ priority */
-  HAL_NVIC_SetPriority(TIM5_IRQn, TickPriority ,0);
-
+  HAL_NVIC_SetPriority(TIM5_IRQn, TickPriority ,0); 
+  
   /* Get clock configuration */
   HAL_RCC_GetClockConfig(&sClokConfig, &pFLatency);
-
+  
   /* Get APB1 prescaler */
   uwAPB1Prescaler = sClokConfig.APB1CLKDivider;
-
+  
   /* Compute TIM5 clock */
-  if (uwAPB1Prescaler == 0)
+  if (uwAPB1Prescaler == 0) 
   {
     uwTimclock = HAL_RCC_GetPCLK1Freq();
   }
@@ -107,10 +107,10 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
 
   /* Compute the prescaler value to have TIM5 counter clock equal to 1MHz */
   uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000) - 1);
-
+  
   /* Initialize TIM5 */
   TimHandle.Instance = TIM5;
-
+    
   /* Initialize TIMx peripheral as follow:
        + Period = [(TIM5CLK/1000) - 1]. to have a (1/1000) s time base.
        + Prescaler = (uwTimclock/1000000 - 1) to have a 1MHz counter clock.
@@ -180,10 +180,10 @@ void TIM5_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

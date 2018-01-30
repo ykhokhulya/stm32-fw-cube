@@ -3,7 +3,7 @@
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -33,7 +33,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -42,18 +42,18 @@
   * @{
   */
 
-/** @defgroup
-  * @brief
+/** @defgroup 
+  * @brief  
   * @{
   */
-
+  
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern HCD_HandleTypeDef             hhcd;
 extern PCD_HandleTypeDef             hpcd;
-extern LTDC_HandleTypeDef            hltdc_disco;
+extern LTDC_HandleTypeDef            hltdc_disco;  
 extern SAI_HandleTypeDef             haudio_out_sai;
 extern QSPI_HandleTypeDef            QSPIHandle;
 extern DSI_HandleTypeDef             hdsi_eval;
@@ -222,5 +222,5 @@ void QUADSPI_IRQHandler(void)
 /**
   * @}
   */
-
+    
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_TFTP_Server/Src/stm32f4xx_it.c
+  * @file    LwIP/LwIP_TFTP_Server/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************
@@ -14,8 +14,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -26,7 +26,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-
+    
 /** @addtogroup STM32F4xx_HAL_Applications
   * @{
   */
@@ -150,7 +150,7 @@ void SysTick_Handler(void)
   * @retval None
   */
 void EXTI15_10_IRQHandler(void)
-{
+{ 
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_14);
 }
 
@@ -178,7 +178,7 @@ void DMA2_Stream3_IRQHandler(void)
 */
 void DMA2_Stream6_IRQHandler(void)
 {
-  BSP_SD_DMA_Tx_IRQHandler();
+  BSP_SD_DMA_Tx_IRQHandler(); 
 }
 
 /**
@@ -202,7 +202,7 @@ void SDIO_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

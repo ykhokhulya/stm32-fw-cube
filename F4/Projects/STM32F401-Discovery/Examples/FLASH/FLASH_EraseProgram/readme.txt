@@ -33,23 +33,23 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example describes how to configure and use the FLASH HAL API to erase and program
+This example describes how to configure and use the FLASH HAL API to erase and program 
 the internal Flash memory.
 
 After Reset, the Flash memory Program/Erase Controller is locked. To unlock it,
 the FLASH_Unlock function is used.
-Before programming the desired addresses, an erase operation is performed using
-the flash erase sector feature.  A programmation of the erase procedure is done
-in filling the erase init structure (erase will be done by sectors from the 1st
-sector to the calculation of sectors number)
-Then all these sectors will be erased one by one by calling HAL_FLASHEx_Erase function.
+Before programming the desired addresses, an erase operation is performed using 
+the flash erase sector feature.  A programmation of the erase procedure is done 
+in filling the erase init structure (erase will be done by sectors from the 1st 
+sector to the calculation of sectors number) 
+Then all these sectors will be erased one by one by calling HAL_FLASHEx_Erase function. 
 
-@note: if problem occurs on a sector, erase will be stopped and faulty sector will
+@note: if problem occurs on a sector, erase will be stopped and faulty sector will 
 be returned to user (through variable 'SectorError').
 
-Once this operation is finished, the word programming operation will be performed by
+Once this operation is finished, the word programming operation will be performed by 
 using the HAL_FLASH_Program function. The written data is then checked and the
 result of the programming operation is stored into the MemoryProgramStatus variable.
 
@@ -68,7 +68,7 @@ STM32 Discovery board's LEDs can be used to monitor the transfer status:
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - FLASH/FLASH_EraseProgram/Src/stm32f4xx_it.c       Interrupt handlers
   - FLASH/FLASH_EraseProgram/Src/main.c               Main program
@@ -77,17 +77,17 @@ STM32 Discovery board's LEDs can be used to monitor the transfer status:
   - FLASH/FLASH_EraseProgram/Inc/stm32f4xx_it.h       Interrupt handlers header file
   - FLASH/FLASH_EraseProgram/Inc/main.h               Main program header file
 
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This example runs on STM32F401xCx Devices.
-
+    
   - This example has been tested with STM32F401-Discovery RevB board (MB1115B) and can be
     easily tailored to any other supported device and development board.
-
-@par How to use it ?
+  
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

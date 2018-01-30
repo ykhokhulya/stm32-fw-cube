@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/main.c
+  * @file    BSP/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the STM32429I-Discovery BSP Drivers
   ******************************************************************************
@@ -43,7 +43,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -53,16 +53,16 @@ static uint8_t DemoIndex = 0;
 #ifdef EE_M24LR64
 uint8_t NbLoop = 1;
 #endif /* EE_M24LR64 */
-__IO uint8_t ubKeyPressed = RESET;
+__IO uint8_t ubKeyPressed = RESET; 
 
 BSP_DemoTypedef BSP_examples[]=
 {
-  {Touchscreen_demo, "TOUCHSCREEN", 0},
-  {LCD_demo, "LCD", 0},
-  {Log_demo, "LCD LOG", 0},
-  {MEMS_demo, "MEMS", 0},
+  {Touchscreen_demo, "TOUCHSCREEN", 0}, 
+  {LCD_demo, "LCD", 0}, 
+  {Log_demo, "LCD LOG", 0},     
+  {MEMS_demo, "MEMS", 0}, 
 #ifdef EE_M24LR64
-  {EEPROM_demo, "EEPROM", 0},
+  {EEPROM_demo, "EEPROM", 0}, 
 #endif /* EE_M24LR64 */
 };
 
@@ -78,7 +78,7 @@ static void Display_DemoDescription(void);
   * @retval None
   */
 int main(void)
-{
+{ 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -86,35 +86,35 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-
+  BSP_LED_Init(LED4); 
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
-
+  
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init();
-
+  
   /* Initialize the LCD Layers */
   BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);
-
+  
   Display_DemoDescription();
-
+  
   /* Wait For User inputs */
   while (1)
   {
     if(BSP_PB_GetState(BUTTON_KEY) == RESET)
     {
       while (BSP_PB_GetState(BUTTON_KEY) == RESET);
-
+      
       BSP_examples[DemoIndex++].DemoFunc();
-
+      
       if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
       {
 #ifdef EE_M24LR64
@@ -130,7 +130,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -155,12 +155,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -174,14 +174,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+    
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -193,38 +193,38 @@ static void SystemClock_Config(void)
 static void Display_DemoDescription(void)
 {
   uint8_t desc[50];
-
+  
   /* Set LCD Foreground Layer  */
   BSP_LCD_SelectLayer(1);
-
+  
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-
-  /* Clear the LCD */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  
+  /* Clear the LCD */ 
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
-
+  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);  
+  
   /* Display LCD messages */
   BSP_LCD_DisplayStringAt(0, 10, (uint8_t*)"STM32F429I BSP", CENTER_MODE);
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAt(0, 35, (uint8_t*)"Drivers examples", CENTER_MODE);
-
+  
   /* Draw Bitmap */
   BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 65, (uint8_t *)stlogo);
-
+  
   BSP_LCD_SetFont(&Font8);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 20, (uint8_t*)"Copyright (c) STMicroelectronics 2017", CENTER_MODE);
-
+  
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 15, BSP_LCD_GetXSize(), 60);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 30, (uint8_t*)"Press USER Button to start:", CENTER_MODE);
   sprintf((char *)desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);   
 }
 
 /**
@@ -250,7 +250,7 @@ uint8_t CheckForUserInput(void)
 void Toggle_Leds(void)
 {
   static uint8_t ticks = 0;
-
+  
   if(ticks++ > 100)
   {
     BSP_LED_Toggle(LED3);
@@ -281,7 +281,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -294,10 +294,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
   */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

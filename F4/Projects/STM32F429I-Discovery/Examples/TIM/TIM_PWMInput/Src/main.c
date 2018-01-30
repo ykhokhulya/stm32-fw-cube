@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_PWMInput/Src/main.c
+  * @file    TIM/TIM_PWMInput/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example shows how to use the TIM peripheral to measure the
   *          frequency and duty cycle of an external signal.
@@ -44,7 +44,7 @@
 
 /** @addtogroup TIM_PWM_Input
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -83,17 +83,17 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
-  /*##-1- Configure the TIM peripheral #######################################*/
+  
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* Set TIMx instance */
   TimHandle.Instance = TIM4;
-
+ 
   /* Initialize TIMx peripheral as follow:
        + Period = 0xFFFF
        + Prescaler = 0
@@ -103,27 +103,27 @@ int main(void)
   TimHandle.Init.Period = 0xFFFF;
   TimHandle.Init.Prescaler = 0;
   TimHandle.Init.ClockDivision = 0;
-  TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
+  TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;  
   if(HAL_TIM_IC_Init(&TimHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the Input Capture channels ###############################*/
+  
+  /*##-2- Configure the Input Capture channels ###############################*/ 
   /* Common configuration */
   sConfig.ICPrescaler = TIM_ICPSC_DIV1;
-  sConfig.ICFilter = 0;
-
+  sConfig.ICFilter = 0;  
+  
   /* Configure the Input Capture of channel 1 */
   sConfig.ICPolarity = TIM_ICPOLARITY_FALLING;
-  sConfig.ICSelection = TIM_ICSELECTION_INDIRECTTI;
+  sConfig.ICSelection = TIM_ICSELECTION_INDIRECTTI;    
   if(HAL_TIM_IC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure the Input Capture of channel 2 */
   sConfig.ICPolarity = TIM_ICPOLARITY_RISING;
   sConfig.ICSelection = TIM_ICSELECTION_DIRECTTI;
@@ -142,29 +142,29 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /*##-4- Start the Input Capture in interrupt mode ##########################*/
   if(HAL_TIM_IC_Start_IT(&TimHandle, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /*##-5- Start the Input Capture in interrupt mode ##########################*/
   if(HAL_TIM_IC_Start_IT(&TimHandle, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /* Infinite loop */
+  
+  /* Infinite loop */  
   while (1)
   {
-  }
+  } 
 }
 
 /**
-  * @brief  Conversion complete callback in non blocking mode
+  * @brief  Conversion complete callback in non blocking mode 
   * @param  hadc : hadc handle
   * @retval None
   */
@@ -174,14 +174,14 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
   {
     /* Get the Input Capture value */
     uhIC2Value = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
-
+    
     if (uhIC2Value != 0)
     {
       /* Duty cycle computation */
       uhDutyCycle = ((HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1)) * 100) / uhIC2Value;
-
+      
       /* uwFrequency computation
-      TIM4 counter clock = (RCC_Clocks.HCLK_Frequency)/2 */
+      TIM4 counter clock = (RCC_Clocks.HCLK_Frequency)/2 */      
       uwFrequency = (HAL_RCC_GetHCLKFreq())/2 / uhIC2Value;
     }
     else
@@ -208,7 +208,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -233,12 +233,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -253,13 +253,13 @@ static void SystemClock_Config(void)
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -272,7 +272,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

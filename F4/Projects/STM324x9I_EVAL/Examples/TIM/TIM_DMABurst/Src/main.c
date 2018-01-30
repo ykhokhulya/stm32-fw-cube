@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_DMABurst/Src/main.c
+  * @file    TIM/TIM_DMABurst/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use DMA with TIM1 Update request to
   *          transfer Data from memory to TIM1 Capture Compare Register 3 (CCR3).
@@ -82,43 +82,43 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
-  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED3);  
 
-  /*##-1- Configure the TIM peripheral #######################################*/
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* -----------------------------------------------------------------------
     TIM1 Configuration: generate 1 PWM signal using the DMA burst mode:
-
-    TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2),
-    since APB2 prescaler is different from 1.
-      TIM1CLK = 2 * PCLK2
-      PCLK2 = HCLK / 2
+  
+    TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), 
+    since APB2 prescaler is different from 1.   
+      TIM1CLK = 2 * PCLK2  
+      PCLK2 = HCLK / 2 
       => TIM1CLK = 2 * (HCLK / 2) = HCLK = SystemCoreClock
-
+    
     To get TIM1 counter clock at 20 MHz, the prescaler is computed as follows:
       Prescaler = (TIM1CLK / TIM1 counter clock) - 1
       Prescaler = (SystemCoreClock /20 MHz) - 1
-
+  
     The TIM1 Frequency = TIM1 counter clock/(ARR + 1)
                        = 20 MHz / 4096 = 4.88 KHz
     TIM1 Channel1 duty cycle = (TIM1_CCR1/ TIM1_ARR)* 100 = 33.33%
-
-    Note:
+  
+    Note: 
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
-     Each time the core clock (HCLK) changes, user had to update SystemCoreClock
+     Each time the core clock (HCLK) changes, user had to update SystemCoreClock 
      variable value. Otherwise, any configuration based on this variable will be incorrect.
      This variable is updated in three ways:
       1) by calling CMSIS function SystemCoreClockUpdate()
       2) by calling HAL API function HAL_RCC_GetSysClockFreq()
-      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency
+      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency  
   ----------------------------------------------------------------------- */
-
+  
   TimHandle.Instance = TIMx;
-
+  
   TimHandle.Init.Period            = 0xFFFF;
   TimHandle.Init.RepetitionCounter = 0;
   TimHandle.Init.Prescaler         = (uint16_t) ((SystemCoreClock / 20000000) - 1);
@@ -129,8 +129,8 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the PWM channel 3 ########################################*/
+  
+  /*##-2- Configure the PWM channel 3 ########################################*/ 
   sConfig.OCMode     = TIM_OCMODE_PWM1;
   sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfig.Pulse      = 0xFFF;
@@ -139,18 +139,18 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
-  /*##-3- Start PWM signal generation in DMA mode ############################*/
+  
+  /*##-3- Start PWM signal generation in DMA mode ############################*/ 
   if(  HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Starting PWM generation Error */
     Error_Handler();
   }
-
-  /*##-4- Start DMA Burst transfer ###########################################*/
+  
+  /*##-4- Start DMA Burst transfer ###########################################*/ 
   HAL_TIM_DMABurst_WriteStart(&TimHandle, TIM_DMABASE_ARR, TIM_DMA_UPDATE,
                               (uint32_t*)aSRC_Buffer, TIM_DMABURSTLENGTH_3TRANSFERS);
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -173,7 +173,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -199,8 +199,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -214,17 +214,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -237,7 +237,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

@@ -204,7 +204,7 @@ int main(void)
       /* Handle I2C3 events (Master Transmit then Receive) */
       Handle_I2C_Master_TransmitReceive();
     }
-
+    
     /* Prepare Index to send next command code */
     ubMasterCommandIndex++;
     if(ubMasterCommandIndex >= ubMasterNbCommandCode)
@@ -237,9 +237,9 @@ void Configure_DMA(void)
   NVIC_EnableIRQ(DMA1_Stream2_IRQn);
 
   /* (3) Configure the DMA functional parameters for Master Transmit */
-
+  
   LL_DMA_SetChannelSelection(DMA1, LL_DMA_STREAM_5, LL_DMA_CHANNEL_6);
-
+  
   LL_DMA_ConfigTransfer(DMA1, LL_DMA_STREAM_5, LL_DMA_DIRECTION_MEMORY_TO_PERIPH | \
                                                 LL_DMA_PRIORITY_HIGH              | \
                                                 LL_DMA_MODE_NORMAL                | \
@@ -261,7 +261,7 @@ void Configure_DMA(void)
                                                 LL_DMA_PDATAALIGN_BYTE            | \
                                                 LL_DMA_MDATAALIGN_BYTE);
   LL_DMA_ConfigAddresses(DMA1, LL_DMA_STREAM_2, (uint32_t)LL_I2C_DMA_GetRegAddr(I2C3), (uint32_t)&(aMasterReceiveBuffer), LL_DMA_GetDataTransferDirection(DMA1, LL_DMA_STREAM_2));
-
+  
   /* (5) Enable DMA1 interrupts complete/error */
   LL_DMA_EnableIT_TC(DMA1, LL_DMA_STREAM_5);
   LL_DMA_EnableIT_TE(DMA1, LL_DMA_STREAM_5);
@@ -316,21 +316,21 @@ void Configure_I2C_Slave(void)
    *  - Set priority for I2C1_EV_IRQn
    *  - Enable I2C1_EV_IRQn
    */
-  NVIC_SetPriority(I2C1_EV_IRQn, 0xF);
+  NVIC_SetPriority(I2C1_EV_IRQn, 0xF);  
   NVIC_EnableIRQ(I2C1_EV_IRQn);
 
   /* Configure Error IT:
    *  - Set priority for I2C1_ER_IRQn
    *  - Enable I2C1_ER_IRQn
    */
-  NVIC_SetPriority(I2C1_ER_IRQn, 0xF);
+  NVIC_SetPriority(I2C1_ER_IRQn, 0xF);  
   NVIC_EnableIRQ(I2C1_ER_IRQn);
 
   /* (4) Configure I2C1 functional parameters ***********************/
-
+  
   /* Disable I2C1 prior modifying configuration registers */
   LL_I2C_Disable(I2C1);
-
+  
   /* Configure the Own Address1 :
    *  - OwnAddress1 is SLAVE_OWN_ADDRESS
    *  - OwnAddrSize is LL_I2C_OWNADDRESS1_7BIT
@@ -340,7 +340,7 @@ void Configure_I2C_Slave(void)
   /* Enable Clock stretching */
   /* Reset Value is Clock stretching enabled */
   //LL_I2C_EnableClockStretching(I2C1);
-
+  
   /* Enable General Call                  */
   /* Reset Value is General Call disabled */
   //LL_I2C_EnableGeneralCall(I2C1);
@@ -390,7 +390,7 @@ void Configure_I2C_Master(void)
 
   /* Enable the peripheral clock of GPIOB */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
-
+  
   /* Configure SDA Pin as : Alternate function, High Speed, Open drain, Pull up */
   LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_4, LL_GPIO_MODE_ALTERNATE);
   LL_GPIO_SetAFPin_0_7(GPIOB, LL_GPIO_PIN_4, LL_GPIO_AF_9);
@@ -409,27 +409,27 @@ void Configure_I2C_Master(void)
    *  - Set priority for I2C3_EV_IRQn
    *  - Enable I2C3_EV_IRQn
    */
-  NVIC_SetPriority(I2C3_EV_IRQn, 0);
+  NVIC_SetPriority(I2C3_EV_IRQn, 0);  
   NVIC_EnableIRQ(I2C3_EV_IRQn);
 
   /* Configure Error IT:
    *  - Set priority for I2C3_ER_IRQn
    *  - Enable I2C3_ER_IRQn
    */
-  NVIC_SetPriority(I2C3_ER_IRQn, 0);
+  NVIC_SetPriority(I2C3_ER_IRQn, 0);  
   NVIC_EnableIRQ(I2C3_ER_IRQn);
 
   /* (4) Configure I2C3 functional parameters ********************************/
-
+  
   /* Disable I2C3 prior modifying configuration registers */
   LL_I2C_Disable(I2C3);
-
+  
   /* Retrieve Clock frequencies */
   LL_RCC_GetSystemClocksFreq(&rcc_clocks);
 
   /* Configure the SCL Clock Speed */
   LL_I2C_ConfigSpeed(I2C3, rcc_clocks.PCLK1_Frequency, I2C_SPEEDCLOCK, I2C_DUTYCYCLE);
-
+  
   /* Configure the Own Address1                   */
   /* Reset Values of :
    *     - OwnAddress1 is 0x00
@@ -441,7 +441,7 @@ void Configure_I2C_Master(void)
   /* Reset Value is Clock stretching enabled */
   //LL_I2C_EnableClockStretching(I2C3);
 
-
+  
   /* Enable General Call                  */
   /* Reset Value is General Call disabled */
   //LL_I2C_EnableGeneralCall(I2C3);
@@ -471,7 +471,7 @@ void Activate_I2C_Slave(void)
 {
   /* (1) Enable I2C1 **********************************************************/
   LL_I2C_Enable(I2C1);
-
+  
   /* (2) Enable I2C1 transfer event/error interrupts:
    *  - Enable Event interrupts
    *  - Enable Error interrupts
@@ -585,7 +585,7 @@ void LED_Off(void)
 /**
   * @brief  Set LED2 to Blinking mode for an infinite loop (toggle period based on value provided as input parameter).
   * @param  Period : Period of time (in ms) between each toggling of LED
-  *   This parameter can be user defined values. Pre-defined values used in that example are :
+  *   This parameter can be user defined values. Pre-defined values used in that example are :   
   *     @arg LED_BLINK_FAST : Fast Blinking
   *     @arg LED_BLINK_SLOW : Slow Blinking
   *     @arg LED_BLINK_ERROR : Error specific Blinking
@@ -599,14 +599,14 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
@@ -626,13 +626,13 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 0x03);
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 0x03);  
 }
 
 /**
   * @brief  Wait for User push-button press to start transfer.
-  * @param  None
+  * @param  None 
   * @retval None
   */
   /*  */
@@ -678,15 +678,15 @@ void Handle_I2C_Master_Transmit(void)
   /* (1) Configure DMA parameters for Command Code transfer *******************/
   pMasterTransmitBuffer    = (uint32_t*)(&aCommandCode[ubMasterCommandIndex][0]);
   ubMasterNbDataToTransmit = strlen((char *)pMasterTransmitBuffer[0]);
-
+  
   LL_DMA_SetMemoryAddress(DMA1, LL_DMA_STREAM_5, (uint32_t)(*pMasterTransmitBuffer));
   LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_5, ubMasterNbDataToTransmit);
-
+  
   /* (2) Enable DMA transfer **************************************************/
   LL_DMA_EnableStream(DMA1, LL_DMA_STREAM_5);
   /* (3) Prepare acknowledge for Master data reception ************************/
   LL_I2C_AcknowledgeNextData(I2C3, LL_I2C_ACK);
-
+  
   /* (4) Initiate a Start condition to the Slave device ***********************/
   /* Master Request direction WRITE */
   ubMasterRequestDirection = I2C_REQUEST_WRITE;
@@ -705,7 +705,7 @@ void Handle_I2C_Master_Transmit(void)
   {
 #if (USE_TIMEOUT == 1)
     /* Check Systick counter flag to decrement the time-out value */
-    if (LL_SYSTICK_IsActiveCounterFlag())
+    if (LL_SYSTICK_IsActiveCounterFlag()) 
     {
       if(Timeout-- == 0)
       {
@@ -718,7 +718,7 @@ void Handle_I2C_Master_Transmit(void)
 
   /* (6) Generate a Stop condition to the Slave device ************************/
   LL_I2C_GenerateStopCondition(I2C3);
-
+  
   /* (7) Clear pending flags, Data Command Code are checking into Slave process */
   /* End of Master Process */
   LL_DMA_DisableStream(DMA1, LL_DMA_STREAM_5);
@@ -788,7 +788,7 @@ void Handle_I2C_Master_TransmitReceive(void)
   {
 #if (USE_TIMEOUT == 1)
     /* Check Systick counter flag to decrement the time-out value */
-    if (LL_SYSTICK_IsActiveCounterFlag())
+    if (LL_SYSTICK_IsActiveCounterFlag()) 
     {
       if(Timeout-- == 0)
       {
@@ -827,7 +827,7 @@ void Handle_I2C_Master_TransmitReceive(void)
   {
 #if (USE_TIMEOUT == 1)
     /* Check Systick counter flag to decrement the time-out value */
-    if (LL_SYSTICK_IsActiveCounterFlag())
+    if (LL_SYSTICK_IsActiveCounterFlag()) 
     {
       if(Timeout-- == 0)
       {
@@ -947,7 +947,7 @@ void Slave_Ready_To_Transmit_Callback(void)
   {
     /* Send the Byte requested by the Master */
     LL_I2C_TransmitData8(I2C1, (uint8_t)(*pSlaveTransmitBuffer++));
-
+    
     ubSlaveNbDataToTransmit--;
   }
   else
@@ -1022,7 +1022,7 @@ void Transfer_Error_Callback()
 {
   /* Disable DMA1_Stream5_IRQn */
   NVIC_DisableIRQ(DMA1_Stream5_IRQn);
-
+                  
   /* Error detected during DMA transfer */
   LED_Blinking(LED_BLINK_ERROR);
 }

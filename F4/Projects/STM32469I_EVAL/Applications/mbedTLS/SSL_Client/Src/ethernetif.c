@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -63,22 +63,22 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4
+  #pragma data_alignment=4   
 #endif
 __ALIGN_BEGIN ETH_DMADescTypeDef  DMARxDscrTab[ETH_RXBUFNB] __ALIGN_END;/* Ethernet Rx MA Descriptor */
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4
+  #pragma data_alignment=4   
 #endif
 __ALIGN_BEGIN ETH_DMADescTypeDef  DMATxDscrTab[ETH_TXBUFNB] __ALIGN_END;/* Ethernet Tx DMA Descriptor */
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4
+  #pragma data_alignment=4   
 #endif
 __ALIGN_BEGIN uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE] __ALIGN_END; /* Ethernet Receive Buffer */
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4
+  #pragma data_alignment=4   
 #endif
 __ALIGN_BEGIN uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE] __ALIGN_END; /* Ethernet Transmit Buffer */
 
@@ -101,9 +101,9 @@ static void ethernetif_input( void const * argument );
   * @retval None
   */
 void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
-{
+{ 
   GPIO_InitTypeDef GPIO_InitStructure;
-
+  
   /* Enable GPIOs clocks */
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -112,7 +112,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE(); 
 
 /* Ethernet pins configuration ************************************************/
   /*
@@ -131,7 +131,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
         ETH_MII_TX_EN --------------------> PG11
         ETH_MII_TXD0 ---------------------> PG13
         ETH_MII_TXD1 ---------------------> PG14
-        ETH_MII_RX_ER --------------------> PI10 (not configured)
+        ETH_MII_RX_ER --------------------> PI10 (not configured)        
         ETH_MII_CRS ----------------------> PA0  (not configured)
         ETH_MII_COL ----------------------> PH3  (not configured)
   */
@@ -139,12 +139,12 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   /* Configure PA1, PA2 and PA7 */
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStructure.Pull = GPIO_NOPULL;
+  GPIO_InitStructure.Pull = GPIO_NOPULL; 
   GPIO_InitStructure.Alternate = GPIO_AF11_ETH;
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-
+  
   /* Configure PB5 */
   GPIO_InitStructure.Pin = GPIO_PIN_5;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
@@ -157,7 +157,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-
+                                
   /* Configure PG11, PG14 and PG13 */
   GPIO_InitStructure.Pin =  GPIO_PIN_11 | GPIO_PIN_13 | GPIO_PIN_14;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStructure);
@@ -165,44 +165,44 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   /* Configure PH6, PH7 */
   GPIO_InitStructure.Pin =  GPIO_PIN_6 | GPIO_PIN_7;
   HAL_GPIO_Init(GPIOH, &GPIO_InitStructure);
-
-  /* Configure PA0
+  
+  /* Configure PA0 
   GPIO_InitStructure.Pin =  GPIO_PIN_0;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
-
+  
   Note: Ethernet Full duplex mode works properly in the default setting
   (which MII_CRS is not connected to PA0 of STM32F469I) because PA0 is shared
-  with Wakeup button and MC_ENA.
-  If Half duplex mode is needed, uncomment PA0 configuration code source (above
+  with Wakeup button and MC_ENA. 
+  If Half duplex mode is needed, uncomment PA0 configuration code source (above 
   the note) and close the SB48 solder bridge of the STM32469I-EVAL board .
   */
 
-  /* Configure PH3
+  /* Configure PH3 
   GPIO_InitStructure.Pin =  GPIO_PIN_3;
   HAL_GPIO_Init(GPIOH, &GPIO_InitStructure);
-
+  
   Note: Ethernet Full duplex mode works properly in the default setting
   (which MII_COL is not connected to PH3 of STM32F469I) because PH3 is shared
-  with SDRAM chip select SDNE0.
-  If Half duplex mode is needed, uncomment PH3 configuration code source (above
+  with SDRAM chip select SDNE0. 
+  If Half duplex mode is needed, uncomment PH3 configuration code source (above 
   the note)  then remove R243 and close SB63 solder bridge of the STM32469I-EVAL board.
   */
 
   /* Configure PI10
   GPIO_InitStructure.Pin = GPIO_PIN_10;
-  HAL_GPIO_Init(GPIOI, &GPIO_InitStructure);
-
-  Note: Ethernet works properly in the default setting (which RX_ER is not
-  connected to PI10 of STM32F469I) because PI10 is shared with data signal
-  of SDRAM.
-  If RX_ER signal is needed, uncomment PI10 configuration code source (above
+  HAL_GPIO_Init(GPIOI, &GPIO_InitStructure); 
+  
+  Note: Ethernet works properly in the default setting (which RX_ER is not 
+  connected to PI10 of STM32F469I) because PI10 is shared with data signal 
+  of SDRAM. 
+  If RX_ER signal is needed, uncomment PI10 configuration code source (above 
   the note) then remove R244 and solder SB12 of the STM32469I-EVAL board.
   */
-
+  
   /* Enable the Ethernet global Interrupt */
   HAL_NVIC_SetPriority(ETH_IRQn, 0x7, 0);
   HAL_NVIC_EnableIRQ(ETH_IRQn);
-
+  
   /* Enable ETHERNET clock  */
   __HAL_RCC_ETH_CLK_ENABLE();
 }
@@ -218,7 +218,7 @@ void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef *heth)
 }
 
 /*******************************************************************************
-                       LL Driver Interface ( LwIP stack --> ETH)
+                       LL Driver Interface ( LwIP stack --> ETH) 
 *******************************************************************************/
 /**
   * @brief In this function, the hardware should be initialized.
@@ -231,8 +231,8 @@ static void low_level_init(struct netif *netif)
 {
   uint32_t regvalue = 0;
   uint8_t macaddress[6]= { MAC_ADDR0, MAC_ADDR1, MAC_ADDR2, MAC_ADDR3, MAC_ADDR4, MAC_ADDR5 };
-
-  EthHandle.Instance = ETH;
+  
+  EthHandle.Instance = ETH;  
   EthHandle.Init.MACAddr = macaddress;
   EthHandle.Init.AutoNegotiation = ETH_AUTONEGOTIATION_ENABLE;
   EthHandle.Init.Speed = ETH_SPEED_100M;
@@ -241,20 +241,20 @@ static void low_level_init(struct netif *netif)
   EthHandle.Init.RxMode = ETH_RXINTERRUPT_MODE;
   EthHandle.Init.ChecksumMode = ETH_CHECKSUM_BY_HARDWARE;
   EthHandle.Init.PhyAddress = DP83848_PHY_ADDRESS;
-
+  
   /* configure ethernet peripheral (GPIOs, clocks, MAC, DMA) */
   if (HAL_ETH_Init(&EthHandle) == HAL_OK)
   {
     /* Set netif link flag */
     netif->flags |= NETIF_FLAG_LINK_UP;
   }
-
+  
   /* Initialize Tx Descriptors list: Chain Mode */
   HAL_ETH_DMATxDescListInit(&EthHandle, DMATxDscrTab, &Tx_Buff[0][0], ETH_TXBUFNB);
-
+     
   /* Initialize Rx Descriptors list: Chain Mode  */
   HAL_ETH_DMARxDescListInit(&EthHandle, DMARxDscrTab, &Rx_Buff[0][0], ETH_RXBUFNB);
-
+  
   /* set netif MAC hardware address length */
   netif->hwaddr_len = ETH_HWADDR_LEN;
 
@@ -282,21 +282,21 @@ static void low_level_init(struct netif *netif)
 
   /* Enable MAC and DMA transmission and reception */
   HAL_ETH_Start(&EthHandle);
-
+  
   /**** Configure PHY to generate an interrupt when Eth Link state changes ****/
   /* Read Register Configuration */
   HAL_ETH_ReadPHYRegister(&EthHandle, PHY_MICR, &regvalue);
-
+  
   regvalue |= (PHY_MICR_INT_EN | PHY_MICR_INT_OE);
 
   /* Enable Interrupts */
   HAL_ETH_WritePHYRegister(&EthHandle, PHY_MICR, regvalue );
-
+  
   /* Read Register Configuration */
   HAL_ETH_ReadPHYRegister(&EthHandle, PHY_MISR, &regvalue);
-
+  
   regvalue |= PHY_MISR_LINK_INT_EN;
-
+    
   /* Enable Interrupt on change of link status */
   HAL_ETH_WritePHYRegister(&EthHandle, PHY_MISR, regvalue);
 }
@@ -330,7 +330,7 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 
   DmaTxDesc = EthHandle.TxDesc;
   bufferoffset = 0;
-
+  
   /* copy frame from pbufs to driver buffers */
   for(q = p; q != NULL; q = q->next)
   {
@@ -340,54 +340,54 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
       errval = ERR_USE;
       goto error;
     }
-
+    
     /* Get bytes in current lwIP buffer */
     byteslefttocopy = q->len;
     payloadoffset = 0;
-
+    
     /* Check if the length of data to copy is bigger than Tx buffer size*/
     while( (byteslefttocopy + bufferoffset) > ETH_TX_BUF_SIZE )
     {
       /* Copy data to Tx buffer*/
       memcpy( (uint8_t*)((uint8_t*)buffer + bufferoffset), (uint8_t*)((uint8_t*)q->payload + payloadoffset), (ETH_TX_BUF_SIZE - bufferoffset) );
-
+      
       /* Point to next descriptor */
       DmaTxDesc = (ETH_DMADescTypeDef *)(DmaTxDesc->Buffer2NextDescAddr);
-
+      
       /* Check if the buffer is available */
       if((DmaTxDesc->Status & ETH_DMATXDESC_OWN) != (uint32_t)RESET)
       {
         errval = ERR_USE;
         goto error;
       }
-
+      
       buffer = (uint8_t *)(DmaTxDesc->Buffer1Addr);
-
+      
       byteslefttocopy = byteslefttocopy - (ETH_TX_BUF_SIZE - bufferoffset);
       payloadoffset = payloadoffset + (ETH_TX_BUF_SIZE - bufferoffset);
       framelength = framelength + (ETH_TX_BUF_SIZE - bufferoffset);
       bufferoffset = 0;
     }
-
+    
     /* Copy the remaining bytes */
     memcpy( (uint8_t*)((uint8_t*)buffer + bufferoffset), (uint8_t*)((uint8_t*)q->payload + payloadoffset), byteslefttocopy );
     bufferoffset = bufferoffset + byteslefttocopy;
     framelength = framelength + byteslefttocopy;
   }
-
-  /* Prepare transmit descriptors to give to DMA */
+  
+  /* Prepare transmit descriptors to give to DMA */ 
   HAL_ETH_TransmitFrame(&EthHandle, framelength);
-
+  
   errval = ERR_OK;
-
+  
 error:
-
+  
   /* When Transmit Underflow flag is set, clear it and issue a Transmit Poll Demand to resume transmission */
   if ((EthHandle.Instance->DMASR & ETH_DMASR_TUS) != (uint32_t)RESET)
   {
     /* Clear TUS ETHERNET DMA flag */
     EthHandle.Instance->DMASR = ETH_DMASR_TUS;
-
+    
     /* Resume DMA transmission*/
     EthHandle.Instance->DMATPDR = 0;
   }
@@ -412,67 +412,67 @@ static struct pbuf * low_level_input(struct netif *netif)
   uint32_t payloadoffset = 0;
   uint32_t byteslefttocopy = 0;
   uint32_t i=0;
-
+  
   /* get received frame */
   if(HAL_ETH_GetReceivedFrame_IT(&EthHandle) != HAL_OK)
     return NULL;
-
+  
   /* Obtain the size of the packet and put it into the "len" variable. */
   len = EthHandle.RxFrameInfos.length;
   buffer = (uint8_t *)EthHandle.RxFrameInfos.buffer;
-
+  
   if (len > 0)
   {
     /* We allocate a pbuf chain of pbufs from the Lwip buffer pool */
     p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
   }
-
+  
   if (p != NULL)
   {
     dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
     bufferoffset = 0;
-
+    
     for(q = p; q != NULL; q = q->next)
     {
       byteslefttocopy = q->len;
       payloadoffset = 0;
-
+      
       /* Check if the length of bytes to copy in current pbuf is bigger than Rx buffer size */
       while( (byteslefttocopy + bufferoffset) > ETH_RX_BUF_SIZE )
       {
         /* Copy data to pbuf */
         memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), (ETH_RX_BUF_SIZE - bufferoffset));
-
+        
         /* Point to next descriptor */
         dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
         buffer = (uint8_t *)(dmarxdesc->Buffer1Addr);
-
+        
         byteslefttocopy = byteslefttocopy - (ETH_RX_BUF_SIZE - bufferoffset);
         payloadoffset = payloadoffset + (ETH_RX_BUF_SIZE - bufferoffset);
         bufferoffset = 0;
       }
-
+      
       /* Copy remaining data in pbuf */
       memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), byteslefttocopy);
       bufferoffset = bufferoffset + byteslefttocopy;
     }
   }
-
+    
   /* Release descriptors to DMA */
   /* Point to first descriptor */
   dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
   /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
   for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
-  {
+  {  
     dmarxdesc->Status |= ETH_DMARXDESC_OWN;
     dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
   }
-
+    
   /* Clear Segment_Count */
   EthHandle.RxFrameInfos.SegCount =0;
-
+  
   /* When Rx Buffer unavailable flag is set: clear it and resume reception */
-  if ((EthHandle.Instance->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)
+  if ((EthHandle.Instance->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
   {
     /* Clear RBUS ETHERNET DMA flag */
     EthHandle.Instance->DMASR = ETH_DMASR_RBUS;
@@ -483,8 +483,8 @@ static struct pbuf * low_level_input(struct netif *netif)
 }
 
 /**
-  * @brief This function is the ethernetif_input task, it is processed when a packet
-  * is ready to be read from the interface. It uses the function low_level_input()
+  * @brief This function is the ethernetif_input task, it is processed when a packet 
+  * is ready to be read from the interface. It uses the function low_level_input() 
   * that should handle the actual reception of bytes from the network
   * interface. Then the type of the received packet is determined and
   * the appropriate input function is called.
@@ -495,7 +495,7 @@ void ethernetif_input( void const * argument )
 {
   struct pbuf *p;
   struct netif *netif = (struct netif *) argument;
-
+  
   for( ;; )
   {
     if (osSemaphoreWait( s_xSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
@@ -557,20 +557,20 @@ void ethernetif_set_link(void const *argument)
 {
   uint32_t regvalue = 0;
   struct link_str *link_arg = (struct link_str *)argument;
-
+  
   for(;;)
   {
     if (osSemaphoreWait( link_arg->semaphore, 100)== osOK)
     {
       /* Read PHY_MISR*/
       HAL_ETH_ReadPHYRegister(&EthHandle, PHY_MISR, &regvalue);
-
+      
       /* Check whether the link interrupt has occurred or not */
       if((regvalue & PHY_LINK_INTERRUPT) != (uint16_t)RESET)
       {
         /* Read PHY_SR*/
         HAL_ETH_ReadPHYRegister(&EthHandle, PHY_SR, &regvalue);
-
+        
         /* Check whether the link is up or down*/
         if((regvalue & PHY_LINK_STATUS)!= (uint16_t)RESET)
         {
@@ -595,55 +595,55 @@ void ethernetif_update_config(struct netif *netif)
 {
   __IO uint32_t tickstart = 0;
   uint32_t regvalue = 0;
-
+  
   if(netif_is_link_up(netif))
-  {
+  { 
     /* Restart the auto-negotiation */
     if(EthHandle.Init.AutoNegotiation != ETH_AUTONEGOTIATION_DISABLE)
     {
       /* Enable Auto-Negotiation */
       HAL_ETH_WritePHYRegister(&EthHandle, PHY_BCR, PHY_AUTONEGOTIATION);
-
+      
       /* Get tick */
       tickstart = HAL_GetTick();
-
+      
       /* Wait until the auto-negotiation will be completed */
       do
       {
         HAL_ETH_ReadPHYRegister(&EthHandle, PHY_BSR, &regvalue);
-
+        
         /* Check for the Timeout ( 1s ) */
         if((HAL_GetTick() - tickstart ) > 1000)
         {
           /* In case of timeout */
           goto error;
         }
-
+        
       } while (((regvalue & PHY_AUTONEGO_COMPLETE) != PHY_AUTONEGO_COMPLETE));
-
+      
       /* Read the result of the auto-negotiation */
       HAL_ETH_ReadPHYRegister(&EthHandle, PHY_SR, &regvalue);
-
+      
       /* Configure the MAC with the Duplex Mode fixed by the auto-negotiation process */
       if((regvalue & PHY_DUPLEX_STATUS) != (uint32_t)RESET)
       {
         /* Set Ethernet duplex mode to Full-duplex following the auto-negotiation */
-        EthHandle.Init.DuplexMode = ETH_MODE_FULLDUPLEX;
+        EthHandle.Init.DuplexMode = ETH_MODE_FULLDUPLEX;  
       }
       else
       {
         /* Set Ethernet duplex mode to Half-duplex following the auto-negotiation */
-        EthHandle.Init.DuplexMode = ETH_MODE_HALFDUPLEX;
+        EthHandle.Init.DuplexMode = ETH_MODE_HALFDUPLEX;           
       }
       /* Configure the MAC with the speed fixed by the auto-negotiation process */
       if(regvalue & PHY_SPEED_STATUS)
-      {
+      {  
         /* Set Ethernet speed to 10M following the auto-negotiation */
-        EthHandle.Init.Speed = ETH_SPEED_10M;
+        EthHandle.Init.Speed = ETH_SPEED_10M; 
       }
       else
-      {
-        /* Set Ethernet speed to 100M following the auto-negotiation */
+      {   
+        /* Set Ethernet speed to 100M following the auto-negotiation */ 
         EthHandle.Init.Speed = ETH_SPEED_100M;
       }
     }
@@ -653,17 +653,17 @@ void ethernetif_update_config(struct netif *netif)
       /* Check parameters */
       assert_param(IS_ETH_SPEED(EthHandle.Init.Speed));
       assert_param(IS_ETH_DUPLEX_MODE(EthHandle.Init.DuplexMode));
-
+      
       /* Set MAC Speed and Duplex Mode to PHY */
       HAL_ETH_WritePHYRegister(&EthHandle, PHY_BCR, ((uint16_t)(EthHandle.Init.DuplexMode >> 3) |
-                                                     (uint16_t)(EthHandle.Init.Speed >> 1)));
+                                                     (uint16_t)(EthHandle.Init.Speed >> 1))); 
     }
 
     /* ETHERNET MAC Re-Configuration */
     HAL_ETH_ConfigMAC(&EthHandle, (ETH_MACInitTypeDef *) NULL);
 
     /* Restart MAC interface */
-    HAL_ETH_Start(&EthHandle);
+    HAL_ETH_Start(&EthHandle);   
   }
   else
   {
@@ -681,9 +681,9 @@ void ethernetif_update_config(struct netif *netif)
   */
 __weak void ethernetif_notify_conn_changed(struct netif *netif)
 {
-  /* NOTE : This is function could be implemented in user file
+  /* NOTE : This is function could be implemented in user file 
             when the callback is needed,
-  */
+  */  
 }
 
 u32_t sys_now(void)

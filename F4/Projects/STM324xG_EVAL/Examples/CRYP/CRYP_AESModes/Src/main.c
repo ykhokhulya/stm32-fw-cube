@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRYP/CRYP_AESModes/Src/main.c
+  * @file    CRYP/CRYP_AESModes/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example provides a short description of how to use the CRYPTO
   *          peripheral to encrypt and decrypt data using AES in chaining modes
@@ -44,7 +44,7 @@
 
 /** @addtogroup CRYP_AESModes
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -66,22 +66,22 @@ UART_HandleTypeDef     UartHandle;
 
 /* Key size 128 bytes */
 uint8_t aAES128key[16] = {0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,
-                          0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c};
+                          0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c}; 
 
-/* Key size 192 bytes */
+/* Key size 192 bytes */  
 uint8_t aAES192key[24] = {0x8e,0x73,0xb0,0xf7,0xda,0x0e,0x64,0x52,
                           0xc8,0x10,0xf3,0x2b,0x80,0x90,0x79,0xe5,
-                          0x62,0xf8,0xea,0xd2,0x52,0x2c,0x6b,0x7b};
+                          0x62,0xf8,0xea,0xd2,0x52,0x2c,0x6b,0x7b}; 
 
 /* Key size 256 bytes */
 uint8_t aAES256key[32] = {0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,
                           0x2b,0x73,0xae,0xf0,0x85,0x7d,0x77,0x81,
                           0x1f,0x35,0x2c,0x07,0x3b,0x61,0x08,0xd7,
-                          0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4};
+                          0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4}; 
 
 /* Initialization vector */
 uint8_t aInitVector[16] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
-                           0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,0x0f};
+                           0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,0x0f}; 
 
 /* Plaintext */
 uint8_t aPlaintext[AES_TEXT_SIZE] = {0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,
@@ -141,10 +141,10 @@ static void PressToContinue(void);
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure the COM port */
   UartHandle.Init.BaudRate = 115200;
   UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
@@ -158,40 +158,40 @@ static void PressToContinue(void);
   /*##-1- Configure the CRYP peripheral ######################################*/
   /* Set the common CRYP parameters */
   CrypHandle.Instance = CRYP;
-
+  
   CrypHandle.Init.DataType = CRYP_DATATYPE_8B;
 
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
-  /* Infinite loop */
+  
+  /* Infinite loop */ 
   while(1)
   {
     /* Display Plain Data*/
     Display_PlainData(AES_TEXT_SIZE);
-
+    
     PressToContinue();
-
+    
 /******************************************************************************/
 /*                             AES mode ECB                                   */
 /******************************************************************************/
 
 /*=====================================================
-    Encryption ECB mode
+    Encryption ECB mode                                        
 ======================================================*/
 
 /*****************  AES 128   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize = CRYP_KEYSIZE_128B;
     CrypHandle.Init.pKey    = aAES128key;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -203,17 +203,17 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }     
 /*****************  AES 192   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize = CRYP_KEYSIZE_192B;
     CrypHandle.Init.pKey    = aAES192key;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -225,19 +225,19 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }    
 /*****************  AES 256   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize = CRYP_KEYSIZE_256B;
     CrypHandle.Init.pKey    = aAES256key;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+    
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
     if(HAL_CRYP_AESECB_Encrypt(&CrypHandle, aPlaintext, AES_TEXT_SIZE, aEncryptedtext, TIMEOUT_VALUE) == HAL_OK)
     {
@@ -247,23 +247,23 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
-
+      Error_Handler(); 
+    }    
+    
     PressToContinue();
 /*=====================================================
-    Decryption ECB mode
+    Decryption ECB mode                                        
 ======================================================*/
 
 /*****************  AES 128   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize = CRYP_KEYSIZE_128B;
     CrypHandle.Init.pKey    = aAES128key;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -275,17 +275,17 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }   
 /*****************  AES 192   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize = CRYP_KEYSIZE_192B;
     CrypHandle.Init.pKey    = aAES192key;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -297,17 +297,17 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }  
 /*****************  AES 256   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize = CRYP_KEYSIZE_256B;
     CrypHandle.Init.pKey    = aAES256key;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -319,29 +319,29 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+  
     PressToContinue();
-
+    
 /******************************************************************************/
 /*                             AES mode CBC                                   */
 /******************************************************************************/
-
+    
 /*=====================================================
-    Encryption CBC mode
+    Encryption CBC mode                                        
 ======================================================*/
-
+    
 /*****************  AES 128   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_128B;
     CrypHandle.Init.pKey      = aAES128key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -353,18 +353,18 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }   
 /*****************  AES 192   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_192B;
     CrypHandle.Init.pKey      = aAES192key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -376,18 +376,18 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }   
 /*****************  AES 256   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_256B;
     CrypHandle.Init.pKey      = aAES256key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -399,24 +399,24 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+    
     PressToContinue();
 /*=====================================================
-    Decryption CBC mode
+    Decryption CBC mode                                        
 ======================================================*/
-
+    
 /*****************  AES 128   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_128B;
     CrypHandle.Init.pKey      = aAES128key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -428,20 +428,20 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }   
 /*****************  AES 192   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_192B;
     CrypHandle.Init.pKey      = aAES192key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+    
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
     if(HAL_CRYP_AESCBC_Decrypt(&CrypHandle, aCyphertext, AES_TEXT_SIZE, aDecryptedtext, TIMEOUT_VALUE) == HAL_OK)
     {
@@ -451,18 +451,18 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    } 
 /*****************  AES 256   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_256B;
     CrypHandle.Init.pKey      = aAES256key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -474,7 +474,7 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     PressToContinue();
@@ -483,19 +483,19 @@ static void PressToContinue(void);
 /******************************************************************************/
 
 /*=====================================================
-    Encryption CTR mode
+    Encryption CTR mode                                        
 ======================================================*/
-
+    
 /*****************  AES 128   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_128B;
     CrypHandle.Init.pKey      = aAES128key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -507,18 +507,18 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 /*****************  AES 192   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_192B;
     CrypHandle.Init.pKey      = aAES192key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -530,18 +530,18 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
-    }
+      Error_Handler(); 
+    }   
 /*****************  AES 256   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_256B;
     CrypHandle.Init.pKey      = aAES256key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start encrypting aPlaintext, the cypher data is available in aEncryptedtext */
@@ -553,24 +553,24 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+    
     PressToContinue();
 /*=====================================================
-    Decryption CTR mode
+    Decryption CTR mode                                        
 ======================================================*/
-
+    
 /*****************  AES 128   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_128B;
     CrypHandle.Init.pKey      = aAES128key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -582,18 +582,18 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 /*****************  AES 192   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_192B;
     CrypHandle.Init.pKey      = aAES192key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -605,18 +605,18 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 /*****************  AES 256   ****************/
     /* Initialize the CRYP peripheral */
     CrypHandle.Init.KeySize   = CRYP_KEYSIZE_256B;
     CrypHandle.Init.pKey      = aAES256key;
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
 
     /* Start decrypting aCyphertext, the decrypted data is available in aDecryptedtext */
@@ -628,17 +628,17 @@ static void PressToContinue(void);
     else
     {
       /* Processing Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+    
     PressToContinue();
-    printf("\n\r Example restarted...\n ");
-  }
+    printf("\n\r Example restarted...\n ");    
+  } 
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -664,8 +664,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -679,14 +679,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -712,7 +712,7 @@ static void Error_Handler(void)
 }
 
 /**
-  * @brief  Display Plain Data
+  * @brief  Display Plain Data 
   * @param  datalength: length of the data to display
   * @retval None
   */
@@ -720,21 +720,21 @@ static void Display_PlainData(uint32_t datalength)
 {
   uint32_t BufferCounter =0;
   uint32_t count = 0;
-
+  
   printf("\n\r =============================================================\n\r");
   printf(" ================= Crypt Using HW Crypto  ====================\n\r");
   printf(" =============================================================\n\r");
   printf(" ---------------------------------------\n\r");
   printf(" Plain Data :\n\r");
   printf(" ---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aPlaintext[BufferCounter]);
     count++;
 
     if(count == 16)
-    {
+    { 
       count = 0;
       printf("  Block %d \n\r", (int)BufferCounter/16);
     }
@@ -742,7 +742,7 @@ static void Display_PlainData(uint32_t datalength)
 }
 
 /**
-  * @brief  Display Encrypted Data
+  * @brief  Display Encrypted Data 
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -759,25 +759,25 @@ static void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
   if(mode == ECB)
   {
     printf("ECB\n\r");
-  }
-  else if(mode == CBC)
+  }    
+  else if(mode == CBC)     
   {
     printf("CBC\n\r");
-  }
-  else /* if(mode == CTR)*/
+  }      
+  else /* if(mode == CTR)*/ 
   {
     printf("CTR\n\r");
-  }
+  }   
 
   printf(" ---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aEncryptedtext[BufferCounter]);
 
     count++;
     if(count == 16)
-    {
+    { 
       count = 0;
       printf(" Block %d \n\r", (int)BufferCounter/16);
     }
@@ -785,7 +785,7 @@ static void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
 }
 
 /**
-  * @brief  Display Decrypted Data
+  * @brief  Display Decrypted Data 
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -802,25 +802,25 @@ static void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
   if(mode == ECB)
   {
     printf("ECB\n\r");
-  }
-  else if(mode == CBC)
+  }    
+  else if(mode == CBC)     
   {
     printf("CBC\n\r");
-  }
-  else /* if(mode == CTR)*/
+  }      
+  else /* if(mode == CTR)*/ 
   {
     printf("CTR\n\r");
-  }
-
+  }   
+ 
   printf(" ---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aDecryptedtext[BufferCounter]);
     count++;
 
     if(count == 16)
-    {
+    { 
       count = 0;
       printf(" Block %d \n\r", (int)BufferCounter/16);
     }
@@ -835,14 +835,14 @@ static void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
 static void PressToContinue(void)
 {
   uint8_t data = 0;
-
-  printf("\n\r Press any key to continue...\n\r ");
-
+  
+  printf("\n\r Press any key to continue...\n\r ");  
+  
   while (data == 0)
   {
     /* Read a character from the EVAL_COM1 */
     HAL_UART_Receive(&UartHandle, (uint8_t *)&data, 1, TIMEOUT_VALUE);
-  }
+  }  
 }
 
 /**
@@ -854,7 +854,7 @@ PUTCHAR_PROTOTYPE
 {
   /* Place your implementation of fputc here */
   /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
-  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 5);
+  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 5); 
 
   return ch;
 }
@@ -868,7 +868,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -881,10 +881,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

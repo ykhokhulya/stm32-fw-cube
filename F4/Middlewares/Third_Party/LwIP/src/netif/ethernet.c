@@ -1,7 +1,7 @@
 /**
  * @file
  * Ethernet common functions
- *
+ * 
  * @defgroup ethernet Ethernet
  * @ingroup callbackstyle_api
  */
@@ -56,6 +56,10 @@
 #include "netif/ppp/pppoe.h"
 #endif /* PPPOE_SUPPORT */
 
+#ifdef LWIP_HOOK_FILENAME
+#include LWIP_HOOK_FILENAME
+#endif
+
 const struct eth_addr ethbroadcast = {{0xff,0xff,0xff,0xff,0xff,0xff}};
 const struct eth_addr ethzero = {{0,0,0,0,0,0}};
 
@@ -68,7 +72,7 @@ const struct eth_addr ethzero = {{0,0,0,0,0,0}};
  *
  * @param p the received packet, p->payload pointing to the ethernet header
  * @param netif the network interface on which the packet was received
- *
+ * 
  * @see LWIP_HOOK_UNKNOWN_ETH_PROTOCOL
  * @see ETHARP_SUPPORT_VLAN
  * @see LWIP_HOOK_VLAN_CHECK

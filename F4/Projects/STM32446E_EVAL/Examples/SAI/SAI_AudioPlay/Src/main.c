@@ -75,10 +75,10 @@ int main(void)
   uint32_t PlaybackPosition   = PLAY_BUFF_SIZE + PLAY_HEADER;
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization: global MSP (MCU Support Package) initialization
@@ -102,7 +102,7 @@ int main(void)
   {
     PlayBuff[i]=*((__IO uint16_t *)(AUDIO_FILE_ADDRESS + PLAY_HEADER + i));
   }
-
+     
   /* Start the playback */
   if(0 != audio_drv->Play(AUDIO_I2C_ADDRESS, NULL, 0))
   {
@@ -112,7 +112,7 @@ int main(void)
   {
     Error_Handler();
   }
-
+  
   /* Start loopback */
   while(1)
   {
@@ -120,7 +120,7 @@ int main(void)
 
     /* Wait a callback event */
     while(UpdatePointer==-1);
-
+    
     int position = UpdatePointer;
     UpdatePointer = -1;
 
@@ -128,7 +128,7 @@ int main(void)
     for(int i = 0; i < PLAY_BUFF_SIZE/2; i++)
     {
       PlayBuff[i+position] = *(uint16_t *)(AUDIO_FILE_ADDRESS + PlaybackPosition);
-      PlaybackPosition+=2;
+      PlaybackPosition+=2; 
     }
 
     /* check the end of the file */
@@ -136,7 +136,7 @@ int main(void)
     {
       PlaybackPosition = PLAY_HEADER;
     }
-
+    
     if(UpdatePointer != -1)
     {
       /* Buffer update time is too long compare to the data transfer time */
@@ -147,7 +147,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -174,8 +174,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -189,27 +189,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {
@@ -225,18 +225,18 @@ static void SystemClock_Config(void)
 static void Playback_Init(void)
 {
   RCC_PeriphCLKInitTypeDef RCC_PeriphCLKInitStruct;
-
+  
   /* Configure PLLSAI prescalers */
-  /* PLLSAI_VCO: VCO_429M
+  /* PLLSAI_VCO: VCO_429M 
      SAI_CLK(first level) = PLLSAI_VCO/PLLSAIQ = 429/2 = 214.5 Mhz
-     SAI_CLK_x = SAI_CLK(first level)/PLLSAIDIVQ = 214.5/19 = 11.289 Mhz */
+     SAI_CLK_x = SAI_CLK(first level)/PLLSAIDIVQ = 214.5/19 = 11.289 Mhz */ 
   RCC_PeriphCLKInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SAI2;
   RCC_PeriphCLKInitStruct.Sai2ClockSelection = RCC_SAI2CLKSOURCE_PLLSAI;
-  RCC_PeriphCLKInitStruct.PLLSAI.PLLSAIM = 8;
-  RCC_PeriphCLKInitStruct.PLLSAI.PLLSAIN = 429;
-  RCC_PeriphCLKInitStruct.PLLSAI.PLLSAIQ = 2;
-  RCC_PeriphCLKInitStruct.PLLSAIDivQ = 19;
-
+  RCC_PeriphCLKInitStruct.PLLSAI.PLLSAIM = 8; 
+  RCC_PeriphCLKInitStruct.PLLSAI.PLLSAIN = 429; 
+  RCC_PeriphCLKInitStruct.PLLSAI.PLLSAIQ = 2; 
+  RCC_PeriphCLKInitStruct.PLLSAIDivQ = 19;     
+  
   if(HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphCLKInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -261,7 +261,7 @@ static void Playback_Init(void)
   SaiHandle.Init.FirstBit       = SAI_FIRSTBIT_MSB;
   SaiHandle.Init.ClockStrobing  = SAI_CLOCKSTROBING_RISINGEDGE;
 
-  SaiHandle.FrameInit.FrameLength       = 32;
+  SaiHandle.FrameInit.FrameLength       = 32; 
   SaiHandle.FrameInit.ActiveFrameLength = 16;
   SaiHandle.FrameInit.FSDefinition      = SAI_FS_CHANNEL_IDENTIFICATION;
   SaiHandle.FrameInit.FSPolarity        = SAI_FS_ACTIVE_LOW;
@@ -269,25 +269,25 @@ static void Playback_Init(void)
 
   SaiHandle.SlotInit.FirstBitOffset = 0;
   SaiHandle.SlotInit.SlotSize       = SAI_SLOTSIZE_DATASIZE;
-  SaiHandle.SlotInit.SlotNumber     = 2;
+  SaiHandle.SlotInit.SlotNumber     = 2; 
   SaiHandle.SlotInit.SlotActive     = (SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_1);
 
   if(HAL_OK != HAL_SAI_Init(&SaiHandle))
   {
     Error_Handler();
   }
-
+  
   /* Enable SAI to generate clock used by audio driver */
   __HAL_SAI_ENABLE(&SaiHandle);
-
+  
   /* Initialize audio driver */
   if(WM8994_ID != wm8994_drv.ReadID(AUDIO_I2C_ADDRESS))
   {
     Error_Handler();
   }
-
+  
   audio_drv = &wm8994_drv;
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);
+  audio_drv->Reset(AUDIO_I2C_ADDRESS);  
   if(0 != audio_drv->Init(AUDIO_I2C_ADDRESS, OUTPUT_DEVICE_HEADPHONE, 20, AUDIO_FREQUENCY_22K))
   {
     Error_Handler();
@@ -319,20 +319,20 @@ void Error_Handler(void)
 void HAL_SAI_MspInit(SAI_HandleTypeDef *hsai)
 {
   GPIO_InitTypeDef  GPIO_Init;
-
+  
   /* Enable SAI2 clock */
   __HAL_RCC_SAI2_CLK_ENABLE();
-
+  
   /* Configure GPIOs used for SAI2 */
   AUDIO_SAIx_MCLK_ENABLE();
   AUDIO_SAIx_SCK_ENABLE();
   AUDIO_SAIx_FS_ENABLE();
   AUDIO_SAIx_SD_ENABLE();
-
+  
   GPIO_Init.Mode      = GPIO_MODE_AF_PP;
   GPIO_Init.Pull      = GPIO_NOPULL;
   GPIO_Init.Speed     = GPIO_SPEED_HIGH;
-
+  
   GPIO_Init.Alternate = AUDIO_SAIx_FS_AF;
   GPIO_Init.Pin       = AUDIO_SAIx_FS_PIN;
   HAL_GPIO_Init(AUDIO_SAIx_FS_GPIO_PORT, &GPIO_Init);
@@ -345,14 +345,14 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef *hsai)
   GPIO_Init.Alternate = AUDIO_SAIx_MCLK_AF;
   GPIO_Init.Pin       = AUDIO_SAIx_MCLK_PIN;
   HAL_GPIO_Init(AUDIO_SAIx_MCLK_GPIO_PORT, &GPIO_Init);
-
+  
   /* Configure DMA used for SAI2 */
   __HAL_RCC_DMA2_CLK_ENABLE();
 
   if(hsai->Instance == AUDIO_SAIx)
   {
-
-    hSaiDma.Init.Channel             = DMA_CHANNEL_3;
+  
+    hSaiDma.Init.Channel             = DMA_CHANNEL_3;                     
     hSaiDma.Init.Direction           = DMA_MEMORY_TO_PERIPH;
     hSaiDma.Init.PeriphInc           = DMA_PINC_DISABLE;
     hSaiDma.Init.MemInc              = DMA_MINC_ENABLE;
@@ -360,14 +360,14 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef *hsai)
     hSaiDma.Init.MemDataAlignment    = DMA_MDATAALIGN_HALFWORD;
     hSaiDma.Init.Mode                = DMA_CIRCULAR;
     hSaiDma.Init.Priority            = DMA_PRIORITY_HIGH;
-    hSaiDma.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;
+    hSaiDma.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;      
     hSaiDma.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
-    hSaiDma.Init.MemBurst            = DMA_MBURST_SINGLE;
-    hSaiDma.Init.PeriphBurst         = DMA_PBURST_SINGLE;
+    hSaiDma.Init.MemBurst            = DMA_MBURST_SINGLE;         
+    hSaiDma.Init.PeriphBurst         = DMA_PBURST_SINGLE;         
 
     /* Select the DMA instance to be used for the transfer : DMA2_Stream6 */
     hSaiDma.Instance                 = DMA2_Stream6;
-
+  
     /* Associate the DMA handle */
     __HAL_LINKDMA(hsai, hdmatx, hSaiDma);
 
@@ -380,7 +380,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef *hsai)
       Error_Handler();
     }
   }
-
+	
   HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0x01, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
 }
@@ -395,7 +395,7 @@ void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 {
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_SAI_TxCpltCallback could be implemented in the user file
-   */
+   */ 
   UpdatePointer = PLAY_BUFF_SIZE/2;
 }
 
@@ -409,7 +409,7 @@ void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_SAI_TxHalfCpltCallback could be implenetd in the user file
-   */
+   */ 
   UpdatePointer = 0;
 }
 
@@ -422,7 +422,7 @@ void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

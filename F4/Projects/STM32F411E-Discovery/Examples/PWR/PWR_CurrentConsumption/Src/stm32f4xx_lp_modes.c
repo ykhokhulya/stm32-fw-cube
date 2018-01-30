@@ -231,7 +231,7 @@ void StopMode_Measure(void)
   /* Configures system clock after wake-up from STOP: enable HSE, PLL and select
   PLL as system clock source (HSE and PLL are disabled in STOP mode) */
   SYSCLKConfig_STOP();
-
+  
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 

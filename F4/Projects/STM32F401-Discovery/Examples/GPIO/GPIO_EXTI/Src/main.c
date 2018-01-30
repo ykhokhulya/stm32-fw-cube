@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    GPIO/GPIO_EXTI/Src/main.c
+  * @file    GPIO/GPIO_EXTI/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example describes how to configure and use GPIOs through
+  * @brief   This example describes how to configure and use GPIOs through 
   *          the STM32F4xx HAL API.
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup GPIO_EXTI
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -64,7 +64,7 @@ static void EXTILine0_Config(void);
 int main(void)
 {
  /* This sample code shows how to use STM32F4xx GPIO HAL API to toggle PD12, PD13,
-    PD14, and PD14 IOs (connected to LED4, LED3, LED5 and LED6 on STM32F401C-DISCO board (MB1115B))
+    PD14, and PD14 IOs (connected to LED4, LED3, LED5 and LED6 on STM32F401C-DISCO board (MB1115B)) 
     in an infinite loop.
     To proceed, 3 steps are required: */
 
@@ -75,19 +75,19 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+ 
   /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
-
+  
   /* Configure the system clock to 84 MHz */
   SystemClock_Config();
-
+    
   /* Configure EXTI Line0 (connected to PA0 pin) in interrupt mode */
   EXTILine0_Config();
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -96,7 +96,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 84000000
   *            HCLK(Hz)                       = 84000000
@@ -121,12 +121,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -139,15 +139,15 @@ static void SystemClock_Config(void)
   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
-  }
+  } 
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
@@ -165,7 +165,7 @@ static void EXTILine0_Config(void)
 
   /* Enable GPIOA clock */
   __HAL_RCC_GPIOA_CLK_ENABLE();
-
+  
   /* Configure PA0 pin as input floating */
   GPIO_InitStructure.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStructure.Pull = GPIO_NOPULL;
@@ -189,9 +189,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     /* Toggle LED3 */
     BSP_LED_Toggle(LED3);
     /* Toggle LED4 */
-    BSP_LED_Toggle(LED4);
+    BSP_LED_Toggle(LED4);    
     /* Toggle LED5 */
-    BSP_LED_Toggle(LED5);
+    BSP_LED_Toggle(LED5);   
     /* Toggle LED6 */
     BSP_LED_Toggle(LED6);
   }
@@ -220,7 +220,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

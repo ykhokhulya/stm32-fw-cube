@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_AdvComPolling/Master/Src/main.c
+  * @file    SPI/SPI_FullDuplex_AdvComPolling/Master/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx SPI HAL API to transmit
+  * @brief   This sample code shows how to use STM32F4xx SPI HAL API to transmit 
   *          and receive a data buffer with a communication process based on
-  *          Polling transfer.
+  *          Polling transfer. 
   *          The communication is done using 2 boards.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup SPI_FullDuplex_AdvComPolling
   * @{
-  */
+  */ 
 
 /** @addtogroup Master
   * @{
@@ -63,7 +63,7 @@
 #define ADDRCMD_MASTER_READ                         ((uint16_t)0x1234)
 #define ADDRCMD_MASTER_WRITE                        ((uint16_t)0x5678)
 #define CMD_LENGTH                                  ((uint16_t)0x0004)
-#define DATA_LENGTH                                 ((uint16_t)0x0020)
+#define DATA_LENGTH                                 ((uint16_t)0x0020)          
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* SPI handler declaration */
@@ -101,16 +101,16 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
-
+  
   /*##-1- Configure the SPI peripheral #######################################*/
   /* Set the SPI parameters */
   SpiHandle.Instance               = SPIx;
@@ -125,16 +125,16 @@ int main(void)
   SpiHandle.Init.NSS               = SPI_NSS_SOFT;
   SpiHandle.Init.TIMode            = SPI_TIMODE_DISABLE;
   SpiHandle.Init.Mode = SPI_MODE_MASTER;
-
+  
   if(HAL_SPI_Init(&SpiHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
-
+  
   /* Wait for user Button press before starting the communication. Toggles LED3 until then */
   while (TestReady != SET)
   {
@@ -142,14 +142,14 @@ int main(void)
     HAL_Delay(40);
   }
   BSP_LED_Off(LED3);
-
-  /* Infinite loop */
+  
+  /* Infinite loop */  
   while(1)
   {
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
-    /* Receive Data from the Slave ###########################################*/
+    
+    /* Receive Data from the Slave ###########################################*/ 
     addrcmd[0] = (uint8_t) (ADDRCMD_MASTER_READ >> 8);
     addrcmd[1] = (uint8_t) ADDRCMD_MASTER_READ;
     addrcmd[2] = (uint8_t) (DATA_LENGTH >> 8);
@@ -161,7 +161,7 @@ int main(void)
     }
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
+    
     /* Receive ACK from the Slave */
     ackbytes = 0;
     if(HAL_SPI_Receive(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes), SPI_TIMEOUT_MAX) != HAL_OK)
@@ -173,7 +173,7 @@ int main(void)
     {
       /* Synchronization between Master and Slave */
       Master_Synchro();
-
+      
       /* Receive the requested data from the slave */
       if(HAL_SPI_Receive(&SpiHandle, aRxBuffer, DATA_LENGTH, SPI_TIMEOUT_MAX) != HAL_OK)
       {
@@ -181,20 +181,20 @@ int main(void)
       }
       /* Synchronization between Master and Slave */
       Master_Synchro();
-
+      
       /* Send ACK to the Slave */
       ackbytes = SPI_ACK_BYTES;
       if(HAL_SPI_Transmit(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes), SPI_TIMEOUT_MAX) != HAL_OK)
       {
         Error_Handler();
       }
-    }
+    }    
     else
     {
       /* Transfer error in transmission process */
       Error_Handler();
     }
-
+    
     /* Compare received buffer with one expected from slave */
     if(Buffercmp((uint8_t*)aTxSlaveBuffer, (uint8_t*)aRxBuffer, CMD_LENGTH))
     {
@@ -209,7 +209,7 @@ int main(void)
 
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
+    
     /* Transmit Data To Slave ################################################*/
     addrcmd[0] = (uint8_t) (ADDRCMD_MASTER_WRITE >> 8);
     addrcmd[1] = (uint8_t) ADDRCMD_MASTER_WRITE;
@@ -222,7 +222,7 @@ int main(void)
     }
     /* Synchronization between Master and Slave */
     Master_Synchro();
-
+    
     /* Receive ACK from the Slave */
     ackbytes = 0;
     if(HAL_SPI_Receive(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes), SPI_TIMEOUT_MAX) != HAL_OK)
@@ -241,23 +241,23 @@ int main(void)
       }
       /* Synchronization between Master and Slave */
       Master_Synchro();
-
+      
       /* Receive ACK from the Slave */
       ackbytes = 0;
       if(HAL_SPI_Receive(&SpiHandle, (uint8_t *)&ackbytes, sizeof(ackbytes), SPI_TIMEOUT_MAX) != HAL_OK)
       {
         Error_Handler();
       }
-    }
+    }    
     else
     {
       /* Transfer error in transmission process */
       Error_Handler();
     }
-
+   
     /* Flush Rx buffer for next transmission */
     Flush_Buffer(aRxBuffer, DATA_LENGTH);
-
+    
     /* Toggle LED4 */
     BSP_LED_Toggle(LED4);
     /* This delay permit to user to see LED4 toggling*/
@@ -298,7 +298,7 @@ static void Master_Synchro(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -323,12 +323,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -339,14 +339,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -419,7 +419,7 @@ static void Flush_Buffer(uint8_t* pBuffer, uint16_t BufferLength)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -432,7 +432,7 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -440,6 +440,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

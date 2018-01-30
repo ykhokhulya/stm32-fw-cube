@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    DMA/DMA_FLASHToRAM/Src/stm32f4xx_it.c
+  * @file    DMA/DMA_FLASHToRAM/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup DMA_FLASHToRAM
   * @{
-  */
+  */  
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -173,12 +173,12 @@ void SysTick_Handler(void)
 void DMA_STREAM_IRQHANDLER(void)
 {
     /* Check the interrupt and clear flag */
-    HAL_DMA_IRQHandler(&DmaHandle);
+    HAL_DMA_IRQHandler(&DmaHandle);  
 }
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

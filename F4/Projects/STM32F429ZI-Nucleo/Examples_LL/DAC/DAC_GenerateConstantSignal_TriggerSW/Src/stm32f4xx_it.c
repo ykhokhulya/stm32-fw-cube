@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/DAC/DAC_GenerateConstantSignal_TriggerSW/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -174,7 +174,7 @@ void USER_BUTTON_IRQHANDLER(void)
   {
     /* Call interruption treatment function */
     UserButton_Callback();
-
+    
     /* Clear EXTI line flag */
     /* Note: Clear flag after callback function to minimize user button       */
     /*       switch debounce parasitics.                                      */
@@ -194,7 +194,7 @@ void TIM6_DAC_IRQHandler(void)
   {
     /* Clear flag DAC channel1 underrun */
     LL_DAC_ClearFlag_DMAUDR1(DAC1);
-
+    
     /* Call interruption treatment function */
     DacUnderrunError_Callback();
   }

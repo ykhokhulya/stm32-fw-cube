@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -51,13 +51,13 @@
 
 /** @addtogroup LTDC_AnimatedPictureFromUSB
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum
 {
-  APPLICATION_IDLE = 0,
-  APPLICATION_START
+  APPLICATION_IDLE = 0,  
+  APPLICATION_START    
 }
 MSC_ApplicationTypeDef;
 
@@ -80,7 +80,7 @@ uint32_t BytesRead = 0;
 
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
 uint8_t USBH_USR_ApplicationState = USH_USR_FS_INIT;
-__IO uint8_t line_idx = 0;
+__IO uint8_t line_idx = 0;   
 
 /* Private function prototypes -----------------------------------------------*/
 static void LCD_Config(void);
@@ -102,7 +102,7 @@ static void Error_Handler(void);
   * @retval None
   */
 int main(void)
-{
+{  
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -110,23 +110,23 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
   /* Configure LED3 and LED4 */
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-
+  BSP_LED_Init(LED3); 
+  BSP_LED_Init(LED4); 
+  
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-
+  
   /* Initialize LCD driver */
   LCD_Config();
-
+  
   /* Link the USB Host disk I/O driver */
   USBDISK_Driver_Num = FATFS_LinkDriver(&USBH_Driver, "");
-
+  
   /* Init Host Library */
   if (USBH_Init(&hUSBHost, USBH_UserProcess, 0) != USBH_OK)
   {
@@ -136,7 +136,7 @@ int main(void)
 
   /* Add Supported Class */
   USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
-
+  
   /* Start Host Process */
   if (USBH_Start(&hUSBHost) != USBH_OK)
   {
@@ -163,21 +163,21 @@ int main(void)
   */
 static void LCD_Config(void)
 {
-  /* LCD Initialization */
+  /* LCD Initialization */ 
   BSP_LCD_Init();
 
-  /* LCD Layers Initialization */
+  /* LCD Layers Initialization */ 
   BSP_LCD_LayerDefaultInit(LCD_FOREGROUND_LAYER, (LCD_FRAME_BUFFER + BUFFER_OFFSET));
-
+  
   /* Configure the transparency for foreground : Increase the transparency */
   BSP_LCD_SetTransparency(LCD_BACKGROUND_LAYER, 0);
   BSP_LCD_SelectLayer(LCD_FOREGROUND_LAYER);
 
   /* LCD Log initialization */
-  LCD_LOG_Init();
+  LCD_LOG_Init(); 
 
   LCD_LOG_SetHeader((uint8_t *)"LTDC Application");
-  LCD_UsrLog("> USB Host library started.\n");
+  LCD_UsrLog("> USB Host library started.\n"); 
   LCD_LOG_SetFooter ((uint8_t *)"     USB Host Library V3.2.0" );
 }
 
@@ -187,9 +187,9 @@ static void LCD_Config(void)
   * @retval None
   */
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
-{
+{  
   switch (id)
-  {
+  { 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_IDLE;
     if (f_mount(&USBDISK_FatFs, "", 0) != FR_OK)
@@ -198,7 +198,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
       Error_Handler();
     }
     break;
-
+    
   case HOST_USER_CLASS_ACTIVE:
     Appli_state = APPLICATION_START;
     break;
@@ -214,7 +214,7 @@ static void MSC_Application(void)
 {
   switch(USBH_USR_ApplicationState)
   {
-  case USH_USR_FS_INIT:
+  case USH_USR_FS_INIT: 
     /* Register work area for logical drives */
     if (f_mount(&USBDISK_FatFs, "", 0) != FR_OK)
     {
@@ -227,7 +227,7 @@ static void MSC_Application(void)
       USBH_USR_ApplicationState = USH_USR_FS_READLIST;
     }
     break;
-
+    
   case USH_USR_FS_READLIST:
     LCD_UsrLog("> Exploring disk flash ...\n");
     if (Explore_Disk("0:/", 1) != FR_OK)
@@ -235,11 +235,11 @@ static void MSC_Application(void)
       LCD_ErrLog("> File cannot be explored.\n");
       Error_Handler();
     }
-    else
+    else 
     {
-      line_idx = 0;
-      USBH_USR_ApplicationState = USH_USR_FS_DRAW;
-
+      line_idx = 0;   
+      USBH_USR_ApplicationState = USH_USR_FS_DRAW; 
+      
       LCD_UsrLog("To start Image Slideshow\n");
       LCD_UsrLog("Press Key\n");
       while(BSP_PB_GetState (BUTTON_KEY) != SET)
@@ -248,22 +248,22 @@ static void MSC_Application(void)
       }
     }
     break;
-
+    
   case USH_USR_FS_DRAW:
     /* USER Button in polling */
     while(BSP_PB_GetState (BUTTON_KEY) != RESET)
     {
       Toggle_Leds();
     }
-
+    
     while(Appli_state == APPLICATION_START)
     {
       Image_Browser("0:/");
       return;
     }
     break;
-
-  default:
+    
+  default: 
     break;
   }
   return;
@@ -282,26 +282,26 @@ static uint8_t Explore_Disk(char* path , uint8_t recu_level)
   DIR dir;
   char *fn;
   char tmp[14];
-
+  
   res = f_opendir(&dir, path);
-
-  if (res == FR_OK)
+  
+  if (res == FR_OK) 
   {
     /* USER Button in polling */
     LCD_UsrLog("To see the disk root content:\n" );
     LCD_UsrLog("Press Key...\n");
-    while((BSP_PB_GetState (BUTTON_KEY) != SET))
+    while((BSP_PB_GetState (BUTTON_KEY) != SET))          
     {
       Toggle_Leds();
     }
-    while((BSP_PB_GetState (BUTTON_KEY) != RESET))
+    while((BSP_PB_GetState (BUTTON_KEY) != RESET))          
     {
       Toggle_Leds();
     }
-    while(Appli_state == APPLICATION_START)
+    while(Appli_state == APPLICATION_START) 
     {
       res = f_readdir(&dir, &fno);
-      if (res != FR_OK || fno.fname[0] == 0)
+      if (res != FR_OK || fno.fname[0] == 0) 
       {
         break;
       }
@@ -309,23 +309,23 @@ static uint8_t Explore_Disk(char* path , uint8_t recu_level)
       {
         continue;
       }
-
+      
       fn = fno.fname;
-      strcpy(tmp, fn);
-
+      strcpy(tmp, fn); 
+      
       line_idx++;
       if(line_idx > 12)
       {
         line_idx = 0;
         LCD_UsrLog("Press Key to continue...\n");
-
+        
         /* USER Button in polling */
         while((Appli_state == APPLICATION_START) && \
           (BSP_PB_GetState (BUTTON_KEY) != SET))
         {
           Toggle_Leds();
         }
-      }
+      } 
       if(recu_level == 1)
       {
         LCD_DbgLog("   |__");
@@ -336,15 +336,15 @@ static uint8_t Explore_Disk(char* path , uint8_t recu_level)
       }
       if((fno.fattrib & AM_DIR) == AM_DIR)
       {
-        strcat(tmp, "\n");
+        strcat(tmp, "\n"); 
         LCD_UsrLog((void *)tmp);
       }
       else
       {
-        strcat(tmp, "\n");
+        strcat(tmp, "\n"); 
         LCD_DbgLog((void *)tmp);
       }
-
+      
       if(((fno.fattrib & AM_DIR) == AM_DIR)&&(recu_level == 1))
       {
         Explore_Disk(fn, 2);
@@ -367,26 +367,26 @@ static uint8_t Image_Browser(char *path)
   FILINFO fno;
   DIR dir;
   char *fn;
-
+  
   res = f_opendir(&dir, path);
-  if (res != FR_OK)
+  if (res != FR_OK) 
   {
     Error_Handler();
   }
   else
-  {
+  {    
     for (;;) {
       res = f_readdir(&dir, &fno);
       if (res != FR_OK || fno.fname[0] == 0) break;
       if (fno.fname[0] == '.') continue;
-
+      
       fn = fno.fname;
-
-      if (fno.fattrib & AM_DIR)
+      
+      if (fno.fattrib & AM_DIR) 
       {
         continue;
-      }
-      else
+      } 
+      else 
       {
         if((strstr(fn, "bmp")) || (strstr(fn, "BMP")))
         {
@@ -400,19 +400,19 @@ static uint8_t Image_Browser(char *path)
             Toggle_Leds();
           }
           f_close(&file);
-
+          
         }
       }
-    }
+    }  
   }
-
+  
     /* LCD Log initialization */
-  LCD_LOG_Init();
+  LCD_LOG_Init(); 
 
-  LCD_LOG_SetHeader((uint8_t *)"LTDC Application");
+  LCD_LOG_SetHeader((uint8_t *)"LTDC Application"); 
   LCD_LOG_SetFooter ((uint8_t *)"     USB Host Library V3.2.0" );
   USBH_USR_ApplicationState = USH_USR_FS_READLIST;
-
+  
   f_closedir(&dir);
   return ret;
 }
@@ -443,12 +443,12 @@ static uint32_t Storage_OpenReadFile(uint32_t Address)
 
   /* Read bitmap size */
   size = *(uint16_t *) (BmpAddress + 2);
-  size |= (*(uint16_t *) (BmpAddress + 4)) << 16;
-
+  size |= (*(uint16_t *) (BmpAddress + 4)) << 16;  
+ 
   /* Get bitmap data address offset */
   index = *(uint16_t *) (BmpAddress + 10);
-  index |= (*(uint16_t *) (BmpAddress + 12)) << 16;
-
+  index |= (*(uint16_t *) (BmpAddress + 12)) << 16;  
+  
   f_lseek (&file, 0);
 
   do
@@ -467,15 +467,15 @@ static uint32_t Storage_OpenReadFile(uint32_t Address)
     for (index = 0; index < i1; index++)
     {
       *(__IO uint8_t*) (Address) = *(__IO uint8_t *)BmpAddress;
-
-      BmpAddress++;
+      
+      BmpAddress++;  
       Address++;
-    }
-
+    }  
+    
     BmpAddress = (uint32_t)Image_Buf;
   }
   while (size > 0);
-
+  
   return 1;
 }
 
@@ -492,12 +492,12 @@ static void Toggle_Leds(void)
     BSP_LED_Toggle(LED3);
     BSP_LED_Toggle(LED4);
     i = 0;
-  }
+  }  
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -522,12 +522,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -539,13 +539,13 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -590,6 +590,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

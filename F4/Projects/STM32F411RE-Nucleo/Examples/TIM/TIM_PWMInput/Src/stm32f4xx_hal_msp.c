@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -57,24 +57,24 @@
   */
 
 /**
-  * @brief TIM MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief TIM MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param htim: TIM handle pointer
   * @retval None
   */
 void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
 {
   GPIO_InitTypeDef   GPIO_InitStruct;
-
+ 
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* TIMx Peripheral clock enable */
   TIMx_CLK_ENABLE();
-
+    
   /* Enable GPIO channels Clock */
   TIMx_CHANNEL_GPIO_PORT();
-
+  
   /* Configure  (TIMx_Channel) in Alternate function, push-pull and 100MHz speed */
   GPIO_InitStruct.Pin = GPIO_PIN_CHANNEL2;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -86,7 +86,7 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
   /*##-2- Configure the NVIC for TIMx ########################################*/
   /* Set the TIMx priority */
   HAL_NVIC_SetPriority(TIMx_IRQn, 0, 1);
-
+  
   /* Enable the TIMx global Interrupt */
   HAL_NVIC_EnableIRQ(TIMx_IRQn);
 }

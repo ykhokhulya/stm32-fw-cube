@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/log.c
+  * @file    BSP/Src/log.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the LCD Log firmware functions
   ******************************************************************************
@@ -58,12 +58,12 @@ typedef enum {
 /* Private functions ---------------------------------------------------------*/
 uint32_t tick_1, tick_2;
 /**
-  * @brief  LCD Log demo
+  * @brief  LCD Log demo 
   * @param  None
   * @retval None
   */
 void Log_demo(void)
-{
+{ 
    TS_ActionTypeDef ts_action = TS_ACT_NONE;
   uint8_t ts_status = TS_OK;
   uint8_t i = 0;
@@ -77,11 +77,11 @@ void Log_demo(void)
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 65, (uint8_t *)"Touchscreen calibration success.", CENTER_MODE);
     }
   }
-
+  
   /* Initialize LCD Log module */
   LCD_LOG_Init();
 
-
+                
   /* Show Header and Footer texts */
   LCD_LOG_SetHeader((uint8_t *)"Log Example");
   LCD_LOG_SetFooter((uint8_t *)"Use touch up/down to scroll");
@@ -130,10 +130,10 @@ void Log_demo(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,9 +1,9 @@
 /**
   @page ADC_ContinuousConversion_TriggerSW ADC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/ADC/ADC_ContinuousConversion_TriggerSW/readme.txt
+  * @file    Examples_LL/ADC/ADC_ContinuousConversion_TriggerSW/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC_ContinuousConversion_TriggerSW example.
   ******************************************************************************
@@ -35,8 +35,8 @@
 
 @par Example Description
 This example describes how to use a ADC peripheral to perform
-continuous ADC conversions of a channel, from a SW start;
-This example is based on the STM32F4xx ADC LL API;
+continuous ADC conversions of a channel, from a SW start; 
+This example is based on the STM32F4xx ADC LL API; 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -51,9 +51,9 @@ After the first trigger (software start in this example), following conversions
 are launched successively automatically, indefinitely.
 Software polls for the first conversion completion
 and stores it into a variable, LED2 is turned on.
-Main program reads frequently ADC conversion data
-(without waiting for end of each conversion: software reads data
-when main program execution pointer is available and can let
+Main program reads frequently ADC conversion data 
+(without waiting for end of each conversion: software reads data 
+when main program execution pointer is available and can let 
 some ADC conversions data unread and overwritten by newer data)
 and stores it into the same variable.
 
@@ -75,7 +75,7 @@ Other peripherals used:
   1 GPIO for analog input: PA.04 (Arduino connector CN8 pin A2, Morpho connector CN7 pin 32)
 
 
-@par Directory contents
+@par Directory contents 
 
   - ADC/ADC_ContinuousConversion_TriggerSW/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - ADC/ADC_ContinuousConversion_TriggerSW/Inc/main.h                  Header for main.c module
@@ -88,12 +88,12 @@ Other peripherals used:
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/USART/USART_Communication_Tx_IT/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -176,7 +176,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Handle user button press in dedicated function */
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 
@@ -209,7 +209,7 @@ void USARTx_IRQHandler(void)
     /* Call Error function */
     Error_Callback();
   }
-
+	
 }
 
 /**

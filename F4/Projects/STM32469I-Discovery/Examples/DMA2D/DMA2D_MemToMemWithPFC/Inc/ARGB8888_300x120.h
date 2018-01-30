@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    DMA2D/DMA2D_MemToMemWithPFC/Inc/ARGB8888_300x120.h
+  * @file    DMA2D/DMA2D_MemToMemWithPFC/Inc/ARGB8888_300x120.h 
   * @author  MCD Application Team
   * @brief   This file contains image array of size 300x120 and format ARGB8888 (32 bpp)
-  *          used for DMA2D example.
+  *          used for DMA2D example.   
   ******************************************************************************
   * @attention
   *
@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __ARGB8888_300x120_H

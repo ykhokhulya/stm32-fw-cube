@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    RNG/RNG_MultiRNG/Src/stm32f4xx_it.c
+  * @file    RNG/RNG_MultiRNG/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup RNG_MultiRNG
   * @{
-  */
+  */  
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -170,13 +170,13 @@ void SysTick_Handler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
+  
+/**
+  * @}
+  */ 
 
 /**
   * @}
-  */
-
-/**
-  * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

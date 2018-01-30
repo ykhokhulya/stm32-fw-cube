@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -51,7 +51,7 @@
 
 /** @addtogroup LTDC_PicturesFromSDCard
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -83,7 +83,7 @@ int main(void)
   uint32_t counter = 0, transparency = 0;
   uint8_t str[30];
   uwInternelBuffer = (uint8_t *)0xC0260000;
-
+  
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -91,18 +91,18 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 175 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure LCD ######################################################*/
-  LCD_Config();
-
+  LCD_Config(); 
+  
   /* Configure TAMPER Button */
-  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
+  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);   
 
   BSP_SD_Init();
 
@@ -111,9 +111,9 @@ int main(void)
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
         BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Please insert SD Card                  ");
   }
-
+  
   BSP_LCD_Clear(LCD_COLOR_BLACK);
-
+  
   /*##-2- Link the SD Card disk I/O driver ###################################*/
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
   {
@@ -125,18 +125,18 @@ int main(void)
       {
         /* Set the Text Color */
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
-
+        
         BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
-
+        
         while(1)
         {
-        }
+        }       
       }
     }
-
+    
     /* Get the BMP file names on root directory */
     ubNumberOfFiles = Storage_GetDirectoryBitmapFiles("/Media", pDirectoryFiles);
-
+    
     if (ubNumberOfFiles == 0)
     {
       for (counter = 0; counter < MAX_BMP_FILES; counter++)
@@ -152,99 +152,99 @@ int main(void)
   else
   {
     /* FatFs Initialization Error */
-    Error_Handler();
+    Error_Handler();    
   }
   while(1)
-  {
+  {     
     counter = 0;
-
+    
     while ((counter) < ubNumberOfFiles)
     {
-      /* Step1 : Display on Foreground layer -------------------------------*/
+      /* Step1 : Display on Foreground layer -------------------------------*/ 
       /* Format the string */
       sprintf ((char*)str, "Media/%-11.11s", pDirectoryFiles[counter]);
-
-      if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0)
-      {
-        /* Format the string */
+      
+      if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0) 
+      {  
+        /* Format the string */        
         sprintf ((char*)str, "Media/%-11.11s", pDirectoryFiles[counter]);
-
+        
         /* Set LCD foreground Layer */
         BSP_LCD_SelectLayer(1);
-
+        
         /* Open a file and copy its content to an internal buffer */
         Storage_OpenReadFile(uwInternelBuffer, (const char*)str);
-
+        
         /* Write bmp file on LCD frame buffer */
-        BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
-
+        BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);  
+        
         /* Configure the transparency for background layer : Increase the transparency */
         for (transparency = 0; transparency < 255; (transparency++))
-        {
+        {        
           BSP_LCD_SetTransparency(1, transparency);
-
+          
           /* Insert a delay of display */
           HAL_Delay(2);
         }
-
+        
         /* Wait for tamper button pressed */
         while (BSP_PB_GetState(BUTTON_TAMPER) == SET)
         {
         }
-
+        
         /* Configure the transparency for foreground layer : decrease the transparency */
         for (transparency = 255; transparency > 0; transparency--)
-        {
+        {        
           BSP_LCD_SetTransparency(1, transparency);
-
+          
           /* Insert a delay of display */
           HAL_Delay(2);
         }
 
-        /* Clear the Foreground Layer */
+        /* Clear the Foreground Layer */ 
         BSP_LCD_Clear(LCD_COLOR_BLACK);
-
-        /* Jump to the next image */
+        
+        /* Jump to the next image */  
         counter++;
-
+        
         /* Step2 : Display on Background layer -----------------------------*/
-        /* Format the string */
+        /* Format the string */  
         sprintf ((char*)str, "Media/%-11.11s", pDirectoryFiles[counter]);
-
+        
         if ((Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0) || (counter < (ubNumberOfFiles)))
-        {
+        {         
           /* Connect the Output Buffer to LCD Background Layer  */
           BSP_LCD_SelectLayer(0);
-
-          /* Format the string */
+          
+          /* Format the string */  
           sprintf ((char*)str, "Media/%-11.11s", pDirectoryFiles[counter]);
-
+          
           /* Open a file and copy its content to an internal buffer */
           Storage_OpenReadFile(uwInternelBuffer, (const char*)str);
-
+          
           /* Write bmp file on LCD frame buffer */
           BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
-
-          /* Configure the transparency for background layer : decrease the transparency */
+          
+          /* Configure the transparency for background layer : decrease the transparency */  
           for (transparency = 0; transparency < 255; (transparency++))
-          {
+          {        
             BSP_LCD_SetTransparency(0, transparency);
-
+            
             /* Insert a delay of display */
             HAL_Delay(2);
           }
-
+          
           /* wait for tamper button pressed */
           while (BSP_PB_GetState(BUTTON_TAMPER) == SET)
           {
           }
-
-          /* Step3 : -------------------------------------------------------*/
+          
+          /* Step3 : -------------------------------------------------------*/              
           /* Configure the transparency for background layer : Increase the transparency */
           for (transparency = 255; transparency > 0; transparency--)
-          {
+          {        
             BSP_LCD_SetTransparency(0, transparency);
-
+            
             /* Insert a delay of display */
             HAL_Delay(2);
           }
@@ -252,21 +252,21 @@ int main(void)
           /* Clear the Background Layer */
           BSP_LCD_Clear(LCD_COLOR_BLACK);
 
-          counter++;
+          counter++;   
         }
         else if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0)
         {
           /* Set the Text Color */
-          BSP_LCD_SetTextColor(LCD_COLOR_RED);
-
-          BSP_LCD_DisplayStringAtLine(7, (uint8_t *) str);
-          BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. ");
+          BSP_LCD_SetTextColor(LCD_COLOR_RED); 
+          
+          BSP_LCD_DisplayStringAtLine(7, (uint8_t *) str);        
+          BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
           while(1)
           {
-          }
-        }
-      }
-    }
+          }      
+        }        
+      }  
+    }      
   }
 }
 
@@ -277,30 +277,30 @@ int main(void)
   */
 static void LCD_Config(void)
 {
-  /* LCD Initialization */
-  /* Two layers are used in this application but not simultaneously
+  /* LCD Initialization */ 
+  /* Two layers are used in this application but not simultaneously 
      so "LCD_MAX_PCLK" is recommended to programme the maximum PCLK = 25,16 MHz */
   BSP_LCD_Init();
 
-  /* LCD Initialization */
+  /* LCD Initialization */ 
   BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
   BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS+(BSP_LCD_GetXSize()*BSP_LCD_GetYSize()*4));
 
-  /* Enable the LCD */
-  BSP_LCD_DisplayOn();
-
+  /* Enable the LCD */ 
+  BSP_LCD_DisplayOn(); 
+  
   /* Select the LCD Background Layer  */
   BSP_LCD_SelectLayer(0);
 
-  /* Clear the Background Layer */
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
-
+  /* Clear the Background Layer */ 
+  BSP_LCD_Clear(LCD_COLOR_BLACK);  
+  
   /* Select the LCD Foreground Layer  */
   BSP_LCD_SelectLayer(1);
 
-  /* Clear the Foreground Layer */
+  /* Clear the Foreground Layer */ 
   BSP_LCD_Clear(LCD_COLOR_BLACK);
-
+  
   /* Configure the transparency for foreground and background :
      Increase the transparency */
   BSP_LCD_SetTransparency(0, 0);
@@ -323,7 +323,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 175000000
   *            HCLK(Hz)                       = 175000000
@@ -349,8 +349,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -367,14 +367,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 

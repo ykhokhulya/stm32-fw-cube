@@ -84,7 +84,7 @@ void HAL_TIM_IC_MspDeInit(TIM_HandleTypeDef *htim)
 {
    /* Enable the TIMx global Interrupt */
   HAL_NVIC_DisableIRQ(TIMx_IRQn);
-
+  
   /* TIMx Peripheral clock disable */
   TIMx_CLK_DISABLE();
 

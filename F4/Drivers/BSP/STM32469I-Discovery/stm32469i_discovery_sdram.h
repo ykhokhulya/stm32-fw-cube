@@ -120,7 +120,7 @@
   * @}
   */
 
-/** @addtogroup STM32469I_Discovery_SDRAM_Exported_Functions
+/** @addtogroup STM32469I_Discovery_SDRAM_Exported_Functions 
   * @{
   */
 uint8_t BSP_SDRAM_Init(void);
@@ -141,7 +141,7 @@ void    BSP_SDRAM_MspDeInit(SDRAM_HandleTypeDef  *hsdram, void *Params);
 /**
   * @}
   */
-
+  
 /**
   * @}
   */

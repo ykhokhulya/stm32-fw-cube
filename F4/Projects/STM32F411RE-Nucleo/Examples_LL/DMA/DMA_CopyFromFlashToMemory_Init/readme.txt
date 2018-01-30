@@ -1,9 +1,9 @@
 /**
   @page DMA_CopyFromFlashToMemory_Init DMA example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/DMA/DMA_CopyFromFlashToMemory_Init/readme.txt
+  * @file    Examples_LL/DMA/DMA_CopyFromFlashToMemory_Init/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the DMA example.
   ******************************************************************************
@@ -53,8 +53,8 @@ The transfer is started by setting the channel enable bit for DMA2_Stream0.
 At the end of the transfer a Transfer Complete interrupt is generated since it
 is enabled and the callback function (customized by user) is called.
 
-Finally, aSRC_Const_Buffer and aDST_Buffer are compared through Buffercmp() in order to
-check buffers correctness.
+Finally, aSRC_Const_Buffer and aDST_Buffer are compared through Buffercmp() in order to 
+check buffers correctness.  
 
 NUCLEO-F411RE's LED2 can be used to monitor the transfer status:
 - LED2 is turned ON if the DMA data transfer is successfully completed.
@@ -64,10 +64,10 @@ NUCLEO-F411RE's LED2 can be used to monitor the transfer status:
 
 System, DMA, Data Transfer, Memory to memory, Stream, Flash, SRAM
 
-@par Directory contents
+@par Directory contents 
 
   - DMA/DMA_CopyFromFlashToMemory_Init/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - DMA/DMA_CopyFromFlashToMemory_Init/Inc/main.h                  Header for main.c module
+  - DMA/DMA_CopyFromFlashToMemory_Init/Inc/main.h                  Header for main.c module  
   - DMA/DMA_CopyFromFlashToMemory_Init/Inc/stm32_assert.h          Template file to include assert_failed function
   - DMA/DMA_CopyFromFlashToMemory_Init/Src/stm32f4xx_it.c          Interrupt handlers
   - DMA/DMA_CopyFromFlashToMemory_Init/Src/main.c                  Main program
@@ -76,15 +76,15 @@ System, DMA, Data Transfer, Memory to memory, Stream, Flash, SRAM
 @par Hardware and Software environment
 
   - This example runs on STM32F411xE devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

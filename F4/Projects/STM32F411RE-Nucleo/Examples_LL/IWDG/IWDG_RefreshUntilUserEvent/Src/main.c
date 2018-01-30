@@ -76,10 +76,10 @@ int main(void)
 
   /* Initialize button in EXTI mode */
   UserButton_Init();
-
+  
   /* Check if the system has resumed from IWDG reset */
   Check_IWDG_Reset();
-
+  
   /* Configure the IWDG */
   Configure_IWDG();
 
@@ -90,10 +90,10 @@ int main(void)
     {
       /* Refresh IWDG down-counter to default value */
       LL_IWDG_ReloadCounter(IWDG);
-
+      
       LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
       /* Note that period used for Counter Reload MUST be higher than blinking timing value*/
-      /* This Counter reload timeout period is a function of this value and the
+      /* This Counter reload timeout period is a function of this value and the 
          clock prescaler. Refer to the datasheet for the timeout information  */
       LL_mDelay(LED_BLINK_FAST);
     }
@@ -110,7 +110,7 @@ void Configure_IWDG(void)
   /* Enable the peripheral clock of DBG register (uncomment for debug purpose) */
   /* ------------------------------------------------------------------------- */
   /*  LL_DBGMCU_APB1_GRP1_FreezePeriph(LL_DBGMCU_APB1_GRP1_IWDG_STOP); */
-
+  
   /* Enable the peripheral clock IWDG */
   /* -------------------------------- */
   LL_RCC_LSI_Enable();
@@ -150,7 +150,7 @@ void Check_IWDG_Reset(void)
 
     /* turn Led on and wait for user event to perform example again */
     LED_On();
-
+    
     while(ubKeyPressed != 1)
     {
     }
@@ -200,18 +200,18 @@ void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+  
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
-  /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
+  
+  /* Configure NVIC for USER_BUTTON_EXTI_IRQn */ 
   NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
   NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
 }

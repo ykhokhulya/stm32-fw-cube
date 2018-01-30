@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_Alarm/Inc/main.h
+  * @file    RTC/RTC_Alarm/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -51,7 +51,7 @@
 
 #ifdef RTC_CLOCK_SOURCE_LSI
 #define RTC_ASYNCH_PREDIV    0x7F
-#define RTC_SYNCH_PREDIV     0x0130
+#define RTC_SYNCH_PREDIV     0x0130    
 #endif
 
 #ifdef RTC_CLOCK_SOURCE_LSE

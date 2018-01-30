@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32446e_eval.c
   * @author  MCD Application Team
-  * @brief   This file provides a set of firmware functions to manage LEDs,
+  * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM32446E-EVAL evaluation
   *          board(MB1045) RevB from STMicroelectronics.
   ******************************************************************************
@@ -51,7 +51,7 @@
 
 /** @defgroup BSP BSP
   * @{
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL STM32446E EVAL
   * @{
@@ -105,7 +105,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup STM32446E_EVAL_LOW_LEVEL_Private_Variables STM32446E EVAL LOW LEVEL Private Variables
+/** @defgroup STM32446E_EVAL_LOW_LEVEL_Private_Variables STM32446E EVAL LOW LEVEL Private Variables 
   * @{
   */
 
@@ -160,7 +160,7 @@ static void     I2Cx_Init(void);
 #if defined(USE_IOEXPANDER)
 static void     I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 static uint8_t  I2Cx_Read(uint8_t Addr, uint8_t Reg);
-#endif /* USE_IOEXPANDER */
+#endif /* USE_IOEXPANDER */     
 
 static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length);
 static HAL_StatusTypeDef I2Cx_WriteMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length);
@@ -188,7 +188,7 @@ void            MFX_IO_EnableWakeupPin(void);
 
 /* LCD IO functions */
 void            LCD_IO_Init(void);
-void            LCD_IO_WriteData(uint16_t Data);
+void            LCD_IO_WriteData(uint16_t Data); 
 void            LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size);
 void            LCD_IO_WriteReg(uint8_t Reg);
 uint16_t        LCD_IO_ReadData(uint16_t Reg);
@@ -216,12 +216,12 @@ HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
 /**
   * @}
   */
-
+    
 
 
 /** @defgroup STM32446E_EVAL_LOW_LEVEL_Private_Functions STM32446E EVAL LOW LEVEL Private Functions
   * @{
-  */
+  */ 
 
   /**
   * @brief  This method returns the STM32446E EVAL BSP Driver revision
@@ -234,7 +234,7 @@ uint32_t BSP_GetVersion(void)
 
 /**
   * @brief  Configures LEDs.
-  * @param  Led: LED to be configured.
+  * @param  Led: LED to be configured. 
   *          This parameter can be one of the following values:
   *            @arg  LED1
   *            @arg  LED2
@@ -257,9 +257,9 @@ void BSP_LED_Init(Led_TypeDef Led)
     gpio_init_structure.Mode = GPIO_MODE_OUTPUT_PP;
     gpio_init_structure.Pull = GPIO_PULLUP;
     gpio_init_structure.Speed = GPIO_SPEED_HIGH;
-
+  
     HAL_GPIO_Init(LEDx_GPIO_PORT, &gpio_init_structure);
-
+    
     /* By default, turn off LED */
     HAL_GPIO_WritePin(LEDx_GPIO_PORT, GPIO_PIN[Led], GPIO_PIN_SET);
   }
@@ -275,7 +275,7 @@ void BSP_LED_Init(Led_TypeDef Led)
     /*  - in case of RevB just led 2 and led4 on IOEXPANDER (Mfx) */
     BSP_IO_ConfigPin(GPIO_PIN[Led], IO_MODE_OUTPUT_PP_PU);
     BSP_IO_WritePin(GPIO_PIN[Led], BSP_IO_PIN_SET);
-#endif /* USE_IOEXPANDER */
+#endif /* USE_IOEXPANDER */     
 
 #if !defined(USE_STM32446E_EVAL_REVA)
   }
@@ -284,13 +284,13 @@ void BSP_LED_Init(Led_TypeDef Led)
 
 /**
   * @brief  DeInit LEDs.
-  * @param  Led: LED to be configured.
+  * @param  Led: LED to be configured. 
   *          This parameter can be one of the following values:
   *            @arg  LED1
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @note Led DeInit does not disable the GPIO clock nor disable the Mfx
+  * @note Led DeInit does not disable the GPIO clock nor disable the Mfx 
   */
 void BSP_LED_DeInit(Led_TypeDef Led)
 {
@@ -315,7 +315,7 @@ void BSP_LED_DeInit(Led_TypeDef Led)
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
     /*  - in case of RevB just led 2 and led4 on IOEXPANDER (Mfx) */
     BSP_IO_ConfigPin(GPIO_PIN[Led], IO_MODE_OFF);
-#endif /* USE_IOEXPANDER */
+#endif /* USE_IOEXPANDER */     
 
 #if !defined(USE_STM32446E_EVAL_REVA)
   }
@@ -324,7 +324,7 @@ void BSP_LED_DeInit(Led_TypeDef Led)
 
 /**
   * @brief  Turns selected LED On.
-  * @param  Led: LED to be set on
+  * @param  Led: LED to be set on 
   *          This parameter can be one of the following values:
   *            @arg  LED1
   *            @arg  LED2
@@ -333,7 +333,7 @@ void BSP_LED_DeInit(Led_TypeDef Led)
   */
 void BSP_LED_On(Led_TypeDef Led)
 {
-
+  
 #if !defined(USE_STM32446E_EVAL_REVA)
   /* On RevB led1 and Led3 are on GPIO while Led2 and Led4 on Mfx*/
   if ((Led == LED1) || (Led == LED3))
@@ -349,7 +349,7 @@ void BSP_LED_On(Led_TypeDef Led)
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
     /*  - in case of RevB just led 2 and led4 on IOEXPANDER (Mfx) */
     BSP_IO_WritePin(GPIO_PIN[Led], BSP_IO_PIN_RESET);
-#endif /* USE_IOEXPANDER */
+#endif /* USE_IOEXPANDER */     
 
 #if !defined(USE_STM32446E_EVAL_REVA)
   }
@@ -357,7 +357,7 @@ void BSP_LED_On(Led_TypeDef Led)
 }
 
 /**
-  * @brief  Turns selected LED Off.
+  * @brief  Turns selected LED Off. 
   * @param  Led: LED to be set off
   *          This parameter can be one of the following values:
   *            @arg  LED1
@@ -367,7 +367,7 @@ void BSP_LED_On(Led_TypeDef Led)
   */
 void BSP_LED_Off(Led_TypeDef Led)
 {
-
+  
 #if !defined(USE_STM32446E_EVAL_REVA)
   /* On RevB led1 and Led3 are on GPIO while Led2 and Led4 on Mfx*/
   if ((Led == LED1) || (Led == LED3))
@@ -383,7 +383,7 @@ void BSP_LED_Off(Led_TypeDef Led)
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
     /*  - in case of RevB just led 2 and led4 on IOEXPANDER (Mfx) */
     BSP_IO_WritePin(GPIO_PIN[Led], BSP_IO_PIN_SET);
-#endif /* USE_IOEXPANDER */
+#endif /* USE_IOEXPANDER */     
 
 #if !defined(USE_STM32446E_EVAL_REVA)
   }
@@ -402,7 +402,7 @@ void BSP_LED_Off(Led_TypeDef Led)
   */
 void BSP_LED_Toggle(Led_TypeDef Led)
 {
-
+  
 #if !defined(USE_STM32446E_EVAL_REVA)
   /* On RevB led1 and Led3 are on GPIO while Led2 and Led4 on Mfx*/
   if ((Led == LED1) || (Led == LED3))
@@ -418,7 +418,7 @@ void BSP_LED_Toggle(Led_TypeDef Led)
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
     /*  - in case of RevB just led 2 and led4 on IOEXPANDER (Mfx) */
     BSP_IO_TogglePin(GPIO_PIN[Led]);
-#endif /* USE_IOEXPANDER */
+#endif /* USE_IOEXPANDER */     
 
 #if !defined(USE_STM32446E_EVAL_REVA)
   }
@@ -429,14 +429,14 @@ void BSP_LED_Toggle(Led_TypeDef Led)
   * @brief  Configures button GPIO and EXTI Line.
   * @param  Button: Button to be configured
   *          This parameter can be one of the following values:
-  *            @arg  BUTTON_WAKEUP: Wakeup Push Button
-  *            @arg  BUTTON_TAMPER: Tamper Push Button
+  *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+  *            @arg  BUTTON_TAMPER: Tamper Push Button  
   *            @arg  BUTTON_KEY: Key Push Button
   * @param  ButtonMode: Button mode
   *          This parameter can be one of the following values:
   *            @arg  BUTTON_MODE_GPIO: Button will be used as simple IO
-  *            @arg  BUTTON_MODE_EXTI: Button will be connected to EXTI line
-  *                                    with interrupt generation capability
+  *            @arg  BUTTON_MODE_EXTI: Button will be connected to EXTI line 
+  *                                    with interrupt generation capability  
   * @note On STM32446E-EVAL evaluation board, the three buttons (Wakeup, Tamper
   *       and key buttons) are mapped on the same push button named "Wakeup/Tamper"
   *       on the board serigraphy.
@@ -444,10 +444,10 @@ void BSP_LED_Toggle(Led_TypeDef Led)
 void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
 {
   GPIO_InitTypeDef gpio_init_structure;
-
+  
   /* Enable the BUTTON clock */
   BUTTONx_GPIO_CLK_ENABLE(Button);
-
+  
   if(ButtonMode == BUTTON_MODE_GPIO)
   {
     /* Configure Button pin as input */
@@ -457,25 +457,25 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
     gpio_init_structure.Speed = GPIO_SPEED_FAST;
     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
   }
-
+  
   if(ButtonMode == BUTTON_MODE_EXTI)
   {
     /* Configure Button pin as input with External interrupt */
     gpio_init_structure.Pin = BUTTON_PIN[Button];
     gpio_init_structure.Pull = GPIO_NOPULL;
     gpio_init_structure.Speed = GPIO_SPEED_FAST;
-
+    
     if(Button != BUTTON_WAKEUP)
     {
-      gpio_init_structure.Mode = GPIO_MODE_IT_FALLING;
+      gpio_init_structure.Mode = GPIO_MODE_IT_FALLING; 
     }
     else
     {
       gpio_init_structure.Mode = GPIO_MODE_IT_RISING;
     }
-
+    
     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
-
+    
     /* Enable and set Button EXTI Interrupt to the lowest priority */
     HAL_NVIC_SetPriority((IRQn_Type)(BUTTON_IRQn[Button]), 0x0F, 0x00);
     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
@@ -486,8 +486,8 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
   * @brief  Push Button DeInit.
   * @param  Button: Button to be configured
   *          This parameter can be one of the following values:
-  *            @arg  BUTTON_WAKEUP: Wakeup Push Button
-  *            @arg  BUTTON_TAMPER: Tamper Push Button
+  *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+  *            @arg  BUTTON_TAMPER: Tamper Push Button  
   *            @arg  BUTTON_KEY: Key Push Button
   * @note On STM32446E-EVAL evaluation board, the three buttons (Wakeup, Tamper
   *       and key buttons) are mapped on the same push button nammed "Wakeup/Tamper"
@@ -507,8 +507,8 @@ void BSP_PB_DeInit(Button_TypeDef Button)
   * @brief  Returns the selected button state.
   * @param  Button: Button to be checked
   *          This parameter can be one of the following values:
-  *            @arg  BUTTON_WAKEUP: Wakeup Push Button
-  *            @arg  BUTTON_TAMPER: Tamper Push Button
+  *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+  *            @arg  BUTTON_TAMPER: Tamper Push Button 
   *            @arg  BUTTON_KEY: Key Push Button
   * @note On STM32446E-EVAL evaluation board, the three buttons (Wakeup, Tamper
   *       and key buttons) are mapped on the same push button nammed "Wakeup/Tamper"
@@ -524,8 +524,8 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button)
   * @brief  Configures COM port.
   * @param  COM: COM port to be configured.
   *          This parameter can be one of the following values:
-  *            @arg  COM1
-  *            @arg  COM2
+  *            @arg  COM1 
+  *            @arg  COM2 
   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
   *                configuration information for the specified USART peripheral.
   */
@@ -563,8 +563,8 @@ void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
   * @brief  DeInit COM port.
   * @param  COM: COM port to be configured.
   *          This parameter can be one of the following values:
-  *            @arg  COM1
-  *            @arg  COM2
+  *            @arg  COM1 
+  *            @arg  COM2 
   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
   *                configuration information for the specified USART peripheral.
   */
@@ -577,11 +577,11 @@ void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
   /* Enable USART clock */
   EVAL_COMx_CLK_DISABLE(COM);
 
-  /* DeInit GPIO pins can be done in the application
+  /* DeInit GPIO pins can be done in the application 
      (by surcharging this __weak function) */
 
-  /* GPIO pins clock, FMC clock and DMA clock can be shut down in the application
-     by surcharging this __weak function */
+  /* GPIO pins clock, FMC clock and DMA clock can be shut down in the application 
+     by surcharging this __weak function */ 
 }
 
 #if defined(USE_IOEXPANDER)
@@ -590,17 +590,17 @@ void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
   * @param  JoyMode: Button mode.
   *          This parameter can be one of the following values:
   *            @arg  JOY_MODE_GPIO: Joystick pins will be used as simple IOs
-  *            @arg  JOY_MODE_EXTI: Joystick pins will be connected to EXTI line
-  *                                 with interrupt generation capability
+  *            @arg  JOY_MODE_EXTI: Joystick pins will be connected to EXTI line 
+  *                                 with interrupt generation capability  
   * @retval IO_OK: if all initializations are OK. Other value if error.
   */
 uint8_t BSP_JOY_Init(JOYMode_TypeDef JoyMode)
 {
   uint8_t ret = 0;
-
+  
   /* Initialize the IO functionalities */
   ret = BSP_IO_Init();
-
+  
   /* Configure joystick pins in IT mode */
   if(JoyMode == JOY_MODE_EXTI)
   {
@@ -611,8 +611,8 @@ uint8_t BSP_JOY_Init(JOYMode_TypeDef JoyMode)
   {
     BSP_IO_ConfigPin(JOY_ALL_PINS, IO_MODE_INPUT_PU);
   }
-
-  return ret;
+  
+  return ret; 
 }
 
 
@@ -638,12 +638,12 @@ void BSP_JOY_DeInit(void)
   */
 JOYState_TypeDef BSP_JOY_GetState(void)
 {
-  uint16_t pin_status = 0;
-
+  uint16_t pin_status = 0;   
+  
   /* Read the status joystick pins */
   pin_status = BSP_IO_ReadPin(JOY_ALL_PINS);
-
-  /* Check the pressed keys */
+   
+  /* Check the pressed keys */  
   if((pin_status & JOY_NONE_PIN) == JOY_NONE)
   {
     return(JOYState_TypeDef) JOY_NONE;
@@ -655,7 +655,7 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   else if(!(pin_status & JOY_DOWN_PIN))
   {
     return(JOYState_TypeDef) JOY_DOWN;
-  }
+  } 
   else if(!(pin_status & JOY_LEFT_PIN))
   {
     return(JOYState_TypeDef) JOY_LEFT;
@@ -669,9 +669,9 @@ JOYState_TypeDef BSP_JOY_GetState(void)
     return(JOYState_TypeDef) JOY_UP;
   }
   else
-  {
+  { 
     return(JOYState_TypeDef) JOY_NONE;
-  }
+  }  
 }
 
 #endif /* USE_IOEXPANDER */
@@ -686,12 +686,12 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   */
 static void I2Cx_MspInit(void)
 {
-  GPIO_InitTypeDef  gpio_init_structure;
-
-  /*** Configure the GPIOs ***/
+  GPIO_InitTypeDef  gpio_init_structure;  
+  
+  /*** Configure the GPIOs ***/  
   /* Enable GPIO clock */
   EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE();
-
+  
   /* Configure I2C Tx as alternate function */
   gpio_init_structure.Pin = EVAL_I2Cx_SCL_PIN;
   gpio_init_structure.Mode = GPIO_MODE_AF_OD;
@@ -699,25 +699,25 @@ static void I2Cx_MspInit(void)
   gpio_init_structure.Speed = GPIO_SPEED_FAST;
   gpio_init_structure.Alternate = EVAL_I2Cx_SCL_SDA_AF;
   HAL_GPIO_Init(EVAL_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
-
+  
   /* Configure I2C Rx as alternate function */
   gpio_init_structure.Pin = EVAL_I2Cx_SDA_PIN;
   HAL_GPIO_Init(EVAL_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
-
-  /*** Configure the I2C peripheral ***/
+  
+  /*** Configure the I2C peripheral ***/ 
   /* Enable I2C clock */
   EVAL_I2Cx_CLK_ENABLE();
-
-  /* Force the I2C peripheral clock reset */
-  EVAL_I2Cx_FORCE_RESET();
-
-  /* Release the I2C peripheral clock reset */
-  EVAL_I2Cx_RELEASE_RESET();
-
+  
+  /* Force the I2C peripheral clock reset */  
+  EVAL_I2Cx_FORCE_RESET(); 
+  
+  /* Release the I2C peripheral clock reset */  
+  EVAL_I2Cx_RELEASE_RESET(); 
+  
   /* Enable and set I2Cx Interrupt to a lower priority */
   HAL_NVIC_SetPriority(EVAL_I2Cx_EV_IRQn, 0x05, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_EV_IRQn);
-
+  
   /* Enable and set I2Cx Interrupt to a lower priority */
   HAL_NVIC_SetPriority(EVAL_I2Cx_ER_IRQn, 0x05, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_ER_IRQn);
@@ -737,11 +737,11 @@ static void I2Cx_Init(void)
     hEvalI2c.Init.DualAddressMode = FMPI2C_DUALADDRESS_DISABLE;
     hEvalI2c.Init.OwnAddress2     = 0;
     hEvalI2c.Init.GeneralCallMode = FMPI2C_GENERALCALL_DISABLE;
-    hEvalI2c.Init.NoStretchMode   = FMPI2C_NOSTRETCH_DISABLE;
-
+    hEvalI2c.Init.NoStretchMode   = FMPI2C_NOSTRETCH_DISABLE;  
+    
     /* Init the I2C */
     I2Cx_MspInit();
-    HAL_FMPI2C_Init(&hEvalI2c);
+    HAL_FMPI2C_Init(&hEvalI2c);    
   }
 }
 
@@ -751,14 +751,14 @@ static void I2Cx_Init(void)
 /**
   * @brief  Writes a single data.
   * @param  Addr: I2C address
-  * @param  Reg: Register address
+  * @param  Reg: Register address 
   * @param  Value: Data to be written
   */
 static void I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 {
   HAL_StatusTypeDef status = HAL_OK;
 
-  status = HAL_FMPI2C_Mem_Write(&hEvalI2c, Addr, (uint16_t)Reg, FMPI2C_MEMADD_SIZE_8BIT, &Value, 1, 100);
+  status = HAL_FMPI2C_Mem_Write(&hEvalI2c, Addr, (uint16_t)Reg, FMPI2C_MEMADD_SIZE_8BIT, &Value, 1, 100); 
 
   /* Check the communication status */
   if(status != HAL_OK)
@@ -771,31 +771,31 @@ static void I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 /**
   * @brief  Reads a single data.
   * @param  Addr: I2C address
-  * @param  Reg: Register address
+  * @param  Reg: Register address 
   * @retval Read data
   */
 static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
 {
   HAL_StatusTypeDef status = HAL_OK;
   uint8_t Value = 0;
-
+  
   status = HAL_FMPI2C_Mem_Read(&hEvalI2c, Addr, Reg, FMPI2C_MEMADD_SIZE_8BIT, &Value, 1, 1000);
-
+  
   /* Check the communication status */
   if(status != HAL_OK)
   {
     /* Execute user timeout callback */
     I2Cx_Error(Addr);
   }
-  return Value;
+  return Value;   
 }
 
-#endif /* USE_IOEXPANDER */
+#endif /* USE_IOEXPANDER */     
 
 /**
   * @brief  Reads multiple data.
   * @param  Addr: I2C address
-  * @param  Reg: Reg address
+  * @param  Reg: Reg address 
   * @param  MemAddSize: address size
   * @param  Buffer: Pointer to data buffer
   * @param  Length: Length of the data
@@ -804,33 +804,33 @@ static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
 static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length)
 {
   HAL_StatusTypeDef status = HAL_OK;
-
+  
   status = HAL_FMPI2C_Mem_Read(&hEvalI2c, Addr, (uint16_t)Reg, MemAddSize, Buffer, Length, 1000);
-
+  
   /* Check the communication status */
   if(status != HAL_OK)
   {
     /* I2C error occurred */
     I2Cx_Error(Addr);
   }
-  return status;
+  return status;    
 }
 
 /**
   * @brief  Writes a value in a register of the device through BUS in using DMA mode.
-  * @param  Addr: Device address on BUS Bus.
+  * @param  Addr: Device address on BUS Bus.  
   * @param  Reg: The target register address to write
   * @param  MemAddSize: address size
-  * @param  Buffer: The target register value to be written
+  * @param  Buffer: The target register value to be written 
   * @param  Length: buffer size to be written
   * @retval HAL status
   */
 static HAL_StatusTypeDef I2Cx_WriteMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length)
 {
   HAL_StatusTypeDef status = HAL_OK;
-
+  
   status = HAL_FMPI2C_Mem_Write(&hEvalI2c, Addr, (uint16_t)Reg, MemAddSize, Buffer, Length, 1000);
-
+  
   /* Check the communication status */
   if(status != HAL_OK)
   {
@@ -841,14 +841,14 @@ static HAL_StatusTypeDef I2Cx_WriteMultiple(uint8_t Addr, uint16_t Reg, uint16_t
 }
 
 /**
-  * @brief  Checks if target device is ready for communication.
+  * @brief  Checks if target device is ready for communication. 
   * @note   This function is used with Memory devices
   * @param  DevAddress: Target device address
   * @param  Trials: Number of trials
   * @retval HAL status
   */
 static HAL_StatusTypeDef I2Cx_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
-{
+{ 
   return (HAL_FMPI2C_IsDeviceReady(&hEvalI2c, DevAddress, Trials, 1000));
 }
 
@@ -860,7 +860,7 @@ static void I2Cx_Error(uint8_t Addr)
 {
   /* De-initialize the I2C communication bus */
   HAL_FMPI2C_DeInit(&hEvalI2c);
-
+  
   /* Re-Initialize the I2C communication bus */
   I2Cx_Init();
 }
@@ -872,35 +872,35 @@ static void I2Cx_Error(uint8_t Addr)
 static void FMC_BANK1_MspInit(void)
 {
   GPIO_InitTypeDef gpio_init_structure;
-
+    
   /* Enable FMC clock */
-  __HAL_RCC_FMC_CLK_ENABLE();
-
+  __HAL_RCC_FMC_CLK_ENABLE(); 
+  
   /* Enable GPIOs clock */
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
-
+  
   /* Common GPIO configuration */
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Pull      = GPIO_PULLUP;
   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
-  gpio_init_structure.Alternate = GPIO_AF12_FMC;
-
+  gpio_init_structure.Alternate = GPIO_AF12_FMC; 
+  
   /* GPIOD configuration */ /* GPIO_PIN_7 is  FMC_NE1 */
   gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_8 |\
                               GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_14 | GPIO_PIN_15 | GPIO_PIN_7;
-
+   
   HAL_GPIO_Init(GPIOD, &gpio_init_structure);
 
-  /* GPIOE configuration */
+  /* GPIOE configuration */  
   gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_3| GPIO_PIN_4 | GPIO_PIN_7     |\
                               GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 |\
                               GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
   HAL_GPIO_Init(GPIOE, &gpio_init_structure);
-
-  /* GPIOF configuration */
-  gpio_init_structure.Pin   = GPIO_PIN_0 ;
+  
+  /* GPIOF configuration */  
+  gpio_init_structure.Pin   = GPIO_PIN_0 ;  
   HAL_GPIO_Init(GPIOF, &gpio_init_structure);
 }
 
@@ -908,11 +908,11 @@ static void FMC_BANK1_MspInit(void)
 /**
   * @brief  Initializes LCD IO.
   */
-static void FMC_BANK1_Init(void)
-{
+static void FMC_BANK1_Init(void) 
+{  
   SRAM_HandleTypeDef hsram;
   FMC_NORSRAM_TimingTypeDef sram_timing;
-
+  
   /*** Configure the SRAM Bank 1 ***/
   /* Configure IPs */
   hsram.Instance  = FMC_NORSRAM_DEVICE;
@@ -925,7 +925,7 @@ static void FMC_BANK1_Init(void)
   sram_timing.CLKDivision           = 2;
   sram_timing.DataLatency           = 2;
   sram_timing.AccessMode            = FMC_ACCESS_MODE_A;
-
+  
   hsram.Init.NSBank             = FMC_NORSRAM_BANK1;
   hsram.Init.DataAddressMux     = FMC_DATA_ADDRESS_MUX_DISABLE;
   hsram.Init.MemoryType         = FMC_MEMORY_TYPE_SRAM;
@@ -945,15 +945,15 @@ static void FMC_BANK1_Init(void)
 
   /* Initialize the SRAM controller */
   FMC_BANK1_MspInit();
-  HAL_SRAM_Init(&hsram, &sram_timing, &sram_timing);
+  HAL_SRAM_Init(&hsram, &sram_timing, &sram_timing);   
 }
 
 
 /**
   * @brief  Writes register value.
-  * @param  Data: Data to be written
+  * @param  Data: Data to be written 
   */
-static void FMC_BANK1_WriteData(uint16_t Data)
+static void FMC_BANK1_WriteData(uint16_t Data) 
 {
   /* Write 16-bit Reg */
   FMC_BANK1->RAM = Data;
@@ -963,7 +963,7 @@ static void FMC_BANK1_WriteData(uint16_t Data)
   * @brief  Writes register address.
   * @param  Reg: Register to be written
   */
-static void FMC_BANK1_WriteReg(uint8_t Reg)
+static void FMC_BANK1_WriteReg(uint8_t Reg) 
 {
   /* Write 16-bit Index, then write register */
   FMC_BANK1->REG = Reg;
@@ -973,7 +973,7 @@ static void FMC_BANK1_WriteReg(uint8_t Reg)
   * @brief  Reads register value.
   * @retval Read value
   */
-static uint16_t FMC_BANK1_ReadData(void)
+static uint16_t FMC_BANK1_ReadData(void) 
 {
   return FMC_BANK1->RAM;
 }
@@ -1012,7 +1012,7 @@ void MFX_IO_ITConfig(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_SYSCFG_CLK_ENABLE();
 
-  /* PA0 is the MFX_OUT_IRQ (often used for EXTI_WKUP) */
+  /* PA0 is the MFX_OUT_IRQ (often used for EXTI_WKUP) */    
   gpio_init_structure.Pin   = GPIO_PIN_0;
   gpio_init_structure.Pull  = GPIO_NOPULL;
   gpio_init_structure.Speed = GPIO_SPEED_LOW;
@@ -1027,7 +1027,7 @@ void MFX_IO_ITConfig(void)
 /**
   * @brief  MFX writes single data.
   * @param  Addr: I2C address
-  * @param  Reg: Register address
+  * @param  Reg: Register address 
   * @param  Value: Data to be written
   */
 void MFX_IO_Write(uint16_t Addr, uint8_t Reg, uint8_t Value)
@@ -1038,7 +1038,7 @@ void MFX_IO_Write(uint16_t Addr, uint8_t Reg, uint8_t Value)
 /**
   * @brief  MFX reads single data.
   * @param  Addr: I2C address
-  * @param  Reg: Register address
+  * @param  Reg: Register address 
   * @retval Read data
   */
 uint8_t MFX_IO_Read(uint16_t Addr, uint8_t Reg)
@@ -1049,7 +1049,7 @@ uint8_t MFX_IO_Read(uint16_t Addr, uint8_t Reg)
 /**
   * @brief  MFX reads multiple data.
   * @param  Addr: I2C address
-  * @param  Reg: Register address
+  * @param  Reg: Register address 
   * @param  Buffer: Pointer to data buffer
   * @param  Length: Length of the data
   * @retval Number of read data
@@ -1060,7 +1060,7 @@ uint16_t MFX_IO_ReadMultiple(uint16_t Addr, uint8_t Reg, uint8_t *Buffer, uint16
 }
 
 /**
-  * @brief  MFX delay
+  * @brief  MFX delay 
   * @param  Delay: Delay in ms
   */
 void MFX_IO_Delay(uint32_t Delay)
@@ -1071,14 +1071,14 @@ void MFX_IO_Delay(uint32_t Delay)
 /**
   * @brief  Used by Lx family but requested for MFX component compatibility.
   */
-void MFX_IO_Wakeup(void)
+void MFX_IO_Wakeup(void) 
 {
 }
 
 /**
   * @brief  Used by Lx family but requested for MXF component compatibility.
   */
-void MFX_IO_EnableWakeupPin(void)
+void MFX_IO_EnableWakeupPin(void) 
 {
 }
 
@@ -1089,7 +1089,7 @@ void MFX_IO_EnableWakeupPin(void)
 /**
   * @brief  Initializes LCD low level.
   */
-void LCD_IO_Init(void)
+void LCD_IO_Init(void) 
 {
     FMC_BANK1_Init();
 }
@@ -1098,7 +1098,7 @@ void LCD_IO_Init(void)
   * @brief  Writes data on LCD data register.
   * @param  Data: Data to be written
   */
-void LCD_IO_WriteData(uint16_t Data)
+void LCD_IO_WriteData(uint16_t Data) 
 {
   /* Write 16-bit Reg */
   FMC_BANK1_WriteData(Data);
@@ -1114,9 +1114,9 @@ void LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size)
 {
   uint32_t counter;
   uint16_t *ptr = (uint16_t *) pData;
-
+  
   for (counter = 0; counter < Size; counter+=2)
-  {
+  {  
     /* Write 16-bit Reg */
     FMC_BANK1_WriteData(*ptr);
     ptr++;
@@ -1127,7 +1127,7 @@ void LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size)
   * @brief  Writes register on LCD register.
   * @param  Reg: Register to be written
   */
-void LCD_IO_WriteReg(uint8_t Reg)
+void LCD_IO_WriteReg(uint8_t Reg) 
 {
   /* Write 16-bit Index, then Write Reg */
   FMC_BANK1_WriteReg(Reg);
@@ -1141,8 +1141,8 @@ void LCD_IO_WriteReg(uint8_t Reg)
 uint16_t LCD_IO_ReadData(uint16_t Reg)
 {
   FMC_BANK1_WriteReg(Reg);
-
-  /* Read 16-bit Reg */
+  
+  /* Read 16-bit Reg */  
   return FMC_BANK1_ReadData();
 }
 
@@ -1151,7 +1151,7 @@ uint16_t LCD_IO_ReadData(uint16_t Reg)
 /**
   * @brief  Initializes Audio low level.
   */
-void AUDIO_IO_Init(void)
+void AUDIO_IO_Init(void) 
 {
   I2Cx_Init();
 }
@@ -1166,43 +1166,43 @@ void AUDIO_IO_DeInit(void)
 /**
   * @brief  Writes a single data.
   * @param  Addr: I2C address
-  * @param  Reg: Reg address
+  * @param  Reg: Reg address 
   * @param  Value: Data to be written
   */
 void AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value)
 {
   uint16_t tmp = Value;
-
+  
   Value = ((uint16_t)(tmp >> 8) & 0x00FF);
-
+  
   Value |= ((uint16_t)(tmp << 8)& 0xFF00);
-
+  
   I2Cx_WriteMultiple(Addr, Reg, FMPI2C_MEMADD_SIZE_16BIT,(uint8_t*)&Value, 2);
 }
 
 /**
   * @brief  Reads a single data.
   * @param  Addr: I2C address
-  * @param  Reg: Reg address
+  * @param  Reg: Reg address 
   * @retval Data to be read
   */
 uint16_t AUDIO_IO_Read(uint8_t Addr, uint16_t Reg)
 {
   uint16_t read_value = 0, tmp = 0;
-
-  I2Cx_ReadMultiple(Addr, Reg, FMPI2C_MEMADD_SIZE_16BIT, (uint8_t*)&read_value, 2);
-
+  
+  I2Cx_ReadMultiple(Addr, Reg, FMPI2C_MEMADD_SIZE_16BIT, (uint8_t*)&read_value, 2); 
+  
   tmp = ((uint16_t)(read_value >> 8) & 0x00FF);
-
+  
   tmp |= ((uint16_t)(read_value << 8)& 0xFF00);
-
+  
   read_value = tmp;
-
+  
   return read_value;
 }
 
 /**
-  * @brief  AUDIO Codec delay
+  * @brief  AUDIO Codec delay 
   * @param  Delay: Delay in ms
   */
 void AUDIO_IO_Delay(uint32_t Delay)
@@ -1215,7 +1215,7 @@ void AUDIO_IO_Delay(uint32_t Delay)
 /**
   * @brief  Initializes Camera low level.
   */
-void CAMERA_IO_Init(void)
+void CAMERA_IO_Init(void) 
 {
   I2Cx_Init();
 }
@@ -1223,7 +1223,7 @@ void CAMERA_IO_Init(void)
 /**
   * @brief  Camera writes single data.
   * @param  Addr: I2C address
-  * @param  Reg: Register address
+  * @param  Reg: Register address 
   * @param  Value: Data to be written
   */
 void CAMERA_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value)
@@ -1238,7 +1238,7 @@ void CAMERA_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value)
 /**
   * @brief  Camera reads single data.
   * @param  Addr: I2C address
-  * @param  Reg: Register address
+  * @param  Reg: Register address 
   * @retval Read data
   */
 uint16_t CAMERA_IO_Read(uint8_t Addr, uint16_t Reg)
@@ -1253,7 +1253,7 @@ uint16_t CAMERA_IO_Read(uint8_t Addr, uint16_t Reg)
 }
 
 /**
-  * @brief  Camera delay
+  * @brief  Camera delay 
   * @param  Delay: Delay in ms
   */
 void CAMERA_Delay(uint32_t Delay)
@@ -1298,14 +1298,14 @@ HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, u
 }
 
 /**
-  * @brief  Checks if target device is ready for communication.
+  * @brief  Checks if target device is ready for communication. 
   * @note   This function is used with Memory devices
   * @param  DevAddress: Target device address
   * @param  Trials: Number of trials
   * @retval HAL status
   */
 HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
-{
+{ 
   return (I2Cx_IsDeviceReady(DevAddress, Trials));
 }
 
@@ -1315,7 +1315,7 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

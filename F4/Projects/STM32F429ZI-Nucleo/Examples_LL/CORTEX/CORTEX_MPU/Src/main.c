@@ -104,11 +104,11 @@ int main(void)
 
   /* Initialize button in EXTI mode */
   UserButton_Init();
-
+  
   /* Set MPU regions */
   Configure_MPU();
   MPU_AccessPermConfig();
-
+  
   /* Toggle quickly the LED in waiting for User-button press */
   LED_Blinking(LED_BLINK_FAST, LED1);
 
@@ -129,20 +129,20 @@ void Configure_MPU(void)
   LL_MPU_Disable();
 
   /* Configure RAM region as Region N°0, 32KB of size and R/W region */
-  LL_MPU_ConfigRegion(EXAMPLE_RAM_REGION_NUMBER, 0x00, EXAMPLE_RAM_ADDRESS_START,
+  LL_MPU_ConfigRegion(EXAMPLE_RAM_REGION_NUMBER, 0x00, EXAMPLE_RAM_ADDRESS_START, 
          EXAMPLE_RAM_SIZE | portMPU_REGION_READ_WRITE | LL_MPU_ACCESS_NOT_BUFFERABLE |
          LL_MPU_ACCESS_NOT_CACHEABLE | LL_MPU_ACCESS_NOT_SHAREABLE | LL_MPU_TEX_LEVEL0 |
          LL_MPU_INSTRUCTION_ACCESS_ENABLE);
 
   /* Configure FLASH region as REGION N°1, 256KB of size and R/W region */
-  LL_MPU_ConfigRegion(EXAMPLE_FLASH_REGION_NUMBER, 0x00, EXAMPLE_FLASH_ADDRESS_START,
+  LL_MPU_ConfigRegion(EXAMPLE_FLASH_REGION_NUMBER, 0x00, EXAMPLE_FLASH_ADDRESS_START, 
          EXAMPLE_FLASH_SIZE | portMPU_REGION_READ_WRITE | LL_MPU_ACCESS_NOT_BUFFERABLE |
          LL_MPU_ACCESS_NOT_CACHEABLE | LL_MPU_ACCESS_NOT_SHAREABLE | LL_MPU_TEX_LEVEL0 |
          LL_MPU_INSTRUCTION_ACCESS_ENABLE);
 
   /* Configure Peripheral region as REGION N°2, 512MB of size, R/W and Execute
   Never region */
-  LL_MPU_ConfigRegion(EXAMPLE_PERIPH_REGION_NUMBER, 0x00, EXAMPLE_PERIPH_ADDRESS_START,
+  LL_MPU_ConfigRegion(EXAMPLE_PERIPH_REGION_NUMBER, 0x00, EXAMPLE_PERIPH_ADDRESS_START, 
          EXAMPLE_PERIPH_SIZE | portMPU_REGION_READ_WRITE | LL_MPU_ACCESS_NOT_BUFFERABLE |
          LL_MPU_ACCESS_NOT_CACHEABLE | LL_MPU_ACCESS_NOT_SHAREABLE | LL_MPU_TEX_LEVEL0 |
          LL_MPU_INSTRUCTION_ACCESS_DISABLE);
@@ -163,11 +163,11 @@ void MPU_AccessPermConfig(void)
   /* Disable MPU */
   LL_MPU_Disable();
 
-  LL_MPU_ConfigRegion(ARRAY_REGION_NUMBER, 0x00, ARRAY_ADDRESS_START,
+  LL_MPU_ConfigRegion(ARRAY_REGION_NUMBER, 0x00, ARRAY_ADDRESS_START, 
          ARRAY_SIZE | portMPU_REGION_PRIVILEGED_READ_ONLY | LL_MPU_ACCESS_NOT_BUFFERABLE |
          LL_MPU_ACCESS_NOT_CACHEABLE | LL_MPU_ACCESS_NOT_SHAREABLE | LL_MPU_TEX_LEVEL0 |
          LL_MPU_INSTRUCTION_ACCESS_ENABLE);
-
+  
   /* Enable MPU (any access not covered by any enabled region will cause a fault) */
   LL_MPU_Enable(LL_MPU_CTRL_PRIVILEGED_DEFAULT);
   LL_HANDLER_EnableFault(LL_HANDLER_FAULT_MEM);
@@ -209,7 +209,7 @@ void LED_Init(void)
   *     @arg LED_BLINK_FAST : Fast Blinking
   *     @arg LED_BLINK_SLOW : Slow Blinking
   *     @arg LED_BLINK_ERROR : Error specific Blinking
-  * @param  Led: Specifies the Led to be configured.
+  * @param  Led: Specifies the Led to be configured. 
   *   This parameter can be one of following parameters:
   *     @arg  LED1
   *     @arg  LED2
@@ -221,7 +221,7 @@ void LED_Blinking(uint32_t Period, Led_TypeDef Led)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LEDx_GPIO_PORT, GPIO_PIN[Led]);
+    LL_GPIO_TogglePin(LEDx_GPIO_PORT, GPIO_PIN[Led]);  
     LL_mDelay(Period);
   }
 }
@@ -234,18 +234,18 @@ void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
-
+  
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
-
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
+  
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+  
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
@@ -340,7 +340,7 @@ void UserButton_Callback(void)
   * @param  None
   * @retval None
   */
-void MemManage_Callback(void)
+void MemManage_Callback(void) 
 {
   /* Turn on LED3 */
   LL_GPIO_SetOutputPin(LEDx_GPIO_PORT, GPIO_PIN[LED3]);

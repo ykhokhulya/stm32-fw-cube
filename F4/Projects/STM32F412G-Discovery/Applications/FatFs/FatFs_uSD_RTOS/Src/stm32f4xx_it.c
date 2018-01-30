@@ -3,7 +3,7 @@
   * @file    FatFs/FatFs_uSD_RTOS/Src/stm32f4xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   *
@@ -15,8 +15,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -140,7 +140,7 @@ void BSP_SD_IRQHandler(void)
   */
 void BSP_SD_DMA_Tx_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(uSdHandle.hdmatx);
+  HAL_DMA_IRQHandler(uSdHandle.hdmatx); 
 }
 
 /**

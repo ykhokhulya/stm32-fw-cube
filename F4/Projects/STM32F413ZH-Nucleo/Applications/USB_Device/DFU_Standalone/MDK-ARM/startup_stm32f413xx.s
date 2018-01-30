@@ -1,7 +1,7 @@
 ;******************** (C) COPYRIGHT 2017 STMicroelectronics ********************
 ;* File Name          : startup_stm32f413xx.s
 ;* Author             : MCD Application Team
-;* Description        : STM32F413xx devices vector table for MDK-ARM toolchain.
+;* Description        : STM32F413xx devices vector table for MDK-ARM toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP
 ;*                      - Set the initial PC == Reset_Handler
@@ -10,9 +10,9 @@
 ;*                        calls main()).
 ;*                      After Reset the CortexM4 processor is in Thread mode,
 ;*                      priority is Privileged, and the Stack is set to Main.
-;* <<< Use Configuration Wizard in Context Menu >>>
+;* <<< Use Configuration Wizard in Context Menu >>>   
 ;*******************************************************************************
-;
+; 
 ;* Redistribution and use in source and binary forms, with or without modification,
 ;* are permitted provided that the following conditions are met:
 ;*   1. Redistributions of source code must retain the above copyright notice,
@@ -34,7 +34,7 @@
 ;* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 ;* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 ;* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-;
+; 
 ;*******************************************************************************
 
 ; Amount of memory (in bytes) allocated for Stack
@@ -459,16 +459,16 @@ DFSDM2_FLT3_IRQHandler
 ; User Stack and Heap initialization
 ;*******************************************************************************
                  IF      :DEF:__MICROLIB
-
+                
                  EXPORT  __initial_sp
                  EXPORT  __heap_base
                  EXPORT  __heap_limit
-
+                
                  ELSE
-
+                
                  IMPORT  __use_two_region_memory
                  EXPORT  __user_initial_stackheap
-
+                 
 __user_initial_stackheap
 
                  LDR     R0, =  Heap_Mem

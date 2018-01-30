@@ -14,8 +14,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -39,7 +39,7 @@ int mbedtls_hardware_poll( void *Data, unsigned char *Output, size_t Len, size_t
 {
   uint32_t index;
   uint32_t randomValue;
-
+		
   for (index = 0; index < Len/4; index++)
   {
     if (HAL_RNG_GenerateRandomNumber(&RngHandle, &randomValue) == HAL_OK)
@@ -52,7 +52,7 @@ int mbedtls_hardware_poll( void *Data, unsigned char *Output, size_t Len, size_t
       Error_Handler();
     }
   }
-
+  
   return 0;
 }
 

@@ -39,7 +39,7 @@
 1. How To use this driver:
 --------------------------
    - This driver is used to drive the touch screen module of the STM32F413H-DISCOVERY
-     evaluation board on the FRIDA LCD mounted on MB1209 daughter board.
+     evaluation board on the FRIDA LCD mounted on MB1209 daughter board. 
      The touch screen driver IC is a FT6x36 type which share the same register naming
      with FT6206 type.
 
@@ -115,7 +115,7 @@ char * ts_gesture_id_string_tab[GEST_ID_NB_MAX] = { "None",
   */
 uint8_t BSP_TS_Init(uint16_t ts_SizeX, uint16_t ts_SizeY)
 {
-  return (BSP_TS_InitEx(ts_SizeX, ts_SizeY, TS_ORIENTATION_LANDSCAPE));
+  return (BSP_TS_InitEx(ts_SizeX, ts_SizeY, TS_ORIENTATION_LANDSCAPE));  
 }
 
 /**
@@ -137,7 +137,7 @@ uint8_t BSP_TS_InitEx(uint16_t ts_SizeX, uint16_t ts_SizeY, uint8_t  orientation
   /* Initialize the communication channel to sensor (I2C) if necessary */
   /* that is initialization is done only once after a power up         */
   ft6x06_ts_drv.Init(I2C_Address);
-
+ 
   /* Scan FT6x36 TouchScreen IC controller ID register by I2C Read */
   /* Verify this is a FT6x36, otherwise this is an error case      */
 
@@ -151,7 +151,7 @@ uint8_t BSP_TS_InitEx(uint16_t ts_SizeX, uint16_t ts_SizeY, uint8_t  orientation
     /* Get LCD chosen orientation */
     if(orientation == TS_ORIENTATION_PORTRAIT)
     {
-      tsOrientation = TS_SWAP_Y;
+      tsOrientation = TS_SWAP_Y;               
     }
     else if(orientation == TS_ORIENTATION_LANDSCAPE_ROT180)
     {
@@ -159,7 +159,7 @@ uint8_t BSP_TS_InitEx(uint16_t ts_SizeX, uint16_t ts_SizeY, uint8_t  orientation
     }
     else
     {
-      tsOrientation = TS_SWAP_XY | TS_SWAP_Y;
+      tsOrientation = TS_SWAP_XY | TS_SWAP_Y;                 
     }
 
 
@@ -239,10 +239,10 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
       if(tsOrientation & TS_SWAP_XY)
       {
         tmp = Raw_x[index];
-        Raw_x[index] = Raw_y[index];
+        Raw_x[index] = Raw_y[index]; 
         Raw_y[index] = tmp;
       }
-
+      
       if(tsOrientation & TS_SWAP_X)
       {
         Raw_x[index] = FT_6206_MAX_WIDTH_HEIGHT - 1 - Raw_x[index];
@@ -252,7 +252,7 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
       {
         Raw_y[index] = FT_6206_MAX_WIDTH_HEIGHT - 1 - Raw_y[index];
       }
-
+            
       xDiff = Raw_x[index] > _x[index]? (Raw_x[index] - _x[index]): (_x[index] - Raw_x[index]);
       yDiff = Raw_y[index] > _y[index]? (Raw_y[index] - _y[index]): (_y[index] - Raw_y[index]);
 

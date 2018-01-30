@@ -41,15 +41,15 @@ Purpose     : TEXT include
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-
+  
 #ifndef TEXT_H
 #define TEXT_H
 
@@ -123,7 +123,7 @@ void TEXT_Callback(WM_MESSAGE * pMsg);
 
 /* Methods changing properties */
 
-GUI_COLOR        TEXT_GetBkColor  (TEXT_Handle hObj);
+GUI_COLOR        TEXT_GetBkColor  (TEXT_Handle hObj); 
 const GUI_FONT * TEXT_GetFont     (TEXT_Handle hObj);
 int              TEXT_GetNumLines (TEXT_Handle hObj);
 int              TEXT_GetText     (TEXT_Handle hObj, char * pDest, U32 BufferSize);

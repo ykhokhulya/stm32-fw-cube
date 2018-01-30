@@ -90,7 +90,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   GPIO_InitStruct.Pin       = USARTx_TX_PIN;
   GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull      = GPIO_PULLUP;
-  GPIO_InitStruct.Speed     = GPIO_SPEED_FAST;
+  GPIO_InitStruct.Speed     = GPIO_SPEED_FAST;  
   GPIO_InitStruct.Alternate = USARTx_TX_AF;
 
   HAL_GPIO_Init(USARTx_TX_GPIO_PORT, &GPIO_InitStruct);
@@ -179,7 +179,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
   HAL_GPIO_DeInit(USARTx_TX_GPIO_PORT, USARTx_TX_PIN);
   /* Configure UART Rx as alternate function  */
   HAL_GPIO_DeInit(USARTx_RX_GPIO_PORT, USARTx_RX_PIN);
-
+  
   /*##-3- Disable the DMA Streams ############################################*/
   /* De-Initialize the DMA Stream associated to transmission process */
   HAL_DMA_DeInit(&hdma_tx);

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/lcd.c
+  * @file    BSP/Src/lcd.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use LCD drawing features.
   ******************************************************************************
@@ -43,7 +43,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -63,19 +63,19 @@ static void LCD_Show_Feature(uint8_t feature);
   * @retval None
   */
 void LCD_demo (void)
-{
+{ 
   LCD_SetHint();
   LCD_Feature = 0;
-  LCD_Show_Feature (LCD_Feature);
-
+  LCD_Show_Feature (LCD_Feature); 
+  
   while (1)
   {
-
+    
     if(CheckForUserInput() > 0)
     {
       if(++LCD_Feature < LCD_FEATURES_NUM)
       {
-       LCD_Show_Feature (LCD_Feature);
+       LCD_Show_Feature (LCD_Feature); 
       }
       else
       {
@@ -93,14 +93,14 @@ void LCD_demo (void)
   */
 static void LCD_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), HEADBAND_HEIGHT);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAt(0, 1, (uint8_t *)"LCD", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -118,8 +118,8 @@ static void LCD_Show_Feature(uint8_t feature)
 {
   Point Points[]= {{20, 120}, {80, 120}, {80, 170}};
   Point Points2[]= {{100, 120}, {160, 120}, {160, 170}};
-
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);  
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillRect(0, HEADBAND_HEIGHT, BSP_LCD_GetXSize(), BSP_LCD_GetYSize() - HEADBAND_HEIGHT);
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
@@ -128,7 +128,7 @@ static void LCD_Show_Feature(uint8_t feature)
   {
   case 0:
     /* Text Feature */
-
+    
     BSP_LCD_DisplayStringAt(0, 70, (uint8_t *)"Left aligned Text", LEFT_MODE);
     BSP_LCD_DisplayStringAt(0, 85, (uint8_t *)"Center aligned Text", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, 100, (uint8_t *)"Right aligned Text", RIGHT_MODE);
@@ -139,14 +139,14 @@ static void LCD_Show_Feature(uint8_t feature)
     BSP_LCD_SetFont(&Font16);
     BSP_LCD_DisplayStringAt(0, 160, (uint8_t *)"Font16", CENTER_MODE);
     break;
-
+    
   case 1:
     /* Draw misc. Shapes */
-    BSP_LCD_SetTextColor(LCD_COLOR_GRAY);
+    BSP_LCD_SetTextColor(LCD_COLOR_GRAY); 
     BSP_LCD_DrawCircle(BSP_LCD_GetXSize() - 120, 90, 20);
     BSP_LCD_FillCircle(BSP_LCD_GetXSize() - 40, 90, 20);
-
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+    
+    BSP_LCD_SetTextColor(LCD_COLOR_GREEN); 
     BSP_LCD_DrawPolygon(Points, 3);
     BSP_LCD_FillPolygon(Points2, 3);
     break;
@@ -157,17 +157,17 @@ static void LCD_Show_Feature(uint8_t feature)
     BSP_LCD_DrawRect(20, 70, 60 , 40);
     BSP_LCD_FillRect(100, 70, 60 , 40);
 
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+    BSP_LCD_SetTextColor(LCD_COLOR_RED); 
     BSP_LCD_DrawEllipse(50, 140, 30, 20);
     BSP_LCD_FillEllipse(BSP_LCD_GetXSize() - 50, 140, 30, 20);
-
+    
     BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
     BSP_LCD_DrawHLine(20, BSP_LCD_GetYSize() - 5, BSP_LCD_GetXSize() - 40);
     BSP_LCD_DrawVLine(BSP_LCD_GetXSize()/2, HEADBAND_HEIGHT + 5, BSP_LCD_GetYSize() - HEADBAND_HEIGHT - 10);
     BSP_LCD_DrawLine (20, BSP_LCD_GetYSize()- 20, BSP_LCD_GetXSize()- 20, BSP_LCD_GetYSize()- 60);
     BSP_LCD_DrawLine (20, BSP_LCD_GetYSize()- 60, BSP_LCD_GetXSize()- 20, BSP_LCD_GetYSize()- 20);
     break;
-
+    
   case 3:
     /* Draw Bitmap */
     BSP_LCD_DrawBitmap(0, 0, (uint8_t *)ImageF4);
@@ -177,10 +177,10 @@ static void LCD_Show_Feature(uint8_t feature)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

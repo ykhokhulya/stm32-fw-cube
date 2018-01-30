@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___d_c_t4___i_d_c_t4.html','');})
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -217,10 +217,10 @@ Discrete Cosine Transform - type-IV</div></div>
 <li>Initializes Real FFT as its process function is used internally in DCT4, by calling <a class="el" href="group___real_f_f_t.html#ga10717ee326bf50832ef1c25b85a23068" title="Initialization function for the floating-point RFFT/RIFFT.">arm_rfft_init_f32()</a>. </li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. Manually initialize the instance structure as follows: <pre>
-*arm_dct4_instance_f32 S = {N, Nby2, normalize, pTwiddle, pCosFactor, pRfft, pCfft};
-*arm_dct4_instance_q31 S = {N, Nby2, normalize, pTwiddle, pCosFactor, pRfft, pCfft};
-*arm_dct4_instance_q15 S = {N, Nby2, normalize, pTwiddle, pCosFactor, pRfft, pCfft};
+<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. Manually initialize the instance structure as follows: <pre>    
+*arm_dct4_instance_f32 S = {N, Nby2, normalize, pTwiddle, pCosFactor, pRfft, pCfft};    
+*arm_dct4_instance_q31 S = {N, Nby2, normalize, pTwiddle, pCosFactor, pRfft, pCfft};   
+*arm_dct4_instance_q15 S = {N, Nby2, normalize, pTwiddle, pCosFactor, pRfft, pCfft};   
   </pre> where <code>N</code> is the length of the DCT4; <code>Nby2</code> is half of the length of the DCT4; <code>normalize</code> is normalizing factor used and is equal to <code>sqrt(2/N)</code>; <code>pTwiddle</code> points to the twiddle factor table; <code>pCosFactor</code> points to the cosFactor table; <code>pRfft</code> points to the real FFT instance; <code>pCfft</code> points to the complex FFT instance; The CFFT and RFFT structures also needs to be initialized, refer to <a class="el" href="group___complex_f_f_t.html#ga521f670cd9c571bc61aff9bec89f4c26" title="Processing function for the floating-point Radix-4 CFFT/CIFFT.">arm_cfft_radix4_f32()</a> and <a class="el" href="group___real_f_f_t.html#ga3df1766d230532bc068fc4ed69d0fcdc" title="Processing function for the floating-point RFFT/RIFFT.">arm_rfft_f32()</a> respectively for details regarding static initialization.</dd></dl>
 <dl class="section user"><dt>Fixed-Point Behavior </dt><dd>Care must be taken when using the fixed-point versions of the DCT4 transform functions. In particular, the overflow and saturation behavior of the accumulator used in each function must be considered. Refer to the function specific documentation below for usage guidelines. </dd></dl>
 <h2 class="groupheader">Function Documentation</h2>
@@ -513,7 +513,7 @@ Discrete Cosine Transform - type-IV</div></div>
 <div class="image">
 <img src="dct4FormatsQ15Table.gif" alt="dct4FormatsQ15Table.gif"/>
 </div>
-
+ 
 <p>References <a class="el" href="group___basic_mult.html#gafb0778d27ed98a2a6f2ecb7d48cc8c75">arm_mult_q15()</a>, <a class="el" href="group__shift.html#gaa1757e53279780107acc92cf100adb61">arm_shift_q15()</a>, <a class="el" href="structarm__dct4__instance__q15.html#a53d24009bb9b2e93d0aa07db7f1a6c25">arm_dct4_instance_q15::N</a>, <a class="el" href="structarm__dct4__instance__q15.html#af43dcbbc2fc661ffbc525afe3dcbd7da">arm_dct4_instance_q15::Nby2</a>, <a class="el" href="structarm__dct4__instance__q15.html#ac76df681b1bd502fb4874c06f055dded">arm_dct4_instance_q15::pCosFactor</a>, and <a class="el" href="structarm__dct4__instance__q15.html#abc6c847e9f906781e1d5da40e9aafa76">arm_dct4_instance_q15::pTwiddle</a>.</p>
 
 </div>
@@ -560,7 +560,7 @@ Discrete Cosine Transform - type-IV</div></div>
 <div class="image">
 <img src="dct4FormatsQ31Table.gif" alt="dct4FormatsQ31Table.gif"/>
 </div>
-
+ 
 <p>References <a class="el" href="group___cmplx_by_cmplx_mult.html#ga1829e50993a90742de225a0ce4213838">arm_cmplx_mult_cmplx_q31()</a>, <a class="el" href="group___basic_mult.html#ga3528c0f54a0607acc603f0490d3ca6c6">arm_mult_q31()</a>, <a class="el" href="group___real_f_f_t.html#gabaeab5646aeea9844e6d42ca8c73fe3a">arm_rfft_q31()</a>, <a class="el" href="group__shift.html#ga387dd8b7b87377378280978f16cdb13d">arm_shift_q31()</a>, <a class="el" href="structarm__dct4__instance__q31.html#a46a9f136457350676e2bfd3768ff9d6d">arm_dct4_instance_q31::N</a>, <a class="el" href="structarm__dct4__instance__q31.html#a32d3268ba4629908dba056599f0a904d">arm_dct4_instance_q31::Nby2</a>, <a class="el" href="structarm__dct4__instance__q31.html#ac80ff7b28fca36aeef74dea12e8312dd">arm_dct4_instance_q31::normalize</a>, <a class="el" href="structarm__dct4__instance__q31.html#af97204d1838925621fc82021a0c2d6c1">arm_dct4_instance_q31::pCosFactor</a>, <a class="el" href="structarm__dct4__instance__q31.html#af1487dab5e7963b85dc0fdc6bf492542">arm_dct4_instance_q31::pRfft</a>, and <a class="el" href="structarm__dct4__instance__q31.html#a7db236e22673146bb1d2c962f0713f08">arm_dct4_instance_q31::pTwiddle</a>.</p>
 
 </div>
@@ -585,9 +585,9 @@ Discrete Cosine Transform - type-IV</div></div>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>cosFactor tables are generated using the formula : <pre>cos_factors[n] = 2 * cos((2n+1)*pi/(4*N))</pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>C command to generate the table </dd></dl>
-<dl class="section user"><dt></dt><dd><pre> for(i = 0; i&lt; N; i++)
-{
-   cos_factors[i]= 2 * cos((2*i+1)*c/2);
+<dl class="section user"><dt></dt><dd><pre> for(i = 0; i&lt; N; i++)    
+{    
+   cos_factors[i]= 2 * cos((2*i+1)*c/2);    
 } </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>where <code>N</code> is the number of factors to generate and <code>c</code> is <code>pi/(2*N)</code> </dd></dl>
 
@@ -679,10 +679,10 @@ Discrete Cosine Transform - type-IV</div></div>
 </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>cosFactor tables are generated using the formula : <pre> cos_factors[n] = 2 * cos((2n+1)*pi/(4*N)) </pre> </dd></dl>
-<dl class="section user"><dt></dt><dd>C command to generate the table <pre>
-for(i = 0; i&lt; N; i++)
-{
-  cos_factors[i]= 2 * cos((2*i+1)*c/2);
+<dl class="section user"><dt></dt><dd>C command to generate the table <pre>    
+for(i = 0; i&lt; N; i++)    
+{    
+  cos_factors[i]= 2 * cos((2*i+1)*c/2);    
 } </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>where <code>N</code> is the number of factors to generate and <code>c</code> is <code>pi/(2*N)</code> </dd></dl>
 <dl class="section user"><dt></dt><dd>Then converted to q15 format by multiplying with 2^31 and saturated if required. </dd></dl>
@@ -775,10 +775,10 @@ for(i = 0; i&lt; N; i++)
 </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>cosFactor tables are generated using the formula : <pre>cos_factors[n] = 2 * cos((2n+1)*pi/(4*N))</pre> </dd></dl>
-<dl class="section user"><dt></dt><dd>C command to generate the table <pre>
-for(i = 0; i&lt; N; i++)
-{
-  cos_factors[i]= 2 * cos((2*i+1)*c/2);
+<dl class="section user"><dt></dt><dd>C command to generate the table <pre>    
+for(i = 0; i&lt; N; i++)    
+{    
+  cos_factors[i]= 2 * cos((2*i+1)*c/2);    
 } </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>where <code>N</code> is the number of factors to generate and <code>c</code> is <code>pi/(2*N)</code> </dd></dl>
 <dl class="section user"><dt></dt><dd>Then converted to q31 format by multiplying with 2^31 and saturated if required. </dd></dl>
@@ -871,11 +871,11 @@ for(i = 0; i&lt; N; i++)
 </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>Weights tables are generated using the formula : <pre>weights[n] = e^(-j*n*pi/(2*N))</pre> </dd></dl>
-<dl class="section user"><dt></dt><dd>C command to generate the table <pre>
-for(i = 0; i&lt; N; i++)
-{
-   weights[2*i]= cos(i*c);
-   weights[(2*i)+1]= -sin(i * c);
+<dl class="section user"><dt></dt><dd>C command to generate the table <pre>    
+for(i = 0; i&lt; N; i++)    
+{    
+   weights[2*i]= cos(i*c);    
+   weights[(2*i)+1]= -sin(i * c);    
 } </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>Where <code>N</code> is the Number of weights to be calculated and <code>c</code> is <code>pi/(2*N)</code> </dd></dl>
 <dl class="section user"><dt></dt><dd>In the tables below the real and imaginary values are placed alternatively, hence the array length is <code>2*N</code>. </dd></dl>
@@ -968,11 +968,11 @@ for(i = 0; i&lt; N; i++)
 </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>Weights tables are generated using the formula : <pre>weights[n] = e^(-j*n*pi/(2*N))</pre> </dd></dl>
-<dl class="section user"><dt></dt><dd>C command to generate the table <pre>
-for(i = 0; i&lt; N; i++)
-{
-  weights[2*i]= cos(i*c);
-  weights[(2*i)+1]= -sin(i * c);
+<dl class="section user"><dt></dt><dd>C command to generate the table <pre>    
+for(i = 0; i&lt; N; i++)    
+{    
+  weights[2*i]= cos(i*c);    
+  weights[(2*i)+1]= -sin(i * c);    
 } </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>where <code>N</code> is the Number of weights to be calculated and <code>c</code> is <code>pi/(2*N)</code> </dd></dl>
 <dl class="section user"><dt></dt><dd>Converted the output to q15 format by multiplying with 2^31 and saturated if required. </dd></dl>
@@ -1066,11 +1066,11 @@ for(i = 0; i&lt; N; i++)
 </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>Weights tables are generated using the formula : <pre>weights[n] = e^(-j*n*pi/(2*N))</pre> </dd></dl>
-<dl class="section user"><dt></dt><dd>C command to generate the table <pre>
-for(i = 0; i&lt; N; i++)
-{
-  weights[2*i]= cos(i*c);
-  weights[(2*i)+1]= -sin(i * c);
+<dl class="section user"><dt></dt><dd>C command to generate the table <pre>    
+for(i = 0; i&lt; N; i++)    
+{    
+  weights[2*i]= cos(i*c);    
+  weights[(2*i)+1]= -sin(i * c);    
 } </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>where <code>N</code> is the Number of weights to be calculated and <code>c</code> is <code>pi/(2*N)</code> </dd></dl>
 <dl class="section user"><dt></dt><dd>Convert the output to q31 format by multiplying with 2^31 and saturated if required. </dd></dl>
@@ -1154,7 +1154,7 @@ for(i = 0; i&lt; N; i++)
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

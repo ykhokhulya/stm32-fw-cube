@@ -160,7 +160,7 @@ header file. */
 #define configASSERT( x ) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
-standard names. */
+standard names. */ 
 #define vPortSVCHandler SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
 
@@ -172,13 +172,13 @@ void PostSleepProcessing(uint32_t *ulExpectedIdleTime);
 /* The configPRE_SLEEP_PROCESSING() and configPOST_SLEEP_PROCESSING() macros
 allow the application writer to add additional code before and after the MCU is
 placed into the low power state respectively.  The empty implementations
-provided in this demo can be extended to save even more power. */
-#if configUSE_TICKLESS_IDLE == 1
+provided in this demo can be extended to save even more power. */ 
+#if configUSE_TICKLESS_IDLE == 1 
 #define configPRE_SLEEP_PROCESSING                        PreSleepProcessing
 #define configPOST_SLEEP_PROCESSING                       PostSleepProcessing
 #endif /* configUSE_TICKLESS_IDLE == 1 */
 
-/* IMPORTANT: This define MUSTbe commented when used with STM32Cube firmware,
+/* IMPORTANT: This define MUSTbe commented when used with STM32Cube firmware, 
               to prevent overwriting SysTick_Handler defined within STM32Cube HAL */
 /* #define xPortSysTickHandler SysTick_Handler */
 

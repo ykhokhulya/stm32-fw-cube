@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* File Info : -----------------------------------------------------------------
                                    User NOTES
@@ -40,33 +40,33 @@
 --------------------------
    - This driver is used to drive the IO module of the STM32446E-EVAL evaluation
      board.
-   - The MFXSTM32L152 IO expander device component driver must be included with this
+   - The MFXSTM32L152 IO expander device component driver must be included with this 
      driver in order to run the IO functionalities commanded by the IO expander (MFX)
      device mounted on the evaluation board.
 
 2. Driver description:
 ---------------------
   + Initialization steps:
-     o Initialize the IO module using the BSP_IO_Init() function. This
+     o Initialize the IO module using the BSP_IO_Init() function. This 
        function includes the MSP layer hardware resources initialization and the
-       communication layer configuration to start the IO functionalities use.
-
+       communication layer configuration to start the IO functionalities use.    
+  
   + IO functionalities use
-     o The IO pin mode is configured when calling the function BSP_IO_ConfigPin(), you
-       must specify the desired IO mode by choosing the "IO_ModeTypedef" parameter
+     o The IO pin mode is configured when calling the function BSP_IO_ConfigPin(), you 
+       must specify the desired IO mode by choosing the "IO_ModeTypedef" parameter 
        predefined value.
-     o If an IO pin is used in interrupt mode, the function BSP_IO_ITGetStatus() is
-       needed to get the interrupt status. To clear the IT pending bits, you should
+     o If an IO pin is used in interrupt mode, the function BSP_IO_ITGetStatus() is 
+       needed to get the interrupt status. To clear the IT pending bits, you should 
        call the function BSP_IO_ITClear() with specifying the IO pending bit to clear.
      o The IT is handled using the corresponding external interrupt IRQ handler,
        the user IT callback treatment is implemented on the same external interrupt
        callback.
-     o The IRQ_OUT pin (common for all functionalities: TS, JOY, SD, etc)  can be
+     o The IRQ_OUT pin (common for all functionalities: TS, JOY, SD, etc)  can be  
        configured using the function BSP_IO_ConfigIrqOutPin()
-     o To get/set an IO pin combination state you can use the functions
-       BSP_IO_ReadPin()/BSP_IO_WritePin() or the function BSP_IO_TogglePin() to toggle the pin
+     o To get/set an IO pin combination state you can use the functions 
+       BSP_IO_ReadPin()/BSP_IO_WritePin() or the function BSP_IO_TogglePin() to toggle the pin 
        state.
-
+ 
 ------------------------------------------------------------------------------*/
 
 /* Includes ------------------------------------------------------------------*/
@@ -78,36 +78,36 @@
 
 /** @addtogroup STM32446E_EVAL
   * @{
-  */
-
-/** @defgroup STM32446E_EVAL_IO STM32446E EVAL IO
+  */ 
+  
+/** @defgroup STM32446E_EVAL_IO STM32446E EVAL IO 
   * @{
-  */
+  */   
 
 /** @defgroup STM32446E_EVAL_IO_Private_Types_Definitions STM32446E EVAL IO Private Types Definitions
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_IO_Private_Defines STM32446E EVAL IO Private Defines
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_IO_Private_Macros STM32446E EVAL IO Private Macros
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_IO_Private_Variables STM32446E EVAL IO Private Variables
   * @{
-  */
+  */ 
 static IO_DrvTypeDef *IoDrv = NULL;
 static  uint8_t mfxstm32l152Identifier;
 
@@ -117,21 +117,21 @@ static  uint8_t mfxstm32l152Identifier;
 
 /** @defgroup STM32446E_EVAL_IO_Private_Function_Prototypes STM32446E EVAL IO Private Function Prototypes
   * @{
-  */
+  */ 
 /**
   * @}
   */
 
 /** @defgroup STM32446E_EVAL_IO_Private_Functions STM32446E EVAL IO Private Functions
   * @{
-  */
+  */ 
 
 /**
   * @brief  Initializes and configures the IO functionalities and configures all
   *         necessary hardware resources (MFX, ...).
   * @note   BSP_IO_Init() is using HAL_Delay() function to ensure that MFXSTM32L152
   *         IO Expander is correctly reset. HAL_Delay() function provides accurate
-  *         delay (in milliseconds) based on variable incremented in SysTick ISR.
+  *         delay (in milliseconds) based on variable incremented in SysTick ISR. 
   *         This implies that if BSP_IO_Init() is called from a peripheral ISR process,
   *         then the SysTick interrupt must have higher priority (numerically lower)
   *         than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
@@ -169,8 +169,8 @@ uint8_t BSP_IO_Init(void)
 /**
   * @brief  DeInit allows Mfx Initialization to be executed again
   * @note   BSP_IO_Init() has no effect if the IoDrv is already initialized
-  *         BSP_IO_DeInit() allows to erase the pointer such to allow init to be effective
-  * @retval IO_OK
+  *         BSP_IO_DeInit() allows to erase the pointer such to allow init to be effective 
+  * @retval IO_OK 
   */
 uint8_t BSP_IO_DeInit(void)
 {
@@ -180,8 +180,8 @@ uint8_t BSP_IO_DeInit(void)
 
 /**
   * @brief  Gets the selected pins IT status.
-  * @param  IoPin: Selected pins to check the status.
-  *          This parameter can be any combination of the IO pins.
+  * @param  IoPin: Selected pins to check the status. 
+  *          This parameter can be any combination of the IO pins.  
   * @retval IO_OK if read status OK. Other value if error.
   */
 uint32_t BSP_IO_ITGetStatus(uint32_t IoPin)
@@ -201,7 +201,7 @@ void BSP_IO_ITClear(void)
 
 /**
   * @brief  Configures the IO pin(s) according to IO mode structure value.
-  * @param  IoPin: IO pin(s) to be configured.
+  * @param  IoPin: IO pin(s) to be configured. 
   *          This parameter can be one of the following values:
   *            @arg  MFXSTM32L152_GPIO_PIN_x: where x can be from 0 to 23.
   * @param  IoMode: IO pin mode to configure
@@ -211,7 +211,7 @@ void BSP_IO_ITClear(void)
   *            @arg  IO_MODE_IT_RISING_EDGE
   *            @arg  IO_MODE_IT_FALLING_EDGE
   *            @arg  IO_MODE_IT_LOW_LEVEL
-  *            @arg  IO_MODE_IT_HIGH_LEVEL
+  *            @arg  IO_MODE_IT_HIGH_LEVEL            
   *            @arg  IO_MODE_ANALOG
   *            @arg  IO_MODE_OFF
   *            @arg  IO_MODE_INPUT_PU,
@@ -230,20 +230,20 @@ void BSP_IO_ITClear(void)
   *            @arg  IO_MODE_IT_FALLING_EDGE_PD
   *            @arg  IO_MODE_IT_LOW_LEVEL_PD
   *            @arg  IO_MODE_IT_HIGH_LEVEL_PD
-  * @retval IO_OK if all initializations are OK. Other value if error.
+  * @retval IO_OK if all initializations are OK. Other value if error.  
   */
 uint8_t BSP_IO_ConfigPin(uint32_t IoPin, IO_ModeTypedef IoMode)
 {
   /* Configure the selected IO pin(s) mode */
   IoDrv->Config(IO_I2C_ADDRESS, IoPin, IoMode);
-
-  return IO_OK;
+  
+  return IO_OK;  
 }
 
 /**
   * @brief  Sets the IRQ_OUT pin polarity and type
   * @param  IoIrqOutPinPolarity: High/Low
-  * @param  IoIrqOutPinType:     OpenDrain/PushPull
+  * @param  IoIrqOutPinType:     OpenDrain/PushPull 
   * @retval OK
   */
 uint8_t BSP_IO_ConfigIrqOutPin(uint8_t IoIrqOutPinPolarity, uint8_t IoIrqOutPinType)
@@ -260,9 +260,9 @@ uint8_t BSP_IO_ConfigIrqOutPin(uint8_t IoIrqOutPinPolarity, uint8_t IoIrqOutPinT
 
 /**
   * @brief  Sets the selected pins state.
-  * @param  IoPin: Selected pins to write.
-  *          This parameter can be any combination of the IO pins.
-  * @param  PinState: New pins state to write
+  * @param  IoPin: Selected pins to write. 
+  *          This parameter can be any combination of the IO pins. 
+  * @param  PinState: New pins state to write  
   */
 void BSP_IO_WritePin(uint32_t IoPin, BSP_IO_PinStateTypeDef PinState)
 {
@@ -272,9 +272,9 @@ void BSP_IO_WritePin(uint32_t IoPin, BSP_IO_PinStateTypeDef PinState)
 
 /**
   * @brief  Gets the selected pins current state.
-  * @param  IoPin: Selected pins to read.
-  *          This parameter can be any combination of the IO pins.
-  * @retval The current pins state
+  * @param  IoPin: Selected pins to read. 
+  *          This parameter can be any combination of the IO pins. 
+  * @retval The current pins state 
   */
 uint32_t BSP_IO_ReadPin(uint32_t IoPin)
 {
@@ -283,9 +283,9 @@ uint32_t BSP_IO_ReadPin(uint32_t IoPin)
 
 /**
   * @brief  Toggles the selected pins state.
-  * @param  IoPin: Selected pins to toggle.
-  *          This parameter can be any combination of the IO pins.
-  * @note   This function is only used to toggle one pin in the same time
+  * @param  IoPin: Selected pins to toggle. 
+  *          This parameter can be any combination of the IO pins.  
+  * @note   This function is only used to toggle one pin in the same time  
   */
 void BSP_IO_TogglePin(uint32_t IoPin)
 {
@@ -297,23 +297,23 @@ void BSP_IO_TogglePin(uint32_t IoPin)
   else
   {
     IoDrv->WritePin(IO_I2C_ADDRESS, IoPin, 1); /* Set */
-  }
+  } 
 }
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

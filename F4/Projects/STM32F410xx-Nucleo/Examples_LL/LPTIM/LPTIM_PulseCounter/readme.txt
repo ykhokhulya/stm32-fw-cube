@@ -1,9 +1,9 @@
 /**
   @page LPTIM_PulseCounter LPTIM example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/LPTIM/LPTIM_PulseCounter/readme.txt
+  * @file    Examples_LL/LPTIM/LPTIM_PulseCounter/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LPTIM_PulseCounter example.
   ******************************************************************************
@@ -43,7 +43,7 @@ for optimization purpose (performance and size).
 To reduce power consumption, MCU enters stop mode after starting counting. Each
 time the counter reaches the maximum value (Period/Autoreload), an interruption
 is generated, the MCU is woke up from stop mode and LED2 toggles the last state.
-
+  
 In this example Period value is set to 1000, so each time the counter counts
 (1000 + 1) rising edges on LPTIM1_IN1 pin, an interrupt is generated and LED2
 toggles. If the external function generator is set to provide a square waveform at 1Khz,
@@ -55,7 +55,7 @@ the frequency of the changes on the external Input1 signal should never exceed t
 frequency of the internal clock provided to the LPTIM1 (LSI for the
 present example).
 
-@par Directory contents
+@par Directory contents 
 
   - LPTIM/LPTIM_PulseCounter/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - LPTIM/LPTIM_PulseCounter/Inc/main.h                  Header for main.c module
@@ -68,14 +68,14 @@ present example).
 @par Hardware and Software environment
 
   - This example runs on STM32F410xx devices.
-
+    
   - This example has been tested with NUCLEO-F410RB RevC board and can be
     easily tailored to any other supported device and development board.
-
+    
   - Connect a square waveform generator to PC.00 (pin 6 in CN8 connector).
     If the frequency of the signal is 1 kHz, LED2 toggles every second.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

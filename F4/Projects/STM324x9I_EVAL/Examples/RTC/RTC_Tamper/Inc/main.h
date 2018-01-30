@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_Tamper/Inc/main.h
+  * @file    RTC/RTC_Tamper/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -45,7 +45,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 #define  BACKUP_COUNT 20
-/* Defines related to Clock configuration */
+/* Defines related to Clock configuration */    
 /* Uncomment to enable the adaquate Clock Source */
 #define RTC_CLOCK_SOURCE_LSE
 /*#define RTC_CLOCK_SOURCE_LSI*/
@@ -59,7 +59,7 @@
   #define RTC_ASYNCH_PREDIV  0x7F
   #define RTC_SYNCH_PREDIV   0x00FF
 #endif
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void Error_Handler(void);

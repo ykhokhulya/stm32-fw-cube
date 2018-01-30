@@ -1,9 +1,9 @@
 /**
   @page RTC_Calendar RTC Calendar Example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    RTC/RTC_Calendar/readme.txt
+  * @file    RTC/RTC_Calendar/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the RTC Calendar example.
   ******************************************************************************
@@ -35,7 +35,7 @@
 
 @par Example Description
 
-This example guides you through the different configuration steps by mean of HAL API
+This example guides you through the different configuration steps by mean of HAL API 
 to ensure Calendar configuration using the RTC peripheral.
 
 At the beginning of the main program the HAL_Init() function is called to reset
@@ -45,33 +45,33 @@ clock (SYSCLK) to run at 100 MHz.
 
 The RTC peripheral configuration is ensured by the HAL_RTC_Init() function.
 This later is calling the HAL_RTC_MspInit()function which core is implementing
-the configuration of the needed RTC resources according to the used hardware (CLOCK,
+the configuration of the needed RTC resources according to the used hardware (CLOCK, 
 PWR, RTC clock source and BackUp). You may update this function to change RTC configuration.
 
-The LSE oscillator clock is used as RTC clock source. LSE oscillator clock usually
-delivered by a 32.768 kHz quartz, which can be one of the listed configurations
+The LSE oscillator clock is used as RTC clock source. LSE oscillator clock usually 
+delivered by a 32.768 kHz quartz, which can be one of the listed configurations 
 depending the version of NUCLEO board hardware:
  - On-board oscillator : X2 crystal 32.768 kHz
  - Oscillator from external depending the version of NUCLEO board hardware.
 
 
-HAL_RTC_SetTime()and HAL_RTC_SetDate() functions are then called to initialize the
+HAL_RTC_SetTime()and HAL_RTC_SetDate() functions are then called to initialize the 
 time and the date.
 
-A key value is written in backup data register 0 to indicate if the RTC is already configured.
-
+A key value is written in backup data register 0 to indicate if the RTC is already configured.  
+      
 The program behaves as follows:
 
 1. After startup the program checks the backup data register 0 value:
     - BKP_DR0 value not correct: (RTC_BKP_DR0 value is not correct or has not yet
       been programmed when the program is executed for the first time) the RTC is
       configured.
-
+    
     - BKP_DR0 value correct: this means that the RTC is configured and the time
       and date are displayed on Debugger.
 
 2. When power on reset occurs:
-The current time and date are updated and displayed on the debugger in aShowTime
+The current time and date are updated and displayed on the debugger in aShowTime 
 and aShowDate variables.
 
 @note Using stdio.h may increase the code size, it is optional and intended only to
@@ -81,19 +81,19 @@ and aShowDate variables.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This
-      implies that if HAL_Delay() is called from a peripheral ISR process, then
+      implies that if HAL_Delay() is called from a peripheral ISR process, then 
       the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+             
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@note The clock setting is configured to have the max product performance (max clock frequency)
+@note The clock setting is configured to have the max product performance (max clock frequency) 
       so not optimized in term of power consumption.
 
 
-@par Directory contents
+@par Directory contents  
 
   - RTC/RTC_Calendar/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - RTC/RTC_Calendar/Inc/stm32f4xx_it.h          Interrupt handlers header file
@@ -107,9 +107,9 @@ and aShowDate variables.
 @par Hardware and Software environment
 
   - This example runs on STM32F411xEx devices.
-
-  - This example has been tested with STMicroelectronics STM32F4xx-Nucleo RevC
-    boards and can be easily tailored to any other supported device
+    
+  - This example has been tested with STMicroelectronics STM32F4xx-Nucleo RevC 
+    boards and can be easily tailored to any other supported device 
     and development board.
 
   - STM32F4xx-Nucleo RevC Set-up
@@ -125,4 +125,4 @@ In order to make the program work, you must do the following :
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-
+ 

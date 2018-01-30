@@ -1,9 +1,9 @@
 /**
   @page TIM_InputCapture Input Capture example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_InputCapture/readme.txt
+  * @file    TIM/TIM_InputCapture/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM_InputCapture example.
   ******************************************************************************
@@ -33,7 +33,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
   This example shows how to use the TIM peripheral to measure the frequency of
   an external signal.
@@ -42,9 +42,9 @@
   so the TIM3 counter clock is SystemCoreClock (Hz).
   SystemCoreClock is set to 100 MHz for STM32F413xx Devices.
 
-  TIM3 is configured in Input Capture Mode: the external signal is connected to
+  TIM3 is configured in Input Capture Mode: the external signal is connected to 
   TIM3 Channel2 used as input pin.
-  To measure the frequency we use the TIM3 CC2 interrupt request, so in the
+  To measure the frequency we use the TIM3 CC2 interrupt request, so in the 
   TIM3_IRQHandler routine, the frequency of the external signal is computed.
 
   The "uwFrequency" variable contains the external signal frequency:
@@ -67,11 +67,11 @@
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_InputCapture/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_InputCapture/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_InputCapture/Inc/main.h                  Header for main.c module
+  - TIM/TIM_InputCapture/Inc/main.h                  Header for main.c module  
   - TIM/TIM_InputCapture/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_InputCapture/Src/main.c                  Main program
   - TIM/TIM_InputCapture/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -82,18 +82,18 @@
 
   - This example runs on STM32F413xx devices.
   - In this example, the clock is set to 100 MHz.
-
+    
   - This example has been tested with STMicroelectronics STM32F413H-DISCOVERY
-    board and can be easily tailored to any other supported device
-    and development board.
+    board and can be easily tailored to any other supported device 
+    and development board.      
 
   - STM32F413H-DISCOVERY Set-up
     - Connect the external signal to measure to the TIM3 CH2 pin (PB.05: connected to pin D11 in CN6 connector)..
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    TIM/TIM_ExtTriggerSynchro/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -58,29 +58,29 @@
 
 
 /**
-  * @brief TIM MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief TIM MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param htim: TIM handle pointer
   * @retval None
   */
 void HAL_TIM_OC_MspInit(TIM_HandleTypeDef *htim)
 {
   GPIO_InitTypeDef   GPIO_InitStruct;
-
+  
   /* Enable TIM1, TIM3 & TIM4 clocks */
   __HAL_RCC_TIM1_CLK_ENABLE();
   __HAL_RCC_TIM3_CLK_ENABLE();
-  __HAL_RCC_TIM4_CLK_ENABLE();
-
+  __HAL_RCC_TIM4_CLK_ENABLE();    
+    
   /* Enable GPIOA, GPIOB, GPIOC, & GPIOE Clocks */
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
 
-
+  
   /* Configure PA.8 (TIM1_Channel1), PE.11 (TIM1_Channel2), PC.6 (TIM3_Channel1)
   and PB.6 (TIM4_Channel1), in push-pull, alternate function mode */
   GPIO_InitStruct.Pin = GPIO_PIN_8;
@@ -88,15 +88,15 @@ void HAL_TIM_OC_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);  
+  
   GPIO_InitStruct.Pin = GPIO_PIN_11;
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
-
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);  
+  
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
   GPIO_InitStruct.Pin = GPIO_PIN_6;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
+  
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM4;
   GPIO_InitStruct.Pin = GPIO_PIN_6;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);

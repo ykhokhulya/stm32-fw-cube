@@ -106,7 +106,7 @@ int main(void)
   {
     /* Wait for user push button press to start transfer */
     WaitForUserButtonPress();
-
+    
     /* transfer Tx buffer to PC application */
     BufferTransfer();
   }
@@ -151,7 +151,7 @@ void Configure_USART(void)
   USARTx_CLK_ENABLE();
 
   /* (3) Configure USART functional parameters ********************************/
-
+  
   /* Disable USART prior modifying configuration registers */
   /* Note: Commented as corresponding to Reset value */
   // LL_USART_Disable(USARTx_INSTANCE);
@@ -174,10 +174,10 @@ void Configure_USART(void)
   /* Frequency available for USART peripheral can also be calculated through LL RCC macro */
   /* Ex :
       Periphclk = LL_RCC_GetUSARTClockFreq(Instance); or LL_RCC_GetUARTClockFreq(Instance); depending on USART/UART instance
-
+  
       In this example, Peripheral Clock is expected to be equal to 100000000/APB_Div Hz => equal to SystemCoreClock/APB_Div
   */
-  LL_USART_SetBaudRate(USARTx_INSTANCE, SystemCoreClock/APB_Div, LL_USART_OVERSAMPLING_16, 115200);
+  LL_USART_SetBaudRate(USARTx_INSTANCE, SystemCoreClock/APB_Div, LL_USART_OVERSAMPLING_16, 115200); 
 
   /* (4) Enable USART *********************************************************/
   LL_USART_Enable(USARTx_INSTANCE);
@@ -240,7 +240,7 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -248,14 +248,14 @@ void LED_Blinking(uint32_t Period)
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -268,13 +268,13 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);  
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
 }
 
 /**
   * @brief  Wait for user push button press to start transfer.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void WaitForUserButtonPress(void)
@@ -305,21 +305,21 @@ void BufferTransfer(void)
     {
 #if (USE_TIMEOUT == 1)
       /* Check Systick counter flag to decrement the time-out value */
-      if (LL_SYSTICK_IsActiveCounterFlag())
-      {
+      if (LL_SYSTICK_IsActiveCounterFlag()) 
+      { 
         if(Timeout-- == 0)
         {
           /* Time-out occurred. Set LED to blinking mode */
           LED_Blinking(LED_BLINK_SLOW);
         }
-      }
+      } 
 #endif /* USE_TIMEOUT */
     }
 
     /* If last char to be sent, clear TC flag */
     if (ubSend == (sizeof(aStringToSend) - 1))
     {
-      LL_USART_ClearFlag_TC(USARTx_INSTANCE);
+      LL_USART_ClearFlag_TC(USARTx_INSTANCE); 
     }
 
     /* Write character in Transmit Data register.
@@ -336,19 +336,19 @@ void BufferTransfer(void)
   {
 #if (USE_TIMEOUT == 1)
     /* Check Systick counter flag to decrement the time-out value */
-    if (LL_SYSTICK_IsActiveCounterFlag())
-    {
+    if (LL_SYSTICK_IsActiveCounterFlag()) 
+    { 
       if(Timeout-- == 0)
       {
         /* Time-out occurred. Set LED to blinking mode */
         LED_Blinking(LED_BLINK_SLOW);
       }
-    }
+    } 
 #endif /* USE_TIMEOUT */
   }
 
   ubButtonPress =0;
-
+    
   /* Turn LED2 On at end of transfer : Tx sequence completed successfully */
   LED_On();
 }

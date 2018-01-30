@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    IWDG/IWDG_Example/Src/main.c
+  * @file    IWDG/IWDG_Example/Src/main.c  
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use the STM32F4xx IWDG HAL API
+  * @brief   This sample code shows how to use the STM32F4xx IWDG HAL API 
   *          to update at regular period the IWDG counter and how to simulate a
-  *          software fault generating an MCU IWDG reset on expiry of a
+  *          software fault generating an MCU IWDG reset on expiry of a 
   *          programmed time period.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup IWDG_Example
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -82,21 +82,21 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
-  SystemClock_Config();
-
-  /* Configure LED1, LED2 and LED3 */
+  SystemClock_Config();     
+  
+  /* Configure LED1, LED2 and LED3 */     
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
+  
   /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
-
+  
   /*##-1- Check if the system has resumed from IWDG reset ####################*/
   if(__HAL_RCC_GET_FLAG(RCC_FLAG_IWDGRST) != RESET)
-  {
+  { 
     /* IWDGRST flag set: Turn LED1 on */
     BSP_LED_On(LED1);
 
@@ -108,10 +108,10 @@ int main(void)
     /* IWDGRST flag is not set: Turn LED1 off */
     BSP_LED_Off(LED1);
   }
-
+ 
   /*##-2- Get the LSI frequency: TIM5 is used to measure the LSI frequency ###*/
   uwLsiFreq = GetLSIFrequency();
-
+  
   /*##-3- Configure the IWDG peripheral ######################################*/
   /* Set counter reload value to obtain 250ms IWDG TimeOut.
      IWDG counter clock Frequency = LsiFreq / 32
@@ -123,14 +123,14 @@ int main(void)
 
   IwdgHandle.Init.Prescaler = IWDG_PRESCALER_32;
   IwdgHandle.Init.Reload    = uwLsiFreq / 128;
-
+  
   if(HAL_IWDG_Init(&IwdgHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
 
-  /* Infinite loop */
+  /* Infinite loop */ 
   while (1)
   {
     /* Toggle LED2 */
@@ -149,38 +149,38 @@ int main(void)
 }
 
 /**
-  * @brief  Configures TIM5 to measure the LSI oscillator frequency.
+  * @brief  Configures TIM5 to measure the LSI oscillator frequency. 
   * @param  None
   * @retval LSI Frequency
   */
 static uint32_t GetLSIFrequency(void)
 {
   uint32_t pclk1 = 0;
-  TIM_IC_InitTypeDef timinputconfig;
-
+  TIM_IC_InitTypeDef timinputconfig;  
+  
   /* Enable the LSI oscillator */
   __HAL_RCC_LSI_ENABLE();
-
+  
   /* Wait till LSI is ready */
   while (__HAL_RCC_GET_FLAG(RCC_FLAG_LSIRDY) == RESET)
   {
   }
-
-  /* Configure the TIM peripheral */
-  /* Set TIM5 instance */
+  
+  /* Configure the TIM peripheral */ 
+  /* Set TIM5 instance */  
   TimInputCaptureHandle.Instance = TIM5;
-
+  
   /* TIM5 configuration: Input Capture mode ---------------------
   The LSI oscillator is connected to TIM5 CH4.
   The Rising edge is used as active edge.
-  The TIM5 CCR4 is used to compute the frequency value.
+  The TIM5 CCR4 is used to compute the frequency value. 
   ------------------------------------------------------------ */
-  TimInputCaptureHandle.Init.Prescaler         = 0;
-  TimInputCaptureHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-  TimInputCaptureHandle.Init.Period            = 0xFFFF;
-  TimInputCaptureHandle.Init.ClockDivision     = 0;
-  TimInputCaptureHandle.Init.RepetitionCounter = 0;
-
+  TimInputCaptureHandle.Init.Prescaler         = 0; 
+  TimInputCaptureHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;  
+  TimInputCaptureHandle.Init.Period            = 0xFFFF; 
+  TimInputCaptureHandle.Init.ClockDivision     = 0;     
+  TimInputCaptureHandle.Init.RepetitionCounter = 0; 
+  
   if(HAL_TIM_IC_Init(&TimInputCaptureHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -188,50 +188,50 @@ static uint32_t GetLSIFrequency(void)
   }
   /* Connect internally the TIM5_CH4 Input Capture to the LSI clock output */
   HAL_TIMEx_RemapConfig(&TimInputCaptureHandle, TIM_TIM5_LSI);
-
+  
   /* Configure the Input Capture of channel 4 */
   timinputconfig.ICPolarity  = TIM_ICPOLARITY_RISING;
   timinputconfig.ICSelection = TIM_ICSELECTION_DIRECTTI;
   timinputconfig.ICPrescaler = TIM_ICPSC_DIV8;
   timinputconfig.ICFilter    = 0;
-
+  
   if(HAL_TIM_IC_ConfigChannel(&TimInputCaptureHandle, &timinputconfig, TIM_CHANNEL_4) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Reset the flags */
   TimInputCaptureHandle.Instance->SR = 0;
-
+  
   /* Start the TIM Input Capture measurement in interrupt mode */
   if(HAL_TIM_IC_Start_IT(&TimInputCaptureHandle, TIM_CHANNEL_4) != HAL_OK)
   {
     Error_Handler();
   }
-
-  /* Wait until the TIM5 get 2 LSI edges (refer to TIM5_IRQHandler() in
+  
+  /* Wait until the TIM5 get 2 LSI edges (refer to TIM5_IRQHandler() in 
   stm32f4xx_it.c file) */
   while(uwMeasurementDone == 0)
   {
   }
   uwCaptureNumber = 0;
-
+  
   /* Deinitialize the TIM5 peripheral registers to their default reset values */
   HAL_TIM_IC_DeInit(&TimInputCaptureHandle);
-
+  
   /* Compute the LSI frequency, depending on TIM5 input clock frequency (PCLK1)*/
   /* Get PCLK1 frequency */
   pclk1 = HAL_RCC_GetPCLK1Freq();
-
+  
   /* Get PCLK1 prescaler */
   if((RCC->CFGR & RCC_CFGR_PPRE1) == 0)
-  {
+  { 
     /* PCLK1 prescaler equal to 1 => TIMCLK = PCLK1 */
     return ((pclk1 / uwPeriodValue) * 8);
   }
   else
-  {
+  { 
     /* PCLK1 prescaler different from 1 => TIMCLK = 2 * PCLK1 */
     return (((2 * pclk1) / uwPeriodValue) * 8);
   }
@@ -239,7 +239,7 @@ static uint32_t GetLSIFrequency(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -265,8 +265,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -280,17 +280,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -317,7 +317,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -330,10 +330,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

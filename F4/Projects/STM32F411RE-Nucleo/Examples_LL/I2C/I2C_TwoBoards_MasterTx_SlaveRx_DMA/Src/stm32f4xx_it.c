@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/I2C/I2C_TwoBoards_MasterTx_SlaveRx_DMA/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -175,7 +175,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Manage code in main.c.*/
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 #ifdef SLAVE_BOARD

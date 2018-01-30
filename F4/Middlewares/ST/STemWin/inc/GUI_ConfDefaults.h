@@ -45,15 +45,15 @@ Attention : Do not modify this file ! If you do, you will not
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-
+  
 #ifndef  GUI_CONFDEFAULTS_H
 #define  GUI_CONFDEFAULTS_H
 
@@ -93,7 +93,7 @@ Attention : Do not modify this file ! If you do, you will not
 
 /* ATTENTION: This define swaps the meaning of a logical color from
    ABGR to ARGB.
-
+   
    It further swaps the meaning of a transparent pixel:
    ABGR: 0x00 means opaque, 0xFF means transparent (default)
    ARGB: 0x00 means transparent, 0xFF means opaque

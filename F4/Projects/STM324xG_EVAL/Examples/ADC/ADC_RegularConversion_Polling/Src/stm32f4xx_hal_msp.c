@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Polling/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -56,33 +56,33 @@
   */
 
 /**
-  * @brief ADC MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief ADC MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hadc: ADC handle pointer
   * @retval None
   */
 void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
   GPIO_InitTypeDef          GPIO_InitStruct;
-
+  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* ADC3 Periph clock enable */
   ADCx_CLK_ENABLE();
   /* Enable GPIO clock ****************************************/
   ADCx_CHANNEL_GPIO_CLK_ENABLE();
-
-  /*##-2- Configure peripheral GPIO ##########################################*/
+  
+  /*##-2- Configure peripheral GPIO ##########################################*/ 
   /* ADC3 Channel8 GPIO pin configuration */
   GPIO_InitStruct.Pin = ADCx_CHANNEL_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(ADCx_CHANNEL_GPIO_PORT, &GPIO_InitStruct);
 }
-
+  
 /**
-  * @brief ADC MSP De-Initialization
+  * @brief ADC MSP De-Initialization 
   *        This function frees the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO to their default state
@@ -91,7 +91,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
   */
 void HAL_ADC_MspDeInit(ADC_HandleTypeDef *hadc)
 {
-
+  
   /*##-1- Reset peripherals ##################################################*/
   ADCx_FORCE_RESET();
   ADCx_RELEASE_RESET();

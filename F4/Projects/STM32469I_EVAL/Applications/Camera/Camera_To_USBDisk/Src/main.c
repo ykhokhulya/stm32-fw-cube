@@ -7,37 +7,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -57,8 +57,8 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
-#define VSYNC           1
-#define VBP             1
+#define VSYNC           1  
+#define VBP             1 
 #define VFP             1
 #define VACT            480
 #define HSYNC           1
@@ -166,31 +166,31 @@ int main(void)
 
   /* SDRAM initialization */
   BSP_SDRAM_Init();
-
+  
   /*##-1- LCD DSI initialization in command mode  with one LTDC layers of size 800x480 */
-  LCD_Init();
-
+  LCD_Init(); 
+  
   LCD_LayertInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_SelectLayer(0);
-
+  BSP_LCD_SelectLayer(0); 
+  
   HAL_DSI_LongWrite(&hdsi_eval, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
   HAL_DSI_LongWrite(&hdsi_eval, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_PASET, pPage);
 
   /* Update pitch : the draw is done on the whole physical X Size */
   HAL_LTDC_SetPitch(&hltdc_eval, BSP_LCD_GetXSize(), 0);
-
+  
   BSP_LCD_Clear(LCD_COLOR_WHITE);
   /* Display USB initialization message */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
   BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
   BSP_LCD_SetFont(&Font24);
-  BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"USB init ..", RIGHT_MODE);
+  BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"USB init ..", RIGHT_MODE);  
 
   pending_buffer = 0;
-  active_area = LEFT_AREA;
-
+  active_area = LEFT_AREA; 
+  
   HAL_DSI_LongWrite(&hdsi_eval, 0, DSI_DCS_LONG_PKT_WRITE, 2, OTM8009A_CMD_WRTESCN, pScanCol);
-
+  
   Display_WaitRefresh();
   /*##-2- Init Host Library ##################################################*/
 
@@ -214,18 +214,18 @@ int main(void)
   /* Display camera initialization message */
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"Camera init ..", RIGHT_MODE);
   Display_StartRefresh();
-
+  
   /* Initialize the Camera */
   BSP_CAMERA_Init(RESOLUTION_R480x272);
   /* Wait for the camera initialization after HW reset*/
   HAL_Delay(100);
-
+  
   /* Start the Camera Capture */
   BSP_CAMERA_ContinuousStart((uint8_t *)CAMERA_FRAME_BUFFER);
 
-  Display_WaitRefresh();
+  Display_WaitRefresh();  
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 48), (uint8_t *)"Press TAMPER button to take snapshot", RIGHT_MODE);
-  BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"Camera Play ..", RIGHT_MODE);
+  BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"Camera Play ..", RIGHT_MODE);  
   Display_StartRefresh();
 
   /*##-6- Run Application ####################################################*/
@@ -258,45 +258,45 @@ static void SavePicture(void)
   static uint32_t counter = 0;
   uint8_t str[30];
   uint8_t str_display[50];
-
+  
   /* Suspend the camera capture */
   BSP_CAMERA_Suspend();
   cameraState = CAMERA_STATE_SAVING_PICTURE;
-
-  HAL_Delay(100);
-
-  Display_WaitRefresh();
+  
+  HAL_Delay(100);  
+  
+  Display_WaitRefresh(); 
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 48), (uint8_t *)"                                    ", RIGHT_MODE);
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                     ", RIGHT_MODE);
   BSP_LCD_SetTextColor(LCD_COLOR_RED);
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"Camera stopped...", RIGHT_MODE);
-
+  
   Display_StartRefresh();
-  Display_WaitRefresh();
+  Display_WaitRefresh();  
   HAL_Delay(1000);
-
+  
   /* Prepare the image to be saved */
   PicturePrepare();
-
+  
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                     ", RIGHT_MODE);
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"           Picture Prepared...", RIGHT_MODE);
-
-  Display_StartRefresh();
-  Display_WaitRefresh();
+  
+  Display_StartRefresh(); 
+  Display_WaitRefresh();  
   HAL_Delay(1000);
 
-
+  
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                                 ", RIGHT_MODE);
   /* Format the string */
   sprintf((char *)str,"image_%d.bmp", (int)counter);
   sprintf((char *)str_display,"         Saving picture in file %s ..", str);
   /* Display text on LTDC layer foreground */
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), str_display, RIGHT_MODE);
-
+  
   Display_StartRefresh();
-  Display_WaitRefresh();
+  Display_WaitRefresh();  
   HAL_Delay(1000);
-
+    
   /* Create and Open a new text file object with write access */
   if(f_open(&MyFile, (const char*)str, FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
   {
@@ -306,26 +306,26 @@ static void SavePicture(void)
   {
     /* Write data to the BMP file */
     res1 = f_write(&MyFile, (uint32_t *)aBMPHeader, 54, (void *)&byteswritten);
-
-
+    
+    
     BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                                          ", RIGHT_MODE);
     BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"           Header BMP written...", RIGHT_MODE);
-
-    Display_StartRefresh();
-    Display_WaitRefresh();
+    
+    Display_StartRefresh();     
+    Display_WaitRefresh(); 
     HAL_Delay(1000);
-
+    
     BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                                          ", RIGHT_MODE);
     BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"           BMP pixel data save ongoing...", RIGHT_MODE);
+    
+    Display_StartRefresh(); 
+    Display_WaitRefresh(); 
 
-    Display_StartRefresh();
-    Display_WaitRefresh();
-
-
+    
     res2 = f_write(&MyFile, (uint8_t *)((uint8_t *)CONVERTED_FRAME_BUFFER),
     		       (CameraResX * CameraResY * RGB888_BYTE_PER_PIXEL),
     		       (void *)&byteswritten);
-
+  
 
     if((res1 != FR_OK) || (res2 != FR_OK) || (byteswritten == 0))
     {
@@ -338,31 +338,31 @@ static void SavePicture(void)
 
       /* Success of the demo: no error occurrence */
       BSP_LED_On(LED1);
-
-
+  
+     
       BSP_LCD_SetTextColor(LCD_COLOR_DARKGREEN);
       BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                                          ", RIGHT_MODE);
       sprintf((char *)str_display,"File %s saved on USB disk ..", str);
       BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize()-24), str_display, RIGHT_MODE);
-      Display_StartRefresh();
-      Display_WaitRefresh();
+      Display_StartRefresh();       
+      Display_WaitRefresh();      
       /* Wait for 2s */
       HAL_Delay(2000);
-
+      
       BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                                          ", RIGHT_MODE);
 
       counter++;
       BSP_LED_Off(LED1);
-
+    
       BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
-      BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 48), (uint8_t *)"Press TAMPER button to take snapshot", RIGHT_MODE);
+      BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 48), (uint8_t *)"Press TAMPER button to take snapshot", RIGHT_MODE);     
       BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize()-24), (uint8_t *)"Camera Play  ", RIGHT_MODE);
       Display_StartRefresh();
-      Display_WaitRefresh();
+      Display_WaitRefresh(); 
 
       /* Resume the camera capture */
-      BSP_CAMERA_Resume();
-
+      BSP_CAMERA_Resume();      
+      
     }
   }
 
@@ -376,7 +376,7 @@ static void SavePicture(void)
 static void CAMERA_Capture(void)
 {
   static uint8_t buttonState = 0;
-
+  
   if(BSP_PB_GetState(BUTTON_TAMPER) == GPIO_PIN_SET)
   {
     buttonState = 1;
@@ -407,34 +407,34 @@ void BSP_CAMERA_FrameEventCallback(void)
   */
 static void LCD_LL_ConvertLineToARGB8888(void *pSrc, void *pDst)
 {
-  uint32_t xPos, yPos, destination;
-
+  uint32_t xPos, yPos, destination;   
+  
   /* Init DMA2D */
-  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/
+  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
   hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
   hdma2d_eval.Init.ColorMode    = DMA2D_ARGB8888;
-  hdma2d_eval.Init.OutputOffset = LcdResX - CAMERA_480x272_RES_X;
-
+  hdma2d_eval.Init.OutputOffset = LcdResX - CAMERA_480x272_RES_X;     
+  
   /*##-2- DMA2D Callbacks Configuration ######################################*/
   hdma2d_eval.XferCpltCallback  = DMA2D_TransferCompleteCallback;
-
+  
   /*##-3- Foreground Configuration ###########################################*/
   hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_REPLACE_ALPHA;
   hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
   hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
   hdma2d_eval.LayerCfg[1].InputOffset = 0;
-
+  
   hdma2d_eval.Instance = DMA2D;
 
   /*##-4- DMA2D Initialization     ###########################################*/
   HAL_DMA2D_Init(&hdma2d_eval);
   HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1);
-
+  
   /*##-1- calculate the destination transfer address  ############*/
   xPos = (LcdResX  - CAMERA_480x272_RES_X)/2;
-  yPos = (LcdResY  - CAMERA_480x272_RES_Y)/2;
-
-  destination = (uint32_t)pDst + (yPos * LcdResX + xPos) * ARGB8888_BYTE_PER_PIXEL;
+  yPos = (LcdResY  - CAMERA_480x272_RES_Y)/2;  
+  
+  destination = (uint32_t)pDst + (yPos * LcdResX + xPos) * ARGB8888_BYTE_PER_PIXEL; 
   HAL_DMA2D_Start_IT(&hdma2d_eval, (uint32_t)pSrc, destination, CAMERA_480x272_RES_X, CAMERA_480x272_RES_Y);
 
 }
@@ -491,7 +491,7 @@ static void PicturePrepare(void)
 
 
 /**
-  * @brief  Initializes the DSI LCD.
+  * @brief  Initializes the DSI LCD. 
   * The ititialization is done as below:
   *     - DSI PLL ititialization
   *     - DSI ititialization
@@ -501,18 +501,18 @@ static void PicturePrepare(void)
   * @retval LCD state
   */
 static uint8_t LCD_Init(void){
-
+  
   GPIO_InitTypeDef GPIO_Init_Structure;
-  DSI_PHY_TimerTypeDef PhyTimings;
+  DSI_PHY_TimerTypeDef PhyTimings; 
   DSI_CmdCfgTypeDef CmdCfg;
   DSI_LPCmdTypeDef LPCmd;
   DSI_PLLInitTypeDef dsiPllInit;
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
-
+  
   /* Toggle Hardware Reset of the DSI LCD using
      its XRES signal (active low) */
   BSP_LCD_Reset();
-
+  
   /* Call first MSP Initialize only in case of first initialization
   * This will set IP blocks LTDC, DSI and DMA2D
   * - out of reset
@@ -520,7 +520,7 @@ static uint8_t LCD_Init(void){
   * - NVIC IRQ related to IP blocks enabled
   */
   BSP_LCD_MspInit();
-
+  
   /* LCD clock configuration */
   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 417 Mhz */
   /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 417 MHz / 5 = 83.4 MHz */
@@ -530,20 +530,20 @@ static uint8_t LCD_Init(void){
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-
+  
   /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
   hdsi_eval.Instance = DSI;
-
+  
   HAL_DSI_DeInit(&(hdsi_eval));
-
+  
   dsiPllInit.PLLNDIV  = 100;
   dsiPllInit.PLLIDF   = DSI_PLL_IN_DIV5;
-  dsiPllInit.PLLODF  = DSI_PLL_OUT_DIV1;
+  dsiPllInit.PLLODF  = DSI_PLL_OUT_DIV1;  
 
   hdsi_eval.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
   hdsi_eval.Init.TXEscapeCkdiv = 0x4;
   HAL_DSI_Init(&(hdsi_eval), &(dsiPllInit));
-
+    
   /* Configure the DSI for Command mode */
   CmdCfg.VirtualChannelID      = 0;
   CmdCfg.HSPolarity            = DSI_HSYNC_ACTIVE_HIGH;
@@ -557,7 +557,7 @@ static uint8_t LCD_Init(void){
   CmdCfg.AutomaticRefresh      = DSI_AR_DISABLE;
   CmdCfg.TEAcknowledgeRequest  = DSI_TE_ACKNOWLEDGE_ENABLE;
   HAL_DSI_ConfigAdaptedCommandMode(&hdsi_eval, &CmdCfg);
-
+  
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_ENABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_ENABLE;
   LPCmd.LPGenShortWriteTwoP   = DSI_LP_GSW2P_ENABLE;
@@ -584,14 +584,14 @@ static uint8_t LCD_Init(void){
 
   /* Initialize LTDC */
   LTDC_Init();
-
+  
   /* Start DSI */
   HAL_DSI_Start(&(hdsi_eval));
-
+    
   /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver)
   */
   OTM8009A_Init(OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
-
+  
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
   LPCmd.LPGenShortWriteTwoP   = DSI_LP_GSW2P_DISABLE;
@@ -603,16 +603,16 @@ static uint8_t LCD_Init(void){
   LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_DISABLE;
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_DISABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_DISABLE;
-  LPCmd.LPMaxReadPacket       = DSI_LP_MRDP_DISABLE;
+  LPCmd.LPMaxReadPacket       = DSI_LP_MRDP_DISABLE;  
   LPCmd.AcknowledgeRequest    = DSI_ACKNOWLEDGE_DISABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
-
+  
   HAL_DSI_ConfigFlowControl(&hdsi_eval, DSI_FLOW_CONTROL_BTA);
-
-
+  
+  
   /* Enable GPIOJ clock */
   __HAL_RCC_GPIOJ_CLK_ENABLE();
-
+  
   /* Configure DSI_TE pin from MB1166 : Tearing effect on separated GPIO from KoD LCD */
   /* that is mapped on GPIOJ2 as alternate DSI function (DSI_TE)                      */
   /* This pin is used only when the LCD and DSI link is configured in command mode    */
@@ -621,12 +621,12 @@ static uint8_t LCD_Init(void){
   GPIO_Init_Structure.Pull      = GPIO_NOPULL;
   GPIO_Init_Structure.Speed     = GPIO_SPEED_HIGH;
   GPIO_Init_Structure.Alternate = GPIO_AF13_DSI;
-  HAL_GPIO_Init(GPIOJ, &GPIO_Init_Structure);
-
-
+  HAL_GPIO_Init(GPIOJ, &GPIO_Init_Structure);   
+  
+  
   /* Refresh the display */
   HAL_DSI_Refresh(&hdsi_eval);
-
+  
   return LCD_OK;
 }
 
@@ -639,7 +639,7 @@ static void LTDC_Init(void)
 {
   /* DeInit */
   HAL_LTDC_DeInit(&hltdc_eval);
-
+  
   /* LTDC Config */
   /* Timing and polarity */
   hltdc_eval.Init.HorizontalSync = HSYNC;
@@ -650,12 +650,12 @@ static void LTDC_Init(void)
   hltdc_eval.Init.AccumulatedActiveW = HSYNC+HBP+HACT;
   hltdc_eval.Init.TotalHeigh = VSYNC+VBP+VACT+VFP;
   hltdc_eval.Init.TotalWidth = HSYNC+HBP+HACT+HFP;
-
+  
   /* background value */
   hltdc_eval.Init.Backcolor.Blue = 0;
   hltdc_eval.Init.Backcolor.Green = 0;
   hltdc_eval.Init.Backcolor.Red = 0;
-
+  
   /* Polarity */
   hltdc_eval.Init.HSPolarity = LTDC_HSPOLARITY_AL;
   hltdc_eval.Init.VSPolarity = LTDC_VSPOLARITY_AL;
@@ -680,7 +680,7 @@ static void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address)
   Layercfg.WindowX0 = 0;
   Layercfg.WindowX1 = BSP_LCD_GetXSize()/2 ;
   Layercfg.WindowY0 = 0;
-  Layercfg.WindowY1 = BSP_LCD_GetYSize();
+  Layercfg.WindowY1 = BSP_LCD_GetYSize(); 
   Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
   Layercfg.FBStartAdress = Address;
   Layercfg.Alpha = 255;
@@ -692,13 +692,13 @@ static void LCD_LayertInit(uint16_t LayerIndex, uint32_t Address)
   Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   Layercfg.ImageWidth = BSP_LCD_GetXSize() / 2;
   Layercfg.ImageHeight = BSP_LCD_GetYSize();
-
-  HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex);
+  
+  HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex); 
 }
 
 /**
   * @brief  Initialize the BSP LCD Msp.
-  * Application surcharge to reduce DSI, DMA2D and LTDC interrupts priorities
+  * Application surcharge to reduce DSI, DMA2D and LTDC interrupts priorities 
   */
 void BSP_LCD_MspInit(void)
 {
@@ -756,9 +756,9 @@ void HAL_DSI_TearingEffectCallback(DSI_HandleTypeDef *hdsi)
 {
   /* Mask the TE */
   __DSI_MASK_TE();
-
+  
   /* Refresh the right part of the display */
-  HAL_DSI_Refresh(hdsi);
+  HAL_DSI_Refresh(hdsi);   
 }
 
 /**
@@ -772,7 +772,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
   if(pending_buffer >= 0)
   {
     if(active_area == LEFT_AREA)
-    {
+    {     
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
       /* Update LTDC configuaration */
@@ -780,11 +780,11 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(hdsi);
-
+      
       HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColRight);
       /* Refresh the right part of the display */
-      HAL_DSI_Refresh(hdsi);
-
+      HAL_DSI_Refresh(hdsi);    
+      
     }
     else if(active_area == RIGHT_AREA)
     {
@@ -796,20 +796,20 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
-
-      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft);
-
+      
+      HAL_DSI_LongWrite(hdsi, 0, DSI_DCS_LONG_PKT_WRITE, 4, OTM8009A_CMD_CASET, pColLeft); 
+      
       if(cameraState == CAMERA_STATE_DISPLAY_ONGOING)
       {
         cameraState = CAMERA_STATE_CAPTURE_ONGOING;
         BSP_CAMERA_Resume();
       }
-
-      pending_buffer = -1;
+        
+      pending_buffer = -1; 
 
     }
   }
-  active_area = (active_area == LEFT_AREA)? RIGHT_AREA : LEFT_AREA;
+  active_area = (active_area == LEFT_AREA)? RIGHT_AREA : LEFT_AREA; 
 }
 
 /**
@@ -821,7 +821,7 @@ static void Display_WaitRefresh(void)
 {
   while(pending_buffer != -1)
   {
-  }
+  } 
 }
 
 /**
@@ -831,7 +831,7 @@ static void Display_WaitRefresh(void)
   */
 static void Display_StartRefresh(void)
 {
-  /* Frame Buffer updated , unmask the DSI TE pin to ask for a DSI refersh*/
+  /* Frame Buffer updated , unmask the DSI TE pin to ask for a DSI refersh*/ 
   pending_buffer = 1;
   /* UnMask the TE */
   __DSI_UNMASK_TE();

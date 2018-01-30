@@ -1,8 +1,8 @@
-/**
+/** 
   ******************************************************************************
   * @file    stm32f401_discovery.h
   * @author  MCD Application Team
-  * @brief   This file contains definitions for STM32F401-Discovery Kit's Leds and
+  * @brief   This file contains definitions for STM32F401-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************
   * @attention
@@ -31,9 +31,9 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
-
+  ******************************************************************************  
+  */ 
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F401_DISCOVERY_H
 #define __STM32F401_DISCOVERY_H
@@ -41,26 +41,26 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
-
+                                              
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
+   
 /** @addtogroup BSP
   * @{
   */
-
+  
 /** @addtogroup STM32F401_DISCOVERY
   * @{
   */
-
+      
 /** @addtogroup STM32F401_DISCOVERY_LOW_LEVEL
   * @{
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Types STM32F401 DISCOVERY LOW LEVEL Exported Types
   * @{
   */
-typedef enum
+typedef enum 
 {
   LED4 = 0,
   LED3 = 1,
@@ -68,27 +68,27 @@ typedef enum
   LED6 = 3
 }Led_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_KEY = 0,
 }Button_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
-}ButtonMode_TypeDef;
+}ButtonMode_TypeDef;     
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Constants STM32F401 DISCOVERY LOW LEVEL Exported Constants
   * @{
-  */
+  */ 
 
-/**
-  * @brief Define for STM32F401_DISCOVERY board
-  */
+/** 
+  * @brief Define for STM32F401_DISCOVERY board  
+  */ 
 #if !defined (USE_STM32F401_DISCO)
  #define USE_STM32F401_DISCO
 #endif
@@ -100,26 +100,26 @@ typedef enum
 
 #define LED4_PIN                                GPIO_PIN_12
 #define LED4_GPIO_PORT                          GPIOD
-#define LED4_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()
-#define LED4_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()
+#define LED4_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()  
+#define LED4_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()  
 
-
+  
 #define LED3_PIN                                GPIO_PIN_13
 #define LED3_GPIO_PORT                          GPIOD
-#define LED3_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()
-#define LED3_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()
+#define LED3_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()  
+#define LED3_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()  
 
-
+  
 #define LED5_PIN                                GPIO_PIN_14
 #define LED5_GPIO_PORT                          GPIOD
-#define LED5_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()
-#define LED5_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()
+#define LED5_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()  
+#define LED5_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()  
 
-
+  
 #define LED6_PIN                                GPIO_PIN_15
 #define LED6_GPIO_PORT                          GPIOD
-#define LED6_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()
-#define LED6_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()
+#define LED6_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOD_CLK_ENABLE()  
+#define LED6_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOD_CLK_DISABLE()  
 
 #define LEDx_GPIO_CLK_ENABLE(__INDEX__) do{if((__INDEX__) == 0) LED4_GPIO_CLK_ENABLE(); else \
                                            if((__INDEX__) == 1) LED3_GPIO_CLK_ENABLE(); else \
@@ -134,12 +134,12 @@ typedef enum
                                             }while(0)
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_BUTTON STM32F401 DISCOVERY LOW LEVEL BUTTON
   * @{
-  */
-#define BUTTONn                                 1
+  */  
+#define BUTTONn                                 1  
 
 /**
  * @brief Wakeup push-button
@@ -156,11 +156,11 @@ typedef enum
                                                  }while(0)
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_BUS STM32F401 DISCOVERY LOW LEVEL BUS
   * @{
-  */
+  */  
 
 /*############################### I2Cx #######################################*/
 #define DISCOVERY_I2Cx                          I2C1
@@ -168,8 +168,8 @@ typedef enum
 #define DISCOVERY_I2Cx_GPIO_PORT                GPIOB                       /* GPIOB */
 #define DISCOVERY_I2Cx_SCL_PIN                  GPIO_PIN_6                  /* PB.06 */
 #define DISCOVERY_I2Cx_SDA_PIN                  GPIO_PIN_9                  /* PB.09 */
-#define DISCOVERY_I2Cx_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOB_CLK_ENABLE()
-#define DISCOVERY_I2Cx_GPIO_CLK_DISABLE()       __HAL_RCC_GPIOB_CLK_DISABLE()
+#define DISCOVERY_I2Cx_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOB_CLK_ENABLE() 
+#define DISCOVERY_I2Cx_GPIO_CLK_DISABLE()       __HAL_RCC_GPIOB_CLK_DISABLE() 
 #define DISCOVERY_I2Cx_AF                       GPIO_AF4_I2C1
 
 #define DISCOVERY_I2Cx_FORCE_RESET()            __HAL_RCC_I2C1_FORCE_RESET()
@@ -197,13 +197,13 @@ typedef enum
    on accurate values, they just guarantee that the application will not remain
    stuck if the SPI communication is corrupted.
    You may modify these timeout values depending on CPU frequency and application
-   conditions (interrupts routines ...). */
+   conditions (interrupts routines ...). */   
 #define SPIx_TIMEOUT_MAX                        ((uint32_t)0x1000)
 
 /*################################ GYROSCOPE #################################*/
 /* Read/Write command */
-#define READWRITE_CMD                           ((uint8_t)0x80)
-/* Multiple byte read/write command */
+#define READWRITE_CMD                           ((uint8_t)0x80) 
+/* Multiple byte read/write command */ 
 #define MULTIPLEBYTE_CMD                        ((uint8_t)0x40)
 /* Dummy Byte Send by the SPI Master device in order to generate the Clock to the Slave device */
 #define DUMMY_BYTE                              ((uint8_t)0x00)
@@ -224,9 +224,9 @@ typedef enum
 #define GYRO_INT_GPIO_CLK_ENABLE()              __HAL_RCC_GPIOE_CLK_ENABLE()
 #define GYRO_INT_GPIO_CLK_DISABLE()             __HAL_RCC_GPIOE_CLK_DISABLE()
 #define GYRO_INT1_PIN                           GPIO_PIN_0                  /* PE.00 */
-#define GYRO_INT1_EXTI_IRQn                     EXTI0_IRQn
+#define GYRO_INT1_EXTI_IRQn                     EXTI0_IRQn 
 #define GYRO_INT2_PIN                           GPIO_PIN_1                  /* PE.01 */
-#define GYRO_INT2_EXTI_IRQn                     EXTI1_IRQn
+#define GYRO_INT2_EXTI_IRQn                     EXTI1_IRQn 
 
 /*################################### AUDIO ##################################*/
 /**
@@ -245,15 +245,15 @@ typedef enum
 #define AUDIO_RESET_GPIO                        GPIOD
 /**
   * @}
-  */
+  */ 
 
 /*############################### ACCELEROMETER ##############################*/
 /**
   * @brief  ACCELERO I2C1 Interface pins
   */
 #define ACCELERO_DRDY_GPIO_PORT                 GPIOE                       /* GPIOE */
-#define ACCELERO_DRDY_GPIO_CLK_ENABLE()         __HAL_RCC_GPIOE_CLK_ENABLE()
-#define ACCELERO_DRDY_GPIO_CLK_DISABLE()        __HAL_RCC_GPIOE_CLK_DISABLE()
+#define ACCELERO_DRDY_GPIO_CLK_ENABLE()         __HAL_RCC_GPIOE_CLK_ENABLE() 
+#define ACCELERO_DRDY_GPIO_CLK_DISABLE()        __HAL_RCC_GPIOE_CLK_DISABLE() 
 #define ACCELERO_DRDY_PIN                       GPIO_PIN_2                  /* PE.02 */
 #define ACCELERO_DRDY_EXTI_IRQn                 TAMP_STAMP_IRQn
 
@@ -261,24 +261,24 @@ typedef enum
 #define ACCELERO_INT_GPIO_CLK_ENABLE()          __HAL_RCC_GPIOE_CLK_ENABLE()
 #define ACCELERO_INT_GPIO_CLK_DISABLE()         __HAL_RCC_GPIOE_CLK_DISABLE()
 #define ACCELERO_INT1_PIN                       GPIO_PIN_4                  /* PE.04 */
-#define ACCELERO_INT1_EXTI_IRQn                 EXTI4_IRQn
+#define ACCELERO_INT1_EXTI_IRQn                 EXTI4_IRQn 
 #define ACCELERO_INT2_PIN                       GPIO_PIN_5                  /* PE.05 */
-#define ACCELERO_INT2_EXTI_IRQn                 EXTI9_5_IRQn
+#define ACCELERO_INT2_EXTI_IRQn                 EXTI9_5_IRQn 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Macros STM32F401 DISCOVERY LOW LEVEL Exported Macros
   * @{
-  */
+  */  
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Functions STM32F401 DISCOVERY LOW LEVEL Exported Functions
   * @{
   */
-uint32_t BSP_GetVersion(void);
+uint32_t BSP_GetVersion(void);  
 void     BSP_LED_Init(Led_TypeDef Led);
 void     BSP_LED_On(Led_TypeDef Led);
 void     BSP_LED_Off(Led_TypeDef Led);
@@ -292,7 +292,7 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -300,7 +300,7 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button);
 
 /**
   * @}
-  */
+  */ 
 
 #ifdef __cplusplus
 }

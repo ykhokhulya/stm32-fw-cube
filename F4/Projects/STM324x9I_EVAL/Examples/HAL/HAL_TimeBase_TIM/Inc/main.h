@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HAL/HAL_TimeBase/Inc/main.h
+  * @file    HAL/HAL_TimeBase/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************

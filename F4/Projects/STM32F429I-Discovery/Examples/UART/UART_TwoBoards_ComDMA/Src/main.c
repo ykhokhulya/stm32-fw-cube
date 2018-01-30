@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_TwoBoards_ComDMA/Src/main.c
+  * @file    UART/UART_TwoBoards_ComDMA/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx UART HAL API to transmit
+  * @brief   This sample code shows how to use STM32F4xx UART HAL API to transmit 
   *          and receive a data buffer with a communication process based on
-  *          DMA transfer.
+  *          DMA transfer. 
   *          The communication is done using 2 Boards.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup UART_TwoBoards_ComDMA
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -89,7 +89,7 @@ int main(void)
   /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
@@ -102,7 +102,7 @@ int main(void)
       - BaudRate = 9600 baud
       - Hardware flow control disabled (RTS and CTS signals) */
   UartHandle.Instance          = USARTx;
-
+  
   UartHandle.Init.BaudRate     = 9600;
   UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
   UartHandle.Init.StopBits     = UART_STOPBITS_1;
@@ -110,12 +110,12 @@ int main(void)
   UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
   UartHandle.Init.Mode         = UART_MODE_TX_RX;
   UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
-
+    
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
     Error_Handler();
   }
-
+  
 #ifdef TRANSMITTER_BOARD
 
   /* Configure USER Button */
@@ -124,70 +124,70 @@ int main(void)
   while (BSP_PB_GetState(BUTTON_KEY) == RESET)
   {
   }
-
+  
   /* The board sends the message and expects to receive it back */
-
-  /*##-2- Start the transmission process #####################################*/
-  /* While the UART in reception process, user can transmit data through
+  
+  /*##-2- Start the transmission process #####################################*/  
+  /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
   {
     Error_Handler();
   }
-
-  /*##-3- Wait for the end of the transfer ###################################*/
+  
+  /*##-3- Wait for the end of the transfer ###################################*/  
   while (UartReady != SET)
   {
   }
-
+  
   /* Reset transmission flag */
   UartReady = RESET;
 
   /* Turn LED3 Off */
   BSP_LED_Off(LED3);
-
-  /*##-4- Put UART peripheral in reception process ###########################*/
+  
+  /*##-4- Put UART peripheral in reception process ###########################*/  
   if(HAL_UART_Receive_DMA(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
   {
     Error_Handler();
   }
 
 #else
-
+  
   /* The board receives the message and sends it back */
 
-  /*##-2- Put UART peripheral in reception process ###########################*/
+  /*##-2- Put UART peripheral in reception process ###########################*/  
   if(HAL_UART_Receive_DMA(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
   {
     Error_Handler();
   }
-
-  /*##-3- Wait for the end of the transfer ###################################*/
+  
+  /*##-3- Wait for the end of the transfer ###################################*/  
   while (UartReady != SET)
   {
   }
 
   /* Reset transmission flag */
   UartReady = RESET;
-
+  
   /* Turn LED3 Off */
   BSP_LED_Off(LED3);
-
-  /*##-4- Start the transmission process #####################################*/
-  /* While the UART in reception process, user can transmit data through
+  
+  /*##-4- Start the transmission process #####################################*/  
+  /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
   {
     Error_Handler();
   }
-
+  
 #endif /* TRANSMITTER_BOARD */
-
-  /*##-5- Wait for the end of the transfer ###################################*/
+  
+  /*##-5- Wait for the end of the transfer ###################################*/  
   while (UartReady != SET)
   {
   }
-
+  
   /* Reset transmission flag */
   UartReady = RESET;
 
@@ -202,7 +202,7 @@ int main(void)
   {
     /* Toggle LED3 */
     BSP_LED_Toggle(LED3);
-
+    
     /* Wait for 40ms */
     HAL_Delay(40);
   }
@@ -210,7 +210,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -235,12 +235,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -257,14 +257,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ 
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
@@ -273,9 +273,9 @@ static void SystemClock_Config(void)
 
 /**
   * @brief  Tx Transfer completed callback
-  * @param  UartHandle: UART handle.
-  * @note   This example shows a simple way to report end of DMA Tx transfer, and
-  *         you can add your own implementation.
+  * @param  UartHandle: UART handle. 
+  * @note   This example shows a simple way to report end of DMA Tx transfer, and 
+  *         you can add your own implementation. 
   * @retval None
   */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
@@ -284,13 +284,13 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
   UartReady = SET;
 
   /* Turn LED3 on: Transfer in transmission process is correct */
-  BSP_LED_On(LED3);
+  BSP_LED_On(LED3); 
 }
 
 /**
   * @brief  Rx Transfer completed callback
   * @param  UartHandle: UART handle
-  * @note   This example shows a simple way to report end of DMA Rx transfer, and
+  * @note   This example shows a simple way to report end of DMA Rx transfer, and 
   *         you can add your own implementation.
   * @retval None
   */
@@ -313,7 +313,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
 {
   /* Turn LED3 on: Transfer error in reception/transmission process */
-  BSP_LED_On(LED3);
+  BSP_LED_On(LED3); 
 }
 
 /**
@@ -361,7 +361,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

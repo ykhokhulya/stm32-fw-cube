@@ -14,8 +14,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -30,20 +30,20 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
-
-/* Includes ------------------------------------------------------------------*/
+ 
+/* Includes ------------------------------------------------------------------*/   
 #include "GUI.h"
 #include "WM.h"
 #include "DIALOG.h"
 #include "CHOOSEFILE.h"
-
+   
 #ifndef GUI_CONST_STORAGE
   #define GUI_CONST_STORAGE const
 #endif
 
 #ifndef GUI_FLASH
   #define GUI_FLASH
-#endif
+#endif    
 
 /* Exported types ------------------------------------------------------------*/
 typedef WM_HMEM ST_ANIMATED_ICONVIEW_Handle;
@@ -75,7 +75,7 @@ extern GUI_FLASH const GUI_FONT GUI_FontLubalGraph32B;
 /* Exported macros -----------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
-/** ST Skins ***/
+/** ST Skins ***/ 
 void SLIDER_SetSTSkin(WM_HMEM hObj);
 void SCROLLBAR_SetSTSkin(WM_HMEM hObj);
 void HEADER_SetSTSkin(WM_HMEM hObj);
@@ -83,7 +83,7 @@ void SLIDER_SetDefaultSTSkin(void);
 void SCROLLBAR_SetDefaultSTSkin(void);
 void HEADER_SetDefaultSTSkin(void);
 
-/** ST Widgets ***/
+/** ST Widgets ***/ 
 ST_ANIMATED_ICONVIEW_Handle ST_AnimatedIconView_CreateEx      (int x0, int y0, int xSize, int ySize, WM_HWIN hParent, int WinFlags, int ExFlags, int Id, int xSizeItems, int ySizeItems, int delay, int FrameNbr);
 ST_ANIMATED_ICONVIEW_Handle ST_AnimatedIconView_CreateUser    (int x0, int y0, int xSize, int ySize, WM_HWIN hParent, int WinFlags, int ExFlags, int Id, int xSizeItems, int ySizeItems, int NumExtraBytes, int delay, int FrameNbr);
 ST_ANIMATED_ICONVIEW_Handle ST_AnimatedIconView_CreateIndirect(const GUI_WIDGET_CREATE_INFO * pCreateInfo, WM_HWIN hWinParent, int x0, int y0, WM_CALLBACK * cb, int delay, int FrameNbr);
@@ -114,17 +114,17 @@ int  ST_AnimatedIconView_AddIcon(ST_ANIMATED_ICONVIEW_Handle hObj, const GUI_BIT
 void ST_AnimatedIconView_SetNextButton(ST_ANIMATED_ICONVIEW_Handle hObj);
 
 
-WM_HWIN ST_CHOOSEFILE_Create(WM_HWIN        hParent,
-                          int               xPos,
-                          int               yPos,
-                          int               xSize,
-                          int               ySize,
-                          const char      * apRoot[],
-                          int               NumRoot,
-                          int               SelRoot,
-                          const char      * sCaption,
-                          int               Flags,
-                          CHOOSEFILE_INFO * pInfo
+WM_HWIN ST_CHOOSEFILE_Create(WM_HWIN        hParent,  
+                          int               xPos,     
+                          int               yPos,     
+                          int               xSize,    
+                          int               ySize,    
+                          const char      * apRoot[], 
+                          int               NumRoot,  
+                          int               SelRoot,  
+                          const char      * sCaption, 
+                          int               Flags,    
+                          CHOOSEFILE_INFO * pInfo  
                           );
 
 void    ST_CHOOSEFILE_Callback            (WM_MESSAGE * pMsg);
@@ -135,10 +135,10 @@ void    ST_CHOOSEFILE_SetDelim            (char Delim);
 void    ST_CHOOSEFILE_SetToolTips         (const TOOLTIP_INFO * pInfo, int NumItems);
 void    ST_CHOOSEFILE_SetTopMode          (unsigned OnOff);
 void    ST_CHOOSEFILE_SetButtonSize       (int XSize, int YSize) ;
-void    ST_CHOOSEFILE_SetButtonBitmaps    (int index,
-                                           const GUI_BITMAP * EnabledBMP,
+void    ST_CHOOSEFILE_SetButtonBitmaps    (int index, 
+                                           const GUI_BITMAP * EnabledBMP, 
                                            const GUI_BITMAP * DisabledBMP) ;
-/** ST 2D Drawing methods ***/
+/** ST 2D Drawing methods ***/ 
 void DrawRect3D(int x0, int y0, int width, int height);
 
 #ifdef __cplusplus

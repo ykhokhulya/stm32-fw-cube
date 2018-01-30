@@ -66,7 +66,7 @@
 #endif /* HSE_VALUE */
 
 /**
-  * @brief LED2
+  * @brief LED2 
   */
 
 #define LED2_PIN                           LL_GPIO_PIN_5
@@ -80,7 +80,7 @@
 #define LED_BLINK_FAST  200
 #define LED_BLINK_SLOW 500
 #define LED_BLINK_ERROR 1000
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void HSEReady_Callback(void);

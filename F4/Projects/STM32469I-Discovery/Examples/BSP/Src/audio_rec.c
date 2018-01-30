@@ -56,9 +56,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {
-  REC_NONE_STATE = 0,
-  REC_RESET_STATE,
-  RECORD_ONGOING,
+  REC_NONE_STATE = 0, 
+  REC_RESET_STATE,     
+  RECORD_ONGOING,   
   REC_ERROR_STATE,
 }AUDIOREC_StateTypeDef;
 
@@ -144,7 +144,7 @@ void AudioRec_demo (void)
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 95, (uint8_t *)"  AUDIO RECORD INIT FAIL", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 80, (uint8_t *)"  Try to reset board ", CENTER_MODE);
   }
-
+  
   /* Infinite loop */
   while (buffer_ctl.rec_length < AUDIO_REC_TOTAL_SIZE)
   {
@@ -285,7 +285,7 @@ void AudioRec_demo (void)
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 95, (uint8_t *)"  AUDIO PLAYBACK  FAIL ", CENTER_MODE);
   }
-
+  
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 25, (uint8_t *)"PLAYBACK DONE", CENTER_MODE);
 
   while (1)

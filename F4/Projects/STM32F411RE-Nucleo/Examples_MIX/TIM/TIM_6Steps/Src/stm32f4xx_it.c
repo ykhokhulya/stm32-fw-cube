@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Examples_MIX/TIM/TIM_6Steps/Src/stm32f4xx_it.c
+  * @file    Examples_MIX/TIM/TIM_6Steps/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -154,7 +154,7 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-
+  
   /* Generate a commutation event each 1 ms */
   LL_TIM_GenerateEvent_COM(TIM1);
 }
@@ -177,17 +177,17 @@ void TIM1_TRG_COM_TIM11_IRQHandler(void)
   {
     /* Clear the update interrupt flag*/
     LL_TIM_ClearFlag_COM(TIM1);
-
+    
     /* TIM1 commutation event processing */
     TimerCommutationEvent_Callback();
   }
-
+  
 }
 
 /**
   * @}
   */
-
+  
 /**
   * @}
   */

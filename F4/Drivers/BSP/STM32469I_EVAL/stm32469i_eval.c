@@ -138,7 +138,7 @@ static I2C_HandleTypeDef heval_I2c;
 static void          I2Cx_MspInit(void);
 static void          I2Cx_Init(void);
 static void          I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
-static uint8_t       I2Cx_Read(uint8_t Addr, uint8_t Reg);
+static uint8_t       I2Cx_Read(uint8_t Addr, uint8_t Reg);     
 static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length);
 static HAL_StatusTypeDef I2Cx_WriteMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length);
 static HAL_StatusTypeDef I2Cx_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
@@ -237,9 +237,9 @@ void BSP_LED_Init(Led_TypeDef Led)
     gpio_init_structure.Mode  = GPIO_MODE_OUTPUT_PP;
     gpio_init_structure.Pull  = GPIO_PULLUP;
     gpio_init_structure.Speed = GPIO_SPEED_HIGH;
-
+  
     HAL_GPIO_Init(LEDx_GPIO_PORT, &gpio_init_structure);
-
+    
     /* By default, turn off LED by setting a high level on corresponding GPIO */
     HAL_GPIO_WritePin(LEDx_GPIO_PORT, GPIO_PIN[Led], GPIO_PIN_SET);
   }
@@ -252,20 +252,20 @@ void BSP_LED_Init(Led_TypeDef Led)
   BSP_IO_ConfigPin(GPIO_PIN[Led], IO_MODE_OUTPUT_PP_PU);
 
   BSP_IO_WritePin(GPIO_PIN[Led], BSP_IO_PIN_SET);
-#endif /* USE_IOEXPANDER */
-#endif /* USE_STM32469I_EVAL_REVA */
+#endif /* USE_IOEXPANDER */     
+#endif /* USE_STM32469I_EVAL_REVA */     
 }
 
 
 /**
   * @brief  DeInit LEDs.
-  * @param  Led: LED to be configured.
+  * @param  Led: LED to be configured. 
   *          This parameter can be one of the following values:
   *            @arg  LED1
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @note Led DeInit does not disable the GPIO clock nor disable the Mfx
+  * @note Led DeInit does not disable the GPIO clock nor disable the Mfx 
   */
 void BSP_LED_DeInit(Led_TypeDef Led)
 {
@@ -287,8 +287,8 @@ void BSP_LED_DeInit(Led_TypeDef Led)
     /* GPIO_PIN[Led]  depends on the board revision: */
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
     BSP_IO_ConfigPin(GPIO_PIN[Led], IO_MODE_OFF);
-#endif /* USE_IOEXPANDER */
-#endif /* USE_STM32469I_EVAL_REVA */
+#endif /* USE_IOEXPANDER */     
+#endif /* USE_STM32469I_EVAL_REVA */     
 }
 /**
   * @brief  Turns selected LED On.
@@ -313,8 +313,8 @@ void BSP_LED_On(Led_TypeDef Led)
     /* GPIO_PIN[Led]  depends on the board revision: */
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
   BSP_IO_WritePin(GPIO_PIN[Led], BSP_IO_PIN_RESET);
-#endif /* USE_IOEXPANDER */
-#endif /* USE_STM32469I_EVAL_REVA */
+#endif /* USE_IOEXPANDER */     
+#endif /* USE_STM32469I_EVAL_REVA */     
 
 }
 
@@ -341,8 +341,8 @@ void BSP_LED_Off(Led_TypeDef Led)
     /* GPIO_PIN[Led]  depends on the board revision: */
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
   BSP_IO_WritePin(GPIO_PIN[Led], BSP_IO_PIN_SET);
-#endif /* USE_IOEXPANDER */
-#endif /* USE_STM32469I_EVAL_REVA */
+#endif /* USE_IOEXPANDER */     
+#endif /* USE_STM32469I_EVAL_REVA */     
 }
 
 /**
@@ -368,8 +368,8 @@ void BSP_LED_Toggle(Led_TypeDef Led)
     /* GPIO_PIN[Led]  depends on the board revision: */
     /*  - in case of RevA all leds are on IOEXPANDER (Mfx)  */
   BSP_IO_TogglePin(GPIO_PIN[Led]);
-#endif /* USE_IOEXPANDER */
-#endif /* USE_STM32469I_EVAL_REVA */
+#endif /* USE_IOEXPANDER */     
+#endif /* USE_STM32469I_EVAL_REVA */     
 }
 
 /**
@@ -387,7 +387,7 @@ void BSP_LED_Toggle(Led_TypeDef Led)
 void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
 {
   GPIO_InitTypeDef gpio_init_structure;
-
+  
   /* Enable the BUTTON clock */
   BUTTONx_GPIO_CLK_ENABLE(Button);
 
@@ -429,8 +429,8 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
   * @brief  Push Button DeInit.
   * @param  Button: Button to be configured
   *          This parameter can be one of the following values:
-  *            @arg  BUTTON_WAKEUP: Wakeup Push Button
-  *            @arg  BUTTON_TAMPER: Tamper Push Button
+  *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+  *            @arg  BUTTON_TAMPER: Tamper Push Button  
   * @note PB DeInit does not disable the GPIO clock
   */
 void BSP_PB_DeInit(Button_TypeDef Button)
@@ -496,8 +496,8 @@ void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
   * @brief  DeInit COM port.
   * @param  COM: COM port to be configured.
   *          This parameter can be one of the following values:
-  *            @arg  COM1
-  *            @arg  COM2
+  *            @arg  COM1 
+  *            @arg  COM2 
   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
   *                configuration information for the specified USART peripheral.
   */
@@ -510,11 +510,11 @@ void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
   /* Enable USART clock */
   EVAL_COMx_CLK_DISABLE(COM);
 
-  /* DeInit GPIO pins can be done in the application
+  /* DeInit GPIO pins can be done in the application 
      (by surcharging this __weak function) */
 
-  /* GPOI pins clock, FMC clock and DMA clock can be shut down in the applic
-     by surcgarging this __weak function */
+  /* GPOI pins clock, FMC clock and DMA clock can be shut down in the applic 
+     by surcgarging this __weak function */ 
 }
 #if defined(USE_IOEXPANDER)
 
@@ -571,12 +571,12 @@ void BSP_JOY_DeInit()
   */
 JOYState_TypeDef BSP_JOY_GetState(void)
 {
-  uint16_t pin_status = 0;
-
+  uint16_t pin_status = 0;   
+  
   /* Read the status joystick pins */
   pin_status = BSP_IO_ReadPin(JOY_ALL_PINS);
-
-  /* Check the pressed keys */
+   
+  /* Check the pressed keys */  
   if((pin_status & JOY_NONE_PIN) == JOY_NONE)
   {
     return(JOYState_TypeDef) JOY_NONE;
@@ -588,7 +588,7 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   else if(!(pin_status & JOY_DOWN_PIN))
   {
     return(JOYState_TypeDef) JOY_DOWN;
-  }
+  } 
   else if(!(pin_status & JOY_LEFT_PIN))
   {
     return(JOYState_TypeDef) JOY_LEFT;
@@ -627,9 +627,9 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   */
 static void I2Cx_MspInit(void)
 {
-  GPIO_InitTypeDef  gpio_init_structure;
-
-  /*** Configure the GPIOs ***/
+  GPIO_InitTypeDef  gpio_init_structure;  
+  
+  /*** Configure the GPIOs ***/  
   /* Enable GPIO clock */
   EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE();
 
@@ -739,7 +739,7 @@ static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
     I2Cx_Error(Addr);
   }
   return Value;
-}
+}    
 
 /**
   * @brief  Reads multiple data.
@@ -1017,14 +1017,14 @@ void MFX_IO_Delay(uint32_t Delay)
 /**
   * @brief  Used by Lx family but requested for MXF component compatibility.
   */
-void MFX_IO_Wakeup(void)
+void MFX_IO_Wakeup(void) 
 {
 }
 
 /**
   * @brief  Used by Lx family but requested for MXF component compatibility.
   */
-void MFX_IO_EnableWakeupPin(void)
+void MFX_IO_EnableWakeupPin(void) 
 {
 }
 

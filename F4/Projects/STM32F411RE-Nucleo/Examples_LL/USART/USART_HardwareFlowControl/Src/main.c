@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Examples_LL/USART/USART_HardwareFlowControl/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to transfer bytes from/to an USART peripheral
-  *          to/from a PC UART with HW FLow Control enabled,
+  * @brief   This example describes how to transfer bytes from/to an USART peripheral 
+  *          to/from a PC UART with HW FLow Control enabled, 
   *          through the STM32F4xx USART LL API.
   *          Peripheral initialization done using LL unitary services functions.
   ******************************************************************************
@@ -107,10 +107,10 @@ int main(void)
 
   /* Wait for User push-button press to start transfer */
   WaitForUserButtonPress();
-
+  
   /* Initiate DMA transfers */
   StartTransfers();
-
+  
   /* Wait for the end of the transfer and check received data */
   WaitAndCheckEndOfTransfer();
 
@@ -174,18 +174,18 @@ void Configure_USART1(void)
   /* (2) NVIC Configuration for USART1 interrupts */
   /*  - Set priority for USART1_IRQn */
   /*  - Enable USART1_IRQn           */
-  NVIC_SetPriority(USART1_IRQn, 0);
+  NVIC_SetPriority(USART1_IRQn, 0);  
   NVIC_EnableIRQ(USART1_IRQn);
 
   /* (3) Enable the USART1 peripheral clock and clock source ****************/
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1);
 
   /* (4) Configure USART1 functional parameters ********************************/
-
+  
   /* Disable USART1 prior modifying configuration registers */
   /* Note: Commented as corresponding to Reset value */
   // LL_USART_Disable(USART1);
-
+  
   /* TX/RX direction */
   LL_USART_SetTransferDirection(USART1, LL_USART_DIRECTION_TX_RX);
 
@@ -203,10 +203,10 @@ void Configure_USART1(void)
   /* Frequency available for USART peripheral can also be calculated through LL RCC macro */
   /* Ex :
       Periphclk = LL_RCC_GetUSARTClockFreq(Instance); or LL_RCC_GetUARTClockFreq(Instance); depending on USART/UART instance
-
+  
       In this example, Peripheral Clock is expected to be equal to 100000000 Hz => equal to SystemCoreClock
   */
-  LL_USART_SetBaudRate(USART1, SystemCoreClock, LL_USART_OVERSAMPLING_16, 115200);
+  LL_USART_SetBaudRate(USART1, SystemCoreClock, LL_USART_OVERSAMPLING_16, 115200); 
 
   /* (5) Enable USART *********************************************************/
   LL_USART_Enable(USART1);
@@ -227,10 +227,10 @@ void StartTransfers(void)
   if (ubSend == 0)
   {
     /* Start USART transmission : Will initiate TXE interrupt after DR register is empty */
-    LL_USART_TransmitData8(USART1, aStringToSend[ubSend++]);
+    LL_USART_TransmitData8(USART1, aStringToSend[ubSend++]); 
 
     /* Enable TXE interrupt */
-    LL_USART_EnableIT_TXE(USART1);
+    LL_USART_EnableIT_TXE(USART1); 
   }
 }
 
@@ -290,21 +290,21 @@ void LED_Blinking(uint32_t Period)
   /* Toggle LED2 in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -317,13 +317,13 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);  
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
 }
 
 /**
   * @brief  Wait for User push-button press to start transfer.
-  * @param  None
+  * @param  None 
   * @retval None
   */
   /*  */
@@ -340,7 +340,7 @@ void WaitForUserButtonPress(void)
 
 /**
   * @brief  Wait end of transfer and check if received Data are well.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void WaitAndCheckEndOfTransfer(void)
@@ -497,7 +497,7 @@ void Error_Callback(void)
 
   /* Disable USART1_IRQn */
   NVIC_DisableIRQ(USART1_IRQn);
-
+  
   /* Error handling example :
     - Read USART SR register to identify flag that leads to IT raising
     - Perform corresponding error handling treatment according to flag

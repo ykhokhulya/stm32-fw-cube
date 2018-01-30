@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/audio_record.c
+  * @file    BSP/Src/audio_record.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use AUDIO features for the record.
   ******************************************************************************
@@ -92,7 +92,7 @@ extern uint16_t *CurrentPos;   /* This variable holds the current position of au
 
 /**
   * @brief  Test Audio Hardware.
-  *   The main objective of this test is to check the hardware connection of the
+  *   The main objective of this test is to check the hardware connection of the 
   *   Audio peripheral.
   * @param  None
   * @retval None
@@ -104,11 +104,11 @@ void AudioRecord_Test(void)
   {
     /* Record Error */
     Error_Handler();
-  }
+  }  
 
   /* Turn ON LED3: start record */
   BSP_LED_On(LED3);
-
+  
   /* Start the record */
   if (BSP_AUDIO_IN_Record((uint16_t*)&InternalBuffer[0], INTERNAL_BUFF_SIZE) != AUDIO_OK)
   {
@@ -116,11 +116,11 @@ void AudioRecord_Test(void)
     Error_Handler();
   }
   BufferCtl.fptr = 0;
-
-  AUDIODataReady = 0;
+  
+  AUDIODataReady = 0; 
 
   /* Wait for the data to be ready with PCM form */
-  while (AUDIODataReady != 2)
+  while (AUDIODataReady != 2) 
   {
     if(BufferCtl.offset == BUFFER_OFFSET_HALF)
     {
@@ -129,9 +129,9 @@ void AudioRecord_Test(void)
 
       /* Copy PCM data in internal buffer */
       memcpy((uint16_t*)&WrBuffer[ITCounter * (PCM_OUT_SIZE*2)], RecBuf, PCM_OUT_SIZE*4);
-
+      
       BufferCtl.offset = BUFFER_OFFSET_NONE;
-
+      
       if(ITCounter == (WR_BUFFER_SIZE/(PCM_OUT_SIZE*4))-1)
       {
         AUDIODataReady = 1;
@@ -147,20 +147,20 @@ void AudioRecord_Test(void)
       else
       {
         ITCounter++;
-      }
-
+      }     
+      
     }
-
+    
     if(BufferCtl.offset == BUFFER_OFFSET_FULL)
     {
       /* PDM to PCM data convert */
       BSP_AUDIO_IN_PDMToPCM((uint16_t*)&InternalBuffer[INTERNAL_BUFF_SIZE/2], (uint16_t*)&RecBuf[0]);
-
+      
       /* Copy PCM data in internal buffer */
       memcpy((uint16_t*)&WrBuffer[ITCounter * (PCM_OUT_SIZE*2)], RecBuf, PCM_OUT_SIZE*4);
-
+      
       BufferCtl.offset = BUFFER_OFFSET_NONE;
-
+      
       if(ITCounter == (WR_BUFFER_SIZE/(PCM_OUT_SIZE*4))-1)
       {
         AUDIODataReady = 1;
@@ -176,10 +176,10 @@ void AudioRecord_Test(void)
       else
       {
         ITCounter++;
-      }
-    }
+      } 
+    }   
   };
-
+  
   /* Stop audio record */
   if (BSP_AUDIO_IN_Stop() != AUDIO_OK)
   {
@@ -191,32 +191,32 @@ void AudioRecord_Test(void)
   BSP_LED_Off(LED3);
   /* Turn ON LED6: play recorded file */
   BSP_LED_On(LED6);
-
+  
   /* Play in the loop the recorded file */
 
-  /* Set variable to indicate play from record buffer */
+  /* Set variable to indicate play from record buffer */ 
   AudioTest = 1;
-
+  
   /* Set variable used to stop player before starting */
   UserPressButton = 0;
 
-  /* Initialize audio IN at REC_FREQ */
+  /* Initialize audio IN at REC_FREQ */ 
   BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, 70, DEFAULT_AUDIO_IN_FREQ);
 
   /* Set the total number of data to be played */
-  AudioTotalSize = AUDIODATA_SIZE * WR_BUFFER_SIZE;
+  AudioTotalSize = AUDIODATA_SIZE * WR_BUFFER_SIZE;  
   /* Update the remaining number of data to be played */
-  AudioRemSize = 0;
+  AudioRemSize = 0;  
   /* Update the WrBuffer audio pointer position */
   CurrentPos = (uint16_t *)(WrBuffer);
-
+  
   /* Play the recorded buffer */
   BSP_AUDIO_OUT_Play(WrBuffer , AudioTotalSize);
-
+  
   while(!UserPressButton)
-  {
+  { 
   }
-
+  
   /* Stop Player before close Test */
   if (BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW) != AUDIO_OK)
   {
@@ -231,7 +231,7 @@ void AudioRecord_Test(void)
   * @retval None
   */
 void BSP_AUDIO_IN_TransferComplete_CallBack(void)
-{
+{ 
   BufferCtl.offset = BUFFER_OFFSET_FULL;
 }
 
@@ -258,10 +258,10 @@ void BSP_AUDIO_IN_Error_Callback(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

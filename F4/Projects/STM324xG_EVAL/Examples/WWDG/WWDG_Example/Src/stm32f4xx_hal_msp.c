@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -57,9 +57,9 @@
   */
 
 /**
-  * @brief WWDG MSP Initialization
-  *        This function configures the hardware resources used in this example:
-  *           - Peripheral's clock enable
+  * @brief WWDG MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
+  *           - Peripheral's clock enable 
   * @param hwwdg: WWDG handle pointer
   * @retval None
   */

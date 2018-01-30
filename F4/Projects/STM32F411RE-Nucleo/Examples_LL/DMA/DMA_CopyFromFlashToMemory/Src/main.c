@@ -100,7 +100,7 @@ int main(void)
 
   /* Start the DMA transfer Flash to Memory */
   LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_0);
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -127,7 +127,7 @@ void Configure_DMA(void)
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMA2);
 
   /* (2) Configure the DMA functionnal parameters */
-  /* Configuration of the DMA parameters can be done using unitary functions or using the specific configure function */
+  /* Configuration of the DMA parameters can be done using unitary functions or using the specific configure function */ 
   /* Unitary Functions */
 
   LL_DMA_SetDataTransferDirection(DMA2, LL_DMA_STREAM_0, LL_DMA_DIRECTION_MEMORY_TO_MEMORY);
@@ -137,7 +137,7 @@ void Configure_DMA(void)
   LL_DMA_SetMemoryIncMode(DMA2, LL_DMA_STREAM_0, LL_DMA_MEMORY_INCREMENT);
   LL_DMA_SetPeriphSize(DMA2, LL_DMA_STREAM_0, LL_DMA_PDATAALIGN_WORD);
   LL_DMA_SetMemorySize(DMA2, LL_DMA_STREAM_0, LL_DMA_MDATAALIGN_WORD);
-
+  
   /* Configure Function */
 //  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_0, LL_DMA_DIRECTION_MEMORY_TO_MEMORY |
 //                                               LL_DMA_PRIORITY_HIGH              |
@@ -146,10 +146,10 @@ void Configure_DMA(void)
 //                                               LL_DMA_MEMORY_INCREMENT           |
 //                                               LL_DMA_PDATAALIGN_WORD            |
 //                                               LL_DMA_MDATAALIGN_WORD);
-
+    
   LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_0, BUFFER_SIZE);
   LL_DMA_ConfigAddresses(DMA2, LL_DMA_STREAM_0, (uint32_t)&aSRC_Const_Buffer, (uint32_t)&aDST_Buffer, LL_DMA_GetDataTransferDirection(DMA2, LL_DMA_STREAM_0));
-
+  
   /* (3) Configure NVIC for DMA transfer complete/error interrupts */
   LL_DMA_EnableIT_TC(DMA2, LL_DMA_STREAM_0);
   LL_DMA_EnableIT_TE(DMA2, LL_DMA_STREAM_0);
@@ -218,11 +218,11 @@ void LED_Blinking(uint32_t Period)
 {
   /* Turn LED2 on */
   LL_GPIO_SetOutputPin(LED2_GPIO_PORT, LED2_PIN);
-
+  
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -301,7 +301,7 @@ void TransferComplete()
     /* DMA data transfered not consistency */
     LED_Blinking(LED_BLINK_ERROR);
   }
-
+  
   /* DMA data transfered consistency */
   LED_On();
 }

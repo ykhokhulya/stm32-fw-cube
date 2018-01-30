@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    LTDC/LTDC_Display_1Layer/Src/stm32f4xx_it.c
+  * @file    LTDC/LTDC_Display_1Layer/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup LTDC_Display_1Layer
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -175,10 +175,10 @@ void SysTick_Handler(void)
 /**
   * @}
   */
-
+  
 /**
   * @}
-  */
+  */ 
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

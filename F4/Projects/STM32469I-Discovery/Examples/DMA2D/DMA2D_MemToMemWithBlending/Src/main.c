@@ -48,7 +48,7 @@
 /** @addtogroup DMA2D_MemToMemWithBlending
   * @{
   */
-
+  
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -98,13 +98,13 @@ int main(void)
   offset_address_area_blended_image_in_lcd_buffer =  ((((LcdResY - LAYER_SIZE_Y) / 2) * LcdResX)
                                   +   ((LcdResX - LAYER_SIZE_X) / 2))
                                    * ARGB8888_BYTE_PER_PIXEL;
-
+  
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization: global MSP (MCU Support Package) initialization
@@ -116,7 +116,7 @@ int main(void)
 
   /* Wait until MFX is ready after reset */
   HAL_Delay(100);
-
+    
   /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
@@ -130,7 +130,7 @@ int main(void)
   /* Proceed to LTDC, DSI initialization and LCD screen initialization
    * with the configuration filled in above */
   lcd_status = BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
   OnError_Handler(lcd_status != LCD_OK);
 
   /* Prepare using DMA2D the 800x480 LCD frame buffer to display background color black */
@@ -313,7 +313,7 @@ static void TransferComplete(DMA2D_HandleTypeDef *hdma2d)
   /* Turn LED1 On */
   BSP_LED_On(LED1);
   /* The Blended image is now ready for display */
-  blended_image_ready = 1;
+  blended_image_ready = 1;    
 }
 
 /**
@@ -331,7 +331,7 @@ static void TransferError(DMA2D_HandleTypeDef *hdma2d)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -359,8 +359,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -378,27 +378,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 6;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {

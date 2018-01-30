@@ -51,7 +51,7 @@ The image size can be modified by changing IMAGE_WIDTH and IMAGE_HEIGHT defines
 in "main.h" file to decode other resolution than 240x240.
 
 @note IMAGE_WIDTH and IMAGE_HEIGHT values must be lower or equal to LCD screen resolution.
- - LCD width  = 240
+ - LCD width  = 240 
  - LCD height = 240
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -59,7 +59,7 @@ in "main.h" file to decode other resolution than 240x240.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
@@ -68,13 +68,13 @@ in "main.h" file to decode other resolution than 240x240.
     - LibJPEG/LibJPEG_Decoding/Inc/main.h                      Main program header file
     - LibJPEG/LibJPEG_Decoding/Inc/sd_diskio.h                 FatFS sd diskio driver header file
     - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_it.h              Interrupt handlers header file
-    - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_hal_conf.h        HAL Configuration file
+    - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_hal_conf.h        HAL Configuration file 
     - LibJPEG/LibJPEG_Decoding/Inc/ffconf.h                    FAT file system module configuration file
     - LibJPEG/LibJPEG_Decoding/Inc/decode.h                    Decoder header file
     - LibJPEG/LibJPEG_Decoding/Inc/jmorecfg.h                  Lib JPEG configuration file (advanced configuration)
     - LibJPEG/LibJPEG_Decoding/Inc/jconfig.h                   Lib JPEG configuration file
     - LibJPEG/LibJPEG_Decoding/Inc/jdata_conf.h                Write/Read methods definition
-    - LibJPEG/LibJPEG_Decoding/Src/main.c                      Main program
+    - LibJPEG/LibJPEG_Decoding/Src/main.c                      Main program  
     - LibJPEG/LibJPEG_Decoding/Src/sd_diskio.c                 FatFS sd diskio driver implementation
     - LibJPEG/LibJPEG_Decoding/Src/stm32f4xx_it.c              Interrupt handlers
     - LibJPEG/LibJPEG_Decoding/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file

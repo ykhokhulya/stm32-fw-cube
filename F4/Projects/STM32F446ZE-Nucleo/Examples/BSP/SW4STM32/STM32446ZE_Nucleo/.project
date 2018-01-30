@@ -129,6 +129,6 @@
 			<type>1</type>
 			<location>PARENT-6-PROJECT_LOC/Drivers/BSP/Adafruit_Shield/stm32_adafruit_sd.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

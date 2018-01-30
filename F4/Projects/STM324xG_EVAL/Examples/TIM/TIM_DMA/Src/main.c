@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_DMA/Src/main.c
+  * @file    TIM/TIM_DMA/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use DMA with TIM1 Update request to
   *          transfer Data from memory to TIM1 Capture Compare Register 3 (CCR3).
@@ -82,12 +82,12 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
-  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED3);  
 
   /* Compute the value of ARR regiter to generate signal frequency at 17.57 Khz */
   uhTimerPeriod = (uint32_t) ((SystemCoreClock / 17570 ) - 1);
@@ -97,16 +97,16 @@ int main(void)
   aCCValue_Buffer[1] = (uint32_t)(((uint32_t) 50 * (uhTimerPeriod - 1)) / 100);
   /* Compute CCR3 value to generate a duty cycle at 25% */
   aCCValue_Buffer[2] = (uint32_t)(((uint32_t) 25 * (uhTimerPeriod - 1)) / 100);
-
-
-  /*##-1- Configure the TIM peripheral #######################################*/
+  
+  
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* ---------------------------------------------------------------------------
-  TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), since APB2
-  prescaler is different from 1.
-    TIM1CLK = 2 * PCLK2
-    PCLK2 = HCLK / 2
+  TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), since APB2 
+  prescaler is different from 1.   
+    TIM1CLK = 2 * PCLK2  
+    PCLK2 = HCLK / 2 
     => TIM1CLK = 2 * (HCLK / 2) = HCLK = SystemCoreClock
-
+  
   TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
   SystemCoreClock is set to 168 MHz for STM32F4xx devices.
 
@@ -117,17 +117,17 @@ int main(void)
   Update DMA request.
 
   The number of this repetitive requests is defined by the TIM1 Repetion counter,
-  each 3 Update Requests, the TIM1 Channel 3 Duty Cycle changes to the next new
+  each 3 Update Requests, the TIM1 Channel 3 Duty Cycle changes to the next new 
   value defined by the aSRC_Buffer.
-
-  Note:
+  
+  Note: 
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
-     Each time the core clock (HCLK) changes, user had to update SystemCoreClock
+     Each time the core clock (HCLK) changes, user had to update SystemCoreClock 
      variable value. Otherwise, any configuration based on this variable will be incorrect.
      This variable is updated in three ways:
       1) by calling CMSIS function SystemCoreClockUpdate()
       2) by calling HAL API function HAL_RCC_GetSysClockFreq()
-      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency
+      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency  
   -----------------------------------------------------------------------------*/
   /* Initialize TIM3 peripheral as follow:
       + Period = TimerPeriod (To have an output frequency equal to 17.570 KHz)
@@ -137,7 +137,7 @@ int main(void)
       + Counter direction = Up
   */
   TimHandle.Instance = TIMx;
-
+  
   TimHandle.Init.Period            = uhTimerPeriod;
   TimHandle.Init.RepetitionCounter = 3;
   TimHandle.Init.Prescaler         = 0;
@@ -148,8 +148,8 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the PWM channel 3 ########################################*/
+  
+  /*##-2- Configure the PWM channel 3 ########################################*/ 
   sConfig.OCMode     = TIM_OCMODE_PWM1;
   sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfig.Pulse      = aCCValue_Buffer[0];
@@ -158,14 +158,14 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
-  /*##-3- Start PWM signal generation in DMA mode ############################*/
+  
+  /*##-3- Start PWM signal generation in DMA mode ############################*/ 
   if(  HAL_TIM_PWM_Start_DMA(&TimHandle, TIM_CHANNEL_3, aCCValue_Buffer, 3) != HAL_OK)
   {
     /* Starting PWM generation Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -188,7 +188,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -214,8 +214,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -229,14 +229,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -256,7 +256,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

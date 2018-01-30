@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/mems.c
+  * @file    BSP/Src/mems.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use MEMS features.
   ******************************************************************************
@@ -72,15 +72,15 @@ void ACCELERO_MEMS_Test(void)
   if(BSP_ACCELERO_Init() != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   UserPressButton = 0;
   while(!UserPressButton)
   {
     ACCELERO_ReadAcc();
   }
-}
+}  
 
 /**
   * @brief  Read Acceleration data.
@@ -91,7 +91,7 @@ static void ACCELERO_ReadAcc(void)
 {
   int16_t buffer[3] = {0};
   int16_t xval, yval = 0x00;
-
+  
   /* Read Acceleration */
   BSP_ACCELERO_GetXYZ(buffer);
 
@@ -101,19 +101,19 @@ static void ACCELERO_ReadAcc(void)
   if((ABS(xval))>(ABS(yval)))
   {
     if(xval > ThresholdHigh)
-    {
+    { 
       /* LED5 On */
       BSP_LED_On(LED5);
       HAL_Delay(10);
     }
     else if(xval < ThresholdLow)
-    {
+    { 
       /* LED4 On */
-      BSP_LED_On(LED4);
+      BSP_LED_On(LED4);      
       HAL_Delay(10);
     }
     else
-    {
+    { 
       HAL_Delay(10);
     }
   }
@@ -130,13 +130,13 @@ static void ACCELERO_ReadAcc(void)
       /* LED3 On */
       BSP_LED_On(LED3);
       HAL_Delay(10);
-    }
+    } 
     else
-    {
+    { 
       HAL_Delay(10);
     }
-  }
-
+  } 
+  
   BSP_LED_Off(LED3);
   BSP_LED_Off(LED4);
   BSP_LED_Off(LED5);
@@ -145,7 +145,7 @@ static void ACCELERO_ReadAcc(void)
 
 /**
   * @brief  Test Gyroscope MEMS Hardware.
-  *         The main objectif of this test is to check the hardware connection of the
+  *         The main objectif of this test is to check the hardware connection of the 
   *         MEMS peripheral.
   * @param  None
   * @retval None
@@ -156,15 +156,15 @@ void GYRO_MEMS_Test(void)
   if(BSP_ACCELERO_Init() != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   UserPressButton = 0;
   while(!UserPressButton)
   {
     GYRO_ReadAng();
   }
-}
+}  
 
 /**
   * @brief  Read Gyroscope Angular data.
@@ -176,36 +176,36 @@ static void GYRO_ReadAng(void)
   /* Gyroscope variables */
   float Buffer[3];
   float Xval, Yval = 0x00;
-
+  
   /* Init Gyroscope Mems */
   if(BSP_GYRO_Init() != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /* Read Gyroscope Angular data */
   BSP_GYRO_GetXYZ(Buffer);
-
+  
   Xval = ABS((Buffer[0]));
-  Yval = ABS((Buffer[1]));
-
+  Yval = ABS((Buffer[1])); 
+  
   if(Xval>Yval)
   {
     if(Buffer[0] > 5000.0f)
-    {
+    { 
       /* LED5 On */
       BSP_LED_On(LED5);
       HAL_Delay(10);
     }
     else if(Buffer[0] < -5000.0f)
-    {
+    { 
       /* LED4 On */
       BSP_LED_On(LED4);
       HAL_Delay(10);
     }
     else
-    {
+    { 
       HAL_Delay(10);
     }
   }
@@ -215,7 +215,7 @@ static void GYRO_ReadAng(void)
     {
       /* LED6 On */
       BSP_LED_On(LED6);
-
+      
       HAL_Delay(10);
     }
     else if(Buffer[1] > 5000.0f)
@@ -223,13 +223,13 @@ static void GYRO_ReadAng(void)
       /* LED3 On */
       BSP_LED_On(LED3);
       HAL_Delay(10);
-    }
+    } 
     else
-    {
+    { 
       HAL_Delay(10);
     }
-  }
-
+  } 
+  
   BSP_LED_Off(LED3);
   BSP_LED_Off(LED4);
   BSP_LED_Off(LED5);
@@ -238,7 +238,7 @@ static void GYRO_ReadAng(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

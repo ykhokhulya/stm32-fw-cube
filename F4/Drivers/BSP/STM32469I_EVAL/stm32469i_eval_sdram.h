@@ -60,11 +60,11 @@
 /** @defgroup STM32469I-EVAL_SDRAM_Exported_Types STM32469I EVAL SDRAM Exported Types
   * @{
   */
-
+    
 /**
   * @}
-  */
-
+  */ 
+  
 /**
   * @brief  SDRAM status structure definition
   */
@@ -140,11 +140,11 @@ void    BSP_SDRAM_MspDeInit(SDRAM_HandleTypeDef  *hsdram, void *Params);
 /**
   * @}
   */
-
+  
 /**
   * @}
   */
-
+  
 /**
   * @}
   */

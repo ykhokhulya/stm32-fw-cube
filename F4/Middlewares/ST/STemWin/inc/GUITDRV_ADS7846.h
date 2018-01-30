@@ -35,7 +35,7 @@ Notes
 (1) The driver needs some function pointer to be filled correctly to be able
     to communicate with the external peripheral correctly. The correct assignment
     of these function pointers is checked during driver configuration.
-
+    
 (2) The driver needs some configuration variables filled in to be able to calculate
     the logical screen coordinates from the physical AD values.
     A description of the typical paramaters that have to be known by the driver is

@@ -42,8 +42,8 @@ Purpose     : Display controller configuration (single layer)
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -118,7 +118,7 @@ Purpose     : Display controller configuration (single layer)
 * Purpose:
 *   Called during the initialization process in order to set up the
 *   display driver configuration.
-*
+*   
 */
 void LCD_X_Config(void) {
   //
@@ -147,7 +147,7 @@ void LCD_X_Config(void) {
 *   This function is called by the display driver for several purposes.
 *   To support the according task the routine needs to be adapted to
 *   the display controller. Please note that the commands marked with
-*   'optional' are not cogently required and should only be adapted if
+*   'optional' are not cogently required and should only be adapted if 
 *   the display controller supports these features.
 *
 * Parameter:

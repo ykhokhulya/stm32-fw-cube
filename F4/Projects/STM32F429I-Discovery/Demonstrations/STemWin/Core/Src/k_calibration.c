@@ -2,41 +2,41 @@
   ******************************************************************************
   * @file    k_calibration.c
   * @author  MCD Application Team
-  * @brief   This file provides the kernel calibration functions
+  * @brief   This file provides the kernel calibration functions   
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -62,12 +62,12 @@ typedef union
 {
   struct
   {
-    uint32_t     A1 : 15;
+    uint32_t     A1 : 15; 
     uint32_t     B1 : 16;
-    uint32_t     Reserved : 1;
+    uint32_t     Reserved : 1; 
   }b;
   uint32_t d32;
-}CALIBRATION_Data1Typedef;
+}CALIBRATION_Data1Typedef; 
 
 typedef union
 {
@@ -78,8 +78,8 @@ typedef union
     uint32_t      IsCalibrated : 1;
   }b;
   uint32_t d32;
-
-}CALIBRATION_Data2Typedef;
+  
+}CALIBRATION_Data2Typedef; 
 
 /* Private defines -----------------------------------------------------------*/
 /* Private macros ------------------------------------------------------------*/
@@ -181,7 +181,7 @@ static void _GetPhysValues(int LogX, int LogY, int * pPhysX, int * pPhysY, const
 
    GUI_TOUCH_GetState(&State);
   *pPhysX = State.x;
-  *pPhysY = State.y;
+  *pPhysY = State.y; 
   /* Wait until touch is released */
   _WaitForPressedState(0);
 }
@@ -212,12 +212,12 @@ void k_CalibrationInit(void)
 
   data1.d32 = k_BkupRestoreParameter(RTC_BKP_DR0);
   data2.d32 = k_BkupRestoreParameter(RTC_BKP_DR1);
-
+  
   A2 = data2.b.A2;
-  B2 = data2.b.B2;
+  B2 = data2.b.B2;    
   A1 = data1.b.A1;
   B1 = data1.b.B1;
-
+  
   if(data2.b.IsCalibrated == 0)
   {
     GUI_SetBkColor(GUI_WHITE);
@@ -235,34 +235,34 @@ void k_CalibrationInit(void)
       _GetPhysValues(aLogX[i], aLogY[i], &aPhysX[i], &aPhysY[i], _acPos[i]);
     }
     /* Use the physical values to calibrate the touch screen */
-
-    A1 = (1000 * ( aLogX[1] - aLogX[0]))/ ( aPhysX[1] - aPhysX[0]);
-    B1 = (1000 * aLogX[0]) - A1 * aPhysX[0];
-
-    A2 = (1000 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]);
-    B2 = (1000 * aLogY[0]) - A2 * aPhysY[0];
-
+    
+    A1 = (1000 * ( aLogX[1] - aLogX[0]))/ ( aPhysX[1] - aPhysX[0]); 
+    B1 = (1000 * aLogX[0]) - A1 * aPhysX[0]; 
+    
+    A2 = (1000 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]); 
+    B2 = (1000 * aLogY[0]) - A2 * aPhysY[0]; 
+    
     data1.b.A1 = A1;
     data1.b.B1 = B1;
     k_BkupSaveParameter(RTC_BKP_DR0, data1.d32);
-
+    
     data2.b.A2 = A2;
     data2.b.B2 = B2;
     data2.b.IsCalibrated = 1;
-    k_BkupSaveParameter(RTC_BKP_DR1, data2.d32);
-
+    k_BkupSaveParameter(RTC_BKP_DR1, data2.d32);  
+    
     /* Display the result */
     GUI_Clear();
     _DispStringCentered("Touch screen has been\n"
                         "calibrated. Please use\n"
                           "the cursor to test\n"
                             "the calibration...");
-
+    
 
   }
-
+  
   CALIBRATION_Done = 1;
-
+  
   GUI_Delay(1000);
 }
 
@@ -288,6 +288,6 @@ uint16_t k_CalibrationGetY(uint16_t y)
 /**
   * @}
   */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

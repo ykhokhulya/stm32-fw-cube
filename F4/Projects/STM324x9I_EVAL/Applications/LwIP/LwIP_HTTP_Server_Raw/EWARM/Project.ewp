@@ -320,7 +320,7 @@
           <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\Src</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
-
+          
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components</state>

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RNG/RNG_MultiRNG/Inc/stm32f4xx_it.h
+  * @file    RNG/RNG_MultiRNG/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
@@ -39,7 +39,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"

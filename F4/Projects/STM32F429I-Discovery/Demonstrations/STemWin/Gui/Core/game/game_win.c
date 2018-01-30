@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -55,7 +55,7 @@
   * @brief game routines
   * @{
   */
-
+  
 /* External variables --------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos);
@@ -124,24 +124,24 @@ static int              _ShowPossibleMoves = 1;
 static int * _px;
 static int * _py;
 static BOARD _aBoardStack[END_GAME_DEPTH + 1];
-static const int _xs[60] = {
-  7, 7, 0, 0, 7, 7, 5, 5, 2, 2,
-  0, 0, 5, 5, 2, 2, 5, 5, 4, 4,
-  3, 3, 2, 2, 7, 7, 4, 4, 3, 3,
-  0, 0, 6, 6, 6, 6, 5, 5, 4, 4,
-  3, 3, 2, 2, 1, 1, 1, 1, 7, 7,
+static const int _xs[60] = { 
+  7, 7, 0, 0, 7, 7, 5, 5, 2, 2, 
+  0, 0, 5, 5, 2, 2, 5, 5, 4, 4, 
+  3, 3, 2, 2, 7, 7, 4, 4, 3, 3, 
+  0, 0, 6, 6, 6, 6, 5, 5, 4, 4, 
+  3, 3, 2, 2, 1, 1, 1, 1, 7, 7, 
   6, 6, 1, 1, 0, 0, 6, 6, 1, 1
 };
-static const int _ys[60] = {
-  7, 0, 7, 0, 5, 2, 7, 0, 7, 0,
-  5, 2, 5, 2, 5, 2, 4, 3, 5, 2,
-  5, 2, 4, 3, 4, 3, 7, 0, 7, 0,
-  4, 3, 5, 4, 3, 2, 6, 1, 6, 1,
-  6, 1, 6, 1, 5, 4, 3, 2, 6, 1,
-  7, 0, 7, 0, 6, 1, 6, 1, 6, 1
+static const int _ys[60] = { 
+  7, 0, 7, 0, 5, 2, 7, 0, 7, 0, 
+  5, 2, 5, 2, 5, 2, 4, 3, 5, 2, 
+  5, 2, 4, 3, 4, 3, 7, 0, 7, 0, 
+  4, 3, 5, 4, 3, 2, 6, 1, 6, 1, 
+  6, 1, 6, 1, 5, 4, 3, 2, 6, 1, 
+  7, 0, 7, 0, 6, 1, 6, 1, 6, 1 
 };
 static int _aaSafe[10][10];
-static const I32 _aaValues[8][8] = {
+static const I32 _aaValues[8][8] = { 
   { 1000, -100, 25,  0,  0, 25, -100, 1000 },
   { -100, -400, -5, -5, -5, -5, -400, -100 },
   {   25,   -5, 12,  2,  2, 12,   -5,   25 },
@@ -182,7 +182,7 @@ static void _InvalidateCell(int x, int y) {
 /**
   * @brief  Get Stone
   * @param  pBoard: pointer to the board stack
-  * @param  x: X position
+  * @param  x: X position     
   * @param  y: Y position
   * @retval stone
   */
@@ -197,7 +197,7 @@ static char _GetStone(const BOARD * pBoard, int x, int y) {
 /**
   * @brief  Set Stone
   * @param  pBoard: pointer to the board stack
-  * @param  x: X position
+  * @param  x: X position     
   * @param  y: Y position
   * @retval None
   */
@@ -211,7 +211,7 @@ static void _SetStone(BOARD * pBoard, int x, int y) {
 /**
   * @brief  Is Valid Move
   * @param  pBoard: pointer to the board stack
-  * @param  x: X position
+  * @param  x: X position     
   * @param  y: Y position
   * @retval status
   */
@@ -226,7 +226,7 @@ static char _IsValidMove(BOARD * pBoard, int x, int y) {
 /**
   * @brief  Check Direction
   * @param  pBoard: pointer to the board stack
-  * @param  x: X position
+  * @param  x: X position     
   * @param  y: Y position
   * @param  dx: difference between current and previous X position
   * @param  dy: difference between current and previous Y position
@@ -284,12 +284,12 @@ static int _CalcValidMoves(BOARD * pBoard) {
 /**
   * @brief  Do Direction
   * @param  pBoard: pointer to the board stack
-  * @param  x: X position
+  * @param  x: X position     
   * @param  y: Y position
   * @param  dx: difference between current and previous X position
   * @param  dy: difference between current and previous Y position
   * @retval None
-  */
+  */ 
 static void _DoDirection(BOARD * pBoard, int x, int y, int dx, int dy) {
   do {
     _SetStone(pBoard, x, y);
@@ -301,10 +301,10 @@ static void _DoDirection(BOARD * pBoard, int x, int y, int dx, int dy) {
 /**
   * @brief  Make Move
   * @param  pBoard: pointer to the board stack
-  * @param  x: X position
+  * @param  x: X position     
   * @param  y: Y position
   * @retval None
-  */
+  */ 
 static void _MakeMove(BOARD * pBoard, int x, int y) {
   U8 Valid;
   _SetStone(pBoard, x, y);
@@ -323,7 +323,7 @@ static void _MakeMove(BOARD * pBoard, int x, int y) {
   * @brief  Calculate Score
   * @param  pBoard: pointer to the board stack
   * @retval Score
-  */
+  */ 
 static int _CalcScore(const BOARD * pBoard) {
   int x, y, r = 0;
   char Cell;
@@ -347,11 +347,11 @@ static int _CalcScore(const BOARD * pBoard) {
   * @param  pBoard: pointer to the board stack
   * @param  player: player index
   * @retval value
-  */
+  */ 
 static I32 _valuePieces(BOARD * pBoard, int player) {
   I32 sum;
   int x, y, corners, changed, s, xCorner, yCorner, numberOfSafe;
-
+  
   sum = 0;
   for (y = 1; y <= 8; y++) {
     for (x = 1; x <= 8; x++) {
@@ -424,7 +424,7 @@ static I32 _valuePieces(BOARD * pBoard, int player) {
   *         negative value means player 2 is in the lead.
   * @param  pBoard: pointer to the board stack
   * @retval value
-  */
+  */ 
 static I32 _Eval(BOARD * pBoard) {
   int ActPlayer, movesA, movesB;
   I32 score, value;
@@ -464,7 +464,7 @@ static I32 _Eval(BOARD * pBoard) {
   * @param  beta: previous Move
   * @param  firstMove: first Move index
   * @retval best move
-  */
+  */ 
 static I32 _Descend(int depth, I32 alpha, I32 beta, int firstMove) {
   BOARD * pBoard;
   BOARD * nextBoard;
@@ -527,10 +527,10 @@ end:
 /**
   * @brief  PlayerAI_SmartGecko
   * @param  pBoard: pointer to the board stack
-  * @param  px: X position
+  * @param  px: X position     
   * @param  py: Y position
   * @retval char
-  */
+  */ 
 static char _PlayerAI_SmartGecko(const BOARD * pBoard, int * px, int * py) {
   int x, y, freeTiles, depth;
 
@@ -566,7 +566,7 @@ static char _PlayerAI_SmartGecko(const BOARD * pBoard, int * px, int * py) {
 }
 
 /**
-  * @brief  Callback Message Box
+  * @brief  Callback Message Box 
   * @param  pMsg : pointer to data structure
   * @retval None
   */
@@ -581,7 +581,7 @@ static void _cbMessageBox(WM_MESSAGE* pMsg) {
       Id = WM_GetId(pMsg->hWinSrc);
        GUI_EndDialog(hWin, (Id == GUI_ID_OK) ? 1 : 0);
     }
-
+    
     break;
   default:
     WM_DefaultProc(pMsg);
@@ -593,8 +593,8 @@ static void _cbMessageBox(WM_MESSAGE* pMsg) {
   * @param  pTitle: pointer to the title
   * @param  pText: pointer to the text
   * @param  YesNo player response
-  * @retval int
-  */
+  * @retval int 
+  */ 
 static int _ShowMessageBox(WM_HWIN hWin, const char* pTitle, const char* pText, int YesNo) {
   WM_HWIN hFrame, hClient, hBut;
   int r = 0;
@@ -615,22 +615,22 @@ static int _ShowMessageBox(WM_HWIN hWin, const char* pTitle, const char* pText, 
     hBut = BUTTON_CreateEx(64, 45, 55, 18, hClient, WM_CF_SHOW, 0, GUI_ID_OK);
     BUTTON_SetText        (hBut, "Ok");
   }
-
-  WM_SetFocus(_hFrame);
+  
+  WM_SetFocus(_hFrame);  
   WM_MakeModal(hFrame);
-  r = GUI_ExecCreatedDialog(hFrame);
+  r = GUI_ExecCreatedDialog(hFrame);  
   return r;
 }
 
 /**
   * @brief  Set Player
   * @param  Player: player index
-  * @retval None
-  */
+  * @retval None 
+  */ 
 static void _SetPlayer(int Player) {
   int Score, ValidMoves, PossibleMoves;
   char ac[256];
-
+  
   _Board.ActPlayer = Player;
   if (Player == 1) {
     FRAMEWIN_SetText(_hFrame, "Reversi - User");
@@ -640,7 +640,7 @@ static void _SetPlayer(int Player) {
   FRAMEWIN_SetBarColor(_hFrame, 1, (Player == 1) ? GUI_RED : GUI_BLUE);
   PossibleMoves = _CalcValidMoves(&_Board);
   GUI_Exec();
-
+  
   if (!PossibleMoves) {
     GUI_Exec();
     _Board.ActPlayer = 3 - Player;
@@ -673,13 +673,13 @@ static void _SetPlayer(int Player) {
 }
 
 /**
-  * @brief  Next Player
-  * @param  None
+  * @brief  Next Player 
+  * @param  None 
   * @retval None
   */
 static void _NextPlayer(void) {
   int x, y;
-
+  
   do {
     _SetPlayer(3 - _Board.ActPlayer);
     if (_pPlayerAI[_Board.ActPlayer - 1]&& !_GameOver) {
@@ -693,7 +693,7 @@ static void _NextPlayer(void) {
 }
 
 /**
-  * @brief  Start new Game
+  * @brief  Start new Game 
   * @param  None
   * @retval None
   */
@@ -709,8 +709,8 @@ static void _StartNewGame(void) {
 }
 
 /**
-  * @brief  Handle PID
-  * @param  x: X position
+  * @brief  Handle PID 
+  * @param  x: X position     
   * @param  y: Y position
   * @param  Pressed: touch status
   * @retval None
@@ -730,9 +730,9 @@ static void _HandlePID(int x, int y, int Pressed) {
           if (Pressed == 0) {
             _MakeMove(&_Board, x, y);
             _NextPlayer();
-          }
+          } 
           goto EndHandlePID;
-        }
+        }   
       }
     }
   }
@@ -741,20 +741,20 @@ EndHandlePID:
 }
 
 /**
-  * @brief  OnTouch
+  * @brief  OnTouch 
   * @param  pMsg : pointer to data structure
   * @retval None
   */
 static void _OnTouch(WM_MESSAGE* pMsg) {
   const GUI_PID_STATE* pState = (const GUI_PID_STATE*)pMsg->Data.p;
-  if (pState)
+  if (pState) 
   {
     _HandlePID(pState->x, pState->y, pState->Pressed);
   }
 }
 
 /**
-  * @brief  Paints callback
+  * @brief  Paints callback 
   * @param  hWin: pointer to the parent handle
   * @retval None
   */
@@ -765,7 +765,7 @@ static void _OnPaint(WM_HWIN hWin) {
   int CellSize, rStone, rMove;
   char Cell, IsValidMove;
   int xCircle, yCircle;
-
+  
   _CalcBoardDimensions();
   GUI_AA_SetFactor(AA_FACTOR);
   #if AA_USE_HIRES
@@ -828,13 +828,13 @@ static void _OnPaint(WM_HWIN hWin) {
 }
 
 /**
-  * @brief  Callback Reversi Win
-  * @param  pMsg: pointer to data structure
+  * @brief  Callback Reversi Win 
+  * @param  pMsg: pointer to data structure 
   * @retval None
   */
 static void _cbReversiWin(WM_MESSAGE* pMsg) {
   WM_HWIN hWin = pMsg->hWin;
-
+  
   switch (pMsg->MsgId) {
   case WM_PAINT:
     _OnPaint(hWin);
@@ -844,7 +844,7 @@ static void _cbReversiWin(WM_MESSAGE* pMsg) {
     break;
   case WM_DELETE:
     _hFrame = 0;
-    break;
+    break;    
   default:
     WM_DefaultProc(pMsg);
   }
@@ -853,7 +853,7 @@ static void _cbReversiWin(WM_MESSAGE* pMsg) {
 /**
   * @brief  Game window Startup
   * @param  hWin: pointer to the parent handle.
-  * @param  xpos: X position
+  * @param  xpos: X position 
   * @param  ypos: Y position
   * @retval None
   */
@@ -861,12 +861,12 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
 {
   _pPlayerAI[1] = _PlayerAI_SmartGecko;
   _hFrame = FRAMEWIN_CreateEx(xpos, ypos, 240, 294, hWin, WM_CF_SHOW, FRAMEWIN_CF_ACTIVE, 0, NULL, &_cbReversiWin);
-
+ 
   FRAMEWIN_SetClientColor(_hFrame, GUI_INVALID_COLOR);
   FRAMEWIN_SetFont       (_hFrame, GUI_FONT_13B_1);
   FRAMEWIN_SetTextAlign  (_hFrame, GUI_TA_HCENTER);
   FRAMEWIN_AddCloseButton(_hFrame, FRAMEWIN_BUTTON_RIGHT, 0);
-
+  
   _StartNewGame();
 }
 
@@ -877,5 +877,5 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
 /**
   * @}
   */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

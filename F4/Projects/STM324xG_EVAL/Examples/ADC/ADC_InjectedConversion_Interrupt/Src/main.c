@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC_InjectedConversion_Interrupt/Src/main.c
+  * @file    ADC/ADC_InjectedConversion_Interrupt/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example describes how to use injected conversion
   ******************************************************************************
@@ -42,7 +42,7 @@
 
 /** @addtogroup ADC_InjectedConversion_Interrupt
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -76,33 +76,33 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 144 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the ADC peripheral #######################################*/
   ADC_Config();
-
-  /*##-2- Start the conversion process and enable interrupt for regular channel #*/
+  
+  /*##-2- Start the conversion process and enable interrupt for regular channel #*/  
   if(HAL_ADC_Start_IT(&AdcHandle) != HAL_OK)
   {
     /* Start Conversation Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-3- Wait one second before starting injected conversion ################*/
   HAL_Delay(1000);
-
-  /*##-4- Start the conversion process and enable interrupt for injected channel #*/
+  
+  /*##-4- Start the conversion process and enable interrupt for injected channel #*/  
   if(HAL_ADCEx_InjectedStart_IT(&AdcHandle) != HAL_OK)
   {
     /* Start Conversation Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -111,7 +111,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 144000000
   *            HCLK(Hz)                       = 144000000
@@ -137,8 +137,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
@@ -152,14 +152,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 6;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ 
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -193,10 +193,10 @@ static void ADC_Config(void)
 {
   ADC_ChannelConfTypeDef sConfig;
   ADC_InjectionConfTypeDef sConfigInjected;
-
+  
   /* ADC Initialization */
   AdcHandle.Instance          = ADCx;
-
+  
   AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle.Init.ScanConvMode = DISABLE;
@@ -209,14 +209,14 @@ static void ADC_Config(void)
   AdcHandle.Init.NbrOfConversion = 1;
   AdcHandle.Init.DMAContinuousRequests = DISABLE;
   AdcHandle.Init.EOCSelection = DISABLE;
-
+      
   if(HAL_ADC_Init(&AdcHandle) != HAL_OK)
   {
     /* Turn LED3 on: in case of Initialization Error */
     Error_Handler();
   }
-
-  /* Configure ADC regular channel */
+  
+  /* Configure ADC regular channel */  
   sConfig.Channel = ADCx_REG_CHANNEL;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_56CYCLES;
@@ -226,7 +226,7 @@ static void ADC_Config(void)
     /* Turn LED3 on: in case of Channel Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure ADC injected channel */
   sConfigInjected.InjectedNbrOfConversion = 1;
   sConfigInjected.InjectedChannel = ADCx_INJ_CHANNEL;
@@ -237,7 +237,7 @@ static void ADC_Config(void)
   sConfigInjected.ExternalTrigInjecConv = ADC_EXTERNALTRIGINJECCONV_T1_CC4;
   sConfigInjected.AutoInjectedConv = DISABLE;
   sConfigInjected.InjectedDiscontinuousConvMode = DISABLE;
-
+  
   if(HAL_ADCEx_InjectedConfigChannel(&AdcHandle, &sConfigInjected) != HAL_OK)
   {
     /* Channel Configuration Error */
@@ -246,10 +246,10 @@ static void ADC_Config(void)
 }
 
 /**
-  * @brief  Conversion complete callback in non blocking mode
+  * @brief  Conversion complete callback in non blocking mode 
   * @param  AdcHandle : AdcHandle handle
-  * @note   This example shows a simple way to report end of conversion, and
-  *         you can add your own implementation.
+  * @note   This example shows a simple way to report end of conversion, and 
+  *         you can add your own implementation.    
   * @retval None
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
@@ -259,16 +259,16 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
 }
 
 /**
-  * @brief  Conversion complete callback in non blocking mode
+  * @brief  Conversion complete callback in non blocking mode 
   * @param  AdcHandle : AdcHandle handle
-  * @note   This example shows a simple way to report end of conversion, and
-  *         you can add your own implementation.
+  * @note   This example shows a simple way to report end of conversion, and 
+  *         you can add your own implementation.    
   * @retval None
   */
 void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
 {
   /* Get the converted value of injected channel */
-  uhADCxConvertedInjValue = HAL_ADCEx_InjectedGetValue(AdcHandle, ADC_INJECTED_RANK_1);
+  uhADCxConvertedInjValue = HAL_ADCEx_InjectedGetValue(AdcHandle, ADC_INJECTED_RANK_1);    
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -280,7 +280,7 @@ void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

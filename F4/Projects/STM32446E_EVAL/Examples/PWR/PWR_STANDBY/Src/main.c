@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_STANDBY/Src/main.c
+  * @file    PWR/PWR_STANDBY/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   *          and exit the Standby mode.
@@ -43,7 +43,7 @@
 
 /** @addtogroup PWR_STANDBY
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -72,31 +72,31 @@ static void RTC_Config(void);
 * @retval None
 */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
        - Set NVIC Group Priority to 4
        - Global MSP (MCU Support Package) initialization
      */
-  HAL_Init();
+  HAL_Init();  
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
 
   /* Configure Key Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
-
+  
   /* Configure Joystick using MFX in IT mode in order to wakeup system after standby */
   BSP_JOY_Init(JOY_MODE_EXTI);
 
   /* RTC configuration */
   RTC_Config();
-
+  
   /* Turn on LED1 */
   BSP_LED_On(LED1);
 
@@ -123,7 +123,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -151,8 +151,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -166,27 +166,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {
@@ -200,48 +200,48 @@ static void SystemClock_Config(void)
   * @retval None
   */
 static void RTC_Config(void)
-{
+{ 
   RTCHandle.Instance = RTC;
-  /* Set the RTC time base to 1s */
+  /* Set the RTC time base to 1s */  
   /* Configure RTC prescaler and RTC data registers as follow:
   - Hour Format = Format 24
   - Asynch Prediv = Value according to source clock
   - Synch Prediv = Value according to source clock
   - OutPut = Output Disable
   - OutPutPolarity = High Polarity
-  - OutPutType = Open Drain */
+  - OutPutType = Open Drain */ 
   RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
   RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
   RTCHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
   RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
   RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
-  RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;    
   if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /* Check and Clear the Wakeup flag */
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_WU) != RESET)
   {
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
-  }
-
+  }  
+  
   /* Check if the system was resumed from StandBy mode */
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET)
   {
     /* Clear StandBy flag */
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
-
+    
     /* Disable the write protection for RTC registers */
     __HAL_RTC_WRITEPROTECTION_DISABLE(&RTCHandle);
-
+    
     /* Wait for RTC APB registers synchronisation (needed after start-up from Reset)*/
     if(HAL_RTC_WaitForSynchro(&RTCHandle) != HAL_OK)
-    {
+    {      
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler();      
     }
 
     /* Enable the write protection for RTC registers */
@@ -255,11 +255,11 @@ static void RTC_Config(void)
     RTC_TimeStructure.TimeFormat = RTC_HOURFORMAT12_AM;
     RTC_TimeStructure.Hours = 0x01;
     RTC_TimeStructure.Minutes = 0x00;
-    RTC_TimeStructure.Seconds = 0x00;
+    RTC_TimeStructure.Seconds = 0x00;    
     if(HAL_RTC_SetTime(&RTCHandle, &RTC_TimeStructure, RTC_FORMAT_BCD) == HAL_ERROR)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
   }
 }
@@ -287,7 +287,7 @@ void HAL_SYSTICK_Callback(void)
 {
   HAL_IncTick();
   if (TimingDelay != 0)
-  {
+  { 
     TimingDelay--;
   }
   else
@@ -305,10 +305,10 @@ void HAL_SYSTICK_Callback(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == TAMPER_BUTTON_PIN)
-  {
+  {  
     HAL_RTC_GetTime(&RTCHandle, &RTC_TimeStructure, RTC_FORMAT_BIN);
     HAL_RTC_GetDate(&RTCHandle, &RTC_DateStructure, RTC_FORMAT_BIN);
-
+    
     /* Set the alarm to current time + 5s */
     RTC_AlarmStructure.Alarm  = RTC_ALARM_A;
     RTC_AlarmStructure.AlarmTime.TimeFormat = RTC_TimeStructure.TimeFormat;
@@ -319,9 +319,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     RTC_AlarmStructure.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
     RTC_AlarmStructure.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY | RTC_ALARMMASK_HOURS | RTC_ALARMMASK_MINUTES;
     RTC_AlarmStructure.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_NONE;
-
+    
     /* The Following Wakeup sequence is highly recommended prior to each Standby
-       mode entry mainly  when using more than one wakeup source this is to not
+       mode entry mainly  when using more than one wakeup source this is to not 
        miss any wakeup event:
        - Disable all used wakeup sources,
        - Clear all related wakeup flags,
@@ -332,20 +332,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     /*## Disable all used wakeup sources #####################################*/
     /* Disable Wake-up timer */
     HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
-
+    
     /* Disable RTC Alarm */
     HAL_RTC_DeactivateAlarm(&RTCHandle, RTC_ALARM_A);
 
     /*## Clear all related wakeup flags ######################################*/
     /* Clear PWR wake up Flag */
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
-
+    
     /* Clear the Alarm Flag */
     __HAL_RTC_ALARM_CLEAR_FLAG(&RTCHandle, RTC_FLAG_ALRAF);
 
     /*## Re-enable all used wakeup sources ###################################*/
     /* Set RTC alarm */
-    if(HAL_RTC_SetAlarm_IT(&RTCHandle, &RTC_AlarmStructure, RTC_FORMAT_BIN) != HAL_OK)
+    if(HAL_RTC_SetAlarm_IT(&RTCHandle, &RTC_AlarmStructure, RTC_FORMAT_BIN) != HAL_OK) 
     {
       /* Initialization Error */
       Error_Handler();
@@ -363,21 +363,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
   if(GPIO_Pin == MFX_IRQOUT_PIN)
   {
-    /* The different functionalities of MFX (TS, Joystick, SD detection, etc. )
+    /* The different functionalities of MFX (TS, Joystick, SD detection, etc. )  
     can be configured in exti mode to generate an IRQ on given events.
-    The MFX IRQ_OUT pin is unique and common to all functionalities, so if several
-    functionalities are configured in exit mode, the MCU has to enquire MFX about
-    the IRQ source (see BSP_IO_ITGetStatus). Communication with Mfx is done by I2C.
-    Often the sw requires ISRs (irq service routines) to be quick while communication
-    with I2C can be considered relatively long (hundreds of usec depending on I2C clk).
-    Considering that the features for human interaction like TS, Joystick, SD detection
-    don’t need immediate reaction, it is suggested to use POLLING instead of EXTI mode,
+    The MFX IRQ_OUT pin is unique and common to all functionalities, so if several 
+    functionalities are configured in exit mode, the MCU has to enquire MFX about  
+    the IRQ source (see BSP_IO_ITGetStatus). Communication with Mfx is done by I2C. 
+    Often the sw requires ISRs (irq service routines) to be quick while communication 
+    with I2C can be considered relatively long (hundreds of usec depending on I2C clk). 
+    Considering that the features for human interaction like TS, Joystick, SD detection 
+    don’t need immediate reaction, it is suggested to use POLLING instead of EXTI mode, 
     in order to avoid "blocking I2C communication" on interrupt service routines */
 
     /* Here an example of implementation is proposed: mix between pooling and exit:
     On ISR a flag is set (MfxIrqReceived), the main loop polls on the flag;
-    Mcu communicates with Mfx only when the flag has been set. This is just an example:
-    the users should choose they strategy depending on their application needs.*/
+    Mcu communicates with Mfx only when the flag has been set. This is just an example: 
+    the users should choose they strategy depending on their application needs.*/    
     MfxExtiReceived = 1;
   }
 }
@@ -391,7 +391,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -404,10 +404,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

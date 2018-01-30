@@ -89,22 +89,22 @@ uint8_t aPlaintext[PLAINTEXT_SIZE];
 uint8_t aExpectedCyphertext[PLAINTEXT_SIZE];
 uint8_t aExpectedMAC[6];
 uint8_t aOutputText[PLAINTEXT_SIZE];
-#endif /* __CC_ARM */
-
+#endif /* __CC_ARM */																	
+																	
 uint8_t aNonce[NONCE_SIZE] = {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17};
-
+                                        
 uint32_t uwNonceSize = NONCE_SIZE;
 
 uint8_t aHeaderMessage[HEADER_SIZE] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
                                        0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,0x0f};
 
 /* Temporary buffer used to append the header. aHBuffer size must be equal to HEADER_SIZE + 21 */
-uint8_t aHBuffer[HEADER_SIZE + 21];
-
+uint8_t aHBuffer[HEADER_SIZE + 21]; 
+                                      
 
 uint8_t aPlaintext[PLAINTEXT_SIZE] = {0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,
                                       0x28,0x29,0x2a,0x2b,0x2c,0x2d,0x2e,0x2f};
-
+                                       
 
 uint8_t aExpectedCyphertext[PLAINTEXT_SIZE] = {0xd2,0xa1,0xf0,0xe0,
                                                0x51,0xea,0x5f,0x62,
@@ -134,10 +134,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization: global MSP (MCU Support Package) initialization
@@ -146,16 +146,16 @@ int main(void)
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+ 
   /* Initialize LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the CRYP peripheral ######################################*/
   /* Set the CRYP parameters */
   CrypHandle.Instance = CRYP;
-
+  
   CrypHandle.Init.DataType   = CRYP_DATATYPE_8B;
   CrypHandle.Init.KeySize    = CRYP_KEYSIZE_128B;
   CrypHandle.Init.pKey       = aAES128Key;
@@ -169,23 +169,23 @@ int main(void)
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-2- Start the AES Encryption in CCM chaining mode ######################*/
   if(HAL_CRYPEx_AESCCM_Encrypt(&CrypHandle, aPlaintext, PLAINTEXT_SIZE, aOutputText, 0xFF) != HAL_OK)
   {
     /* Encryption Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
-  /*##-3- Compute the authentication TAG for AES CCM mode ####################*/
+  
+  /*##-3- Compute the authentication TAG for AES CCM mode ####################*/ 
   if(HAL_CRYPEx_AESCCM_Finish(&CrypHandle, aMAC, 0xFF) != HAL_OK)
   {
     /* TAG Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-4- Compare the encrypted text and the aMAC with the expected ones #####*/
   if( (memcmp(aOutputText, aExpectedCyphertext, PLAINTEXT_SIZE) != 0) ||  (memcmp(aMAC, aExpectedMAC, MAC_SIZE) != 0))
   {
@@ -197,7 +197,7 @@ int main(void)
     /* Right encryption: Turn LED1 on */
     BSP_LED_On(LED1);
   }
-
+  
   /* Infinite loop */
   while(1)
   {
@@ -206,7 +206,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -234,8 +234,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -249,27 +249,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 6;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {

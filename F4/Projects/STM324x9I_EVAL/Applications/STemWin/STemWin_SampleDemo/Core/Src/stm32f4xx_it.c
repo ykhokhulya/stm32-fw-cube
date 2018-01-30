@@ -14,8 +14,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -123,7 +123,7 @@ void SysTick_Handler(void)
 {
   /* Update the LocalTime by adding 1 ms each SysTick interrupt */
   HAL_IncTick();
-
+  
   OS_TimeMS++;
 }
 

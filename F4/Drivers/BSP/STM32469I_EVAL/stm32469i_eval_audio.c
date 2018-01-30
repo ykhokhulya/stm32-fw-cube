@@ -130,7 +130,7 @@ Known Limitations:
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_AUDIO_Private_Macros STM32469I EVAL AUDIO Private Macros
+/** @defgroup STM32469I-EVAL_AUDIO_Private_Macros STM32469I EVAL AUDIO Private Macros 
   * @{
   */
 /**
@@ -140,10 +140,10 @@ Known Limitations:
 /** @defgroup STM32469I-EVAL_AUDIO_Private_Variables STM32469I EVAL AUDIO Private Variables
   * @{
   */
-
+  
 /*
-Note:
-  these global variables are not compliant to naming rules (upper case without "_" ),
+Note: 
+  these global variables are not compliant to naming rules (upper case without "_" ), 
   but we keep this naming for compatibility, in fact these variables (not static)
   could have been used by the application, example the stm32f4xx_it.c:
     void DMA2_Stream6_IRQHandler(void)
@@ -218,8 +218,8 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
   uint32_t deviceid = 0x00;
 
   SAIx_DeInit();
-
-  /* PLL clock is set depending by the AudioFreq (44.1khz vs 48khz groups) */
+  
+  /* PLL clock is set depending by the AudioFreq (44.1khz vs 48khz groups) */ 
   BSP_AUDIO_OUT_ClockConfig(&haudio_out_sai, AudioFreq, NULL);
 
   /* SAI data transfer preparation:
@@ -267,14 +267,14 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
 {
   /* Call the audio Codec Play function */
   if(audio_drv->Play(AUDIO_I2C_ADDRESS, pBuffer, Size) != 0)
-  {
+  {  
     return AUDIO_ERROR;
   }
   else
   {
-    /* Update the Media layer and enable it for play */
+    /* Update the Media layer and enable it for play */  
     HAL_SAI_Transmit_DMA(&haudio_out_sai, (uint8_t*) pBuffer, DMA_MAX(Size / AUDIODATA_SIZE));
-
+    
     return AUDIO_OK;
   }
 }
@@ -437,8 +437,8 @@ uint8_t BSP_AUDIO_OUT_SetOutputMode(uint8_t Output)
   *         audio frequency.
   */
 void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
-{
-  /* PLL clock is set depending by the AudioFreq (44.1khz vs 48khz groups) */
+{ 
+  /* PLL clock is set depending by the AudioFreq (44.1khz vs 48khz groups) */ 
   BSP_AUDIO_OUT_ClockConfig(&haudio_out_sai, AudioFreq, NULL);
 
   /* Disable SAI peripheral to allow access to SAI internal registers */
@@ -621,7 +621,7 @@ __weak void BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params)
   }
 
   /* Disable SAI peripheral */
-  __HAL_SAI_DISABLE(hsai);
+  __HAL_SAI_DISABLE(hsai);  
 
   /* Deactives CODEC_SAI pins FS, SCK, MCK and SD by putting them in input mode */
   gpio_init_structure.Pin = AUDIO_SAIx_MCK_PIN;
@@ -633,8 +633,8 @@ __weak void BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params)
     /* Disable SAI clock */
     AUDIO_SAIx_CLK_DISABLE();
 
-    /* GPIO pins clock and DMA clock can be shut down in the applic
-       by surcgarging this __weak function */
+    /* GPIO pins clock and DMA clock can be shut down in the applic 
+       by surcgarging this __weak function */ 
 }
 
 /**
@@ -642,15 +642,15 @@ __weak void BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params)
   * @param  hsai: might be required to set audio peripheral predivider if any.
   * @param  AudioFreq: Audio frequency used to play the audio stream.
   * @note   This API is called by BSP_AUDIO_OUT_Init() and BSP_AUDIO_OUT_SetFrequency()
-  *         Being __weak it can be overwritten by the application
+  *         Being __weak it can be overwritten by the application     
   * @param  Params : pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_AUDIO_OUT_ClockConfig(SAI_HandleTypeDef *hsai, uint32_t AudioFreq, void *Params)
-{
+{ 
   RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
 
   HAL_RCCEx_GetPeriphCLKConfig(&rcc_ex_clk_init_struct);
-
+  
   /* Set the PLL configuration according to the audio frequency */
   if((AudioFreq == AUDIO_FREQUENCY_11K) || (AudioFreq == AUDIO_FREQUENCY_22K) || (AudioFreq == AUDIO_FREQUENCY_44K))
   {
@@ -662,21 +662,21 @@ __weak void BSP_AUDIO_OUT_ClockConfig(SAI_HandleTypeDef *hsai, uint32_t AudioFre
     rcc_ex_clk_init_struct.PLLI2S.PLLI2SN = 429;
     rcc_ex_clk_init_struct.PLLI2S.PLLI2SQ = 2;
     rcc_ex_clk_init_struct.PLLI2SDivQ = 19;
-
+    
     HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
-
+    
   }
   else /* AUDIO_FREQUENCY_8K, AUDIO_FREQUENCY_16K, AUDIO_FREQUENCY_48K), AUDIO_FREQUENCY_96K */
   {
-    /* SAI clock config
-    PLLSAI_VCO: VCO_344M
-    I2S_CLK(first level) = PLLI2S_VCO/PLLI2SQ = 344/7 = 49.142 Mhz
-    I2S_CLK_x = SAI_CLK(first level)/PLLI2SDIVQ = 49.142/1 = 49.142 Mhz */
+    /* SAI clock config 
+    PLLSAI_VCO: VCO_344M 
+    I2S_CLK(first level) = PLLI2S_VCO/PLLI2SQ = 344/7 = 49.142 Mhz 
+    I2S_CLK_x = SAI_CLK(first level)/PLLI2SDIVQ = 49.142/1 = 49.142 Mhz */  
     rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_SAI_PLLI2S;
-    rcc_ex_clk_init_struct.PLLI2S.PLLI2SN = 344;
-    rcc_ex_clk_init_struct.PLLI2S.PLLI2SQ = 7;
-    rcc_ex_clk_init_struct.PLLI2SDivQ = 1;
-
+    rcc_ex_clk_init_struct.PLLI2S.PLLI2SN = 344; 
+    rcc_ex_clk_init_struct.PLLI2S.PLLI2SQ = 7; 
+    rcc_ex_clk_init_struct.PLLI2SDivQ = 1;       
+    
     HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
   }
 }
@@ -779,7 +779,7 @@ uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
   RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
 
   I2Sx_DeInit();
-
+  
   HAL_RCCEx_GetPeriphCLKConfig(&rcc_ex_clk_init_struct);
   rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_I2S;
   rcc_ex_clk_init_struct.PLLI2S.PLLI2SN = 384;
@@ -788,11 +788,11 @@ uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
 
   /* Configure the PDM library */
   PDMDecoder_Init(AudioFreq, ChnlNbr, ChnlNbr);
-
+ 
   /* Configure the I2S peripheral */
   haudio_in_i2s.Instance = AUDIO_I2Sx;
   if(HAL_I2S_GetState(&haudio_in_i2s) == HAL_I2S_STATE_RESET)
-  {
+  { 
     /* Initialize the I2S Msp: this __weak function can be rewritten by the application */
     BSP_AUDIO_IN_MspInit(&haudio_in_i2s, NULL);
   }
@@ -855,7 +855,7 @@ uint8_t BSP_AUDIO_IN_Pause(void)
 }
 
 /**
-  * @brief  Resumes the audio file stream.
+  * @brief  Resumes the audio file stream.  
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Resume(void)
@@ -998,7 +998,7 @@ __weak void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
   /* Configure the Timer which clocks the MEMS */
   /* Moved inside MSP to allow applic to redefine the TIMx_MspInit */
   TIMx_Init();
-
+  
   /* Enable I2S clock */
   AUDIO_I2Sx_CLK_ENABLE();
 
@@ -1022,7 +1022,7 @@ __weak void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
 
   if(hi2s->Instance == AUDIO_I2Sx)
   {
-    /* Configure the hdma_i2s_rx handle parameters */
+    /* Configure the hdma_i2s_rx handle parameters */   
     hdma_i2s_rx.Init.Channel             = AUDIO_I2Sx_DMAx_CHANNEL;
     hdma_i2s_rx.Init.Direction           = DMA_PERIPH_TO_MEMORY;
     hdma_i2s_rx.Init.PeriphInc           = DMA_PINC_DISABLE;
@@ -1063,8 +1063,8 @@ __weak void BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params)
   GPIO_InitTypeDef  gpio_init_structure;
 
   /* I2S DMA IRQ Channel deactivation */
-  HAL_NVIC_DisableIRQ(AUDIO_I2Sx_DMAx_IRQ);
-
+  HAL_NVIC_DisableIRQ(AUDIO_I2Sx_DMAx_IRQ); 
+  
   if(hi2s->Instance == AUDIO_I2Sx)
   {
     /* Deinitialize the Stream for new transfer */
@@ -1078,13 +1078,13 @@ __weak void BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params)
   gpio_init_structure.Pin = AUDIO_I2Sx_SCK_PIN;
   HAL_GPIO_DeInit(AUDIO_I2Sx_SCK_GPIO_PORT, gpio_init_structure.Pin);
   gpio_init_structure.Pin = AUDIO_I2Sx_SD_PIN;
-  HAL_GPIO_DeInit(AUDIO_I2Sx_SD_GPIO_PORT, gpio_init_structure.Pin);
+  HAL_GPIO_DeInit(AUDIO_I2Sx_SD_GPIO_PORT, gpio_init_structure.Pin); 
 
   /* Disable I2S clock */
   AUDIO_I2Sx_CLK_DISABLE();
 
-  /* GPIO pins clock and DMA clock can be shut down in the applic
-     by surcgarging this __weak function */
+  /* GPIO pins clock and DMA clock can be shut down in the applic 
+     by surcgarging this __weak function */ 
 }
 
 /*******************************************************************************
@@ -1145,9 +1145,9 @@ static void I2Sx_Init(uint32_t AudioFreq)
   haudio_in_i2s.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
   haudio_in_i2s.Init.Mode = I2S_MODE_MASTER_RX;
   haudio_in_i2s.Init.Standard = I2S_STANDARD_LSB;
-
+  
   /* Init the I2S */
-  HAL_I2S_Init(&haudio_in_i2s);
+  HAL_I2S_Init(&haudio_in_i2s); 
 
  /* Disable I2S block */
   __HAL_I2S_ENABLE(&haudio_in_i2s);
@@ -1166,7 +1166,7 @@ static void I2Sx_DeInit(void)
   __HAL_I2S_DISABLE(&haudio_in_i2s);
 
   /* DeInit the I2S */
-  HAL_I2S_DeInit(&haudio_in_i2s);
+  HAL_I2S_DeInit(&haudio_in_i2s); 
 }
 
 
@@ -1211,8 +1211,8 @@ static void TIMx_IC_MspDeInit(TIM_HandleTypeDef *htim)
     /* Disable TIMx Peripheral clock  */
     AUDIO_TIMx_CLK_DISABLE();
 
-    /* GPIO pins clock and DMA clock can be shut down in the applic
-       by surcgarging this __weak function */
+    /* GPIO pins clock and DMA clock can be shut down in the applic 
+       by surcgarging this __weak function */ 
 }
 
 /**
@@ -1225,7 +1225,7 @@ static void TIMx_Init(void)
   TIM_OC_InitTypeDef     s_oc_config;
   TIM_ClockConfigTypeDef s_clk_source_config;
   TIM_SlaveConfigTypeDef s_slave_config;
-
+  
   /* Configure the TIM peripheral --------------------------------------------*/
   /* Set TIMx instance */
   haudio_tim.Instance = AUDIO_TIMx;
@@ -1252,14 +1252,14 @@ static void TIMx_Init(void)
   s_ic_config.ICPrescaler = TIM_ICPSC_DIV1;
   s_ic_config.ICFilter    = 0;
   HAL_TIM_IC_ConfigChannel(&haudio_tim, &s_ic_config, AUDIO_TIMx_IN_CHANNEL);
-
+  
   /* Select external clock mode 1 */
   s_clk_source_config.ClockSource = TIM_CLOCKSOURCE_ETRMODE1;
   s_clk_source_config.ClockPolarity = TIM_CLOCKPOLARITY_NONINVERTED;
   s_clk_source_config.ClockPrescaler = TIM_CLOCKPRESCALER_DIV1;
-  s_clk_source_config.ClockFilter = 0;
+  s_clk_source_config.ClockFilter = 0;   
   HAL_TIM_ConfigClockSource(&haudio_tim, &s_clk_source_config);
-
+  
   /* Select Input Channel as input trigger */
   s_slave_config.InputTrigger = TIM_TS_TI1FP1;
   s_slave_config.SlaveMode = TIM_SLAVEMODE_EXTERNAL1;
@@ -1267,7 +1267,7 @@ static void TIMx_Init(void)
   s_slave_config.TriggerPrescaler = TIM_CLOCKPRESCALER_DIV1;
   s_slave_config.TriggerFilter = 0;
   HAL_TIM_SlaveConfigSynchronization(&haudio_tim, &s_slave_config);
-
+  
   /* Output Compare PWM Mode configuration: Channel2 */
   s_oc_config.OCMode = TIM_OCMODE_PWM1;
   s_oc_config.OCIdleState = TIM_OCIDLESTATE_SET;
@@ -1276,7 +1276,7 @@ static void TIMx_Init(void)
   s_oc_config.OCNPolarity = TIM_OCNPOLARITY_HIGH;
   s_oc_config.OCFastMode = TIM_OCFAST_DISABLE;
   s_oc_config.OCNIdleState = TIM_OCNIDLESTATE_SET;
-
+  
   /* Initialize the TIM3 Channel2 with the structure above */
   HAL_TIM_PWM_ConfigChannel(&haudio_tim, &s_oc_config, AUDIO_TIMx_OUT_CHANNEL);
 
@@ -1294,22 +1294,22 @@ static void TIMx_Init(void)
 static void TIMx_DeInit(void)
 {
   haudio_tim.Instance = AUDIO_TIMx;
-
+  
   /* Stop the TIM3 Channel2 */
   HAL_TIM_PWM_Stop(&haudio_tim, AUDIO_TIMx_OUT_CHANNEL);
   /* Stop the TIM3 Channel1 */
   HAL_TIM_IC_Stop(&haudio_tim, AUDIO_TIMx_IN_CHANNEL);
 
   HAL_TIM_IC_DeInit(&haudio_tim);
-
+  
   /* Initialize the TIMx peripheral with the structure above */
   TIMx_IC_MspDeInit(&haudio_tim);
 }
 
 /**
   * @}
-  */
-
+  */ 
+  
 /**
   * @}
   */

@@ -60,15 +60,15 @@
        which is stored in the structure "HAL_SD_CardInfoTypeDef".
 
      + Micro SD card operations
-        o The micro SD card can be accessed with read/write block(s) operations once
+        o The micro SD card can be accessed with read/write block(s) operations once 
           it is ready for access. The access can be performed whether using the polling
-          mode by calling the functions BSP_SD_ReadBlocks()/BSP_SD_WriteBlocks(), or by DMA
+          mode by calling the functions BSP_SD_ReadBlocks()/BSP_SD_WriteBlocks(), or by DMA 
           transfer using the functions BSP_SD_ReadBlocks_DMA()/BSP_SD_WriteBlocks_DMA()
         o The DMA transfer complete is used with interrupt mode. Once the SD transfer
           is complete, the SD interrupt is handled using the function BSP_SD_IRQHandler(),
           the DMA Tx/Rx transfer complete are handled using the functions
-          BSP_SD_DMA_Tx_IRQHandler()/BSP_SD_DMA_Rx_IRQHandler(). The corresponding user callbacks
-          are implemented by the user at application level.
+          BSP_SD_DMA_Tx_IRQHandler()/BSP_SD_DMA_Rx_IRQHandler(). The corresponding user callbacks 
+          are implemented by the user at application level. 
         o The SD erase block(s) is performed using the function BSP_SD_Erase() with specifying
           the number of blocks to erase.
         o The SD runtime status is returned when calling the function BSP_SD_GetCardState().
@@ -163,7 +163,7 @@ uint8_t BSP_SD_Init(void)
   {
     return MSD_ERROR_SD_NOT_PRESENT;
   }
-
+  
   /* Msp SD initialization */
   BSP_SD_MspInit(&uSdHandle, NULL);
 
@@ -194,11 +194,11 @@ uint8_t BSP_SD_Init(void)
   * @retval SD status
   */
 uint8_t BSP_SD_DeInit(void)
-{
+{ 
   uint8_t sd_state = MSD_OK;
-
+ 
   uSdHandle.Instance = SDIO;
-
+  
   /* Set back Mfx pin to INPUT mode in case it was in exti */
   UseExtiModeDetection = 0;
   BSP_IO_ConfigPin(SD_DETECT_PIN, IO_MODE_INPUT_PU);
@@ -212,7 +212,7 @@ uint8_t BSP_SD_DeInit(void)
   /* Msp SD deinitialization */
   uSdHandle.Instance = SDIO;
   BSP_SD_MspDeInit(&uSdHandle, NULL);
-
+  
   return  sd_state;
 }
 
@@ -221,10 +221,10 @@ uint8_t BSP_SD_DeInit(void)
   * @retval Returns 0
   */
 uint8_t BSP_SD_ITConfig(void)
-{
-  /* Configure Interrupt mode for SD detection pin */
+{  
+  /* Configure Interrupt mode for SD detection pin */  
   /* Note: disabling exti mode can be done calling SD_DeInit() */
-  UseExtiModeDetection = 1;
+  UseExtiModeDetection = 1;  
   BSP_SD_IsDetected();
 
   return 0;
@@ -237,7 +237,7 @@ uint8_t BSP_SD_ITConfig(void)
 uint8_t BSP_SD_IsDetected(void)
 {
   __IO uint8_t status = SD_PRESENT;
-
+  
   /* Check SD card detect pin */
   if((BSP_IO_ReadPin(SD_DETECT_PIN)&SD_DETECT_PIN) != SD_DETECT_PIN)
   {
@@ -276,7 +276,7 @@ uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBloc
 }
 
 /**
-  * @brief  Writes block(s) to a specified address in an SD card, in polling mode.
+  * @brief  Writes block(s) to a specified address in an SD card, in polling mode. 
   * @param  pData: Pointer to the buffer that will contain the data to transmit
   * @param  WriteAddr: Address from where data is to be written
   * @param  NumOfBlocks: Number of SD blocks to write
@@ -299,11 +299,11 @@ uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBl
   * @brief  Reads block(s) from a specified address in an SD card, in DMA mode.
   * @param  pData: Pointer to the buffer that will contain the data to transmit
   * @param  ReadAddr: Address from where data is to be read
-  * @param  NumOfBlocks: Number of SD blocks to read
+  * @param  NumOfBlocks: Number of SD blocks to read 
   * @retval SD status
   */
 uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks)
-{
+{  
   /* Read block(s) in DMA transfer mode */
   if(HAL_SD_ReadBlocks_DMA(&uSdHandle, (uint8_t *)pData, ReadAddr, NumOfBlocks) != HAL_OK)
   {
@@ -319,11 +319,11 @@ uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOf
   * @brief  Writes block(s) to a specified address in an SD card, in DMA mode.
   * @param  pData: Pointer to the buffer that will contain the data to transmit
   * @param  WriteAddr: Address from where data is to be written
-  * @param  NumOfBlocks: Number of SD blocks to write
+  * @param  NumOfBlocks: Number of SD blocks to write 
   * @retval SD status
   */
 uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks)
-{
+{ 
   /* Write block(s) in DMA transfer mode */
   if(HAL_SD_WriteBlocks_DMA(&uSdHandle, (uint8_t *)pData, WriteAddr, NumOfBlocks) != HAL_OK)
   {
@@ -373,7 +373,7 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   /* Assert the camera RSTI pin (active low) */
   BSP_IO_WritePin(RSTI_PIN, BSP_IO_PIN_RESET);
   HAL_Delay(100);
-
+  
   /* Enable SDIO clock */
   __HAL_RCC_SDIO_CLK_ENABLE();
 
@@ -389,10 +389,10 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   gpio_init_structure.Pull      = GPIO_PULLUP;
   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
   gpio_init_structure.Alternate = GPIO_AF12_SDIO;
-
+  
   /* GPIOC configuration */
   gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
-
+   
   HAL_GPIO_Init(GPIOC, &gpio_init_structure);
 
   /* GPIOD configuration */
@@ -416,18 +416,18 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   dma_rx_handle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   dma_rx_handle.Init.MemBurst            = DMA_MBURST_INC4;
   dma_rx_handle.Init.PeriphBurst         = DMA_PBURST_INC4;
-
+  
   dma_rx_handle.Instance = SD_DMAx_Rx_STREAM;
-
+  
   /* Associate the DMA handle */
   __HAL_LINKDMA(hsd, hdmarx, dma_rx_handle);
-
+  
   /* Deinitialize the stream for new transfer */
   HAL_DMA_DeInit(&dma_rx_handle);
-
+  
   /* Configure the DMA stream */
   HAL_DMA_Init(&dma_rx_handle);
-
+  
   /* Configure DMA Tx parameters */
   dma_tx_handle.Init.Channel             = SD_DMAx_Tx_CHANNEL;
   dma_tx_handle.Init.Direction           = DMA_MEMORY_TO_PERIPH;
@@ -441,18 +441,18 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   dma_tx_handle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   dma_tx_handle.Init.MemBurst            = DMA_MBURST_INC4;
   dma_tx_handle.Init.PeriphBurst         = DMA_PBURST_INC4;
-
+  
   dma_tx_handle.Instance = SD_DMAx_Tx_STREAM;
-
+  
   /* Associate the DMA handle */
   __HAL_LINKDMA(hsd, hdmatx, dma_tx_handle);
-
+  
   /* Deinitialize the stream for new transfer */
   HAL_DMA_DeInit(&dma_tx_handle);
-
+  
   /* Configure the DMA stream */
-  HAL_DMA_Init(&dma_tx_handle);
-
+  HAL_DMA_Init(&dma_tx_handle); 
+  
   /* NVIC configuration for DMA transfer complete interrupt */
   HAL_NVIC_SetPriority(SD_DMAx_Rx_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(SD_DMAx_Rx_IRQn);
@@ -475,26 +475,26 @@ __weak void BSP_SD_MspDeInit(SD_HandleTypeDef *hsd, void *Params)
     /* Disable NVIC for DMA transfer complete interrupts */
     HAL_NVIC_DisableIRQ(SD_DMAx_Rx_IRQn);
     HAL_NVIC_DisableIRQ(SD_DMAx_Tx_IRQn);
-
+  
     /* Deinitialize the stream for new transfer */
     dma_rx_handle.Instance = SD_DMAx_Rx_STREAM;
     HAL_DMA_DeInit(&dma_rx_handle);
-
+  
     /* Deinitialize the stream for new transfer */
     dma_tx_handle.Instance = SD_DMAx_Tx_STREAM;
     HAL_DMA_DeInit(&dma_tx_handle);
-
+  
     /* Disable NVIC for SDIO interrupts */
     HAL_NVIC_DisableIRQ(SDIO_IRQn);
 
-    /* DeInit GPIO pins can be done in the application
+    /* DeInit GPIO pins can be done in the application 
        (by surcharging this __weak function) */
 
     /* Disable SDIO clock */
     __HAL_RCC_SDIO_CLK_DISABLE();
 
-    /* GPOI pins clock and DMA cloks can be shut down in the applic
-       by surcgarging this __weak function */
+    /* GPOI pins clock and DMA cloks can be shut down in the applic 
+       by surcgarging this __weak function */ 
 }
 
 /**
@@ -508,12 +508,12 @@ uint8_t BSP_SD_GetCardState(void)
 {
   return((HAL_SD_GetCardState(&uSdHandle) == HAL_SD_CARD_TRANSFER ) ? SD_TRANSFER_OK : SD_TRANSFER_BUSY);
 }
-
+  
 
 /**
   * @brief  Get SD information about specific SD card.
   * @param  CardInfo: Pointer to HAL_SD_CardInfoTypedef structure
-  * @retval None
+  * @retval None 
   */
 void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypeDef *CardInfo)
 {

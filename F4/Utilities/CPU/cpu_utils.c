@@ -33,16 +33,16 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /********************** NOTES **********************************************
 To use this module, the following steps should be followed :
 
-1- in the _OS_Config.h file (ex. FreeRTOSConfig.h) enable the following macros :
+1- in the _OS_Config.h file (ex. FreeRTOSConfig.h) enable the following macros : 
       - #define configUSE_IDLE_HOOK        1
       - #define configUSE_TICK_HOOK        1
 
-2- in the _OS_Config.h define the following macros :
+2- in the _OS_Config.h define the following macros : 
       - #define traceTASK_SWITCHED_IN()  extern void StartIdleMonitor(void); \
                                          StartIdleMonitor()
       - #define traceTASK_SWITCHED_OUT() extern void EndIdleMonitor(void); \
@@ -60,18 +60,18 @@ To use this module, the following steps should be followed :
 /* Private variables ---------------------------------------------------------*/
 
 xTaskHandle    xIdleHandle = NULL;
-__IO uint32_t  osCPU_Usage = 0;
-uint32_t       osCPU_IdleStartTime = 0;
-uint32_t       osCPU_IdleSpentTime = 0;
-uint32_t       osCPU_TotalIdleTime = 0;
+__IO uint32_t  osCPU_Usage = 0; 
+uint32_t       osCPU_IdleStartTime = 0; 
+uint32_t       osCPU_IdleSpentTime = 0; 
+uint32_t       osCPU_TotalIdleTime = 0; 
 
 /* Private functions ---------------------------------------------------------*/
 /**
   * @brief  Application Idle Hook
-  * @param  None
+  * @param  None 
   * @retval None
   */
-void vApplicationIdleHook(void)
+void vApplicationIdleHook(void) 
 {
   if( xIdleHandle == NULL )
   {
@@ -82,17 +82,17 @@ void vApplicationIdleHook(void)
 
 /**
   * @brief  Application Idle Hook
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void vApplicationTickHook (void)
 {
   static int tick = 0;
-
+  
   if(tick ++ > CALCULATION_PERIOD)
   {
     tick = 0;
-
+    
     if(osCPU_TotalIdleTime > 1000)
     {
       osCPU_TotalIdleTime = 1000;
@@ -104,12 +104,12 @@ void vApplicationTickHook (void)
 
 /**
   * @brief  Start Idle monitor
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void StartIdleMonitor (void)
 {
-  if( xTaskGetCurrentTaskHandle() == xIdleHandle )
+  if( xTaskGetCurrentTaskHandle() == xIdleHandle ) 
   {
     osCPU_IdleStartTime = xTaskGetTickCountFromISR();
   }
@@ -117,7 +117,7 @@ void StartIdleMonitor (void)
 
 /**
   * @brief  Stop Idle monitor
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void EndIdleMonitor (void)
@@ -126,13 +126,13 @@ void EndIdleMonitor (void)
   {
     /* Store the handle to the idle task. */
     osCPU_IdleSpentTime = xTaskGetTickCountFromISR() - osCPU_IdleStartTime;
-    osCPU_TotalIdleTime += osCPU_IdleSpentTime;
+    osCPU_TotalIdleTime += osCPU_IdleSpentTime; 
   }
 }
 
 /**
   * @brief  Stop Idle monitor
-  * @param  None
+  * @param  None 
   * @retval None
   */
 uint16_t osGetCPUUsage (void)

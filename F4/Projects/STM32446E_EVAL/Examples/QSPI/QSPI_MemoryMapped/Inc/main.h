@@ -192,7 +192,7 @@
 
 /* Exported macro ------------------------------------------------------------*/
 #define COUNTOF(__BUFFER__)        (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
-
+        
 /* Exported functions ------------------------------------------------------- */
 
 #endif /* __MAIN_H */

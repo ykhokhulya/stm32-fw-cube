@@ -177,6 +177,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/queue.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

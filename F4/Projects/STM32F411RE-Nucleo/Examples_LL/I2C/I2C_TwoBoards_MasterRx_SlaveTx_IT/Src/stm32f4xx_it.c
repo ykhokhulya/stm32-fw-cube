@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/I2C/I2C_TwoBoards_MasterRx_SlaveTx_IT/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -177,7 +177,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Manage code in main.c.*/
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 
@@ -271,7 +271,7 @@ void I2C1_EV_IRQHandler(void)
     {
       /* Prepare the generation of a Non ACKnowledge condition after next received byte */
       LL_I2C_AcknowledgeNextData(I2C1, LL_I2C_NACK);
-
+      
       /* Enable Buffer Interrupts */
       LL_I2C_EnableIT_BUF(I2C1);
     }
@@ -279,7 +279,7 @@ void I2C1_EV_IRQHandler(void)
     {
       /* Prepare the generation of a Non ACKnowledge condition after next received byte */
       LL_I2C_AcknowledgeNextData(I2C1, LL_I2C_NACK);
-
+      
       /* Enable Pos */
       LL_I2C_EnableBitPOS(I2C1);
     }

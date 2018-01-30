@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_InputCapture/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to use a timer instance in input
+  * @brief   This example describes how to use a timer instance in input 
   *          capture mode using the STM32F4xx TIM LL API.
   *          Peripheral initialization done using LL unitary services functions.
   ******************************************************************************
@@ -102,7 +102,7 @@ int main(void)
 
   /* Initialize button in EXTI mode */
   UserButton_Init();
-
+  
   /* Configure TIM3 in input capture mode */
   Configure_TIMInputCapture();
 
@@ -118,7 +118,7 @@ int main(void)
 /**
   * @brief  This function enables the peripheral clock on TIM3, configures
   *         TIM3_CH1 as input and enables the capture/compare 1 interrupt
-  *         It enables also the peripheral clock for GPIOA and configures
+  *         It enables also the peripheral clock for GPIOA and configures 
   *         PA.06 as alternate function for TIM3_CH1.
   * @note   Peripheral configuration is minimal configuration from reset values.
   *         Thus, some useless LL unitary functions calls below are provided as
@@ -145,19 +145,19 @@ __STATIC_INLINE void Configure_TIMInputCapture(void)
   /***************************************************************/
   NVIC_SetPriority(TIM3_IRQn, 0);
   NVIC_EnableIRQ(TIM3_IRQn);
-
+  
   /******************************/
   /* Peripheral clocks enabling */
   /******************************/
   /* Enable the timer peripheral clock */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
-
+  
   /************************************/
   /* Input capture mode configuration */
   /************************************/
   /* Select the active input: IC1 = TI1FP1 */
   LL_TIM_IC_SetActiveInput(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_ACTIVEINPUT_DIRECTTI);
-
+  
   /* Configure the input filter duration: no filter needed */
   LL_TIM_IC_SetFilter(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_IC_FILTER_FDIV1);
 
@@ -166,19 +166,19 @@ __STATIC_INLINE void Configure_TIMInputCapture(void)
 
   /* Select the edge of the active transition on the TI1 channel: rising edge */
   LL_TIM_IC_SetPolarity(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_IC_POLARITY_RISING);
-
+  
   /**************************/
   /* TIM3 interrupts set-up */
   /**************************/
   /* Enable the capture/compare interrupt for channel 1 */
   LL_TIM_EnableIT_CC1(TIM3);
-
+  
   /***********************/
   /* Start input capture */
   /***********************/
   /* Enable output channel 1 */
   LL_TIM_CC_EnableChannel(TIM3, LL_TIM_CHANNEL_CH1);
-
+    
   /* Enable counter */
   LL_TIM_EnableCounter(TIM3);
 }
@@ -186,7 +186,7 @@ __STATIC_INLINE void Configure_TIMInputCapture(void)
 /**
   * @brief  This function enables the peripheral clock on TIM2 and configures
   *         TIM2_CHTIMB_CHX as PWM output.
-  *         It enables also the peripheral clock for GPIOA and configures
+  *         It enables also the peripheral clock for GPIOA and configures 
   *         PA.06 as alternate function for TIM2_CHTIMB_CHX.
   * @note   Peripheral configuration is minimal configuration from reset values.
   *         Thus, some useless LL unitary functions calls below are provided as
@@ -213,49 +213,49 @@ __STATIC_INLINE void  Configure_TIMPWMOutput(void)
   /******************************/
   /* Enable the timer peripheral clock */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
-
+  
   /***************************/
   /* Time base configuration */
   /***************************/
   /* Set counter mode */
   /* Reset value is LL_TIM_COUNTERMODE_UP */
   //LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
-
+  
   /* Enable TIM2_ARR register preload. Writing to or reading from the         */
   /* auto-reload register accesses the preload register. The content of the   */
   /* preload register are transferred into the shadow register at each update */
-  /* event (UEV).                                                             */
+  /* event (UEV).                                                             */  
   LL_TIM_EnableARRPreload(TIM2);
-
+  
   /* Set the auto-reload value to have a counter frequency of 2 kHz           */
   /* TIM2CLK = SystemCoreClock / (APB prescaler & multiplier)                 */
   TimOutClock = SystemCoreClock/1;
   /* TIM2 counter frequency = TimOutClock / (ARR + 1)                   */
   LL_TIM_SetAutoReload(TIM2, __LL_TIM_CALC_ARR(TimOutClock, LL_TIM_GetPrescaler(TIM2), aFrequency[0]));
-
+  
   /*********************************/
   /* Output waveform configuration */
   /*********************************/
-  /* Set output mode: PWM mode 1 */
+  /* Set output mode: PWM mode 1 */ 
   LL_TIM_OC_SetMode(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_PWM1);
 
   /* Set compare value to half of the counter period (50% duty cycle )*/
   LL_TIM_OC_SetCompareCH1(TIM2, (LL_TIM_GetAutoReload(TIM2) / 2));
-
+  
   /* Enable TIM2_CCR1 register preload. Read/Write operations access the      */
   /* preload register. TIM2_CCR1 preload value is loaded in the active        */
   /* at each update event.                                                    */
   LL_TIM_OC_EnablePreload(TIM2, LL_TIM_CHANNEL_CH1);
-
+  
   /**********************************/
   /* Start output signal generation */
   /**********************************/
   /* Enable output channel 1 */
   LL_TIM_CC_EnableChannel(TIM2, LL_TIM_CHANNEL_CH1);
-
+    
   /* Enable counter */
   LL_TIM_EnableCounter(TIM2);
-
+  
   /* Force update generation */
   LL_TIM_GenerateEvent_UPDATE(TIM2);
 }
@@ -272,7 +272,7 @@ __STATIC_INLINE void Configure_Frequency(uint32_t Frequency)
   /* Set the auto-reload value to have the requested frequency */
   /* Frequency = TIM2CLK / (ARR + 1)                   */
   LL_TIM_SetAutoReload(TIM2, __LL_TIM_CALC_ARR(TimOutClock, LL_TIM_GetPrescaler(TIM2), Frequency));
-
+ 
   /* Set compare value to half of the counter period (50% duty cycle )*/
   LL_TIM_OC_SetCompareCH1(TIM2, (LL_TIM_GetAutoReload(TIM2) / 2));
 }
@@ -311,7 +311,7 @@ __STATIC_INLINE void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -325,21 +325,21 @@ __STATIC_INLINE void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
-
+  
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+    
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
+    
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
 }
 
 /**
@@ -403,8 +403,8 @@ void SystemClock_Config(void)
 /******************************************************************************/
 /**
   * @brief  User button interrupt processing
-  * @note   When the user key button is pressed the frequency of the
-  *         PWM signal generated by TIM2 is updated.
+  * @note   When the user key button is pressed the frequency of the  
+  *         PWM signal generated by TIM2 is updated. 
   * @param  None
   * @retval None
   */
@@ -428,17 +428,17 @@ void TimerCaptureCompare_Callback(void)
 {
   /* Capture index */
   static uint16_t uhCaptureIndex = 0;
-
+  
   /* Captured Values */
   static uint32_t uwICValue1 = 0;
   static uint32_t uwICValue2 = 0;
   static uint32_t uwDiffCapture = 0;
-
+  
   uint32_t TIM3CLK;
   uint32_t PSC;
   uint32_t IC1PSC;
   uint32_t IC1Polarity;
-
+  
   if(uhCaptureIndex == 0)
   {
     /* Get the 1st Input Capture value */
@@ -448,16 +448,16 @@ void TimerCaptureCompare_Callback(void)
   else if(uhCaptureIndex == 1)
   {
     /* Get the 2nd Input Capture value */
-    uwICValue2 = LL_TIM_IC_GetCaptureCH1(TIM3);
-
+    uwICValue2 = LL_TIM_IC_GetCaptureCH1(TIM3); 
+    
     /* Capture computation */
     if (uwICValue2 > uwICValue1)
     {
-      uwDiffCapture = (uwICValue2 - uwICValue1);
+      uwDiffCapture = (uwICValue2 - uwICValue1); 
     }
     else if (uwICValue2 < uwICValue1)
     {
-      uwDiffCapture = ((TIM3_ARR_MAX - uwICValue1) + uwICValue2) + 1;
+      uwDiffCapture = ((TIM3_ARR_MAX - uwICValue1) + uwICValue2) + 1; 
     }
     else
     {
@@ -465,10 +465,10 @@ void TimerCaptureCompare_Callback(void)
       /* measures.                                                            */
       LED_Blinking(LED_BLINK_ERROR);
     }
-
-    /* The signal frequency is calculated as follows:                         */
+    
+    /* The signal frequency is calculated as follows:                         */      
     /* Frequency = (TIM3*IC1PSC) / (Capture*(PSC+1)*IC1Polarity)           */
-    /* where:                                                                 */
+    /* where:                                                                 */                                                          
     /*  Capture is the difference between two consecutive captures            */
     /*  TIM3CLK is the timer counter clock frequency                           */
     /*  PSC is the timer prescaler value                                      */
@@ -476,27 +476,27 @@ void TimerCaptureCompare_Callback(void)
     /*  IC1Polarity value depends on the capture sensitivity:                 */
     /*    1 if the input is sensitive to rising or falling edges              */
     /*    2 if the input is sensitive to both rising and falling edges        */
-
+    
     /* Retrieve actual TIM3 counter clock frequency */
     TIM3CLK = SystemCoreClock;
-
+    
     /* Retrieve actual TIM3 prescaler value */
     PSC = LL_TIM_GetPrescaler(TIM3);
-
+    
     /* Retrieve actual IC1 prescaler ratio */
     IC1PSC = __LL_TIM_GET_ICPSC_RATIO(LL_TIM_IC_GetPrescaler(TIM3, LL_TIM_CHANNEL_CH1));
-
+   
     /* Retrieve actual IC1 polarity setting */
     if (LL_TIM_IC_GetPolarity(TIM3, LL_TIM_CHANNEL_CH1) == LL_TIM_IC_POLARITY_BOTHEDGE)
       IC1Polarity = 2;
     else
       IC1Polarity = 1;
-
+    
     /* Calculate input signal frequency */
     uwMeasuredFrequency = (TIM3CLK *IC1PSC) / (uwDiffCapture*(PSC+1)*IC1Polarity);
-
+    
     /* reset capture index */
-    uhCaptureIndex = 0;
+    uhCaptureIndex = 0;    
   }
 }
 

@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F429I_DISCOVERY_TS_H
@@ -40,20 +40,20 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
-
+#endif   
+   
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f429i_discovery.h"
 /* Include TouchScreen component driver */
-#include "../Components/stmpe811/stmpe811.h"
-
+#include "../Components/stmpe811/stmpe811.h"   
+   
 /** @addtogroup BSP
   * @{
   */
 
 /** @addtogroup STM32F429I_DISCOVERY
   * @{
-  */
+  */ 
 
 /** @addtogroup STM32F429I_DISCOVERY_TS
   * @{
@@ -61,7 +61,7 @@
 
 /** @defgroup STM32F429I_DISCOVERY_TS_Exported_Types STM32F429I DISCOVERY TS Exported Types
   * @{
-  */
+  */ 
 typedef struct
 {
   uint16_t TouchDetected;
@@ -75,13 +75,13 @@ typedef struct
 
 /** @defgroup STM32F429I_DISCOVERY_TS_Exported_Constants STM32F429I DISCOVERY TS Exported Constants
   * @{
-  */
+  */ 
 #define TS_SWAP_NONE                    0x00
 #define TS_SWAP_X                       0x01
 #define TS_SWAP_Y                       0x02
 #define TS_SWAP_XY                      0x04
 
-typedef enum
+typedef enum 
 {
   TS_OK       = 0x00,
   TS_ERROR    = 0x01,
@@ -109,7 +109,7 @@ void    BSP_TS_ITClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -117,7 +117,7 @@ void    BSP_TS_ITClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

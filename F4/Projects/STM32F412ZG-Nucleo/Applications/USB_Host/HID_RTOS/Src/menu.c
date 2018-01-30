@@ -1,49 +1,49 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/HID_RTOS/Src/menu.c
+  * @file    USB_Host/HID_RTOS/Src/menu.c 
   * @author  MCD Application Team
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "main.h" 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -70,18 +70,18 @@ void HID_MenuInit(void)
   /* Create Menu Semaphore */
   osSemaphoreDef(osSem);
 
-  MenuEvent = osSemaphoreCreate(osSemaphore(osSem), 1);
-
+  MenuEvent = osSemaphoreCreate(osSemaphore(osSem), 1); 
+  
   /* Force menu to show Item 0 by default */
   osSemaphoreRelease(MenuEvent);
-
+  
   /* Menu task */
   osThreadDef(Menu_Thread, HID_MenuThread, osPriorityHigh, 0, 8 * configMINIMAL_STACK_SIZE);
   osThreadCreate(osThread(Menu_Thread), NULL);
 }
 
 /**
-  * @brief  Updates the Menu.
+  * @brief  Updates the Menu. 
   * @param  None
   * @retval None
   */
@@ -108,8 +108,8 @@ void HID_MenuThread(void const *argument)
       case HID_DEMO_IDLE:
           hid_demo.state = HID_DEMO_START;
           osSemaphoreRelease(MenuEvent);
-        break;
-
+        break;  
+        
       case HID_DEMO_START:
         if(Appli_state == APPLICATION_READY)
         {
@@ -135,31 +135,31 @@ void HID_MenuThread(void const *argument)
               hid_demo.state = HID_DEMO_IDLE;
             }
           }
-          osSemaphoreRelease(MenuEvent);
+          osSemaphoreRelease(MenuEvent);          
         }
         break;
-
+        
       case HID_DEMO_MOUSE:
         if(Appli_state == APPLICATION_READY)
         {
           USBH_MouseDemo(&hUSBHost);
         }
         break;
-
+        
       case HID_DEMO_KEYBOARD:
-        if(Appli_state == APPLICATION_READY)
+        if(Appli_state == APPLICATION_READY)  
         {
           USBH_KeybdDemo(&hUSBHost);
-        }
+        }   
         break;
-
+        
       default:
         break;
       }
-
+      
       if(Appli_state == APPLICATION_DISCONNECT)
       {
-        Appli_state = APPLICATION_IDLE;
+        Appli_state = APPLICATION_IDLE; 
         LCD_LOG_ClearTextZone();
         BSP_LCD_ClearStringLine(18);
         BSP_LCD_ClearStringLine(19);
@@ -186,7 +186,7 @@ void USBH_HID_EventCallback(USBH_HandleTypeDef *phost)
   * @retval None
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
+{  
   if(GPIO_Pin == USER_BUTTON_PIN)
   {
     osSemaphoreRelease(MenuEvent);
@@ -201,14 +201,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   */
 static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
 {
-  HID_MOUSE_Info_TypeDef *m_pinfo;
-
+  HID_MOUSE_Info_TypeDef *m_pinfo;  
+  
   m_pinfo = USBH_HID_GetMouseInfo(phost);
   if(m_pinfo != NULL)
   {
     /* Handle Mouse data position */
     USR_MOUSE_ProcessData(&mouse_info);
-
+    
     if(m_pinfo->buttons[0])
     {
       HID_MOUSE_ButtonPressed(0);
@@ -217,7 +217,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
     {
       HID_MOUSE_ButtonReleased(0);
     }
-
+    
     if(m_pinfo->buttons[1])
     {
       HID_MOUSE_ButtonPressed(2);
@@ -226,7 +226,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
     {
       HID_MOUSE_ButtonReleased(2);
     }
-
+    
     if(m_pinfo->buttons[2])
     {
       HID_MOUSE_ButtonPressed(1);
@@ -245,10 +245,10 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
   */
 static void USBH_KeybdDemo(USBH_HandleTypeDef *phost)
 {
-  HID_KEYBD_Info_TypeDef *k_pinfo;
+  HID_KEYBD_Info_TypeDef *k_pinfo; 
   char c;
   k_pinfo = USBH_HID_GetKeybdInfo(phost);
-
+  
   if(k_pinfo != NULL)
   {
     c = USBH_HID_GetASCIICode(k_pinfo);

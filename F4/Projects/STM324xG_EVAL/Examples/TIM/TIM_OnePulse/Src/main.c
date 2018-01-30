@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_OnePulse/Src/main.c
+  * @file    TIM/TIM_OnePulse/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx TIM HAL API to generate
   *          a one pulse signal
@@ -44,7 +44,7 @@
 
 /** @addtogroup TIM_OnePulse
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -79,98 +79,98 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /* Compute the prescaler value, to have TIM4Freq = 42 MHz */
   uwPrescalerValue = (uint32_t) ((SystemCoreClock / 2) / 42000000) - 1;
-
+  
   /*##-1- Configure the TIM peripheral #######################################*/
   /* --------------------------------------------------------------------------
     TIM4 configuration: One Pulse mode
-    The external signal is connected to TIM4_CH2 pin (PB.07),
+    The external signal is connected to TIM4_CH2 pin (PB.07), 
     The Rising edge is used as active edge,
     The One Pulse signal is output on TIM4_CH1 pin (PB.06)
-    The TIM_Pulse defines the delay value
+    The TIM_Pulse defines the delay value 
     The (TIM_Period -  TIM_Pulse) defines the One Pulse value.
-
-    TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1),
-    since APB1 prescaler is different from 1.
-      TIM4CLK = 2 * PCLK1
-      PCLK1 = HCLK / 4
+     
+    TIM4 input clock (TIM4CLK) is set to 2 * APB1 clock (PCLK1), 
+    since APB1 prescaler is different from 1.   
+      TIM4CLK = 2 * PCLK1  
+      PCLK1 = HCLK / 4 
       => TIM4CLK = HCLK / 2 = SystemCoreClock /2
 
     TIM2CLK = SystemCoreClock/2, we want to get TIM2 counter clock at 42 MHz:
      Prescaler = (TIM2CLK / TIM2 counter clock) - 1
      Prescaler = ((SystemCoreClock /2) /42 MHz) - 1
-
-    The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value
+     
+    The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value 
     to trigger the TIM4 input is 42000000/65535 = 641 Hz.
 
-    The TIM_Pulse defines the delay value, the delay value is fixed
+    The TIM_Pulse defines the delay value, the delay value is fixed 
     to 390 us:
-    delay =  CCR1/TIM4 counter clock
-          = 16383 / 42000000 = 390 us.
-    The (TIM_Period - TIM_Pulse) defines the One Pulse value,
+    delay =  CCR1/TIM4 counter clock 
+          = 16383 / 42000000 = 390 us. 
+    The (TIM_Period - TIM_Pulse) defines the One Pulse value, 
     the pulse value is fixed to 1.170 ms:
-    One Pulse value = (TIM_Period - TIM_Pulse) / TIM4 counter clock
+    One Pulse value = (TIM_Period - TIM_Pulse) / TIM4 counter clock 
                     = (65535 - 16383) / 42000000 = 1.170 ms.
 
-    Note:
+    Note: 
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
-     Each time the core clock (HCLK) changes, user had to update SystemCoreClock
+     Each time the core clock (HCLK) changes, user had to update SystemCoreClock 
      variable value. Otherwise, any configuration based on this variable will be incorrect.
      This variable is updated in three ways:
       1) by calling CMSIS function SystemCoreClockUpdate()
       2) by calling HAL API function HAL_RCC_GetSysClockFreq()
-      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency
+      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency    
  --------------------------------------------------------------------------- */
-
+  
   /* Initialize TIMx peripheral as follow:
-
+  
         + Prescaler = (SystemCoreClock/2)/42000000
         + Period = 0xFFFF
         + ClockDivision = 0
         + Counter direction = Up
   */
   TimHandle.Instance = TIMx;
-
+  
   TimHandle.Init.Period = 0xFFFF;
   TimHandle.Init.Prescaler = uwPrescalerValue;
   TimHandle.Init.ClockDivision = 0;
   TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
-
+  
   if(HAL_TIM_OnePulse_Init(&TimHandle, TIM_OPMODE_SINGLE) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the Channel 1 in One Pulse mode ##########################*/
+  
+  /*##-2- Configure the Channel 1 in One Pulse mode ##########################*/ 
   sConfig.OCMode = TIM_OCMODE_PWM2;
   sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfig.Pulse = 16383;
   sConfig.ICPolarity = TIM_ICPOLARITY_RISING;
   sConfig.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfig.ICFilter = 0;
-
+  
   if(HAL_TIM_OnePulse_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
-
-  /*##-3- Start the One Pulse mode #######################################*/
+  
+  /*##-3- Start the One Pulse mode #######################################*/ 
   if(HAL_TIM_OnePulse_Start(&TimHandle, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -193,7 +193,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -219,8 +219,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -234,14 +234,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -261,7 +261,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

@@ -1,9 +1,9 @@
 /**
   @page IWDG_RefreshUntilUserEvent IWDG example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/IWDG/IWDG_RefreshUntilUserEvent/readme.txt
+  * @file    Examples_LL/IWDG/IWDG_RefreshUntilUserEvent/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the IWDG_RefreshUntilUserEvent example.
   ******************************************************************************
@@ -36,7 +36,7 @@
 @par Example Description
 
 This example describes how to configure the IWDG to ensure period counter update and
-generate an MCU IWDG reset when a user button is pressed. Peripheral initialization is
+generate an MCU IWDG reset when a user button is pressed. Peripheral initialization is 
 done using LL unitary services functions for optimization purpose (performance and size).
 
 Example Configuration:
@@ -45,14 +45,14 @@ Infinite refresh of the IWDG down-counter done in the main loop.
 LED2 is blinking fast & continuously.
 
 Example Execution:
-When User Button is pressed, the down-counter automatic refresh mechanism is
-disable and thus, reset will occur. After a reset, when re-entering in the main,
+When User Button is pressed, the down-counter automatic refresh mechanism is 
+disable and thus, reset will occur. After a reset, when re-entering in the main, 
 RCC IWDG Reset Flag will be checked and if we are back from a IWDG reset the LED2
 will be switch ON.
 
 Waiting a new user button pressed to re-activate the IWDG
 
-@par Directory contents
+@par Directory contents 
 
   - IWDG/IWDG_RefreshUntilUserEvent/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - IWDG/IWDG_RefreshUntilUserEvent/Inc/main.h                  Header for main.c module
@@ -65,12 +65,12 @@ Waiting a new user button pressed to re-activate the IWDG
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

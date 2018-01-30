@@ -62,10 +62,10 @@ int main(void)
 {
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Add your application code here */
-
-
+  
+  
   /* Infinite loop */
   while (1)
   {
@@ -75,7 +75,7 @@ int main(void)
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE BEGIN    ============== */
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -118,7 +118,7 @@ void SystemClock_Config(void)
   while(LL_PWR_IsActiveFlag_ODSW() != 1)
   {
   };
-
+  
   /* Main PLL configuration and activation */
   LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_8, 360, LL_RCC_PLLP_DIV_2);
   LL_RCC_PLL_Enable();

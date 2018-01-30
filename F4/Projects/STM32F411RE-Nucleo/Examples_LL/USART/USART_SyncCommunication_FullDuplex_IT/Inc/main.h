@@ -56,7 +56,7 @@
 /* Exported constants --------------------------------------------------------*/
 
 /**
-  * @brief LED2
+  * @brief LED2 
   */
 #define LED2_PIN                           LL_GPIO_PIN_5
 #define LED2_GPIO_PORT                     GPIOA
@@ -75,11 +75,11 @@
   */
 #define USER_BUTTON_PIN                         LL_GPIO_PIN_13
 #define USER_BUTTON_GPIO_PORT                   GPIOC
-#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
+#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)   
 #define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_13
 #define USER_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
-#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)
-#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)
+#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)   
+#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)   
 #define USER_BUTTON_SYSCFG_SET_EXTI()           do {                                                                     \
                                                   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                  \
                                                   LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTC, LL_SYSCFG_EXTI_LINE13);  \
@@ -89,9 +89,9 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 /* IRQ Handler treatment functions */
-void USART_TXEmpty_Callback(void);
-void USART_CharTransmitComplete_Callback(void);
-void USART_CharReception_Callback(void);
+void USART_TXEmpty_Callback(void); 
+void USART_CharTransmitComplete_Callback(void); 
+void USART_CharReception_Callback(void); 
 void SPI1_DMA2_TransmitComplete_Callback(void);
 void SPI1_DMA2_ReceiveComplete_Callback(void);
 void USART_TransferError_Callback(void);

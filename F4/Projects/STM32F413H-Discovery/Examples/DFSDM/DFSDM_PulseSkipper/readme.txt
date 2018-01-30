@@ -1,6 +1,6 @@
 /**
   @page DFSDM_PulseSkipper Description
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    DFSDM/DFSDM_PulseSkipper/readme.txt
@@ -33,11 +33,11 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example shows how to use the DFSDM HAL API to perform stereo audio recording.
 For this audio record we will use two MP34DT01 digital microphones mounted on the board(2micros) or
-those integrated on extension boards( 2 micro from MB1299).
+those integrated on extension boards( 2 micro from MB1299). 
 
 MP34DT01 runs with a clock frequency from 1MHz to 3,25MHz.
 This clock frequency has to be delivered by DFSDM. So first channel of DFSDM will be
@@ -63,16 +63,16 @@ In addition, this example shows how to implement a pulse skipper to generate a d
 In main.h, uncomment #define USE_CHANNEL_DELAY to enable pulse skipper.
 
 Purpose of pulses skipper is to implement delay line for given input channel(s).
-Given number of samples from input serial data stream will be discarded before they enter into the filter.
+Given number of samples from input serial data stream will be discarded before they enter into the filter. 
 The implementation of the Clock skipping is based on block MultiChannelDelay, Tim3 and TIM4.
-The clock injected to digital microphones is provided by DFSDM2 clock out. It is distributed to
-OR gates, Trigger inputs of two timers and DFSDM1_CKOUT and DFSDM2_CKOUT to generate output clock
+The clock injected to digital microphones is provided by DFSDM2 clock out. It is distributed to 
+OR gates, Trigger inputs of two timers and DFSDM1_CKOUT and DFSDM2_CKOUT to generate output clock 
 signal for DFSDM pins.
 
-@note Refer to the application note AN4957 "How to synchronize the DFSDMs filters
+@note Refer to the application note AN4957 "How to synchronize the DFSDMs filters 
 and how to program the pulse skipper on STM32F413/423 line devices" for more details.
 
-For each two Microphones selected, the user can select in which channel to generate pulse delay.
+For each two Microphones selected, the user can select in which channel to generate pulse delay. 
 
 #if defined(PLAY_DFSDM12_DATIN10)
 /* Select channel to generate delay: either DFSDM1 CH1 or  DFSDM2 CH0 */
@@ -86,24 +86,24 @@ For each two Microphones selected, the user can select in which channel to gener
 #endif
 
 Playback of the recorded data will be performed on headset using HAL_I2S and WM8994 audio codec.
-A circular playback buffer will be filled as soon as recorded data are available.
-When half left and right buffers will be filled, we put first parts of left and right channels data
-on first half of playback buffer.
-When left and right buffers will be full filled, we put second parts of left and right channels data
+A circular playback buffer will be filled as soon as recorded data are available. 
+When half left and right buffers will be filled, we put first parts of left and right channels data 
+on first half of playback buffer. 
+When left and right buffers will be full filled, we put second parts of left and right channels data 
 on second half of playback buffer.
 
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This
-      implies that if HAL_Delay() is called from a peripheral ISR process, then
+      implies that if HAL_Delay() is called from a peripheral ISR process, then 
       the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents  
 
   - DFSDM/DFSDM_PulseSkipper/Src/main.c                  Main program
   - DFSDM/DFSDM_PulseSkipper/Src/system_stm32f4xx.c      STM32F4xx system source file
@@ -116,20 +116,20 @@ on second half of playback buffer.
 @par Hardware and Software environment
 
   - This example runs on STM32F413xx devices.
-
+    
   - This example has been tested with STMicroelectronics STM32F413ZH-Discovery revB
     board and can be easily tailored to any other supported device
-    and development board.
+    and development board.      
 
   - STM32F413H-Discovery Set-up :
     - Plug headset on AUDIO JACK connector CN5.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the example 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

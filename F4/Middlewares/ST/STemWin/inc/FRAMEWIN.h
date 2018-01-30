@@ -41,15 +41,15 @@ Purpose     : Frame window include
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-
+  
 #ifndef FRAMEWIN_H
 #define FRAMEWIN_H
 
@@ -258,10 +258,10 @@ void             FRAMEWIN_SetDefaultTextColor  (unsigned Index, GUI_COLOR Color)
 */
 #define         FRAMEWIN_SetDefaultCaptionSize(Height)       FRAMEWIN_SetDefaultTitleHeight(Height)
 #define         FRAMEWIN_GetDefaultCaptionSize()             FRAMEWIN_GetDefaultTitleHeight()
-#define         FRAMEWIN_CreateButton(hObj, Flags, Off, Id)  FRAMEWIN_AddButton(hObj, Flags, Off, Id)
+#define         FRAMEWIN_CreateButton(hObj, Flags, Off, Id)  FRAMEWIN_AddButton(hObj, Flags, Off, Id) 
 #define         FRAMEWIN_CreateCloseButton(hObj, Flags, Off) FRAMEWIN_AddCloseButton(hObj, Flags, Off)
-#define         FRAMEWIN_CreateMaxButton(hObj, Flags, Off)   FRAMEWIN_AddMaxButton(hObj, Flags, Off)
-#define         FRAMEWIN_CreateMinButton(hObj, Flags, Off)   FRAMEWIN_AddMinButton(hObj, Flags, Off)
+#define         FRAMEWIN_CreateMaxButton(hObj, Flags, Off)   FRAMEWIN_AddMaxButton(hObj, Flags, Off)  
+#define         FRAMEWIN_CreateMinButton(hObj, Flags, Off)   FRAMEWIN_AddMinButton(hObj, Flags, Off)  
 
 #if defined(__cplusplus)
   }

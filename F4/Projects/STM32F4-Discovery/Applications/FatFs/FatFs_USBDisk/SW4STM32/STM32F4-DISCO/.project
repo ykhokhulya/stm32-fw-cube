@@ -161,6 +161,6 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/usbh_diskio_dma.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

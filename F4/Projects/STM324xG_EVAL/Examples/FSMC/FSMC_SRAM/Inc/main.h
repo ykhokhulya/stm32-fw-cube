@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FSMC/FSMC_SRAM/Inc/main.h
+  * @file    FSMC/FSMC_SRAM/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -52,7 +52,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* #define SRAM_MEMORY_WIDTH            FSMC_NORSRAM_MEM_BUS_WIDTH_32 */
 
 
-#define SRAM_TIMEOUT     ((uint32_t)0xFFFF)
+#define SRAM_TIMEOUT     ((uint32_t)0xFFFF) 
 
 #endif /* __MAIN_H */
 

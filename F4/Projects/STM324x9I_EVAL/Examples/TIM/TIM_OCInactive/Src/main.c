@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_OCInactive/Src/main.c
+  * @file    TIM/TIM_OCInactive/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx TIM HAL API to generate
   *          4 signals in PWM.
@@ -43,7 +43,7 @@
 
 /** @addtogroup TIM_OCInactive
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 #define  PULSE1_VALUE       1000        /* Capture Compare 1 Value  */
@@ -83,41 +83,41 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
-  SystemClock_Config();
-
+  SystemClock_Config();   
+  
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /* Compute the prescaler value to have TIMx counter clock equal to 2 KHz */
   uwPrescalerValue = ((SystemCoreClock /2) / 2000) - 1;
 
-  /*##-1- Configure the TIM peripheral #######################################*/
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* ---------------------------------------------------------------
     TIM2 Configuration: Output Compare Inactive Mode:
-    In this example TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1),
-    since APB1 prescaler is different from 1.
-      TIM2CLK = 2 * PCLK1
-      PCLK1 = HCLK / 4
+    In this example TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1), 
+    since APB1 prescaler is different from 1.   
+      TIM2CLK = 2 * PCLK1  
+      PCLK1 = HCLK / 4 
       => TIM2CLK = HCLK / 2 = SystemCoreClock /2
-
+          
     To get TIM2 counter clock at 2 KHz, the prescaler is computed as follows:
        Prescaler = (TIM2CLK / TIM2 counter clock) - 1
        Prescaler = ((SystemCoreClock /2) /2 KHz) - 1
-
+       
     Generate 4 signals with 4 different delays:
        TIM2_CH1 delay = uhCCR1_Val/TIM2 counter clock = 500 ms
        TIM2_CH2 delay = uhCCR2_Val/TIM2 counter clock = 250 ms
        TIM2_CH3 delay = uhCCR3_Val/TIM2 counter clock = 125 ms
        TIM2_CH4 delay = uhCCR4_Val/TIM2 counter clock = 62.5 ms
 
-    Note:
+    Note: 
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
-     Each time the core clock (HCLK) changes, user had to update SystemCoreClock
+     Each time the core clock (HCLK) changes, user had to update SystemCoreClock 
      variable value. Otherwise, any configuration based on this variable will be incorrect.
      This variable is updated in three ways:
       1) by calling CMSIS function SystemCoreClockUpdate()
@@ -132,7 +132,7 @@ int main(void)
        + Counter direction = Up
   */
   TimHandle.Instance = TIMx;
-
+  
   TimHandle.Init.Period        = 65535;
   TimHandle.Init.Prescaler     = uwPrescalerValue;
   TimHandle.Init.ClockDivision = 0;
@@ -142,20 +142,20 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the Output Compare channels ##############################*/
+  
+  /*##-2- Configure the Output Compare channels ##############################*/ 
   /* Common configuration for all channels */
   sConfig.OCMode     = TIM_OCMODE_INACTIVE;
   sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
 
   /* Set the pulse (delay1)  value for channel 1 */
-  sConfig.Pulse = PULSE1_VALUE;
+  sConfig.Pulse = PULSE1_VALUE;  
   if(HAL_TIM_OC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse (delay2) value for channel 2 */
   sConfig.Pulse = PULSE2_VALUE;
   if(HAL_TIM_OC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_2) != HAL_OK)
@@ -163,7 +163,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse (delay3) value for channel 3 */
   sConfig.Pulse = PULSE3_VALUE;
   if(HAL_TIM_OC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_3) != HAL_OK)
@@ -171,7 +171,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse (delay4) value for channel 4 */
   sConfig.Pulse = PULSE4_VALUE;
   if(HAL_TIM_OC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_4) != HAL_OK)
@@ -179,14 +179,14 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
-  /*##-3- Turn on LED1, LED2, LED3 and LED4 ##################################*/
+  
+  /*##-3- Turn on LED1, LED2, LED3 and LED4 ##################################*/ 
   BSP_LED_On(LED1);
   BSP_LED_On(LED2);
   BSP_LED_On(LED3);
   BSP_LED_On(LED4);
-
-  /*##-4- Start signals generation ###########################################*/
+  
+  /*##-4- Start signals generation ###########################################*/ 
   /* Start channel 1 in Output compare mode */
   if(HAL_TIM_OC_Start_IT(&TimHandle, TIM_CHANNEL_1) != HAL_OK)
   {
@@ -219,7 +219,7 @@ int main(void)
 }
 
 /**
-  * @brief  Output Compare callback in non blocking mode
+  * @brief  Output Compare callback in non blocking mode 
   * @param  htim : TIM OC handle
   * @retval None
   */
@@ -263,7 +263,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -289,8 +289,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -304,17 +304,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -327,7 +327,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

@@ -92,7 +92,7 @@ typedef union
     uint32_t      IsCalibrated : 1;
   }b;
   uint32_t d32;
-
+  
 }CALIBRATION_Data2Typedef;
 
 CALIBRATION_Data1Typedef data1;
@@ -154,22 +154,22 @@ uint8_t Touchscreen_Calibration(void)
   uint8_t ts_Orientation;
   uint16_t ts_SizeX;
   uint16_t ts_SizeY;
-
+  
   ts_Orientation  = TS_ORIENTATION_LANDSCAPE_ROT180;
   ts_SizeX        = BSP_LCD_GetXSize();
   ts_SizeY        = BSP_LCD_GetYSize();
-
+  
   data1.d32 = k_BkupRestoreParameter(RTC_BKP_DR0);
   data2.d32 = k_BkupRestoreParameter(RTC_BKP_DR1);
-
+  
   /* Start touchscreen internal calibration and configuration + start */
-  ts_status = BSP_TS_InitEx(ts_SizeX, ts_SizeY, ts_Orientation);
-
+  ts_status = BSP_TS_InitEx(ts_SizeX, ts_SizeY, ts_Orientation);  
+  
   if ((calibration_data[0] != 1)  /* Very first start-up and calibration */
       || (UserButton_press == 1))       /* User-requested calibration          */
   {
     TouchscreenCalibration_SetHint();
-
+    
     if (ts_status != TS_OK)
     {
       BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
@@ -197,7 +197,7 @@ uint8_t Touchscreen_Calibration(void)
       aLogY[0] = 20;
       aLogX[1] = BSP_LCD_GetXSize() - 20;
       aLogY[1] = BSP_LCD_GetYSize() - 20;
-
+      
       for (i = 0; i < 2; i++)
       {
         TouchScreen_Calibration_GetPhysValues(aLogX[i], aLogY[i], &aPhysX[i], &aPhysY[i]);
@@ -209,22 +209,22 @@ uint8_t Touchscreen_Calibration(void)
           }
         }
       }
-
+      
       data1.b.A1 = aPhysX[0];
       data1.b.B1 = aPhysX[1];
       k_BkupSaveParameter(RTC_BKP_DR0, data1.d32);
-
+      
       data2.b.A2 = aPhysY[0];
       data2.b.B2 = aPhysY[1];
       data2.b.IsCalibrated = 1;
       k_BkupSaveParameter(RTC_BKP_DR1, data2.d32);
-
+      
       /* Save calibration parameters in Flash */
       HAL_FLASH_Unlock();
-
+      
       __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR |\
         FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR| FLASH_FLAG_PGSERR);
-
+      
       /* First, erase Flash to be able to write afterwards */
       /* Fill EraseInit structure*/
       EraseInitStruct.TypeErase     = FLASH_TYPEERASE_SECTORS;
@@ -232,13 +232,13 @@ uint8_t Touchscreen_Calibration(void)
       EraseInitStruct.Banks         = CALIBRATION_PARAM_FLASH_BANK;
       EraseInitStruct.Sector        = CALIBRATION_PARAM_FLASH_SECTOR;
       EraseInitStruct.NbSectors     = CALIBRATION_PARAM_FLASH_NB_SECTOR;
-
+      
       if (HAL_FLASHEx_Erase(&EraseInitStruct, &PAGEError) != HAL_OK)
       {
         Flash_error = HAL_FLASH_GetError();
         BSP_LCD_DisplayStringAt(0, 240 - 65, (uint8_t *)"Calibration parameters erasing error", CENTER_MODE);
       }
-
+      
       /* Save calibration 'done' information */
       if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)&calibration_data, (uint32_t) 1) != HAL_OK)
       {
@@ -267,9 +267,9 @@ uint8_t Touchscreen_Calibration(void)
     data1.d32 = calibration_data[2];
     data2.d32 = calibration_data[4];
   }
-
+  
   ts_calibration_done = 1;
-
+  
   return (ts_status);
 }
 
@@ -282,11 +282,11 @@ static void TouchscreenCalibration_SetHint(void)
 {
   /* Clear the LCD */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set Touchscreen Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-
+  
   BSP_LCD_SetFont(&Font20);
   BSP_LCD_DisplayStringAt(0, 100, (uint8_t *)"Touchscreen", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 120, (uint8_t *)"Calibration", CENTER_MODE);
@@ -304,24 +304,24 @@ static void TouchscreenCalibration_SetHint(void)
 static void TouchScreen_Calibration_GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY)
 {
   TS_StateTypeDef TS_State = {0};
-
+  
   /* Draw the ring */
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_FillCircle(LogX, LogY, 20);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillCircle(LogX, LogY, 10);
-
+  
   /* Wait until pressed state on the touch panel */
   TouchScreen_Calibration_WaitForPressedState(1, &TS_State);
-
+  
   /* Return as physical touch values the positions of first touch, even if double touched occurred */
   *pPhysX = TS_State.touchX[0];
   *pPhysY = TS_State.touchY[0];
-
+  
   /* Wait until touch is released on touch panel */
   TouchScreen_Calibration_WaitForPressedState(0, &TS_State);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillCircle(LogX, LogY, 20);
 }
@@ -343,13 +343,13 @@ static void TouchScreen_Calibration_WaitForPressedState(uint8_t Pressed, TS_Stat
   uint8_t  status = TS_OK;
   uint32_t exitFirstLevelWhileLoopReq = 0;  /* By default no exit request from first level while loop  */
   uint32_t exitSecondLevelWhileLoopReq = 0; /* By default no exit request from second level while loop */
-
+  
   /* First level while loop entry */
   do
   {
     /* reset exit second level while loop in case it was set */
     exitSecondLevelWhileLoopReq = 0;
-
+    
     /* Sense of touch state from touch IC until get the awaited state in parameter 'Pressed' */
     status = BSP_TS_GetState(TS_State);
     if(status == TS_OK)
@@ -361,7 +361,7 @@ static void TouchScreen_Calibration_WaitForPressedState(uint8_t Pressed, TS_Stat
         /* Record in 'TimeStart' the time of awaited touch event for anti-rebound calculation */
         /* The state should persist for a minimum sufficient time */
         TimeStart = HAL_GetTick();
-
+        
         /* Is state of the touch changing ? */
         /* Second level while loop entry */
         do
@@ -381,23 +381,23 @@ static void TouchScreen_Calibration_WaitForPressedState(uint8_t Pressed, TS_Stat
             {
               /* State have not changed for the timeout duration (stable touch for 100 ms) */
               /* This means the touch state is stable : can exit function */
-
+              
               /* found valid touch, exit both while levels */
               exitSecondLevelWhileLoopReq = 1;
               exitFirstLevelWhileLoopReq  = 1;
             }
-
+            
             /* Wait 10 ms before next sense of touch at next loop iteration */
             HAL_Delay(100);
-
+            
           } /* of if(status == TS_OK) */
         }
         while (!exitSecondLevelWhileLoopReq);
-
+        
       } /* of if (((Pressed == 0) && .... */
-
+      
     } /* of if(status == TS_OK) */
-
+    
     if(!exitFirstLevelWhileLoopReq)
     {
       /* Wait some time before next sense of touch at next loop iteration */

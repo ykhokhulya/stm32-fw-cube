@@ -86,7 +86,7 @@
 #define portNVIC_SYSTICK_CTRL			( * ( ( volatile uint32_t * ) 0xe000e010 ) )
 #define portNVIC_SYSTICK_LOAD			( * ( ( volatile uint32_t * ) 0xe000e014 ) )
 #define portNVIC_SYSTICK_CURRENT_VALUE	        ( * ( ( volatile uint32_t * ) 0xe000e018 ) )
-#define portNVIC_SYSPRI2			( ( volatile uint32_t * ) 0xe000ed20 )
+#define portNVIC_SYSPRI2			( ( volatile uint32_t * ) 0xe000ed20 ) 
 #define portNVIC_SYSTICK_CLK		0x00000004
 #define portNVIC_SYSTICK_INT		0x00000002
 #define portNVIC_SYSTICK_ENABLE		0x00000001
@@ -104,7 +104,7 @@ FreeRTOS.org versions prior to V4.3.0 did not include this definition. */
 #ifndef configKERNEL_INTERRUPT_PRIORITY
 	#define configKERNEL_INTERRUPT_PRIORITY 0
 #endif
-
+   
 /* The systick is a 24-bit counter. */
 #define portMAX_24_BIT_NUMBER				( 0xffffffUL )
 

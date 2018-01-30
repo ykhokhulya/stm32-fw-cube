@@ -1,43 +1,43 @@
 /**
   ******************************************************************************
-  * @file    LibJPEG/LibJPEG_Decoding/Src/main.c
+  * @file    LibJPEG/LibJPEG_Decoding/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   *          This sample code shows how to decompress JPEG file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -49,9 +49,9 @@
 /* Private typedef -----------------------------------------------------------*/
 typedef enum
 {
-  APPLICATION_IDLE = 0,
-  APPLICATION_START
-} MSC_ApplicationTypeDef;
+  APPLICATION_IDLE = 0,  
+  APPLICATION_START    
+} MSC_ApplicationTypeDef;  
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -64,7 +64,7 @@ uint32_t offset = 0xD0000000;
 RGB_typedef *RGB_matrix;
 uint8_t _aucLine[2048];
 
-USBH_HandleTypeDef  hUSBHost;
+USBH_HandleTypeDef  hUSBHost;  
 
 /* Variable to save the state of USB */
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
@@ -91,86 +91,86 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /*##-1- LCD Configuration ##################################################*/
   LCD_Config();
-
+  
   /*##-2- Link the USB Host disk I/O driver ##################################*/
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   {
     /*##-3- Init Host Library ################################################*/
     USBH_Init(&hUSBHost, USBH_UserProcess, 0);
-
+    
     /*##-4- Add Supported Class ##############################################*/
     USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
-
+    
     /*##-5- Start Host Process ###############################################*/
     USBH_Start(&hUSBHost);
-
+    
     /*##-6- Run Application (Blocking mode) ##################################*/
     while (1)
     {
       /* USB Host Background task */
       USBH_Process(&hUSBHost);
-
+      
       /* Mass Storage Application State Machine */
       switch(Appli_state)
       {
       case APPLICATION_START:
-
+          
         /* Open the JPG image with read access */
         if(f_open(&MyFile, "image.jpg", FA_READ) == FR_OK)
         {
           /* Decode the jpg image file */
           jpeg_decode(&MyFile, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
-
+            
           /* Close the JPG image */
           f_close(&MyFile);
         }
-
+        
         Appli_state = APPLICATION_IDLE;
         break;
-
+        
       case APPLICATION_IDLE:
       default:
-        break;
+        break;      
       }
     }
-  }
-
+  }  
+  
   /* TrueStudio compilation error correction */
   while (1)
   {
-  }
+  }  
 }
 
 /**
   * @brief  LCD Configuration.
-  * @param  None
+  * @param  None  
   * @retval None
   */
 static void LCD_Config(void)
 {
-  /* Initialize the LCD */
+  /* Initialize the LCD */  
   BSP_LCD_Init();
-
+  
   /* Background Layer Initialization */
   BSP_LCD_LayerDefaultInit(0, LCD_BUFFER);
-
+  
   /* Set Foreground Layer */
   BSP_LCD_SelectLayer(0);
-
+  
   /* Enable the LCD */
-  BSP_LCD_DisplayOn();
-
+  BSP_LCD_DisplayOn();  
+  
   /* Set the layer window */
   BSP_LCD_SetLayerWindow(0, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-
+  
   /* Clear the LCD Background layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  BSP_LCD_Clear(LCD_COLOR_WHITE); 
 }
 
 /**
@@ -182,12 +182,12 @@ static void LCD_Config(void)
 
 static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 {
-
+   
 #ifdef DONT_USE_DMA2D
   RGB_matrix =  (RGB_typedef*)Row;
   uint32_t  ARGB32Buffer[IMAGE_WIDTH];
   uint32_t counter = 0;
-
+   
   for(counter = 0; counter < IMAGE_WIDTH; counter++)
   {
     ARGB32Buffer[counter]  = (uint32_t)
@@ -201,50 +201,50 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
   }
 #endif
 
-#ifdef USE_DMA2D
+#ifdef USE_DMA2D  
   static DMA2D_HandleTypeDef DMA2DHandle;
-
+  
 /* Configure the DMA2D Mode, Color Mode and output offset */
   DMA2DHandle.Init.Mode         = DMA2D_M2M_PFC;
   DMA2DHandle.Init.ColorMode    = DMA2D_ARGB8888;
-  DMA2DHandle.Init.OutputOffset = 0;
-
+  DMA2DHandle.Init.OutputOffset = 0;     
+  
   /* Foreground Configuration */
   DMA2DHandle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   DMA2DHandle.LayerCfg[1].InputAlpha = 0xFF;
   DMA2DHandle.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB888;
   DMA2DHandle.LayerCfg[1].InputOffset = 0;
-
-  DMA2DHandle.Instance = DMA2D;
-
+  
+  DMA2DHandle.Instance = DMA2D; 
+  
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&DMA2DHandle) == HAL_OK)
+  if(HAL_DMA2D_Init(&DMA2DHandle) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&DMA2DHandle, 1) == HAL_OK)
+    if(HAL_DMA2D_ConfigLayer(&DMA2DHandle, 1) == HAL_OK) 
     {
       if (HAL_DMA2D_Start(&DMA2DHandle, (uint32_t)Row, (uint32_t)offset, IMAGE_WIDTH, 1) == HAL_OK)
       {
-        /* Polling For DMA transfer */
+        /* Polling For DMA transfer */  
         HAL_DMA2D_PollForTransfer(&DMA2DHandle, 10);
       }
     }
-  }
+  }   
 #endif
 
-#ifdef SWAP_RB
+#ifdef SWAP_RB 
   uint32_t pixel = 0, width_counter, result = 0, result1 = 0;
-
+  
   for(width_counter = 0; width_counter < IMAGE_WIDTH; width_counter++)
   {
-    pixel = *(__IO uint32_t *)(LCD_BUFFER + (width_counter*4) + (offset - LCD_BUFFER));
+    pixel = *(__IO uint32_t *)(LCD_BUFFER + (width_counter*4) + (offset - LCD_BUFFER)); 
     result1 = (((pixel & 0x00FF0000) >> 16) | ((pixel & 0x000000FF) << 16));
     pixel = pixel & 0xFF00FF00;
     result = (result1 | pixel);
     *(__IO uint32_t *)(LCD_BUFFER + (width_counter*4) + (offset - LCD_BUFFER)) = result;
-
-  }
+    
+  }  
 #endif
-
+  
   offset += (DataLength + IMAGE_WIDTH);
   return 0;
 }
@@ -255,9 +255,9 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
   * @retval None
   */
 static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
-{
+{  
   switch (id)
-  {
+  { 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_IDLE;
     if (f_mount(0, "", 0) != FR_OK)
@@ -265,15 +265,15 @@ static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
       /* FatFs Initialization Error */
     }
     break;
-
+  
   case HOST_USER_CONNECTION:
     Appli_state = APPLICATION_IDLE;
     if (f_mount(&USBDISK_FatFs, "", 0) != FR_OK)
     {
       /* FatFs Initialization Error */
     }
-    break;
-
+    break;    
+    
   case HOST_USER_CLASS_ACTIVE:
     Appli_state = APPLICATION_START;
     break;
@@ -282,7 +282,7 @@ static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -307,12 +307,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -323,14 +323,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig (&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -343,7 +343,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

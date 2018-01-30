@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -57,9 +57,9 @@
   */
 
 /**
-  * @brief CRC MSP Initialization
-  *        This function configures the hardware resources used in this example:
-  *           - Peripheral's clock enable
+  * @brief CRC MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
+  *           - Peripheral's clock enable 
   * @param hcrc: CRC handle pointer
   * @retval None
   */
@@ -70,7 +70,7 @@ void HAL_CRC_MspInit(CRC_HandleTypeDef *hcrc)
 }
 
 /**
-  * @brief CRC MSP De-Initialization
+  * @brief CRC MSP De-Initialization 
   *        This function freeze the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   * @param hcrc: CRC handle pointer
@@ -80,7 +80,7 @@ void HAL_CRC_MspDeInit(CRC_HandleTypeDef *hcrc)
 {
   /* Enable CRC reset state */
   __HAL_RCC_CRC_FORCE_RESET();
-
+  
   /* Release CRC from reset state */
   __HAL_RCC_CRC_RELEASE_RESET();
 }

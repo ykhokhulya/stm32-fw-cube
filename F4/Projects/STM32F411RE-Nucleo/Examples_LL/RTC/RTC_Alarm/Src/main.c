@@ -142,7 +142,7 @@ void Configure_RTC(void)
      - Configure the needed RTC clock source */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
   LL_PWR_EnableBkUpAccess();
-
+  
   /*##-2- Configure LSE/LSI as RTC clock source ###############################*/
 #ifdef RTC_CLOCK_SOURCE_LSE
   /* Enable LSE only if disabled.*/
@@ -157,7 +157,7 @@ void Configure_RTC(void)
     while (LL_RCC_LSE_IsReady() != 1)
     {
 #if (USE_TIMEOUT == 1)
-      if (LL_SYSTICK_IsActiveCounterFlag())
+      if (LL_SYSTICK_IsActiveCounterFlag()) 
       {
         Timeout --;
       }
@@ -165,13 +165,13 @@ void Configure_RTC(void)
       {
         /* LSE activation error */
         LED_Blinking(LED_BLINK_ERROR);
-      }
+      }  
 #endif /* USE_TIMEOUT */
     }
     LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
-
+    
     /*##-3- Enable RTC peripheral Clocks #######################################*/
-    /* Enable RTC Clock */
+    /* Enable RTC Clock */ 
     LL_RCC_EnableRTC();
   }
 #elif defined(RTC_CLOCK_SOURCE_LSI)
@@ -183,7 +183,7 @@ void Configure_RTC(void)
   while (LL_RCC_LSI_IsReady() != 1)
   {
 #if (USE_TIMEOUT == 1)
-    if (LL_SYSTICK_IsActiveCounterFlag())
+    if (LL_SYSTICK_IsActiveCounterFlag()) 
     {
       Timeout --;
     }
@@ -191,7 +191,7 @@ void Configure_RTC(void)
     {
       /* LSI activation error */
       LED_Blinking(LED_BLINK_ERROR);
-    }
+    }  
 #endif /* USE_TIMEOUT */
   }
   LL_RCC_ForceBackupDomainReset();
@@ -199,7 +199,7 @@ void Configure_RTC(void)
   LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSI);
 
   /*##-3- Enable RTC peripheral Clocks #######################################*/
-  /* Enable RTC Clock */
+  /* Enable RTC Clock */ 
   LL_RCC_EnableRTC();
 
 #else
@@ -210,7 +210,7 @@ void Configure_RTC(void)
   LL_RTC_DisableWriteProtection(RTC);
 
   /*##-5- Enter in initialization mode #######################################*/
-  if (Enter_RTC_InitMode() != RTC_ERROR_NONE)
+  if (Enter_RTC_InitMode() != RTC_ERROR_NONE)   
   {
     /* Initialization Error */
     LED_Blinking(LED_BLINK_ERROR);
@@ -236,7 +236,7 @@ void Configure_RTC(void)
 
   /*##-7- Exit of initialization mode #######################################*/
   Exit_RTC_InitMode();
-
+  
   /*##-8- Enable RTC registers write protection #############################*/
   LL_RTC_EnableWriteProtection(RTC);
 }
@@ -269,45 +269,45 @@ void Configure_RTC_Alarm(void)
   /*                          __LL_RTC_CONVERT_BIN2BCD(31), (...))           */
   /* Set Date: Friday December 29th 2016 */
   LL_RTC_DATE_Config(RTC, LL_RTC_WEEKDAY_FRIDAY, 0x29, LL_RTC_MONTH_DECEMBER, 0x16);
-
+  
   /*##-4- Configure the Time ################################################*/
   /* Set Time: 11:59:55 PM*/
   LL_RTC_TIME_Config(RTC, LL_RTC_TIME_FORMAT_PM, 0x11, 0x59, 0x55);
-
+  
   /*##-5- Configure the RTC Alarm peripheral #################################*/
-  /* Set Alarm to 12:00:25
+  /* Set Alarm to 12:00:25 
      RTC Alarm Generation: Alarm on Hours, Minutes and Seconds (ignore date/weekday)*/
   LL_RTC_ALMA_ConfigTime(RTC, LL_RTC_ALMA_TIME_FORMAT_AM, 0x12, 0x00, 0x25);
   LL_RTC_ALMA_SetMask(RTC, LL_RTC_ALMA_MASK_DATEWEEKDAY);
-
+  
   /* Note: following interfaces may be used but not needed as default values are used.*/
   //LL_RTC_ALMA_DisableWeekday(RTC);
   //LL_RTC_ALMA_SetDay(RTC, 0x01);
-
+  
   /* Enable Alarm*/
   LL_RTC_ALMA_Enable(RTC);
 
   /* Clear the Alarm interrupt pending bit */
   LL_RTC_ClearFlag_ALRA(RTC);
-
+  
   /* Enable IT Alarm */
   LL_RTC_EnableIT_ALRA(RTC);
 
   /* RTC Alarm Interrupt Configuration: EXTI configuration */
   LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_17);
   LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_17);
-
+  
   /*##-6- Configure the NVIC for RTC Alarm ###############################*/
   NVIC_SetPriority(RTC_Alarm_IRQn, 0x0F);
   NVIC_EnableIRQ(RTC_Alarm_IRQn);
 
   /*##-7- Exit of initialization mode #######################################*/
-  if (Exit_RTC_InitMode() != RTC_ERROR_NONE)
+  if (Exit_RTC_InitMode() != RTC_ERROR_NONE)   
   {
     /* Initialization Error */
     LED_Blinking(LED_BLINK_ERROR);
   }
-
+   
   /*##-8- Enable RTC registers write protection #############################*/
   LL_RTC_EnableWriteProtection(RTC);
 }
@@ -322,7 +322,7 @@ uint32_t Enter_RTC_InitMode(void)
 {
   /* Set Initialization mode */
   LL_RTC_EnableInitMode(RTC);
-
+  
 #if (USE_TIMEOUT == 1)
     Timeout = RTC_TIMEOUT_VALUE;
 #endif /* USE_TIMEOUT */
@@ -338,22 +338,22 @@ uint32_t Enter_RTC_InitMode(void)
       if (Timeout == 0)
       {
       return RTC_ERROR_TIMEOUT;
-      }
+      }  
 #endif /* USE_TIMEOUT */
   }
-
+  
   return RTC_ERROR_NONE;
 }
 
 /**
-  * @brief  Exit Initialization mode
+  * @brief  Exit Initialization mode 
   * @param  None
   * @retval RTC_ERROR_NONE if no error
   */
 uint32_t Exit_RTC_InitMode(void)
 {
   LL_RTC_DisableInitMode(RTC);
-
+  
   /* Wait for synchro */
   /* Note: Needed only if Shadow registers is enabled           */
   /*       LL_RTC_IsShadowRegBypassEnabled function can be used */
@@ -364,7 +364,7 @@ uint32_t Exit_RTC_InitMode(void)
   * @brief  Wait until the RTC Time and Date registers (RTC_TR and RTC_DR) are
   *         synchronized with RTC APB clock.
   * @param  None
-  * @retval RTC_ERROR_NONE if no error (RTC_ERROR_TIMEOUT will occur if RTC is
+  * @retval RTC_ERROR_NONE if no error (RTC_ERROR_TIMEOUT will occur if RTC is 
   *         not synchronized)
   */
 uint32_t WaitForSynchro_RTC(void)
@@ -387,7 +387,7 @@ uint32_t WaitForSynchro_RTC(void)
       if (Timeout == 0)
       {
       return RTC_ERROR_TIMEOUT;
-      }
+      }  
 #endif /* USE_TIMEOUT */
   }
   return RTC_ERROR_NONE;
@@ -402,14 +402,14 @@ void Show_RTC_Calendar(void)
 {
   /* Note: need to convert in decimal value in using __LL_RTC_CONVERT_BCD2BIN helper macro */
   /* Display time Format : hh:mm:ss */
-  sprintf((char*)aShowTime,"%.2d:%.2d:%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC)),
-          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetMinute(RTC)),
+  sprintf((char*)aShowTime,"%.2d:%.2d:%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC)), 
+          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetMinute(RTC)), 
           __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetSecond(RTC)));
   /* Display date Format : mm-dd-yy */
-  sprintf((char*)aShowDate,"%.2d-%.2d-%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)),
-          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)),
+  sprintf((char*)aShowDate,"%.2d-%.2d-%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)), 
+          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)), 
           2000 + __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC)));
-}
+} 
 
 /**
   * @brief  Initialize LED2.
@@ -456,7 +456,7 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }

@@ -87,7 +87,7 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
   /*##-2- Configure the NVIC for TIMx #########################################*/
 
   HAL_NVIC_SetPriority(TIMx_CC_IRQn, 0, 1);
-
+  
   /* Enable the TIMx global Interrupt */
   HAL_NVIC_EnableIRQ(TIMx_CC_IRQn);
 }

@@ -189,11 +189,11 @@ void USARTx_DMA_TX_IRQHandler(void)
 }
 
 /**
-  * @brief  This function handles USARTx interrupt request.
+  * @brief  This function handles USARTx interrupt request.  
   * @param  None
   * @retval None
-  * @Note   This function is redefined in "main.h" and related to DMA
-  *         used for USART data transmission
+  * @Note   This function is redefined in "main.h" and related to DMA  
+  *         used for USART data transmission     
   */
 void USARTx_IRQHandler(void)
 {

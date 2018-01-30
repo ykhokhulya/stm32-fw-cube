@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/mems.c
+  * @file    BSP/Src/mems.c  
   * @author  MCD Application Team
   * @brief   This example code shows how to use MEMS features.
   ******************************************************************************
@@ -86,10 +86,10 @@ static void Gyroscope_DrawBackground(uint8_t state);
 void MEMS_demo(void)
 {
   MEMS_SetHint();
-
+  
   if (BSP_GYRO_Init() != GYRO_OK)
   {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, (uint8_t*)"ERROR", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, (uint8_t*)"MEMS cannot be initialized", CENTER_MODE);
@@ -98,88 +98,88 @@ void MEMS_demo(void)
   {
     Gyroscope_DrawBackground(state);
   }
-
+  
   BSP_GYRO_Reset();
-
+  
   while (1)
-  {
+  {	
     /* Read Gyro Angular data */
     BSP_GYRO_GetXYZ(Buffer);
-
+    
     /* Update autoreload and capture compare registers value */
     Xval = ABS((Buffer[0]));
-    Yval = ABS((Buffer[1]));
-    Zval = ABS((Buffer[2]));
-
+    Yval = ABS((Buffer[1])); 
+    Zval = ABS((Buffer[2])); 
+    
     if((Xval>Yval) && (Xval>Zval))
     {
       if(Buffer[0] > 10000.0f)
-      {
+      { 
         if((state & 1) == 0)
         {
-          Gyroscope_DrawBackground(1);
+          Gyroscope_DrawBackground(1);			
           state |= 1;
           HAL_Delay(1000);
-        }
+        }        
       }
       else if(Buffer[0] < -10000.0f)
-      {
+      { 
         if((state & 2) == 0)
-        {
-          Gyroscope_DrawBackground(2);
+        {          
+          Gyroscope_DrawBackground(2);            
           state |= 2;
           HAL_Delay(1000);
-        }
-      }
+        }           
+      }      
     }
     else if ((Yval>Xval) && (Yval>Zval))
     {
       if(Buffer[1] < -10000.0f)
       {
         if((state & 4) == 0)
-        {
-          Gyroscope_DrawBackground(4);
+        {                     
+          Gyroscope_DrawBackground(4);            
           state |= 4;
           HAL_Delay(1000);
-        }
+        }   
       }
       else if(Buffer[1] > 10000.0f)
       {
         if((state & 8) == 0)
-        {
-          Gyroscope_DrawBackground(8);
+        {          
+          Gyroscope_DrawBackground(8);            
           state |= 8;
           HAL_Delay(1000);
         }
-      }
-    }
+      }     
+    } 
     else if ((Zval>Xval) && (Zval>Yval))
     {
       if(Buffer[2] < -10000.0f)
       {
         if((state & 16) == 0)
-        {
-          Gyroscope_DrawBackground(16);
+        {                     
+          Gyroscope_DrawBackground(16);            
           state |= 16;
           HAL_Delay(1000);
-        }
-      }
+        }   
+      }		 
       else if(Buffer[2] > 10000.0f)
       {
         if((state & 32) == 0)
-        {
-          Gyroscope_DrawBackground(32);
+        {          
+          Gyroscope_DrawBackground(32);            
           state |= 32;
-          HAL_Delay(1000);
+          HAL_Delay(1000);			
         }
-      }
-    }
-    if (state != 0x3F)
+      }  	
+    } 
+    if (state != 0x3F)	
     {
     }
     else if (CheckForUserInput() > 0)
-    {
-      state = 0;
+    { 
+      state = 0;    
       return;
     }
   }
@@ -194,21 +194,21 @@ static void MEMS_SetHint(void)
 {
   /* Clear the LCD */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
   BSP_LCD_DisplayStringAt(0, 0, (uint8_t*)"MEMS", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t*)"This example shows MEMS Features", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t*)"move board around axis", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t*)"to start test", CENTER_MODE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
 }
@@ -224,76 +224,76 @@ static void Gyroscope_DrawBackground (uint8_t Localstate)
   {
   case 0:
     /* Circle for Y Positive Log */
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
     BSP_LCD_FillCircle(CIRCLE_LEFT_X_POS, CIRCLE_LEFT_Y_POS, CIRCLE_RADIUS);
-
+    
     /* Circle for Y Positive Log */
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+    BSP_LCD_SetTextColor(LCD_COLOR_GREEN); 
     BSP_LCD_FillCircle(CIRCLE_RIGHT_X_POS, CIRCLE_RIGHT_Y_POS, CIRCLE_RADIUS);
-
+    
     /* Circle for X Negative Log */
-    BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+    BSP_LCD_SetTextColor(LCD_COLOR_YELLOW); 
     BSP_LCD_FillCircle(CIRCLE_UP_X_POS, CIRCLE_UP_Y_POS, CIRCLE_RADIUS);
-
+    
     /* Circle for X Negative Log */
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+    BSP_LCD_SetTextColor(LCD_COLOR_RED); 
     BSP_LCD_FillCircle(CIRCLE_DOWN_X_POS, CIRCLE_DOWN_Y_POS, CIRCLE_RADIUS);
-
+    
     /* Circle for Z Negative Log */
-    BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
+    BSP_LCD_SetTextColor(LCD_COLOR_ORANGE); 
     BSP_LCD_FillCircle(CIRCLE_CENTRAL_X_POS, CIRCLE_CENTRAL_Y_POS, CIRCLE_RADIUS);
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    BSP_LCD_FillCircle(CIRCLE_LEFT_X_POS, CIRCLE_LEFT_Y_POS, CIRCLE_RADIUS - 2);
-    BSP_LCD_FillCircle(CIRCLE_RIGHT_X_POS, CIRCLE_RIGHT_Y_POS,  CIRCLE_RADIUS - 2);
+    BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
+    BSP_LCD_FillCircle(CIRCLE_LEFT_X_POS, CIRCLE_LEFT_Y_POS, CIRCLE_RADIUS - 2);        
+    BSP_LCD_FillCircle(CIRCLE_RIGHT_X_POS, CIRCLE_RIGHT_Y_POS,  CIRCLE_RADIUS - 2); 
     BSP_LCD_FillCircle(CIRCLE_UP_X_POS, CIRCLE_UP_Y_POS, CIRCLE_RADIUS - 2);
     BSP_LCD_FillCircle(CIRCLE_DOWN_X_POS, CIRCLE_DOWN_Y_POS, CIRCLE_RADIUS - 2);
     BSP_LCD_FillCircle(CIRCLE_CENTRAL_X_POS, CIRCLE_CENTRAL_Y_POS, CIRCLE_RADIUS - 2);
     break;
-
+    
     /* X positive Log */
   case 1:
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+    BSP_LCD_SetTextColor(LCD_COLOR_RED); 
     BSP_LCD_FillCircle(CIRCLE_DOWN_X_POS, CIRCLE_DOWN_Y_POS, CIRCLE_RADIUS);
     BSP_LCD_SetFont(&Font24);
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     BSP_LCD_SetBackColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(CIRCLE_DOWN_X_POS-(CIRCLE_RADIUS/2), CIRCLE_DOWN_Y_POS-(CIRCLE_RADIUS/2), (uint8_t*)"X+",LEFT_MODE);
     break;
-
+    
     /* X Negative Log */
   case 2:
-    BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+    BSP_LCD_SetTextColor(LCD_COLOR_YELLOW); 
     BSP_LCD_FillCircle(CIRCLE_UP_X_POS, CIRCLE_UP_Y_POS, CIRCLE_RADIUS);
     BSP_LCD_SetFont(&Font24);
     BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
     BSP_LCD_SetBackColor(LCD_COLOR_YELLOW);
     BSP_LCD_DisplayStringAt(CIRCLE_UP_X_POS-(CIRCLE_RADIUS/2), CIRCLE_UP_Y_POS-(CIRCLE_RADIUS/2), (uint8_t*)"X-", LEFT_MODE);
     break;
-
+    
     /* Y Negative Log */
   case 4:
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
     BSP_LCD_FillCircle(CIRCLE_LEFT_X_POS, CIRCLE_LEFT_Y_POS, CIRCLE_RADIUS);
     BSP_LCD_SetFont(&Font24);
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAt(CIRCLE_LEFT_X_POS-(CIRCLE_RADIUS/2), CIRCLE_LEFT_Y_POS-(CIRCLE_RADIUS/2), (uint8_t*)"Y-", LEFT_MODE);
     break;
-
+    
     /* Y Positive Log */
   case 8:
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+    BSP_LCD_SetTextColor(LCD_COLOR_GREEN); 
     BSP_LCD_FillCircle(CIRCLE_RIGHT_X_POS, CIRCLE_RIGHT_Y_POS, CIRCLE_RADIUS);
     BSP_LCD_SetFont(&Font24);
     BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
     BSP_LCD_SetBackColor(LCD_COLOR_GREEN);
     BSP_LCD_DisplayStringAt(CIRCLE_RIGHT_X_POS-(CIRCLE_RADIUS/2), CIRCLE_RIGHT_Y_POS-(CIRCLE_RADIUS/2), (uint8_t*)"Y+", LEFT_MODE);
     break;
-
+    
     /* Z Negative Log */
-  case 16:
+  case 16:	 
     if((state & 32) == 0)
-    {
+    {    
       BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
       BSP_LCD_FillCircle(CIRCLE_CENTRAL_X_POS, CIRCLE_CENTRAL_Y_POS, CIRCLE_RADIUS);
     }
@@ -302,14 +302,14 @@ static void Gyroscope_DrawBackground (uint8_t Localstate)
     BSP_LCD_SetBackColor(LCD_COLOR_ORANGE);
     BSP_LCD_DisplayStringAt(CIRCLE_CENTRAL_X_POS-(CIRCLE_RADIUS/2), CIRCLE_CENTRAL_Y_POS-(CIRCLE_RADIUS/2), (uint8_t*)"Z-", LEFT_MODE);
     break;
-
+    
     /* Z Positive Log */
   case 32:
     if((state & 16) == 0)
-    {
-      BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
+    {	 
+      BSP_LCD_SetTextColor(LCD_COLOR_ORANGE); 
       BSP_LCD_FillCircle(CIRCLE_CENTRAL_X_POS, CIRCLE_CENTRAL_Y_POS, CIRCLE_RADIUS);
-    }
+    }		
     BSP_LCD_SetFont(&Font16);
     BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
     BSP_LCD_SetBackColor(LCD_COLOR_ORANGE);
@@ -320,7 +320,7 @@ static void Gyroscope_DrawBackground (uint8_t Localstate)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

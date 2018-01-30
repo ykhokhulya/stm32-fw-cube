@@ -69,6 +69,6 @@
 			<type>1</type>
 			<location>PARENT-1-PROJECT_LOC/startup_stm32f446xx.s</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

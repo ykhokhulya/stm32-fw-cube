@@ -135,7 +135,7 @@ void LED_Blinking_5s(void)
   /* Toggle IO in during 5s (25*200ms) */
   for(i = 0; i < 25; i++)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(200);
   }
 }
@@ -159,8 +159,8 @@ void Configure_PWR(void)
   */
 void EnterSTOP_MAINREGUMode(void)
 {
-  LL_GPIO_InitTypeDef gpio_initstruct = {LL_GPIO_PIN_ALL, LL_GPIO_MODE_ANALOG,
-                                         LL_GPIO_SPEED_FREQ_HIGH, LL_GPIO_OUTPUT_PUSHPULL,
+  LL_GPIO_InitTypeDef gpio_initstruct = {LL_GPIO_PIN_ALL, LL_GPIO_MODE_ANALOG, 
+                                         LL_GPIO_SPEED_FREQ_HIGH, LL_GPIO_OUTPUT_PUSHPULL, 
                                          LL_GPIO_PULL_NO, LL_GPIO_AF_0};
 
   /* Set all GPIO in analog state to reduce power consumption,                */
@@ -197,7 +197,7 @@ void EnterSTOP_MAINREGUMode(void)
   LL_PWR_SetPowerMode(LL_PWR_MODE_STOP_MAINREGU);
 
   /* Set SLEEPDEEP bit of Cortex System Control Register */
-  LL_LPM_EnableDeepSleep();
+  LL_LPM_EnableDeepSleep();  
 
   /* Request Wait For Interrupt */
   __WFI();

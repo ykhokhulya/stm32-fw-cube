@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/RCC/RCC_OutputSystemClockOnMCO/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to how to configure MCO pin to output
+  * @brief   This example describes how to how to configure MCO pin to output 
   *          the system clock through the STM32F4xx RCC LL API.
   ******************************************************************************
   * @attention
@@ -156,21 +156,21 @@ void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
 
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+  
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
+  
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
 }
 
 /**
@@ -240,14 +240,14 @@ void SystemClock_Config(void)
 void UserButton_Callback(void)
 {
   register uint32_t source = 0, prescaler = 0;
-
+  
   /* Get the MCO config to apply */
   source = aMCO_Config[bMCOIndex].Source;
   prescaler = aMCO_Config[bMCOIndex].Prescaler;
-
+  
   /* Toggle LED2 to indicate a button press*/
-  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
-
+  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
+  
   /* Select MCO clock source and prescaler */
   LL_RCC_ConfigMCO(source, prescaler);
 

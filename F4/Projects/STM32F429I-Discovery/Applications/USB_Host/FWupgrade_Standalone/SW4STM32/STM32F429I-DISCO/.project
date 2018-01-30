@@ -165,6 +165,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

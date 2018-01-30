@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -46,7 +46,7 @@
 #include "main.h"
 /* Private defines -----------------------------------------------------------*/
 /* Update SSID and PASSWORD with own Access point settings */
-#define SSID     "MySSID"
+#define SSID     "MySSID" 
 #define PASSWORD "MyPassword"
 
 #define LCD_USE
@@ -58,8 +58,8 @@ uint8_t RxData [500];
 
 uint8_t TxData[] = "STM32 : Hello!\n";
 uint16_t RxLen;
-uint8_t  MAC_Addr[6];
-uint8_t  IP_Addr[4];
+uint8_t  MAC_Addr[6]; 
+uint8_t  IP_Addr[4]; 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 
@@ -77,11 +77,11 @@ int main(void)
   uint16_t Trials = CONNECTION_TRIAL_MAX;
 #if defined (LCD_USE)
   uint8_t modulestr[10] = {0};
-#endif /* LCD_USE */
-
+#endif /* LCD_USE */  
+  
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
+  
   /* Configure the system clock */
   SystemClock_Config();
   /* Configure LED4 */
@@ -90,19 +90,19 @@ int main(void)
   BSP_LCD_InitEx(LCD_ORIENTATION_LANDSCAPE_ROT180);
   BSP_LCD_DisplayOn();
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   BSP_LCD_Clear(LCD_COLOR_WHITE);
   BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), (BSP_LCD_GetYSize() -200));
-
+  
   BSP_LCD_SetFont(&Font12);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
   BSP_LCD_DisplayStringAt(10, 10, (uint8_t *)"ES-WIFI Module in TCP", CENTER_MODE );
-  BSP_LCD_DisplayStringAt(10, 23, (uint8_t *)"Client mode demonstration", CENTER_MODE );
+  BSP_LCD_DisplayStringAt(10, 23, (uint8_t *)"Client mode demonstration", CENTER_MODE );  
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
   BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"TCP Client Instructions:");
   BSP_LCD_DisplayStringAtLine(6, (uint8_t *)"1-Make sure your Phone connected ");
   BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"to the network that you configured");
@@ -112,7 +112,7 @@ int main(void)
   BSP_LCD_DisplayStringAtLine(12,(uint8_t *)"with port(8002).");
   BSP_LCD_DisplayStringAtLine(14,(uint8_t *)"3-Get the Network Name or IP Address");
   BSP_LCD_DisplayStringAtLine(15,(uint8_t *)"of your Android from the step 2.");
-
+  
   HAL_Delay(2000);
 #endif /* LCD_USE */
   /*Initialize  WIFI module */
@@ -121,23 +121,23 @@ int main(void)
 #if defined (LCD_USE)
     BSP_LCD_Clear(LCD_COLOR_WHITE);
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+    
+    BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
     BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), (BSP_LCD_GetYSize() -200));
-
+    
     BSP_LCD_SetFont(&Font12);
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+    BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
     BSP_LCD_DisplayStringAt(10, 10, (uint8_t *)"ES-WIFI Module in TCP", CENTER_MODE );
-    BSP_LCD_DisplayStringAt(10, 23, (uint8_t *)"Client mode demonstration", CENTER_MODE );
-
+    BSP_LCD_DisplayStringAt(10, 23, (uint8_t *)"Client mode demonstration", CENTER_MODE );  
+    
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
     BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"ES-WIFI Module Initialized.");
-#endif /* LCD_USE */
+#endif /* LCD_USE */   
     if(WIFI_GetMAC_Address(MAC_Addr) == WIFI_STATUS_OK)
     {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+#if defined (LCD_USE)    
+      BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
       BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"Es-wifi module MAC Address:");
       sprintf((char*)modulestr,"%X:%X:%X:%X:%X:%X.", MAC_Addr[0],
               MAC_Addr[1],
@@ -145,91 +145,91 @@ int main(void)
               MAC_Addr[3],
               MAC_Addr[4],
               MAC_Addr[5]);
-
+      
       BSP_LCD_DisplayStringAtLine(10, (uint8_t *) modulestr);
-#endif /* LCD_USE */
+#endif /* LCD_USE */       
     }
     else
     {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_RED); 
       BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"ERROR : CANNOT get MAC address");
-#endif /* LCD_USE */
-      BSP_LED_On(LED4);
+#endif /* LCD_USE */  
+      BSP_LED_On(LED4);      
     }
-
+    
     if( WIFI_Connect(SSID, PASSWORD, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK)
     {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
       BSP_LCD_DisplayStringAtLine(11, (uint8_t *)"Es-wifi module connected");
-#endif /* LCD_USE */
+#endif /* LCD_USE */       
       if(WIFI_GetIP_Address(IP_Addr) == WIFI_STATUS_OK)
       {
-#if defined (LCD_USE)
+#if defined (LCD_USE)        
         BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"es-wifi module got IP Address :");
         sprintf((char*)modulestr,"%d.%d.%d.%d",  IP_Addr[0],
                 IP_Addr[1],
                 IP_Addr[2],
-                IP_Addr[3]);
-
+                IP_Addr[3]); 
+        
         BSP_LCD_DisplayStringAtLine(13, (uint8_t *) modulestr);
-
+        
         BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"Trying to connect to Server:");
         sprintf((char*)modulestr,"%d.%d.%d.%d:8002",  RemoteIP[0],
                 RemoteIP[1],
                 RemoteIP[2],
-                RemoteIP[3]);
-
+                RemoteIP[3]); 
+        
         BSP_LCD_DisplayStringAtLine(15, (uint8_t *) modulestr);
-
-#endif /* LCD_USE */
+        
+#endif /* LCD_USE */  
         while (Trials--)
-        {
-          if( WIFI_OpenClientConnection(0, WIFI_TCP_PROTOCOL, "TCP_CLIENT", (char *)RemoteIP, 8002, 0) == WIFI_STATUS_OK)
+        { 
+          if( WIFI_OpenClientConnection(0, WIFI_TCP_PROTOCOL, "TCP_CLIENT", (char *)RemoteIP, 8002, 0) == WIFI_STATUS_OK) 
           {
-#if defined (LCD_USE)
+#if defined (LCD_USE) 
             BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"TCP Connection opened successfully.");
-#endif /* LCD_USE */
+#endif /* LCD_USE */  
             Socket = 0;
           }
         }
         if(!Trials)
         {
-#if defined (LCD_USE)
-          BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+          BSP_LCD_SetTextColor(LCD_COLOR_RED); 
           BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"ERROR : Cannot open Connection");
 #endif /* LCD_USE */
-          BSP_LED_On(LED4);
+          BSP_LED_On(LED4);    
         }
       }
       else
       {
-#if defined (LCD_USE)
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+        BSP_LCD_SetTextColor(LCD_COLOR_RED); 
         BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"ERROR: es-wifi module CANNOT get IP address");
 #endif /* LCD_USE */
-        BSP_LED_On(LED4);
+        BSP_LED_On(LED4);      
       }
     }
     else
     {
-#if defined (LCD_USE)
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+      BSP_LCD_SetTextColor(LCD_COLOR_RED); 
       BSP_LCD_DisplayStringAtLine(11, (uint8_t *)"ERROR:es-wifi module NOT connected\n");
-#endif /* LCD_USE */
+#endif /* LCD_USE */ 
       BSP_LED_On(LED4);
     }
   }
   else
   {
-#if defined (LCD_USE)
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+    BSP_LCD_SetTextColor(LCD_COLOR_RED); 
     BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"ERROR : WIFI Module cannot be initialized.\n");
 #endif /* LCD_USE */
     BSP_LED_On(LED4);
   }
-
+  
   while(1)
   {
     if(Socket != -1)
@@ -240,19 +240,19 @@ int main(void)
         {
           if(WIFI_SendData(Socket, TxData, sizeof(TxData), &Datalen) != WIFI_STATUS_OK)
           {
-#if defined (LCD_USE)
-            BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+            BSP_LCD_SetTextColor(LCD_COLOR_RED); 
             BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"ERROR : Failed to send Data.");
-#endif /* LCD_USE */
-          }
+#endif /* LCD_USE */ 
+          } 
         }
       }
       else
       {
-#if defined (LCD_USE)
-            BSP_LCD_SetTextColor(LCD_COLOR_RED);
+#if defined (LCD_USE)  
+            BSP_LCD_SetTextColor(LCD_COLOR_RED); 
             BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"ERROR : Failed to Receive Data.");
-#endif /* LCD_USE */
+#endif /* LCD_USE */  
       }
     }
   }
@@ -283,14 +283,14 @@ static void SystemClock_Config(void)
 {
    RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
-
+  
   HAL_StatusTypeDef ret = HAL_OK;
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -305,13 +305,13 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   if(ret != HAL_OK)
   {
     while(1);
   }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;

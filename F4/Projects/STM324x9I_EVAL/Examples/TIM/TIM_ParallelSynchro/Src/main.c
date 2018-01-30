@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_ParallelSynchro/Src/main.c
+  * @file    TIM/TIM_ParallelSynchro/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example shows how to command 2 Timers as slaves (TIM3 & TIM4)
   *          using a Timer as master (TIM2)
@@ -43,7 +43,7 @@
 
 /** @addtogroup TIM_ParallelSynchro
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -93,28 +93,28 @@ int main(void)
 
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /* Timers Configuration */
   /* ---------------------------------------------------------------------------
      Timers synchronisation in parallel mode
      1/TIM2 is configured as Master Timer:
          - PWM Mode is used
-         - The TIM2 Update event is used as Trigger Output
+         - The TIM2 Update event is used as Trigger Output  
      2/TIM3 and TIM4 are slaves for TIM2,
          - PWM Mode is used
          - The ITR1(TIM2) is used as input trigger for both slaves
          - Gated mode is used, so starts and stops of slaves counters
            are controlled by the Master trigger output signal(update event).
-
-    TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1),
-    since APB1 prescaler is different from 1.
-      TIM2CLK = 2 * PCLK1
-      PCLK1 = HCLK / 4
+  
+    TIM2 input clock (TIM2CLK) is set to 2 * APB1 clock (PCLK1), 
+    since APB1 prescaler is different from 1.   
+      TIM2CLK = 2 * PCLK1  
+      PCLK1 = HCLK / 4 
       => TIM2CLK = HCLK / 2 = SystemCoreClock /2
-
-    To get Master Timer TIM2 output clock at 351.562 KHz running at  and the
+     
+    To get Master Timer TIM2 output clock at 351.562 KHz running at  and the 
     duty cycle is equal to 25% :
-
+    
     The period (TIM2_ARR) is computed as follows:
     ARR = (TIM2 counter clock / TIM2 output clock) - 1
         = 255
@@ -122,30 +122,30 @@ int main(void)
     The dutu cycle (TIM2_CCR1) is computed as follows:
     CCR1 = ((TIM2_ARR + 1) * 25)/100
          = 64
-
+     
     The TIM3 is running:
     - At (TIM2 frequency)/ (TIM3 period + 1) = 35.156 KHz and a duty cycle
       equal to TIM3_CCR1/(TIM3_ARR + 1) = 30%
-
+     
     The TIM4 is running:
     - At (TIM2 frequency)/ (TIM4 period + 1) = 70.312 KHz and a duty cycle
       equal to TIM4_CCR1/(TIM4_ARR + 1) = 60%
-
-    Note:
+      
+    Note: 
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
-     Each time the core clock (HCLK) changes, user had to update SystemCoreClock
+     Each time the core clock (HCLK) changes, user had to update SystemCoreClock 
      variable value. Otherwise, any configuration based on this variable will be incorrect.
      This variable is updated in three ways:
       1) by calling CMSIS function SystemCoreClockUpdate()
       2) by calling HAL API function HAL_RCC_GetSysClockFreq()
       3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency
   ----------------------------------------------------------------------------*/
-
+ 
   /* Set Timers instance */
   TimMasterHandle.Instance = TIM2;
   TimSlave1Handle.Instance = TIM3;
   TimSlave2Handle.Instance = TIM4;
-
+ 
   /*====================== Master configuration : TIM2 =======================*/
   /* Initialize TIM2 peripheral in PWM mode*/
   TimMasterHandle.Init.Period            = 255;
@@ -157,12 +157,12 @@ int main(void)
   {
     /* Initialization Error */
     Error_Handler();
-  }
-
+  }  
+  
   /* Configure the PWM_channel_1  */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sOCConfig.Pulse = 64;
+  sOCConfig.Pulse = 64;  
   if(HAL_TIM_PWM_ConfigChannel(&TimMasterHandle, &sOCConfig, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Configuration Error */
@@ -176,11 +176,11 @@ int main(void)
   {
     /* Configuration Error */
     Error_Handler();
-  }
-
+  }     
+  
   /*================== End of Master configuration : TIM2 ====================*/
 
-
+  
   /*====================== Slave1 configuration : TIM3 =======================*/
   /* Initialize TIM3 peripheral in PWM mode */
   TimSlave1Handle.Init.Period            = 9;
@@ -193,7 +193,7 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure the PWM_channel_1 */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -202,7 +202,7 @@ int main(void)
   {
     /* Configuration Error */
     Error_Handler();
-  }
+  }  
 
   /* Configure TIM3 in Gated slave mode &
   use the Internal Trigger 0 (ITR0) as trigger source */
@@ -215,8 +215,8 @@ int main(void)
   }
 
   /*================== End of Slave1 configuration : TIM3 ====================*/
-
-
+  
+  
   /*====================== Slave2 configuration : TIM4 =======================*/
   /* Initialize TIM4 peripheral in PWM mode*/
   TimSlave2Handle.Init.Period            = 4;
@@ -229,7 +229,7 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure the PWM_channel_1  */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -239,7 +239,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure TIM3 in Gated slave mode &
   use the Internal Trigger 0 (ITR0) as trigger source */
   sSlaveConfig.SlaveMode     = TIM_SLAVEMODE_GATED;
@@ -249,17 +249,17 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /*================== End of Slave2 configuration : TIM4 ====================*/
-
-
+   
+  
   /* Start Master PWM generation */
   if(HAL_TIM_PWM_Start(&TimMasterHandle, TIM_CHANNEL_1) != HAL_OK)
   {
     /* PWM generation Error */
     Error_Handler();
   }
-
+  
   /* Start Slave1 PWM generation */
   if(HAL_TIM_PWM_Start(&TimSlave1Handle, TIM_CHANNEL_1) != HAL_OK)
   {
@@ -272,7 +272,7 @@ int main(void)
     /* PWM generation Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -295,7 +295,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -321,8 +321,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -336,17 +336,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -359,7 +359,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

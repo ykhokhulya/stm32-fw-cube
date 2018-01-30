@@ -32,11 +32,11 @@ Certificate:
                     b2:27
                 Exponent: 65537 (0x10001)
         X509v3 extensions:
-            X509v3 Basic Constraints:
+            X509v3 Basic Constraints: 
                 CA:FALSE
-            X509v3 Subject Key Identifier:
+            X509v3 Subject Key Identifier: 
                 B7:51:D4:E5:20:D5:45:54:F4:C5:51:1B:E0:82:B5:61:05:AF:9B:B6
-            X509v3 Authority Key Identifier:
+            X509v3 Authority Key Identifier: 
                 keyid:CF:22:31:27:91:D8:C2:54:FF:1E:DA:D9:EE:8A:C5:89:32:AD:0C:21
 
     Signature Algorithm: md2WithRSAEncryption

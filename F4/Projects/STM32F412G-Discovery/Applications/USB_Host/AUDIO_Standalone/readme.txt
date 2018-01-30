@@ -1,9 +1,9 @@
 /**
   @page AUDIO_Standalone USB Host AUDIO application
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    USB_Host/AUDIO_Standalone/readme.txt
+  * @file    USB_Host/AUDIO_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Host AUDIO application.
   ******************************************************************************
@@ -35,28 +35,27 @@
   *
   ******************************************************************************
    @endverbatim
-
+  
 @par Application Description
 
-This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
-USB host application based on the Audio OUT class on the STM32F4xx devices.
+This application shows how to use the USB host application based on the Audio OUT class on the STM32F4xx devices.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
 initialize the Flash interface and the systick. The user is provided with the SystemClock_Config()
 function to configure the system clock (SYSCLK) to run at 100 MHz. The Full Speed (FS) USB module uses
 internally a 48-MHz clock which is coming from a specific output PLL I2S.
 
-When the application is started, the connected USB headset device is detected in AUDIO mode and gets
-initialized. The STM32 MCU behaves as a AUDIO Host, it enumerates the device and extracts VID, PID,
-manufacturer name, Serial no and product name information and displays it on the LCD screen.
+When the application is started, the connected USB headset device is detected in AUDIO mode and gets 
+initialized. The STM32 MCU behaves as a AUDIO Host, it enumerates the device and extracts VID, PID, 
+manufacturer name, Serial no and product name information and displays it on the LCD screen. 
 
 A menu is displayed and the user can select any operation from the menu using the Joystick buttons:
  - "Explore audio file" operation searches for all .Wav files in the uSD and displays it on the LCD screen.
- - "Start audio Player" operation starts playing the song from the uSD. The files are read using the
+ - "Start audio Player" operation starts playing the song from the uSD. The files are read using the 
    FatFs file system then USBH_AUDIO_ChangeOutBuffer() function is called while playing songs and the
-   bytes are stored in a circular buffer. Sampling frequency, Channels number and File size (duration)
-   are detected. The audio.c file contains a set of APIs for Audio Out playback, for example when the
-   WAV file is playing, USBH_AUDIO_SetVolume() is called to change the volume setting. This application does not
+   bytes are stored in a circular buffer. Sampling frequency, Channels number and File size (duration) 
+   are detected. The audio.c file contains a set of APIs for Audio Out playback, for example when the 
+   WAV file is playing, USBH_AUDIO_SetVolume() is called to change the volume setting. This application does not 
    support compressed WAV formats.
  - "Re-Enumerate" operation performs a new Enumeration of the device.
 
@@ -65,11 +64,11 @@ A menu is displayed and the user can select any operation from the menu using th
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-For more details about the STM32Cube USB Host library, please refer to UM1720
+For more details about the STM32Cube USB Host library, please refer to UM1720  
 "STM32Cube USB Host library".
 
 
@@ -104,18 +103,18 @@ requirements, such as:
   - USB_Host/AUDIO_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/AUDIO_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/AUDIO_Standalone/Inc/ffconf.h                FAT file system module configuration file
-
+ 
 
 @par Hardware and Software environment
 
   - This application runs on STM32F412xx devices.
-
+    
   - This application has been tested with STMicroelectronics STM32F412G-Discovery Rev.C
-    boards and can be easily tailored to any other supported device
+    boards and can be easily tailored to any other supported device 
     and development board.
 
   - STM32F412G-Discovery Set-up
-    - Connect the STM32F412G-Discovery board to the PC through 'USB micro A-Male
+    - Connect the STM32F412G-Discovery board to the PC through 'USB micro A-Male 
       to A-Male' cable to the connector
     - Connect a uSD Card to the MSD connector (CN13)
     - Plug the USB headset for sound playback into the STM32F412G-Discovery board through
@@ -126,10 +125,10 @@ requirements, such as:
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the application
-
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-
+ 

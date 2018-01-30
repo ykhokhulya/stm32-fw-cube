@@ -172,7 +172,7 @@ uint8_t BSP_LCD_Init(void)
 }
 
 /**
-  * @brief  Initializes the DSI LCD.
+  * @brief  Initializes the DSI LCD. 
   * The ititialization is done as below:
   *     - DSI PLL ititialization
   *     - DSI ititialization
@@ -196,12 +196,12 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   uint32_t                   HBP; /*!< Horizontal Back Porch time in units of lcdClk */
   uint32_t                   HFP; /*!< Horizontal Front Porch time in units of lcdClk */
   uint32_t                   HACT; /*!< Horizontal Active time in units of lcdClk = imageSize X in pixels to display */
-
-
+  
+  
   /* Toggle Hardware Reset of the DSI LCD using
   * its XRES signal (active low) */
   BSP_LCD_Reset();
-
+  
   /* Call first MSP Initialize only in case of first initialization
   * This will set IP blocks LTDC, DSI and DMA2D
   * - out of reset
@@ -209,25 +209,25 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   * - NVIC IRQ related to IP blocks enabled
   */
   BSP_LCD_MspInit();
-
-/*************************DSI Initialization***********************************/
-
+  
+/*************************DSI Initialization***********************************/  
+  
   /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
   hdsi_eval.Instance = DSI;
-
+  
   HAL_DSI_DeInit(&(hdsi_eval));
-
+  
   dsiPllInit.PLLNDIV  = 100;
   dsiPllInit.PLLIDF   = DSI_PLL_IN_DIV5;
   dsiPllInit.PLLODF  = DSI_PLL_OUT_DIV1;
   laneByteClk_kHz = 62500; /* 500 MHz / 8 = 62.5 MHz = 62500 kHz */
-
+  
   /* Set number of Lanes */
   hdsi_eval.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
-
+  
   /* TXEscapeCkdiv = f(LaneByteClk)/15.62 = 4 */
-  hdsi_eval.Init.TXEscapeCkdiv = laneByteClk_kHz/15620;
-
+  hdsi_eval.Init.TXEscapeCkdiv = laneByteClk_kHz/15620; 
+  
   HAL_DSI_Init(&(hdsi_eval), &(dsiPllInit));
 
   /* Timing parameters for all Video modes
@@ -236,35 +236,35 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   if(orientation == LCD_ORIENTATION_PORTRAIT)
   {
     lcd_x_size = OTM8009A_480X800_WIDTH;  /* 480 */
-    lcd_y_size = OTM8009A_480X800_HEIGHT; /* 800 */
+    lcd_y_size = OTM8009A_480X800_HEIGHT; /* 800 */                                
   }
   else
   {
     /* lcd_orientation == LCD_ORIENTATION_LANDSCAPE */
     lcd_x_size = OTM8009A_800X480_WIDTH;  /* 800 */
-    lcd_y_size = OTM8009A_800X480_HEIGHT; /* 480 */
+    lcd_y_size = OTM8009A_800X480_HEIGHT; /* 480 */                                
   }
-
+  
   HACT = lcd_x_size;
   VACT = lcd_y_size;
-
+  
   /* The following values are same for portrait and landscape orientations */
   VSA  = OTM8009A_480X800_VSYNC;        /* 12  */
   VBP  = OTM8009A_480X800_VBP;          /* 12  */
   VFP  = OTM8009A_480X800_VFP;          /* 12  */
   HSA  = OTM8009A_480X800_HSYNC;        /* 63  */
   HBP  = OTM8009A_480X800_HBP;          /* 120 */
-  HFP  = OTM8009A_480X800_HFP;          /* 120 */
+  HFP  = OTM8009A_480X800_HFP;          /* 120 */  
 
   hdsivideo_handle.VirtualChannelID = LCD_OTM8009A_ID;
   hdsivideo_handle.ColorCoding = LCD_DSI_PIXEL_DATA_FMT_RBG888;
   hdsivideo_handle.VSPolarity = DSI_VSYNC_ACTIVE_HIGH;
   hdsivideo_handle.HSPolarity = DSI_HSYNC_ACTIVE_HIGH;
-  hdsivideo_handle.DEPolarity = DSI_DATA_ENABLE_ACTIVE_HIGH;
+  hdsivideo_handle.DEPolarity = DSI_DATA_ENABLE_ACTIVE_HIGH;  
   hdsivideo_handle.Mode = DSI_VID_MODE_BURST; /* Mode Video burst ie : one LgP per line */
   hdsivideo_handle.NullPacketSize = 0xFFF;
   hdsivideo_handle.NumberOfChunks = 0;
-  hdsivideo_handle.PacketSize                = HACT; /* Value depending on display orientation choice portrait/landscape */
+  hdsivideo_handle.PacketSize                = HACT; /* Value depending on display orientation choice portrait/landscape */ 
   hdsivideo_handle.HorizontalSyncActive      = (HSA * laneByteClk_kHz) / LcdClock;
   hdsivideo_handle.HorizontalBackPorch       = (HBP * laneByteClk_kHz) / LcdClock;
   hdsivideo_handle.HorizontalLine            = ((HACT + HSA + HBP + HFP) * laneByteClk_kHz) / LcdClock; /* Value depending on display orientation choice portrait/landscape */
@@ -272,19 +272,19 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   hdsivideo_handle.VerticalBackPorch         = VBP;
   hdsivideo_handle.VerticalFrontPorch        = VFP;
   hdsivideo_handle.VerticalActive            = VACT; /* Value depending on display orientation choice portrait/landscape */
-
+  
   /* Enable or disable sending LP command while streaming is active in video mode */
   hdsivideo_handle.LPCommandEnable = DSI_LP_COMMAND_ENABLE; /* Enable sending commands in mode LP (Low Power) */
-
+  
   /* Largest packet size possible to transmit in LP mode in VSA, VBP, VFP regions */
   /* Only useful when sending LP packets is allowed while streaming is active in video mode */
   hdsivideo_handle.LPLargestPacketSize = 16;
-
+  
   /* Largest packet size possible to transmit in LP mode in HFP region during VACT period */
   /* Only useful when sending LP packets is allowed while streaming is active in video mode */
   hdsivideo_handle.LPVACTLargestPacketSize = 0;
-
-
+  
+  
   /* Specify for each region of the video frame, if the transmission of command in LP mode is allowed in this region */
   /* while streaming is active in video mode                                                                         */
   hdsivideo_handle.LPHorizontalFrontPorchEnable = DSI_LP_HFP_ENABLE;   /* Allow sending LP commands during HFP period */
@@ -293,7 +293,7 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   hdsivideo_handle.LPVerticalFrontPorchEnable = DSI_LP_VFP_ENABLE;   /* Allow sending LP commands during VFP period */
   hdsivideo_handle.LPVerticalBackPorchEnable = DSI_LP_VBP_ENABLE;   /* Allow sending LP commands during VBP period */
   hdsivideo_handle.LPVerticalSyncActiveEnable = DSI_LP_VSYNC_ENABLE; /* Allow sending LP commands during VSync = VSA period */
-
+  
   /* Configure DSI Video mode timings with settings set above */
   HAL_DSI_ConfigVideoMode(&(hdsi_eval), &(hdsivideo_handle));
 
@@ -305,24 +305,24 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   PhyTimings.DataLaneMaxReadTime = 0;
   PhyTimings.StopWaitTime = 10;
   HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
+  
 
-
-/*************************End DSI Initialization*******************************/
-
-
-/************************LTDC Initialization***********************************/
-
-  /* Timing Configuration */
+/*************************End DSI Initialization*******************************/ 
+  
+  
+/************************LTDC Initialization***********************************/  
+  
+  /* Timing Configuration */    
   hltdc_eval.Init.HorizontalSync = (HSA - 1);
   hltdc_eval.Init.AccumulatedHBP = (HSA + HBP - 1);
   hltdc_eval.Init.AccumulatedActiveW = (lcd_x_size + HSA + HBP - 1);
   hltdc_eval.Init.TotalWidth = (lcd_x_size + HSA + HBP + HFP - 1);
-
+  
   /* Initialize the LCD pixel width and pixel height */
   hltdc_eval.LayerCfg->ImageWidth  = lcd_x_size;
-  hltdc_eval.LayerCfg->ImageHeight = lcd_y_size;
-
-
+  hltdc_eval.LayerCfg->ImageHeight = lcd_y_size;   
+  
+  
   /* LCD clock configuration */
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 384 Mhz */
@@ -333,46 +333,46 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 7;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-
+  
   /* Background value */
   hltdc_eval.Init.Backcolor.Blue = 0;
   hltdc_eval.Init.Backcolor.Green = 0;
   hltdc_eval.Init.Backcolor.Red = 0;
   hltdc_eval.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
   hltdc_eval.Instance = LTDC;
-
+  
   /* Get LTDC Configuration from DSI Configuration */
   HAL_LTDC_StructInitFromVideoConfig(&(hltdc_eval), &(hdsivideo_handle));
-
-  /* Initialize the LTDC */
+  
+  /* Initialize the LTDC */  
   HAL_LTDC_Init(&hltdc_eval);
 
   /* Enable the DSI host and wrapper after the LTDC initialization
      To avoid any synchronization issue, the DSI shall be started after enabling the LTDC */
 
   HAL_DSI_Start(&(hdsi_eval));
-
+  
 #if !defined(DATA_IN_ExtSDRAM)
   /* Initialize the SDRAM */
   BSP_SDRAM_Init();
 #endif /* DATA_IN_ExtSDRAM */
-
+  
   /* Initialize the font */
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-
+  
 /************************End LTDC Initialization*******************************/
-
-
-/***********************OTM8009A Initialization********************************/
-
+  
+  
+/***********************OTM8009A Initialization********************************/  
+  
   /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver)
   *  depending on configuration set in 'hdsivideo_handle'.
   */
   OTM8009A_Init(OTM8009A_FORMAT_RGB888, orientation);
-
-/***********************End OTM8009A Initialization****************************/
-
-  return LCD_OK;
+  
+/***********************End OTM8009A Initialization****************************/ 
+  
+  return LCD_OK; 
 }
 
 /**
@@ -404,11 +404,11 @@ void BSP_LCD_Reset(void)
 
     /* Desactivate XRES */
     HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, GPIO_PIN_SET);
-
+    
     /* Wait for 10ms after releasing XRES before sending commands */
-    HAL_Delay(10);
+    HAL_Delay(10);    
 #else
-
+  
 #endif /* USE_STM32469I_EVAL_REVA == 0 */
 }
 
@@ -462,7 +462,7 @@ void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
   Layercfg.WindowX0 = 0;
   Layercfg.WindowX1 = BSP_LCD_GetXSize();
   Layercfg.WindowY0 = 0;
-  Layercfg.WindowY1 = BSP_LCD_GetYSize();
+  Layercfg.WindowY1 = BSP_LCD_GetYSize(); 
   Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
   Layercfg.FBStartAdress = FB_Address;
   Layercfg.Alpha = 255;
@@ -474,9 +474,9 @@ void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
   Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   Layercfg.ImageWidth = BSP_LCD_GetXSize();
   Layercfg.ImageHeight = BSP_LCD_GetYSize();
-
-  HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex);
-
+  
+  HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex); 
+  
   DrawProp[LayerIndex].BackColor = LCD_COLOR_WHITE;
   DrawProp[LayerIndex].pFont     = &Font24;
   DrawProp[LayerIndex].TextColor = LCD_COLOR_BLACK;
@@ -511,7 +511,7 @@ void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State)
     __HAL_LTDC_LAYER_DISABLE(&(hltdc_eval), LayerIndex);
   }
   __HAL_LTDC_RELOAD_CONFIG(&(hltdc_eval));
-
+  
 }
 
 /**
@@ -522,9 +522,9 @@ void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State)
   */
 void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
 {
-
+  
   HAL_LTDC_SetAlpha(&(hltdc_eval), Transparency, LayerIndex);
-
+  
 }
 
 /**
@@ -534,9 +534,9 @@ void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
   */
 void BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address)
 {
-
+  
   HAL_LTDC_SetAddress(&(hltdc_eval), Address, LayerIndex);
-
+  
 }
 
 /**
@@ -551,10 +551,10 @@ void BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, u
 {
   /* Reconfigure the layer size */
   HAL_LTDC_SetWindowSize(&(hltdc_eval), Width, Height, LayerIndex);
-
+  
   /* Reconfigure the layer position */
   HAL_LTDC_SetWindowPosition(&(hltdc_eval), Xpos, Ypos, LayerIndex);
-
+  
 }
 
 /**
@@ -1252,7 +1252,7 @@ void BSP_LCD_DisplayOn(void)
                      DSI_DCS_SHORT_PKT_WRITE_P1,
                      OTM8009A_CMD_DISPON,
                      0x00);
-
+  
 }
 
 /**
@@ -1267,7 +1267,7 @@ void BSP_LCD_DisplayOff(void)
                      DSI_DCS_SHORT_PKT_WRITE_P1,
                      OTM8009A_CMD_DISPOFF,
                      0x00);
-
+  
 }
 
 /**
@@ -1281,12 +1281,12 @@ void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams)
 {
   if(NbrParams <= 1)
   {
-   HAL_DSI_ShortWrite(&hdsi_eval, LCD_OTM8009A_ID, DSI_DCS_SHORT_PKT_WRITE_P1, pParams[0], pParams[1]);
+   HAL_DSI_ShortWrite(&hdsi_eval, LCD_OTM8009A_ID, DSI_DCS_SHORT_PKT_WRITE_P1, pParams[0], pParams[1]); 
   }
   else
   {
-   HAL_DSI_LongWrite(&hdsi_eval,  LCD_OTM8009A_ID, DSI_DCS_LONG_PKT_WRITE, NbrParams, pParams[NbrParams], pParams);
-  }
+   HAL_DSI_LongWrite(&hdsi_eval,  LCD_OTM8009A_ID, DSI_DCS_LONG_PKT_WRITE, NbrParams, pParams[NbrParams], pParams); 
+  } 
 }
 
 /*******************************************************************************

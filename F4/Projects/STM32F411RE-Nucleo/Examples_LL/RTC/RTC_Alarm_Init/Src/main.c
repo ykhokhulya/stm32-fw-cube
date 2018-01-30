@@ -128,7 +128,7 @@ int main(void)
 void Configure_RTC(void)
 {
   LL_RTC_InitTypeDef rtc_initstruct;
-
+  
   /*##-1- Enables the PWR Clock and Enables access to the backup domain #######*/
   /* To change the source clock of the RTC feature (LSE, LSI), you have to:
      - Enable the power clock
@@ -137,7 +137,7 @@ void Configure_RTC(void)
      - Configure the needed RTC clock source */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
   LL_PWR_EnableBkUpAccess();
-
+  
   /*##-2- Configure LSE/LSI as RTC clock source ###############################*/
 #ifdef RTC_CLOCK_SOURCE_LSE
   /* Enable LSE only if disabled.*/
@@ -152,7 +152,7 @@ void Configure_RTC(void)
     while (LL_RCC_LSE_IsReady() != 1)
     {
 #if (USE_TIMEOUT == 1)
-      if (LL_SYSTICK_IsActiveCounterFlag())
+      if (LL_SYSTICK_IsActiveCounterFlag()) 
       {
         Timeout --;
       }
@@ -160,13 +160,13 @@ void Configure_RTC(void)
       {
         /* LSE activation error */
         LED_Blinking(LED_BLINK_ERROR);
-      }
+      }  
 #endif /* USE_TIMEOUT */
     }
     LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
-
+    
     /*##-3- Enable RTC peripheral Clocks #######################################*/
-    /* Enable RTC Clock */
+    /* Enable RTC Clock */ 
     LL_RCC_EnableRTC();
   }
 #elif defined(RTC_CLOCK_SOURCE_LSI)
@@ -178,7 +178,7 @@ void Configure_RTC(void)
   while (LL_RCC_LSI_IsReady() != 1)
   {
 #if (USE_TIMEOUT == 1)
-    if (LL_SYSTICK_IsActiveCounterFlag())
+    if (LL_SYSTICK_IsActiveCounterFlag()) 
     {
       Timeout --;
     }
@@ -186,7 +186,7 @@ void Configure_RTC(void)
     {
       /* LSI activation error */
       LED_Blinking(LED_BLINK_ERROR);
-    }
+    }  
 #endif /* USE_TIMEOUT */
   }
   LL_RCC_ForceBackupDomainReset();
@@ -194,7 +194,7 @@ void Configure_RTC(void)
   LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSI);
 
   /*##-3- Enable RTC peripheral Clocks #######################################*/
-  /* Enable RTC Clock */
+  /* Enable RTC Clock */ 
   LL_RCC_EnableRTC();
 
 #else
@@ -203,7 +203,7 @@ void Configure_RTC(void)
 
   /*##-4 Configure RTC ######################################################*/
   /* Configure RTC prescaler and RTC data registers */
-  if (LL_RTC_DeInit(RTC) != SUCCESS)
+  if (LL_RTC_DeInit(RTC) != SUCCESS) 
   {
     /* Initialization Error */
     LED_Blinking(LED_BLINK_ERROR);
@@ -218,7 +218,7 @@ void Configure_RTC(void)
   rtc_initstruct.AsynchPrescaler = RTC_ASYNCH_PREDIV;
   rtc_initstruct.SynchPrescaler  = RTC_SYNCH_PREDIV;
 
-  /* Initialize RTC instance according to parameters defined in initialization structure. */
+  /* Initialize RTC instance according to parameters defined in initialization structure. */  
   if (LL_RTC_Init(RTC, &rtc_initstruct) != SUCCESS)
   {
     /* Initialization Error */
@@ -229,9 +229,9 @@ void Configure_RTC(void)
 /**
   * @brief Configure the current time and date and set alarm.
   * Note   __LL_RTC_CONVERT_BIN2BCD helper macro can be used if user wants to
-  *        provide directly the decimal value:
-  *        LL_RTC_DATE_Config(RTC, LL_RTC_WEEKDAY_MONDAY,
-  *                          __LL_RTC_CONVERT_BIN2BCD(31), (...))
+  *        provide directly the decimal value:                               
+  *        LL_RTC_DATE_Config(RTC, LL_RTC_WEEKDAY_MONDAY,                    
+  *                          __LL_RTC_CONVERT_BIN2BCD(31), (...))           
   * @param  None
   * @retval None
   */
@@ -240,7 +240,7 @@ void Configure_RTC_Alarm(void)
   LL_RTC_DateTypeDef rtc_date_initstruct;
   LL_RTC_TimeTypeDef rtc_time_initstruct;
   LL_RTC_AlarmTypeDef rtc_alarm_initstruct;
-
+  
   /*## Configure the Date ################################################*/
   /* Set Date: Friday December 29th 2016 */
   rtc_date_initstruct.WeekDay = LL_RTC_WEEKDAY_FRIDAY;
@@ -248,8 +248,8 @@ void Configure_RTC_Alarm(void)
   rtc_date_initstruct.Month   = LL_RTC_MONTH_DECEMBER;
   rtc_date_initstruct.Year    = 0x16;
 
-  /* Initialize RTC date according to parameters defined in initialization structure. */
-  if (LL_RTC_DATE_Init(RTC, LL_RTC_FORMAT_BCD, &rtc_date_initstruct) != SUCCESS)
+  /* Initialize RTC date according to parameters defined in initialization structure. */  
+  if (LL_RTC_DATE_Init(RTC, LL_RTC_FORMAT_BCD, &rtc_date_initstruct) != SUCCESS)   
   {
     /* Initialization Error */
     LED_Blinking(LED_BLINK_ERROR);
@@ -262,13 +262,13 @@ void Configure_RTC_Alarm(void)
   rtc_time_initstruct.Minutes    = 0x59;
   rtc_time_initstruct.Seconds    = 0x55;
 
-  /* Initialize RTC time according to parameters defined in initialization structure. */
-  if (LL_RTC_TIME_Init(RTC, LL_RTC_FORMAT_BCD, &rtc_time_initstruct) != SUCCESS)
+  /* Initialize RTC time according to parameters defined in initialization structure. */  
+  if (LL_RTC_TIME_Init(RTC, LL_RTC_FORMAT_BCD, &rtc_time_initstruct) != SUCCESS)   
   {
     /* Initialization Error */
     LED_Blinking(LED_BLINK_ERROR);
   }
-
+  
   /*## Configure the RTC Alarm peripheral #################################*/
   /* Set Alarm to 12:00:25 */
   rtc_alarm_initstruct.AlarmTime.TimeFormat = LL_RTC_ALMA_TIME_FORMAT_AM;
@@ -281,8 +281,8 @@ void Configure_RTC_Alarm(void)
   rtc_alarm_initstruct.AlarmDateWeekDaySel  = LL_RTC_ALMA_DATEWEEKDAYSEL_DATE;
   rtc_alarm_initstruct.AlarmDateWeekDay     = 0x01;
 
-  /* Initialize ALARM A according to parameters defined in initialization structure. */
-  if (LL_RTC_ALMA_Init(RTC, LL_RTC_FORMAT_BCD, &rtc_alarm_initstruct) != SUCCESS)
+  /* Initialize ALARM A according to parameters defined in initialization structure. */  
+  if (LL_RTC_ALMA_Init(RTC, LL_RTC_FORMAT_BCD, &rtc_alarm_initstruct) != SUCCESS)   
   {
     /* Initialization Error */
     LED_Blinking(LED_BLINK_ERROR);
@@ -296,7 +296,7 @@ void Configure_RTC_Alarm(void)
 
  /* Clear the Alarm interrupt pending bit */
   LL_RTC_ClearFlag_ALRA(RTC);
-
+  
   /* Enable IT Alarm */
   LL_RTC_EnableIT_ALRA(RTC);
 
@@ -306,7 +306,7 @@ void Configure_RTC_Alarm(void)
    /* RTC Alarm Interrupt Configuration: EXTI configuration */
   LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_17);
   LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_17);
-
+  
   /*## Configure the NVIC for RTC Alarm ##################################*/
   NVIC_SetPriority(RTC_Alarm_IRQn, 0x0F);
   NVIC_EnableIRQ(RTC_Alarm_IRQn);
@@ -321,14 +321,14 @@ void Show_RTC_Calendar(void)
 {
   /* Note: need to convert in decimal value in using __LL_RTC_CONVERT_BCD2BIN helper macro */
   /* Display time Format : hh:mm:ss */
-  sprintf((char*)aShowTime,"%.2d:%.2d:%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC)),
-          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetMinute(RTC)),
+  sprintf((char*)aShowTime,"%.2d:%.2d:%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC)), 
+          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetMinute(RTC)), 
           __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetSecond(RTC)));
   /* Display date Format : mm-dd-yy */
-  sprintf((char*)aShowDate,"%.2d-%.2d-%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)),
-          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)),
+  sprintf((char*)aShowDate,"%.2d-%.2d-%.2d", __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)), 
+          __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)), 
           2000 + __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC)));
-}
+} 
 
 /**
   * @brief  Initialize LED2.
@@ -375,7 +375,7 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }

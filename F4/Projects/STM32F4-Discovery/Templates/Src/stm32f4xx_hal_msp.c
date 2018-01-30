@@ -3,13 +3,13 @@
   * @file    Templates/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
   * @brief   HAL MSP module.
-  *
+  *         
   @verbatim
  ===============================================================================
                      ##### How to use this driver #####
  ===============================================================================
     [..]
-    This file is generated automatically by STM32CubeMX and eventually modified
+    This file is generated automatically by STM32CubeMX and eventually modified 
     by the user
 
   @endverbatim
@@ -41,7 +41,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
@@ -73,19 +73,19 @@
   */
 void HAL_MspInit(void)
 {
-  /* NOTE : This function is generated automatically by STM32CubeMX and eventually
+  /* NOTE : This function is generated automatically by STM32CubeMX and eventually  
             modified by the user
-   */
+   */ 
 }
 
 /**
   * @brief  DeInitializes the Global MSP.
-  * @param  None
+  * @param  None  
   * @retval None
   */
 void HAL_MspDeInit(void)
 {
-  /* NOTE : This function is generated automatically by STM32CubeMX and eventually
+  /* NOTE : This function is generated automatically by STM32CubeMX and eventually  
             modified by the user
    */
 }

@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group__scale.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -131,14 +131,14 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description</h2>
 <p>Multiply a vector by a scalar value. For floating-point data, the algorithm used is:</p>
-<pre>
-    pDst[n] = pSrc[n] * scale,   0 &lt;= n &lt; blockSize.
+<pre>        
+    pDst[n] = pSrc[n] * scale,   0 &lt;= n &lt; blockSize.        
 </pre><p>In the fixed-point Q7, Q15, and Q31 functions, <code>scale</code> is represented by a fractional multiplication <code>scaleFract</code> and an arithmetic shift <code>shift</code>. The shift allows the gain of the scaling operation to exceed 1.0. The algorithm used with fixed-point data is:</p>
-<pre>
-    pDst[n] = (pSrc[n] * scaleFract) &lt;&lt; shift,   0 &lt;= n &lt; blockSize.
+<pre>        
+    pDst[n] = (pSrc[n] * scaleFract) &lt;&lt; shift,   0 &lt;= n &lt; blockSize.        
 </pre><p>The overall scale factor applied to the fixed-point data is </p>
-<pre>
-    scale = scaleFract * 2^shift.
+<pre>        
+    scale = scaleFract * 2^shift.        
 </pre><p>The functions support in-place computation allowing the source and destination pointers to reference the same memory buffer. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ga3487af88b112f682ee90589cd419e123"></a>
@@ -382,7 +382,7 @@ Functions</h2></td></tr>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

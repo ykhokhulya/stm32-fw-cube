@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/LPTIM/LPTIM_PulseCounter/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -174,11 +174,11 @@ void LPTIM1_IRQHandler(void)
   {
     /* Clear the Autoreload match interrupt flag */
     LL_LPTIM_ClearFLAG_ARRM(LPTIM1);
-
+    
     /* LPTIM1 Autoreload match interrupt processing */
     LPTimerAutoreloadMatch_Callback();
   }
-
+  
 }
 /**
   * @}

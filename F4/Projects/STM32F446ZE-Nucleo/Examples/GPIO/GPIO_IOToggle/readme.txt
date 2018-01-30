@@ -1,9 +1,9 @@
 /**
   @page GPIO_IOToggle GPIO IO Toggle example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    GPIO/GPIO_IOToggle/readme.txt
+  * @file    GPIO/GPIO_IOToggle/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the GPIO IO Toggle example.
   ******************************************************************************
@@ -35,7 +35,7 @@
 
 @par Example Description
 
-This example describes how to configure and use GPIOs through the HAL API.
+How to configure and use GPIOs through the HAL API.
 
 PB.00 IO (configured in output pushpull mode) toggle in a forever loop.
 On NUCLEO-446ZE Rev.B board this IO is connected to LED1.
@@ -49,15 +49,15 @@ In this example, HCLK is configured at 180 MHz.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - GPIO/GPIO_IOToggle/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - GPIO/GPIO_IOToggle/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - GPIO/GPIO_IOToggle/Inc/main.h                  Header for main.c module
+  - GPIO/GPIO_IOToggle/Inc/main.h                  Header for main.c module  
   - GPIO/GPIO_IOToggle/Src/stm32f4xx_it.c          Interrupt handlers
   - GPIO/GPIO_IOToggle/Src/main.c                  Main program
   - GPIO/GPIO_IOToggle/Src/system_stm32f4xx.c      STM32F4xx system source file
@@ -66,12 +66,12 @@ In this example, HCLK is configured at 180 MHz.
 @par Hardware and Software environment
 
   - This example runs on STM32F446ZE devices.
-
+    
   - This example has been tested with NUCLEO-F446ZE Rev.B board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

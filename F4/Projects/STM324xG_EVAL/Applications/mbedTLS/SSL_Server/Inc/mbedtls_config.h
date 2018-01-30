@@ -1,10 +1,10 @@
-/**
+/** 
   *
   *  Portions COPYRIGHT 2016 STMicroelectronics
   *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
   *
   ******************************************************************************
-  * @file    mbedtls_config.h
+  * @file    mbedtls_config.h 
   * @author  MCD Application Team
   * @brief   the mbedtls custom config header file.
   ******************************************************************************
@@ -35,7 +35,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 #ifndef MBEDTLS_CONFIG_H
 #define MBEDTLS_CONFIG_H
@@ -82,6 +82,9 @@
 
 /* Save RAM at the expense of ROM */
 #define MBEDTLS_AES_ROM_TABLES
+
+/* Disable double-width division */
+#define MBEDTLS_NO_UDBL_DIVISION
 
 /* Save RAM by adjusting to our exact needs */
 #define MBEDTLS_ECP_MAX_BITS   384

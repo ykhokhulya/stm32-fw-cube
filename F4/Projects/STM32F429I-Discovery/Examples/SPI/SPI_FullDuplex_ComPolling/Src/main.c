@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_ComPolling/Src/main.c
+  * @file    SPI/SPI_FullDuplex_ComPolling/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx SPI HAL API to transmit
+  * @brief   This sample code shows how to use STM32F4xx SPI HAL API to transmit 
   *          and receive a data buffer with a communication process based on
-  *          Polling transfer.
+  *          Polling transfer. 
   *          The communication is done using 2 Boards.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup SPI_FullDuplex_ComPolling
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -92,7 +92,7 @@ int main(void)
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /*##-1- Configure the SPI peripheral #######################################*/
   /* Set the SPI parameters */
   SpiHandle.Instance               = SPIx;
@@ -106,7 +106,7 @@ int main(void)
   SpiHandle.Init.FirstBit          = SPI_FIRSTBIT_MSB;
   SpiHandle.Init.NSS               = SPI_NSS_SOFT;
   SpiHandle.Init.TIMode            = SPI_TIMODE_DISABLE;
-
+  
 #ifdef MASTER_BOARD
   SpiHandle.Init.Mode = SPI_MODE_MASTER;
 #else
@@ -118,7 +118,7 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
 #ifdef MASTER_BOARD
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
@@ -129,46 +129,46 @@ int main(void)
     BSP_LED_Toggle(LED3);
     HAL_Delay(40);
   }
-
+  
     BSP_LED_Off(LED3);
-#endif /* MASTER_BOARD */
+#endif /* MASTER_BOARD */ 
 
-  /*##-2- Start the Full Duplex Communication process ########################*/
-  /* While the SPI in TransmitReceive process, user can transmit data through
+  /*##-2- Start the Full Duplex Communication process ########################*/  
+  /* While the SPI in TransmitReceive process, user can transmit data through 
      "aTxBuffer" buffer & receive data through "aRxBuffer" */
   /* Timeout is set to 5s */
-
+  
   switch(HAL_SPI_TransmitReceive(&SpiHandle, (uint8_t*)aTxBuffer, (uint8_t *)aRxBuffer, BUFFERSIZE, 5000))
   {
-  case HAL_OK:
+  case HAL_OK:  
     /* Communication is completed_____________________________________________*/
     /* Compare the sent and received buffers */
     if(Buffercmp((uint8_t*)aTxBuffer, (uint8_t*)aRxBuffer, BUFFERSIZE))
     {
       /* Transfer error in transmission process */
-      Error_Handler();
+      Error_Handler();     
     }
-
+    
     /* Turn LED3 on: Transfer process is correct */
     BSP_LED_On(LED3);
-    break;
-
+    break;  
+    
   case HAL_TIMEOUT:
     /* A Timeout occurred_____________________________________________________*/
     /* Call Timeout Handler */
-    Timeout_Error_Handler();
-    break;
-
+    Timeout_Error_Handler();  
+    break;  
+    
     /* An Error occurred______________________________________________________*/
   case HAL_ERROR:
     /* Call Timeout Handler */
-    Error_Handler();
+    Error_Handler();  
     break;
-
+  
   default:
     break;
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -191,7 +191,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -216,12 +216,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -235,14 +235,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ 
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -256,7 +256,7 @@ static void SystemClock_Config(void)
  void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi)
 {
   /* Turn LED4 on: Transfer error in reception/transmission process */
-  BSP_LED_On(LED4);
+  BSP_LED_On(LED4); 
 }
 
 /**
@@ -307,7 +307,7 @@ static uint16_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferL
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

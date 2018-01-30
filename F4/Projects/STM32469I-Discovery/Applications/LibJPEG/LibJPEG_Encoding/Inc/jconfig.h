@@ -176,5 +176,5 @@ typedef unsigned char boolean;
 /* Define this if you want percent-done progress reports from cjpeg/djpeg.
  */
 #undef PROGRESS_REPORT
-
+    
 #endif /* JPEG_CJPEG_DJPEG */

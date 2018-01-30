@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    FLASH/FLASH_EraseProgram/Src/main.c
+  * @file    FLASH/FLASH_EraseProgram/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example provides a description of how to erase and program the
+  * @brief   This example provides a description of how to erase and program the 
   *          STM32F4xx FLASH.
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup FLASH_Program
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -60,7 +60,7 @@ __IO uint32_t data32 = 0 , MemoryProgramStatus = 0;
 
 /*Variable used for Erase procedure*/
 static FLASH_EraseInitTypeDef EraseInitStruct;
-
+   
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -93,7 +93,7 @@ int main(void)
   /* Configure the system clock to 84 MHz */
   SystemClock_Config();
 
-  /* Unlock the Flash to enable the flash control register access *************/
+  /* Unlock the Flash to enable the flash control register access *************/ 
   HAL_FLASH_Unlock();
 
   /* Erase the user Flash area
@@ -110,10 +110,10 @@ int main(void)
   EraseInitStruct.Sector = FirstSector;
   EraseInitStruct.NbSectors = NbOfSectors;
   if(HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
-  {
-    /*
-      Error occurred while sector erase.
-      User can add here some code to deal with this error.
+  { 
+    /* 
+      Error occurred while sector erase. 
+      User can add here some code to deal with this error. 
       SectorError will contain the faulty sector and then to know the code error on this sector,
       user can call function 'HAL_FLASH_GetError()'
     */
@@ -148,8 +148,8 @@ int main(void)
       Address = Address + 4;
     }
     else
-    {
-      /* Error occurred while writing data in Flash memory.
+    { 
+      /* Error occurred while writing data in Flash memory. 
          User can add here some code to deal with this error */
       /*
         FLASH_ErrorTypeDef errorcode = HAL_FLASH_GetError();
@@ -160,25 +160,25 @@ int main(void)
 
   /* Lock the Flash to disable the flash control register access (recommended
      to protect the FLASH memory against possible unwanted operation) *********/
-  HAL_FLASH_Lock();
+  HAL_FLASH_Lock(); 
 
-  /* Check if the programmed data is OK
+  /* Check if the programmed data is OK 
       MemoryProgramStatus = 0: data programmed correctly
       MemoryProgramStatus != 0: number of words not programmed correctly ******/
   Address = FLASH_USER_START_ADDR;
   MemoryProgramStatus = 0x0;
-
+  
   while (Address < FLASH_USER_END_ADDR)
   {
     data32 = *(__IO uint32_t*)Address;
 
     if (data32 != DATA_32)
     {
-      MemoryProgramStatus++;
+      MemoryProgramStatus++;  
     }
 
     Address = Address + 4;
-  }
+  }  
 
   /*Check if there is an issue to program data*/
   if (MemoryProgramStatus == 0)
@@ -191,7 +191,7 @@ int main(void)
     /* Error detected. Switch on LED5*/
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -206,26 +206,26 @@ int main(void)
 static uint32_t GetSector(uint32_t Address)
 {
   uint32_t sector = 0;
-
+  
   if((Address < ADDR_FLASH_SECTOR_1) && (Address >= ADDR_FLASH_SECTOR_0))
   {
-    sector = FLASH_SECTOR_0;
+    sector = FLASH_SECTOR_0;  
   }
   else if((Address < ADDR_FLASH_SECTOR_2) && (Address >= ADDR_FLASH_SECTOR_1))
   {
-    sector = FLASH_SECTOR_1;
+    sector = FLASH_SECTOR_1;  
   }
   else if((Address < ADDR_FLASH_SECTOR_3) && (Address >= ADDR_FLASH_SECTOR_2))
   {
-    sector = FLASH_SECTOR_2;
+    sector = FLASH_SECTOR_2;  
   }
   else if((Address < ADDR_FLASH_SECTOR_4) && (Address >= ADDR_FLASH_SECTOR_3))
   {
-    sector = FLASH_SECTOR_3;
+    sector = FLASH_SECTOR_3;  
   }
   else if((Address < ADDR_FLASH_SECTOR_5) && (Address >= ADDR_FLASH_SECTOR_4))
   {
-    sector = FLASH_SECTOR_4;
+    sector = FLASH_SECTOR_4;  
   }
    else/*(Address < FLASH_END_ADDR) && (Address >= ADDR_FLASH_SECTOR_5))*/
   {
@@ -255,7 +255,7 @@ static uint32_t GetSectorSize(uint32_t Sector)
   else
   {
     sectorsize = 128 * 1024;
-  }
+  }  
   return sectorsize;
 }
 
@@ -275,7 +275,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 84000000
   *            HCLK(Hz)                       = 84000000
@@ -300,12 +300,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -316,14 +316,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ 
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
 }
 
@@ -336,7 +336,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

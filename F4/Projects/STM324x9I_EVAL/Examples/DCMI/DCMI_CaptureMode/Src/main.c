@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DCMI/DCMI_CaptureMode/Src/main.c
+  * @file    DCMI/DCMI_CaptureMode/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example describes how to configure the camera in continuous mode.
   ******************************************************************************
@@ -42,7 +42,7 @@
 
 /** @addtogroup DCMI_CaptureMode
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -69,29 +69,29 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
-  /*##-1- Disable SAI1_SDA signal ############################################*/
-  /* Note: In STM324X9I-EVAL RevB, PE6 pin is shared between data_7 of camera
-           and SAI1_SDA of codec WM8994, after power on, SAI1_SDA pin of codec WM8994
-           is in output state, thus preventing MCU from Receiving correct signal
-           from camera, so we need to configure SAI1_SDA pin of codec WM8994
-           in tri-state
+  /*##-1- Disable SAI1_SDA signal ############################################*/  
+  /* Note: In STM324X9I-EVAL RevB, PE6 pin is shared between data_7 of camera 
+           and SAI1_SDA of codec WM8994, after power on, SAI1_SDA pin of codec WM8994 
+           is in output state, thus preventing MCU from Receiving correct signal 
+           from camera, so we need to configure SAI1_SDA pin of codec WM8994 
+           in tri-state 
   */
   /* Initialize the Control interface of the Audio Codec */
   BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_SPEAKER, 0, 0);
   /* ADCDAT1 is tri-stated */
   AUDIO_IO_Write(AUDIO_I2C_ADDRESS, 0x200, 0);
   AUDIO_IO_Write(AUDIO_I2C_ADDRESS, 0x300, 0x6010);
-
+  
   /*##-2- Initialize the LCD #################################################*/
   BSP_LCD_Init();
-
+  
   /*##-3- Initialize the LCD Layer ###########################################*/
   BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);
-
+  
   /* Enable the LCD */
   BSP_LCD_DisplayOn();
 
@@ -105,7 +105,7 @@ int main(void)
   /* Start the Camera Capture */
   BSP_CAMERA_ContinuousStart((uint8_t *)CAMERA_FRAME_BUFFER);
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
   {
   }
@@ -119,11 +119,11 @@ int main(void)
 void BSP_CAMERA_LineEventCallback(void)
 {
   static uint32_t tmp, tmp2, counter;
-
+  
   if(BSP_LCD_GetYSize() > counter)
   {
     LCD_LL_ConvertLineToARGB8888((uint32_t *)(CAMERA_FRAME_BUFFER + tmp), (uint32_t *)(LCD_FRAME_BUFFER + tmp2));
-    tmp  = tmp + BSP_LCD_GetXSize()*sizeof(uint16_t);
+    tmp  = tmp + BSP_LCD_GetXSize()*sizeof(uint16_t); 
     tmp2 = tmp2 + BSP_LCD_GetXSize()*sizeof(uint32_t);
     counter++;
   }
@@ -140,35 +140,35 @@ void BSP_CAMERA_LineEventCallback(void)
   * @param  pSrc: Pointer to source buffer
   * @param  pDst: Output color
   * @param  xSize: Buffer width
-  * @param  ColorMode: Input color mode
+  * @param  ColorMode: Input color mode   
   * @retval None
   */
 static void LCD_LL_ConvertLineToARGB8888(void *pSrc, void *pDst)
-{
+{ 
   /* Enable DMA2D clock */
   __HAL_RCC_DMA2D_CLK_ENABLE();
-
+  
   /* Configure the DMA2D Mode, Color Mode and output offset */
   hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
   hdma2d_eval.Init.ColorMode    = DMA2D_ARGB8888;
-  hdma2d_eval.Init.OutputOffset = 0;
-
+  hdma2d_eval.Init.OutputOffset = 0;     
+  
   /* Foreground Configuration */
   hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
   hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
   hdma2d_eval.LayerCfg[1].InputOffset = 0;
-
-  hdma2d_eval.Instance = DMA2D;
-
+  
+  hdma2d_eval.Instance = DMA2D; 
+  
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK)
+  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK)
+    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK) 
     {
       if (HAL_DMA2D_Start(&hdma2d_eval, (uint32_t)pSrc, (uint32_t)pDst, BSP_LCD_GetXSize(), 1) == HAL_OK)
       {
-        /* Polling For DMA transfer */
+        /* Polling For DMA transfer */  
         HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
       }
     }
@@ -196,7 +196,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -222,8 +222,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -240,14 +240,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -260,7 +260,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

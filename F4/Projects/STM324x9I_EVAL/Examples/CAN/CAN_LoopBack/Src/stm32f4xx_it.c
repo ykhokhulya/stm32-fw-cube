@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    CAN/CAN_LoopBack/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -39,18 +39,16 @@
 #include "main.h"
 #include "stm32f4xx_it.h"
 
-
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
 
 /** @addtogroup CAN_LoopBack
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* CAN handler declared in "main.c" file */
@@ -158,11 +156,12 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+  HAL_IncTick();
 }
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (CAN), for the  */
+/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
@@ -173,7 +172,7 @@ void SysTick_Handler(void)
 * @retval None
 */
 void DMA1_Stream5_IRQHandler(void)
-{
+{ 
 }
 
 /**
@@ -258,7 +257,7 @@ void CAN2_TX_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

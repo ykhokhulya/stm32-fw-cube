@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    USB_Device/HID_LPM_Standalone/Src/stm32f4xx_it.c
+  * @file    USB_Device/HID_LPM_Standalone/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -144,12 +144,12 @@ void SysTick_Handler(void)
 {
   static __IO uint32_t counter=0;
   HAL_IncTick();
-
+  
   /* check Joystick state every polling interval (10ms) */
   if (counter++ == USBD_HID_GetPollingInterval(&USBD_Device))
   {
     GetPointerData(HID_Buffer);
-
+    
     /* send data though IN endpoint*/
     if((HID_Buffer[1] != 0) || (HID_Buffer[2] != 0))
     {
@@ -185,7 +185,7 @@ void OTG_HS_IRQHandler(void)
   * @param  None
   * @retval None
   */
-#ifdef USE_USB_FS
+#ifdef USE_USB_FS  
 void OTG_FS_WKUP_IRQHandler(void)
 #else
 void OTG_HS_WKUP_IRQHandler(void)
@@ -194,14 +194,14 @@ void OTG_HS_WKUP_IRQHandler(void)
   if((&hpcd)->Init.low_power_enable)
   {
     /* Reset SLEEPDEEP bit of Cortex System Control Register */
-    SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
-
-    /* Configures system clock after wake-up from STOP: enable HSE, PLL and select
+    SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));  
+    
+    /* Configures system clock after wake-up from STOP: enable HSE, PLL and select 
     PLL as system clock source (HSE and PLL are disabled in STOP mode) */
     SystemClock_Config();
-
+    
     /* ungate PHY clock */
-     __HAL_PCD_UNGATE_PHYCLOCK((&hpcd));
+     __HAL_PCD_UNGATE_PHYCLOCK((&hpcd)); 
   }
 #ifdef USE_USB_FS
   /* Clear EXTI pending Bit*/
@@ -232,27 +232,27 @@ void EXTI15_10_IRQHandler(void)
 static void GetPointerData(uint8_t *pbuf)
 {
   int8_t  x = 0, y = 0 ;
-
+  
   if(JoyButtonInitialized == 1)
   {
     switch(BSP_JOY_GetState())
     {
     case JOY_LEFT:
       x -= CURSOR_STEP;
-      break;
-
+      break;  
+      
     case JOY_RIGHT:
       x += CURSOR_STEP;
       break;
-
+      
     case JOY_UP:
       y -= CURSOR_STEP;
       break;
-
+      
     case JOY_DOWN:
       y += CURSOR_STEP;
       break;
-
+      
     default:
       break;
     }

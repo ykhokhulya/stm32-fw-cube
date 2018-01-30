@@ -130,14 +130,14 @@ void Configure_USART(void)
   /* (2) NVIC Configuration for USART interrupts */
   /*  - Set priority for USARTx_IRQn */
   /*  - Enable USARTx_IRQn */
-  NVIC_SetPriority(USARTx_IRQn, 0);
+  NVIC_SetPriority(USARTx_IRQn, 0);  
   NVIC_EnableIRQ(USARTx_IRQn);
 
   /* (3) Enable USART peripheral clock and clock source ***********************/
   USARTx_CLK_ENABLE();
 
   /* (4) Configure USART functional parameters ********************************/
-
+  
   /* Disable USART prior modifying configuration registers */
   /* Note: Commented as corresponding to Reset value */
   // LL_USART_Disable(USARTx_INSTANCE);
@@ -157,7 +157,7 @@ void Configure_USART(void)
   usart_initstruct.TransferDirection   = LL_USART_DIRECTION_TX_RX;
   usart_initstruct.HardwareFlowControl = LL_USART_HWCONTROL_NONE;
   usart_initstruct.OverSampling        = LL_USART_OVERSAMPLING_16;
-
+  
   /* Initialize USART instance according to parameters defined in initialization structure */
   LL_USART_Init(USARTx_INSTANCE, &usart_initstruct);
 
@@ -225,21 +225,21 @@ void LED_Blinking(uint32_t Period)
   /* Toggle LED2 in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -252,8 +252,8 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);  
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
 }
 
 /**
@@ -362,7 +362,7 @@ void Error_Callback(void)
 
   /* Disable USARTx_IRQn */
   NVIC_DisableIRQ(USARTx_IRQn);
-
+  
   /* Error handling example :
     - Read USART SR register to identify flag that leads to IT raising
     - Perform corresponding error handling treatment according to flag

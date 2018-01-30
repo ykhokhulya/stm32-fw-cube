@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Inc/audio_record.h
+  * @file    BSP/Inc/audio_record.h 
   * @author  MCD Application Team
   * @brief   Header for audio_record.c module
   ******************************************************************************

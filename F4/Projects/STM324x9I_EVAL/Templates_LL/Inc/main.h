@@ -72,7 +72,7 @@
 
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE BEGIN    ============== */
 /**
-  * @brief LED1
+  * @brief LED1 
   */
 
 #define LED1_PIN                           LL_GPIO_PIN_6
@@ -80,7 +80,7 @@
 #define LED1_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG)
 
 /**
-  * @brief LED2
+  * @brief LED2 
   */
 
 #define LED2_PIN                           LL_GPIO_PIN_7
@@ -88,7 +88,7 @@
 #define LED2_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG)
 
 /**
-  * @brief LED3
+  * @brief LED3 
   */
 
 #define LED3_PIN                           LL_GPIO_PIN_10
@@ -96,7 +96,7 @@
 #define LED3_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG)
 
 /**
-  * @brief LED4
+  * @brief LED4 
   */
 
 #define LED4_PIN                           LL_GPIO_PIN_12
@@ -108,11 +108,11 @@
   */
 #define TAMPER_BUTTON_PIN                         LL_GPIO_PIN_13
 #define TAMPER_BUTTON_GPIO_PORT                   GPIOC
-#define TAMPER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
+#define TAMPER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)   
 #define TAMPER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_13
 #define TAMPER_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
-#define TAMPER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(TAMPER_BUTTON_EXTI_LINE)
-#define TAMPER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(TAMPER_BUTTON_EXTI_LINE)
+#define TAMPER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(TAMPER_BUTTON_EXTI_LINE)   
+#define TAMPER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(TAMPER_BUTTON_EXTI_LINE)   
 #define TAMPER_BUTTON_SYSCFG_SET_EXTI()           do {                                                                     \
                                                      LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                 \
                                                      LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTC, LL_SYSCFG_EXTI_LINE13); \
@@ -124,11 +124,11 @@
   */
 #define KEY_BUTTON_PIN                         LL_GPIO_PIN_13
 #define KEY_BUTTON_GPIO_PORT                   GPIOC
-#define KEY_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
+#define KEY_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)   
 #define KEY_BUTTON_EXTI_LINE                   LL_EXTI_LINE_13
 #define KEY_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
-#define KEY_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(KEY_BUTTON_EXTI_LINE)
-#define KEY_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(KEY_BUTTON_EXTI_LINE)
+#define KEY_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(KEY_BUTTON_EXTI_LINE)   
+#define KEY_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(KEY_BUTTON_EXTI_LINE)   
 #define KEY_BUTTON_SYSCFG_SET_EXTI()           do {                                                                      \
                                                    LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                 \
                                                    LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTC, LL_SYSCFG_EXTI_LINE13); \
@@ -140,11 +140,11 @@
   */
 #define WAKEUP_BUTTON_PIN                         LL_GPIO_PIN_0
 #define WAKEUP_BUTTON_GPIO_PORT                   GPIOA
-#define WAKEUP_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA)
+#define WAKEUP_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA)   
 #define WAKEUP_BUTTON_EXTI_LINE                   LL_EXTI_LINE_0
 #define WAKEUP_BUTTON_EXTI_IRQn                   EXTI0_IRQn
-#define WAKEUP_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(WAKEUP_BUTTON_EXTI_LINE)
-#define WAKEUP_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(WAKEUP_BUTTON_EXTI_LINE)
+#define WAKEUP_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(WAKEUP_BUTTON_EXTI_LINE)   
+#define WAKEUP_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(WAKEUP_BUTTON_EXTI_LINE)   
 #define WAKEUP_BUTTON_SYSCFG_SET_EXTI()           do {                                                                        \
                                                      LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                 \
                                                      LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE0); \
@@ -159,7 +159,7 @@
 #define LED_BLINK_FAST  200
 #define LED_BLINK_SLOW  500
 #define LED_BLINK_ERROR 1000
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

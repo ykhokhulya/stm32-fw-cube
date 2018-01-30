@@ -273,7 +273,7 @@ static portFORCE_INLINE void vPortClearBASEPRIFromISR( void )
 	__asm
 	{
 		/* Set BASEPRI to 0 so no interrupts are masked.  This function is only
-		used to lower the mask in an interrupt, so memory barriers are not
+		used to lower the mask in an interrupt, so memory barriers are not 
 		used. */
 		msr basepri, #0
 	}
@@ -326,10 +326,10 @@ BaseType_t xReturn;
 portFORCE_INLINE static void vPortResetPrivilege( BaseType_t xRunningPrivileged )
 {
 uint32_t ulReg;
-
-	if( xRunningPrivileged != pdTRUE )
+	
+	if( xRunningPrivileged != pdTRUE ) 
 	{
-		__asm
+		__asm 
 		{
 			mrs ulReg, control
 			orr ulReg, #1

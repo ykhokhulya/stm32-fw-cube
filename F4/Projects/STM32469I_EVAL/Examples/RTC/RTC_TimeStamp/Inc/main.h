@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_TimeStamp/Inc/main.h
+  * @file    RTC/RTC_TimeStamp/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************

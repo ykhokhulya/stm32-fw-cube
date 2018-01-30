@@ -78,10 +78,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization
@@ -96,7 +96,7 @@ int main(void)
 
   /* Compute the period value to have TIM1 counter clock equal to 18kHz */
   uwPeriodValue = (uint32_t) ((SystemCoreClock  / 18000) - 1);
-
+  
   /* Compute Pulse1 value to generate a duty cycle at 50% for channel 1 and 1N */
   uwPulse1 = (5 * (uwPeriodValue - 1)) / 10;
   /* Compute Pulse2 value to generate a duty cycle at 37.5%  for channel 2 and 2N */
@@ -106,16 +106,16 @@ int main(void)
   /* Compute Pulse4 value to generate a duty cycle at 12.5%  for channel 4 */
   uwPulse4 = (125 * (uwPeriodValue- 1)) / 1000;
 
-  /*##-1- Configure the TIM peripheral #######################################*/
-  /* ---------------------------------------------------------------------------
+  /*##-1- Configure the TIM peripheral #######################################*/ 
+  /* --------------------------------------------------------------------------- 
     Generate 7 PWM signals with 4 different duty cycles (50%, 37.5%, 25% and 12.5%)
-
+  
     TIM1 input clock (TIM1CLK) is set to 2 * APB2 clock (PCLK2), since APB2
     prescaler is different from 1.
     TIM1CLK = 2 * PCLK2
     PCLK1 = HCLK / 2
     => TIM1CLK = HCLK = SystemCoreClock
-
+  
     TIM1CLK is fixed to SystemCoreClock, the TIM1 Prescaler is set to have
     TIM1 counter clock = 18kHz.
 
@@ -128,15 +128,15 @@ int main(void)
 
     The Timer pulse is calculated as follows:
      - ChannelxPulse = DutyCycle * (TIM1_Period - 1) / 100
-
-    Note:
+          
+    Note: 
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
-     Each time the core clock (HCLK) changes, user had to update SystemCoreClock
+     Each time the core clock (HCLK) changes, user had to update SystemCoreClock 
      variable value. Otherwise, any configuration based on this variable will be incorrect.
      This variable is updated in three ways:
       1) by calling CMSIS function SystemCoreClockUpdate()
       2) by calling HAL API function HAL_RCC_GetSysClockFreq()
-      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency
+      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency     
   --------------------------------------------------------------------------- */
 
   /* Initialize TIM peripheral as follows:
@@ -147,7 +147,7 @@ int main(void)
   */
   /* Select the Timer instance */
   TimHandle.Instance = TIM1;
-
+  
   TimHandle.Init.Prescaler         = 0;
   TimHandle.Init.Period            = uwPeriodValue;
   TimHandle.Init.ClockDivision     = 0;
@@ -159,7 +159,7 @@ int main(void)
     Error_Handler();
   }
 
-  /*##-2- Configure the PWM channels #########################################*/
+  /*##-2- Configure the PWM channels #########################################*/ 
   /* Common configuration for all channels */
   sPWMConfig.OCMode      = TIM_OCMODE_PWM2;
   sPWMConfig.OCFastMode  = TIM_OCFAST_DISABLE;
@@ -175,7 +175,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse value for channel 2 */
   sPWMConfig.Pulse = uwPulse2;
   if(HAL_TIM_PWM_ConfigChannel(&TimHandle, &sPWMConfig, TIM_CHANNEL_2) != HAL_OK)
@@ -183,7 +183,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse value for channel 3 */
   sPWMConfig.Pulse = uwPulse3;
   if(HAL_TIM_PWM_ConfigChannel(&TimHandle, &sPWMConfig, TIM_CHANNEL_3) != HAL_OK)
@@ -191,7 +191,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse value for channel 4 */
   sPWMConfig.Pulse = uwPulse4;
   if(HAL_TIM_PWM_ConfigChannel(&TimHandle, &sPWMConfig, TIM_CHANNEL_4) != HAL_OK)
@@ -200,7 +200,7 @@ int main(void)
     Error_Handler();
   }
 
-  /*##-3- Start PWM signals generation #######################################*/
+  /*##-3- Start PWM signals generation #######################################*/ 
   /* Start channel 1 */
   if(HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_1) != HAL_OK)
   {
@@ -213,7 +213,7 @@ int main(void)
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Start channel 2 */
   if(HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_2) != HAL_OK)
   {
@@ -226,7 +226,7 @@ int main(void)
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Start channel 3 */
   if(HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_3) != HAL_OK)
   {
@@ -254,7 +254,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -281,8 +281,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -296,27 +296,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {

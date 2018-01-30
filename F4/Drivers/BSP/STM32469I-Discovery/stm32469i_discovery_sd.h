@@ -53,7 +53,7 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery_SD
+/** @addtogroup STM32469I-Discovery_SD 
   * @{
   */
 
@@ -76,9 +76,9 @@
 #define   MSD_ERROR                     ((uint8_t)0x01)
 #define   MSD_ERROR_SD_NOT_PRESENT      ((uint8_t)0x02)
 
-/**
-  * @brief  SD transfer state definition
-  */
+/** 
+  * @brief  SD transfer state definition  
+  */     
 #define   SD_TRANSFER_OK                ((uint8_t)0x00)
 #define   SD_TRANSFER_BUSY              ((uint8_t)0x01)
 

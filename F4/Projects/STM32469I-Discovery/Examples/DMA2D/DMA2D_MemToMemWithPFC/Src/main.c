@@ -119,7 +119,7 @@ int main(void)
   /*##-2- DMA2D configuration ################################################*/
   DMA2D_Config();
 
-  /*##-3- Start DMA2D transfer ###############################################*/
+  /*##-3- Start DMA2D transfer ###############################################*/  
   hal_status = HAL_DMA2D_Start_IT(&Dma2dHandle,
       (uint32_t)&ARGB8888_300x120, /* Input image 300x120 of format ARGB8888 (32 bpp) */
       (uint32_t)&aBufferResult,    /* Output image of same size 300x120 after conversion by PFC in ARGB4444 (16 bpp) */
@@ -136,15 +136,15 @@ int main(void)
 static void LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
 {
   LCD_LayerCfgTypeDef  Layercfg;
-
+  
   /* Layer Init */
   if (LayerIndex == 0) // Background layer
   {
     Layercfg.WindowX0 = 250;
     Layercfg.WindowX1 = 550;
     Layercfg.WindowY0 = 80;
-    Layercfg.WindowY1 = 200;
-    Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
+    Layercfg.WindowY1 = 200; 
+    Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;      
   }
   else // forground layer
   {
@@ -152,9 +152,9 @@ static void LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
     Layercfg.WindowX1 = 550;
     Layercfg.WindowY0 = 280;
     Layercfg.WindowY1 = 400;
-    Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB4444;
+    Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB4444;      
   }
-
+  
   Layercfg.FBStartAdress = FB_Address;
   Layercfg.Alpha = 255;
   Layercfg.Alpha0 = 0;
@@ -165,7 +165,7 @@ static void LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
   Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   Layercfg.ImageWidth = 300;
   Layercfg.ImageHeight = 120;
-
+  
   HAL_LTDC_ConfigLayer(&hltdc_eval, &Layercfg, LayerIndex);
 }
 

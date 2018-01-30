@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/AUDIO_Standalone/Src/stm32f4xx_it.c
+  * @file    USB_Host/AUDIO_Standalone/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention

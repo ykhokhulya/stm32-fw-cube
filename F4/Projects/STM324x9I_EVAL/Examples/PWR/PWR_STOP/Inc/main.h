@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_STOP/Inc/main.h
+  * @file    PWR/PWR_STOP/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -43,7 +43,7 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* Defines related to Clock configuration */
+/* Defines related to Clock configuration */    
 /* Uncomment the corresponding line to select the STM32F4xx Low Power mode */
 #define STOP_MODE
 /* #define STOP_UNDERDRIVE_MODE */
@@ -61,7 +61,7 @@
   #define RTC_ASYNCH_PREDIV  0x7F
   #define RTC_SYNCH_PREDIV   0x00FF
 #endif
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void Error_Handler(void);

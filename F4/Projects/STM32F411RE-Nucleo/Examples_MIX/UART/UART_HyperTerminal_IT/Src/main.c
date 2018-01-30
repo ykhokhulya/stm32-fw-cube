@@ -5,7 +5,7 @@
   * @brief   This sample code shows how to use UART HAL and LL APIs to transmit
   *          and receive a data buffer with a communication process based on IT;
   *          The communication is done with the Hyperterminal PC application;
-  *          HAL driver is used to perform UART configuration,
+  *          HAL driver is used to perform UART configuration, 
   *          then TX/RX transfers procedures are based on LL APIs use
   ******************************************************************************
   * @attention
@@ -81,10 +81,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization
@@ -93,14 +93,14 @@ int main(void)
 
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+  
   /* Configure leds */
   BSP_LED_Init(LED2);
-
+  
   /*##-1- Configure the UART peripheral using HAL services ###################*/
   /* Put the USART peripheral in the Asynchronous mode (UART Mode) */
   /* UART configured as follows:
-      - Word Length = 8 Bits (7 data bit + 1 parity bit) :
+      - Word Length = 8 Bits (7 data bit + 1 parity bit) : 
 	                  BE CAREFUL : Program 7 data bits + 1 parity bit in PC HyperTerminal
       - Stop Bit    = One Stop bit
       - Parity      = ODD parity
@@ -122,25 +122,25 @@ int main(void)
     Error_Handler();
   }
 
-  /*##-2- Configure UART peripheral for reception process (using LL) ##########*/
-  /* Any data received will be stored "aRxBuffer" buffer : the number max of
+  /*##-2- Configure UART peripheral for reception process (using LL) ##########*/  
+  /* Any data received will be stored "aRxBuffer" buffer : the number max of 
      data received is RXBUFFERSIZE */
-  /* Enable RXNE and Error interrupts */
+  /* Enable RXNE and Error interrupts */  
   LL_USART_EnableIT_RXNE(USARTx);
   LL_USART_EnableIT_ERROR(USARTx);
 
-  /*##-3- Start the transmission process (using LL) *##########################*/
-  /* While the UART in reception process, user can transmit data from
+  /*##-3- Start the transmission process (using LL) *##########################*/  
+  /* While the UART in reception process, user can transmit data from 
      "aTxStartMessage" buffer */
   /* Start USART transmission : Will initiate TXE interrupt after DR register is empty */
-  LL_USART_TransmitData8(USARTx, aTxStartMessage[uwTxIndex++]);
+  LL_USART_TransmitData8(USARTx, aTxStartMessage[uwTxIndex++]); 
 
   /* Enable TXE interrupt */
-  LL_USART_EnableIT_TXE(USARTx);
+  LL_USART_EnableIT_TXE(USARTx); 
 
   /*##-4- Wait for the end of the transfer ###################################*/
-  /* USART IRQ handler is not anymore routed to HAL_UART_IRQHandler() function
-     and is now based on LL API functions use.
+  /* USART IRQ handler is not anymore routed to HAL_UART_IRQHandler() function 
+     and is now based on LL API functions use. 
      Therefore, use of HAL IT based services is no more possible. */
   /*  Once TX transfer is completed, LED2 will toggle.
       Then, when RX transfer is completed, LED2 will turn On. */
@@ -164,14 +164,14 @@ int main(void)
     /* Transfer error in transmission process */
     Error_Handler();
   }
-
-  /*##-6- Send the End Message ###############################################*/
+  
+  /*##-6- Send the End Message ###############################################*/  
   if(HAL_UART_Transmit(&UartHandle, (uint8_t*)aTxEndMessage, TXENDMESSAGESIZE, 1000)!= HAL_OK)
   {
     /* Transfer error in transmission process */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -180,7 +180,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -205,12 +205,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -224,14 +224,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
@@ -245,7 +245,7 @@ static void SystemClock_Config(void)
 static void Error_Handler(void)
 {
   /* Turn LED2 to off for error */
-  BSP_LED_Off(LED2);
+  BSP_LED_Off(LED2); 
   while(1)
   {
   }
@@ -253,7 +253,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  Rx Transfer completed callback
-  * @note   This example shows a simple way to report end of IT Rx transfer, and
+  * @note   This example shows a simple way to report end of IT Rx transfer, and 
   *         you can add your own implementation.
   * @retval None
   */
@@ -280,7 +280,7 @@ void UART_TXEmpty_Callback(void)
   {
     /* Disable TXE interrupt */
     LL_USART_DisableIT_TXE(USARTx);
-
+    
     /* Enable TC interrupt */
     LL_USART_EnableIT_TC(USARTx);
   }
@@ -298,10 +298,10 @@ void UART_CharTransmitComplete_Callback(void)
   if(uwTxIndex == sizeof(aTxStartMessage))
   {
     uwTxIndex = 0;
-
+    
     /* Disable TC interrupt */
     LL_USART_DisableIT_TC(USARTx);
-
+    
     /* Set Tx complete boolean to 1 */
     ubTxComplete = 1;
   }
@@ -319,7 +319,7 @@ void UART_Error_Callback(void)
 
   /* Disable USARTx_IRQn */
   NVIC_DisableIRQ(USARTx_IRQn);
-
+  
   /* Error handling example :
     - Read USART SR register to identify flag that leads to IT raising
     - Perform corresponding error handling treatment according to flag
@@ -346,7 +346,7 @@ void UART_Error_Callback(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

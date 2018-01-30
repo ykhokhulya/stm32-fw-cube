@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/RTC/RTC_ExitStandbyWithWakeUpTimer/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -174,7 +174,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Manage code in main.c */
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 

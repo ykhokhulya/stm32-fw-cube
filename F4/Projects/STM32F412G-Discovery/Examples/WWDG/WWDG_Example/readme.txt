@@ -1,9 +1,9 @@
 /**
   @page WWDG_Example Window Watchdog example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    WWDG/WWDG_Example/readme.txt
+  * @file    WWDG/WWDG_Example/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the Window Watchdog example.
   ******************************************************************************
@@ -35,36 +35,36 @@
 
 @par Example Description
 
-This example guides you through the different configuration steps by mean of HAL API
-to ensure WWDG counter update at regular period and simulate a software fault generating
-an MCU WWDG reset on expiry of a programmed time period.
+This example guides you through the different configuration steps by means of the 
+HAL API to perform periodic WWDG counter update and simulate a software fault that 
+generates an MCU WWDG reset when a predefined time period has elapsed.
 
-At the beginning of the main program the HAL_Init() function is called to reset
+At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 100 MHz.
 
 The WWDG peripheral configuration is ensured by the HAL_WWDG_Init() function.
 This later is calling the HAL_WWDG_MspInit()function which core is implementing
-the configuration of the needed WWDG resources according to the used hardware (CLOCK,
+the configuration of the needed WWDG resources according to the used hardware (CLOCK, 
 GPIO, DMA and NVIC). You may update this function to change WWDG configuration.
 
-The WWDG timeout is set, through counter value, to 42 ms.
-The refresh window is set in order to make user wait 31 ms after a wadchdog refresh,
-before writing again counter. Hence the WWDG counter is refreshed each (31 + 1) ms in the
-main program infinite loop to prevent a WWDG reset.
+The WWDG timeout is set, through counter value, to 42 ms. 
+The refresh window is set in order to make user wait 31 ms after a wadchdog refresh, 
+before writing again counter. Hence the WWDG counter is refreshed each (31 + 1) ms in the 
+main program infinite loop to prevent a WWDG reset. 
 LED2 is also toggled each 37ms indicating that the program is running.
 
 An EXTI Line is connected to a GPIO pin, and configured to generate an interrupt
 on the rising edge of the signal.
 
-The EXTI Line is used to simulate a software failure: once the EXTI Line event
+The EXTI Line is used to simulate a software failure: once the EXTI Line event 
 occurs by pressing the Joystick sel-button (PA.00), the corresponding interrupt is served.
 
 
-
+ 
 In the ISR, a write to invalid address generates a Hardfault exception containing
-an infinite loop and preventing to return to main program (the WWDG counter is
+an infinite loop and preventing to return to main program (the WWDG counter is 
 not refreshed).
 
 As a result, when the WWDG counter falls to 63, the WWDG reset occurs.
@@ -81,19 +81,19 @@ LED3 is turned ON and remains ON if any error occurs.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This
-      implies that if HAL_Delay() is called from a peripheral ISR process, then
+      implies that if HAL_Delay() is called from a peripheral ISR process, then 
       the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - WWDG/WWDG_Example/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - WWDG/WWDG_Example/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - WWDG/WWDG_Example/Inc/main.h                  Header for main.c module
+  - WWDG/WWDG_Example/Inc/main.h                  Header for main.c module  
   - WWDG/WWDG_Example/Src/stm32f4xx_it.c          Interrupt handlers
   - WWDG/WWDG_Example/Src/main.c                  Main program
   - WWDG/WWDG_Example/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -103,18 +103,19 @@ LED3 is turned ON and remains ON if any error occurs.
 @par Hardware and Software environment
 
   - This example runs on STM32F412xG devices.
-
+    
   - This example has been tested with STM32412G-DISCOVERY board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
-
-
+ 
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
+ 

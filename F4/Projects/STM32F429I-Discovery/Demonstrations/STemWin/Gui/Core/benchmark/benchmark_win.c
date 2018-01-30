@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -47,7 +47,7 @@
 #include "k_module.h"
 #include "benchmark_res.c"
 #include "cpu_utils.h"
-#include "k_rtc.h"
+#include "k_rtc.h" 
 #include "k_modules_res.h"
 
 /** @addtogroup BENCHMARK_MODULE
@@ -86,22 +86,22 @@ K_ModuleItem_Typedef  cpu_bench =
   NULL,
 };
 
-static const GUI_WIDGET_CREATE_INFO _aDialog[] =
+static const GUI_WIDGET_CREATE_INFO _aDialog[] = 
 {
   { FRAMEWIN_CreateIndirect, "Benchmark", ID_FRAMEWIN_INFO, 0, 0, 240, 294, 0, 0x64, 0 },
-  { TEXT_CreateIndirect, "00000000 Pixels/s ", ID_BENCH_CPU, 60 , 150, 160, 20, 0, 0, 0 },
+  { TEXT_CreateIndirect, "00000000 Pixels/s ", ID_BENCH_CPU, 60 , 150, 160, 20, 0, 0, 0 }, 
   { BUTTON_CreateIndirect, "Start speed Benchmark", ID_BENCH_CPU, 40 , 170 , 160, 20, 0, 0, 0 },
   { LISTBOX_CreateIndirect, "List", ID_IMAGE_LIST, 5, 200, 220, 65, LISTBOX_CF_AUTOSCROLLBAR_V, 0x0, 0 }
 };
 
 static const GUI_COLOR _aColor[8] = {
-  0x000000,
-  0x0000FF,
-  0x00FF00,
-  0x00FFFF,
-  0xFF0000,
-  0xFF00FF,
-  0xFFFF00,
+  0x000000, 
+  0x0000FF, 
+  0x00FF00, 
+  0x00FFFF, 
+  0xFF0000, 
+  0xFF00FF, 
+  0xFFFF00, 
   0xFFFFFF
 };
 
@@ -140,13 +140,13 @@ static U32 _GetPixelsPerSecond(void) {
     GUI_FillRect(x0, y0, x1, y1);
     GUI_Exec();
     Cnt++;
-    t = GUI_GetTime();
+    t = GUI_GetTime();    
   } while ((t - (t0 + 100)) <= 0);
 
   /* Compute result */
   t -= t0;
   PixelCnt = (x1 - x0 + 1) * (y1 - y0 + 1) * Cnt;
-  PixelsPerSecond = PixelCnt / t * 1000;
+  PixelsPerSecond = PixelCnt / t * 1000;   
   GUI_SetColor(Color);
   return PixelsPerSecond;
 }
@@ -177,14 +177,14 @@ static int Run_SpeedTest(void) {
   }
 
   Stop_Test = 0;
-
+  
   for (i = 0; i< 8; i++) {
     aColorIndex[i] = GUI_Color2Index(_aColor[i]);
-  }
+  }  
   TimeStart = GUI_GetTime();
   for (i = 0; ((GUI_GetTime() - TimeStart) < 5000) &&( Stop_Test == 0); i++) {
     GUI_SetColorIndex(aColorIndex[i&7]);
-
+    
     /* Calculate random positions */
     Rect.x0 = rand() % xSize - xSize / 2;
     Rect.y0 = rand() % ySize - ySize / 2;
@@ -219,27 +219,27 @@ static int Run_SpeedTest(void) {
   * @retval None
   */
 static void _cbCpuWindow(WM_MESSAGE * pMsg) {
-
-  static WM_HTIMER hTimerTime;
-  switch (pMsg->MsgId)
+ 
+  static WM_HTIMER hTimerTime; 
+  switch (pMsg->MsgId) 
   {
   case WM_CREATE:
-
+    
     /* Create timer */
-    hTimerTime = WM_CreateTimer(pMsg->hWin, 0, 400, 0);
+    hTimerTime = WM_CreateTimer(pMsg->hWin, 0, 400, 0);        
     break;
-
+    
   case WM_TIMER:
     GRAPH_DATA_YT_AddValue(hData , osGetCPUUsage());
     WM_InvalidateWindow(pMsg->hWin);
     WM_RestartTimer(pMsg->Data.v, 400);
-
-    break;
-
+    
+    break; 
+    
   case WM_DELETE:
     WM_DeleteTimer(hTimerTime);
     break;
-
+    
   default:
     WM_DefaultProc(pMsg);
   }
@@ -252,8 +252,8 @@ static void _cbCpuWindow(WM_MESSAGE * pMsg) {
   * @retval None
   */
 static void _ClearDesktop(WM_MESSAGE * pMsg) {
-
-  switch (pMsg->MsgId)
+  
+  switch (pMsg->MsgId) 
   {
   case WM_PAINT:
     GUI_SetBkColor(GUI_BLACK);
@@ -278,42 +278,42 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   uint8_t sec, min, hour;
   char temp[50];
   WM_CALLBACK  *_cb;
-
+  
   switch (pMsg->MsgId) {
   case WM_INIT_DIALOG:
 
     hItem = pMsg->hWin;
-    FRAMEWIN_AddCloseButton(hItem, FRAMEWIN_BUTTON_RIGHT, 0);
-
-    /* Initialization of 'CPU' */
+    FRAMEWIN_AddCloseButton(hItem, FRAMEWIN_BUTTON_RIGHT, 0);   
+    
+    /* Initialization of 'CPU' */    
     hItem = TEXT_CreateEx(20, 30, 100, 25, pMsg->hWin, WM_CF_SHOW,0, 0x123,"");
     TEXT_SetFont(hItem, GUI_FONT_13B_1);
     TEXT_SetTextColor(hItem, 0x00804000);
     TEXT_SetText(hItem, "CPU Usage %:");
-
+    
     hItem = WM_GetDialogItem(pMsg->hWin, ID_BENCH_CPU);
     TEXT_SetFont(hItem, GUI_FONT_16B_ASCII);
     TEXT_SetTextColor(hItem, GUI_DARKRED);
 
-
-    hItem = WM_GetDialogItem(pMsg->hWin, ID_CPU_GRAPH);
-    FRAMEWIN_SetBarColor(hItem, 0, GUI_DARKGRAY);
-    FRAMEWIN_SetBarColor(hItem, 1, GUI_DARKGRAY);
-
+    
+    hItem = WM_GetDialogItem(pMsg->hWin, ID_CPU_GRAPH);  
+    FRAMEWIN_SetBarColor(hItem, 0, GUI_DARKGRAY);  
+    FRAMEWIN_SetBarColor(hItem, 1, GUI_DARKGRAY);   
+ 
     hGraph = GRAPH_CreateEx(10, 45, 220, 110, pMsg->hWin, WM_CF_SHOW, 0, GUI_ID_GRAPH0);
     hData = GRAPH_DATA_YT_Create(GUI_LIGHTGREEN, 500, 0, 20);
     GRAPH_SetGridVis(hGraph, 1);
-    GRAPH_SetBorder(hGraph, 20, 4, 5, 4);
+    GRAPH_SetBorder(hGraph, 20, 4, 5, 4); 
     GRAPH_AttachData(hGraph, hData);
-
+    
     hScale = GRAPH_SCALE_Create(20, GUI_TA_RIGHT, GRAPH_SCALE_CF_VERTICAL, 25);
-    GRAPH_AttachScale(hGraph, hScale);
+    GRAPH_AttachScale(hGraph, hScale);  
     GRAPH_SCALE_SetTextColor(hScale, GUI_YELLOW);
     GRAPH_SetGridDistX(hGraph, 25);
-    GRAPH_SetGridDistY(hGraph, 25);
-
-    WM_CreateWindowAsChild(80, 45, 354, 23, pMsg->hWin, WM_CF_SHOW | WM_CF_HASTRANS, _cbCpuWindow , 0);
-
+    GRAPH_SetGridDistY(hGraph, 25);   
+    
+    WM_CreateWindowAsChild(80, 45, 354, 23, pMsg->hWin, WM_CF_SHOW | WM_CF_HASTRANS, _cbCpuWindow , 0); 
+    
     break;
 
   case WM_NOTIFY_PARENT:
@@ -322,29 +322,29 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     switch (NCode) {
     case WM_NOTIFICATION_RELEASED:      /* React only if released */
       switch (Id) {
-
+   
       case ID_BENCH_CPU:
         Stop_Test = 0;
-
+        
         WM_HideWindow(pMsg->hWin);
-
+        
         _cb = WM_GetCallback(WM_HBKWIN);
         WM_SetCallback(WM_HBKWIN, _ClearDesktop);
         cpu_speed = Run_SpeedTest();
-
+        
         hItem = WM_GetDialogItem(pMsg->hWin, ID_IMAGE_LIST);
-
+        
         k_GetTime(&RTC_Time);
         sec    =  RTC_Time.Seconds;
         min    =  RTC_Time.Minutes;
-        hour   =  RTC_Time.Hours;
-
-        sprintf(temp,"[%02d:%02d:%02d]: %d Pix/s ", hour , min, sec, cpu_speed);
+        hour   =  RTC_Time.Hours; 
+    
+        sprintf(temp,"[%02d:%02d:%02d]: %d Pix/s ", hour , min, sec, cpu_speed); 
         LISTBOX_AddString(hItem, temp);
 
         WM_ShowWindow(pMsg->hWin);
         hItem = WM_GetDialogItem(pMsg->hWin, ID_BENCH_CPU);
-        sprintf (temp, "%d  Pixels/s ", cpu_speed);
+        sprintf (temp, "%d  Pixels/s ", cpu_speed); 
         TEXT_SetText(hItem, temp);
         WM_SetCallback(WM_HBKWIN, _cb);
         hItem = WM_GetDialogItem(WM_HBKWIN, ID_BUTTON_BKGND);
@@ -354,10 +354,10 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         break;
       }
       break;
-
+    
     case WM_NOTIFICATION_CHILD_DELETED:
       Stop_Test = 1;
-      break;
+      break; 
     }
     break;
 
@@ -370,7 +370,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 /**
   * @brief  Benchmark window startup
   * @param  hWin: pointer to the parent handle.
-  * @param  xpos: X position
+  * @param  xpos: X position 
   * @param  ypos: Y position
   * @retval None
   */

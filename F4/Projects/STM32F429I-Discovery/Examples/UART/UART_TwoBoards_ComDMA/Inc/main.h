@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_TwoBoards_ComDMA/Inc/main.h
+  * @file    UART/UART_TwoBoards_ComDMA/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -43,14 +43,14 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* User can use this section to tailor USARTx/UARTx instance used and associated
+/* User can use this section to tailor USARTx/UARTx instance used and associated 
    resources */
 /* Definition for USARTx clock resources */
 #define USARTx                           USART1
 #define USARTx_CLK_ENABLE()              __HAL_RCC_USART1_CLK_ENABLE();
 #define DMAx_CLK_ENABLE()                __HAL_RCC_DMA2_CLK_ENABLE()
 #define USARTx_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
-#define USARTx_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USARTx_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE() 
 
 #define USARTx_FORCE_RESET()             __HAL_RCC_USART1_FORCE_RESET()
 #define USARTx_RELEASE_RESET()           __HAL_RCC_USART1_RELEASE_RESET()

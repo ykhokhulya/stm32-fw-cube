@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -52,7 +52,7 @@
 #define I2Cx                            I2C1
 #define I2Cx_CLK_ENABLE()               __HAL_RCC_I2C1_CLK_ENABLE()
 #define I2Cx_SDA_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE()
-#define I2Cx_SCL_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE()
+#define I2Cx_SCL_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE() 
 
 #define I2Cx_FORCE_RESET()              __HAL_RCC_I2C1_FORCE_RESET()
 #define I2Cx_RELEASE_RESET()            __HAL_RCC_I2C1_RELEASE_RESET()

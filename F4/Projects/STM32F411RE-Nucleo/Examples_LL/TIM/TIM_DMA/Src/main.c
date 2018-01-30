@@ -81,9 +81,9 @@ int main(void)
   /* Initialize LED2 */
   LED_Init();
 
-  /* Configure DMA transfer */
+  /* Configure DMA transfer */  
   Configure_DMA();
-
+  
   /* Configure timer instance */
   Configure_TIM();
 
@@ -101,7 +101,7 @@ int main(void)
   * @retval None
   */
 __STATIC_INLINE void  Configure_DMA(void)
-{
+{  
   /******************************************************/
   /* Configure NVIC for DMA transfer related interrupts */
   /******************************************************/
@@ -128,7 +128,7 @@ __STATIC_INLINE void  Configure_DMA(void)
   LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_7, CC_VALUE_NB);
   LL_DMA_EnableIT_TC(DMA1, LL_DMA_STREAM_7);
   LL_DMA_EnableIT_TE(DMA1, LL_DMA_STREAM_7);
-
+    
   /***************************/
   /* Enable the DMA transfer */
   /***************************/
@@ -139,7 +139,7 @@ __STATIC_INLINE void  Configure_DMA(void)
 /**
   * @brief  This function configures TIM3 channel 3 to generate a PWM edge
   *         aligned signal with a frequency equal to 17.57 KHz and a variable
-  *         duty cycle that is changed by the DMA after a specific number of
+  *         duty cycle that is changed by the DMA after a specific number of 
   *         update DMA requests. The number of this repetitive requests is
   *         defined by the TIM3 repetition counter, each 4 update requests, the
   *         TIM3 Channel 3 Duty Cycle changes to the next new value defined by
@@ -150,7 +150,7 @@ __STATIC_INLINE void  Configure_DMA(void)
   * @retval None
   */
 __STATIC_INLINE void  Configure_TIM(void)
-{
+{  
   /*************************/
   /* GPIO AF configuration */
   /*************************/
@@ -168,20 +168,20 @@ __STATIC_INLINE void  Configure_TIM(void)
   /******************************************************/
   NVIC_SetPriority(TIM3_IRQn, 0);
   NVIC_EnableIRQ(TIM3_IRQn);
-
+  
   /******************************/
   /* Peripheral clocks enabling */
   /******************************/
   /* Enable the peripheral clock of TIM3 */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
-
+  
   /***************************/
   /* Time base configuration */
   /***************************/
   /* Set counter mode */
   /* Reset value is LL_TIM_COUNTERMODE_UP */
   //LL_TIM_SetCounterMode(TIM3, LL_TIM_COUNTERMODE_UP);
-
+  
   /* Set the TIM3 auto-reload register to get a PWM frequency at 17.57 KHz */
   /* Note that the timer pre-scaler isn't used, therefore the timer counter   */
   /* clock frequency is equal to the timer frequency.                        */
@@ -190,15 +190,15 @@ __STATIC_INLINE void  Configure_TIM(void)
   /*    TIM3CLK = PCLK2                                                     */
   /*    PCLK2 = HCLK                                                        */
   /*    => TIM3CLK = HCLK = SystemCoreClock (100 Mhz)                       */
-
+  
   /* TIM3CLK = SystemCoreClock / (APB prescaler & multiplier)              */
   TimOutClock = SystemCoreClock/1;
   LL_TIM_SetAutoReload(TIM3, __LL_TIM_CALC_ARR(TimOutClock, LL_TIM_COUNTERMODE_UP, 17570));
-
+  
   /* Set the repetition counter in order to generate one update event every 4 */
   /* counter cycles.                                                          */
   LL_TIM_SetRepetitionCounter(TIM3, 4-1);
-
+  
   /*********************************/
   /* Output waveform configuration */
   /*********************************/
@@ -217,10 +217,10 @@ __STATIC_INLINE void  Configure_TIM(void)
 
   /* Set PWM duty cycle  for TIM3 channel 3*/
   LL_TIM_OC_SetCompareCH3(TIM3, aCCValue[0]);
-
+  
   /* Enable register preload for TIM3 channel 3 */
   LL_TIM_OC_EnablePreload(TIM3, LL_TIM_CHANNEL_CH3);
-
+  
   /****************************/
   /* TIM3 DMA requests set-up */
   /****************************/
@@ -229,19 +229,19 @@ __STATIC_INLINE void  Configure_TIM(void)
 
   /* Enable TIM3 Channel 3 DMA request */
   LL_TIM_EnableDMAReq_CC3(TIM3);
-
+  
   /**********************************/
   /* Start output signal generation */
   /**********************************/
   /* Enable TIM3 channel 3 */
   LL_TIM_CC_EnableChannel(TIM3, LL_TIM_CHANNEL_CH3);
-
+  
   /* Enable TIM3 outputs */
   LL_TIM_EnableAllOutputs(TIM3);
-
+  
   /* Enable counter */
   LL_TIM_EnableCounter(TIM3);
-
+  
   /* Force update generation */
   LL_TIM_GenerateEvent_UPDATE(TIM3);
 }
@@ -277,7 +277,7 @@ __STATIC_INLINE void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }

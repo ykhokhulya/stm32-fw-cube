@@ -56,10 +56,10 @@
   */
 
 /**
-  * @brief SPI MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief SPI MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hspi: SPI handle pointer
   * @retval None
   */
@@ -100,7 +100,7 @@ GPIO_InitTypeDef  GPIO_InitStruct;
 }
 
 /**
-  * @brief SPI MSP De-Initialization
+  * @brief SPI MSP De-Initialization 
   *        This function frees the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO and NVIC configuration to their default state

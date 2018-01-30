@@ -64,7 +64,7 @@ copies images with the following properties:
         until reaching the maximum of SD card memory space.
 
 @note
-  => If the "Media" directory is empty, a warning message is displayed on
+  => If the "Media" directory is empty, a warning message is displayed on 
      the LCD : "No Bitmap files..."
 
   => If the SD card is not inserted, a warning message is displayed on the LCD :
@@ -73,7 +73,7 @@ copies images with the following properties:
   => If the SD card is unplugged while the program is running, after User button is pressed a warning message is displayed on the LCD:
      "Please insert SD Card"
      "Reset the board"
-
+     
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
@@ -90,10 +90,10 @@ copies images with the following properties:
     - Display/LCD_PicturesFromSDCard/Inc/main.h                             Main configuration file
     - Display/LCD_PicturesFromSDCard/Inc/sd_diskio.h                        FatFS sd diskio driver header file
     - Display/LCD_PicturesFromSDCard/Inc/stm32f4xx_it.h                     Interrupt handlers header file
-    - Display/LCD_PicturesFromSDCard/Inc/stm32f4xx_hal_conf.h               HAL Configuration file
+    - Display/LCD_PicturesFromSDCard/Inc/stm32f4xx_hal_conf.h               HAL Configuration file 
     - Display/LCD_PicturesFromSDCard/Inc/ffconf.h                           FAT file system module configuration file
     - Display/LCD_PicturesFromSDCard/Inc/fatfs_storage.h                    Header for fatfs_storage.c
-    - Display/LCD_PicturesFromSDCard/Src/main.c                             Main program
+    - Display/LCD_PicturesFromSDCard/Src/main.c                             Main program 
     - Display/LCD_PicturesFromSDCard/Src/sd_diskio.c                        FatFS sd diskio driver implementation
     - Display/LCD_PicturesFromSDCard/Src/fatfs_storage.c                    Storage (FatFs) driver
     - Display/LCD_PicturesFromSDCard/Src/stm32f4xx_it.c                     Interrupt handlers
@@ -102,21 +102,21 @@ copies images with the following properties:
 @par Hardware and Software environment
 
   - This application runs on and STM32F413xx devices.
-
+    
   - This application has been tested with STMicroelectronics STM32F413H-DISCOVERY
     boards and can be easily tailored to any other supported device
     and development board.
 
   - STM32F413H-Discovery Set-up
-    - Connect the STM32F413H-Discovery board to the PC through 'USB micro A-Male
+    - Connect the STM32F413H-Discovery board to the PC through 'USB micro A-Male 
       to A-Male' cable to the connector
     - Connect a uSD Card to the MSD connector (CN1).
 
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - The bitmap images, available under "/BMP_240x240" folder
-   provided under "/Utilities/Media/Pictures" might be copied inside a
+ - The bitmap images, available under "/BMP_240x240" folder 
+   provided under "/Utilities/Media/Pictures" might be copied inside a 
    dedicated directory named "Media" at the micro SD card root.
    The images should have the following properties:
      file type    : *.bmp

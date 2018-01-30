@@ -42,7 +42,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 /* Include audio component Driver */
@@ -52,13 +52,13 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM32446E_EVAL
   * @{
   */
-
-/** @addtogroup STM32446E_EVAL_AUDIO
+    
+/** @addtogroup STM32446E_EVAL_AUDIO 
   * @{
   */
 
@@ -67,33 +67,33 @@
   */
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_AUDIO_Exported_Constants  STM32446E EVAL AUDIO Exported Constants
   * @{
   */
-
+ 
 /*------------------------------------------------------------------------------
                           USER SAI defines parameters
  -----------------------------------------------------------------------------*/
-/** @defgroup CODEC_AudioFrame_SLOT_TDMMode  STM32446E EVAL Audio Slot TDM mode
+/** @defgroup CODEC_AudioFrame_SLOT_TDMMode  STM32446E EVAL Audio Slot TDM mode 
   * @brief In W8994 codec the Audio frame contains 4 slots : TDM Mode
   * TDM format :
-  * +------------------|------------------|--------------------|-------------------+
+  * +------------------|------------------|--------------------|-------------------+ 
   * | CODEC_SLOT0 Left | CODEC_SLOT1 Left | CODEC_SLOT0 Right  | CODEC_SLOT1 Right |
   * +------------------------------------------------------------------------------+
   * @{
   */
 /* To have 2 separate audio stream in Both headphone and speaker the 4 slot must be activated */
 #define CODEC_AUDIOFRAME_SLOT_0123                   SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_1 | SAI_SLOTACTIVE_2 | SAI_SLOTACTIVE_3
-/* To have an audio stream in headphone only SAI Slot 0 and Slot 2 must be activated */
-#define CODEC_AUDIOFRAME_SLOT_02                     SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2
-/* To have an audio stream in speaker only SAI Slot 1 and Slot 3 must be activated */
+/* To have an audio stream in headphone only SAI Slot 0 and Slot 2 must be activated */ 
+#define CODEC_AUDIOFRAME_SLOT_02                     SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2 
+/* To have an audio stream in speaker only SAI Slot 1 and Slot 3 must be activated */ 
 #define CODEC_AUDIOFRAME_SLOT_13                     SAI_SLOTACTIVE_1 | SAI_SLOTACTIVE_3
 /**
   * @}
-  */
-
+  */ 
+  
 /* SAI peripheral configuration defines */
 #define AUDIO_SAIx                           SAI2_Block_B
 #define AUDIO_SAIx_CLK_ENABLE()              __HAL_RCC_SAI2_CLK_ENABLE()
@@ -101,7 +101,7 @@
 #define AUDIO_SAIx_SCK_AF                    GPIO_AF8_SAI2
 #define AUDIO_SAIx_MCLK_SD_FS_AF             GPIO_AF10_SAI2
 
-
+   
 #define AUDIO_SAIx_MCLK_SCK_ENABLE()         __HAL_RCC_GPIOA_CLK_ENABLE()
 #define AUDIO_SAIx_MCLK_SCK_DISABLE()        __HAL_RCC_GPIOA_CLK_DISABLE()
 #define AUDIO_SAIx_MCK_PIN                   GPIO_PIN_1 /* PA1 */
@@ -123,11 +123,11 @@
 #define AUDIO_SAIx_DMAx_PERIPH_DATA_SIZE     DMA_PDATAALIGN_HALFWORD
 #define AUDIO_SAIx_DMAx_MEM_DATA_SIZE        DMA_MDATAALIGN_HALFWORD
 #define DMA_MAX_SZE                          0xFFFF
-
+   
 #define AUDIO_SAIx_DMAx_IRQHandler           DMA2_Stream6_IRQHandler
 
 /* Select the interrupt preemption priority for the DMA interrupt */
-#define AUDIO_OUT_IRQ_PREPRIO           ((uint32_t)5)   /* Select the preemption priority level(0 is the highest) */
+#define AUDIO_OUT_IRQ_PREPRIO           ((uint32_t)5)   /* Select the preemption priority level(0 is the highest) */   
 
 /*------------------------------------------------------------------------------
                         AUDIO IN CONFIGURATION
@@ -156,15 +156,15 @@
 #define AUDIO_I2Sx_DMAx_IRQ                 DMA1_Stream2_IRQn
 #define AUDIO_I2Sx_DMAx_PERIPH_DATA_SIZE    DMA_PDATAALIGN_HALFWORD
 #define AUDIO_I2Sx_DMAx_MEM_DATA_SIZE       DMA_MDATAALIGN_HALFWORD
-
+   
 #define AUDIO_I2Sx_DMAx_IRQHandler          DMA1_Stream2_IRQHandler
-
+  
 /* Select the interrupt preemption priority and subpriority for the IT/DMA interrupt */
 #define AUDIO_IN_IRQ_PREPRIO                ((uint32_t)6)   /* Select the preemption priority level(0 is the highest) */
 
 
 /* Two channels are used:
-   - one channel as input which is connected to I2S SCK in stereo mode
+   - one channel as input which is connected to I2S SCK in stereo mode 
    - one channel as output which divides the frequency on the input
 */
 
@@ -186,7 +186,7 @@
 
 #define AUDIODATA_SIZE                      2   /* 16-bits audio data size */
 
-/* Audio status definition */
+/* Audio status definition */     
 #define AUDIO_OK                            ((uint8_t)0)
 #define AUDIO_ERROR                         ((uint8_t)1)
 #define AUDIO_TIMEOUT                       ((uint8_t)2)
@@ -202,14 +202,14 @@
 /* PCM buffer output size */
 #define PCM_OUT_SIZE                        (DEFAULT_AUDIO_IN_FREQ/1000*2)
 #define CHANNEL_DEMUX_MASK                  ((uint8_t)0x55)
-
+   
 /*------------------------------------------------------------------------------
                     OPTIONAL Configuration defines parameters
 ------------------------------------------------------------------------------*/
 
 /* Delay for the Codec to be correctly reset */
 #define CODEC_RESET_DELAY           ((uint8_t)5)
-
+   
 
 /*------------------------------------------------------------------------------
                             OUTPUT DEVICES definition
@@ -218,11 +218,11 @@
 /* Alias on existing output devices to adapt for 2 headphones output */
 #define OUTPUT_DEVICE_HEADPHONE1 OUTPUT_DEVICE_HEADPHONE
 #define OUTPUT_DEVICE_HEADPHONE2 OUTPUT_DEVICE_SPEAKER /* Headphone2 is connected to Speaker output of the wm8994 */
-
+   
 /**
   * @}
   */
-
+ 
 /** @defgroup STM32446E_EVAL_AUDIO_Exported_Variables  STM32446E EVAL AUDIO Exported Variables
   * @{
   */
@@ -230,14 +230,14 @@ extern __IO uint16_t AudioInVolume;
  /**
   * @}
   */
-
+   
 /** @defgroup STM32446E_EVAL_AUDIO_Exported_Macros  STM32446E EVAL AUDIO Exported Macros
   * @{
   */
 #define DMA_MAX(x)           (((x) <= DMA_MAX_SZE)? (x):DMA_MAX_SZE)
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_AUDIO_OUT_Exported_Functions  STM32446E EVAL AUDIO OUT Exported Functions
   * @{
@@ -273,7 +273,7 @@ void    BSP_AUDIO_OUT_MspInit(SAI_HandleTypeDef *hsai, void *Params);
 void    BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params);
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_AUDIO_IN_Exported_Functions  STM32446E EVAL AUDIO IN Exported Functions
   * @{
@@ -304,11 +304,11 @@ void    BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params);
 void    BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -54,7 +54,7 @@
   * @brief settings routines
   * @{
   */
-
+  
 /* External variables --------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos);
@@ -91,25 +91,25 @@ K_ModuleItem_Typedef  settings_board =
 
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static const GUI_WIDGET_CREATE_INFO _aDialog[] =
+static const GUI_WIDGET_CREATE_INFO _aDialog[] = 
 {
-  { WINDOW_CreateIndirect, "", ID_WINDOW_0,                    0,    0,  800, 480, 0, 0x64, 0 },
+  { WINDOW_CreateIndirect, "", ID_WINDOW_0,                    0,    0,  800, 480, 0, 0x64, 0 }, 
   { TEXT_CreateIndirect, "System Information", ID_TEXT_TITLE,  290,  30, 300, 40,  0, 0x0,  0 },
   { TEXT_CreateIndirect, "Board", ID_TEXT_BOARD,               90,   155, 80, 20,  0, 0x0,  0 },
   { TEXT_CreateIndirect, "Core", ID_TEXT_CORE,                 285,  155, 80, 20,  0, 0x0,  0 },
   { TEXT_CreateIndirect, "CPU Speed", ID_TEXT_CPU,             445,  155, 100, 20,  0, 0x0,  0 },
-  { TEXT_CreateIndirect, "Firm.Ver", ID_TEXT_VERSION,          645,  155, 90, 20,  0, 0x0,  0 },
+  { TEXT_CreateIndirect, "Firm.Ver", ID_TEXT_VERSION,          645,  155, 90, 20,  0, 0x0,  0 },  
 
   { TEXT_CreateIndirect, " STM32469I", ID_TEXT_BOARD_1,  65,  300, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " STM32479I",  ID_TEXT_BOARD_2,  65,  320, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " STM32F4", ID_TEXT_CORE_1,     260, 300, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " 180MHz", ID_TEXT_CPU_1,       450, 300, 100, 20, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "V1.3.0", ID_TEXT_VERSION_1,    655, 300, 100, 20, 0, 0x0, 0 },
-
+  { TEXT_CreateIndirect, "V1.3.0", ID_TEXT_VERSION_1,    655, 300, 100, 20, 0, 0x0, 0 }, 
+  
   { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2016", ID_TEXT_COPYRIGHT, 550, 453, 240, 20, 0, 0x0, 0 },
 };
 
-static WM_HTIMER                  hTimer;
+static WM_HTIMER                  hTimer; 
 uint32_t frame = 0;
 
 /* Private functions ---------------------------------------------------------*/
@@ -161,13 +161,13 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 
   switch (pMsg->MsgId) {
   case WM_INIT_DIALOG:
-
+    
     frame = 0;
     hTimer = WM_CreateTimer(pMsg->hWin, 0, 50, 0);
-
+  
     hItem = BUTTON_CreateEx(700, 0, 100, 100, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_EXIT);
     WM_SetCallback(hItem, _cbButton_exit);
-
+    
     /* Initialization of 'Board*/
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_BOARD);
     TEXT_SetFont(hItem, &GUI_FontLubalGraph24B);
@@ -186,7 +186,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     /* Initialization of 'Firmware Version*/
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION);
     TEXT_SetFont(hItem, &GUI_FontLubalGraph24B);
-    TEXT_SetTextColor(hItem, GUI_STCOLOR_DARKBLUE);
+    TEXT_SetTextColor(hItem, GUI_STCOLOR_DARKBLUE); 
 
     /* Initialization of 'Board*/
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_BOARD_1);
@@ -196,8 +196,8 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     /* Initialization of 'Board */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_BOARD_2);
     TEXT_SetFont(hItem, &GUI_FontLubalGraph24);
-    TEXT_SetTextColor(hItem, GUI_STCOLOR_LIGHTBLUE);
-
+    TEXT_SetTextColor(hItem, GUI_STCOLOR_LIGHTBLUE);    
+    
     /* Initialization of 'Core: STM32F-4 Series' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_CORE_1);
     TEXT_SetFont(hItem, &GUI_FontLubalGraph24);
@@ -211,8 +211,8 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     /* Initialization of 'Firmware Version*/
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION_1);
     TEXT_SetFont(hItem, &GUI_FontLubalGraph24);
-    TEXT_SetTextColor(hItem, GUI_STCOLOR_LIGHTBLUE);
-
+    TEXT_SetTextColor(hItem, GUI_STCOLOR_LIGHTBLUE); 
+    
     /* ST Copyright */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_COPYRIGHT);
     TEXT_SetFont(hItem, &GUI_FontLubalGraph16);
@@ -222,22 +222,22 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_TITLE);
     TEXT_SetFont(hItem, &GUI_FontLubalGraph32B);
     TEXT_SetTextColor(hItem, GUI_STCOLOR_LIGHTBLUE);
-
-    break;
-
-  case WM_PAINT:
+    
+    break;     
+    
+  case WM_PAINT:    
     GUI_SetColor(GUI_STCOLOR_LIGHTBLUE);
     GUI_AA_DrawRoundedRect(30,  140, 200, 340, 30);
     GUI_AA_DrawRoundedRect(220, 140, 390, 340, 30);
     GUI_AA_DrawRoundedRect(410, 140, 580, 340, 30);
     GUI_AA_DrawRoundedRect(600, 140, 770, 340, 30);
-
+    
     GUI_DrawBitmap(open_board[frame]   , 65,  190);
     GUI_DrawBitmap(open_mcu[frame]     , 255, 190);
     GUI_DrawBitmap(open_cpu[frame]     , 445, 190);
     GUI_DrawBitmap(open_fversion[frame], 635, 190);
-
-    break;
+      
+    break;     
 
   case WM_TIMER:
     if(frame < 4)
@@ -252,41 +252,41 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
       {
         WM_DeleteTimer(hTimer);
         hTimer = 0;
-      }
-    }
+      }  
+    }    
     break;
-
+       
   case WM_NOTIFY_PARENT:
     Id    = WM_GetId(pMsg->hWinSrc);    /* Id of widget */
     NCode = pMsg->Data.v;               /* Notification code */
-
+       
     switch(Id) {
-    case ID_BUTTON_EXIT:
+    case ID_BUTTON_EXIT: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
         if(hTimer != 0)
         {
           WM_DeleteTimer(hTimer);
           hTimer = 0;
-        }
+        }         
         GUI_EndDialog(pMsg->hWin, 0);
 
         break;
       }
-      break;
+      break;      
     }
     break;
   default:
     WM_DefaultProc(pMsg);
     break;
-  }
+  }    
 }
 
 
 /**
   * @brief  system information window Startup
   * @param  hWin: pointer to the parent handle.
-  * @param  xpos: X position
+  * @param  xpos: X position 
   * @param  ypos: Y position
   * @retval None
   */
@@ -302,5 +302,5 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
 /**
   * @}
   */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

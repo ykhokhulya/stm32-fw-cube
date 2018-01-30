@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Demonstrations/Src/main.c
+  * @file    Demonstrations/Src/main.c 
   * @author  MCD Application Team
   * @brief   This demo describes how display bmp images from SD card on LCD using
              the Adafruit 1.8" TFT shield with Joystick and microSD mounted on top
@@ -8,37 +8,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -53,12 +53,12 @@
 
 /** @addtogroup Demo
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
-typedef enum
+typedef enum 
 {
-  SHIELD_NOT_DETECTED = 0,
+  SHIELD_NOT_DETECTED = 0, 
   SHIELD_DETECTED
 }ShieldStatus;
 
@@ -98,7 +98,7 @@ static void TFT_DisplayImages(void);
   * @retval None
   */
 int main(void)
-{
+{ 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -106,30 +106,30 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+  
   /* Check the availability of adafruit 1.8" TFT shield on top of STM32NUCLEO
      board. This is done by reading the state of IO PC.01 pin (mapped to JoyStick
      available on adafruit 1.8" TFT shield). If the state of PC.01 is high then
-     the adafruit 1.8" TFT shield is available. */
+     the adafruit 1.8" TFT shield is available. */  
   if(TFT_ShieldDetect() == SHIELD_DETECTED)
   {
     /* Initialize the LCD */
     BSP_LCD_Init();
-
+    
     /* Configure SD card */
-    SDCard_Config();
-
+    SDCard_Config(); 
+    
     /* Display on TFT Images existing on SD card */
     TFT_DisplayImages();
-  }
+  }  
   else /* Shield not mounted */
-  {
+  {   
     LED2_Blink();
-  }
-
+  } 
+  
   /* Infinite loop */
   while (1)
   {
@@ -138,7 +138,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSI)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -163,12 +163,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
@@ -182,14 +182,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
@@ -204,7 +204,7 @@ static void SystemClock_Config(void)
 static void TFT_DisplayMenu(void)
 {
   JOYState_TypeDef tmp;
-
+  
   /* Set Menu font */
   BSP_LCD_SetFont(&Font12);
 
@@ -213,33 +213,33 @@ static void TFT_DisplayMenu(void)
   /* Display message */
   BSP_LCD_DisplayStringAtLine(1, (uint8_t*)"   NUCLEO-F413ZH     ");
   BSP_LCD_DisplayStringAtLine(2, (uint8_t*)"       DEMO         ");
-
+  
   /* Set Text color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  /* Display message */
+  /* Display message */  
   BSP_LCD_DisplayStringAtLine(4, (uint8_t*)"Display images      ");
   BSP_LCD_DisplayStringAtLine(6, (uint8_t*)"stored under uSD    ");
   BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"on TFT LCD          ");
-
+  
   /* Set Text color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  /* Display message */
+  /* Display message */ 
   BSP_LCD_DisplayStringAtLine(11, (uint8_t*)"  Press JOY DOWN   ");
   BSP_LCD_DisplayStringAtLine(12, (uint8_t*)"  to continue...   ");
-
+ 
   /* Wait for JOY_DOWN is pressed */
   while (BSP_JOY_GetState() != JOY_DOWN)
   {}
 
   /* Set Text color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  /* Display message */
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);  
+  /* Display message */ 
   BSP_LCD_DisplayStringAtLine(4,  (uint8_t*)"                   ");
   BSP_LCD_DisplayStringAtLine(6,  (uint8_t*)"  Press Joystick   ");
-
+  
   /* Set Text color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  /* Display message */
+  /* Display message */ 
   BSP_LCD_DisplayStringAtLine(8,  (uint8_t*)"  UP for:          ");
   BSP_LCD_DisplayStringAtLine(9,  (uint8_t*)"  Manual Mode      ");
   BSP_LCD_DisplayStringAtLine(11, (uint8_t*)"  DOWN for:        ");
@@ -255,38 +255,38 @@ static void TFT_DisplayMenu(void)
   {
     tmp = BSP_JOY_GetState();
   }
-
+  
   /* LCD Clear */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  BSP_LCD_Clear(LCD_COLOR_WHITE); 
+  
   /* JOY_UP is pressed: Display Manual mode menu #############################*/
   if(tmp == JOY_UP )
   {
     /* Set Text color */
-    BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    /* Display message */
+    BSP_LCD_SetTextColor(LCD_COLOR_RED);    
+    /* Display message */ 
     BSP_LCD_DisplayStringAtLine(3,  (uint8_t*)"   Manual Mode   ");
-    BSP_LCD_DisplayStringAtLine(5,  (uint8_t*)"    Selected     ");
-
+    BSP_LCD_DisplayStringAtLine(5,  (uint8_t*)"    Selected     "); 
+    
     /* Set Text color */
-    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-    /* Display message */
-    BSP_LCD_DisplayStringAtLine(9,  (uint8_t*)"RIGHT: Next image");
+    BSP_LCD_SetTextColor(LCD_COLOR_BLUE);      
+    /* Display message */               
+    BSP_LCD_DisplayStringAtLine(9,  (uint8_t*)"RIGHT: Next image"); 
     BSP_LCD_DisplayStringAtLine(10, (uint8_t*)"LEFT : Previous  ");
     BSP_LCD_DisplayStringAtLine(11, (uint8_t*)"SEL  : Switch to ");
-    BSP_LCD_DisplayStringAtLine(12, (uint8_t*)"automatic mode   ");
-    JoystickValue = 2;
+    BSP_LCD_DisplayStringAtLine(12, (uint8_t*)"automatic mode   ");    
+    JoystickValue = 2;  
   }
   /* JOY_DOWN is pressed: Display Automatic mode menu ########################*/
-  else if (tmp == JOY_DOWN)
+  else if (tmp == JOY_DOWN)    
   {
     /* Set Text color */
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    /* Display message */
+    /* Display message */ 
     BSP_LCD_DisplayStringAtLine(3,  (uint8_t*)"  Automatic Mode  ");
     BSP_LCD_DisplayStringAtLine(5,  (uint8_t*)"     Selected     ");
 
-    JoystickValue = 1;
+    JoystickValue = 1;  
     HAL_Delay(200);
   }
 }
@@ -297,7 +297,7 @@ static void TFT_DisplayMenu(void)
   * @retval None
   */
 static void TFT_DisplayImages(void)
-{
+{    
   uint32_t bmplen = 0x00;
   uint32_t checkstatus = 0x00;
   uint32_t filesnumbers = 0x00;
@@ -305,13 +305,13 @@ static void TFT_DisplayImages(void)
   uint32_t bmpcounter = 0x00;
   DIR directory;
   FRESULT res;
-
+  
   /* Initialize the Joystick available on adafruit 1.8" TFT shield */
   BSP_JOY_Init();
-
+  
   /* Welcome message */
-  TFT_DisplayMenu();
-
+  TFT_DisplayMenu(); 
+  
   /* Open directory */
   res = f_opendir(&directory, "/");
   if((res != FR_OK))
@@ -319,28 +319,28 @@ static void TFT_DisplayImages(void)
     if(res == FR_NO_FILESYSTEM)
     {
       /* Display message: SD card not FAT formatted */
-      TFT_DisplayErrorMessage(SD_CARD_NOT_FORMATTED);
+      TFT_DisplayErrorMessage(SD_CARD_NOT_FORMATTED);    
     }
     else
     {
       /* Display message: Fail to open directory */
-      TFT_DisplayErrorMessage(SD_CARD_OPEN_FAIL);
+      TFT_DisplayErrorMessage(SD_CARD_OPEN_FAIL);  
     }
   }
-
+  
   /* Get number of bitmap files */
-  filesnumbers = Storage_GetDirectoryBitmapFiles ("/", pDirectoryFiles);
+  filesnumbers = Storage_GetDirectoryBitmapFiles ("/", pDirectoryFiles);    
   /* Set bitmap counter to display first image */
-  bmpcounter = 1;
+  bmpcounter = 1; 
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
-  {
-    /* Get JoyStick status */
+  {     
+    /* Get JoyStick status */    
     joystickstatus = BSP_JOY_GetState();
-
+    
     if(joystickstatus == JOY_SEL )
-    {
+    {      
       JoystickValue++;
       if (JoystickValue > 2)
       {
@@ -348,14 +348,14 @@ static void TFT_DisplayImages(void)
       }
       joystickstatus = JOY_NONE;
     }
-
+    
     /*## Display BMP pictures in Automatic mode ##############################*/
-    if(JoystickValue == 1)
+    if(JoystickValue == 1) 
     {
       sprintf((char*)str, "%-11.11s", pDirectoryFiles[bmpcounter -1]);
-
+      
       checkstatus = Storage_CheckBitmapFile((const char*)str, &bmplen);
-
+      
       if(checkstatus == 0)
       {
         /* Format the string */
@@ -373,8 +373,8 @@ static void TFT_DisplayImages(void)
       {
         bmpcounter = 1;
       }
-    }
-
+    }   
+    
     /*## Display BMP pictures in Manual mode #################################*/
     if(JoystickValue == 2)
     {
@@ -389,22 +389,22 @@ static void TFT_DisplayImages(void)
           bmpcounter++;
         }
         sprintf ((char*)str, "%-11.11s", pDirectoryFiles[bmpcounter - 1]);
-
+        
         checkstatus = Storage_CheckBitmapFile((const char*)str, &bmplen);
-
+        
         if(checkstatus == 0)
         {
           /* Format the string */
-          Storage_OpenReadFile(POSITION_X_BITMAP, POSITION_Y_BITMAP, (const char*)str);
+          Storage_OpenReadFile(POSITION_X_BITMAP, POSITION_Y_BITMAP, (const char*)str); 
         }
-
+        
         if(checkstatus == 1)
         {
           /* Display message: File not supported */
-          TFT_DisplayErrorMessage(SD_CARD_FILE_NOT_SUPPORTED);
+          TFT_DisplayErrorMessage(SD_CARD_FILE_NOT_SUPPORTED); 
         }
         joystickstatus = JOY_NONE;
-        JoystickValue = 2;
+        JoystickValue = 2;          
       }
       else if(joystickstatus == JOY_LEFT )
       {
@@ -416,15 +416,15 @@ static void TFT_DisplayImages(void)
         {
           bmpcounter--;
         }
-        sprintf ((char*)str, "%-11.11s", pDirectoryFiles[bmpcounter - 1]);
+        sprintf ((char*)str, "%-11.11s", pDirectoryFiles[bmpcounter - 1]); 
         checkstatus = Storage_CheckBitmapFile((const char*)str, &bmplen);
-
+        
         if(checkstatus == 0)
         {
           /* Format the string */
-          Storage_OpenReadFile(POSITION_X_BITMAP, POSITION_Y_BITMAP, (const char*)str);
+          Storage_OpenReadFile(POSITION_X_BITMAP, POSITION_Y_BITMAP, (const char*)str); 
         }
-
+        
         if (checkstatus == 1)
         {
           /* Display message: File not supported */
@@ -434,7 +434,7 @@ static void TFT_DisplayImages(void)
         JoystickValue = 2;
       }
     }
-  }
+  }  
 }
 
 /**
@@ -445,35 +445,35 @@ static void TFT_DisplayImages(void)
 static void SDCard_Config(void)
 {
   uint32_t counter = 0;
-
+  
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
   {
     /* Initialize the SD mounted on adafruit 1.8" TFT shield */
     if(BSP_SD_Init() != MSD_OK)
     {
       TFT_DisplayErrorMessage(BSP_SD_INIT_FAILED);
-    }
-
+    }  
+    
     /* Check the mounted device */
     if(f_mount(&SD_FatFs, (TCHAR const*)"/", 0) != FR_OK)
     {
       TFT_DisplayErrorMessage(FATFS_NOT_MOUNTED);
-    }
+    }  
     else
     {
       /* Initialize the Directory Files pointers (heap) */
       for (counter = 0; counter < MAX_BMP_FILES; counter++)
       {
-        pDirectoryFiles[counter] = malloc(11);
+        pDirectoryFiles[counter] = malloc(11); 
       }
     }
   }
 }
 
 /**
-  * @brief  Displays adequate message on TFT available on adafruit 1.8" TFT shield
+  * @brief  Displays adequate message on TFT available on adafruit 1.8" TFT shield  
   * @param  message: Error message to be displayed on the LCD.
-  *   This parameter can be one of following values:
+  *   This parameter can be one of following values:   
   *     @arg SD_CARD_NOT_FORMATTED: SD CARD is not FAT formatted
   *     @arg SD_CARD_FILE_NOT_SUPPORTED: File is not supported
   *     @arg SD_CARD_OPEN_FAIL: Failure to open directory
@@ -483,23 +483,23 @@ static void SDCard_Config(void)
 static void TFT_DisplayErrorMessage(uint8_t message)
 {
   /* LCD Clear */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  BSP_LCD_Clear(LCD_COLOR_WHITE); 
   /* Set Error Message Font */
   BSP_LCD_SetFont(&Font12);
   /* Set Text and Back colors */
-  BSP_LCD_SetBackColor(LCD_COLOR_GREY);
+  BSP_LCD_SetBackColor(LCD_COLOR_GREY); 
   BSP_LCD_SetTextColor(LCD_COLOR_RED);
 
   if(message == SD_CARD_NOT_FORMATTED)
   {
     /* Display message */
     BSP_LCD_DisplayStringAtLine(5, (uint8_t*)" SD Card is not    ");
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" FAT formatted.    ");
+    BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" FAT formatted.    ");  
     BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" Please Format the ");
     BSP_LCD_DisplayStringAtLine(8, (uint8_t*)" microSD card.     ");
     while (1)
     {
-    }
+    }    
   }
   if(message == SD_CARD_FILE_NOT_SUPPORTED)
   {
@@ -510,7 +510,7 @@ static void TFT_DisplayErrorMessage(uint8_t message)
     BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while(1)
     {
-    }
+    }    
   }
   if(message == SD_CARD_OPEN_FAIL)
   {
@@ -521,18 +521,18 @@ static void TFT_DisplayErrorMessage(uint8_t message)
     BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while(1)
     {
-    }
+    }     
   }
   if(message == FATFS_NOT_MOUNTED)
   {
     /* Display message */
     BSP_LCD_DisplayStringAtLine(5, (uint8_t*)"                   ");
     BSP_LCD_DisplayStringAtLine(6, (uint8_t*)" Cannot mount      ");
-    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" FatFs on Drive.   ");
+    BSP_LCD_DisplayStringAtLine(7, (uint8_t*)" FatFs on Drive.   "); 
     BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while (1)
     {
-    }
+    }    
   }
   if(message == BSP_SD_INIT_FAILED)
   {
@@ -543,7 +543,7 @@ static void TFT_DisplayErrorMessage(uint8_t message)
     BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"                   ");
     while(1)
     {
-    }
+    }     
   }
 }
 
@@ -559,10 +559,10 @@ static void LED2_Blink(void)
 
   /* Configure the User Button in EXTI Mode */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
-
-  /* Initiate BlinkSpeed variable */
-  BlinkSpeed = 0;
-
+  
+  /* Initiate BlinkSpeed variable */ 
+  BlinkSpeed = 0;  
+  
   /* Infinite loop */
   while(1)
   {
@@ -570,20 +570,20 @@ static void LED2_Blink(void)
     if(BlinkSpeed == 0)
     {
       BSP_LED_Toggle(LED2);
-      /* Wait for 500ms */
-      HAL_Delay(500);
-    }
+      /* Wait for 500ms */      
+      HAL_Delay(500);      
+    }      
     else if(BlinkSpeed == 1)
     {
       BSP_LED_Toggle(LED2);
       /* Wait for 100ms */
-      HAL_Delay(100);
+      HAL_Delay(100); 
     }
     else if(BlinkSpeed == 2)
     {
-      BSP_LED_Toggle(LED2);
+      BSP_LED_Toggle(LED2);    
       /* Wait for 50ms */
-      HAL_Delay(50);
+      HAL_Delay(50);  
     }
   }
 }
@@ -608,8 +608,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 /**
   * @brief  Check the availability of adafruit 1.8" TFT shield on top of STM32NUCLEO
-  *         board. This is done by reading the state of IO PC.01 pin (mapped to
-  *         JoyStick available on adafruit 1.8" TFT shield). If the state of PC.01
+  *         board. This is done by reading the state of IO PC.01 pin (mapped to 
+  *         JoyStick available on adafruit 1.8" TFT shield). If the state of PC.01 
   *         is high then the adafruit 1.8" TFT shield is available.
   * @param  None
   * @retval SHIELD_DETECTED: 1.8" TFT shield is available
@@ -617,16 +617,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   */
 static ShieldStatus TFT_ShieldDetect(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct;
+  GPIO_InitTypeDef  GPIO_InitStruct; 
 
   /* Enable GPIO clock */
   __HAL_RCC_GPIOC_CLK_ENABLE();
-
+  
   GPIO_InitStruct.Pin = GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
+  
   if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) != 0)
   {
     return SHIELD_DETECTED;
@@ -658,7 +658,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

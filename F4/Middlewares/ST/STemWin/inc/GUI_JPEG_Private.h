@@ -31,7 +31,7 @@ Purpose     : Private header
 ----------------------------------------------------------------------
 
 Explanation of terms:
-
+  
   Component   - Color channel, e.g., Red or Luminance.
   Sample      - Single component value (i.e., one number in the image data).
   Coefficient - Frequency coefficient (a DCT transform output number).
@@ -53,15 +53,15 @@ Explanation of terms:
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-
+  
 #ifndef GUI_JPEG_PRIVATE_H
 #define GUI_JPEG_PRIVATE_H
 
@@ -223,7 +223,7 @@ struct GUI_JPEG_DCONTEXT {
   U8 SuccessiveHigh;                       // Successive approximation high
   COEFF_BUFFER aDC_Coeffs[MAX_COMPONENTS]; // DC coefficient buffer for progressive scan
   COEFF_BUFFER aAC_Coeffs[MAX_COMPONENTS]; // AC coefficient buffer for progressive scan
-  int aBlockY_MCU[MAX_COMPONENTS];         //
+  int aBlockY_MCU[MAX_COMPONENTS];         // 
   //
   // Common
   //

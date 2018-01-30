@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/ioe_gpio.c
+  * @file    BSP/Src/ioe_gpio.c 
   * @author  MCD Application Team
   * @brief   This test check the IO and exti of the MFX expander Driver
   ******************************************************************************
@@ -42,7 +42,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -70,8 +70,8 @@ static void SetMcuGpioToBeConnectedToMfxGPO(void);
   * @retval None
   */
 void IOE_GPIO_demo (void)
-{
-  uint32_t ioe_irq_pending_status, ioe_gpio_status;
+{ 
+  uint32_t ioe_irq_pending_status, ioe_gpio_status; 
   uint32_t lcd_line = 85;
   uint8_t test_result = IOE_GPIO_TEST_PASSED;
   uint8_t all_test_fail = 1;
@@ -81,12 +81,12 @@ void IOE_GPIO_demo (void)
 
   /* Enable the Leds */
   BSP_IO_Init();
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
-
-  BSP_LED_On(LED1);
-  BSP_LED_On(LED2);
-
+  BSP_LED_Init(LED1); 
+  BSP_LED_Init(LED2); 
+  
+  BSP_LED_On(LED1); 
+  BSP_LED_On(LED2); 
+ 
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_OFF);
 
   /* TEST IO_MODE_OUPUT mode */
@@ -100,7 +100,7 @@ void IOE_GPIO_demo (void)
   BSP_IO_WritePin(MFX_CONNECTET_PIN, BSP_IO_PIN_RESET);
   HAL_Delay(1);
   mcu_pin_state = HAL_GPIO_ReadPin (MCU_GPIO_PORT, MCU_GPIO_PIN);
-  if (mcu_pin_state)
+  if (mcu_pin_state) 
   {
     test_result |= IOE_GPIO_TEST_FAILED;
   }
@@ -112,7 +112,7 @@ void IOE_GPIO_demo (void)
   BSP_IO_WritePin(MFX_CONNECTET_PIN, BSP_IO_PIN_SET);
   HAL_Delay(1);
   mcu_pin_state = HAL_GPIO_ReadPin (MCU_GPIO_PORT, MCU_GPIO_PIN);
-  if (mcu_pin_state)
+  if (mcu_pin_state) 
   {
     test_result |= IOE_GPIO_TEST_PASSED;
   }
@@ -124,7 +124,7 @@ void IOE_GPIO_demo (void)
   BSP_IO_WritePin(MFX_CONNECTET_PIN, BSP_IO_PIN_RESET);
   HAL_Delay(1);
   mcu_pin_state = HAL_GPIO_ReadPin (MCU_GPIO_PORT, MCU_GPIO_PIN);
-  if (mcu_pin_state)
+  if (mcu_pin_state) 
   {
     test_result |= IOE_GPIO_TEST_FAILED;
   }
@@ -134,7 +134,7 @@ void IOE_GPIO_demo (void)
   }
 
   lcd_line += 15;
-  if (test_result)
+  if (test_result) 
   {
     BSP_LCD_DisplayStringAt(20, lcd_line, (uint8_t *)"IOE IO_MODE_OUTPUT: FAILED", LEFT_MODE);
   }
@@ -156,7 +156,7 @@ void IOE_GPIO_demo (void)
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
   HAL_Delay(1);
   ioe_gpio_status = BSP_IO_ReadPin (MFX_CONNECTET_PIN);
-  if (ioe_gpio_status)
+  if (ioe_gpio_status) 
   {
     test_result |= IOE_GPIO_TEST_FAILED;
   }
@@ -168,7 +168,7 @@ void IOE_GPIO_demo (void)
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_SET);
   HAL_Delay(1);
   ioe_gpio_status = BSP_IO_ReadPin (MFX_CONNECTET_PIN);
-  if (ioe_gpio_status)
+  if (ioe_gpio_status) 
   {
     test_result |= IOE_GPIO_TEST_PASSED;
   }
@@ -180,7 +180,7 @@ void IOE_GPIO_demo (void)
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
   HAL_Delay(1);
   ioe_gpio_status = BSP_IO_ReadPin (MFX_CONNECTET_PIN);
-  if (ioe_gpio_status)
+  if (ioe_gpio_status) 
   {
     test_result |= IOE_GPIO_TEST_FAILED;
   }
@@ -190,7 +190,7 @@ void IOE_GPIO_demo (void)
   }
 
   lcd_line += 15;
-  if (test_result)
+  if (test_result) 
   {
     BSP_LCD_DisplayStringAt(20, lcd_line, (uint8_t *)"IOE IO_MODE_INPUT: FAILED", LEFT_MODE);
   }
@@ -201,13 +201,13 @@ void IOE_GPIO_demo (void)
   }
 
   SetMcuGpioToBeConnectedToMfxGPI();
-
+		
   /* TEST IO_MODE_IT_HIGH_LEVEL mode */
   /* ---------------------------------- */
   test_result = IOE_GPIO_TEST_PASSED;
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_OFF);
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
-  BSP_IO_ITClear();
+  BSP_IO_ITClear();   
 
   /* BSP_IO_ConfigPin(MFXIO_PIN_6, IO_MODE_INPUT); */
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_IT_HIGH_LEVEL_PD);
@@ -215,9 +215,9 @@ void IOE_GPIO_demo (void)
   HAL_NVIC_DisableIRQ((IRQn_Type)(MFX_IRQOUT_EXTI_IRQn));
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -227,9 +227,9 @@ void IOE_GPIO_demo (void)
 
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_SET);
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_PASSED;
   }
   else
@@ -240,9 +240,9 @@ void IOE_GPIO_demo (void)
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_PASSED;
   }
   else
@@ -251,9 +251,9 @@ void IOE_GPIO_demo (void)
   }
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -262,7 +262,7 @@ void IOE_GPIO_demo (void)
   }
 
   lcd_line += 15;
-  if (test_result)
+  if (test_result) 
   {
     BSP_LCD_DisplayStringAt(20, lcd_line, (uint8_t *)"IOE IO_MODE_IT_HIGH_LEVEL: FAILED", LEFT_MODE);
   }
@@ -278,7 +278,7 @@ void IOE_GPIO_demo (void)
   test_result = IOE_GPIO_TEST_PASSED;
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_OFF);
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_SET);
-  BSP_IO_ITClear();
+  BSP_IO_ITClear();   
 
   /* BSP_IO_ConfigPin(MFXIO_PIN_6, IO_MODE_INPUT); */
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_IT_LOW_LEVEL_PU);
@@ -286,9 +286,9 @@ void IOE_GPIO_demo (void)
   HAL_NVIC_DisableIRQ((IRQn_Type)(MFX_IRQOUT_EXTI_IRQn));
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -299,9 +299,9 @@ void IOE_GPIO_demo (void)
 
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_PASSED;
   }
   else
@@ -312,9 +312,9 @@ void IOE_GPIO_demo (void)
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_SET);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_PASSED;
   }
   else
@@ -323,9 +323,9 @@ void IOE_GPIO_demo (void)
   }
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -334,7 +334,7 @@ void IOE_GPIO_demo (void)
   }
 
   lcd_line += 15;
-  if (test_result)
+  if (test_result) 
   {
     BSP_LCD_DisplayStringAt(20, lcd_line, (uint8_t *)"IOE IO_MODE_IT_LOW_LEVEL: FAILED", LEFT_MODE);
   }
@@ -349,7 +349,7 @@ void IOE_GPIO_demo (void)
   test_result = IOE_GPIO_TEST_PASSED;
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_OFF);
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
-  BSP_IO_ITClear();
+  BSP_IO_ITClear();   
 
   /* BSP_IO_ConfigPin(MFXIO_PIN_6, IO_MODE_INPUT); */
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_IT_RISING_EDGE_PD);
@@ -357,9 +357,9 @@ void IOE_GPIO_demo (void)
   HAL_NVIC_DisableIRQ((IRQn_Type)(MFX_IRQOUT_EXTI_IRQn));
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -370,9 +370,9 @@ void IOE_GPIO_demo (void)
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_SET);
   HAL_Delay(1);
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_PASSED;
   }
   else
@@ -382,9 +382,9 @@ void IOE_GPIO_demo (void)
   HAL_Delay(1);
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -394,9 +394,9 @@ void IOE_GPIO_demo (void)
 
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -405,7 +405,7 @@ void IOE_GPIO_demo (void)
   }
 
   lcd_line += 15;
-  if (test_result)
+  if (test_result) 
   {
     BSP_LCD_DisplayStringAt(20, lcd_line, (uint8_t *)"IOE IO_MODE_IT_RISING_EDGE: FAILED", LEFT_MODE);
   }
@@ -420,7 +420,7 @@ void IOE_GPIO_demo (void)
   test_result = IOE_GPIO_TEST_PASSED;
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_OFF);
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
-  BSP_IO_ITClear();
+  BSP_IO_ITClear();   
 
   /* BSP_IO_ConfigPin(MFXIO_PIN_6, IO_MODE_INPUT); */
   BSP_IO_ConfigPin(MFX_CONNECTET_PIN, IO_MODE_IT_FALLING_EDGE_PU);
@@ -428,9 +428,9 @@ void IOE_GPIO_demo (void)
   HAL_NVIC_DisableIRQ((IRQn_Type)(MFX_IRQOUT_EXTI_IRQn));
 
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -441,9 +441,9 @@ void IOE_GPIO_demo (void)
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_SET);
   HAL_Delay(1);
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_FAILED;
   }
   else
@@ -454,9 +454,9 @@ void IOE_GPIO_demo (void)
   HAL_GPIO_WritePin(MCU_GPIO_PORT, MCU_GPIO_PIN, GPIO_PIN_RESET);
   HAL_Delay(1);
   ioe_irq_pending_status = BSP_IO_ITGetStatus(MFX_CONNECTET_PIN);
-  if (ioe_irq_pending_status)
+  if (ioe_irq_pending_status) 
   {
-    BSP_IO_ITClear();
+    BSP_IO_ITClear();   
     test_result |= IOE_GPIO_TEST_PASSED;
   }
   else
@@ -465,7 +465,7 @@ void IOE_GPIO_demo (void)
   }
 
   lcd_line += 15;
-  if (test_result)
+  if (test_result) 
   {
     BSP_LCD_DisplayStringAt(20, lcd_line, (uint8_t *)"IOE IO_MODE_IT_FALLING_EDGE: FAILED", LEFT_MODE);
   }
@@ -475,7 +475,7 @@ void IOE_GPIO_demo (void)
     all_test_fail = 0;
   }
 
-  if (all_test_fail)
+  if (all_test_fail) 
   {
     BSP_LCD_DisplayStringAt(20, lcd_line + 20, (uint8_t *)"          all IOE tests FAILED !!!", LEFT_MODE);
     BSP_LCD_DisplayStringAt(15, lcd_line + 40, (uint8_t *)"Are you sure that MCU_PB4 pin is connected ", LEFT_MODE);
@@ -484,9 +484,9 @@ void IOE_GPIO_demo (void)
 
   /* We just want to test the good functioning of pending bit and ack on the IOE */
   HAL_NVIC_EnableIRQ((IRQn_Type)(MFX_IRQOUT_EXTI_IRQn));
-
+	
   while (1)
-  {
+  {    
     if(CheckForUserInput() > 0)
     {
       return;
@@ -539,14 +539,14 @@ static void SetMcuGpioToBeConnectedToMfxGPI(void)
   */
 static void IOE_GPIO_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
   BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"IOE_GPIO", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -555,21 +555,21 @@ static void IOE_GPIO_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"Connect the requested pins with a wire", CENTER_MODE);
 
    /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
  }
 
 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

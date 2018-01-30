@@ -241,6 +241,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/croutine.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

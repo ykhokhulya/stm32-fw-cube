@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___corr.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -146,10 +146,10 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description</h2>
 <p>Correlation is a mathematical operation that is similar to convolution. As with convolution, correlation uses two signals to produce a third signal. The underlying algorithms in correlation and convolution are identical except that one of the inputs is flipped in convolution. Correlation is commonly used to measure the similarity between two signals. It has applications in pattern recognition, cryptanalysis, and searching. The CMSIS library provides correlation functions for Q7, Q15, Q31 and floating-point data types. Fast versions of the Q15 and Q31 functions are also provided.</p>
-<dl class="section user"><dt>Algorithm </dt><dd>Let <code>a[n]</code> and <code>b[n]</code> be sequences of length <code>srcALen</code> and <code>srcBLen</code> samples respectively. The convolution of the two signals is denoted by <pre>
-                  c[n] = a[n] * b[n]
-</pre> In correlation, one of the signals is flipped in time <pre>
-                  c[n] = a[n] * b[-n]
+<dl class="section user"><dt>Algorithm </dt><dd>Let <code>a[n]</code> and <code>b[n]</code> be sequences of length <code>srcALen</code> and <code>srcBLen</code> samples respectively. The convolution of the two signals is denoted by <pre>    
+                  c[n] = a[n] * b[n]    
+</pre> In correlation, one of the signals is flipped in time <pre>    
+                  c[n] = a[n] * b[-n]    
 </pre></dd></dl>
 <dl class="section user"><dt></dt><dd>and this is mathematically defined as <div class="image">
 <img src="CorrelateEquation.gif" alt="CorrelateEquation.gif"/>
@@ -742,7 +742,7 @@ Functions</h2></td></tr>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

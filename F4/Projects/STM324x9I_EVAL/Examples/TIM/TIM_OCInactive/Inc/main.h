@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_OCInactive/Inc/main.h
+  * @file    TIM/TIM_OCInactive/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -43,7 +43,7 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* User can use this section to tailor TIMx instance used and associated
+/* User can use this section to tailor TIMx instance used and associated 
    resources */
 /* Definition for TIMx clock resources */
 #define TIMx                           TIM2
@@ -55,7 +55,7 @@
 #define GPIO_PIN_CHANNEL2              GPIO_PIN_2
 #define GPIO_PIN_CHANNEL3              GPIO_PIN_3
 #define GPIO_PIN_CHANNEL4              GPIO_PIN_4
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

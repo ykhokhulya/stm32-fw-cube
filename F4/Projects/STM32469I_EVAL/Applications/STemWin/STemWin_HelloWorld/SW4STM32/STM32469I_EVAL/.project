@@ -177,6 +177,6 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Core/Src/system_stm32f4xx.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

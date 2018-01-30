@@ -1,9 +1,9 @@
 /**
   @page DAC_GenerateConstantSignal_TriggerSW DAC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/DAC/DAC_GenerateConstantSignal_TriggerSW/readme.txt
+  * @file    Examples_LL/DAC/DAC_GenerateConstantSignal_TriggerSW/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the DAC_GenerateConstantSignal_TriggerSW example.
   ******************************************************************************
@@ -35,8 +35,8 @@
 
 @par Example Description
 This example describes how to use the DAC peripheral to generate
-a constant voltage signal;
-This example is based on the STM32F4xx DAC LL API;
+a constant voltage signal; 
+This example is based on the STM32F4xx DAC LL API; 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -58,7 +58,7 @@ Finally, LED1 is turned-on.
 Note: In case of noise on DAC channel, DAC output voltage may trig at a voltage level with an uncertainty of tens of mV.
 
 Connection needed:
-None.
+None. 
 Oscilloscope for monitoring DAC channel output (cf pin below).
 Other peripheral used:
   1 GPIO for push button
@@ -66,9 +66,9 @@ Other peripheral used:
 
 @par Keywords
 
-Analog, DAC, Conversion, Voltage output, Oscilloscope, Signal, Software trigger,
+Analog, DAC, Conversion, Voltage output, Oscilloscope, Signal, Software trigger, 
 
-@par Directory contents
+@par Directory contents 
 
   - DAC/DAC_GenerateConstantSignal_TriggerSW/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - DAC/DAC_GenerateConstantSignal_TriggerSW/Inc/main.h                  Header for main.c module
@@ -81,12 +81,12 @@ Analog, DAC, Conversion, Voltage output, Oscilloscope, Signal, Software trigger,
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx devices.
-
+    
   - This example has been tested with STM32F429ZI-Nucleo Rev B board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

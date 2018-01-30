@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    DAC/DAC_SignalsGeneration/Src/stm32f4xx_it.c
+  * @file    DAC/DAC_SignalsGeneration/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -38,7 +38,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-
+   
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -46,7 +46,7 @@
 
 /** @addtogroup DAC_SignalsGeneration
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -193,7 +193,7 @@ void DACx_DMA_IRQHandler1(void)
 */
 void DACx_DMA_IRQHandler2(void)
 {
-  HAL_DMA_IRQHandler(DacHandle.DMA_Handle2);
+  HAL_DMA_IRQHandler(DacHandle.DMA_Handle2); 
 }
 
 /**
@@ -203,7 +203,7 @@ void DACx_DMA_IRQHandler2(void)
 */
 void DMA2_Stream0_IRQHandler(void)
 {
-
+  
 }
 
 /**
@@ -217,7 +217,7 @@ void DMA2_Stream0_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

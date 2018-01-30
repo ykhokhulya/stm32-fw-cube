@@ -48,7 +48,7 @@
 
 #define _FFCONF 68300	/* Revision ID */
 /*-----------------------------------------------------------------------------/
-/ Additional user header to be used
+/ Additional user header to be used  
 /-----------------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "stm32469i_discovery_sd.h"

@@ -72,7 +72,7 @@
 
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE BEGIN    ============== */
 /**
-  * @brief LED1
+  * @brief LED1 
   */
 
 #define LED1_PIN                           LL_GPIO_PIN_0
@@ -80,7 +80,7 @@
 #define LED1_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOE)
 
 /**
-  * @brief LED2
+  * @brief LED2 
   */
 
 #define LED2_PIN                           LL_GPIO_PIN_1
@@ -88,7 +88,7 @@
 #define LED2_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOE)
 
 /**
-  * @brief LED3
+  * @brief LED3 
   */
 
 #define LED3_PIN                           LL_GPIO_PIN_2
@@ -96,7 +96,7 @@
 #define LED3_GPIO_CLK_ENABLE()             LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOE)
 
 /**
-  * @brief LED4
+  * @brief LED4 
   */
 
 #define LED4_PIN                           LL_GPIO_PIN_3
@@ -108,11 +108,11 @@
   */
 #define SEL_JOY_PIN                         LL_GPIO_PIN_0
 #define SEL_JOY_GPIO_PORT                   GPIOA
-#define SEL_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA)
+#define SEL_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA)   
 #define SEL_JOY_EXTI_LINE                   LL_EXTI_LINE_0
 #define SEL_JOY_EXTI_IRQn                   EXTI0_IRQn
-#define SEL_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(SEL_JOY_EXTI_LINE)
-#define SEL_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(SEL_JOY_EXTI_LINE)
+#define SEL_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(SEL_JOY_EXTI_LINE)   
+#define SEL_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(SEL_JOY_EXTI_LINE)   
 #define SEL_JOY_SYSCFG_SET_EXTI()           do {                                                                     \
                                                 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                \
                                                 LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE0); \
@@ -124,11 +124,11 @@
   */
 #define LEFT_JOY_PIN                         LL_GPIO_PIN_15
 #define LEFT_JOY_GPIO_PORT                   GPIOF
-#define LEFT_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF)
+#define LEFT_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF)   
 #define LEFT_JOY_EXTI_LINE                   LL_EXTI_LINE_15
 #define LEFT_JOY_EXTI_IRQn                   EXTI15_10_IRQn
-#define LEFT_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(LEFT_JOY_EXTI_LINE)
-#define LEFT_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(LEFT_JOY_EXTI_LINE)
+#define LEFT_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(LEFT_JOY_EXTI_LINE)   
+#define LEFT_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(LEFT_JOY_EXTI_LINE)   
 #define LEFT_JOY_SYSCFG_SET_EXTI()           do {                                                                     \
                                                 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                 \
                                                 LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTF, LL_SYSCFG_EXTI_LINE15); \
@@ -140,11 +140,11 @@
   */
 #define UP_JOY_PIN                         LL_GPIO_PIN_0
 #define UP_JOY_GPIO_PORT                   GPIOG
-#define UP_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG)
+#define UP_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG)   
 #define UP_JOY_EXTI_LINE                   LL_EXTI_LINE_0
 #define UP_JOY_EXTI_IRQn                   EXTI0_IRQn
-#define UP_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(UP_JOY_EXTI_LINE)
-#define UP_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(UP_JOY_EXTI_LINE)
+#define UP_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(UP_JOY_EXTI_LINE)   
+#define UP_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(UP_JOY_EXTI_LINE)   
 #define UP_JOY_SYSCFG_SET_EXTI()           do {                                                                      \
                                                 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                \
                                                 LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTG, LL_SYSCFG_EXTI_LINE0); \
@@ -156,11 +156,11 @@
   */
 #define RIGHT_JOY_PIN                         LL_GPIO_PIN_14
 #define RIGHT_JOY_GPIO_PORT                   GPIOF
-#define RIGHT_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF)
+#define RIGHT_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF)   
 #define RIGHT_JOY_EXTI_LINE                   LL_EXTI_LINE_14
 #define RIGHT_JOY_EXTI_IRQn                   EXTI15_10_IRQn
-#define RIGHT_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(RIGHT_JOY_EXTI_LINE)
-#define RIGHT_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(RIGHT_JOY_EXTI_LINE)
+#define RIGHT_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(RIGHT_JOY_EXTI_LINE)   
+#define RIGHT_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(RIGHT_JOY_EXTI_LINE)   
 #define RIGHT_JOY_SYSCFG_SET_EXTI()           do {                                                                    \
                                                 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                 \
                                                 LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTF, LL_SYSCFG_EXTI_LINE14); \
@@ -172,11 +172,11 @@
   */
 #define DOWN_JOY_PIN                         LL_GPIO_PIN_1
 #define DOWN_JOY_GPIO_PORT                   GPIOG
-#define DOWN_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG)
+#define DOWN_JOY_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG)   
 #define DOWN_JOY_EXTI_LINE                   LL_EXTI_LINE_1
 #define DOWN_JOY_EXTI_IRQn                   EXTI1_IRQn
-#define DOWN_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(DOWN_JOY_EXTI_LINE)
-#define DOWN_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(DOWN_JOY_EXTI_LINE)
+#define DOWN_JOY_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(DOWN_JOY_EXTI_LINE)   
+#define DOWN_JOY_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(DOWN_JOY_EXTI_LINE)   
 #define DOWN_JOY_SYSCFG_SET_EXTI()           do {                                                                    \
                                                 LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                \
                                                 LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTG, LL_SYSCFG_EXTI_LINE1); \
@@ -192,7 +192,7 @@
 #define LED_BLINK_FAST  200
 #define LED_BLINK_SLOW  500
 #define LED_BLINK_ERROR 1000
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

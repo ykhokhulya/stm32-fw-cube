@@ -61,7 +61,7 @@
 #define RTC_ERROR_TIMEOUT 1
 
 /**
-  * @brief LED2
+  * @brief LED2 
   */
 
 #define LED2_PIN                           LL_GPIO_PIN_5
@@ -82,7 +82,7 @@
   */
 #define USER_BUTTON_PIN                         LL_GPIO_PIN_13
 #define USER_BUTTON_GPIO_PORT                   GPIOC
-#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
+#define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)   
 
 /* Exported macro ------------------------------------------------------------*/
 

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_EEPROM/Src/stm32f4xx_it.c
+  * @file    I2C/I2C_EEPROM/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and
@@ -166,10 +166,10 @@ void SysTick_Handler(void)
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 /**
-  * @brief  This function handles I2C event interrupt request.
+  * @brief  This function handles I2C event interrupt request.  
   * @param  None
   * @retval None
-  * @Note   This function is redefined in "main.h" and related to I2C data transmission
+  * @Note   This function is redefined in "main.h" and related to I2C data transmission     
   */
 void FMPI2C1_Event_IRQHandler(void)
 {

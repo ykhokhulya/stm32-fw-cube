@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_BreakAndDeadtime/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example shows how to configure the TIMER peripheral to generate
-  *          three center aligned PWM and complementary PWM signals,
-  *          to insert a defined dead time value, to use the break feature and
+  * @brief   This example shows how to configure the TIMER peripheral to generate  
+  *          three center aligned PWM and complementary PWM signals, 
+  *          to insert a defined dead time value, to use the break feature and 
   *          to lock the desired parameters, using the STM32F4xx TIM LL API.
   *          Peripheral initialization done using LL unitary services functions.
   ******************************************************************************
@@ -69,9 +69,9 @@ int main(void)
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
 
-  /* Configure GPIO ports */
+  /* Configure GPIO ports */  
   ConfigureGPIO();
-
+  
   /* Configure timer instance */
   ConfigureTIMBreakAndDeadtime();
 
@@ -85,12 +85,12 @@ int main(void)
   * @brief  This function enables the peripheral clocks on required GPIOs and
   *         configures PA.08 (TIM1_CH1), PA.07 (TIM1_CH1N), PA.09 (TIM1_CH2),
   *         PB.00 (TIM1_CH2N), PA.10 (TIM1_CH3), PB.01 (TIM1_CH3N) and
-  *         PA.06 (TIM1_BKIN).
+  *         PA.06 (TIM1_BKIN). 
   * @param  None
   * @retval None
   */
 __INLINE void ConfigureGPIO(void)
-{
+{  
   /******************************/
   /* Peripheral clocks enabling */
   /******************************/
@@ -100,7 +100,7 @@ __INLINE void ConfigureGPIO(void)
   /*************************/
   /* GPIO AF configuration */
   /*************************/
-
+  
   /* GPIO TIM1_CH1 configuration */
   LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_8, LL_GPIO_MODE_ALTERNATE);
   LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_8, LL_GPIO_PULL_DOWN);
@@ -136,7 +136,7 @@ __INLINE void ConfigureGPIO(void)
   LL_GPIO_SetPinPull(GPIOB, LL_GPIO_PIN_1, LL_GPIO_PULL_DOWN);
   LL_GPIO_SetPinSpeed(GPIOB, LL_GPIO_PIN_1, LL_GPIO_SPEED_FREQ_HIGH);
   LL_GPIO_SetAFPin_0_7(GPIOB, LL_GPIO_PIN_1, LL_GPIO_AF_1);
-
+  
   /* GPIO TIM1_BKIN configuration */
   LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_6, LL_GPIO_MODE_ALTERNATE);
   LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_6, LL_GPIO_PULL_DOWN);
@@ -145,7 +145,7 @@ __INLINE void ConfigureGPIO(void)
 }
 
 /**
-  * @brief  This function enables the peripheral clock on TIM1,
+  * @brief  This function enables the peripheral clock on TIM1, 
   *         configures the TIM1 counter in center-aligned mode,
   *         configures the output channels to generate complementary PWM signals
   *         with 4 us dead-time insertion, configures the break function,
@@ -163,13 +163,13 @@ __STATIC_INLINE void ConfigureTIMBreakAndDeadtime(void)
   /*****************************/
   /* Enable the peripheral clock of TIM1 */
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_TIM1);
-
+  
   /***************************/
   /* Time base configuration */
   /***************************/
   /* Select center-aligned mode */
   LL_TIM_SetCounterMode(TIM1, LL_TIM_COUNTERMODE_CENTER_UP);
-
+  
   /* Set the TIM1 prescaler to get counter clock frequency at 10 MHz */
   /* In this example TIM1 input clock (TIM1CLK) frequency is set to APB2      */
   /* (PCLK2), since APB2 pre-scaler is equal to 1.                            */
@@ -177,9 +177,9 @@ __STATIC_INLINE void ConfigureTIMBreakAndDeadtime(void)
   /*  PCLK2 = HCLK                                                            */
   /*  => TIM1CLK = HCLK = SystemCoreClock (100 Mhz)                           */
   LL_TIM_SetPrescaler(TIM1, __LL_TIM_CALC_PSC(SystemCoreClock, 10000000));
-
-  /* Set the TIM1 auto-reload register to get a PWM frequency at 10 KHz */
-  /* Note that in macro call below, targeted PWM frequency must be multiplied */
+  
+  /* Set the TIM1 auto-reload register to get a PWM frequency at 10 KHz */  
+  /* Note that in macro call below, targeted PWM frequency must be multiplied */ 
   /* by 2 when the counter operates in center-aligned mode (due to the       */
   /* symmetry of the pattern).                                                */
   LL_TIM_SetAutoReload(TIM1, __LL_TIM_CALC_ARR(SystemCoreClock, LL_TIM_GetPrescaler(TIM1), 10000*2));
@@ -189,13 +189,13 @@ __STATIC_INLINE void ConfigureTIMBreakAndDeadtime(void)
   /*********************************/
   /* Set output channel 1 in PWM1 mode */
   LL_TIM_OC_SetMode(TIM1,  LL_TIM_CHANNEL_CH1,  LL_TIM_OCMODE_PWM1);
-
+  
   /* Output channel 1 configuration:    */
   LL_TIM_OC_ConfigOutput(TIM1, LL_TIM_CHANNEL_CH1, LL_TIM_OCPOLARITY_HIGH | LL_TIM_OCIDLESTATE_HIGH);
-
+  
   /*  Set PWM output channel 1 duty cycle to 50% */
   LL_TIM_OC_SetCompareCH1(TIM1, LL_TIM_GetAutoReload(TIM1) * 500 / 1000 );
-
+  
   /* Set output channel 2 in PWM1 mode */
   LL_TIM_OC_SetMode(TIM1,  LL_TIM_CHANNEL_CH2,  LL_TIM_OCMODE_PWM1);
 
@@ -213,31 +213,31 @@ __STATIC_INLINE void ConfigureTIMBreakAndDeadtime(void)
 
   /*  Set PWM output channel 3 duty cycle to 12.5% */
   LL_TIM_OC_SetCompareCH3(TIM1, LL_TIM_GetAutoReload(TIM1) * 125 / 1000 );
-
+  
   /*  Enable register preload for every output channels */
   LL_TIM_OC_EnablePreload(TIM1, LL_TIM_CHANNEL_CH1);
   LL_TIM_OC_EnablePreload(TIM1, LL_TIM_CHANNEL_CH2);
   LL_TIM_OC_EnablePreload(TIM1, LL_TIM_CHANNEL_CH3);
-
+  
   /* Set dead time to 4 us (4000 ns) */
   LL_TIM_OC_SetDeadTime(TIM1, __LL_TIM_CALC_DEADTIME(SystemCoreClock, LL_TIM_GetClockDivision(TIM1), 4000));
-
+  
   /********************************/
   /* Break function configuration */
   /********************************/
-  /* Break input configuration:        */
+  /* Break input configuration:        */  
   LL_TIM_ConfigBRK(TIM1, LL_TIM_BREAK_POLARITY_HIGH);
-
+  
   /* Outputs are automatically re-enabled when the *break input is no longer  */
   /* active                                                                   */
   LL_TIM_EnableAutomaticOutput(TIM1);
-
+  
   /* Select the outputs off state in Idle and Run modes */
   LL_TIM_SetOffStates(TIM1, LL_TIM_OSSI_ENABLE, LL_TIM_OSSR_ENABLE);
 
-  /* Enable the break input: */
+  /* Enable the break input: */  
   LL_TIM_EnableBRK(TIM1);
-
+  
   /**************************/
   /* Lock level programming */
   /**************************/
@@ -245,7 +245,7 @@ __STATIC_INLINE void ConfigureTIMBreakAndDeadtime(void)
   /* From this point onward, deadtime, outputs idle state, break input        */
   /* configuration and automatic output enabling can no longer be written     */
   LL_TIM_CC_SetLockLevel(TIM1, LL_TIM_LOCKLEVEL_1);
-
+  
   /**********************************/
   /* Start output signal generation */
   /**********************************/
@@ -256,13 +256,13 @@ __STATIC_INLINE void ConfigureTIMBreakAndDeadtime(void)
                                 LL_TIM_CHANNEL_CH2N |
                                 LL_TIM_CHANNEL_CH3  |
                                 LL_TIM_CHANNEL_CH3N);
-
+  
   /* Enable TIM1 outputs */
   LL_TIM_EnableAllOutputs(TIM1);
-
+  
   /* Enable counter */
   LL_TIM_EnableCounter(TIM1);
-
+  
   /* Force update generation */
   LL_TIM_GenerateEvent_UPDATE(TIM1);
 }

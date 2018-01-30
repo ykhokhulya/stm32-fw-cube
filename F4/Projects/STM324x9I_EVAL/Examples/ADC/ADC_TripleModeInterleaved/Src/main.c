@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC_TripleModeInterleaved/Src/main.c
+  * @file    ADC/ADC_TripleModeInterleaved/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example provides a short description of how to use the ADC
+  * @brief   This example provides a short description of how to use the ADC 
   *          peripheral to convert a regular channel in Triple interleaved mode.
   ******************************************************************************
   * @attention
@@ -44,7 +44,7 @@
 
 /** @addtogroup ADC_TripleModeInterleaved
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -81,28 +81,28 @@ int main(void)
   HAL_Init();
   /* Configure the system clock to 144 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure ADC1, ADC2 and ADC3 peripherals ##########################*/
   ADC_Config();
-
+  
   /*##-2- Start ADC3 conversion process ######################################*/
   if(HAL_ADC_Start(&AdcHandle3) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-
+  
   /*##-3- Start ADC2 conversion process ######################################*/
   if(HAL_ADC_Start(&AdcHandle2) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
-
+  
   /*##-4- Start ADC1 conversion process and enable DMA #######################*/
   /* Note: Considering IT occurring after each number of ADC conversions      */
   /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
@@ -113,7 +113,7 @@ int main(void)
     /* Start Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -122,7 +122,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 144000000
   *            HCLK(Hz)                       = 144000000
@@ -148,8 +148,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
@@ -163,14 +163,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 6;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ 
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
 }
 
@@ -190,7 +190,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  ADC configuration
-  * @note   This function Configure the ADC peripheral
+  * @note   This function Configure the ADC peripheral  
             1) Enable peripheral clocks
             2) Configure ADC Channel 12 pin as analog input
             3) DMA2_Stream0 channel2 configuration
@@ -204,10 +204,10 @@ static void ADC_Config(void)
 {
   ADC_ChannelConfTypeDef sConfig;
   ADC_MultiModeTypeDef mode;
-
+  
   /*##-1- Configure the ADC3 peripheral #######################################*/
   AdcHandle3.Instance          = ADCz;
-
+  
   AdcHandle3.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle3.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle3.Init.ScanConvMode = DISABLE;
@@ -220,28 +220,28 @@ static void ADC_Config(void)
   AdcHandle3.Init.NbrOfConversion = 1;
   AdcHandle3.Init.DMAContinuousRequests = DISABLE;
   AdcHandle3.Init.EOCSelection = DISABLE;
-
+      
   if(HAL_ADC_Init(&AdcHandle3) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure ADC3 regular channel #####################################*/
+  
+  /*##-2- Configure ADC3 regular channel #####################################*/  
   sConfig.Channel = ADCxyz_CHANNEL;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
   sConfig.Offset = 0;
-
+  
   if(HAL_ADC_ConfigChannel(&AdcHandle3, &sConfig) != HAL_OK)
   {
     /* Channel Configuration Error */
     Error_Handler();
   }
-
+  
   /*##-3- Configure the ADC2 peripheral ######################################*/
   AdcHandle2.Instance          = ADCy;
-
+  
   AdcHandle2.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle2.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle2.Init.ScanConvMode = DISABLE;
@@ -254,23 +254,23 @@ static void ADC_Config(void)
   AdcHandle2.Init.NbrOfConversion = 1;
   AdcHandle2.Init.DMAContinuousRequests = DISABLE;
   AdcHandle2.Init.EOCSelection = DISABLE;
-
+      
   if(HAL_ADC_Init(&AdcHandle2) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-4- Configure ADC2 regular channel #####################################*/
+  
+  /*##-4- Configure ADC2 regular channel #####################################*/  
   if(HAL_ADC_ConfigChannel(&AdcHandle2, &sConfig) != HAL_OK)
   {
     /* Channel Configuration Error */
     Error_Handler();
   }
-
+  
   /*##-5- Configure the ADC1 peripheral ######################################*/
   AdcHandle1.Instance          = ADCx;
-
+  
   AdcHandle1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle1.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle1.Init.ScanConvMode = DISABLE;
@@ -283,25 +283,25 @@ static void ADC_Config(void)
   AdcHandle1.Init.NbrOfConversion = 1;
   AdcHandle1.Init.DMAContinuousRequests = ENABLE;
   AdcHandle1.Init.EOCSelection = DISABLE;
-
+      
   if(HAL_ADC_Init(&AdcHandle1) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-6- Configure ADC1 regular channel #####################################*/
+  
+  /*##-6- Configure ADC1 regular channel #####################################*/  
   if(HAL_ADC_ConfigChannel(&AdcHandle1, &sConfig) != HAL_OK)
   {
     /* Channel Configuration Error */
     Error_Handler();
   }
-
+  
   /*##-7- Configure Multimode ################################################*/
   mode.Mode = ADC_TRIPLEMODE_INTERL;
   mode.DMAAccessMode = ADC_DMAACCESSMODE_2;
-  mode.TwoSamplingDelay = ADC_TWOSAMPLINGDELAY_5CYCLES;
-
+  mode.TwoSamplingDelay = ADC_TWOSAMPLINGDELAY_5CYCLES; 
+  
   if(HAL_ADCEx_MultiModeConfigChannel(&AdcHandle1, &mode) != HAL_OK)
   {
     /* Multimode Configuration Error */
@@ -310,10 +310,10 @@ static void ADC_Config(void)
 }
 
 /**
-  * @brief  Conversion complete callback in non blocking mode
+  * @brief  Conversion complete callback in non blocking mode 
   * @param  hadc: ADC handle
-  * @note   This example shows a simple way to report end of conversion, and
-  *         you can add your own implementation.
+  * @note   This example shows a simple way to report end of conversion, and 
+  *         you can add your own implementation.    
   * @retval None
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
@@ -331,7 +331,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

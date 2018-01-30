@@ -100,7 +100,7 @@ int main(void)
 
   /* Start the DMA transfer Flash to Memory */
   LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_0);
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -119,7 +119,7 @@ int main(void)
   * @retval  None
   */
 void Configure_DMA(void)
-{
+{  
   LL_DMA_InitTypeDef dma_initstruct;
 
   /* (1) Enable the clock of DMA2 */
@@ -128,7 +128,7 @@ void Configure_DMA(void)
   /* (2) Configure the DMA functionnal parameters */
 
   /* Reset DMA2 data registers */
-  if (LL_DMA_DeInit(DMA2, LL_DMA_STREAM_0) != SUCCESS)
+  if (LL_DMA_DeInit(DMA2, LL_DMA_STREAM_0) != SUCCESS) 
   {
     /* Initialization Error */
     LED_Blinking(LED_BLINK_ERROR);
@@ -157,8 +157,8 @@ void Configure_DMA(void)
   dma_initstruct.Priority               = LL_DMA_PRIORITY_HIGH;
   dma_initstruct.FIFOMode               = LL_DMA_FIFOMODE_DISABLE;
   dma_initstruct.Channel                = LL_DMA_CHANNEL_0;
-
-  /* Initialize DMA instance according to parameters defined in initialization structure. */
+  
+  /* Initialize DMA instance according to parameters defined in initialization structure. */  
   if (LL_DMA_Init(DMA2, LL_DMA_STREAM_0, &dma_initstruct) != SUCCESS)
   {
     /* Initialization Error */
@@ -233,11 +233,11 @@ void LED_Blinking(uint32_t Period)
 {
   /* Turn LED2 on */
   LL_GPIO_SetOutputPin(LED2_GPIO_PORT, LED2_PIN);
-
+  
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -316,7 +316,7 @@ void TransferComplete()
     /* DMA data transfered not consistency */
     LED_Blinking(LED_BLINK_ERROR);
   }
-
+  
   /* DMA data transfered consistency */
   LED_On();
 }

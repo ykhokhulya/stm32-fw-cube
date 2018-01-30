@@ -54,7 +54,7 @@
   * @{
   */
 
-/** @addtogroup STM32469I_Discovery_LOW_LEVEL
+/** @addtogroup STM32469I_Discovery_LOW_LEVEL 
   * @{
   */
 
@@ -100,10 +100,10 @@ typedef enum
 
 /** @addtogroup Exported_types
   * @{
-  */
-typedef enum
+  */ 
+typedef enum 
 {
-  PB_SET = 0,
+  PB_SET = 0, 
   PB_RESET = !PB_SET
 } ButtonValue_TypeDef;
 
@@ -121,7 +121,7 @@ typedef enum
 /**
   * @}
   */
-
+  
 /**
   * @}
   */

@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    Audio/Audio_playback_and_record/Src/waveplayer.c
+  * @file    Audio/Audio_playback_and_record/Src/waveplayer.c 
   * @author  MCD Application Team
   * @brief   This file provides the Audio Out (playback) interface API
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -81,36 +81,36 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Init(void)
 }
 
 /**
-  * @brief  Starts Audio streaming.
+  * @brief  Starts Audio streaming.    
   * @param  idx: File index
   * @retval Audio error
-  */
+  */ 
 AUDIO_ErrorTypeDef AUDIO_PLAYER_Start(uint8_t idx)
 {
   uint32_t bytesread;
-
+  
   f_close(&WavFile);
   if(AUDIO_GetWavObjectNumber() > idx)
-  {
+  { 
     GetFileInfo(idx, &WaveFormat);
-
+    
     /*Adjust the Audio frequency */
-    PlayerInit(WaveFormat.SampleRate);
-
+    PlayerInit(WaveFormat.SampleRate); 
+    
     BufferCtl.state = BUFFER_OFFSET_NONE;
-
+    
     /* Get Data from USB Flash Disk */
     f_lseek(&WavFile, 0);
-
+    
     /* Fill whole buffer at first time */
-    if(f_read(&WavFile,
-              &BufferCtl.buff[0],
-              AUDIO_OUT_BUFFER_SIZE,
+    if(f_read(&WavFile, 
+              &BufferCtl.buff[0], 
+              AUDIO_OUT_BUFFER_SIZE, 
               (void *)&bytesread) == FR_OK)
     {
       AudioState = AUDIO_STATE_PLAY;
       BSP_LCD_DisplayStringAt(250, LINE(14), (uint8_t *)"  [PLAY ]", LEFT_MODE);
-      {
+      { 
         if(bytesread != 0)
         {
           BSP_AUDIO_OUT_Play((uint16_t*)&BufferCtl.buff[0], AUDIO_OUT_BUFFER_SIZE);
@@ -124,7 +124,7 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Start(uint8_t idx)
 }
 
 /**
-  * @brief  Manages Audio process.
+  * @brief  Manages Audio process. 
   * @param  None
   * @retval Audio error
   */
@@ -133,8 +133,8 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
   uint32_t bytesread, elapsed_time;
   AUDIO_ErrorTypeDef audio_error = AUDIO_ERROR_NONE;
   static uint32_t prev_elapsed_time = 0xFFFFFFFF;
-  uint8_t str[10];
-
+  uint8_t str[10];  
+  
   switch(AudioState)
   {
   case AUDIO_STATE_PLAY:
@@ -143,87 +143,87 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
       BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
       AudioState = AUDIO_STATE_NEXT;
     }
-
+    
     if(BufferCtl.state == BUFFER_OFFSET_HALF)
     {
-      if(f_read(&WavFile,
-                &BufferCtl.buff[0],
-                AUDIO_OUT_BUFFER_SIZE/2,
+      if(f_read(&WavFile, 
+                &BufferCtl.buff[0], 
+                AUDIO_OUT_BUFFER_SIZE/2, 
                 (void *)&bytesread) != FR_OK)
-      {
-        BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
-        return AUDIO_ERROR_IO;
-      }
+      { 
+        BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
+        return AUDIO_ERROR_IO;       
+      } 
       BufferCtl.state = BUFFER_OFFSET_NONE;
-      BufferCtl.fptr += bytesread;
+      BufferCtl.fptr += bytesread; 
     }
-
+    
     if(BufferCtl.state == BUFFER_OFFSET_FULL)
     {
-      if(f_read(&WavFile,
-                &BufferCtl.buff[AUDIO_OUT_BUFFER_SIZE /2],
-                AUDIO_OUT_BUFFER_SIZE/2,
+      if(f_read(&WavFile, 
+                &BufferCtl.buff[AUDIO_OUT_BUFFER_SIZE /2], 
+                AUDIO_OUT_BUFFER_SIZE/2, 
                 (void *)&bytesread) != FR_OK)
-      {
-        BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
-        return AUDIO_ERROR_IO;
-      }
-
+      { 
+        BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
+        return AUDIO_ERROR_IO;       
+      } 
+ 
       BufferCtl.state = BUFFER_OFFSET_NONE;
-      BufferCtl.fptr += bytesread;
+      BufferCtl.fptr += bytesread; 
     }
-
+    
     /* Display elapsed time */
-    elapsed_time = BufferCtl.fptr / WaveFormat.ByteRate;
+    elapsed_time = BufferCtl.fptr / WaveFormat.ByteRate; 
     if(prev_elapsed_time != elapsed_time)
     {
       prev_elapsed_time = elapsed_time;
       sprintf((char *)str, "[%02d:%02d]", (int)(elapsed_time /60), (int)(elapsed_time%60));
-      BSP_LCD_SetTextColor(LCD_COLOR_CYAN);
+      BSP_LCD_SetTextColor(LCD_COLOR_CYAN); 
       BSP_LCD_DisplayStringAt(263, LINE(8), str, LEFT_MODE);
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+      BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
     }
     break;
-
+    
   case AUDIO_STATE_STOP:
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
-    AudioState = AUDIO_STATE_IDLE;
+    AudioState = AUDIO_STATE_IDLE; 
     audio_error = AUDIO_ERROR_IO;
     break;
-
+    
   case AUDIO_STATE_NEXT:
     if(++FilePos >= AUDIO_GetWavObjectNumber())
     {
-      FilePos = 0;
+      FilePos = 0; 
     }
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
     AUDIO_PLAYER_Start(FilePos);
-    break;
-
+    break;    
+    
   case AUDIO_STATE_PREVIOUS:
     if(--FilePos < 0)
     {
-      FilePos = AUDIO_GetWavObjectNumber() - 1;
+      FilePos = AUDIO_GetWavObjectNumber() - 1; 
     }
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
     AUDIO_PLAYER_Start(FilePos);
-    break;
-
+    break;   
+    
   case AUDIO_STATE_PAUSE:
     BSP_LCD_ClearStringLine(LINE(14));
     BSP_LCD_DisplayStringAt(250, LINE(14), (uint8_t *)"  [PAUSE]", LEFT_MODE);
     BSP_AUDIO_OUT_Pause();
     AudioState = AUDIO_STATE_WAIT;
     break;
-
+    
   case AUDIO_STATE_RESUME:
     BSP_LCD_ClearStringLine(LINE(14));
     BSP_LCD_DisplayStringAt(250, LINE(14), (uint8_t *)"  [PLAY ]", LEFT_MODE);
     BSP_AUDIO_OUT_Resume();
     AudioState = AUDIO_STATE_PLAY;
     break;
-
-  case AUDIO_STATE_VOLUME_UP:
+    
+  case AUDIO_STATE_VOLUME_UP: 
     if( uwVolume <= 90)
     {
       uwVolume += 10;
@@ -231,8 +231,8 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
     BSP_AUDIO_OUT_SetVolume(uwVolume);
     AudioState = AUDIO_STATE_PLAY;
     break;
-
-  case AUDIO_STATE_VOLUME_DOWN:
+    
+  case AUDIO_STATE_VOLUME_DOWN:    
     if( uwVolume >= 10)
     {
       uwVolume -= 10;
@@ -240,10 +240,10 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
     BSP_AUDIO_OUT_SetVolume(uwVolume);
     AudioState = AUDIO_STATE_PLAY;
     break;
-
+    
   case AUDIO_STATE_WAIT:
   case AUDIO_STATE_IDLE:
-  case AUDIO_STATE_INIT:
+  case AUDIO_STATE_INIT:    
   default:
     /* Do Nothing */
     break;
@@ -260,7 +260,7 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Stop(void)
 {
   AudioState = AUDIO_STATE_STOP;
   FilePos = 0;
-
+  
   BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
   f_close(&WavFile);
   return AUDIO_ERROR_NONE;
@@ -273,7 +273,7 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Stop(void)
   */
 void AUDIO_PlaybackProbeKey(JOYState_TypeDef state)
 {
-  /* Handle File List Selection */
+  /* Handle File List Selection */ 
   if(state == JOY_UP)
   {
     if(AudioState == AUDIO_STATE_PLAY)
@@ -291,15 +291,15 @@ void AUDIO_PlaybackProbeKey(JOYState_TypeDef state)
   else if(state == JOY_RIGHT)
   {
     AudioState = AUDIO_STATE_NEXT;
-  }
+  }  
   else if(state == JOY_LEFT)
   {
     AudioState = AUDIO_STATE_PREVIOUS;
-  }
+  }    
   else if(state == JOY_SEL)
   {
     AudioState = (AudioState == AUDIO_STATE_WAIT) ? AUDIO_STATE_RESUME : AUDIO_STATE_PAUSE;
-  }
+  } 
 }
 
 /**
@@ -322,7 +322,7 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
   * @retval None
   */
 void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
-{
+{ 
   if(AudioState == AUDIO_STATE_PLAY)
   {
     BufferCtl.state = BUFFER_OFFSET_HALF;
@@ -343,35 +343,35 @@ static AUDIO_ErrorTypeDef GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *inf
 {
   uint32_t bytesread;
   uint32_t duration;
-  uint8_t str[FILEMGR_FILE_NAME_SIZE + 20];
-
-  if(f_open(&WavFile, (char *)FileList.file[file_idx].name, FA_OPEN_EXISTING | FA_READ) == FR_OK)
+  uint8_t str[FILEMGR_FILE_NAME_SIZE + 20];  
+  
+  if(f_open(&WavFile, (char *)FileList.file[file_idx].name, FA_OPEN_EXISTING | FA_READ) == FR_OK) 
   {
     /* Fill the buffer to Send */
     if(f_read(&WavFile, info, sizeof(WaveFormat), (void *)&bytesread) == FR_OK)
     {
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      sprintf((char *)str, "Playing file (%d/%d): %s",
+      BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
+      sprintf((char *)str, "Playing file (%d/%d): %s", 
               file_idx + 1, FileList.ptr,
               (char *)FileList.file[file_idx].name);
       BSP_LCD_ClearStringLine(4);
       BSP_LCD_DisplayStringAtLine(4, str);
-
-      BSP_LCD_SetTextColor(LCD_COLOR_CYAN);
+      
+      BSP_LCD_SetTextColor(LCD_COLOR_CYAN); 
       sprintf((char *)str,  "Sample rate : %d Hz", (int)(info->SampleRate));
       BSP_LCD_ClearStringLine(6);
       BSP_LCD_DisplayStringAtLine(6, str);
-
+      
       sprintf((char *)str,  "Channels number : %d", info->NbrChannels);
-      BSP_LCD_ClearStringLine(7);
+      BSP_LCD_ClearStringLine(7);      
       BSP_LCD_DisplayStringAtLine(7, str);
-
-      duration = info->FileSize / info->ByteRate;
+      
+      duration = info->FileSize / info->ByteRate; 
       sprintf((char *)str, "File Size : %d KB [%02d:%02d]", (int)(info->FileSize/1024), (int)(duration/60), (int)(duration%60));
       BSP_LCD_ClearStringLine(8);
       BSP_LCD_DisplayStringAtLine(8, str);
       BSP_LCD_DisplayStringAt(263, LINE(8), (uint8_t *)"[00:00]", LEFT_MODE);
-      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+      BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
       return AUDIO_ERROR_NONE;
     }
     f_close(&WavFile);
@@ -385,8 +385,8 @@ static AUDIO_ErrorTypeDef GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *inf
   * @retval None
   */
 static uint8_t PlayerInit(uint32_t AudioFreq)
-{
-  /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */
+{ 
+  /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */  
   if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_BOTH, uwVolume, AudioFreq) != 0)
   {
     return 1;
@@ -395,7 +395,7 @@ static uint8_t PlayerInit(uint32_t AudioFreq)
   {
     BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
     return 0;
-  }
+  } 
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

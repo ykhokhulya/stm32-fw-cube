@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Display/LCD_DSI_ImagesSlider/Src/stm32f4xx_it.c
+  * @file    Display/LCD_DSI_ImagesSlider/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and
@@ -48,7 +48,7 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
-extern LTDC_HandleTypeDef hltdc_eval;
+extern LTDC_HandleTypeDef hltdc_eval;   
 extern DSI_HandleTypeDef hdsi_eval;
 QSPI_HandleTypeDef hqspi;
 /* Private define ------------------------------------------------------------*/
@@ -187,7 +187,7 @@ void LTDC_IRQHandler(void)
 }
 
 void LTDC_ER_IRQHandler(void)
-{
+{ 
   /* Check the interrupt and clear flag */
   HAL_LTDC_IRQHandler(&hltdc_eval);
 

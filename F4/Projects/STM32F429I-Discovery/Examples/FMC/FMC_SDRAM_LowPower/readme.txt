@@ -1,9 +1,9 @@
 /**
   @page FMC_SDRAM_LowPower SDRAM memory low power mode use example
-
+  
   @verbatim
   ******************* (C) COPYRIGHT 2017 STMicroelectronics  ********************
-  * @file    FMC/FMC_SDRAM_LowPower/readme.txt
+  * @file    FMC/FMC_SDRAM_LowPower/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FMC SDRAM Low power example.
   ******************************************************************************
@@ -32,47 +32,47 @@
   *
   ******************************************************************************
   @endverbatim
+ 
+@par Example Description 
 
-@par Example Description
-
-This example describes how to configure the FMC controller to access the SDRAM
+This example describes how to configure the FMC controller to access the SDRAM 
 memory in low power mode (SDRAM Self Refresh mode).
 
-It gives a simple application of the FMC SDRAM low power mode use (self refresh mode)
+It gives a simple application of the FMC SDRAM low power mode use (self refresh mode) 
 while the MCU is in a low power mode (STOP mode).
-
-At the beginning of the main program the HAL_Init() function is called to reset
+  
+At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 180 MHz.
-
-The purpose is to show how the SDRAM can retain data written after entering STOP mode.
-STOP mode is a CPU low power mode which stops all peripherals clocks in the 1.2V
+ 
+The purpose is to show how the SDRAM can retain data written after entering STOP mode. 
+STOP mode is a CPU low power mode which stops all peripherals clocks in the 1.2V 
 domain. Only internal SRAM and registers content are preserved in this mode.
-
-After SDRAM initialization, the data is written to the memory and a "self refresh"
-command is sent to the SDRAM. The program waits for USER button to be pushed
-to enter the CPU in STOP mode, the LED3/LED4 are then turned ON.
+  
+After SDRAM initialization, the data is written to the memory and a "self refresh" 
+command is sent to the SDRAM. The program waits for USER button to be pushed 
+to enter the CPU in STOP mode, the LED3/LED4 are then turned ON. 
 The wakeup from STOP mode is done when pushing USER Button again (LED3/LED4 switch off)
-and the CPU returns to RUN mode. At this time, the system clock is reconfigured using
-the function SystemClock_Config().
+and the CPU returns to RUN mode. At this time, the system clock is reconfigured using 
+the function SystemClock_Config(). 
 
-Finally, a "normal mode" command is send to SDRAM memory to exit self refresh mode.
-The data written to SDRAM is read back and checked.
-
+Finally, a "normal mode" command is send to SDRAM memory to exit self refresh mode. 
+The data written to SDRAM is read back and checked.  
+   
 LEDs are used to indicate the system state as following:
   - LED3/LED4 Off  : Wait for entering in STOP mode in pushing USER button
   - LED3/LED4 on  : CPU enters STOP mode.
-  - LED3 on  : correct data transfer (PASS).
+  - LED3 on  : correct data transfer (PASS). 
   - LED4 on  : incorrect data transfer (FAIL).
 
-
+ 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
@@ -81,25 +81,25 @@ LEDs are used to indicate the system state as following:
 
  - FMC/FMC_SDRAM_LowPower/stm32f4xx_hal_conf.h        Library Configuration file
  - FMC/FMC_SDRAM_LowPower/stm32f4xx_it.h              Interrupt handlers header file
- - FMC/FMC_SDRAM_LowPower/main.h                      Main program header file
- - FMC/FMC_SDRAM_LowPower/main.c                      Main program
+ - FMC/FMC_SDRAM_LowPower/main.h                      Main program header file 
+ - FMC/FMC_SDRAM_LowPower/main.c                      Main program  
  - FMC/FMC_SDRAM_LowPower/stm32f4xx_it.c              Interrupt handlers
- - FMC/FMC_SDRAM_LowPower/system_stm32f4xx.c          STM32F4xx system clock configuration file
+ - FMC/FMC_SDRAM_LowPower/system_stm32f4xx.c          STM32F4xx system clock configuration file                                      
 
-
-@par Hardware and Software environment
+      
+@par Hardware and Software environment 
 
   - This example runs on STM32F429xx devices.
-
+    
   - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
-    boards and can be easily tailored to any other supported device
+    boards and can be easily tailored to any other supported device 
     and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
  In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

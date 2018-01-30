@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    DFSDM/DFSDM_PulseSkipper/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -81,12 +81,12 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
   RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
-
+    
   if (channelMspInitCount == 0)
   {
     /* Init only once */
     channelMspInitCount++;
-
+  
     /* Enable DFSDM clock */
     __HAL_RCC_DFSDM1_CLK_ENABLE();
     __HAL_RCC_DFSDM2_CLK_ENABLE();
@@ -99,7 +99,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel)
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = DFSDM1_CKOUT_ALTERNATE;
     HAL_GPIO_Init(DFSDM1_CKOUT_PORT, &GPIO_InitStruct);
-
+    
     __DFSDM2_CKOUT_ENABLE();
     GPIO_InitStruct.Pin = DFSDM2_CKOUT_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -116,7 +116,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel)
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = DFSDM2_DATIN1_ALTERNATE;
     HAL_GPIO_Init(DFSDM2_DATIN1_PORT, &GPIO_InitStruct);
-
+    
     /* MP34DT01TR microphones uses DFSDM2_DATIN7 input pin */
     __DFSDM2_DATIN7_ENABLE();
     GPIO_InitStruct.Pin = DFSDM2_DATIN7_PIN;
@@ -125,7 +125,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel)
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = DFSDM2_DATIN7_ALTERNATE;
     HAL_GPIO_Init(DFSDM2_DATIN7_PORT, &GPIO_InitStruct);
-
+    
     /* MP34DT01TR microphones uses DFSDM1_DATIN1 input pin */
     __DFSDM1_DATIN1_ENABLE();
     GPIO_InitStruct.Pin = DFSDM1_DATIN1_PIN;
@@ -133,7 +133,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = DFSDM1_DATIN1_ALTERNATE;
-    HAL_GPIO_Init(DFSDM1_DATIN1_PORT, &GPIO_InitStruct);
+    HAL_GPIO_Init(DFSDM1_DATIN1_PORT, &GPIO_InitStruct);    
 
     /* Configure and enable PLLI2S clock to generate audio clock */
     rcc_ex_clk_init_struct.PeriphClockSelection = (RCC_PERIPHCLK_I2S_APB1 | RCC_PERIPHCLK_DFSDM);
@@ -144,7 +144,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel)
     rcc_ex_clk_init_struct.PLLI2S.PLLI2SR = 7;
 
     HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
-
+    
     /* I2S_APB1 selected as DFSDM audio clock source */
     __HAL_RCC_DFSDM1AUDIO_CONFIG(RCC_DFSDM1AUDIOCLKSOURCE_I2SAPB1);
     __HAL_RCC_DFSDM2AUDIO_CONFIG(RCC_DFSDM2AUDIOCLKSOURCE_I2SAPB1);
@@ -159,7 +159,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef *hdfsdm_channel)
 void HAL_DFSDM_FilterMspInit(DFSDM_Filter_HandleTypeDef *hdfsdm_filter)
 {
   __HAL_RCC_DMA2_CLK_ENABLE();
-
+  
   if(hdfsdm_filter == &Dfsdm2Filter1Handle)
   {
     /* AUDIO_DFSDM2 FILTER0 */

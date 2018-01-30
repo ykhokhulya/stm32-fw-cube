@@ -1,9 +1,9 @@
 /**
   @page I2C_TwoBoards_RestartAdvComIT I2C example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
-  * @file    I2C/I2C_TwoBoards_RestartAdvComIT/readme.txt
+  * @file    I2C/I2C_TwoBoards_RestartAdvComIT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the I2C_TwoBoards_RestartAdvComIT I2C example.
   ******************************************************************************
@@ -33,10 +33,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example describes how to perform I2C data buffer sequential transmission/reception
-between two boards using an interrupt.
+How to perform multiple I2C data buffer transmission/reception between two boards, 
+in interrupt mode and with restart condition.
 
    _________________________                        _________________________
   |           ______________|                      |______________           |
@@ -55,19 +55,19 @@ between two boards using an interrupt.
   |                      GND|______________________|GND                      |
   |_STM32F429xx_____________|                      |_____________STM32F429xx_|
 
-This example shows how to configure GPIO, DMA and I2C peripherals using
+This example shows how to configure GPIO, DMA and I2C peripherals using 
 2 STM32F429I-Discovery boards for exchanging some datas
 between an I2C Master device using Interrupt mode
 and an I2C Slave device using Interrupt mode through the STM32F4xx I2C HAL API.
 
-At the beginning of the main program the HAL_Init() function is called to reset
+At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 180 MHz.
 
 The I2C peripheral configuration is ensured by the HAL_I2C_Init() function.
 This later is calling the HAL_I2C_MspInit()function which core is implementing
-the configuration of the needed I2C resources according to the used hardware (CLOCK,
+the configuration of the needed I2C resources according to the used hardware (CLOCK, 
 GPIO and NVIC). You may update this function to change I2C configuration.
 
 The User push-button is used to initiate a communication between Master device to Slave.
@@ -76,11 +76,11 @@ User can initiate a new communication after each previous transfer completed.
 The I2C communication is then initiated.
 The project is splitted in two parts the Master Board and the Slave Board
 - Master Board
-  The HAL_I2C_Master_Sequential_Transmit_IT() and the HAL_I2C_Master_Sequential_Receive_IT() functions
+  The HAL_I2C_Master_Sequential_Transmit_IT() and the HAL_I2C_Master_Sequential_Receive_IT() functions 
   allow respectively the transmission and the reception of a predefined data buffer
   in Master mode.
 - Slave Board
-  The HAL_I2C_EnableListen_IT(), HAL_I2C_Slave_Sequential_Receive_IT() and the HAL_I2C_Slave_Sequential_Transmit_IT() functions
+  The HAL_I2C_EnableListen_IT(), HAL_I2C_Slave_Sequential_Receive_IT() and the HAL_I2C_Slave_Sequential_Transmit_IT() functions 
   allow respectively the "Listen" the I2C bus for address match code event, reception and the transmission of a predefined data buffer
   in Slave mode.
 The user can choose between Master and Slave through "#define MASTER_BOARD"
@@ -130,12 +130,12 @@ Slave board side only :
 
 Master board side only :
    - LED3 is turned ON when the transmission process is completed.
-
+ 
 Both side
  - LED4 is turned ON when there is an error in communication process.(communication is stopped if any, using infinite loop)
 
 These LEDs status are kept at same value during 1 Second and then clear, this will allow to monitor a next transfer status.
-
+ 
 Also only on Master board side, Terminal I/O can be used to watch the Action Command Code sent by Master and associated Slave action with IDE in debug mode.
 Depending of IDE, to watch content of Terminal I/O note that
  - When resorting to EWARM IAR IDE:
@@ -143,7 +143,7 @@ Depending of IDE, to watch content of Terminal I/O note that
 
  - When resorting to MDK-ARM KEIL IDE:
  Command Code is displayed on debugger as follows: View --> Serial Viewer --> Debug (printf) Viewer
-
+ 
 - When resorting to AC6 SW4STM32 IDE:
  In Debug configuration window\ Startup, in addition to "monitor reset halt" add the command "monitor arm semihosting enable"
  Command Code is displayed on debugger as follows: Window--> Show View--> Console.
@@ -194,7 +194,7 @@ Slave board side :
 Master board side :
    - LED3 is turned ON when the transmission process is completed.
    - LED3 is turned ON when the reception process is completed.
-
+ 
 Both side
  - LED4 is turned ON when there is an error in communication process.(communication is stopped if any, using infinite loop)
 
@@ -206,7 +206,7 @@ Also only on Master board side, Terminal I/O can be used to watch the Request Co
 
  - When resorting to MDK-ARM KEIL IDE:
  Command Code is displayed on debugger as follows: View --> Serial Viewer --> Debug (printf) Viewer
-
+ 
 - When resorting to AC6 SW4STM32 IDE:
  In Debug configuration window\ Startup, in addition to "monitor reset halt" add the command "monitor arm semihosting enable"
  Command Code is displayed on debugger as follows: Window--> Show View--> Console.
@@ -223,23 +223,23 @@ Also only on Master board side, Terminal I/O can be used to watch the Request Co
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - I2C/I2C_TwoBoards_RestartAdvComIT/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - I2C/I2C_TwoBoards_RestartAdvComIT/Inc/stm32f4xx_it.h          I2C interrupt handlers header file
-  - I2C/I2C_TwoBoards_RestartAdvComIT/Inc/main.h                  Header for main.c module
+  - I2C/I2C_TwoBoards_RestartAdvComIT/Inc/main.h                  Header for main.c module  
   - I2C/I2C_TwoBoards_RestartAdvComIT/Src/stm32f4xx_it.c          I2C interrupt handlers
   - I2C/I2C_TwoBoards_RestartAdvComIT/Src/main.c                  Main program
   - I2C/I2C_TwoBoards_RestartAdvComIT/Src/system_stm32f4xx.c      STM32F4xx system source file
-  - I2C/I2C_TwoBoards_RestartAdvComIT/Src/stm32f4xx_hal_msp.c     HAL MSP file
+  - I2C/I2C_TwoBoards_RestartAdvComIT/Src/stm32f4xx_hal_msp.c     HAL MSP file    
 
 
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx devices.
-
+    
   - This example has been tested with STM32F429I-Discovery board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.    
 
   -STM32F429I-Discovery Set-up
     - Connect I2C_SCL line of Master board (PB6, P1) to I2C_SCL line of Slave Board (PB6, P1).
@@ -252,10 +252,10 @@ Also only on Master board side, Terminal I/O can be used to watch the Request Co
   - Press User push-button to initiate a communication by Master device to Slave device.
       User can initiate a new communication after each previous transfer completed.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
     o Uncomment "#define MASTER_BOARD" and load the project in Master Board
     o Comment "#define MASTER_BOARD" and load the project in Slave Board

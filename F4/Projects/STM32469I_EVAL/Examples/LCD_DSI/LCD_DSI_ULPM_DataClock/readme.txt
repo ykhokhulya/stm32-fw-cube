@@ -1,13 +1,13 @@
 /**
-  @page LCD_DSI_ULPM_DataClock : LCD DSI example : enter and exit DSI ULPM Mode on data lanes
-  and clock lane while displaying a picture 800x480 (WVGA)
+  @page LCD_DSI_ULPM_DataClock : LCD DSI example : enter and exit DSI ULPM Mode on data lanes 
+  and clock lane while displaying a picture 800x480 (WVGA) 
   in landscape mode in DSI mode Video Burst on LCD screen.
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LCD_DSI/LCD_DSI_ULPM_DataClock/readme.txt
   * @author  MCD Application Team
-  * @brief   Description of the LCD DSI enter and exit DSI ULPM Mode on data lane
+  * @brief   Description of the LCD DSI enter and exit DSI ULPM Mode on data lane 
   *          and clock lane example.
   ******************************************************************************
   *
@@ -38,9 +38,10 @@
 
 @par Example Description
 
-This example provides a description of how to use the embedded LCD DSI controller
-(using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board and manage entry and exit in
-DSI ULPM mode on data lane and clock lane.
+This example provides a description of how to use the embedded LCD DSI controller 
+(using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board and manage entry and exit in 
+DSI ULPM mode on data lane and clock lane. 
+
 In this mode, the DSI PHY state machine is entering a low power state
 on data lane and clock lane.
 The DSI Dphy_Clk should be derived from the clock tree PLL.PLLR (ck_plldsi) with a 60 MHz clock for instance
@@ -49,14 +50,14 @@ When exiting from ULPM, the PLL DPHY is first switched back on and locked, then 
 power down and display again as before.
 
 In this example a WVGA landscape picture (800x480) is displayed on LCD in DSI Mode Video Burst.
-On a Tamper button press from the user, the LCD display will be switched off. 100ms later,
+On a Tamper button press from the user, the LCD display will be switched off. 100ms later, 
 the DSI PHY Data and clock lane will enter ULPM mode. DphyClk is derived from PLL.PLLR, then
 DPHY PLL is switched Off.
 
 After 2 seconds in Off mode, The PLL DPHY is switched back on and locked,
 then the ULPM on data and clock lanes will be exited in DPHY DSI state machine.
-The LCD will then be switched back on and display the same image as before
-with a text notifying that the exit from ULPM was successful.
+The LCD will then be switched back on and display the same image as before 
+with a text notifying that the exit from ULPM was successful. 
 
 The image candies_800x480_argb8888 is of format ARGB8888 and is initially copied from Flash to SDRAM Frame Buffer.
 The LTDC is reading continuously the LCD Frame buffer from SDRAM, sent it to DSI Host which sends it in burst mode (DCS commands)
@@ -95,7 +96,7 @@ LED3 ON: an error occured.
 
   - This example runs on STM32F469xx/STM32F479xx devices.
 
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
     board and can be easily tailored to any other supported device
     and development board.
 

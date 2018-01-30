@@ -1,43 +1,43 @@
 /**
   ******************************************************************************
-  * @file    LibJPEG/LibJPEG_Encoding/Src/main.c
+  * @file    LibJPEG/LibJPEG_Encoding/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   *          This sample code shows how to compress BMP file to JPEG file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -54,12 +54,12 @@ FATFS SDFatFs;       /* File system object for SD card logical drive */
 FIL MyFile, MyFile1; /* File objects */
 char SDPath[4];      /* SD card logical drive path */
 
-RGB_typedef *RGB_matrix;
+RGB_typedef *RGB_matrix;  
 uint8_t _aucLine[1024];
 uint32_t counter = 0, bytesread;
 uint32_t offset = 0;
 uint32_t line_counter = 0;
-
+  
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength);
@@ -81,13 +81,13 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
    */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
-  /*##-1- LCD Configuration ##################################################*/
+  
+  /*##-1- LCD Configuration ##################################################*/   
   LCD_Config();
-
+  
   /*##-2- Link the micro SD disk I/O driver ##################################*/
   if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
   {
@@ -102,23 +102,23 @@ int main(void)
         {
           /*##-6- Jpeg encoding ##############################################*/
           jpeg_encode(&MyFile, &MyFile1, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_QUALITY, _aucLine);
-
+          
           /* Close the BMP and JPEG files */
           f_close(&MyFile1);
           f_close(&MyFile);
-
+          
           /*##-7- Jpeg decoding ##############################################*/
           /* Open the BMP file for read */
           if(f_open(&MyFile1, "image.jpg", FA_READ) == FR_OK)
-          {
+          {          
             /* Jpeg Decoding for display to LCD */
             jpeg_decode(&MyFile1, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
-
+            
             /* Close the BMP file */
-            f_close(&MyFile1);
+            f_close(&MyFile1);   
           }
         }
-      }
+      }      
     }
   }
 
@@ -135,23 +135,23 @@ int main(void)
   */
 static void LCD_Config(void)
 {
-  /* Initialize the LCD */
+  /* Initialize the LCD */  
   BSP_LCD_Init();
-
+  
   /* Background Layer Initialization */
   BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);
-
+  
   /* Set Foreground Layer */
   BSP_LCD_SelectLayer(0);
-
+  
   /* Enable the LCD */
-  BSP_LCD_DisplayOn();
-
+  BSP_LCD_DisplayOn();  
+  
   /* Set Display window */
   BSP_LCD_SetLayerWindow(0, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-
+  
   /* Clear the LCD Background layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  BSP_LCD_Clear(LCD_COLOR_WHITE); 
 }
 
 /**
@@ -168,7 +168,7 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
   RGB_matrix =  (RGB_typedef*)Row;
   uint32_t  ARGB32Buffer[IMAGE_WIDTH];
   uint32_t counter = 0;
-
+  
   for(counter = 0; counter < IMAGE_WIDTH; counter++)
   {
     ARGB32Buffer[counter]  = (uint32_t)
@@ -177,63 +177,63 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
         (RGB_matrix[counter].G << 8)|
         (RGB_matrix[counter].R) | 0xFF000000)
          );
-
+    
     *(__IO uint32_t *)(LCD_FRAME_BUFFER + (counter*4) + (IMAGE_WIDTH * line_counter * 4)) = ARGB32Buffer[counter];
   }
 #endif
-
-#ifdef USE_DMA2D
+  
+#ifdef USE_DMA2D  
   static DMA2D_HandleTypeDef hdma2d_eval;
-
+  
   offset = (LCD_FRAME_BUFFER + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4));
   /* Configure the DMA2D Mode, Color Mode and output offset */
   hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
   hdma2d_eval.Init.ColorMode    = DMA2D_ARGB8888;
-  hdma2d_eval.Init.OutputOffset = 0;
-
+  hdma2d_eval.Init.OutputOffset = 0;     
+  
   /* Foreground Configuration */
   hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
   hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB888;
   hdma2d_eval.LayerCfg[1].InputOffset = 0;
-
-  hdma2d_eval.Instance = DMA2D;
-
+  
+  hdma2d_eval.Instance = DMA2D; 
+  
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK)
+  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK)
+    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK) 
     {
       if (HAL_DMA2D_Start(&hdma2d_eval, (uint32_t)Row, (uint32_t)offset, IMAGE_WIDTH, 1) == HAL_OK)
       {
-        /* Polling For DMA transfer */
+        /* Polling For DMA transfer */  
         HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
       }
     }
-  }
+  }   
 #endif
 
-#ifdef SWAP_RB
+#ifdef SWAP_RB 
   uint32_t pixel = 0, width_counter, result = 0, result1 = 0;
-
+  
   for(width_counter = 0; width_counter < IMAGE_WIDTH; width_counter++)
   {
-    pixel = *(__IO uint32_t *)(LCD_FRAME_BUFFER + (width_counter*4) + (IMAGE_WIDTH * line_counter * 4));
+    pixel = *(__IO uint32_t *)(LCD_FRAME_BUFFER + (width_counter*4) + (IMAGE_WIDTH * line_counter * 4)); 
     result1 = (((pixel & 0x00FF0000) >> 16) | ((pixel & 0x000000FF) << 16));
     pixel = pixel & 0xFF00FF00;
     result = (result1 | pixel);
     *(__IO uint32_t *)(LCD_FRAME_BUFFER + (width_counter*4) + (IMAGE_WIDTH * line_counter * 4)) = result;
-
-  }
+    
+  }  
 #endif
-
+  
   line_counter++;
   return 0;
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -259,8 +259,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -274,16 +274,16 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -296,7 +296,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

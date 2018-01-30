@@ -41,15 +41,15 @@ Purpose     : Widget interface
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-
+  
 #ifndef WIDGET_H        /* Avoid multiple inclusion  */
 #define WIDGET_H
 
@@ -255,7 +255,7 @@ typedef struct {
   U16 State;
   #if GUI_DEBUG_LEVEL > 1
     U32 DebugId;
-  #endif
+  #endif  
 } WIDGET;
 
 

@@ -121,7 +121,7 @@ int main(void)
   /* Proceed to LTDC, DSI initialization and LCD screen initialization
    * with the configuration filled in above */
   lcd_status = BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
   OnError_Handler(lcd_status != LCD_OK);
 
   /* Prepare using DMA2D the 800x480 LCD frame buffer to display background color black */

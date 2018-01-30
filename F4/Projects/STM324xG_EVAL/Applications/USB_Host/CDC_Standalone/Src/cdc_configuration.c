@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/CDC_Standalone/Src/cdc_configuration.c
+  * @file    USB_Host/CDC_Standalone/Src/cdc_configuration.c 
   * @author  MCD Application Team
   * @brief   CDC Settings state machine
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -49,7 +49,7 @@
 #define NB_BAUD_RATES   10
 
 /* Private typedef -----------------------------------------------------------*/
-uint8_t *DEMO_CONFIGURATION_menu[] =
+uint8_t *DEMO_CONFIGURATION_menu[] = 
 {
   (uint8_t *)"      1 - Apply new settings                                                ",
   (uint8_t *)"      2 - Set Default settings                                              ",
@@ -66,7 +66,7 @@ uint8_t Prev_DataBitsIdx = 0;
 uint8_t Prev_ParityIdx = 0;
 uint8_t Prev_StopBitsIdx = 0;
 
-const uint32_t BaudRateValue[NB_BAUD_RATES]  =
+const uint32_t BaudRateValue[NB_BAUD_RATES]  = 
 { 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600 };
 
 const uint8_t DataBitsValue[4]     = { 5, 6, 7, 8};
@@ -86,7 +86,7 @@ static void ReturnFromConfigurationMenu(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Handles Configuration Menu.
+  * @brief  Handles Configuration Menu. 
   * @param  None
   * @retval None
   */
@@ -94,7 +94,7 @@ void CDC_Handle_Configuration_Menu(void)
 {
   if(CdcSelectMode == CDC_SELECT_MENU)
   {
-
+    
     switch(CdcDemo.Configuration_state)
     {
     case CDC_CONFIGURATION_IDLE:
@@ -103,9 +103,9 @@ void CDC_Handle_Configuration_Menu(void)
       CdcSettingsState.select = 0;
       CdcDemo.Configuration_state = CDC_CONFIGURATION_WAIT;
       CDC_SelectItem (DEMO_CONFIGURATION_menu, 0xFF);
-      CdcDemo.select = 0;
+      CdcDemo.select = 0;  
       break;
-
+      
     case CDC_CONFIGURATION_WAIT:
       if(CdcDemo.select != PrevSelect)
       {
@@ -120,23 +120,23 @@ void CDC_Handle_Configuration_Menu(void)
             USBH_CDC_SetLineCoding(&hUSBHost, &LineCoding);
             ReturnFromConfigurationMenu();
             break;
-
+            
           case 1: /* Apply default settings */
             USBH_CDC_SetLineCoding(&hUSBHost, &DefaultLineCoding);
-            ReturnFromConfigurationMenu();
+            ReturnFromConfigurationMenu();  
             break;
-
+            
           case 2: /* Return from configuration menu  */
-            ReturnFromConfigurationMenu();
+            ReturnFromConfigurationMenu();      
             break;
-
+            
           default:
             break;
           }
         }
       }
-      break;
-
+      break; 
+      
     default:
       break;
     }
@@ -150,29 +150,29 @@ void CDC_Handle_Configuration_Menu(void)
 
 
 /**
-  * @brief  Returns default configuration.
+  * @brief  Returns default configuration. 
   * @param  None
   * @retval None
   */
 void GetDefaultConfiguration(void)
 {
-      USBH_CDC_GetLineCoding(&hUSBHost, &LineCoding);
+      USBH_CDC_GetLineCoding(&hUSBHost, &LineCoding); 
       DefaultLineCoding = LineCoding;
 }
 /**
-  * @brief  Returns from Configuration Menu.
+  * @brief  Returns from Configuration Menu. 
   * @param  None
   * @retval None
   */
 static void ReturnFromConfigurationMenu(void)
 {
   CdcDemo.state = CDC_DEMO_IDLE;
-  CdcDemo.select = 0;
-
+  CdcDemo.select = 0; 
+  
   /* Restore main menu */
   LCD_ClearTextZone();
-  LCD_LOG_UpdateDisplay();
-  Menu_Init();
+  LCD_LOG_UpdateDisplay();  
+  Menu_Init();  
 }
 
 /**
@@ -200,112 +200,112 @@ static void InitSettingsItems(void)
   /*Initialize baud rate index accordingly */
   switch(LineCoding.b.dwDTERate)
   {
-  case 2400:
+  case 2400: 
     CdcSettingsState.settings.BaudRateIdx = 0;
     break;
-
+    
   case 4800:
     CdcSettingsState.settings.BaudRateIdx = 1;
     break;
-
-  case 9600:
+    
+  case 9600: 
     CdcSettingsState.settings.BaudRateIdx = 2;
     break;
-
+    
   case 19200:
     CdcSettingsState.settings.BaudRateIdx = 3;
     break;
-
-  case 38400:
+    
+  case 38400: 
     CdcSettingsState.settings.BaudRateIdx = 4;
     break;
-
-  case 57600:
+    
+  case 57600: 
     CdcSettingsState.settings.BaudRateIdx = 5;
     break;
-
-  case 115200:
+    
+  case 115200: 
     CdcSettingsState.settings.BaudRateIdx = 6;
     break;
-
-  case 230400:
+    
+  case 230400: 
     CdcSettingsState.settings.BaudRateIdx = 7;
-    break;
-
+    break;    
+    
   case 460800:
     CdcSettingsState.settings.BaudRateIdx = 8;
     break;
-
+    
   case 921600:
     CdcSettingsState.settings.BaudRateIdx = 9;
     break;
-
+    
   default:
     break;
   }
-
+  
   /*Initialize data bits index accordingly */
   switch(LineCoding.b.bDataBits)
   {
-  case 5:
+  case 5: 
     CdcSettingsState.settings.DataBitsIdx = 0;
     break;
-
+    
   case 6:
     CdcSettingsState.settings.DataBitsIdx = 1;
     break;
-
-  case 7:
+    
+  case 7: 
     CdcSettingsState.settings.DataBitsIdx = 2;
     break;
-
+    
   case 8:
     CdcSettingsState.settings.DataBitsIdx = 3;
     break;
-
+    
   default:
     break;
-  }
-
+  }  
+  
   /*Initialize stop bits index accordingly */
   switch(LineCoding.b.bCharFormat)
   {
-  case 1:
+  case 1: 
     CdcSettingsState.settings.StopBitsIdx = 0;
     break;
-
+    
   case 2:
     CdcSettingsState.settings.StopBitsIdx = 1;
     break;
-
+    
   default:
     break;
-  }
-
+  } 
+  
   /* Initialize parity index accordingly */
   switch(LineCoding.b.bParityType)
   {
-  case 0:
+  case 0: 
     CdcSettingsState.settings.ParityIdx = 0;
     break;
-
+    
   case 1:
     CdcSettingsState.settings.ParityIdx = 1;
     break;
-
+    
   case 2:
     CdcSettingsState.settings.ParityIdx = 2;
     break;
-
+    
   default:
     break;
-  }
-
+  }   
+  
   Prev_BaudRateIdx = CdcSettingsState.settings.BaudRateIdx;
   Prev_DataBitsIdx = CdcSettingsState.settings.DataBitsIdx;
   Prev_ParityIdx = CdcSettingsState.settings.StopBitsIdx;
   Prev_StopBitsIdx = CdcSettingsState.settings.ParityIdx;
-  PrevSelect = 0;
+  PrevSelect = 0;    
 }
 
 
@@ -317,14 +317,14 @@ static void InitSettingsItems(void)
 void CDC_SelectSettingsItem(uint8_t item)
 {
   uint8_t str_temp[40];
-
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-
+  
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);  
+  
   switch (item)
   {
   case 0:
     {
-      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA); 
       BSP_LCD_DisplayStringAtLine(9, (uint8_t *)MSG_BITS_PER_SECOND);
       if(LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
@@ -333,31 +333,31 @@ void CDC_SelectSettingsItem(uint8_t item)
       else
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
       BSP_LCD_DisplayStringAtLine(9, str_temp);
-
+      
       /* Display the data bits */
-      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+      BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
       BSP_LCD_DisplayStringAtLine(10, (uint8_t *)MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
       BSP_LCD_DisplayStringAtLine(10, str_temp);
-
+      
       /* Display the parity bits */
       BSP_LCD_DisplayStringAtLine(11, (uint8_t *)MSG_PARITY);
       if(LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s", ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s", ParityArray[LineCoding.b.bParityType]);
-      BSP_LCD_DisplayStringAtLine(11, str_temp);
-
+      BSP_LCD_DisplayStringAtLine(11, str_temp);    
+      
       /* Display the Stop bits */
       BSP_LCD_DisplayStringAtLine(12, (uint8_t *)MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s", StopBitsArray[LineCoding.b.bCharFormat]);
-      BSP_LCD_DisplayStringAtLine(12, str_temp);
+      BSP_LCD_DisplayStringAtLine(12, str_temp);           
     }
     break;
-
+    
   case 1:
     {
-      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+      BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
       BSP_LCD_DisplayStringAtLine(9, (uint8_t *)MSG_BITS_PER_SECOND);
       if(LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
@@ -367,33 +367,33 @@ void CDC_SelectSettingsItem(uint8_t item)
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
       BSP_LCD_DisplayStringAtLine(9, str_temp);
       BSP_LCD_DisplayStringAtLine(9, str_temp);
-
+      
       /*Display the data bits*/
-      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);         
       BSP_LCD_DisplayStringAtLine(10, (uint8_t *)MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
       BSP_LCD_DisplayStringAtLine(10, str_temp);
-
-
+      
+      
       /* Display the parity bits */
-      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);         
       BSP_LCD_DisplayStringAtLine(11, (uint8_t *)MSG_PARITY);
       if(LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s", ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s", ParityArray[LineCoding.b.bParityType]);
-      BSP_LCD_DisplayStringAtLine(11, str_temp);
-
+      BSP_LCD_DisplayStringAtLine(11, str_temp);    
+      
       /* Display the Stop bits */
       BSP_LCD_DisplayStringAtLine(12, (uint8_t *)MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s", StopBitsArray[LineCoding.b.bCharFormat]);
-      BSP_LCD_DisplayStringAtLine(12, str_temp);
+      BSP_LCD_DisplayStringAtLine(12, str_temp);          
     }
     break;
-
+    
   case 2:
     {
-      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+      BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
       BSP_LCD_DisplayStringAtLine(9, (uint8_t *)MSG_BITS_PER_SECOND);
       if(LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
@@ -402,32 +402,32 @@ void CDC_SelectSettingsItem(uint8_t item)
       else
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
       BSP_LCD_DisplayStringAtLine(9, str_temp);
-
+      
       /* Display the data bits */
       BSP_LCD_DisplayStringAtLine(10, (uint8_t *)MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
       BSP_LCD_DisplayStringAtLine(10, str_temp);
-
+      
       /* Display the parity bits */
-      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA); 
       BSP_LCD_DisplayStringAtLine(11, (uint8_t *)MSG_PARITY);
       if(LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s", ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s", ParityArray[LineCoding.b.bParityType]);
-      BSP_LCD_DisplayStringAtLine(11, str_temp);
-
+      BSP_LCD_DisplayStringAtLine(11, str_temp);    
+      
       /* Display the Stop bits */
-      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
       BSP_LCD_DisplayStringAtLine(12, (uint8_t *)MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s", StopBitsArray[LineCoding.b.bCharFormat]);
-      BSP_LCD_DisplayStringAtLine(12, str_temp);
+      BSP_LCD_DisplayStringAtLine(12, str_temp); 
     }
     break;
-
+    
   case 3:
     {
-      BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+      BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
       BSP_LCD_DisplayStringAtLine(9, (uint8_t *)MSG_BITS_PER_SECOND);
       if(LineCoding.b.dwDTERate <= 9600)
         sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
@@ -437,30 +437,30 @@ void CDC_SelectSettingsItem(uint8_t item)
         sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
       BSP_LCD_DisplayStringAtLine(9, str_temp);
       BSP_LCD_DisplayStringAtLine(9, str_temp);
-
+      
       /* Display the data bits */
       BSP_LCD_DisplayStringAtLine(10, (uint8_t *)MSG_DATA_BITS);
       sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
       BSP_LCD_DisplayStringAtLine(10, str_temp);
-
+      
       /* Display the parity bits */
       BSP_LCD_DisplayStringAtLine(11, (uint8_t *)MSG_PARITY);
       if(LineCoding.b.bParityType == 2)
         sprintf((char *)str_temp, "          %s", ParityArray[LineCoding.b.bParityType]);
       else
         sprintf((char *)str_temp, "         %s", ParityArray[LineCoding.b.bParityType]);
-      BSP_LCD_DisplayStringAtLine(11, str_temp);
-
+      BSP_LCD_DisplayStringAtLine(11, str_temp);    
+      
       /* Display the Stop bits */
-      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+      BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA); 
       BSP_LCD_DisplayStringAtLine(12, (uint8_t *)MSG_STOP_BITS);
       sprintf((char *)str_temp, "            %s", StopBitsArray[LineCoding.b.bCharFormat]);
-      BSP_LCD_DisplayStringAtLine(12, str_temp);
+      BSP_LCD_DisplayStringAtLine(12, str_temp);        
     }
     break;
-
+    
   default:
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
     BSP_LCD_DisplayStringAtLine(9, (uint8_t *)MSG_BITS_PER_SECOND);
     if(LineCoding.b.dwDTERate <= 9600)
       sprintf((char *)str_temp, "         %lu", LineCoding.b.dwDTERate);
@@ -470,24 +470,24 @@ void CDC_SelectSettingsItem(uint8_t item)
       sprintf((char *)str_temp, "       %lu", LineCoding.b.dwDTERate);
     BSP_LCD_DisplayStringAtLine(9, str_temp);
     BSP_LCD_DisplayStringAtLine(9, str_temp);
-
+    
     /* Display the data bits */
     BSP_LCD_DisplayStringAtLine(10, (uint8_t *)MSG_DATA_BITS);
     sprintf((char *)str_temp, "            %d", LineCoding.b.bDataBits);
     BSP_LCD_DisplayStringAtLine(10, str_temp);
-
+    
     /* Display the parity bits */
     BSP_LCD_DisplayStringAtLine(11, (uint8_t *)MSG_PARITY);
     if(LineCoding.b.bParityType == 2)
       sprintf((char *)str_temp, "          %s", ParityArray[LineCoding.b.bParityType]);
     else
       sprintf((char *)str_temp, "         %s", ParityArray[LineCoding.b.bParityType]);
-    BSP_LCD_DisplayStringAtLine(11, str_temp);
-
+    BSP_LCD_DisplayStringAtLine(11, str_temp);    
+    
     /* Display the Stop bits */
     BSP_LCD_DisplayStringAtLine(12, (uint8_t *)MSG_STOP_BITS);
     sprintf((char *)str_temp, "            %s", StopBitsArray[LineCoding.b.bCharFormat]);
-    BSP_LCD_DisplayStringAtLine(12, str_temp);
+    BSP_LCD_DisplayStringAtLine(12, str_temp);         
     break;
   }
 }
@@ -500,31 +500,31 @@ void CDC_SelectSettingsItem(uint8_t item)
 void CDC_AdjustSettingMenu(void)
 {
   uint8_t str_temp[40];
-
-  BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-
+  
+  BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA); 
+  
   if(CdcSettingsState.select != PrevSelect)
   {
     PrevSelect = CdcSettingsState.select;
     CDC_SelectSettingsItem(CdcSettingsState.select);
   }
-
+  
   if(CdcSettingsState.settings.BaudRateIdx != Prev_BaudRateIdx)
   {
     Prev_BaudRateIdx = CdcSettingsState.settings.BaudRateIdx;
-
+    
     if(BaudRateValue[CdcSettingsState.settings.BaudRateIdx] <= 9600)
       sprintf((char *)str_temp, "         %lu", BaudRateValue[CdcSettingsState.settings.BaudRateIdx]);
     else if(BaudRateValue[CdcSettingsState.settings.BaudRateIdx] <= 57600)
       sprintf((char *)str_temp, "        %lu", BaudRateValue[CdcSettingsState.settings.BaudRateIdx]);
     else
       sprintf((char *)str_temp, "       %lu", BaudRateValue[CdcSettingsState.settings.BaudRateIdx]);
-
+    
     BSP_LCD_DisplayStringAtLine(9, str_temp);
-
-    LineCoding.b.dwDTERate = BaudRateValue[CdcSettingsState.settings.BaudRateIdx];
+    
+    LineCoding.b.dwDTERate = BaudRateValue[CdcSettingsState.settings.BaudRateIdx];  
   }
-
+  
   if(CdcSettingsState.settings.DataBitsIdx != Prev_DataBitsIdx)
   {
     Prev_DataBitsIdx = CdcSettingsState.settings.DataBitsIdx;
@@ -532,7 +532,7 @@ void CDC_AdjustSettingMenu(void)
     BSP_LCD_DisplayStringAtLine(10, str_temp);
     LineCoding.b.bDataBits = DataBitsValue[CdcSettingsState.settings.DataBitsIdx];
   }
-
+  
   if(CdcSettingsState.settings.ParityIdx != Prev_ParityIdx)
   {
     Prev_ParityIdx = CdcSettingsState.settings.ParityIdx;
@@ -541,17 +541,17 @@ void CDC_AdjustSettingMenu(void)
     else
       sprintf((char *)str_temp, "         %s", (uint8_t *)ParityArray[CdcSettingsState.settings.ParityIdx]);
     BSP_LCD_DisplayStringAtLine(11, str_temp);
-    LineCoding.b.bParityType = CdcSettingsState.settings.ParityIdx;
+    LineCoding.b.bParityType = CdcSettingsState.settings.ParityIdx;          
   }
-
+  
   if(CdcSettingsState.settings.StopBitsIdx!= Prev_StopBitsIdx)
   {
     Prev_StopBitsIdx = CdcSettingsState.settings.StopBitsIdx;
     sprintf((char *)str_temp, "            %s", StopBitsArray[CdcSettingsState.settings.StopBitsIdx]);
     BSP_LCD_DisplayStringAtLine(12, str_temp);
-    LineCoding.b.bCharFormat = CdcSettingsState.settings.StopBitsIdx;
-  }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    LineCoding.b.bCharFormat = CdcSettingsState.settings.StopBitsIdx;       
+  }  
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
 }
 
 /**
@@ -561,8 +561,8 @@ void CDC_AdjustSettingMenu(void)
   */
 void CDC_Settings_ProbeKey(JOYState_TypeDef state)
 {
-  /* Handle Configuration inputs */
-  /**** Vertical selection ****/
+  /* Handle Configuration inputs */ 
+  /**** Vertical selection ****/ 
   if((state == JOY_UP) && (CdcSettingsState.select > 0))
   {
     CdcSettingsState.select --;
@@ -571,28 +571,28 @@ void CDC_Settings_ProbeKey(JOYState_TypeDef state)
   {
     CdcSettingsState.select ++;
   }
-  /**** Horizontal selection ****/
+  /**** Horizontal selection ****/   
   else if(state == JOY_RIGHT)
   {
     if((CdcSettingsState.select == 0) && (CdcSettingsState.settings.BaudRateIdx < 9))
     {
       CdcSettingsState.settings.BaudRateIdx ++;
     }
-
+    
     if((CdcSettingsState.select == 1) && (CdcSettingsState.settings.DataBitsIdx < 3 ))
     {
       CdcSettingsState.settings.DataBitsIdx ++;
     }
-
+    
     if((CdcSettingsState.select == 2) && (CdcSettingsState.settings.ParityIdx < 2))
     {
       CdcSettingsState.settings.ParityIdx ++;
     }
-
+    
     if((CdcSettingsState.select == 3) && (CdcSettingsState.settings.StopBitsIdx < 1))
     {
       CdcSettingsState.settings.StopBitsIdx ++;
-    }
+    }       
   }
   else if(state == JOY_LEFT)
   {
@@ -600,21 +600,21 @@ void CDC_Settings_ProbeKey(JOYState_TypeDef state)
     {
       CdcSettingsState.settings.BaudRateIdx --;
     }
-
+    
     if((CdcSettingsState.select == 1) && (CdcSettingsState.settings.DataBitsIdx > 0))
     {
       CdcSettingsState.settings.DataBitsIdx --;
-    }
-
+    } 
+    
     if((CdcSettingsState.select == 2) && (CdcSettingsState.settings.ParityIdx > 0))
     {
       CdcSettingsState.settings.ParityIdx --;
     }
-
+    
     if((CdcSettingsState.select == 3) && (CdcSettingsState.settings.StopBitsIdx > 0))
     {
       CdcSettingsState.settings.StopBitsIdx --;
-    }
+    }          
   }
 }
 
@@ -625,7 +625,7 @@ void CDC_Settings_ProbeKey(JOYState_TypeDef state)
   */
 void USBH_CDC_LineCodingChanged(USBH_HandleTypeDef *phost)
 {
-  LCD_DbgLog("New CDC Settings applied!\n");
+  LCD_DbgLog("New CDC Settings applied!\n"); 
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

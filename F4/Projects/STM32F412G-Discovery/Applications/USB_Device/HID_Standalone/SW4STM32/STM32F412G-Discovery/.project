@@ -157,6 +157,6 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/usbd_conf.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

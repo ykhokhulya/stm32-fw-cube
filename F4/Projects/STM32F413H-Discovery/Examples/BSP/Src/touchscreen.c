@@ -47,10 +47,10 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define  CIRCLE_RADIUS        28
-#define  LINE_LENGHT          30
+#define  LINE_LENGHT          30    
 /* Private macro -------------------------------------------------------------*/
 #define  CIRCLE_XPOS(i)       (((i == 1) | (i == 3)) ?  BSP_LCD_GetXSize()/4 : BSP_LCD_GetXSize() - 60)
-#define  CIRCLE_YPOS(i)       (((i == 1) | (i == 2)) ? BSP_LCD_GetYSize()/2 : BSP_LCD_GetYSize() -40)
+#define  CIRCLE_YPOS(i)       (((i == 1) | (i == 2)) ? BSP_LCD_GetYSize()/2 : BSP_LCD_GetYSize() -40)    
 
 
 /* Private Structures and Enumerations ------------------------------------------------------------*/
@@ -74,7 +74,7 @@ uint32_t colors[23] = {LCD_COLOR_BLUE, LCD_COLOR_GREEN, LCD_COLOR_RED, LCD_COLOR
                        LCD_COLOR_LIGHTBLUE, LCD_COLOR_LIGHTGREEN, LCD_COLOR_LIGHTRED, LCD_COLOR_LIGHTMAGENTA, LCD_COLOR_ORANGE,
                        LCD_COLOR_LIGHTYELLOW, LCD_COLOR_DARKBLUE, LCD_COLOR_DARKGREEN, LCD_COLOR_DARKRED, LCD_COLOR_DARKCYAN,
                        LCD_COLOR_DARKMAGENTA, LCD_COLOR_DARKYELLOW, LCD_COLOR_LIGHTGRAY, LCD_COLOR_GRAY, LCD_COLOR_DARKGRAY,
-                       LCD_COLOR_BLACK, LCD_COLOR_BROWN};
+                       LCD_COLOR_BLACK, LCD_COLOR_BROWN}; 
 /* Private function prototypes -----------------------------------------------*/
 static void     Touchscreen_SetHint_Demo(TouchScreenDemoTypeDef demoIndex);
 static uint32_t Touchscreen_Handle_NewTouch(void);
@@ -92,7 +92,7 @@ void Touchscreen_demo1(void)
   uint8_t state = 0;
   uint8_t exitTsUseCase = 0;
   uint32_t ts_status = TS_OK;
-
+  
   /* If calibration is not yet done, proceed with calibration */
   if (TouchScreen_IsCalibrationDone() == 0)
   {
@@ -102,13 +102,13 @@ void Touchscreen_demo1(void)
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 65, (uint8_t *)"Touchscreen calibration success.", CENTER_MODE);
     }
   } /* of if (TouchScreen_IsCalibrationDone() == 0) */
-
+  
   if(ts_status == TS_OK)
   {
     /* Display touch screen demo description */
     Touchscreen_SetHint_Demo(TOUCHSCREEN_DEMO_1);
     Touchscreen_DrawBackground_Circles(state);
-
+    
     while (exitTsUseCase == 0)
     {
       if (ts_status == TS_OK)
@@ -120,11 +120,11 @@ void Touchscreen_demo1(void)
         {
           /* One or dual touch have been detected          */
           /* Only take into account the first touch so far */
-
+          
           /* Get X and Y position of the first touch post calibrated */
           x1 = TouchScreen_Get_Calibrated_X(TS_State.touchX[0]);
           y1 = TouchScreen_Get_Calibrated_Y(TS_State.touchY[0]);
-
+          
           if ((y1 > (CIRCLE_YPOS(1) - CIRCLE_RADIUS)) && (y1 < (CIRCLE_YPOS(1) + CIRCLE_RADIUS)))
           {
             if ((x1 > (CIRCLE_XPOS(1) - CIRCLE_RADIUS)) && (x1 < (CIRCLE_XPOS(1) + CIRCLE_RADIUS)))
@@ -136,7 +136,7 @@ void Touchscreen_demo1(void)
                 BSP_LCD_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS);
                 state = 1;
               }
-            }
+            }            
             if ((x1 > (CIRCLE_XPOS(2) - CIRCLE_RADIUS)) && (x1 < (CIRCLE_XPOS(2) + CIRCLE_RADIUS)))
             {
               if ((state & 2) == 0)
@@ -146,10 +146,10 @@ void Touchscreen_demo1(void)
                 BSP_LCD_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS);
                 state = 2;
               }
-            }
+            }            
           }
           if ((y1 > (CIRCLE_YPOS(3) - CIRCLE_RADIUS)) && (y1 < (CIRCLE_YPOS(3) + CIRCLE_RADIUS)))
-          {
+          {          
             if ((x1 > (CIRCLE_XPOS(3) - CIRCLE_RADIUS)) && (x1 < (CIRCLE_XPOS(3) + CIRCLE_RADIUS)))
             {
               if ((state & 4) == 0)
@@ -160,7 +160,7 @@ void Touchscreen_demo1(void)
                 state = 4;
               }
             }
-
+            
             if ((x1 > (CIRCLE_XPOS(4) - CIRCLE_RADIUS)) && (x1 < (CIRCLE_XPOS(4) + CIRCLE_RADIUS)))
             {
               if ((state & 8) == 0)
@@ -173,16 +173,16 @@ void Touchscreen_demo1(void)
             }
           }
         } /* of if(TS_State.TouchDetected) */
-      } /* of if (ts_status == TS_OK) */
-
+      } /* of if (ts_status == TS_OK) */ 
+      
       /* Wait for a key button press to switch to next test case of BSP validation application */
       /* Otherwise stay in the test */
       exitTsUseCase = CheckForUserInput();
-
+      
       HAL_Delay(20);
-    } /* of while (exitTsUseCase == 0) */
-  } /* of if(status == TS_OK) */
-}
+    } /* of while (exitTsUseCase == 0) */  
+  } /* of if(status == TS_OK) */ 
+} 
 
 
 /**
@@ -204,7 +204,7 @@ void Touchscreen_demo2(void)
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 65, (uint8_t *)"Touchscreen calibration success.", CENTER_MODE);
     }
   } /* of if (TouchScreen_IsCalibrationDone() == 0) */
-
+  
   if(ts_status == TS_OK)
   {
     /* Display touch screen demo2 description */
@@ -234,8 +234,8 @@ void Touchscreen_demo3(void)
 {
   uint16_t x1, y1, i, j, k, l;
   uint8_t exitTsUseCase = 0;
-  uint32_t ts_status = TS_OK;
-
+  uint32_t ts_status = TS_OK; 
+  
   /* If calibration is not yet done, proceed with calibration */
   if (TouchScreen_IsCalibrationDone() == 0)
   {
@@ -245,13 +245,13 @@ void Touchscreen_demo3(void)
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 65, (uint8_t *)"Touchscreen calibration success.", CENTER_MODE);
     }
   } /* of if (TouchScreen_IsCalibrationDone() == 0) */
-
+  
   BSP_TS_ITConfig();
-
+  
   /* Display touch screen demo2 description */
   Touchscreen_SetHint_Demo(TOUCHSCREEN_DEMO_3);
   while (CheckForUserInput() == 0);
-
+  
   BSP_LCD_Clear(LCD_COLOR_WHITE);
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   for(k = 0; k < 6; k++)
@@ -261,7 +261,7 @@ void Touchscreen_demo3(void)
       BSP_LCD_DrawRect(40*k, 40*l,40,40);
     }
   }
-
+  
   while (exitTsUseCase == 0)
   {
     ts_status = BSP_TS_GetState(&TS_State);
@@ -269,11 +269,11 @@ void Touchscreen_demo3(void)
     {
       /* One or dual touch have been detected          */
       /* Only take into account the first touch so far */
-
+      
       /* Get X and Y position of the first touch post calibrated */
       x1 = TouchScreen_Get_Calibrated_X(TS_State.touchX[0]);
       y1 = TouchScreen_Get_Calibrated_Y(TS_State.touchY[0]);
-
+      
       for(i = 0; i < 6; i++)
       {
         for(j = 0; j < 6; j++)
@@ -286,7 +286,7 @@ void Touchscreen_demo3(void)
               for(l = 0; l < 6; l++)
               {
                 BSP_LCD_SetTextColor(colors[(touchscreen_color_idx++ % 23)]);
-
+                
                 BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
                 BSP_LCD_DrawRect(40*k, 40*l,40,40);
               }
@@ -299,8 +299,8 @@ void Touchscreen_demo3(void)
     }
     /* Wait for a key button press to switch to next test case of BSP validation application */
     /* Otherwise stay in the test */
-    exitTsUseCase = CheckForUserInput();
-  }
+    exitTsUseCase = CheckForUserInput();    
+  }  
 }
 
 /**
@@ -315,7 +315,7 @@ static uint32_t Touchscreen_Handle_NewTouch(void)
   uint16_t x1 = 0;
   uint16_t y1 = 0;
   uint16_t x2 = 0;
-  uint16_t y2 = 0;
+  uint16_t y2 = 0; 
   uint32_t drawTouch1 = 0; /* activate/deactivate draw of footprint of touch 1 */
   uint32_t drawTouch2 = 0; /* activate/deactivate draw of footprint of touch 2 */
 
@@ -332,7 +332,7 @@ static uint32_t Touchscreen_Handle_NewTouch(void)
     /* Erase previous information on touchscreen play pad area */
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     BSP_LCD_FillRect(12, 92, BSP_LCD_GetXSize() - 24, BSP_LCD_GetYSize() - 104);
-
+    
     /* Re-Draw touch screen play area on LCD */
     BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
     BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize() - 100);
@@ -347,7 +347,7 @@ static uint32_t Touchscreen_Handle_NewTouch(void)
     /* Get X and Y position of the first touch post calibrated */
     x1 = TouchScreen_Get_Calibrated_X(TS_State.touchX[0]);
     y1 = TouchScreen_Get_Calibrated_Y(TS_State.touchY[0]);
-
+    
     if((y1 > (90 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
        (y1 < (BSP_LCD_GetYSize() - 10 - TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
        (x1 > (10 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
@@ -381,7 +381,7 @@ static uint32_t Touchscreen_Handle_NewTouch(void)
       /* Get X and Y position of the second touch post calibrated */
       x2 = TouchScreen_Get_Calibrated_X(TS_State.touchX[1]);
       y2 = TouchScreen_Get_Calibrated_Y(TS_State.touchY[1]);
-
+      
       if((y2 > (90 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
          (y2 < (BSP_LCD_GetYSize() - 10 - TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
          (x2 > (10 + TS_MULTITOUCH_FOOTPRINT_CIRCLE_RADIUS)) &&
@@ -468,14 +468,14 @@ static void Touchscreen_SetHint_Demo(TouchScreenDemoTypeDef demoIndex)
     else
     {
       BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"TS IT mode", CENTER_MODE);
-
+      
       BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
       BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-
+    
       BSP_LCD_SetFont(&Font12);
       BSP_LCD_DisplayStringAt(0, 35, (uint8_t *)"Use the TS to select ", CENTER_MODE);
       BSP_LCD_DisplayStringAt(0, 50, (uint8_t *)"the required rectangle", CENTER_MODE);
-      BSP_LCD_DisplayStringAt(0, 65, (uint8_t *)"Press button to start/quit.", CENTER_MODE);
+      BSP_LCD_DisplayStringAt(0, 65, (uint8_t *)"Press button to start/quit.", CENTER_MODE);      
     }
 
     if(demoIndex != TOUCHSCREEN_DEMO_3)
@@ -495,7 +495,7 @@ static void Touchscreen_SetHint_Demo(TouchScreenDemoTypeDef demoIndex)
   */
 void Touchscreen_DrawBackground_Circles(uint8_t state)
 {
-  uint16_t x, y;
+  uint16_t x, y;  
   switch (state)
   {
     case 0:
@@ -570,7 +570,7 @@ void Touchscreen_DrawBackground_Circles(uint8_t state)
       BSP_LCD_DisplayStringAt(x, y, (uint8_t *)"Dw", LEFT_MODE);
       BSP_LCD_SetFont(&Font12);
 
-      break;
+      break;      
   }
 }
 
@@ -587,44 +587,44 @@ void Touchscreen_DrawControl_Buttons(void)
   BSP_LCD_FillRect(170, 80, 60, 30);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillRect(172, 82, 56, 26);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_DisplayStringAt(185, 93, (uint8_t *)"Vol+", LEFT_MODE);
-
+  
   /* Volume down button*/
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(10, 80, 60, 30);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillRect(12, 82, 56, 26);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_DisplayStringAt(25, 93, (uint8_t *)"Vol-", LEFT_MODE);
-
+  
   /* freq up button*/
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(170, 200, 60, 30);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillRect(172, 202, 56, 26);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_DisplayStringAt(185, 213, (uint8_t *)"Freq+", LEFT_MODE);
-
+  
   /* freq down button */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(10, 200, 60, 30);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillRect(12, 202, 56, 26);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_DisplayStringAt(25, 213, (uint8_t *)"Freq-", LEFT_MODE);
-
+  
   /* pause/play button*/
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(90, 155, 60, 30);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillRect(92, 157, 56, 26);
-
-
+  
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_DisplayStringAt(105, 165, (uint8_t *)"Pause", LEFT_MODE);
 }
@@ -639,7 +639,7 @@ uint8_t TouchScreen_GetTouchPosition(void)
 {
   uint16_t x1, y1;
   uint8_t circleNr = 0;
-
+  
   /* Check in polling mode in touch screen the touch status and coordinates */
   /* of touches if touch occurred                                           */
   BSP_TS_GetState(&TS_State);
@@ -647,22 +647,22 @@ uint8_t TouchScreen_GetTouchPosition(void)
   {
     /* One or dual touch have been detected          */
     /* Only take into account the first touch so far */
-
-    /* Get X and Y position of the first */
+    
+    /* Get X and Y position of the first */          
     x1 = TouchScreen_Get_Calibrated_X(TS_State.touchX[0]);
     y1 = TouchScreen_Get_Calibrated_Y(TS_State.touchY[0]);
-
+    
     if ((y1 > (CIRCLE_YPOS(3) - CIRCLE_RADIUS)) && (y1 < (CIRCLE_YPOS(3) + CIRCLE_RADIUS)))
-    {
+    {          
       if ((x1 > (CIRCLE_XPOS(3) - CIRCLE_RADIUS)) && (x1 < (CIRCLE_XPOS(3) + CIRCLE_RADIUS)))
       {
-
+        
         circleNr = 1;
       }
-
+      
       if ((x1 > (CIRCLE_XPOS(4) - CIRCLE_RADIUS)) && (x1 < (CIRCLE_XPOS(4) + CIRCLE_RADIUS)))
       {
-
+        
         circleNr = 2;
       }
     }
@@ -692,22 +692,22 @@ uint8_t TouchScreen_GetTouchButtonPosition(void)
   uint16_t x1, y1;
   uint8_t buttonnum = 0;
 
-
+  
   /* Check in polling mode in touch screen the touch status and coordinates */
   /* of touches if touch occurred                                           */
   BSP_TS_GetState(&TS_State);
-
-    /* Get X and Y position of the first */
+  
+    /* Get X and Y position of the first */          
     x1 = TouchScreen_Get_Calibrated_X(TS_State.touchX[0]);
     y1 = TouchScreen_Get_Calibrated_Y(TS_State.touchY[0]);
-
+    
   if(TS_State.touchDetected)
-  {
+  { 
     if((x_old != x1) || (y_old != y1))
     {
-      x_old = x1;
-      y_old = y1;
-      buttonnum = Get_ButtonNum(x1, y1);
+      x_old = x1; 
+      y_old = y1; 
+      buttonnum = Get_ButtonNum(x1, y1);     
     }
   }
   return buttonnum;
@@ -715,47 +715,47 @@ uint8_t TouchScreen_GetTouchButtonPosition(void)
 
 static uint8_t Get_ButtonNum(uint16_t x1, uint16_t y1)
 {
-  uint8_t buttonnum = 0;
+  uint8_t buttonnum = 0; 
   if ((y1 < 110))
-  {
+  {          
     if ((x1 > 10) && (x1 < 85))
     {
-
+      
       buttonnum = 3; /* Vol - */
     }
-
+    
     else if ((x1 > 170) && (x1 < 240))
     {
-
+      
       buttonnum = 4; /* Vol + */
     }
   }
   else if ((y1 > 115) && (y1 < 190))
-  {
+  {          
     if ((x1 > 90) && (x1 < 190))
     {
-
+      
       buttonnum = 0xFE; /* Pause/Play */
-    }
+    } 
   }
   else  if (y1 > 200)
-  {
+  {          
     if ((x1 > 10) && (x1 < 80))
     {
-
+      
       buttonnum = 1; /* freq - */
     }
-
+    
     else if ((x1 > 170) && (x1 < 240))
     {
-
+      
       buttonnum = 2; /* freq+ */
     }
   }
   else
   {
     buttonnum = 0xFF;
-  }
+  }  
   return buttonnum;
 }
 /**

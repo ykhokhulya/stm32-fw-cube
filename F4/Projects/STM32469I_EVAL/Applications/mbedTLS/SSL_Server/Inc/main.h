@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.h
   * @author  MCD Application Team
-  * @brief   main application header file.
+  * @brief   main application header file. 
   ******************************************************************************
   * @attention
   *
@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -56,7 +56,7 @@
     "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n" \
     "<h2>mbed TLS Test Server</h2>\r\n" \
     "<p>Successful connection using: %s</p>\r\n"
-
+	
 #ifdef USE_DHCP
 
 #define IP_ADDR0  0

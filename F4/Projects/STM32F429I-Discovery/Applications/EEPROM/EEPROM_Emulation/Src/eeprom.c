@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    EEPROM/EEPROM_Emulation/src/eeprom.c
+  * @file    EEPROM/EEPROM_Emulation/src/eeprom.c 
   * @author  MCD Application Team
   * @brief   This file provides all the EEPROM emulation firmware functions.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -44,7 +44,7 @@
   */
 /** @addtogroup EEPROM_Emulation
   * @{
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "eeprom.h"
@@ -95,7 +95,7 @@ uint16_t EE_Init(void)
   pEraseInit.Sector = PAGE0_ID;
   pEraseInit.NbSectors = 1;
   pEraseInit.VoltageRange = VOLTAGE_RANGE;
-
+  
   /* Check for invalid header states and repair if necessary */
   switch (PageStatus0)
   {
@@ -117,7 +117,7 @@ uint16_t EE_Init(void)
       {
         /* Erase Page0 */
         if(!EE_VerifyPageFullyErased(PAGE0_BASE_ADDRESS))
-        {
+        { 
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
@@ -184,7 +184,7 @@ uint16_t EE_Init(void)
         pEraseInit.VoltageRange = VOLTAGE_RANGE;
         /* Erase Page1 */
         if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
-        {
+        { 
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
@@ -200,7 +200,7 @@ uint16_t EE_Init(void)
         pEraseInit.VoltageRange = VOLTAGE_RANGE;
         /* Erase Page1 */
         if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
-        {
+        { 
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
@@ -246,7 +246,7 @@ uint16_t EE_Init(void)
         pEraseInit.VoltageRange = VOLTAGE_RANGE;
         /* Erase Page1 */
         if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
-        {
+        { 
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
@@ -282,7 +282,7 @@ uint16_t EE_Init(void)
           }
         }
         /* Mark Page1 as valid */
-        FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, PAGE1_BASE_ADDRESS, VALID_PAGE);
+        FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, PAGE1_BASE_ADDRESS, VALID_PAGE);        
         /* If program operation was failed, a Flash error code is returned */
         if (FlashStatus != HAL_OK)
         {
@@ -293,7 +293,7 @@ uint16_t EE_Init(void)
         pEraseInit.VoltageRange = VOLTAGE_RANGE;
         /* Erase Page0 */
         if(!EE_VerifyPageFullyErased(PAGE0_BASE_ADDRESS))
-        {
+        { 
           FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
           /* If erase operation was failed, a Flash error code is returned */
           if (FlashStatus != HAL_OK)
@@ -332,7 +332,7 @@ uint16_t EE_VerifyPageFullyErased(uint32_t Address)
 {
   uint32_t ReadStatus = 1;
   uint16_t AddressValue = 0x5555;
-
+    
   /* Check each active page address starting from end */
   while (Address <= PAGE0_END_ADDRESS)
   {
@@ -342,7 +342,7 @@ uint16_t EE_VerifyPageFullyErased(uint32_t Address)
     /* Compare the read address with the virtual address */
     if (AddressValue != ERASED)
     {
-
+      
       /* In case variable value is read, reset ReadStatus flag */
       ReadStatus = 0;
 
@@ -351,7 +351,7 @@ uint16_t EE_VerifyPageFullyErased(uint32_t Address)
     /* Next address location */
     Address = Address + 4;
   }
-
+  
   /* Return ReadStatus value: (0: Page not erased, 1: Sector erased) */
   return ReadStatus;
 }
@@ -455,14 +455,14 @@ static HAL_StatusTypeDef EE_Format(void)
   uint32_t SectorError = 0;
   FLASH_EraseInitTypeDef pEraseInit;
 
-  pEraseInit.TypeErase = FLASH_TYPEERASE_SECTORS;
+  pEraseInit.TypeErase = FLASH_TYPEERASE_SECTORS;  
   pEraseInit.Sector = PAGE0_ID;
   pEraseInit.NbSectors = 1;
   pEraseInit.VoltageRange = VOLTAGE_RANGE;
   /* Erase Page0 */
   if(!EE_VerifyPageFullyErased(PAGE0_BASE_ADDRESS))
   {
-    FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+    FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError); 
     /* If erase operation was failed, a Flash error code is returned */
     if (FlashStatus != HAL_OK)
     {
@@ -470,7 +470,7 @@ static HAL_StatusTypeDef EE_Format(void)
     }
   }
   /* Set Page0 as valid page: Write VALID_PAGE at Page0 base address */
-  FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, PAGE0_BASE_ADDRESS, VALID_PAGE);
+  FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, PAGE0_BASE_ADDRESS, VALID_PAGE); 
   /* If program operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
   {
@@ -480,15 +480,15 @@ static HAL_StatusTypeDef EE_Format(void)
   pEraseInit.Sector = PAGE1_ID;
   /* Erase Page1 */
   if(!EE_VerifyPageFullyErased(PAGE1_BASE_ADDRESS))
-  {
-    FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+  {  
+    FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError); 
     /* If erase operation was failed, a Flash error code is returned */
     if (FlashStatus != HAL_OK)
     {
       return FlashStatus;
     }
   }
-
+  
   return HAL_OK;
 }
 
@@ -581,7 +581,7 @@ static uint16_t EE_VerifyPageFullWriteVariable(uint16_t VirtAddress, uint16_t Da
 
   /* Get valid Page for write operation */
   ValidPage = EE_FindValidPage(WRITE_IN_VALID_PAGE);
-
+  
   /* Check if there is no valid page */
   if (ValidPage == NO_VALID_PAGE)
   {
@@ -601,14 +601,14 @@ static uint16_t EE_VerifyPageFullWriteVariable(uint16_t VirtAddress, uint16_t Da
     if ((*(__IO uint32_t*)Address) == 0xFFFFFFFF)
     {
       /* Set variable data */
-      FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, Address, Data);
+      FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, Address, Data);       
       /* If program operation was failed, a Flash error code is returned */
       if (FlashStatus != HAL_OK)
       {
         return FlashStatus;
       }
       /* Set variable virtual address */
-      FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, Address + 2, VirtAddress);
+      FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, Address + 2, VirtAddress);       
       /* Return program operation status */
       return FlashStatus;
     }
@@ -669,13 +669,13 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
   }
 
   /* Set the new Page status to RECEIVE_DATA status */
-  FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, NewPageAddress, RECEIVE_DATA);
+  FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, NewPageAddress, RECEIVE_DATA);  
   /* If program operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
   {
     return FlashStatus;
   }
-
+  
   /* Write the variable passed as parameter in the new active page */
   EepromStatus = EE_VerifyPageFullWriteVariable(VirtAddress, Data);
   /* If program operation was failed, a Flash error code is returned */
@@ -709,9 +709,9 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
   pEraseInit.Sector = OldPageId;
   pEraseInit.NbSectors = 1;
   pEraseInit.VoltageRange = VOLTAGE_RANGE;
-
+  
   /* Erase the old Page: Set old Page status to ERASED status */
-  FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);
+  FlashStatus = HAL_FLASHEx_Erase(&pEraseInit, &SectorError);  
   /* If erase operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
   {
@@ -719,7 +719,7 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
   }
 
   /* Set new Page status to VALID_PAGE status */
-  FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, NewPageAddress, VALID_PAGE);
+  FlashStatus = HAL_FLASH_Program(TYPEPROGRAM_HALFWORD, NewPageAddress, VALID_PAGE);   
   /* If program operation was failed, a Flash error code is returned */
   if (FlashStatus != HAL_OK)
   {
@@ -732,6 +732,6 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
 
 /**
   * @}
-  */
+  */ 
 
 /******************* (C) COPYRIGHT 2017 STMicroelectronics *****END OF FILE****/

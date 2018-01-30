@@ -529,6 +529,6 @@
 			<type>1</type>
 			<location>PARENT-6-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pccard.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

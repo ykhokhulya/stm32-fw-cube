@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    WWDG/WWDG_Example/Src/main.c
+  * @file    WWDG/WWDG_Example/Src/main.c  
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use the STM32F4xx WWDG HAL API
-  *          to update at regular period the WWDG counter and how to simulate
-  *          a software fault generating an MCU WWDG reset on expiry of a
+  * @brief   This sample code shows how to use the STM32F4xx WWDG HAL API 
+  *          to update at regular period the WWDG counter and how to simulate 
+  *          a software fault generating an MCU WWDG reset on expiry of a 
   *          programmed time period.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup WWDG_Example
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -66,7 +66,7 @@ static void Error_Handler(void);
   * @retval None
   */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -74,21 +74,21 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
-  /* Configure LED1, LED2 and LED3 */
+  
+  /* Configure LED1, LED2 and LED3 */    
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
-
+  
+  
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
 
   /*##-1- Check if the system has resumed from WWDG reset ####################*/
   if(__HAL_RCC_GET_FLAG(RCC_FLAG_WWDGRST) != RESET)
-  {
+  { 
     /* WWDGRST flag set: Turn LED1 on */
     BSP_LED_On(LED1);
 
@@ -100,12 +100,12 @@ int main(void)
     /* WWDGRST flag is not set: Turn LED1 off */
     BSP_LED_Off(LED1);
   }
-
+  
   /*##-2- Configure the WWDG peripheral ######################################*/
-  /* WWDG clock counter = (PCLK1 (42MHz)/4096)/8) = 1281 Hz (~780 us)
-     WWDG Window value = 80 means that the WWDG counter should be refreshed only
-     when the counter is below 80 (and greater than 64) otherwise a reset will
-     be generated.
+  /* WWDG clock counter = (PCLK1 (42MHz)/4096)/8) = 1281 Hz (~780 us) 
+     WWDG Window value = 80 means that the WWDG counter should be refreshed only 
+     when the counter is below 80 (and greater than 64) otherwise a reset will 
+     be generated. 
      WWDG Counter value = 127, WWDG timeout = ~780 us * 64 = 49.9 ms */
   WwdgHandle.Instance = WWDG;
 
@@ -118,19 +118,19 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
-  /* Infinite loop */
+  
+  /* Infinite loop */ 
   while (1)
   {
     /* Toggle LED2 */
     BSP_LED_Toggle(LED2);
-
+    
     /* Insert 40 ms delay */
     HAL_Delay(40);
-
-    /* Refresh WWDG: update counter value to 127, the refresh window is:
-    ~780 * (127-80) = 36.6ms < refresh window < ~780 * 64 = 49.9ms */
-
+    
+    /* Refresh WWDG: update counter value to 127, the refresh window is: 
+    ~780 * (127-80) = 36.6ms < refresh window < ~780 * 64 = 49.9ms */  
+    
     if(HAL_WWDG_Refresh(&WwdgHandle) != HAL_OK)
     {
       Error_Handler();
@@ -140,7 +140,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -166,8 +166,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -181,14 +181,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -222,7 +222,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -235,10 +235,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

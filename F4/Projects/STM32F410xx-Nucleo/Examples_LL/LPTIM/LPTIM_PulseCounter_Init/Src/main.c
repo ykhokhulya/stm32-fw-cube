@@ -74,13 +74,13 @@ int main(void)
 
   /* Enable the LSI Clock */
   Enable_LSI();
-
+  
   /* Configures LPTIM1 in counter mode */
   Configure_LPTIMCounter();
-
+  
   /* Enter STOP 1 mode */
   EnterStop1Mode();
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -96,32 +96,32 @@ void Enable_LSI(void)
 {
   /* Enable LSI Oscillator */
   LL_RCC_LSI_Enable();
-
-  while(LL_RCC_LSI_IsReady() != 1)
+  
+  while(LL_RCC_LSI_IsReady() != 1) 
   {
   };
 }
 
 /**
-  * @brief  Configures the LPTIM1 instance in counter mode.
+  * @brief  Configures the LPTIM1 instance in counter mode. 
   * @param  None
   * @retval None
   */
 void Configure_LPTIMCounter(void)
 {
   LL_LPTIM_InitTypeDef    lptim_initstruct;
-
+  
   /***************************************/
   /* Select LSI as LPTIM1 clock source */
   /***************************************/
   LL_RCC_SetLPTIMClockSource(LL_RCC_LPTIM1_CLKSOURCE_LSI);
-
+  
   /*************************/
   /* GPIO AF configuration */
   /*************************/
   /* Enable the peripheral clock of GPIOs */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC);
-
+  
   /* GPIO LPTIM1_IN1 configuration */
   LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_0, LL_GPIO_MODE_ALTERNATE);
   LL_GPIO_SetPinPull(GPIOC, LL_GPIO_PIN_0, LL_GPIO_PULL_DOWN);
@@ -138,7 +138,7 @@ void Configure_LPTIMCounter(void)
   /* Peripheral clocks enabling */
   /******************************/
   /* Enable the timer peripheral clock */
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_LPTIM1);
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_LPTIM1); 
 
   /****************************/
   /* LPTIM1 interrupts set-up */
@@ -146,13 +146,13 @@ void Configure_LPTIMCounter(void)
   /* LPTIM1 Interrupt Configuration: EXTI configuration */
   LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_23);
   LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_23);
-
+  
   /* Clear LPTIM1 autoreload match flag */
   LL_LPTIM_ClearFLAG_ARRM(LPTIM1);
-
+  
   /* Enable the Autoreload match Interrupt */
   LL_LPTIM_EnableIT_ARRM(LPTIM1);
-
+  
   /*****************************/
   /* LPTIM1 configuration      */
   /*****************************/
@@ -161,24 +161,24 @@ void Configure_LPTIMCounter(void)
   lptim_initstruct.Prescaler   = LL_LPTIM_PRESCALER_DIV1;
   lptim_initstruct.Waveform    = LL_LPTIM_OUTPUT_WAVEFORM_PWM;
   lptim_initstruct.Polarity    = LL_LPTIM_OUTPUT_POLARITY_REGULAR;
-
+  
   /* Initialize LPTIM instance according to parameters defined in             */
   /* initialization structure.                                                */
   LL_LPTIM_Init(LPTIM1, &lptim_initstruct);
-
+  
   /* The counter is incremented following each valid clock pulse on the LPTIM external Input1 */
   LL_LPTIM_SetCounterMode(LPTIM1, LL_LPTIM_COUNTER_MODE_EXTERNAL);
-
+  
   /*****************************/
   /* Enable the LPTIM1 counter */
   /*****************************/
   LL_LPTIM_Enable(LPTIM1);
-
+  
   /****************************/
   /* Set the Autoreload value */
   /****************************/
   LL_LPTIM_SetAutoReload(LPTIM1, 1000);
-
+  
   /************************/
   /* Start LPTIM1 counter */
   /************************/
@@ -197,7 +197,7 @@ void EnterStop1Mode(void)
     LL_PWR_SetPowerMode(LL_PWR_MODE_STOP_MAINREGU);
 
     /* Set SLEEPDEEP bit of Cortex System Control Register */
-    LL_LPM_EnableDeepSleep();
+    LL_LPM_EnableDeepSleep();  
 
     /* Request Wait For Interrupt */
     __WFI();
@@ -290,7 +290,7 @@ void SystemClock_Config(void)
   */
 void LPTimerAutoreloadMatch_Callback(void)
 {
-  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
 }
 
 #ifdef  USE_FULL_ASSERT

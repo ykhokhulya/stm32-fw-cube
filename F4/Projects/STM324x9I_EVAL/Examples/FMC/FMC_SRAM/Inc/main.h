@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FMC/FMC_SRAM/Inc/main.h
+  * @file    FMC/FMC_SRAM/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -54,7 +54,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* #define SRAM_CONTINUOUS_CLOCK    FMC_CONTINUOUS_CLOCK_SYNC_ONLY */
 #define SRAM_CONTINUOUS_CLOCK    FMC_CONTINUOUS_CLOCK_SYNC_ASYNC
 
-#define SRAM_TIMEOUT     ((uint32_t)0xFFFF)
+#define SRAM_TIMEOUT     ((uint32_t)0xFFFF) 
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

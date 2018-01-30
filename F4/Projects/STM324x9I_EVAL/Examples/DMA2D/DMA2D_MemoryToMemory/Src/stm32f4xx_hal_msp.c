@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemoryToMemory/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.       
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -42,7 +42,7 @@
 
 /** @addtogroup DMA2D_MemoryToMemory
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -56,26 +56,26 @@
   */
 
 /**
-  * @brief DMA2D MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief DMA2D MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hdma2d: DMA2D handle pointer
   * @retval None
   */
 void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef *hdma2d)
-{
+{  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
-  __HAL_RCC_DMA2D_CLK_ENABLE();
+  __HAL_RCC_DMA2D_CLK_ENABLE();   
 
-  /*##-2- NVIC configuration  ################################################*/
+  /*##-2- NVIC configuration  ################################################*/  
   /* NVIC configuration for DMA2D transfer complete interrupt */
   HAL_NVIC_SetPriority(DMA2D_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA2D_IRQn);
+  HAL_NVIC_EnableIRQ(DMA2D_IRQn);  
 }
 
 /**
-  * @brief DMA2D MSP De-Initialization
+  * @brief DMA2D MSP De-Initialization 
   *        This function frees the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   * @param hdma2d: DMA2D handle pointer
@@ -83,12 +83,12 @@ void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef *hdma2d)
   */
 void HAL_DMA2D_MspDeInit(DMA2D_HandleTypeDef *hdma2d)
 {
-
+  
   /*##-1- Reset peripherals ##################################################*/
   /* Enable DMA2D reset state */
   __HAL_RCC_DMA2D_FORCE_RESET();
-
-  /* Release DMA2D from reset state */
+  
+  /* Release DMA2D from reset state */ 
   __HAL_RCC_DMA2D_RELEASE_RESET();
 }
 

@@ -1,9 +1,9 @@
 /**
   @page QSPI_ReadWrite_DMA QSPI Read/Write in DMA mode example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    QSPI/QSPI_ReadWrite_DMA/readme.txt
+  * @file    QSPI/QSPI_ReadWrite_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the QSPI Read/Write in DMA mode example.
   ******************************************************************************
@@ -35,8 +35,10 @@
 
 @par Example Description
 
-This example describes how to erase part of the QSPI memory, write data in DMA mode, read data in DMA mode
-and compare the result in a forever loop.
+How to use a QSPI memory in DMA mode.
+
+This example describes how to erase part of a QSPI memory, write data in DMA mode, read data in DMA mode 
+and compare the result in an infinite loop.
 
 LED1 toggles each time a new comparison is good
 LED2 is on as soon as a comparison error occurs
@@ -49,32 +51,32 @@ In this example, HCLK is configured at 100 MHz.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - QSPI/QSPI_ReadWrite_DMA/Inc/stm32f4xx_hal_conf.h HAL configuration file
   - QSPI/QSPI_ReadWrite_DMA/Inc/stm32f4xx_it.h       Interrupt handlers header file
-  - QSPI/QSPI_ReadWrite_DMA/Inc/main.h               Header for main.c module
+  - QSPI/QSPI_ReadWrite_DMA/Inc/main.h               Header for main.c module  
   - QSPI/QSPI_ReadWrite_DMA/Src/stm32f4xx_it.c       Interrupt handlers
   - QSPI/QSPI_ReadWrite_DMA/Src/main.c               Main program
   - QSPI/QSPI_ReadWrite_DMA/Src/system_stm32f4xx.c   STM32F4xx system source file
-  - QSPI/QSPI_ReadWrite_DMA/Src/stm32f4xx_hal_msp.c  HAL MSP file
+  - QSPI/QSPI_ReadWrite_DMA/Src/stm32f4xx_hal_msp.c  HAL MSP file    
 
 
 @par Hardware and Software environment
 
   - This example runs on STM32F412xG devices.
-
+    
   - This example has been tested with STM32412G-DISCOVERY board and can be
     easily tailored to any other supported device and development board.
 
   - STM32412G-DISCOVERY Set-up :
     - Please ensure that jumpers JP5 is fitted in position 1-2
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

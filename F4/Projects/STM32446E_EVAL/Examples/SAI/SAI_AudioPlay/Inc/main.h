@@ -49,7 +49,7 @@
 /* Exported functions ------------------------------------------------------- */
 void Error_Handler(void);
 
-
+  
 /* SAI peripheral configuration defines */
 #define AUDIO_SAIx                           SAI2_Block_B
 #define AUDIO_SAIx_CLK_ENABLE()              __HAL_RCC_SAI2_CLK_ENABLE()
@@ -66,12 +66,12 @@ void Error_Handler(void);
 #define AUDIO_SAIx_MCLK_GPIO_PORT            GPIOA
 #define AUDIO_SAIx_MCLK_AF                   GPIO_AF10_SAI2
 #define AUDIO_SAIx_MCLK_PIN                  GPIO_PIN_1
-
+   
 #define AUDIO_SAIx_MCLK_ENABLE()             __HAL_RCC_GPIOA_CLK_ENABLE()
 #define AUDIO_SAIx_SCK_ENABLE()              __HAL_RCC_GPIOA_CLK_ENABLE()
 #define AUDIO_SAIx_FS_ENABLE()               __HAL_RCC_GPIOG_CLK_ENABLE()
 #define AUDIO_SAIx_SD_ENABLE()               __HAL_RCC_GPIOG_CLK_ENABLE()
-
+   
 
 #endif /* __MAIN_H */
 

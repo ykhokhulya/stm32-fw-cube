@@ -157,6 +157,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32446E_EVAL/stm32446e_eval_ts.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

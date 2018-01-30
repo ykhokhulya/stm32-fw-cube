@@ -30,7 +30,7 @@ extern void free JPP((void *ptr));
 
 typedef struct {
   struct jpeg_destination_mgr pub; /* public fields */
-#ifdef JFILE
+#ifdef JFILE  
   JFILE * outfile;		/* target stream */
 #endif /* JFILE */
   JOCTET * buffer;		/* start of buffer */

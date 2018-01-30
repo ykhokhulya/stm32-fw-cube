@@ -63,7 +63,7 @@
   * @retval None
   */
 void HAL_RNG_MspInit(RNG_HandleTypeDef *hrng)
-{
+{  
 
 
   /* RNG Peripheral clock enable */
@@ -85,7 +85,7 @@ void HAL_RNG_MspDeInit(RNG_HandleTypeDef *hrng)
 
   /* Release RNG from reset state */
   __HAL_RCC_RNG_RELEASE_RESET();
-}
+} 
 
 /**
   * @}

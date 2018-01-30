@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    RNG/RNG_MultiRNG/Src/main.c
+  * @file    RNG/RNG_MultiRNG/Src/main.c  
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use the STM32F4xx RNG HAL API
+  * @brief   This sample code shows how to use the STM32F4xx RNG HAL API 
   *          to generate Random 32bit numbers.
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup RNG_MultiRNG
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -69,7 +69,7 @@ static void Error_Handler(void);
 int main(void)
 {
   uint32_t counter = 0;
-
+ 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -77,38 +77,38 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+   
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-
+  
   /*##-1- Configure the RNG peripheral #######################################*/
   RngHandle.Instance = RNG;
-
+  
   if(HAL_RNG_Init(&RngHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
   {
     /*##-2- Wait until Key button is pressed #################################*/
     while(BSP_PB_GetState(BUTTON_KEY) != RESET)
     {
     }
-
+    
     /*##-3- Loop while Key button is maintained pressed ######################*/
     while(BSP_PB_GetState(BUTTON_KEY) == RESET)
     {
     }
-
+    
     /*##-4- Generate 8 Random 32bit Numbers ##################################*/
     for(counter = 0; counter < 8; counter++)
     {
@@ -119,7 +119,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -145,8 +145,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -160,14 +160,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -201,7 +201,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -214,10 +214,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

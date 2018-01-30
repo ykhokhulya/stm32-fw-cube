@@ -1,9 +1,9 @@
 /**
   @page CRYP_TDES_DMA  Encrypt data using TDES Algo in ECB mode, with DMA
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CRYP/CRYP_TDES_DMA/readme.txt
+  * @file    CRYP/CRYP_TDES_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP TDES DMA example.
   ******************************************************************************
@@ -33,9 +33,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example provides a short description of how to use the CRYPTO peripheral to
+This example provides a short description of how to use the CRYPTO peripheral to 
 encrypt data using TDES Algorithm.
 
 For this example, DMA is used to transfer data from memory to the CRYPTO processor
@@ -56,18 +56,18 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - CRYP/CRYP_TDES_DMA/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CRYP/CRYP_TDES_DMA/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CRYP/CRYP_TDES_DMA/Inc/main.h                  Header for main.c module
+  - CRYP/CRYP_TDES_DMA/Inc/main.h                  Header for main.c module  
   - CRYP/CRYP_TDES_DMA/Src/stm32f4xx_it.c          Interrupt handlers
   - CRYP/CRYP_TDES_DMA/Src/main.c                  Main program
   - CRYP/CRYP_TDES_DMA/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -79,11 +79,11 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
 
   - This example has been tested and validated with STM32479I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
-
-@par How to use it ?
+ 
+@par How to use it ? 
 
 In order to make the program work, you must do the following:
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

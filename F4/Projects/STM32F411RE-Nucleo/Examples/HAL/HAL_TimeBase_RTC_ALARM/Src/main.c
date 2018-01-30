@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/main.c
+  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   ******************************************************************************
@@ -65,7 +65,7 @@ int main(void)
 
   /* Configure LED2 */
   BSP_LED_Init(LED2);
-
+  
   /* Configure BUTTON_KEY */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   /* -3- Toggle LED2 in an Infinite loop */
@@ -91,7 +91,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Suspend tick increment */
       HAL_SuspendTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 1;
     }
@@ -99,7 +99,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Resume tick increment */
       HAL_ResumeTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 0;
     }
@@ -107,8 +107,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
-  *            System Clock source            = PLL (HSE_CRYSTAL or HSE_BYPASS)
+  *         The system Clock is configured as follow : 
+  *            System Clock source            = PLL (HSE_CRYSTAL or HSE_BYPASS) 
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
   *            AHB Prescaler                  = 1
@@ -132,15 +132,15 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-#ifdef HSE_CRYSTAL
+#ifdef HSE_CRYSTAL  
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
 #elif defined (HSE_BYPASS)
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
@@ -152,8 +152,8 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -184,10 +184,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-*/
+*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/main.c
+  * @file    BSP/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the STM324xG BSP Drivers
   ******************************************************************************
@@ -55,9 +55,9 @@ uint8_t NbLoop = 1;
 BSP_DemoTypedef  BSP_examples[]=
 {
   {Joystick_demo, "JOYSTICK", 0},
-  {Touchscreen_demo, "TOUCHSCREEN", 0},
-  {LCD_demo, "LCD", 0},
-  {SD_demo, "mSD", 0},
+  {Touchscreen_demo, "TOUCHSCREEN", 0}, 
+  {LCD_demo, "LCD", 0}, 
+  {SD_demo, "mSD", 0},  
   {Log_demo, "LCD LOG", 0},
   {EEPROM_demo, "EEPROM", 0},
 };
@@ -74,7 +74,7 @@ static void Display_DemoDescription(void);
   * @retval None
   */
 int main(void)
-{
+{ 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -82,25 +82,25 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
+  BSP_LED_Init(LED2); 
   BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-
+  BSP_LED_Init(LED4); 
+  
   /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-
+  
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init();
-
+  
   Display_DemoDescription();
-
+  
   /* Wait For User inputs */
   while (1)
   {
@@ -108,7 +108,7 @@ int main(void)
     {
       while (BSP_PB_GetState(BUTTON_KEY) == RESET);
       BSP_examples[DemoIndex++].DemoFunc();
-
+      
       if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
       {
         /* Increment number of loops which be used by EEPROM example */
@@ -122,7 +122,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -148,8 +148,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -163,14 +163,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+    
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -189,34 +189,34 @@ static void SystemClock_Config(void)
 static void Display_DemoDescription(void)
 {
   char desc[50];
-
+  
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-
-  /* Clear the LCD */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  
+  /* Clear the LCD */ 
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
-
+  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);  
+  
   /* Display LCD messages */
   BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32F4xG BSP", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 35, (uint8_t *)"Drivers examples", CENTER_MODE);
-
+  
   /* Draw Bitmap */
   BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 65, (uint8_t *)stlogo);
-
+  
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 20, (uint8_t *)"Copyright (c) STMicroelectronics 2014", CENTER_MODE);
-
+  
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 15, BSP_LCD_GetXSize(), 60);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 30, (uint8_t *)"Press User Button to start :", CENTER_MODE);
   sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);   
 }
 
 /**
@@ -242,7 +242,7 @@ uint8_t CheckForUserInput(void)
 void Toggle_Leds(void)
 {
   static uint8_t ticks = 0;
-
+  
   if(ticks++ > 100)
   {
     BSP_LED_Toggle(LED1);
@@ -262,7 +262,7 @@ void Toggle_Leds(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -271,11 +271,11 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-#endif /* USE_FULL_ASSERT */
+#endif /* USE_FULL_ASSERT */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

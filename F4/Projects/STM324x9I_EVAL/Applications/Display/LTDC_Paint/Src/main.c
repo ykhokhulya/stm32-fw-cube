@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    Display/LTDC_Paint/Src/main.c
+  * @file    Display/LTDC_Paint/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -54,12 +54,12 @@
 
 /** @addtogroup LTDC_Paint
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {
-  APPLICATION_IDLE = 0,
-  APPLICATION_RUNNIG
+  APPLICATION_IDLE = 0,  
+  APPLICATION_RUNNIG    
 }MSC_ApplicationTypeDef;
 
 /* Private define ------------------------------------------------------------*/
@@ -74,12 +74,12 @@ static uint32_t Radius = 2;
 static uint32_t x = 0, y = 0;
 static TS_StateTypeDef  TS_State;
 
-const uint32_t aBMPHeader1[14]=
-{0x26E64D42, 0x0000000B, 0x00360000, 0x00280000, 0x02440000, 0x01A40000, 0x00010000,
+const uint32_t aBMPHeader1[14]=         
+{0x26E64D42, 0x0000000B, 0x00360000, 0x00280000, 0x02440000, 0x01A40000, 0x00010000, 
  0x00000018, 0xF5400000, 0x00000006, 0x00000000, 0x00000000, 0x00000000, 0x0000};
 
-const uint32_t aBMPHeader2[14]=
-{0x13A64D42, 0x00000004, 0x00360000, 0x00280000, 0x01A40000, 0x00D40000, 0x00010000,
+const uint32_t aBMPHeader2[14]=         
+{0x13A64D42, 0x00000004, 0x00360000, 0x00280000, 0x01A40000, 0x00D40000, 0x00010000, 
  0x00000018, 0xF5400000, 0x00000006, 0x00000000, 0x00000000, 0x00000000, 0x0000};
 
 /* Variable to save the state of USB */
@@ -113,74 +113,74 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
-  SystemClock_Config();
-
+  SystemClock_Config(); 
+  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
-
-  /*##-1- LCD Initialization #################################################*/
-  /* Initialize the LCD */
+  
+  /*##-1- LCD Initialization #################################################*/ 
+  /* Initialize the LCD */ 
   BSP_LCD_Init();
-
+  
   /* Background Layer Initialization */
   BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER_LAYER0);
-
+  
   /* Set Foreground Layer */
   BSP_LCD_SelectLayer(0);
-
+  
   /* Enable the LCD */
   BSP_LCD_DisplayOn();
-
+  
   /* Clear the LCD Background layer */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /*##-2- Touch screen initialization ########################################*/
   Touchscreen_Calibration();
-
-  /*##-3- USB Initialization #################################################*/
+  
+  /*##-3- USB Initialization #################################################*/ 
   /* Init Host Library */
   if (USBH_Init(&hUSBHost, USBH_UserProcess, 0) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
   }
-
+  
   /* Add Supported Class */
   USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
-
+  
   /* Start Host Process */
   if (USBH_Start(&hUSBHost) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
   }
-
+  
   /*##-4- Link the USB Mass Storage disk I/O driver ##########################*/
-  if(FATFS_LinkDriver(&USBH_Driver, USB_Path) != 0)
+  if(FATFS_LinkDriver(&USBH_Driver, USB_Path) != 0) 
   {
     /* FatFs Initialization Error */
     Error_Handler();
   }
-
+  
   /*##-5- Register the file system object to the FatFs module ################*/
   if(f_mount(&USBDISK_FatFs, (TCHAR const*)USB_Path, 0) != FR_OK)
   {
     /* FatFs Initialization Error */
     Error_Handler();
   }
-
+  
   /*##-6- Draw the menu ######################################################*/
-  Draw_Menu();
-
-  /* Infinite loop */
+  Draw_Menu();  
+  
+  /* Infinite loop */  
   while (1)
-  {
-    /*##-7- Configure the touch screen and Get the position ##################*/
+  { 
+    /*##-7- Configure the touch screen and Get the position ##################*/    
     GetPosition();
-
+    
     USBH_Process(&hUSBHost);
   }
 }
@@ -191,9 +191,9 @@ int main(void)
   * @retval None
   */
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
-{
+{  
   switch (id)
-  {
+  { 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_IDLE;
     if (f_mount(&USBDISK_FatFs, "", 0) != FR_OK)
@@ -202,7 +202,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
       Error_Handler();
     }
     break;
-
+    
   case HOST_USER_CLASS_ACTIVE:
     Appli_state = APPLICATION_RUNNIG;
     break;
@@ -216,9 +216,9 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
   */
 static void GetPosition(void)
 {
-  static uint32_t color_width;
+  static uint32_t color_width;  
   static uint32_t color;
-
+  
   if (BSP_LCD_GetXSize() == 640)
   {
     color_width = 36;
@@ -227,9 +227,9 @@ static void GetPosition(void)
   {
     color_width = 19;
   }
-
+  
  /* Get Touch screen position */
- BSP_TS_GetState(&TS_State);
+ BSP_TS_GetState(&TS_State); 
 
   /* Read the coordinate */
   x = Calibration_GetX(TS_State.x);
@@ -240,7 +240,7 @@ static void GetPosition(void)
     BSP_LCD_FillCircle((x), (y), Radius);
   }
   else if ((TS_State.TouchDetected) & (x > 0 ) & ( x < 50 ))
-  {
+  { 
     if ((TS_State.TouchDetected) & ( y > 0 ) & ( y < color_width ))
     {
       BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
@@ -300,7 +300,7 @@ static void GetPosition(void)
     {
       BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
       Update_Size(Radius);
-    }
+    }    
     else if ((TS_State.TouchDetected) &  (y > (12 * color_width)) & (y < (13 * color_width)))
     {
       /* Get the current text color */
@@ -315,42 +315,42 @@ static void GetPosition(void)
       x = 0;
       y = 0;
     }
-    Update_Color();
+    Update_Color();    
   }
   else if ((TS_State.TouchDetected) & (x > 70 ) & (y > (12 * color_width)) & (y < (13 * color_width)) & ( x < 120 ))
-  {
+  {    
     Radius = 20;
     Update_Size(Radius);
   }
   else if ((TS_State.TouchDetected) & (x > 120 ) & (y > (12 * color_width)) & (y < (13 * color_width)) & ( x < 170 ))
-  {
+  {    
     Radius = 15;
     Update_Size(Radius);
   }
   else if ((TS_State.TouchDetected) & (x > 170 ) & (y > (12 * color_width)) & (y < (13 * color_width)) & ( x < 220 ))
-  {
+  {    
     Radius = 10;
     Update_Size(Radius);
   }
   else if ((TS_State.TouchDetected) & (x > 220 ) & (y > (12 * color_width)) & (y < (13 * color_width)) & ( x < 270 ))
-  {
+  {    
     Radius = 5;
     Update_Size(Radius);
   }
   else if ((TS_State.TouchDetected) & (x > 270 ) & (y > (12 * color_width)) & (y < (13 * color_width)) & ( x < 320 ))
-  {
+  {    
     Radius = 2;
     Update_Size(Radius);
-  }
+  }  
   else if ((TS_State.TouchDetected) & (((x > (BSP_LCD_GetXSize()-5) ) & (y > (12 * color_width)) & (y < (13 * color_width))) | (( x < 55 ) & ( y < 5 ))))
-  {
+  {    
   TS_State.x = 0;
   TS_State.y = 0;
-  }
+  }  
   else if ((TS_State.TouchDetected) & (x > 320) & (y > (BSP_LCD_GetYSize() - 50)) & (x < 370) & (y < BSP_LCD_GetYSize() ))
-  {
+  {   
     Save_Picture();
-  }
+  }    
 }
 
 /**
@@ -359,12 +359,12 @@ static void GetPosition(void)
   * @retval None
   */
 static void Draw_Menu(void)
-{
+{ 
   /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
+  BSP_LCD_Clear(LCD_COLOR_WHITE);  
 
   if (BSP_LCD_GetXSize() == 640)
-  {
+  {  
     /* Draw color image */
     BSP_LCD_DrawBitmap(0, 0, (uint8_t *)color);
   }
@@ -373,19 +373,19 @@ static void Draw_Menu(void)
     /* Draw color image */
     BSP_LCD_DrawBitmap(0, 0, (uint8_t *)color2);
   }
-
+  
   /* Draw save image */
   BSP_LCD_DrawBitmap(310, (BSP_LCD_GetYSize() - 50), (uint8_t *)save);
 
   /* Set Black as text color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-
+  
   /* Draw working window */
   BSP_LCD_DrawRect(61, 0, (BSP_LCD_GetXSize() - 61), (BSP_LCD_GetYSize() - 60));
   BSP_LCD_DrawRect(63, 3, (BSP_LCD_GetXSize() - 66), (BSP_LCD_GetYSize() - 66));
   BSP_LCD_DrawRect(65, 5, (BSP_LCD_GetXSize() - 70), (BSP_LCD_GetYSize() - 70));
   BSP_LCD_DrawRect(67, 7, (BSP_LCD_GetXSize() - 74), (BSP_LCD_GetYSize() - 74));
-
+  
   /* Draw size icons */
   BSP_LCD_FillRect(60, (BSP_LCD_GetYSize() - 48), 250, 48);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
@@ -393,14 +393,14 @@ static void Draw_Menu(void)
   BSP_LCD_FillCircle(145, (BSP_LCD_GetYSize() - 24), 15);
   BSP_LCD_FillCircle(195, (BSP_LCD_GetYSize() - 24), 10);
   BSP_LCD_FillCircle(245, (BSP_LCD_GetYSize() - 24), 5);
-  BSP_LCD_FillCircle(295, (BSP_LCD_GetYSize() - 24), 2);
-
+  BSP_LCD_FillCircle(295, (BSP_LCD_GetYSize() - 24), 2);  
+  
   BSP_LCD_SetTextColor(LCD_COLOR_DARKRED);
   BSP_LCD_SetFont(&Font8);
-  BSP_LCD_DisplayStringAt(360, (BSP_LCD_GetYSize() - 55), (uint8_t *)"Selected Color  Size", LEFT_MODE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_FillRect(380, (BSP_LCD_GetYSize() - 40), 30, 30);
-  BSP_LCD_FillCircle(450, (BSP_LCD_GetYSize()- 24), Radius);
+  BSP_LCD_DisplayStringAt(360, (BSP_LCD_GetYSize() - 55), (uint8_t *)"Selected Color  Size", LEFT_MODE);  
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
+  BSP_LCD_FillRect(380, (BSP_LCD_GetYSize() - 40), 30, 30);  
+  BSP_LCD_FillCircle(450, (BSP_LCD_GetYSize()- 24), Radius); 
 }
 
 /**
@@ -409,28 +409,28 @@ static void Draw_Menu(void)
   * @retval None
   */
 void Save_Picture(void)
-{
+{ 
   FRESULT res1, res2;    /* FatFs function common result code */
   uint32_t byteswritten; /* File write count */
   static uint32_t color;
 
-  /* Get the current text color */
-  color = BSP_LCD_GetTextColor();
-
+  /* Get the current text color */ 
+  color = BSP_LCD_GetTextColor();  
+  
   BSP_LCD_SetTextColor(LCD_COLOR_DARKRED);
   BSP_LCD_SetFont(&Font20);
-
+  
   /* Turn LED1 and LED3 Off */
   BSP_LED_Off(LED1);
   BSP_LED_Off(LED3);
-
+    
   if (Appli_state == APPLICATION_RUNNIG)
   {
     BSP_LCD_DisplayStringAt(0, (BSP_LCD_GetYSize()-35), (uint8_t *)"Saving ... ", RIGHT_MODE);
-
+    
     /*##-1- Prepare the image to be saved ####################################*/
     Prepare_Picture();
-
+    
     /*##-2- Create and Open a new bmp file object with write access ##########*/
     if(f_open(&MyFile, "image.bmp", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
     {
@@ -442,18 +442,18 @@ void Save_Picture(void)
       /*##-3- Write data to the BMP file #####################################*/
       /* Write the BMP header */
       if (BSP_LCD_GetXSize() == 640)
-      {
+      {  
         /* if ampire 640x480 LCD is used */
         res1 = f_write(&MyFile, (uint32_t *)aBMPHeader1, 54, (void *)&byteswritten);
       }
       else
-      {
+      {  
         /* if ampire 480x272 LCD is used */
         res1 = f_write(&MyFile, (uint32_t *)aBMPHeader2, 54, (void *)&byteswritten);
-      }
+      }        
       /* Write the bmp file */
       res2 = f_write(&MyFile, (uint32_t *)CONVERTED_FRAME_BUFFER, ((BSP_LCD_GetYSize()-60)*(BSP_LCD_GetXSize()-60)*3), (void *)&byteswritten);
-
+      
       if((res1 != FR_OK) || (res2 != FR_OK) || (byteswritten == 0))
       {
         /* 'image' file Write or EOF Error */
@@ -494,8 +494,8 @@ void Save_Picture(void)
     /* Wait for 2s */
     HAL_Delay(2000);
   }
-
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+    
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);     
   BSP_LCD_FillRect(480, 430, 160, 50);
   BSP_LCD_SetTextColor(color);
 }
@@ -505,44 +505,44 @@ void Save_Picture(void)
   * @param  None
   * @retval None
   */
-static void Prepare_Picture(void)
-{
+static void Prepare_Picture(void) 
+{ 
   static DMA2D_HandleTypeDef hdma2d_eval;
   uint32_t address1 = CONVERTED_FRAME_BUFFER;
   uint32_t address2 = LCD_FRAME_BUFFER_LAYER0;
   uint32_t index = 0;
-
+  
   /* Configure the DMA2D Mode, Color Mode and output offset */
   hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
   hdma2d_eval.Init.ColorMode    = DMA2D_RGB888;
-  hdma2d_eval.Init.OutputOffset = 0;
-
+  hdma2d_eval.Init.OutputOffset = 0;     
+  
   /* Foreground Configuration */
   hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
   hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
   hdma2d_eval.LayerCfg[1].InputOffset = 60;
-
-  hdma2d_eval.Instance = DMA2D;
+  
+  hdma2d_eval.Instance = DMA2D; 
 
   /* Bypass the bitmap header */
-  address2 += ((BSP_LCD_GetXSize() * (BSP_LCD_GetYSize() - 61) + 60) * 4);
-
+  address2 += ((BSP_LCD_GetXSize() * (BSP_LCD_GetYSize() - 61) + 60) * 4);  
+  
   /* Convert picture to RGB888 pixel format */
   for(index=0; index < (BSP_LCD_GetYSize() - 60); index++)
-  {
+  { 
     /* DMA2D Initialization */
-    if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK)
+    if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK) 
     {
-      if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK)
+      if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK) 
       {
         if (HAL_DMA2D_Start(&hdma2d_eval, address2, address1, (BSP_LCD_GetXSize() - 60), 1) == HAL_OK)
         {
-          /* Polling For DMA transfer */
+          /* Polling For DMA transfer */  
           HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
         }
       }
-    }
+    }    
     /* Increment the source and destination buffers */
     address1 += ((BSP_LCD_GetXSize() - 60)*3);
     address2 -= BSP_LCD_GetXSize()*4;
@@ -571,14 +571,14 @@ static void Error_Handler(void)
 static void Update_Color(void)
 {
   static uint32_t color;
-
+  
   /* Get the current text color */
   color = BSP_LCD_GetTextColor();
   /* Update the selected color icon */
   BSP_LCD_FillRect(380, (BSP_LCD_GetYSize()-40), 30, 30);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);    
   BSP_LCD_DrawRect(380, (BSP_LCD_GetYSize()-40), 30, 30);
-  BSP_LCD_SetTextColor(color);
+  BSP_LCD_SetTextColor(color);  
 }
 
 /**
@@ -589,22 +589,22 @@ static void Update_Color(void)
 static void Update_Size(uint8_t size)
 {
   static uint32_t color;
-
-  /* Get the current text color */
+  
+  /* Get the current text color */ 
   color = BSP_LCD_GetTextColor();
   /* Update the selected size icon */
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillCircle(450, (BSP_LCD_GetYSize()-24), 20);
-  BSP_LCD_SetTextColor(color);
+  BSP_LCD_SetTextColor(color);  
   BSP_LCD_FillCircle(450, (BSP_LCD_GetYSize()-24), size);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);    
   BSP_LCD_DrawCircle(450, (BSP_LCD_GetYSize()-24), size);
-  BSP_LCD_SetTextColor(color);
+  BSP_LCD_SetTextColor(color);  
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -630,8 +630,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -645,13 +645,13 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -664,7 +664,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

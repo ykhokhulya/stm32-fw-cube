@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_CurrentConsumption/Src/main.c
+  * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   * and exit the stop mode.
@@ -43,7 +43,7 @@
 
 /** @addtogroup PWR_CurrentConsumption
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -70,24 +70,24 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Enable Power Clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
+  
   /* Check and handle if the system was resumed from Standby mode */
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET)
   {
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
-
+    
     /* Turn LED4 On */
     BSP_LED_On(LED4);
   }
@@ -95,7 +95,7 @@ int main(void)
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 
-  /* Infinite loop */
+  /* Infinite loop */ 
   while(1)
   {
     UserButtonStatus = 0;
@@ -105,7 +105,7 @@ int main(void)
     {
       /* Toggle LED6 */
       BSP_LED_Toggle(LED6);
-
+      
       /* Inserted Delay */
       HAL_Delay(100);
     }
@@ -113,9 +113,9 @@ int main(void)
     while(BSP_PB_GetState(BUTTON_KEY) != RESET)
     {
     }
-
+    
 #if defined (SLEEP_MODE)
-    /* Sleep Mode Entry
+    /* Sleep Mode Entry 
     - System Running at PLL (168MHz)
     - Flash 5 wait state
     - Instruction and Data caches ON
@@ -126,34 +126,34 @@ int main(void)
     */
     SleepMode_Measure();
 #elif defined (STOP_MODE)
-    /* STOP Mode Entry
+    /* STOP Mode Entry 
     - RTC Clocked by LSI
     - Regulator in LP mode
-    - HSI, HSE OFF and LSI OFF if not used as RTC Clock source
+    - HSI, HSE OFF and LSI OFF if not used as RTC Clock source  
     - No IWDG
     - FLASH in deep power down mode
     - Automatic Wake-up using RTC clocked by LSI (after ~20s)
     */
     StopMode_Measure();
 #elif defined (STANDBY_MODE)
-    /* STANDBY Mode Entry
+    /* STANDBY Mode Entry 
     - Backup SRAM and RTC OFF
     - IWDG and LSI OFF
     - Wake-up using WakeUp Pin (PA.00)
     */
     StandbyMode_Measure();
-
+    
 #elif defined (STANDBY_RTC_MODE)
-    /* STANDBY Mode with RTC on LSI Entry
+    /* STANDBY Mode with RTC on LSI Entry 
     - RTC Clocked by LSI
     - IWDG OFF and LSI OFF if not used as RTC Clock source
     - Backup SRAM OFF
     - Automatic Wake-up using RTC clocked by LSI (after ~20s)
     */
     StandbyRTCMode_Measure();
-
+    
 #elif defined (STANDBY_RTC_BKPSRAM_MODE)
-    /* STANDBY Mode with RTC on LSI Entry
+    /* STANDBY Mode with RTC on LSI Entry 
     - RTC Clocked by LSI
     - Backup SRAM ON
     - IWDG OFF
@@ -166,7 +166,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -191,9 +191,9 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -211,13 +211,13 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
@@ -262,7 +262,7 @@ void HAL_SYSTICK_Callback(void)
   * @retval None
   */
 void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
-{
+{ 
   /* NOTE : add the specific code to handle the RTC wake up interrupt */
   /* Configure LED6 */
   BSP_LED_Init(LED6);
@@ -279,7 +279,7 @@ void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == KEY_BUTTON_PIN)
-  {
+  {  
     UserButtonStatus = 1;
   }
 }
@@ -294,7 +294,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

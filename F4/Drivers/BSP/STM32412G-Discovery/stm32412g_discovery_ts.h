@@ -77,9 +77,9 @@
 #define TS_SWAP_XY                      ((uint8_t) 0x08)
 
 #define TS_ORIENTATION_PORTRAIT         ((uint8_t) 0)
-#define TS_ORIENTATION_LANDSCAPE        ((uint8_t) 1)
+#define TS_ORIENTATION_LANDSCAPE        ((uint8_t) 1) 
 #define TS_ORIENTATION_LANDSCAPE_ROT180 ((uint8_t) 2)
-
+   
  /**
    * @}
    */

@@ -3,7 +3,7 @@
   * @file    USB_Host/CDC_Standalone/Src/stm32f4xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -152,7 +152,7 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-#ifdef USE_USB_FS
+#ifdef USE_USB_FS  
 void OTG_FS_IRQHandler(void)
 #else
 void OTG_HS_IRQHandler(void)
@@ -188,7 +188,7 @@ void DMA2_Stream3_IRQHandler(void)
   */
 void DMA2_Stream6_IRQHandler(void)
 {
-  BSP_SD_DMA_Tx_IRQHandler();
+  BSP_SD_DMA_Tx_IRQHandler(); 
 }
 
 /**
@@ -218,6 +218,6 @@ void EXTI15_10_IRQHandler(void)
   */
 /*void PPP_IRQHandler(void)
 {
-}*/
+}*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

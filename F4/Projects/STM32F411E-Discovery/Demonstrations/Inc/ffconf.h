@@ -10,13 +10,13 @@
 #define _FFCONF 8051 /* Revision ID */
 
 /*-----------------------------------------------------------------------------/
-/ Additional user header to be used
+/ Additional user header to be used  
 /-----------------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
 #include "usbh_core.h"
 #include "usbh_msc.h"
-#define  HOST_HANDLE   hUSB_Host
+#define  HOST_HANDLE   hUSB_Host 
 
 /*-----------------------------------------------------------------------------/
 / Functions and Buffer Configurations
@@ -38,7 +38,7 @@
 /* The _FS_MINIMIZE option defines minimization level to remove some functions.
 /
 /   0: Full function.
-/   1: f_stat, f_getfree, f_unlink, f_mkdir, f_chmod, f_truncate, f_utime
+/   1: f_stat, f_getfree, f_unlink, f_mkdir, f_chmod, f_truncate, f_utime 
 /      and f_rename are removed.
 /   2: f_opendir and f_readdir are removed in addition to 1.
 /   3: f_lseek is removed in addition to 2. */

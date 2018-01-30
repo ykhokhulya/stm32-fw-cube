@@ -238,7 +238,7 @@ not necessary for to use this port.  They are defined so the common demo files
 	void vPortValidateInterruptPriority( void );
 	#define portASSERT_IF_INTERRUPT_PRIORITY_INVALID() 	vPortValidateInterruptPriority()
 #endif
-
+        
 void vSVCHandler( uint32_t *pulParam );
 void vPortResetPrivilege( BaseType_t xRunningPrivileged );
 

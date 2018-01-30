@@ -65,20 +65,20 @@
 
 #define WIFI_IS_CMDDATA_READY()            (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_12) == GPIO_PIN_SET)
 
+    
 
-
-/* Exported functions ------------------------------------------------------- */
+/* Exported functions ------------------------------------------------------- */ 
 void    SPI_WIFI_MspInit(SPI_HandleTypeDef* hspi);
 int8_t  SPI_WIFI_DeInit(void);
 int8_t  SPI_WIFI_Init(void);
 int16_t SPI_WIFI_ReceiveData(uint8_t *pData, uint16_t len, uint32_t timeout);
 int16_t SPI_WIFI_SendData( uint8_t *pData, uint16_t len, uint32_t timeout);
 void    SPI_WIFI_Delay(uint32_t Delay);
-
+    
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __WIFI_IO__ */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/    

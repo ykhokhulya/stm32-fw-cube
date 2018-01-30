@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -44,7 +44,7 @@
   */
 
 #include "tftpserver.h"
-#include "tftputils.h"
+#include "tftputils.h" 
 #include "ff.h"
 #include "stm32f4xx_hal.h"
 #include <string.h>
@@ -100,8 +100,8 @@ void recv_callback_tftp(void *arg, struct udp_pcb *upcb, struct pbuf *pkt_buf, c
   * @brief  sends a TFTP message
   * @param  upcb: pointer on a udp pcb
   * @param  to_ip: pointer on remote IP address
-  * @param  to_port: pointer on remote port
-  * @param buf: pointer on buffer where to create the message
+  * @param  to_port: pointer on remote port  
+  * @param buf: pointer on buffer where to create the message  
   * @param err: error code of type tftp_errorcode
   * @retval error code
   */
@@ -131,9 +131,9 @@ err_t tftp_send_message(struct udp_pcb *upcb, const ip_addr_t *to_ip, unsigned s
 
 /**
   * @brief construct an error message into buf
-  * @param buf: pointer on buffer where to create the message
+  * @param buf: pointer on buffer where to create the message  
   * @param err: error code of type tftp_errorcode
-  * @retval
+  * @retval 
   */
 int tftp_construct_error_message(char *buf, tftp_errorcode err)
 {
@@ -156,7 +156,7 @@ int tftp_construct_error_message(char *buf, tftp_errorcode err)
   * @brief Sends a TFTP error message
   * @param  upcb: pointer on a udp pcb
   * @param  to: pointer on remote IP address
-  * @param  to_port: pointer on remote port
+  * @param  to_port: pointer on remote port  
   * @param  err: tftp error code
   * @retval error value
   */
@@ -239,7 +239,7 @@ void tftp_cleanup_rd(struct udp_pcb *upcb, tftp_connection_args *args)
   /* Free the tftp_connection_args structure reserverd for */
   mem_free(args);
 
-  /* Disconnect the udp_pcb*/
+  /* Disconnect the udp_pcb*/  
   udp_disconnect(upcb);
 
   /* close the connection */
@@ -288,7 +288,7 @@ void tftp_send_next_block(struct udp_pcb *upcb, tftp_connection_args *args,
    f_read(&file_SD, (uint8_t*)args->data, TFTP_DATA_LEN_MAX, (UINT*)(&args->data_len));
 
   /*   NOTE: We need to send data packet even if args->data_len = 0*/
-
+ 
   /* sEndTransferthe data */
   tftp_send_data_packet(upcb, to_ip, to_port, args->block, args->data, args->data_len);
 
@@ -351,7 +351,7 @@ void wrq_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf *pkt_buf, co
   tftp_connection_args *args = (tftp_connection_args *)arg;
   int n = 0;
 
-  /* we expect to receive only one pbuf (pbuf size should be
+  /* we expect to receive only one pbuf (pbuf size should be 
      configured > max TFTP frame size */
   if (pkt_buf->len != pkt_buf->tot_len)
   {
@@ -371,10 +371,10 @@ void wrq_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf *pkt_buf, co
       /* close the connection */
       tftp_cleanup_wr(upcb, args); /* close the connection */
     }
-
+    
     /* update our block number to match the block number just received */
     args->block++;
-
+    
     /* update total bytes  */
     (args->tot_bytes) += (pkt_buf->len - TFTP_DATA_PKT_HDR_LEN);
   }
@@ -390,7 +390,7 @@ void wrq_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf *pkt_buf, co
    * number, then the args->block (our block number) is never updated and
    * we simply send "duplicate ACK" which has the same block number as the
    * last ACK pkt we sent.  This lets the host know that we are still waiting
-   * on block number args->block+1.
+   * on block number args->block+1. 
    */
   tftp_send_ack_packet(upcb, addr, port, args->block);
 
@@ -413,7 +413,7 @@ void wrq_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf *pkt_buf, co
 
 /**
   * @brief  processes tftp read operation
-  * @param  upcb: pointer on udp pcb
+  * @param  upcb: pointer on udp pcb 
   * @param  to: pointer on remote IP address
   * @param  to_port: pointer on remote udp port
   * @param  FileName: pointer on filename to be read
@@ -432,7 +432,7 @@ int tftp_process_read(struct udp_pcb *upcb, const ip_addr_t *to, unsigned short 
 
     return 0;
   }
-
+  
   args = mem_malloc(sizeof *args);
   /* If we aren't able to allocate memory for a "tftp_connection_args" */
   if (!args)
@@ -467,10 +467,10 @@ int tftp_process_read(struct udp_pcb *upcb, const ip_addr_t *to, unsigned short 
 
 /**
   * @brief  processes tftp write operation
-  * @param  upcb: pointer on upd pcb
+  * @param  upcb: pointer on upd pcb 
   * @param  to: pointer on remote IP address
   * @param  to_port: pointer on remote udp port
-  * @param  FileName: pointer on filename to be written
+  * @param  FileName: pointer on filename to be written 
   * @retval error code
   */
 int tftp_process_write(struct udp_pcb *upcb, const ip_addr_t *to, unsigned short to_port, char *FileName)
@@ -531,7 +531,7 @@ void process_tftp_request(struct pbuf *pkt_buf, const ip_addr_t *addr, u16_t por
   /* create new UDP PCB structure */
   upcb = udp_new();
   if (!upcb)
-  {
+  {     
     /* Error creating PCB. Out of Memory  */
     return;
   }
@@ -542,7 +542,7 @@ void process_tftp_request(struct pbuf *pkt_buf, const ip_addr_t *addr, u16_t por
    * transactions for a given "stream" occur on another port!  */
   err = udp_bind(upcb, IP_ADDR_ANY, 0);
   if (err != ERR_OK)
-  {
+  {    
     /* Unable to bind to port */
     return;
   }
@@ -566,25 +566,25 @@ void process_tftp_request(struct pbuf *pkt_buf, const ip_addr_t *addr, u16_t por
       /* Start the TFTP read mode*/
       tftp_process_read(upcb, addr, port, FileName);
       break;
-    }
+    } 
 
     case TFTP_WRQ: /* TFTP WRQ (write request) */
     {
       /* Read the name of the file asked by the client to be received and writen in the SD card */
       tftp_extract_filename(FileName, pkt_buf->payload);
-
+  
       /* Could not open filesystem */
       if(f_mount(&filesystem, (TCHAR const*)"", 0) != FR_OK)
       {
         return;
       }
-
+        
       /* If Could not open the selected directory */
       if (f_opendir(&dir_2, "/") != FR_OK)
       {
         return;
       }
-
+        
       /* Start the TFTP write mode */
       tftp_process_write(upcb, addr, port, FileName);
       break;
@@ -621,7 +621,7 @@ void recv_callback_tftp(void *arg, struct udp_pcb *upcb, struct pbuf *pkt_buf,
 
 
 /**
-  * @brief  Initializes the udp pcb for TFTP
+  * @brief  Initializes the udp pcb for TFTP 
   * @param  None
   * @retval None
   */
@@ -633,11 +633,11 @@ void tftpd_init(void)
   /* create a new UDP PCB structure  */
   UDPpcb = udp_new();
   if (UDPpcb)
-  {
+  {  
     /* Bind this PCB to port 69  */
     err = udp_bind(UDPpcb, IP_ADDR_ANY, port);
     if (err == ERR_OK)
-    {
+    {    
       /* TFTP server start  */
       udp_recv(UDPpcb, recv_callback_tftp, NULL);
     }

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    LTDC/LTDC_Display_2Layers/Src/stm32f4xx_it.c
+  * @file    LTDC/LTDC_Display_2Layers/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -190,7 +190,7 @@ void LTDC_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

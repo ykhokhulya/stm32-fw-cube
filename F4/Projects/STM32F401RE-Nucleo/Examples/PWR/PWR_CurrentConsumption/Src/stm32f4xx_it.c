@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_CurrentConsumption/Src/stm32f4xx_it.c
+  * @file    PWR/PWR_CurrentConsumption/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -155,7 +155,7 @@ void PendSV_Handler(void)
   * @retval None
   */
 void SysTick_Handler(void)
-{
+{ 
   HAL_SYSTICK_IRQHandler();
 }
 
@@ -197,7 +197,7 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

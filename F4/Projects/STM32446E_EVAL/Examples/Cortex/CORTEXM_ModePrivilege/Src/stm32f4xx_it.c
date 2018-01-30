@@ -128,9 +128,9 @@ void SVC_Handler(void)
 {
   /* Switch back Thread mode to privileged */
   __set_CONTROL(THREAD_MODE_PRIVILEGED | SP_PROCESS);
-
+  
   /* Execute ISB instruction to flush pipeline as recommended by Arm */
-  __ISB();
+  __ISB(); 
 }
 
 /**

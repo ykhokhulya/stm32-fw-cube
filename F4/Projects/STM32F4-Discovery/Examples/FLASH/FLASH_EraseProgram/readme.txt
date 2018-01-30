@@ -33,31 +33,31 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example describes how to configure and use the FLASH HAL API to erase and program
+This example describes how to configure and use the FLASH HAL API to erase and program 
 the internal Flash memory.
 
 This example guides you through the different configuration steps by mean of HAL API
-how to erase and program the STM32F4xx internal Flash memory mounted on
+how to erase and program the STM32F4xx internal Flash memory mounted on 
 STM32F4-Discovery RevB & RevC board.
 
-At the beginning of the main program the HAL_Init() function is called to reset
+At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
-Then the SystemClock_Config() function is used to configure the system clock (SYSCLK)
+Then the SystemClock_Config() function is used to configure the system clock (SYSCLK) 
 to run at 168 MHz.
 
 After Reset, the Flash memory Program/Erase Controller is locked. A dedicated function
 is used to enable the FLASH control register access.
-Before programming the desired addresses, an erase operation is performed using
-the flash erase sector feature. The erase procedure is done by filling the erase init
+Before programming the desired addresses, an erase operation is performed using 
+the flash erase sector feature. The erase procedure is done by filling the erase init 
 structure giving the starting erase sector and the number of sectors to erase.
 At this stage, all these sectors will be erased one by one separately.
 
-@note: if problem occurs on a sector, erase will be stopped and faulty sector will
+@note: if problem occurs on a sector, erase will be stopped and faulty sector will 
 be returned to user (through variable 'SectorError').
 
-Once this operation is finished, sector word programming operation will be performed
+Once this operation is finished, sector word programming operation will be performed 
 in the Flash memory. The written data is then read back and checked.
 
 STM32F4-Discovery RevB & RevC board's LEDs can be used to monitor the transfer status:
@@ -76,7 +76,7 @@ STM32F4-Discovery RevB & RevC board's LEDs can be used to monitor the transfer s
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - FLASH/FLASH_EraseProgram/Inc/stm32f4xx_hal_conf.h HAL Configuration file
   - FLASH/FLASH_EraseProgram/Inc/stm32f4xx_it.h       Interrupt handlers header file
@@ -86,18 +86,18 @@ STM32F4-Discovery RevB & RevC board's LEDs can be used to monitor the transfer s
   - FLASH/FLASH_EraseProgram/Src/system_stm32f4xx.c   STM32F4xx system clock configuration file
 
 
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This example runs on STM32F407xx Devices.
-
+    
   - This example has been tested with STM32F4-Discovery RevB & RevC board and can be
     easily tailored to any other supported device and development board.
-
-
-@par How to use it ?
+  
+  
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

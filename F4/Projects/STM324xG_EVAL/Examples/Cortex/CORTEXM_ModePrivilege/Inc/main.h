@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Cortex/CORTEXM_ModePrivilege/Inc/main.h
+  * @file    Cortex/CORTEXM_ModePrivilege/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************

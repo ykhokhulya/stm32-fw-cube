@@ -85,10 +85,10 @@ int main(void)
 
   /* Initialize User push-button in EXTI mode */
   UserButton_Init(BUTTON_MODE_EXTI);
-
+  
   /* Led blinking in RUN mode */
-  LED_Blinking(LedSpeed);
-
+  LED_Blinking(LedSpeed);  
+    
   /* Infinite loop */
   while (1)
   {
@@ -129,7 +129,7 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -137,17 +137,17 @@ void LED_Blinking(uint32_t Period)
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
   * @param  ButtonMode: Specifies Button mode.
-  *   This parameter can be one of following parameters:
+  *   This parameter can be one of following parameters:   
   *     @arg BUTTON_MODE_GPIO: Button will be used as simple IO
   *     @arg BUTTON_MODE_EXTI: Button will be connected to EXTI line with interrupt
-  *                            generation capability
+  *                            generation capability  
   * @retval None
   */
 void UserButton_Init(uint32_t Button_Mode)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -156,14 +156,14 @@ void UserButton_Init(uint32_t Button_Mode)
   {
     /* Connect External Line to the GPIO*/
     USER_BUTTON_SYSCFG_SET_EXTI();
-
+    
     /* Enable a rising trigger EXTI line 13 Interrupt */
     USER_BUTTON_EXTI_LINE_ENABLE();
     USER_BUTTON_EXTI_RISING_TRIG_ENABLE();
-
+    
     /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-    NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-    NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
+    NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+    NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
   }
 }
 
@@ -187,16 +187,16 @@ void Configure_PWR(void)
 {
   /* Enable Power Clock */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
-
+  
   /* Check if the system was resumed from StandBy mode */
   if (LL_PWR_IsActiveFlag_SB() != 0)
-  {
+  { 
     /* Clear Standby flag */
-    LL_PWR_ClearFlag_SB();
-
+    LL_PWR_ClearFlag_SB(); 
+    
     /* Change LED speed to SLOW to indicate exit from standby mode */
     LedSpeed = LED_BLINK_SLOW;
-
+    
     /* Wait that user release the User push-button */
     while(UserButton_GetState() == 0){}
   }
@@ -217,26 +217,26 @@ void EnterStandbyMode(void)
 {
   /* Wait that user release the User push-button */
   while(UserButton_GetState() == 0){}
-
+  
   /* Disable all used wakeup sources */
   LL_PWR_DisableWakeUpPin(LL_PWR_WAKEUP_PIN1);
-
+  
   /* Clear all wake up Flag */
   LL_PWR_ClearFlag_WU();
-
+	
   /* Enable wakeup pin */
   LL_PWR_EnableWakeUpPin(LL_PWR_WAKEUP_PIN1);
-
+  
   /** Request to enter STANDBY mode
     * Following procedure describe in STM32F4xx Reference Manual
     * See PWR part, section Low-power modes, Standby mode
     */
   /* Set STANDBY mode when CPU enters deepsleep */
   LL_PWR_SetPowerMode(LL_PWR_MODE_STANDBY);
-
+  
   /* Set SLEEPDEEP bit of Cortex System Control Register */
   LL_LPM_EnableDeepSleep();
-
+  
   /* This option is used to ensure that store operations are completed */
 #if defined ( __CC_ARM)
   __force_stores();
@@ -313,7 +313,7 @@ void UserButton_Callback(void)
 {
   /* Configure and enter in STANDBY Mode */
   EnterStandbyMode();
-
+  
   /* Here Device is in STANDBY mode */
 }
 

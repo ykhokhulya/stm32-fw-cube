@@ -1,9 +1,9 @@
 /**
   @page SPI_OneBoard_HalfDuplex_IT SPI example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/SPI/SPI_OneBoard_HalfDuplex_IT/readme.txt
+  * @file    Examples_LL/SPI/SPI_OneBoard_HalfDuplex_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the SPI_OneBoard_HalfDuplex_IT example.
   ******************************************************************************
@@ -44,7 +44,7 @@ This example works with only one NUCLEO-F411RE.
 
 SPI1 Peripheral is configured in Master mode Half-Duplex Tx.
 SPI2 Peripheral is configured in Slave mode Half-Duplex Rx.
-GPIO associated to User push-button is linked with EXTI.
+GPIO associated to User push-button is linked with EXTI. 
 
 Example execution:
 
@@ -57,7 +57,7 @@ LED2 is On if data is well received.
 
 In case of errors, LED2 is blinking Slowly (1s).
 
-@par Directory contents
+@par Directory contents 
 
   - SPI/SPI_OneBoard_HalfDuplex_IT/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - SPI/SPI_OneBoard_HalfDuplex_IT/Inc/main.h                  Header for main.c module
@@ -83,7 +83,7 @@ Relation with Board connector:
   PB13 is connected to pin 30 of CN10 connector
   PB14 is connected to pin 28 of CN10 connector
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

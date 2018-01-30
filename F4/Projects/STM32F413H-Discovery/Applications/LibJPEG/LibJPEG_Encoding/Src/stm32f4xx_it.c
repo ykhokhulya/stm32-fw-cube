@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    LibJPEG/LibJPEG_Encoding/Src/stm32f4xx_it.c
+  * @file    LibJPEG/LibJPEG_Encoding/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -36,7 +36,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_it.h"
+#include "stm32f4xx_it.h" 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -144,7 +144,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  HAL_IncTick();
+  HAL_IncTick(); 
 }
 
 /******************************************************************************/

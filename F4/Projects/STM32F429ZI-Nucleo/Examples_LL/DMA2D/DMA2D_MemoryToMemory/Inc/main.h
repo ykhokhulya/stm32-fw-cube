@@ -53,7 +53,7 @@
 /* Exported constants --------------------------------------------------------*/
 
 /**
-  * @brief LED1
+  * @brief LED1 
   */
 
 #define LED1_PIN                           LL_GPIO_PIN_0

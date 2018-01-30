@@ -1,9 +1,9 @@
 /**
   @page TIM_ParallelSynchro Timers Synchronization example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_ParallelSynchro/readme.txt
+  * @file    TIM/TIM_ParallelSynchro/readme.txt 
   * @author  MCD Application Team
   * @brief   How to command 2 Timers as slaves (TIM3 & TIM4) using a Timer
   *          as master (TIM2)
@@ -35,29 +35,29 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example shows how to synchronize TIM2 and Timers (TIM3 and TIM4) in parallel mode.
 
 Timers synchronisation in parallel mode:
 
 
-                                                       ___________
+                                                       ___________ 
                                                  ITR1 |  SLAVE 1  |
                                      _________________|    TIM3   |
    ___________                      |                 |___________|
-  |   MASTER  |TRGO_Update          |
-  |    TIM2   |---------------------|
-  |___________|                     |                  ___________
+  |   MASTER  |TRGO_Update          |                 
+  |    TIM2   |---------------------|               
+  |___________|                     |                  ___________ 
                                     |_________________|  SLAVE 2  |
                                                  ITR1 |    TIM4   |
                                                       |___________|
-
+                         
 
 1/ TIM2 is configured as Master Timer:
    - PWM Mode is used
-   - The TIM2 Update event is used as Trigger Output
-
+   - The TIM2 Update event is used as Trigger Output 
+ 
 2/ TIM3 and TIM4 are slaves for TIM2,
    - PWM Mode is used
    - The ITR1(TIM2) is used as input trigger for both slaves
@@ -70,7 +70,7 @@ The TIM2 counter clock is 180 MHz.
   TIM2 frequency = TIM2 counter clock / (TIM2_Period + 1) = 351.562 KHz and
   a the duty cycle equal to: TIM2_CCR1/(TIM2_ARR + 1) = 25%
 
-  The TIM3 is running at:
+  The TIM3 is running at: 
   (TIM2 frequency)/ (TIM3 period +1) = 35.156 KHz and
   a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 30%
 
@@ -82,11 +82,11 @@ The TIM2 counter clock is 180 MHz.
 The PWM waveform can be displayed using an oscilloscope.
 
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_ParallelSynchro/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_ParallelSynchro/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_ParallelSynchro/Inc/main.h                  Header for main.c module
+  - TIM/TIM_ParallelSynchro/Inc/main.h                  Header for main.c module  
   - TIM/TIM_ParallelSynchro/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_ParallelSynchro/Src/main.c                  Main program
   - TIM/TIM_ParallelSynchro/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -96,9 +96,9 @@ The PWM waveform can be displayed using an oscilloscope.
 @par Hardware and Software environment
 
   - This example runs on STM32F446xx devices.
-
+    
   - This example has been tested with STM32446E-EVAL board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.      
 
   - STM32446E-EVAL Set-up
    Connect the following pins to an oscilloscope to monitor the different waveforms:
@@ -106,13 +106,13 @@ The PWM waveform can be displayed using an oscilloscope.
       - TIM3 CH1 (PC.06)
       - TIM4 CH3 (PB.08)
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
  - Rebuild all files: Project->Rebuild all
  - Load project image: Project->Download and Debug
- - Run program: Debug->Go(F5)
+ - Run program: Debug->Go(F5) 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

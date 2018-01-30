@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_ComDMA/Src/stm32f4xx_it.c
+  * @file    SPI/SPI_FullDuplex_ComDMA/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -167,9 +167,9 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles DMA Rx interrupt request.
+  * @brief  This function handles DMA Rx interrupt request.  
   * @param  None
-  * @retval None
+  * @retval None    
   */
 void SPIx_DMA_RX_IRQHandler(void)
 {
@@ -179,7 +179,7 @@ void SPIx_DMA_RX_IRQHandler(void)
 /**
   * @brief  This function handles DMA Tx interrupt request.
   * @param  None
-  * @retval None
+  * @retval None  
   */
 void SPIx_DMA_TX_IRQHandler(void)
 {
@@ -207,7 +207,7 @@ void SPIx_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

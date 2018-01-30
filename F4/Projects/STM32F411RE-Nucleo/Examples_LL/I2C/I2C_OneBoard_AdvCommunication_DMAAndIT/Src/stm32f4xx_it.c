@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/I2C/I2C_OneBoard_AdvCommunication_DMAAndIT/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -179,7 +179,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Manage code in main.c.*/
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 
@@ -243,7 +243,7 @@ void I2C1_EV_IRQHandler(void)
   {
     /* Clear STOP flag value in ISR register */
     LL_I2C_ClearFlag_STOP(I2C1);
-
+    
     /* Call function Slave Complete Callback */
     Slave_Complete_Callback();
   }

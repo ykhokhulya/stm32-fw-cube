@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32446E_EVAL_TS_H
@@ -40,24 +40,24 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
-
+#endif   
+   
 /* Includes ------------------------------------------------------------------*/
 #include "stm32446e_eval.h"
-/* Include IOExpander(MFX) component Driver */
+/* Include IOExpander(MFX) component Driver */ 
 #include "../Components/mfxstm32l152/mfxstm32l152.h"
-
+   
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM32446E_EVAL
   * @{
   */
-
+    
 /** @defgroup STM32446E_EVAL_TS STM32446E EVAL TS
   * @{
-  */
+  */    
 
 /** @defgroup STM32446E_EVAL_TS_Exported_Types STM32446E EVAL TS Exported Types
   * @{
@@ -71,7 +71,7 @@ typedef struct
 }TS_StateTypeDef;
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_TS_Exported_Constants STM32446E EVAL TS Exported Constants
   * @{
@@ -81,7 +81,7 @@ typedef struct
 #define TS_SWAP_Y                       ((uint8_t)0x02)
 #define TS_SWAP_XY                      ((uint8_t)0x04)
 
-typedef enum
+typedef enum 
 {
   TS_OK       = 0x00,
   TS_ERROR    = 0x01,
@@ -90,14 +90,14 @@ typedef enum
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_TS_Exported_Macros STM32446E EVAL TS Exported Macros
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_TS_Exported_Functions  STM32446E EVAL TS Exported Functions
   * @{
@@ -114,7 +114,7 @@ void    BSP_TS_FIFOClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -122,7 +122,7 @@ void    BSP_TS_FIFOClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

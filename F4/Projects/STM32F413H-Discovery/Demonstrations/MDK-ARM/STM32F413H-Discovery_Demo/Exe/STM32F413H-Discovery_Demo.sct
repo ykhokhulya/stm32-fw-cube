@@ -18,7 +18,8 @@ ER_QSPI 0x90000000 0x1000000 {
 }
 }
 LR_DATA 0x0817FE00 0x200 {
-  ER_DATA 0x0817FE00 0x200 {
-  *.o (.calibration_data)
+  ER_DATA 0x0817FE00 0x200 { 
+  *.o (.calibration_data) 
   }
   }
+    

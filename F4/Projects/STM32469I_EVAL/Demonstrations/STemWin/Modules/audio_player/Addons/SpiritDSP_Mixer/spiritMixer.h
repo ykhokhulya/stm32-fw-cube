@@ -10,8 +10,8 @@
   *
   *        http://www.st.com/software_license_agreement_image_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -57,7 +57,7 @@ typedef void TSpiritMixer;
 int SpiritMixer_Init   (      TSpiritMixer *_);
 int SpiritMixer_SetPrms(      TSpiritMixer *_, const TSpiritMixer_Prms *prms);
 int SpiritMixer_GetPrms(const TSpiritMixer *_,       TSpiritMixer_Prms *prms);
-int SpiritMixer_Apply  (      TSpiritMixer *_,
+int SpiritMixer_Apply  (      TSpiritMixer *_, 
                         const short *in0, const short *in1, int nSamplesPerCh, short *out);
 
 #ifdef __cplusplus

@@ -28,7 +28,7 @@
  * Note that the max_memory_to_use option is ignored by this implementation.
  */
 #include "jdata_conf.h"
-
+   
 /*
  * These symbols indicate the properties of your machine or compiler.
  * #define the symbol if yes, #undef it if no.
@@ -176,5 +176,5 @@ typedef unsigned char boolean;
 /* Define this if you want percent-done progress reports from cjpeg/djpeg.
  */
 #undef PROGRESS_REPORT
-
+    
 #endif /* JPEG_CJPEG_DJPEG */

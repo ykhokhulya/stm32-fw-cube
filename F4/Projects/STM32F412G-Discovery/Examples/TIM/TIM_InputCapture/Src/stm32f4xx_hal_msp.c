@@ -68,11 +68,11 @@
 void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
 {
   GPIO_InitTypeDef   GPIO_InitStruct;
-
+ 
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* TIMx Peripheral clock enable */
   TIMx_CLK_ENABLE();
-
+  
   /* Enable GPIO channels Clock */
   TIMx_CHANNEL_GPIO_PORT();
 
@@ -83,7 +83,7 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Alternate = TIMx_GPIO_AF_TIMx;
   HAL_GPIO_Init(TIMx_GPIO_PORT, &GPIO_InitStruct);
-
+  
   /*##-2- Configure the NVIC for TIMx #########################################*/
 
   HAL_NVIC_SetPriority(TIMx_IRQn, 0, 1);

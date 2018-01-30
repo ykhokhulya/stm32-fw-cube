@@ -1,9 +1,9 @@
 /**
   @page RCC_OutputSystemClockOnMCO RCC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/RCC/RCC_OutputSystemClockOnMCO/readme.txt
+  * @file    Examples_LL/RCC/RCC_OutputSystemClockOnMCO/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the RCC example.
   ******************************************************************************
@@ -50,7 +50,7 @@ Different configuration will be observed
 
 When user press User push-button, a LED2 toggle is done to indicate a change in MCO config.
 
-@par Directory contents
+@par Directory contents 
 
   - RCC/RCC_OutputSystemClockOnMCO/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - RCC/RCC_OutputSystemClockOnMCO/Inc/main.h                  Header for main.c module
@@ -63,7 +63,7 @@ When user press User push-button, a LED2 toggle is done to indicate a change in 
 @par Hardware and Software environment
 
   - This example runs on STM32F411xE devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
@@ -72,7 +72,7 @@ When user press User push-button, a LED2 toggle is done to indicate a change in 
       - PA.08: connected to pin 23 of CN10 connector for Nucleo-64 (MB1136)
       - PC.09: connected to pin 1 of CN10 connector for Nucleo-64  (MB1136)
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

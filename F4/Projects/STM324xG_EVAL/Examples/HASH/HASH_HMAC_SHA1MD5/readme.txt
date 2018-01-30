@@ -1,6 +1,6 @@
 /**
   @page HASH_HMAC_SHA1MD5  HMAC digest calculation using HMAC SHA1 and HMAC MD5 example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    HASH/HASH_HMAC_SHA1MD5/readme.txt
@@ -33,14 +33,16 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example provides a short description of how to use the HASH peripheral to
-hash data using HMAC SHA-1 and HMAC MD5 Algorithms.
-For this example, DMA is not used for data transfer. In fact, the CPU is used in
+How to use the HASH peripheral to hash data with HMAC SHA-1 
+and HMAC MD5 algorithms.
+
+For this example, DMA is not used for data transfer, the CPU is using HASH peripheral in
 polling mode.
+
 The key used is long type (2088 bit = 261 bytes).
-The HMAC SHA-1 message digest result is a 160 bit (20 bytes) data and the HMAC MD5 message
+The HMAC SHA-1 message digest result is a 160 bit (20 bytes) data and the HMAC MD5 message 
 digest result is a 128 bit (16 bytes) data.
 
 The expected HASH digests (for SHA1 and MD5) are already computed using an online
@@ -55,16 +57,16 @@ In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - HASH/HASH_HMAC_SHA1MD5/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - HASH/HASH_HMAC_SHA1MD5/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - HASH/HASH_HMAC_SHA1MD5/Inc/main.h                  Main program header file
+  - HASH/HASH_HMAC_SHA1MD5/Inc/main.h                  Main program header file  
   - HASH/HASH_HMAC_SHA1MD5/Src/stm32f4xx_it.c          Interrupt handlers
   - HASH/HASH_HMAC_SHA1MD5/Src/main.c                  Main program
   - HASH/HASH_HMAC_SHA1MD5/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -73,20 +75,20 @@ In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F417xx devices.
-
-  - This example has been tested with STMicroelectronics STM32417G-EVAL RevC
-    evaluation boards and can be easily tailored to any other supported device
+  - This example runs on STM32F417xx devices.  
+    
+  - This example has been tested with STMicroelectronics STM32417G-EVAL RevC 
+    evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the example 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-
+ 

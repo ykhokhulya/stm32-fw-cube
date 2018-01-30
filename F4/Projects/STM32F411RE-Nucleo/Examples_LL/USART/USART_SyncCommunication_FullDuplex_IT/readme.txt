@@ -1,9 +1,9 @@
 /**
   @page USART_SyncCommunication_FullDuplex_IT USART Synchronous Transmitter/Receiver example (IT mode)
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/USART/USART_SyncCommunication_FullDuplex_IT/readme.txt
+  * @file    Examples_LL/USART/USART_SyncCommunication_FullDuplex_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USART_SyncCommunication_FullDuplex_IT example.
   ******************************************************************************
@@ -37,7 +37,7 @@
 
 This example shows how to configure GPIO, USART, DMA and SPI peripherals for transmitting
 bytes from/to an USART peripheral to/from an SPI peripheral (in slave mode) by using Interrupt
-mode through the STM32F4xx USART LL API (SPI is using DMA for
+mode through the STM32F4xx USART LL API (SPI is using DMA for 
 receving/transmitting characters sent from/received by USART). Peripheral initialization is
 done using LL unitary services functions for optimization purpose (performance and size).
 
@@ -45,7 +45,7 @@ This example works with only one NUCLEO-F411RE.
 
 USART1 Peripheral is acts as Master using IT.
 SPI1 Peripheral is configured in Slave mode using DMA.
-GPIO associated to User push-button is linked with EXTI.
+GPIO associated to User push-button is linked with EXTI. 
 
 Example execution:
 
@@ -62,7 +62,7 @@ In case of errors, LED2 is blinking Slowly (1s).
 
 Connectivity, USART, Synchroneous mode, RS-232, baud rate, Interrupt, SPI, Reception, Transmission, Full Duplex
 
-@par Directory contents
+@par Directory contents 
 
   - USART/USART_SyncCommunication_FullDuplex_IT/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USART/USART_SyncCommunication_FullDuplex_IT/Inc/main.h                  Header for main.c module
@@ -91,7 +91,7 @@ Board connector:
   PB.05 :   connected to pin 29 of CN10 connector
   PB.04 :   connected to pin 27 of CN10 connector
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

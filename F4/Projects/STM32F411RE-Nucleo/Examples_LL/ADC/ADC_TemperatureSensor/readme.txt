@@ -1,9 +1,9 @@
 /**
   @page ADC_TemperatureSensor ADC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/ADC/ADC_TemperatureSensor/readme.txt
+  * @file    Examples_LL/ADC/ADC_TemperatureSensor/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC_TemperatureSensor example.
   ******************************************************************************
@@ -34,13 +34,13 @@
   @endverbatim
 
 @par Example Description
-This example describes how to use a ADC peripheral to perform
-a single ADC conversion of the internal temperature sensor
-and to calculate the temperature in Celsius degrees;
-Example using programming model: polling
+This example describes how to use a ADC peripheral to perform 
+a single ADC conversion of the internal temperature sensor 
+and to calculate the temperature in Celsius degrees; 
+Example using programming model: polling 
 (for programming models interrupt or DMA transfer, refer to
-other examples);
-This example is based on the STM32F4xx ADC LL API;
+other examples); 
+This example is based on the STM32F4xx ADC LL API; 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -71,7 +71,7 @@ Other peripherals used:
   1 GPIO for User Button
   1 GPIO for LED2
 
-@par Directory contents
+@par Directory contents 
 
   - ADC/ADC_TemperatureSensor/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - ADC/ADC_TemperatureSensor/Inc/main.h                  Header for main.c module
@@ -84,12 +84,12 @@ Other peripherals used:
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2S/I2S_Audio/Src/main.c
+  * @file    I2S/I2S_Audio/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   ******************************************************************************
@@ -42,12 +42,12 @@
 
 /** @addtogroup I2S_Audio
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define MESSAGE1   "     STM32F40xx     "
-#define MESSAGE2   " Device running on  "
+#define MESSAGE2   " Device running on  " 
 #define MESSAGE3   "   STM324xG-EVAL    "
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,7 +55,7 @@
 __IO uint32_t uwCommand = AUDIO_PAUSE;
 __IO uint32_t uwVolume = AUDIO_DEFAULT_VOLUME;
 
-/* Variable to indicate that push buttons will be used for switching between
+/* Variable to indicate that push buttons will be used for switching between 
    Headphone and Speaker output modes. */
 uint32_t uwSpHpSwitch = 0;
 
@@ -70,7 +70,7 @@ static void SystemClock_Config(void);
   * @retval None
   */
 int main(void)
-{
+{ 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -78,10 +78,10 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LEDs, Push buttons and LCD available on EVAL board ************/
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
@@ -90,22 +90,22 @@ int main(void)
 
   /* Configure push Buttons */
   /* Key button used for Pause/Resume */
-  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-  /* Wakeup button used for Volume High */
-  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
-  /* Tamper button used for Volume Low */
-  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
-
+  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO); 
+  /* Wakeup button used for Volume High */    
+  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO); 
+  /* Tamper button used for Volume Low */ 
+  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);  
+    
   /* Initialize the LCD */
   BSP_LCD_Init();
-
+  
   /* Display message on EVAL LCD **********************************************/
-  /* Clear the LCD */
-  BSP_LCD_Clear(LCD_COLOR_BLUE);
+  /* Clear the LCD */ 
+  BSP_LCD_Clear(LCD_COLOR_BLUE);  
 
   /* Set the LCD Back Color */
   BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-
+  
   /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_DisplayStringAtLine(0, (uint8_t *)MESSAGE1);
@@ -118,7 +118,7 @@ int main(void)
   BSP_LED_On(LED3);
   BSP_LED_On(LED4);
 
-  /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */
+  /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */  
   if(AUDIO_Init() == AUDIO_ERROR_NONE)
   {
     BSP_LCD_DisplayStringAtLine(3, (uint8_t *)"====================");
@@ -126,43 +126,43 @@ int main(void)
     BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"Tamper: Vol+/Headph");
     BSP_LCD_DisplayStringAtLine(6, (uint8_t *)"Wakeup: Vol-/Spkr  ");
     BSP_LCD_DisplayStringAtLine(7, (uint8_t *)"====================");
-    BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"  AUDIO CODEC   OK  ");
+    BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"  AUDIO CODEC   OK  ");    
   }
   else
   {
     BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"  AUDIO CODEC  FAIL ");
     BSP_LCD_DisplayStringAtLine(5, (uint8_t *)" Try to reset board ");
   }
-
-  /*
-  Start playing the file from a circular buffer, once the DMA is enabled, it is
-  always in running state. Application has to fill the buffer with the audio data
-  using Transfer complete and/or half transfer complete interrupts callbacks
+  
+  /* 
+  Start playing the file from a circular buffer, once the DMA is enabled, it is 
+  always in running state. Application has to fill the buffer with the audio data 
+  using Transfer complete and/or half transfer complete interrupts callbacks 
   (EVAL_AUDIO_TransferComplete_CallBack() or EVAL_AUDIO_HalfTransfer_CallBack()...
   */
   AUDIO_Start();
-
+  
   /* Display the state on the screen */
   BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"       PLAYING      ");
-
+  
   /* Infinite loop */
   while (1)
-  {
+  {    
     /* Check on the Pause/Resume button */
     if(BSP_PB_GetState(BUTTON_KEY) == RESET)
     {
       /* Wait to avoid rebound */
       while (BSP_PB_GetState(BUTTON_KEY) == RESET);
-
+      
       if(uwCommand == AUDIO_PAUSE)
       {
         BSP_AUDIO_OUT_Pause();
         /* Display the current state of the player */
         BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"       PAUSED       ");
-
+        
         /* Next time Resume command should be processed */
         uwCommand = AUDIO_RESUME;
-
+        
         /* Push buttons will be used to switch between Speaker and Headphone modes */
         uwSpHpSwitch = 1;
       }
@@ -171,25 +171,25 @@ int main(void)
         BSP_AUDIO_OUT_Resume();
         /* Display the current state of the player */
         BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"       PLAYING      ");
-
+        
         /* Next time Pause command should be processed */
         uwCommand = AUDIO_PAUSE;
-
+        
         /* Push buttons will be used to control volume level */
         uwSpHpSwitch = 0;
       }
     }
-
+    
     /* Check on the Volume high button */
     if (BSP_PB_GetState(BUTTON_WAKEUP) != RESET)
     {
-      /* Check if the current state is paused (push buttons are used for volume control or for
+      /* Check if the current state is paused (push buttons are used for volume control or for 
       speaker/headphone mode switching) */
       if (uwSpHpSwitch)
       {
         /* Set output to Speaker */
         BSP_AUDIO_OUT_SetOutputMode(OUTPUT_DEVICE_SPEAKER);
-
+        
         /* Display the current state of the player */
         BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"       SPEAKER      ");
       }
@@ -197,29 +197,29 @@ int main(void)
       {
         /* Wait to avoid rebound */
         while (BSP_PB_GetState(BUTTON_WAKEUP) != RESET);
-
+        
         /* Decrease volume by 5% */
         if (uwVolume > 5)
-          uwVolume -= 5;
+          uwVolume -= 5; 
         else
-          uwVolume = 0;
-
+          uwVolume = 0; 
+        
         /* Apply the new volume to the codec */
         BSP_AUDIO_OUT_SetVolume(uwVolume);
         BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"       VOL:   -     ");
       }
-    }
-
+    }    
+    
     /* Check on the Volume high button */
     if (BSP_PB_GetState(BUTTON_TAMPER) == RESET)
     {
-      /* Check if the current state is paused (push buttons are used for volume control or for
+      /* Check if the current state is paused (push buttons are used for volume control or for 
          speaker/headphone mode switching) */
       if (uwSpHpSwitch)
       {
         /* Set output to Headphone */
         BSP_AUDIO_OUT_SetOutputMode(OUTPUT_DEVICE_HEADPHONE);
-
+        
         /* Display the current state of the player */
         BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"      HEADPHONE     ");
       }
@@ -227,36 +227,36 @@ int main(void)
       {
         /* Wait to avoid rebound */
         while (BSP_PB_GetState(BUTTON_TAMPER) == RESET);
-
+        
         /* Increase volume by 5% */
         if (uwVolume < 95)
-          uwVolume += 5;
+          uwVolume += 5; 
         else
-          uwVolume = 100;
-
+          uwVolume = 100; 
+        
         /* Apply the new volume to the codec */
         BSP_AUDIO_OUT_SetVolume(uwVolume);
-        BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"       VOL:   +     ");
+        BSP_LCD_DisplayStringAtLine(9, (uint8_t *)"       VOL:   +     ");  
       }
-    }
-
+    }  
+    
     /* Toggle LED3 */
     BSP_LED_Toggle(LED3);
-
+    
     /* Insert 100 ms delay */
     HAL_Delay(100);
-
+    
     /* Toggle LED2 */
     BSP_LED_Toggle(LED2);
-
+    
     /* Insert 100 ms delay */
     HAL_Delay(100);
   }
 }
-
+  
  /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -282,8 +282,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -297,14 +297,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -324,7 +324,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -337,10 +337,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
   */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

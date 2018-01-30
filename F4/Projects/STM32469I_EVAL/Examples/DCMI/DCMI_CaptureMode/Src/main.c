@@ -147,9 +147,9 @@ int main(void)
   BSP_LCD_Init(); /* Uncomment if default config (landscape orientation) is needed */
   while(lcd_status != LCD_OK);
 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_SelectLayer(0);
-
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
+  BSP_LCD_SelectLayer(0);  
+  
   if(BSP_LCD_GetXSize() > BSP_LCD_GetYSize())
   {
     lcd_display_orientation = LCD_ORIENTATION_LANDSCAPE;

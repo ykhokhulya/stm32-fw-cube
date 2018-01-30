@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/nor.c
+  * @file    BSP/Src/nor.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the NOR Driver
   ******************************************************************************
@@ -42,7 +42,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -68,13 +68,13 @@ static uint8_t Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t Buffer
   * @retval None
   */
 void NOR_demo(void)
-{
+{ 
   /* NOR IDs structure */
   static NOR_IDTypeDef pNOR_ID;
 
   NOR_SetHint();
 
-  /* STM32F427x/437x/429x/439x "Revision 3" devices: FMC dynamic and static
+  /* STM32F427x/437x/429x/439x "Revision 3" devices: FMC dynamic and static 
      bank switching is allowed  */
   if (HAL_GetREVID() >= 0x2000) {}
   else
@@ -82,24 +82,24 @@ void NOR_demo(void)
     /* Disable the LCD to avoid the refrech from the SDRAM */
     BSP_LCD_DisplayOff();
   }
-
+  
   /*##-1- Configure the NOR device ###########################################*/
-  /* NOR device configuration */
+  /* NOR device configuration */ 
   if(BSP_NOR_Init() != NOR_STATUS_OK)
   {
-    ubInitStatus++;
+    ubInitStatus++; 
   }
-
+  
   /*##-2- Read & check the NOR device IDs ####################################*/
   /* Initialize the ID structure */
   pNOR_ID.Manufacturer_Code = (uint16_t)0x00;
   pNOR_ID.Device_Code1 = (uint16_t)0x00;
   pNOR_ID.Device_Code2 = (uint16_t)0x00;
   pNOR_ID.Device_Code3 = (uint16_t)0x00;
-
+  
   /* Read the NOR memory ID */
   BSP_NOR_Read_ID(&pNOR_ID);
-
+  
   /* Test the NOR ID correctness */
   if(pNOR_ID.Manufacturer_Code != (uint16_t)0x0020)
     ubIDStatus++;
@@ -109,45 +109,45 @@ void NOR_demo(void)
     ubIDStatus++;
   else if (pNOR_ID.Device_Code3 != (uint16_t)0x2200)
     ubIDStatus++;
-
-  /*##-3- Erase NOR memory ###################################################*/
+    
+  /*##-3- Erase NOR memory ###################################################*/ 
   /* Return to read mode */
   BSP_NOR_ReturnToReadMode();
-
+    
   if(BSP_NOR_Erase_Block(WRITE_READ_ADDR) != NOR_STATUS_OK)
   {
-    ubEraseStatus++;
+    ubEraseStatus++; 
   }
-
-  /*##-4- NOR memory read/write access  ######################################*/
+  
+  /*##-4- NOR memory read/write access  ######################################*/   
   /* Fill the buffer to write */
-  Fill_Buffer(nor_aTxBuffer, BUFFER_SIZE, 0xC20F);
-
+  Fill_Buffer(nor_aTxBuffer, BUFFER_SIZE, 0xC20F);   
+  
   /* Write data to the NOR memory */
   if(BSP_NOR_WriteData(WRITE_READ_ADDR, nor_aTxBuffer, BUFFER_SIZE) != NOR_STATUS_OK)
   {
-    ubWriteStatus++;
+    ubWriteStatus++; 
   }
-
+  
   /* Read back data from the NOR memory */
   if(BSP_NOR_ReadData(WRITE_READ_ADDR, nor_aRxBuffer, BUFFER_SIZE) != NOR_STATUS_OK)
   {
-    ubReadStatus++;
+    ubReadStatus++; 
   }
 
-  /*##-5- Checking data integrity ############################################*/
-  /* STM32F427x/437x/429x/439x "Revision 3" devices: FMC dynamic and static
+  /*##-5- Checking data integrity ############################################*/  
+  /* STM32F427x/437x/429x/439x "Revision 3" devices: FMC dynamic and static 
      bank switching is allowed  */
   if (HAL_GetREVID() >= 0x2000) {}
   else
   {
     /* Enable the LCD */
     BSP_LCD_DisplayOn();
-
+    
     /* SDRAM initialization */
     BSP_SDRAM_Init();
   }
-
+  
   if(ubIDStatus != 0)
   {
     BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"NOR Read ID : FAILED.", LEFT_MODE);
@@ -163,7 +163,7 @@ void NOR_demo(void)
     else
     {
       BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"NOR Initialization : OK.", LEFT_MODE);
-    }
+    }  
     if(ubEraseStatus != 0)
     {
       BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"NOR ERASE : FAILED.", LEFT_MODE);
@@ -190,20 +190,20 @@ void NOR_demo(void)
     else
     {
       BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"NOR READ :  OK.    ", LEFT_MODE);
-    }
+    }    
     if(Buffercmp(nor_aRxBuffer, nor_aTxBuffer, BUFFER_SIZE) > 0)
     {
       BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"NOR COMPARE : FAILED.", LEFT_MODE);
       BSP_LCD_DisplayStringAt(20, 175, (uint8_t *)"NOR Test Aborted.", LEFT_MODE);
     }
     else
-    {
+    {    
       BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"NOR Test : OK.     ", LEFT_MODE);
     }
   }
-
+  
   while (1)
-  {
+  {    
     if(CheckForUserInput() > 0)
     {
       return;
@@ -218,27 +218,27 @@ void NOR_demo(void)
   */
 static void NOR_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
   BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"NOR", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on NOR", CENTER_MODE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
 }
 
 /**
@@ -251,7 +251,7 @@ static void NOR_SetHint(void)
 static void Fill_Buffer(uint16_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
 {
   uint32_t tmpIndex = 0;
-
+  
   /* Put in global buffer different values */
   for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
   {
@@ -274,20 +274,20 @@ static uint8_t Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t Buffer
     {
       return 1;
     }
-
+    
     pBuffer1++;
     pBuffer2++;
   }
-
+  
   return 0;
 }
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

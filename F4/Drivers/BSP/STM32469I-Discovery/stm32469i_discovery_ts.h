@@ -57,7 +57,7 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery_TS
+/** @addtogroup STM32469I-Discovery_TS 
   * @{
   */
 

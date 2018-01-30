@@ -1,12 +1,12 @@
 /**
   @page I2C_OneBoard_ComSlave7_10bits_IT I2C One Board Communication Slave 10-Bit
   then Slave 7-Bit IT example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/readme.txt
+  * @file    Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/readme.txt 
   * @author  MCD Application Team
-  * @brief   Description of the I2C One Board Master Communication with
+  * @brief   Description of the I2C One Board Master Communication with 
   *          a Slave 10-Bit address then a Slave 7-Bit address example.
   ******************************************************************************
   *
@@ -35,10 +35,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example describes how to perform I2C data buffer transmission/reception between
-one master and 2 slaves with different address sizes (7-bit or 10-bit) and
+one master and 2 slaves with different address sizes (7-bit or 10-bit) and 
 different Max speed support (400Khz or 100Khz). This example
 uses the STM32F4xx I2C HAL and LL API (LL API usage for performance improvement)
 and an interrupt.
@@ -64,29 +64,29 @@ SDA SLAVE Pin: PB.7 (CN7, pin 21)
   |                                            |
   |___________NUCLEO-F411RE_________|
 
-At the beginning of the main program the HAL_Init() function is called to reset
+At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 100 MHz.
 
 The I2C peripheral configuration is ensured by the HAL_I2C_Init() function.
 This later is calling the HAL_I2C_MspInit()function which core is implementing
-the configuration of the needed I2C resources according to the used hardware (CLOCK,
+the configuration of the needed I2C resources according to the used hardware (CLOCK, 
 GPIO and NVIC). You may update this function to change I2C configuration.
 
-For this example two buffers are used
-- aTxBuffer buffer contains the data to be transmitted
+For this example two buffers are used 
+- aTxBuffer buffer contains the data to be transmitted 
 - aRxBuffer buffer is used to save the received data
 Note that both buffers have same size
-
+                       
 Example execution:
 First step, press the User push-button, this action initiates a reception process (aRxBuffer) for
 I2C Slave1 or Slave2 address through HAL_I2C_Slave_Receive_IT().
 Then I2C Master starts the communication by sending aTxBuffer through HAL_I2C_Master_Transmit_IT()
-for Slave1 (10-Bit address) at max speed supported 400Khz.
+for Slave1 (10-Bit address) at max speed supported 400Khz. 
 The end of this step is monitored through the HAL_I2C_GetState() function
 result.
-Finally, aTxBuffer and aRxBuffer are compared through Buffercmp() in order to
+Finally, aTxBuffer and aRxBuffer are compared through Buffercmp() in order to 
 check buffers correctness.
 Toggle LED2 when data is received correctly, otherwise LED2 is slowly blinking (1 sec. period)
 and communication is stopped (using infinite loop)
@@ -97,7 +97,7 @@ Then I2C Master starts the communication by receiving aRxBuffer through HAL_I2C_
 from Slave2 (7-Bit address) at max speed supported 100Khz.
 The end of this two steps are monitored through the HAL_I2C_GetState() function
 result.
-Finally, aTxBuffer and aRxBuffer are compared through Buffercmp() in order to
+Finally, aTxBuffer and aRxBuffer are compared through Buffercmp() in order to 
 check buffers correctness.
 Toggle LED2 when data is received correctly, otherwise LED2 is slowly blinking (1 sec. period)
 and communication is stopped (using infinite loop)
@@ -105,7 +105,7 @@ and communication is stopped (using infinite loop)
 @note In Master side, only Acknowledge failure error is handled. When this error
        occurs Master restart the current operation until Slave acknowledges it's
        address.
-
+        
 @note I2C2 and I2C1 instance used and associated resources can be updated in "main.h"
        file depending hardware configuration used.
 
@@ -119,23 +119,23 @@ and communication is stopped (using infinite loop)
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Inc/stm32f4xx_it.h          I2C interrupt handlers header file
-  - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Inc/main.h                  Header for main.c module
+  - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Inc/main.h                  Header for main.c module  
   - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Src/stm32f4xx_it.c          I2C interrupt handlers
   - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Src/main.c                  Main program
   - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Src/system_stm32f4xx.c      STM32F4xx system source file
-  - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Src/stm32f4xx_hal_msp.c     HAL MSP file
+  - Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/Src/stm32f4xx_hal_msp.c     HAL MSP file    
 
 
 @par Hardware and Software environment
 
   - This example runs on STM32F411RE devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.    
 
   -NUCLEO-F411RE Set-up
     - Connect GPIOs connected to I2C1 SCL/SDA (PB.6 and PB.7)
@@ -149,10 +149,10 @@ and communication is stopped (using infinite loop)
   - Press again User push-button to initiate a read request by Master
     then Slave2 (7-Bit address) Transmit a Buffer. LED2 Toggle when data is received correctly.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

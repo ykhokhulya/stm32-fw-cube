@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/UTILS/UTILS_ReadDeviceInfo/Src/stm32f4xx_it.c
   * @author  MCD Application Team

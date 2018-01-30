@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Templates_LL/Src/main.c
+  * @file    Templates_LL/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body through the LL API
   ******************************************************************************
@@ -62,10 +62,10 @@ int main(void)
 {
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Add your application code here */
-
-
+  
+  
   /* Infinite loop */
   while (1)
   {

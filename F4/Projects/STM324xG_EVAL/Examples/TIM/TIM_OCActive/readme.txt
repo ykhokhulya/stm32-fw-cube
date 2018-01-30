@@ -3,9 +3,9 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_OCActive/readme.txt
+  * @file    TIM/TIM_OCActive/readme.txt 
   * @author  MCD Application Team
-  * @brief   This example shows how to configure the Timer to generate four
+  * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************
   *
@@ -34,15 +34,15 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-  This example shows how to configure the TIM peripheral to generate four different
+  This example shows how to configure the TIM peripheral to generate four different 
   signals with four different delays.
 
   The TIM3CLK frequency is set to SystemCoreClock / 2 (Hz), and the objective is
   to get TIM3 counter clock at 2 KHz so the Prescaler is computed as following:
      - Prescaler = (TIM3CLK / TIM3 counter clock) - 1
-
+   
   SystemCoreClock is set to 168 MHz.
 
   The TIM3 CCR1 register value is equal to 1000:
@@ -70,33 +70,33 @@
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
-
+      
 @note LED4 is turned ON, because it's sharing the same GPIO pin with the TIM3 channel 2.
 
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OCActive/Inc/stm32f4xx_hal_conf.h         HAL configuration file
   - TIM/TIM_OCActive/Inc/stm32f4xx_it.h               Interrupt handlers header file
-  - TIM/TIM_OCActive/Inc/main.h                       Main program header file
+  - TIM/TIM_OCActive/Inc/main.h                       Main program header file  
   - TIM/TIM_OCActive/Src/stm32f4xx_it.c               Interrupt handlers
   - TIM/TIM_OCActive/Src/main.c                       Main program
   - TIM/TIM_OCActive/Src/stm32f4xx_hal_msp.c          HAL MSP module
   - TIM/TIM_OCActive/Src/system_stm32f4xx.c           STM32F4xx system clock configuration file
 
-
-@par Hardware and Software environment
+                                  
+@par Hardware and Software environment 
 
   - This example runs on STM32F407xx/417xx devices.
-
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC
+    
+  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC  
     evaluation boards and can be easily tailored to any other supported device and development board
 
-  - STM324xG-EVAL RevC Set-up
-    - Connect the following pins to an oscilloscope to monitor the different
+  - STM324xG-EVAL RevC Set-up 
+    - Connect the following pins to an oscilloscope to monitor the different 
       waveforms:
        - Use LED1 connected to PG.06 (Reference)
        - PC.06 (TIM3_CH1)
@@ -105,10 +105,10 @@
        - PC.09 (TIM3_CH4)
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

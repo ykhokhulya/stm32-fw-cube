@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect_ExtPin/Inc/stm32f4xx_it.h
+  * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect_ExtPin/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************

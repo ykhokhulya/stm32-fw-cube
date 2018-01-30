@@ -1,9 +1,9 @@
 /**
   @page TIM_PWMOutput_Init TIM example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/TIM/TIM_PWMOutput_Init/readme.txt
+  * @file    Examples_LL/TIM/TIM_PWMOutput_Init/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM_PWMOutput_Init example.
   ******************************************************************************
@@ -35,17 +35,17 @@
 
 @par Example Description
 
-This example describes how to use a timer peripheral to generate a
-PWM output signal and update PWM duty cycle;
-Example using the STM32F4xx TIM LL API,
+This example describes how to use a timer peripheral to generate a 
+PWM output signal and update PWM duty cycle; 
+Example using the STM32F4xx TIM LL API, 
 peripheral initialization done using LL initialization function
 to demonstrate LL init usage.
 
 In this example TIM2 input clock TIM2CLK is set to APB1 clock (PCLK1),
-since APB1 pre-scaler is equal to 1.
-   TIM2CLK = PCLK1
-   PCLK1 = HCLK
-   => TIM2CLK = SystemCoreClock (100 MHz)
+since APB1 pre-scaler is equal to 1.                                  
+   TIM2CLK = PCLK1                                                    
+   PCLK1 = HCLK                                                       
+   => TIM2CLK = SystemCoreClock (100 MHz)                             
 
 To set the TIM2 counter clock frequency to 10 KHz, the pre-scaler (PSC) is
 calculated as follows:
@@ -73,11 +73,11 @@ steps of 10%. Duty cycle is periodically measured. It can be observed through
 the debugger by watching the variable uwMeasuredDutyCycle.
 
 Initially the output channel is configured in output compare toggle mode.
-@note The LED2 is not toggling. In fact, if the dutycycle is 0% so the LED2 is OFF. When pushing
-successively the user button, the LED2 is ON and its luminosity rises as the dutycycle value keep
+@note The LED2 is not toggling. In fact, if the dutycycle is 0% so the LED2 is OFF. When pushing 
+successively the user button, the LED2 is ON and its luminosity rises as the dutycycle value keep 
 increasing.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_PWMOutput_Init/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - TIM/TIM_PWMOutput_Init/Inc/main.h                  Header for main.c module
@@ -90,12 +90,12 @@ increasing.
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

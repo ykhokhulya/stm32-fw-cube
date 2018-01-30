@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/MTP_Standalone/Src/menu.c
+  * @file    USB_Host/MTP_Standalone/Src/menu.c 
   * @author  MCD Application Team
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -54,7 +54,7 @@ uint8_t                     prev_select = 0;
 MTP_DEMO_SelectMode         mtp_select_mode;
 AUDIO_PLAYBACK_StateTypeDef audio_state;
 
-uint8_t *MTP_main_menu[] =
+uint8_t *MTP_main_menu[] = 
 {
   (uint8_t *)"      1 - Explore audio file                                         ",
   (uint8_t *)"      2 - Start audio Player                                         ",
@@ -78,7 +78,7 @@ void MTP_MenuInit(void)
 {
   mtp_demo.state = MTP_DEMO_IDLE;
   mtp_select_mode = MTP_SELECT_MENU;
-  MTP_SelectItem(MTP_main_menu, 0);
+  MTP_SelectItem(MTP_main_menu, 0); 
 }
 
 /**
@@ -91,65 +91,65 @@ void MTP_MenuProcess(void)
   switch(mtp_demo.state)
   {
   case MTP_DEMO_IDLE:
-    MTP_SelectItem(MTP_main_menu, 0);
+    MTP_SelectItem(MTP_main_menu, 0); 
     mtp_demo.state = MTP_DEMO_WAIT;
     mtp_demo.select = 0;
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
     BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
     BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll MTP menu");
-    break;
-
+    break;    
+    
   case MTP_DEMO_WAIT:
-
+    
     if(mtp_demo.select != prev_select)
     {
       prev_select = mtp_demo.select;
       MTP_SelectItem(MTP_main_menu, mtp_demo.select & 0x7F);
-
+      
       /* Handle select item */
       if(mtp_demo.select & 0x80)
       {
-
+        
         switch(mtp_demo.select & 0x7F)
         {
         case 0:
-          mtp_demo.state = MTP_DEMO_EXPLORE;
+          mtp_demo.state = MTP_DEMO_EXPLORE;  
           break;
-
-        case 1:
+        
+        case 1:         
           /* Display HMI messages */
-          BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+          BSP_LCD_SetTextColor(LCD_COLOR_GREEN);          
           BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                             ");
-          BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"                                             ");
+          BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"                                             ");          
           BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [User Key] To Stop and return from player");
-          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-
-          /* Set PLAYBACK state and start playing 1st file */
+          BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
+          
+          /* Set PLAYBACK state and start playing 1st file */ 
           audio_state = AUDIO_STATE_IDLE;
           mtp_demo.state = MTP_DEMO_PLAYBACK;
-          MTP_ChangeSelectMode(MTP_PLAYBACK_CONTROL);
+          MTP_ChangeSelectMode(MTP_PLAYBACK_CONTROL);           
           break;
-
+        
         case 2:
-          mtp_demo.state = MTP_REENUMERATE;
+          mtp_demo.state = MTP_REENUMERATE;  
           break;
-
+        
         default:
           break;
         }
       }
     }
     break;
-
-  case MTP_DEMO_EXPLORE:
+    
+  case MTP_DEMO_EXPLORE:  
     if(Appli_state == APPLICATION_READY)
     {
       if(MTP_Init() == 0)
       {
         if(MTP_ExploreWavFile() > 0)
         {
-          LCD_ErrLog("There is no WAV file on the microSD.\n" );
-          MTP_ChangeSelectMode(MTP_SELECT_MENU);
+          LCD_ErrLog("There is no WAV file on the microSD.\n" );         
+          MTP_ChangeSelectMode(MTP_SELECT_MENU); 
           mtp_demo.state = MTP_DEMO_IDLE;
         }
         else
@@ -162,8 +162,8 @@ void MTP_MenuProcess(void)
     {
       mtp_demo.state = MTP_DEMO_WAIT;
     }
-    break;
-
+    break; 
+    
   case MTP_DEMO_PLAYBACK:
     if(Appli_state == APPLICATION_READY)
     {
@@ -175,25 +175,25 @@ void MTP_MenuProcess(void)
           audio_state = AUDIO_STATE_INIT;
           if(AUDIO_Start(0) == AUDIO_ERROR_IO)
           {
-            MTP_ChangeSelectMode(MTP_SELECT_MENU);
+            MTP_ChangeSelectMode(MTP_SELECT_MENU); 
              mtp_demo.state = MTP_DEMO_IDLE;
           }
           else
           {
-            BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+            BSP_LCD_SetTextColor(LCD_COLOR_YELLOW); 
             BSP_LCD_DisplayStringAtLine(10, (uint8_t *)"[  UP   ] : Volume +");
             BSP_LCD_DisplayStringAtLine(11, (uint8_t *)"[ DOWN  ] : Volume -");
             BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"[ LEFT  ] : Previous");
             BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"[ RIGHT ] : Next");
-            BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"[  SEL  ] : Pause/Resume");
-            BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+            BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"[  SEL  ] : Pause/Resume");          
+            BSP_LCD_SetTextColor(LCD_COLOR_WHITE);           
           }
         }
         else /* Not idle */
         {
           if(AUDIO_Process() == AUDIO_ERROR_IO)
           {
-            MTP_ChangeSelectMode(MTP_SELECT_MENU);
+            MTP_ChangeSelectMode(MTP_SELECT_MENU);  
             mtp_demo.state = MTP_DEMO_IDLE;
           }
         }
@@ -203,11 +203,11 @@ void MTP_MenuProcess(void)
     {
       mtp_demo.state = MTP_DEMO_WAIT;
     }
-    break;
-
+    break; 
+    
   case MTP_REENUMERATE:
     /* Force MTP Device to re-enumerate */
-    USBH_ReEnumerate(&hUSBHost);
+    USBH_ReEnumerate(&hUSBHost); 
     mtp_demo.state = MTP_DEMO_WAIT;
     break;
 
@@ -217,13 +217,13 @@ void MTP_MenuProcess(void)
 
   if(Appli_state == APPLICATION_DISCONNECT)
   {
-    Appli_state = APPLICATION_IDLE;
+    Appli_state = APPLICATION_IDLE;     
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
-    MTP_ChangeSelectMode(MTP_SELECT_MENU);
+    MTP_ChangeSelectMode(MTP_SELECT_MENU);     
   }
-
+   
   mtp_demo.select &= 0x7F;
-}
+} 
 
 /**
   * @brief  Manages the menu on the screen.
@@ -234,42 +234,42 @@ void MTP_MenuProcess(void)
 static void MTP_SelectItem(uint8_t **menu, uint8_t item)
 {
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-
+  
   switch(item)
   {
-  case 0:
+  case 0: 
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(17, menu [0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
     BSP_LCD_DisplayStringAtLine(18, menu [1]);
     BSP_LCD_DisplayStringAtLine(19, menu [2]);
     break;
-
-  case 1:
+    
+  case 1: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(17, menu [0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);    
     BSP_LCD_DisplayStringAtLine(18, menu [1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu [2]);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
+    BSP_LCD_DisplayStringAtLine(19, menu [2]); 
     break;
-
-  case 2:
+    
+  case 2: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(17, menu [0]);
+    BSP_LCD_DisplayStringAtLine(17, menu [0]);  
     BSP_LCD_DisplayStringAtLine(18, menu [1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu [2]);
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
+    BSP_LCD_DisplayStringAtLine(19, menu [2]); 
     break;
-
+     
   default:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(17, menu [0]);
     BSP_LCD_DisplayStringAtLine(18, menu [1]);
-    BSP_LCD_DisplayStringAtLine(19, menu [2]);
-    break;
+    BSP_LCD_DisplayStringAtLine(19, menu [2]); 
+    break; 
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK); 
 }
 
 /**
@@ -291,10 +291,10 @@ static void MTP_MenuProbeKey(JOYState_TypeDef state)
   else if(state == JOY_SEL)
   {
     if(USBH_MTP_IsReady(&hUSBHost) > 0)
-    {
+    {    
       mtp_demo.select |= 0x80;
     }
-  }
+  }  
 }
 
 /**
@@ -306,31 +306,31 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   static JOYState_TypeDef JoyState = JOY_NONE;
   static uint32_t debounce_time = 0;
-
+  
   if(GPIO_Pin == GPIO_PIN_2)
-  {
+  {    
     /* Get the Joystick State */
     JoyState = BSP_JOY_GetState();
-
+    
     /* Clear joystick interrupt pending bits */
     BSP_IO_ITClear(JOY_ALL_PINS);
-
+    
     if(mtp_select_mode == MTP_SELECT_MENU)
-    {
-      MTP_MenuProbeKey(JoyState);
-
+    {  
+      MTP_MenuProbeKey(JoyState); 
+      
       switch(JoyState)
       {
       case JOY_LEFT:
         LCD_LOG_ScrollBack();
         break;
-
+             
       case JOY_RIGHT:
         LCD_LOG_ScrollForward();
-        break;
-
+        break;          
+        
       default:
-        break;
+        break;           
       }
     }
     else if(mtp_select_mode == MTP_PLAYBACK_CONTROL)
@@ -342,7 +342,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   if(mtp_demo.state == MTP_DEMO_PLAYBACK)
   {
     if(GPIO_Pin == KEY_BUTTON_PIN)
-    {
+    { 
       /* Prevent debounce effect for user key */
       if((HAL_GetTick() - debounce_time) > 50)
       {
@@ -352,14 +352,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       {
         return;
       }
-
+      
       /* Change the selection type */
       if(mtp_select_mode == MTP_SELECT_MENU)
       {
-        MTP_ChangeSelectMode(MTP_PLAYBACK_CONTROL);
+        MTP_ChangeSelectMode(MTP_PLAYBACK_CONTROL); 
       }
       else if(mtp_select_mode == MTP_PLAYBACK_CONTROL)
-      {
+      {       
        AUDIO_Stop();
       }
     }
@@ -377,14 +377,14 @@ static void MTP_ChangeSelectMode(MTP_DEMO_SelectMode select_mode)
   {
     MTP_SelectItem(MTP_main_menu, 0x00);
     LCD_ClearTextZone();
-    LCD_LOG_UpdateDisplay();
+    LCD_LOG_UpdateDisplay(); 
   }
   else if(select_mode == MTP_PLAYBACK_CONTROL)
   {
     LCD_ClearTextZone();
-    MTP_SelectItem(MTP_main_menu, 0xFF);
+    MTP_SelectItem(MTP_main_menu, 0xFF);     
   }
-  mtp_select_mode = select_mode;
+  mtp_select_mode = select_mode; 
   mtp_demo.select = 0;
 }
 

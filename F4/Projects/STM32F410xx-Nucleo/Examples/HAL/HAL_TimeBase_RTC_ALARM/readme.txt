@@ -1,9 +1,9 @@
 /**
   @page HAL_TimeBase_RTC_ALARM HAL TimeBase RTC Alarm
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt
+  * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HAL TimeBase RTC Alarm example.
   ******************************************************************************
@@ -33,23 +33,23 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example describes how to customize the HAL time base using RTC Alarm instead
+This example describes how to customize the HAL time base using RTC Alarm instead 
 of Systick as main source of time base. The nucleo board user button (connected to EXTI Line13)
-will be used to Suspend or Resume tick increment.
+will be used to Suspend or Resume tick increment. 
 Each time the user button is pressed; EXTI Line13 interrupt is generated and in the ISR
 the uwIncrementState is checked:
-  1- If the uwIncrementState = 0: the tick increment is suspended by calling
+  1- If the uwIncrementState = 0: the tick increment is suspended by calling 
      HAL_SuspendTick() API (RTC alarm interrupt is disabled).
-  2- If the uwIncrementState = 1: the tick increment is Resumed by calling
+  2- If the uwIncrementState = 1: the tick increment is Resumed by calling 
      HAL_ResumeTick() API(RTC alarm interrupt is enabled).
 
-The alarm is configured to assert an interrupt when the RTC reaches 1 ms
+The alarm is configured to assert an interrupt when the RTC reaches 1 ms 
 
 The example brings, in user file, a new implementation of the following HAL weak functions:
 
-HAL_InitTick()
+HAL_InitTick() 
 HAL_SuspendTick()
 HAL_ResumeTick()
 
@@ -81,21 +81,21 @@ In an infinite loop, LED2 toggles spaced out over 500ms delay
   - HAL/HAL_TimeBase/Src/main.c                                  Main program
   - HAL/HAL_TimeBase/Src/stm32f4xx_hal_timebase_rtc_alarm.c      HAL time base functions
   - HAL/HAL_TimeBase/Src/system_stm32f4xx.c                      STM32F4xx system clock configuration file
-
+  
 
 @par Hardware and Software environment
 
   - This example runs on STM32F410xx devices.
-
+    
   - This example has been tested with STMicroelectronics STM32F410xx-Nucleo RevC
-    boards and can be easily tailored to any other supported device
+    boards and can be easily tailored to any other supported device 
     and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

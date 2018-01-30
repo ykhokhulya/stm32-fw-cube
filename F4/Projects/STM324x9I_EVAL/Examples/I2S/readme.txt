@@ -1,9 +1,9 @@
 /**
   @page I2S_EXAMPLES I2S Example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    I2S/readme.txt
+  * @file    I2S/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of I2S example.
   ******************************************************************************
@@ -38,8 +38,8 @@
     - /Projects/STM324xG_EVAL/Examples/I2S/I2S_Audio
     - /Projects/STM324xG_EVAL/Applications/USB_Device/AUDIO_Standalone
     - /Projects/STM32F401-Discovery/Applications/Audio/Audio_playback_and_record
-    - /Projects/STM32F4-Discovery/Applications/Audio/Audio_playback_and_record
+    - /Projects/STM32F4-Discovery/Applications/Audio/Audio_playback_and_record    
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-
+ 

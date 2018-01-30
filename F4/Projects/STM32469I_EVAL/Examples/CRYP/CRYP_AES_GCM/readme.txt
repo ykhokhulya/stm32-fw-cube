@@ -1,9 +1,9 @@
 /**
   @page CRYP_AES_GCM  Encrypt and Decrypt data using AES Algo using GCM chaining mode
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CRYP/CRYP_AES_GCM/readme.txt
+  * @file    CRYP/CRYP_AES_GCM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES Algorithm using GCM chaining mode example
   ******************************************************************************
@@ -33,7 +33,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example provides a description of how to use the CRYPTO peripheral to
 encrypt and decrypt data using AES with Galois/Counter Mode (GCM).
@@ -45,7 +45,7 @@ The AES-GCM mode requires:
 2. Header that will be authenticated but not encrypted. The header size must be
    multiple of 16 bytes whatever the key size.
 3. Initialization vector a value that is used only once within a specified
-   context. It must be padded to 16-byte length with LSB set to 2.
+   context. It must be padded to 16-byte length with LSB set to 2. 
 4. Key is the parameter which determines the cipher text. In this example the
    key size is 128 bits =16 bytes but it can be tailored to 192 bits or 256 bits.
 
@@ -55,38 +55,38 @@ The AES-GCM provides:
    Its size is the same as the plain text.
 2. Plain text which is the decryption result of the Cipher text. In this
    example, the plain text is available in "DecryptedText".
-   Its size is the same as the plain text.
+   Its size is the same as the plain text. 
 3. TAG: The Message Authentication Code which is used for both message
    authentication and message tampering detection. It's size is always 16 bytes.
-
+   
 The Plain data, encrypted data, authentication TAG (MAC) and decrypted data can
 be displayed on a PC HyperTerminal using the UART.
 
 The USARTx is configured as follow:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
     - Hardware flow control disabled (RTS and CTS signals)
     - Receive and transmit enabled
-
+    
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - CRYP/CRYP_AES_GCM/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CRYP/CRYP_AES_GCM/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CRYP/CRYP_AES_GCM/Inc/main.h                  Header for main.c module
+  - CRYP/CRYP_AES_GCM/Inc/main.h                  Header for main.c module  
   - CRYP/CRYP_AES_GCM/Src/stm32f4xx_it.c          Interrupt handlers
   - CRYP/CRYP_AES_GCM/Src/main.c                  Main program
   - CRYP/CRYP_AES_GCM/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -98,25 +98,25 @@ The USARTx is configured as follow:
 
   - This example has been tested and validated with STM32479I-EVAL board and can be
     easily tailored to any other supported device and development board.
-
+ 
 
   - Hyperterminal configuration:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
     - Hardware flow control disabled (RTS and CTS signals)
     - Receive and transmit enabled
-
+    
     @note Make sure that :
-    - jumper JP8  is on RS232_RX position (1-2)  and
-    - jumper JP15 is on USART1_RX position 1-2)and
-    - jumper JP19 is on USART1_TX position (1-2).
+    - jumper JP8  is on RS232_RX position (1-2)  and 
+    - jumper JP15 is on USART1_RX position 1-2)and 
+    - jumper JP19 is on USART1_TX position (1-2). 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following:
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

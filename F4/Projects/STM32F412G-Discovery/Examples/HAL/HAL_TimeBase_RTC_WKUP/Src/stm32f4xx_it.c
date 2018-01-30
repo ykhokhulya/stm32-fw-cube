@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HAL/HAL_TimeBase_RTC_WKUP/Src/stm32f4xx_it.c
+  * @file    HAL/HAL_TimeBase_RTC_WKUP/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Interrupt Service Routines.
   ******************************************************************************
@@ -214,7 +214,7 @@ void EXTI15_10_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

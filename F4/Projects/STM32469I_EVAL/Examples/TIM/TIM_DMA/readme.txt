@@ -1,9 +1,9 @@
 /**
   @page TIM_DMA TIM DMA example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_DMA/readme.txt
+  * @file    TIM/TIM_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM DMA example.
   ******************************************************************************
@@ -33,7 +33,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example provides a description of how to use DMA with TIMER Update request
 to transfer Data from memory to TIMER Capture Compare Register 3 (CCR3).
@@ -41,50 +41,50 @@ to transfer Data from memory to TIMER Capture Compare Register 3 (CCR3).
   The following configuration values are used in this example:
 
     - TIM2CLK = SystemCoreClock
-    - Counter repetition = 3
-    - Prescaler = 0
+    - Counter repetition = 3 
+    - Prescaler = 0 
     - TIM2 counter clock = SystemCoreClock
     - SystemCoreClock is set to 180 MHz for STM32F4xx
 
-  The objective is to configure TIM2 channel 3 to generate complementary PWM
-  (Pulse Width Modulation) signal with a frequency equal to 17.57 KHz, and a variable
+  The objective is to configure TIM2 channel 3 to generate complementary PWM 
+  (Pulse Width Modulation) signal with a frequency equal to 17.57 KHz, and a variable 
   duty cycle that is changed by the DMA after a specific number of Update DMA request.
 
   The number of this repetitive requests is defined by the TIM2 Repetition counter,
-  each 4 Update Requests, the TIM2 Channel 3 Duty Cycle changes to the next new
+  each 4 Update Requests, the TIM2 Channel 3 Duty Cycle changes to the next new 
   value defined by the aCCValue_Buffer.
-
+  
   The PWM waveform can be displayed using an oscilloscope.
-
+ 
   In nominal mode (except at start) , it should looks like this :
-
-       .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .
+    
+       .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   
         ___________     _______         ___             ___________    __
-      _|           |___|       |_______|   |___________|           |__|
+      _|           |___|       |_______|   |___________|           |__|             
        <----57us -----><----57us -----><----57us -----><----57us ----->
 
 
 
-@note PWM signal frequency value mentioned above is theoretical (obtained when the system clock frequency
+@note PWM signal frequency value mentioned above is theoretical (obtained when the system clock frequency 
       is exactly 180 MHz). Since the generated system clock frequency may vary from one board to another observed
       PWM signal frequency might be slightly different.
-
+    
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This
-      implies that if HAL_Delay() is called from a peripheral ISR process, then
+      implies that if HAL_Delay() is called from a peripheral ISR process, then 
       the SysTick interrupt must have higher priority (numerically lower)
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_DMA/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_DMA/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_DMA/Inc/main.h                  Header for main.c module
+  - TIM/TIM_DMA/Inc/main.h                  Header for main.c module  
   - TIM/TIM_DMA/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_DMA/Src/main.c                  Main program
   - TIM/TIM_DMA/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -95,18 +95,18 @@ to transfer Data from memory to TIMER Capture Compare Register 3 (CCR3).
   - This example runs on STM32F469xx/STM32F479xx devices.
   - In this example, the clock is set to 180 MHz.
 
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC
-    board and can be easily tailored to any other supported device
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
+    board and can be easily tailored to any other supported device 
     and development board.
 
   - STM32469I-EVAL Set-up
-    - Connect the TIM2 pin to an oscilloscope to monitor the different waveforms:
+    - Connect the TIM2 pin to an oscilloscope to monitor the different waveforms: 
     - TIM2 CH3 (PB.10, pin 33 of CN5 connector)
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

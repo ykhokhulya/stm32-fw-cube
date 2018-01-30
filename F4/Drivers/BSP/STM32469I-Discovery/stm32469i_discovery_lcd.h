@@ -63,7 +63,7 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery_LCD
+/** @addtogroup STM32469I-Discovery_LCD 
   * @{
   */
 
@@ -72,11 +72,11 @@
   */
 
 #define LCD_LayerCfgTypeDef    LTDC_LayerCfgTypeDef
-/**
-  * @brief  LCD FB_StartAddress
+/** 
+  * @brief  LCD FB_StartAddress  
   */
 #define LCD_FB_START_ADDRESS       ((uint32_t)0xC0000000)
-
+   
 /** @brief Maximum number of LTDC layers
  */
 #define LTDC_MAX_LAYER_NUMBER             ((uint32_t) 2)
@@ -97,18 +97,18 @@
  */
 #define LTDC_DEFAULT_ACTIVE_LAYER         LTDC_ACTIVE_LAYER_FOREGROUND
 
-/**
-  * @brief  LCD status structure definition
-  */
+/** 
+  * @brief  LCD status structure definition  
+  */     
 #define   LCD_OK         0x00
 #define   LCD_ERROR      0x01
 #define   LCD_TIMEOUT    0x02
 
-/**
-  * @brief  LCD Display OTM8009A ID
-  */
+/** 
+  * @brief  LCD Display OTM8009A ID  
+  */ 
 #define LCD_OTM8009A_ID  ((uint32_t) 0)
-
+   
 /**
   * @brief  LCD color definitions values
   * in ARGB8888 format.
@@ -234,7 +234,7 @@
 /**
   * @}
   */
-
+   
 /** @defgroup STM32469I-Discovery_LCD_Exported_Types STM32469I Discovery LCD Exported Types
   * @{
   */

@@ -70,16 +70,16 @@ void Error_Handler(void);
 #if defined(USE_CHANNEL_DELAY)
 #if defined(PLAY_DFSDM2_DATIN01)
 /* Select channel to generate delay: either DFSDM2 CH0 or  DFSDM2 CH1 */
-//#define GENERATE_DELAY_DFSDM2_CH1
-//#define GENERATE_DELAY_DFSDM2_CH0
+//#define GENERATE_DELAY_DFSDM2_CH1                          
+//#define GENERATE_DELAY_DFSDM2_CH0                             
 #elif defined(PLAY_DFSDM2_DATIN06)
 /* Select channel to generate delay: either DFSDM2 CH0 or  DFSDM2 CH6 */
-//#define GENERATE_DELAY_DFSDM2_CH6
-//#define GENERATE_DELAY_DFSDM2_CH0
+//#define GENERATE_DELAY_DFSDM2_CH6                       
+//#define GENERATE_DELAY_DFSDM2_CH0                         
 #elif defined(PLAY_DFSDM2_DATIN07)
 /* Select channel to generate delay: either DFSDM2 CH0 or  DFSDM2 CH7 */
-//#define GENERATE_DELAY_DFSDM2_CH7
-//#define GENERATE_DELAY_DFSDM2_CH0
+//#define GENERATE_DELAY_DFSDM2_CH7                        
+//#define GENERATE_DELAY_DFSDM2_CH0                          
 #elif defined(PLAY_DFSDM2_DATIN16)
 /* Select channel to generate delay: either DFSDM2 CH1 or  DFSDM2 CH6 */
 //#define GENERATE_DELAY_DFSDM2_CH1
@@ -143,13 +143,13 @@ void Error_Handler(void);
 #define DFSDM1_CKOUT_PIN                                GPIO_PIN_8
 #define DFSDM1_CKOUT_PORT                               GPIOA
 #define DFSDM1_CKOUT_ALTERNATE                          GPIO_AF6_DFSDM1
-#define __DFSDM1_CKOUT_ENABLE()                         __HAL_RCC_GPIOA_CLK_ENABLE()
+#define __DFSDM1_CKOUT_ENABLE()                         __HAL_RCC_GPIOA_CLK_ENABLE() 
 #define __DFSDM1_CKOUT_DISABLE()                        __HAL_RCC_GPIOA_CLK_DISABLE()
 
 #define DFSDM2_CKOUT_PIN                                GPIO_PIN_2
 #define DFSDM2_CKOUT_PORT                               GPIOD
 #define DFSDM2_CKOUT_ALTERNATE                          GPIO_AF3_DFSDM2
-#define __DFSDM2_CKOUT_ENABLE()                         __HAL_RCC_GPIOD_CLK_ENABLE()
+#define __DFSDM2_CKOUT_ENABLE()                         __HAL_RCC_GPIOD_CLK_ENABLE() 
 #define __DFSDM2_CKOUT_DISABLE()                        __HAL_RCC_GPIOD_CLK_DISABLE()
 
 #define DFSDM1_DATIN1_PIN                               GPIO_PIN_6
@@ -175,7 +175,7 @@ void Error_Handler(void);
                                                         }while(0)
 #define __HAL_RCC_DFSDMxAUDIO_CONFIG()                  do {__HAL_RCC_DFSDM1AUDIO_CONFIG(RCC_DFSDM1AUDIOCLKSOURCE_I2SAPB1); \
                                                             __HAL_RCC_DFSDM2AUDIO_CONFIG(RCC_DFSDM2AUDIOCLKSOURCE_I2SAPB1);    \
-                                                        }while(0)
+                                                        }while(0)                                                  
 
 #endif /* __MAIN_H */
 

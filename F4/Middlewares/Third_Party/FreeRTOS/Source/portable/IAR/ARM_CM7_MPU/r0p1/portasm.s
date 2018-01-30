@@ -83,7 +83,7 @@
 	PUBLIC vPortEnableVFP
         PUBLIC xPortRaisePrivilege
         PUBLIC vPortSwitchToUserMode
-
+        
 
 
 /*-----------------------------------------------------------*/
@@ -122,7 +122,7 @@ xPortPendSVHandler:
 	/* The first item in pxCurrentTCB is the task top of stack. */
 	ldr r1, [r3]
 	ldr r0, [r1]
-
+        
  	add r1, r1, #4					/* Move onto the second item in the TCB... */
 	ldr r2, =0xe000ed9c				/* Region Base Address register. */
 	ldmia r1!, {r4-r11}				/* Read 4 sets of MPU registers. */
@@ -179,7 +179,7 @@ vPortStartFirstTask:
 	dsb
 	isb
 	svc 0	/* System call to start first task. */
-
+  
 vRestoreContextOfFirstTask:
 
 	ldr r0, =0xE000ED08				/* Use the NVIC offset register to locate the stack. */
@@ -199,7 +199,7 @@ vRestoreContextOfFirstTask:
 	mov r0, #0
 	msr	basepri, r0
 	bx r14
-
+  
 /*-----------------------------------------------------------*/
 
 vPortEnableVFP:
@@ -220,13 +220,13 @@ xPortRaisePrivilege:
 	svcne 2                                  	/* Switch to privileged. */
 	moveq r0, #1					/* CONTROL[0]==0, return true. */
 	bx lr
-
+        
 /*-----------------------------------------------------------*/
 
 
 
 vPortSwitchToUserMode:
-
+	
 	mrs r0, control
 	orr r0, r0, #1
 	msr control, r0

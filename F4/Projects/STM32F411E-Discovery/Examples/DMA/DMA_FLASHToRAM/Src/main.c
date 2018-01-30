@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    DMA/DMA_FLASHToRAM/Src/main.c
+  * @file    DMA/DMA_FLASHToRAM/Src/main.c  
   * @author  MCD Application Team
-  * @brief   This example provides a description of how to use a DMA channel
-  *          to transfer a word data buffer from FLASH memory to embedded
+  * @brief   This example provides a description of how to use a DMA channel 
+  *          to transfer a word data buffer from FLASH memory to embedded 
   *          SRAM memory through the STM32F4xx HAL API.
   ******************************************************************************
   * @attention
@@ -44,7 +44,7 @@
 
 /** @addtogroup DMA_FLASHToRAM
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -96,13 +96,13 @@ int main(void)
 
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+  
   /* Configure and enable the DMA Stream for Memory to Memory transfer */
-  DMA_Config();
-
+  DMA_Config(); 
+  
   /* Infinite loop */
   while (1)
-  {
+  {    
   }
 }
 
@@ -113,7 +113,7 @@ int main(void)
   *        -1- Enable DMA2 clock
   *        -2- Select the DMA functional Parameters
   *        -3- Select the DMA instance to be used for the transfer
-  *        -4- Select Callbacks functions called after Transfer complete and
+  *        -4- Select Callbacks functions called after Transfer complete and 
                Transfer error interrupt detection
   *        -5- Initialize the DMA stream
   *        -6- Configure NVIC for DMA transfer complete/error interrupts
@@ -122,7 +122,7 @@ int main(void)
   * @retval None
   */
 static void DMA_Config(void)
-{
+{   
   /*## -1- Enable DMA2 clock #################################################*/
   __HAL_RCC_DMA2_CLK_ENABLE();
 
@@ -147,17 +147,17 @@ static void DMA_Config(void)
   if(HAL_DMA_Init(&DmaHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler();  
   }
 
   /*##-5- Select Callbacks functions called after Transfer complete and Transfer error */
   HAL_DMA_RegisterCallback(&DmaHandle, HAL_DMA_XFER_CPLT_CB_ID, TransferComplete);
   HAL_DMA_RegisterCallback(&DmaHandle, HAL_DMA_XFER_ERROR_CB_ID, TransferError);
-
+  
   /*##-6- Configure NVIC for DMA transfer complete/error interrupts ##########*/
-  /* Set Interrupt Group Priority */
+  /* Set Interrupt Group Priority */ 
   HAL_NVIC_SetPriority(DMA_STREAM_IRQ, 0, 0);
-
+  
   /* Enable the DMA STREAM global Interrupt */
   HAL_NVIC_EnableIRQ(DMA_STREAM_IRQ);
 
@@ -167,13 +167,13 @@ static void DMA_Config(void)
   if(HAL_DMA_Start_IT(&DmaHandle, (uint32_t)&aSRC_Const_Buffer, (uint32_t)&aDST_Buffer, BUFFER_SIZE) != HAL_OK)
   {
     /* Transfer Error */
-    Error_Handler();
-  }
+    Error_Handler();  
+  }           
 }
 
 /**
   * @brief  DMA conversion complete callback
-  * @note   This function is executed when the transfer complete interrupt
+  * @note   This function is executed when the transfer complete interrupt 
   *         is generated
   * @retval None
   */
@@ -185,7 +185,7 @@ static void TransferComplete(DMA_HandleTypeDef *DmaHandle)
 
 /**
   * @brief  DMA conversion error callback
-  * @note   This function is executed when the transfer error interrupt
+  * @note   This function is executed when the transfer error interrupt 
   *         is generated during DMA transfer
   * @retval None
   */
@@ -197,7 +197,7 @@ static void TransferError(DMA_HandleTypeDef *DmaHandle)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSI)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -222,12 +222,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -242,14 +242,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
@@ -279,7 +279,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

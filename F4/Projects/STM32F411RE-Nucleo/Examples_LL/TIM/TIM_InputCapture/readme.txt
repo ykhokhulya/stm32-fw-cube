@@ -1,9 +1,9 @@
 /**
   @page TIM_InputCapture TIM example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/TIM/TIM_InputCapture/readme.txt
+  * @file    Examples_LL/TIM/TIM_InputCapture/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM_InputCapture example.
   ******************************************************************************
@@ -37,12 +37,12 @@
 
 This example shows how to use the TIM peripheral to measure the frequency of
 a periodic signal provided either by an external signal generator or by
-another timer instance;
-Example using the STM32F4xx TIM LL API,
+another timer instance; 
+Example using the STM32F4xx TIM LL API, 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
-
-TIM3_CH1 is configured in input capture mode. The TIM3CLK frequency is set to
+  
+TIM3_CH1 is configured in input capture mode. The TIM3CLK frequency is set to 
 its maximum value (Prescaler is 1) in order to get the best possible resolution.
 So the TIM3 counter clock is SystemCoreClock.
 
@@ -62,7 +62,7 @@ change the frequency of this signal from 2 kHz up to 20 kHz by steps of 2 kHz.
 It is then possible to run this example without a signal generator by connecting
 TIM2_CH1 to TIM3_CH1.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_InputCapture/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - TIM/TIM_InputCapture/Inc/main.h                  Header for main.c module
@@ -75,16 +75,16 @@ TIM2_CH1 to TIM3_CH1.
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-F411RE Set-up
     - When no signal generator is used TIM2_CH1 can be connected to TIM3_CH1:
-      - TIM3_CH1  PA.06: connected to pin 5 of CN5 connector
-      - TIM2_CH1  PA.05: connected to pin 6 of CN5 connector
+      - TIM3_CH1  PA.06: connected to pin 5 of CN5 connector  
+      - TIM2_CH1  PA.05: connected to pin 6 of CN5 connector 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

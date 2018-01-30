@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Display/LCD_DSI_ImagesSlider/Inc/stm32f4xx_it.h
+  * @file    Display/LCD_DSI_ImagesSlider/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************

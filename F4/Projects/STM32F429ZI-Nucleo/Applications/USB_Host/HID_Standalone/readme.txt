@@ -1,57 +1,56 @@
 /**
   @page HID_Standalone USB Host Human Interface (HID) application
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    USB_Host/HID_Standalone/readme.txt
+  * @file    USB_Host/HID_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Host HID application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   @endverbatim
 
-@par Application Description
+@par Application Description 
 
-This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
-USB host application based on the Human Interface Class (HID) on the STM32F4xx devices.
+This application shows how to use the USB host application based on the HID class on the STM32F4xx devices.
 
-This is a typical application on how to use the STM32F429ZI USB OTG Host peripheral to interact with an USB
+This is a typical application on how to use the STM32F429ZI USB OTG Host peripheral to interact with an USB 
 HID Device such as a Mouse or a Keyboard.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
@@ -59,9 +58,9 @@ initialize the Flash interface and the systick. The user is provided with the Sy
 function to configure the system clock (SYSCLK) to run at 168 MHz. The Full Speed (FS) USB module uses
 internally a 48-MHz clock which is coming from the PLL.
 
-When the application is started, the connected HID device (Mouse/Keyboard) is detected in HID mode and
-gets initialized. The STM32 MCU behaves as a HID Host, it enumerates the device and extracts VID, PID,
-manufacturer name, Serial no and product name information and displays it on the LCD screen.
+When the application is started, the connected HID device (Mouse/Keyboard) is detected in HID mode and 
+gets initialized. The STM32 MCU behaves as a HID Host, it enumerates the device and extracts VID, PID, 
+manufacturer name, Serial no and product name information and displays it on the LCD screen. 
 This application is based on interacting with a HID device (Mouse/Keyboard) trough a HID routine.
 LCD and joystick are provided by Adafruit 1.8" TFT shield to be plugged on Arduino connectors.
 
@@ -70,11 +69,11 @@ A menu is displayed and the user can select any operation from the menu using th
    - "Start Mouse / Re-Initialize" operation starts Mouse HID application. Moving the mouse will move
     the pointer in the display rectangle and if a button is pressed, the corresponding rectangle will be
     highlighted in Blue.
-   - "Start Keyboard / Clear" operation starts Keyboard HID application. Taped Keyboard characters are
+   - "Start Keyboard / Clear" operation starts Keyboard HID application. Taped Keyboard characters are 
    displayed on the LCD screen.
  - "Re-Enumerate" operation performs a new Enumeration of the device.
 
-@note In case of using an AZERTY keyboard, user should add "AZERTY_KEYBOARD" define to ensure correct
+@note In case of using an AZERTY keyboard, user should add "AZERTY_KEYBOARD" define to ensure correct 
       displaying taped characters.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -82,11 +81,11 @@ A menu is displayed and the user can select any operation from the menu using th
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-For more details about the STM32Cube USB Host library, please refer to UM1720
+For more details about the STM32Cube USB Host library, please refer to UM1720  
 "STM32Cube USB Host library".
 
 @note LED1 is turned ON, because it's sharing the same pin with the SPI CLK signal used to communicate with the Adafruit 1.8" TFT shield.
@@ -119,32 +118,32 @@ requirements, such as:
   - USB_Host/HID_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/HID_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/HID_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
-
+ 
 
 @par Hardware and Software environment
 
   - This application runs on STM32F429ZI devices.
-
-  - This application has been tested with STMicroelectronics NUCLEO-F429ZI Rev.B boards
+    
+  - This application has been tested with STMicroelectronics NUCLEO-F429ZI Rev.B boards 
     and can be easily tailored to any other supported device and development board.
 
   - NUCLEO-F429ZI Set-up
-    - Plug a USB device mouse or keyboard into the NUCLEO-F429ZI board
+    - Plug a USB device mouse or keyboard into the NUCLEO-F429ZI board 
       through 'USB micro A-Male to A-Female' cable
 
   - Make sure that the jumper JP4 is closed
 
-  - Adafruit 1.8" TFT shield must be connected on CN7, CN8, CN9 and CN10 Arduino connectors,
+  - Adafruit 1.8" TFT shield must be connected on CN7, CN8, CN9 and CN10 Arduino connectors, 
     for more details please refer to UM1726.
 
-  - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-F429ZI board (bottom side)
+  - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-F429ZI board (bottom side) 
 
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the application
-
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

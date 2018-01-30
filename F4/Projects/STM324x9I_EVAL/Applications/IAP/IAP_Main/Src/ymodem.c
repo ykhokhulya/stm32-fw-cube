@@ -1,43 +1,43 @@
 /**
   ******************************************************************************
-  * @file    IAP/IAP_Main/Src/ymodem.c
+  * @file    IAP/IAP_Main/Src/ymodem.c 
   * @author  MCD Application Team
-  * @brief   This file provides all the software functions related to the ymodem
+  * @brief   This file provides all the software functions related to the ymodem 
   *          protocol.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -45,8 +45,8 @@
   */
 /** @addtogroup STM32F4xx_IAP_Main
   * @{
-  */
-
+  */ 
+  
 /* Includes ------------------------------------------------------------------*/
 #include "flash_if.h"
 #include "common.h"
@@ -245,7 +245,7 @@ static void PreparePacket(uint8_t *p_source, uint8_t *p_packet, uint8_t pkt_nr, 
 
 /**
   * @brief  Update CRC16 for input byte
-  * @param  crc_in input value
+  * @param  crc_in input value 
   * @param  input byte
   * @retval None
   */
@@ -263,7 +263,7 @@ uint16_t UpdateCRC16(uint16_t crc_in, uint8_t byte)
     if(crc & 0x10000)
       crc ^= 0x1021;
   }
-
+  
   while(!(in & 0x10000));
 
   return crc & 0xffffu;
@@ -282,7 +282,7 @@ uint16_t Cal_CRC16(const uint8_t* p_data, uint32_t size)
 
   while(p_data < dataEnd)
     crc = UpdateCRC16(crc, *p_data++);
-
+ 
   crc = UpdateCRC16(crc, 0);
   crc = UpdateCRC16(crc, 0);
 
@@ -471,11 +471,11 @@ COM_StatusTypeDef Ymodem_Transmit (uint8_t *p_buf, const uint8_t *p_file_name, u
   uint32_t blk_number = 1;
   uint8_t a_rx_ctrl[2];
   uint8_t i;
-#ifdef CRC16_F
+#ifdef CRC16_F    
   uint32_t temp_crc;
-#else /* CRC16_F */
+#else /* CRC16_F */   
   uint8_t temp_chksum;
-#endif /* CRC16_F */
+#endif /* CRC16_F */  
 
   /* Prepare first block - header */
   PrepareIntialPacket(aPacketData, p_file_name, file_size);
@@ -486,11 +486,11 @@ COM_StatusTypeDef Ymodem_Transmit (uint8_t *p_buf, const uint8_t *p_file_name, u
     HAL_UART_Transmit(&UartHandle, &aPacketData[PACKET_START_INDEX], PACKET_SIZE + PACKET_HEADER_SIZE, NAK_TIMEOUT);
 
     /* Send CRC or Check Sum based on CRC16_F */
-#ifdef CRC16_F
+#ifdef CRC16_F    
     temp_crc = Cal_CRC16(&aPacketData[PACKET_DATA_INDEX], PACKET_SIZE);
     Serial_PutByte(temp_crc >> 8);
     Serial_PutByte(temp_crc & 0xFF);
-#else /* CRC16_F */
+#else /* CRC16_F */   
     temp_chksum = CalcChecksum (&aPacketData[PACKET_DATA_INDEX], PACKET_SIZE);
     Serial_PutByte(temp_chksum);
 #endif /* CRC16_F */
@@ -548,17 +548,17 @@ COM_StatusTypeDef Ymodem_Transmit (uint8_t *p_buf, const uint8_t *p_file_name, u
       }
 
       HAL_UART_Transmit(&UartHandle, &aPacketData[PACKET_START_INDEX], pkt_size + PACKET_HEADER_SIZE, NAK_TIMEOUT);
-
+      
       /* Send CRC or Check Sum based on CRC16_F */
-#ifdef CRC16_F
+#ifdef CRC16_F    
       temp_crc = Cal_CRC16(&aPacketData[PACKET_DATA_INDEX], pkt_size);
       Serial_PutByte(temp_crc >> 8);
       Serial_PutByte(temp_crc & 0xFF);
-#else /* CRC16_F */
+#else /* CRC16_F */   
       temp_chksum = CalcChecksum (&aPacketData[PACKET_DATA_INDEX], pkt_size);
       Serial_PutByte(temp_chksum);
 #endif /* CRC16_F */
-
+      
       /* Wait for Ack */
       if ((HAL_UART_Receive(&UartHandle, &a_rx_ctrl[0], 1, NAK_TIMEOUT) == HAL_OK) && (a_rx_ctrl[0] == ACK))
       {
@@ -647,11 +647,11 @@ COM_StatusTypeDef Ymodem_Transmit (uint8_t *p_buf, const uint8_t *p_file_name, u
     HAL_UART_Transmit(&UartHandle, &aPacketData[PACKET_START_INDEX], PACKET_SIZE + PACKET_HEADER_SIZE, NAK_TIMEOUT);
 
     /* Send CRC or Check Sum based on CRC16_F */
-#ifdef CRC16_F
+#ifdef CRC16_F    
     temp_crc = Cal_CRC16(&aPacketData[PACKET_DATA_INDEX], PACKET_SIZE);
     Serial_PutByte(temp_crc >> 8);
     Serial_PutByte(temp_crc & 0xFF);
-#else /* CRC16_F */
+#else /* CRC16_F */   
     temp_chksum = CalcChecksum (&aPacketData[PACKET_DATA_INDEX], PACKET_SIZE);
     Serial_PutByte(temp_chksum);
 #endif /* CRC16_F */

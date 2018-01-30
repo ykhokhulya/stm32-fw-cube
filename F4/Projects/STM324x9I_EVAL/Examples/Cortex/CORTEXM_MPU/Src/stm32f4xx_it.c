@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Cortex/CORTEXM_MPU/Src/stm32f4xx_it.c
+  * @file    Cortex/CORTEXM_MPU/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -38,7 +38,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-
+   
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -91,7 +91,7 @@ void MemManage_Handler(void)
 {
   /* Turn on LED2 */
   BSP_LED_On(LED2);
-
+  
   /* Go to infinite loop when Memory Manage exception occurs */
   while (1)
   {
@@ -160,7 +160,7 @@ void SysTick_Handler(void)
 {
   HAL_IncTick();
 }
-
+  
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
@@ -180,7 +180,7 @@ void SysTick_Handler(void)
 
 /**
   * @}
-  */
+  */ 
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

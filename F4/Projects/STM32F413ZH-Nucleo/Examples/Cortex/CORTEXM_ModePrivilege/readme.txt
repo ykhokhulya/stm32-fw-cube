@@ -3,7 +3,7 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CORTEXM/CORTEXM_ModePrivilege/readme.txt
+  * @file    CORTEXM/CORTEXM_ModePrivilege/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the Cortex-M4 Mode Privilege example.
   ******************************************************************************
@@ -33,9 +33,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to modify Thread mode privilege access and stack. Thread
+This example shows how to modify Thread mode privilege access and stack. Thread 
 mode is entered on reset or when returning from an exception.
 
 The associated program is used to:
@@ -57,15 +57,15 @@ LED1 Turns ON when the test is finished successfully.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - CORTEXM/CORTEXM_ModePrivilege/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CORTEXM/CORTEXM_ModePrivilege/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CORTEXM/CORTEXM_ModePrivilege/Inc/main.h                  Header for main.c module
+  - CORTEXM/CORTEXM_ModePrivilege/Inc/main.h                  Header for main.c module  
   - CORTEXM/CORTEXM_ModePrivilege/Src/stm32f4xx_it.c          Interrupt handlers
   - CORTEXM/CORTEXM_ModePrivilege/Src/main.c                  Main program
   - CORTEXM/CORTEXM_ModePrivilege/Src/system_stm32f4xx.c      STM32F4xx system source file
@@ -73,13 +73,13 @@ LED1 Turns ON when the test is finished successfully.
 @par Hardware and Software environment
 
   - This example runs on STM32F413xx/STM32F423xx devices.
-
+    
   - This example has been tested with STM32F413ZH-Nucleo board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.      
 
-@par How to use it ?
+@par How to use it ? 
 In order to make the program work, you must do the following :
-- Open your preferred toolchain
+- Open your preferred toolchain 
 - Rebuild all files and load your image into target memory
 - Run the example
 

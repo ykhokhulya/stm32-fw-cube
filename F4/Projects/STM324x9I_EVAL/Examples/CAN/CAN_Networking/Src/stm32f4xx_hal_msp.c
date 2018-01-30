@@ -64,7 +64,7 @@
   * @param hcan: CAN handle pointer
   * @retval None
   */
-void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
+void HAL_CAN_MspInit(CAN_HandleTypeDef *hcan)
 {
   GPIO_InitTypeDef   GPIO_InitStruct;
 
@@ -78,7 +78,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
   /* CAN1 TX GPIO pin configuration */
   GPIO_InitStruct.Pin = CANx_TX_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Alternate =  CANx_TX_AF;
 
@@ -87,11 +87,11 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
   /* CAN1 RX GPIO pin configuration */
   GPIO_InitStruct.Pin = CANx_RX_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Alternate =  CANx_RX_AF;
 
-  HAL_GPIO_Init(CANx_TX_GPIO_PORT, &GPIO_InitStruct);
+  HAL_GPIO_Init(CANx_RX_GPIO_PORT, &GPIO_InitStruct);
 
   /*##-3- Configure the NVIC #################################################*/
   /* NVIC configuration for CAN1 Reception complete interrupt */

@@ -123,11 +123,11 @@ void FW_UPGRADE_Process(void)
       /* Waiting KEY Button Released */
       while((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
       {}
-
+      
       /* Waiting KEY Button Pressed */
       while((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
       {}
-
+      
       /* Waiting KEY Button Released */
       while((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
       {}

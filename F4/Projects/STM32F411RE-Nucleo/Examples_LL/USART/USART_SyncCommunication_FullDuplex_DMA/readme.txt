@@ -1,9 +1,9 @@
 /**
   @page USART_SyncCommunication_FullDuplex_DMA USART Synchronous Transmitter/Receiver example (DMA mode)
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/USART/USART_SyncCommunication_FullDuplex_DMA/readme.txt
+  * @file    Examples_LL/USART/USART_SyncCommunication_FullDuplex_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USART_SyncCommunication_FullDuplex_DMA example.
   ******************************************************************************
@@ -35,7 +35,7 @@
 
 @par Example Description
 
-This example shows how to configure GPIO, USART, DMA and SPI peripherals
+This example shows how to configure GPIO, USART, DMA and SPI peripherals 
 for transmitting bytes from/to an USART peripheral to/from an SPI peripheral (in slave mode)
 by using DMA mode through the STM32F4xx USART LL API. Peripheral initialization is
 done using LL unitary services functions for optimization purpose (performance and size).
@@ -44,7 +44,7 @@ This example works with only one NUCLEO-F411RE.
 
 USART1 Peripheral is acts as Master.
 SPI1 Peripheral is configured in Slave mode.
-GPIO associated to User push-button is linked with EXTI.
+GPIO associated to User push-button is linked with EXTI. 
 
 Example execution:
 
@@ -61,7 +61,7 @@ In case of errors, LED2 is blinking Slowly (1s).
 
 Connectivity, USART, Synchroneous mode, RS-232, baud rate, DMA, SPI, Reception, Transmission, Full duplex
 
-@par Directory contents
+@par Directory contents 
 
   - USART/USART_SyncCommunication_FullDuplex_DMA/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USART/USART_SyncCommunication_FullDuplex_DMA/Inc/main.h                  Header for main.c module
@@ -90,7 +90,7 @@ Board connector:
   PB.05 :   connected to pin 29 of CN10 connector
   PB.04 :   connected to pin 27 of CN10 connector
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

@@ -62,7 +62,7 @@ void eth_rx_irq()
   my_pbuf->dma_descriptor         = dma_desc;
 
   invalidate_cpu_cache(dma_desc->rx_data, dma_desc->rx_length);
-
+  
   struct pbuf* p = pbuf_alloced_custom(PBUF_RAW,
      dma_desc->rx_length,
      PBUF_REF,
@@ -350,8 +350,18 @@ pbuf_alloc(pbuf_layer layer, u16_t length, pbuf_type type)
 
     break;
   case PBUF_RAM:
-    /* If pbuf is to be allocated in RAM, allocate memory for it. */
-    p = (struct pbuf*)mem_malloc(LWIP_MEM_ALIGN_SIZE(SIZEOF_STRUCT_PBUF + offset) + LWIP_MEM_ALIGN_SIZE(length));
+    {
+      mem_size_t alloc_len = LWIP_MEM_ALIGN_SIZE(SIZEOF_STRUCT_PBUF + offset) + LWIP_MEM_ALIGN_SIZE(length);
+      
+      /* bug #50040: Check for integer overflow when calculating alloc_len */
+      if (alloc_len < LWIP_MEM_ALIGN_SIZE(length)) {
+        return NULL;
+      }
+    
+      /* If pbuf is to be allocated in RAM, allocate memory for it. */
+      p = (struct pbuf*)mem_malloc(alloc_len);
+    }
+
     if (p == NULL) {
       return NULL;
     }
@@ -568,11 +578,11 @@ pbuf_header_impl(struct pbuf *p, s16_t header_size_increment, u8_t force)
   }
 
   if (header_size_increment < 0) {
-    increment_magnitude = -header_size_increment;
+    increment_magnitude = (u16_t)-header_size_increment;
     /* Check that we aren't going to move off the end of the pbuf */
     LWIP_ERROR("increment_magnitude <= p->len", (increment_magnitude <= p->len), return 1;);
   } else {
-    increment_magnitude = header_size_increment;
+    increment_magnitude = (u16_t)header_size_increment;
 #if 0
     /* Can't assert these as some callers speculatively call
          pbuf_header() to see if it's OK.  Will return 1 below instead. */
@@ -812,6 +822,7 @@ pbuf_ref(struct pbuf *p)
   /* pbuf given? */
   if (p != NULL) {
     SYS_ARCH_INC(p->ref, 1);
+    LWIP_ASSERT("pbuf ref overflow", p->ref > 0);
   }
 }
 
@@ -1119,7 +1130,8 @@ pbuf_skip_const(const struct pbuf* in, u16_t in_offset, u16_t* out_offset)
 struct pbuf*
 pbuf_skip(struct pbuf* in, u16_t in_offset, u16_t* out_offset)
 {
-  return (struct pbuf*)(size_t)pbuf_skip_const(in, in_offset, out_offset);
+  const struct pbuf* out = pbuf_skip_const(in, in_offset, out_offset);
+  return LWIP_CONST_CAST(struct pbuf*, out);
 }
 
 /**
@@ -1227,6 +1239,7 @@ pbuf_coalesce(struct pbuf *p, pbuf_layer layer)
     return p;
   }
   err = pbuf_copy(q, p);
+  LWIP_UNUSED_ARG(err); /* in case of LWIP_NOASSERT */
   LWIP_ASSERT("pbuf_copy failed", err == ERR_OK);
   pbuf_free(p);
   return q;
@@ -1351,18 +1364,18 @@ pbuf_memcmp(const struct pbuf* p, u16_t offset, const void* s2, u16_t n)
   u16_t start = offset;
   const struct pbuf* q = p;
   u16_t i;
-
+ 
   /* pbuf long enough to perform check? */
   if(p->tot_len < (offset + n)) {
     return 0xffff;
   }
-
+ 
   /* get the correct pbuf from chain. We know it succeeds because of p->tot_len check above. */
   while ((q != NULL) && (q->len <= start)) {
     start -= q->len;
     q = q->next;
   }
-
+ 
   /* return requested data if pbuf is OK */
   for (i = 0; i < n; i++) {
     /* We know pbuf_get_at() succeeds because of p->tot_len check above. */

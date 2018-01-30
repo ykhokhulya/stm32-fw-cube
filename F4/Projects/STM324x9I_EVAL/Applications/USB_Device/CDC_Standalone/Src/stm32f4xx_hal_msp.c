@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    USB_Device/CDC_Standalone/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -55,10 +55,10 @@
 /* Private functions --------------------------------------------------------- */
 
 /**
-  * @brief UART MSP Initialization
-  *        This function configures the hardware resources used in this application:
+  * @brief UART MSP Initialization 
+  *        This function configures the hardware resources used in this application: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   *           - NVIC configuration for UART interrupt request enable
   * @param huart: UART handle pointer
   * @retval None
@@ -136,7 +136,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef * huart)
 }
 
 /**
-  * @brief UART MSP De-Initialization
+  * @brief UART MSP De-Initialization 
   *        This function frees the hardware resources used in this application:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO, and NVIC configuration to their default state

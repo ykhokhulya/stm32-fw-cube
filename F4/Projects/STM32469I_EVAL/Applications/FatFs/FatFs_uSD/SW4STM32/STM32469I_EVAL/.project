@@ -157,6 +157,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/diskio.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

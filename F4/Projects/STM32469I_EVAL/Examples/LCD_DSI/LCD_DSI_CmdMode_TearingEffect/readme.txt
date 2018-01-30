@@ -1,5 +1,5 @@
 /**
-  @page LCD_DSI_CmdMode_TearingEffect : LCD DSI examples in DSI command mode
+  @page LCD_DSI_CmdMode_TearingEffect : LCD DSI examples in DSI command mode 
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
@@ -35,11 +35,11 @@
 
 @par Example Description
 
-This example provides a description of how to use the embedded LCD DSI controller
+This example provides a description of how to use the embedded LCD DSI controller 
 (using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board.
 
 The goal of this example is to display a QVGA landscape (320x240) images on LCD glass
-in Command mode using Tearing Effect, through DSI LINK, and partial
+in Command mode using Tearing Effect, through DSI LINK, and partial 
 refresh method. One buffer is used for display and for draw.
 
 Layer0 is initialized to display a brief description of the example. It will be
@@ -76,7 +76,7 @@ Each image is displayed for two secondes.
   - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Inc/stm32f4xx_it.h                Interrupt handlers header file
   - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Inc/main.h                        Header for main.c module
   - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Inc/life_augmented_argb8888.h     Image 320x240 in ARGB8888 to display on LCD
-  - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Inc/image_320x240_argb8888.h      Image 320x240 in ARGB8888 to display on LCD
+  - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Inc/image_320x240_argb8888.h      Image 320x240 in ARGB8888 to display on LCD  
   - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Src/stm32f4xx_it.c                Interrupt handlers
   - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Src/main.c                        Main program
   - LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Src/stm32f4xx_hal_msp.c           HAL MSP file

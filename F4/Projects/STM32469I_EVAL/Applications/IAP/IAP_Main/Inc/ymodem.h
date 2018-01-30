@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    IAP/IAP_Main/Inc/ymodem.h
+  * @file    IAP/IAP_Main/Inc/ymodem.h 
   * @author  MCD Application Team
-  * @brief   This file provides all the software function headers of the ymodem.c
+  * @brief   This file provides all the software function headers of the ymodem.c 
   *          file.
   ******************************************************************************
   *
@@ -12,14 +12,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __YMODEM_H_
@@ -57,7 +57,7 @@ typedef enum
 #define PACKET_1K_SIZE          ((uint32_t)1024)
 
 /* /-------- Packet in IAP memory ------------------------------------------\
- * | 0      |  1    |  2     |  3   |  4      | ... | n+4     | n+5  | n+6  |
+ * | 0      |  1    |  2     |  3   |  4      | ... | n+4     | n+5  | n+6  | 
  * |------------------------------------------------------------------------|
  * | unused | start | number | !num | data[0] | ... | data[n] | crc0 | crc1 |
  * \------------------------------------------------------------------------/

@@ -1,9 +1,9 @@
 /**
   @page FMC_SDRAM SDRAM memory functionalities use example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    FMC/FMC_SDRAM/readme.txt
+  * @file    FMC/FMC_SDRAM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FMC SDRAM example.
   ******************************************************************************
@@ -32,43 +32,43 @@
   *
   ******************************************************************************
   @endverbatim
+ 
+@par Example Description 
 
-@par Example Description
 
-
-This example describes how to configure the FMC controller to access the SDRAM
+This example describes how to configure the FMC controller to access the SDRAM 
 memory.
 
 This example guides you through the different configuration steps by mean of HAL API
-to configure the FMC controller to access the MT48LC4M32B2B5-7 SDRAM memory mounted
+to configure the FMC controller to access the MT48LC4M32B2B5-7 SDRAM memory mounted 
 on STM324x9I-EVAL RevB evaluation board.
-
-At the beginning of the main program the HAL_Init() function is called to reset
+ 
+At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 180 MHz.
+  
+The goal of this example is to explain the different steps to configure the FMC 
+and make the SDRAM device ready for access, without using the MSP layer.          
 
-The goal of this example is to explain the different steps to configure the FMC
-and make the SDRAM device ready for access, without using the MSP layer.
-
-In this example, the SDRAM device is configured and initialized explicitly
-following all initialization sequence steps. After initializing the device, user
-can perform read/write operations on it. A data buffer is written to the SDRAM
+In this example, the SDRAM device is configured and initialized explicitly 
+following all initialization sequence steps. After initializing the device, user 
+can perform read/write operations on it. A data buffer is written to the SDRAM 
 memory, then read back and checked to verify its correctness.
 
-The user can choose his own configuration by commenting/uncommenting the defines for
-undesired/desired configurations in "main.h", for example, to configure the SDRAM
-data bus width as 32 bits, uncomment the define for the configuration
+The user can choose his own configuration by commenting/uncommenting the defines for  
+undesired/desired configurations in "main.h", for example, to configure the SDRAM 
+data bus width as 32 bits, uncomment the define for the configuration 
 "FMC_SDRAM_MEM_BUS_WIDTH_16".
+  
+If the data is read correctly from SDRAM, the LED1 is ON, otherwise the LED2 is ON. 
 
-If the data is read correctly from SDRAM, the LED1 is ON, otherwise the LED2 is ON.
-
- @note - The FMC mode register definition is configured using defines for the external
+ @note - The FMC mode register definition is configured using defines for the external 
          memory device mode register, defined in the main header file.
        - The function "BSP_SDRAM_Initialization_Sequence()" is used to program the SDRAM
-         device. It is considered as a specific function which depends on the SDRAM device.
-         When changing the external device, you may have to apply some changes
-         in this function.
+         device. It is considered as a specific function which depends on the SDRAM device. 
+         When changing the external device, you may have to apply some changes 
+         in this function. 
 
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -76,37 +76,37 @@ If the data is read correctly from SDRAM, the LED1 is ON, otherwise the LED2 is 
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
 @par Directory contents
-
- - FMC/FMC_SDRAM/Inc/stm32f4xx_hal_conf.h        Library Configuration file
+                        
+ - FMC/FMC_SDRAM/Inc/stm32f4xx_hal_conf.h        Library Configuration file 
  - FMC/FMC_SDRAM/Inc/main.h                      Main program header file
- - FMC/FMC_SDRAM/Inc/stm32f4xx_it.h              Interrupt handlers header file
- - FMC/FMC_SDRAM/Src/main.c                      Main program
+ - FMC/FMC_SDRAM/Inc/stm32f4xx_it.h              Interrupt handlers header file 
+ - FMC/FMC_SDRAM/Src/main.c                      Main program 
  - FMC/FMC_SDRAM/Src/stm32f4xx_hal_msp.c         HAL MSP module
- - FMC/FMC_SDRAM/Src/stm32f4xx_it.c              Interrupt handlers
- - FMC/FMC_SDRAM/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
+ - FMC/FMC_SDRAM/Src/stm32f4xx_it.c              Interrupt handlers   
+ - FMC/FMC_SDRAM/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file                                    
 
 
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This example runs on STM32F429xx/STM32F439xx devices.
-
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB
-    evaluation boards and can be easily tailored to any other supported device
+  
+  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+    evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
-
+ - Run the example   
+   
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

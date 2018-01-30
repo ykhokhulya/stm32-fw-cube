@@ -1,9 +1,9 @@
 /**
   @page PWR_STANDBY PWR standby example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    PWR/PWR_STANDBY/readme.txt
+  * @file    PWR/PWR_STANDBY/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PWR STANDBY example.
   ******************************************************************************
@@ -33,10 +33,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
-
-This example shows how to enters the system to STANDBY mode and wake-up from this
-mode using external RESET or WKUP pin.
+@par Example Description 
+ 
+How to enter the Standby mode and wake up from this mode by using an external 
+reset or the WKUP pin.
 
 In the associated software, the system clock is set to 100 MHz.
 The SysTick is programmed to generate an interrupt each 1 ms.
@@ -48,8 +48,8 @@ Alternatively, an external RESET of the board will lead to a system wake-up as w
 The LED1 Blinks once in order to indicate the system was resumed from Standby mode.
 These steps are repeated in an infinite loop.
 
-@note This example can not be used in DEBUG mode due to the fact
-      that the Cortex-M4 core is no longer clocked during low power mode
+@note This example can not be used in DEBUG mode due to the fact 
+      that the Cortex-M4 core is no longer clocked during low power mode 
       so debugging features are disabled.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -57,11 +57,11 @@ These steps are repeated in an infinite loop.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - PWR/PWR_STANDBY/Inc/stm32f4xx_conf.h         HAL Configuration file
   - PWR/PWR_STANDBY/Inc/stm32f4xx_it.h           Header for stm32f4xx_it.c
@@ -76,7 +76,7 @@ These steps are repeated in an infinite loop.
   - This example runs on STM32F412Zx devices
 
   - This example has been tested with STMicroelectronics NUCLEO-F412ZG Rev B
-    board and can be easily tailored to any other supported device
+    board and can be easily tailored to any other supported device 
     and development board.
 
   - NUCLEO-F412ZG Rev B Set-up
@@ -84,14 +84,14 @@ These steps are repeated in an infinite loop.
     - Put a Jumper between PA.00 and 3.3V to generate a rising edge on PWR_WAKEUP_PIN1.
     - Connect an ampere-meter to JP5 to measure the IDD current.
 
-  - NUCLEO-F412ZG Rev B (not yet available) adds two solder bridges to allow
-    connecting the push button to either PA0 or to PC13.
+  - NUCLEO-F412ZG Rev B (not yet available) adds two solder bridges to allow 
+    connecting the push button to either PA0 or to PC13. 
     The push-button still connected to PC13. It is up to the user to change the settings.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Wake-up will be done in putting 3.3V to PA.00 pin (present on pin29 of CN10).
    Wired should be put between PA.00 and GND before running test. Connect to 3V3 to awake board.

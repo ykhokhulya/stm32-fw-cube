@@ -85,10 +85,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization
@@ -113,7 +113,7 @@ int main(void)
   I2cHandle.Init.OwnAddress2     = 0xFF;
   I2cHandle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   I2cHandle.Init.NoStretchMode   = I2C_NOSTRETCH_DISABLE;
-
+  
   if(HAL_I2C_Init(&I2cHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -139,8 +139,8 @@ int main(void)
 
   /* The board sends the message and expects to receive it back */
 
-  /*##-2- Start the transmission process #####################################*/
-  /* While the I2C in reception process, user can transmit data through
+  /*##-2- Start the transmission process #####################################*/  
+  /* While the I2C in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   /* Timeout is set to 10S */
   while(HAL_I2C_Master_Transmit(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t*)aTxBuffer, TXBUFFERSIZE, 10000)!= HAL_OK)
@@ -171,8 +171,8 @@ int main(void)
   }
 
 
-  /*##-3- Put I2C peripheral in reception process ############################*/
-  /* Timeout is set to 10S */
+  /*##-3- Put I2C peripheral in reception process ############################*/ 
+  /* Timeout is set to 10S */ 
   while(HAL_I2C_Master_Receive(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t *)aRxBuffer, RXBUFFERSIZE, 10000) != HAL_OK)
   {
     /* Error_Handler() function is called when Timeout error occurs.
@@ -188,10 +188,10 @@ int main(void)
   BSP_LED_Off(LED1);
 
 #else
-
+  
   /* The board receives the message and sends it back */
 
-  /*##-2- Put I2C peripheral in reception process ############################*/
+  /*##-2- Put I2C peripheral in reception process ############################*/ 
   /* Timeout is set to 10S  */
   if(HAL_I2C_Slave_Receive(&I2cHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE, 10000) != HAL_OK)
   {
@@ -202,8 +202,8 @@ int main(void)
   /* Turn LED1 on: Transfer in reception process is correct */
   BSP_LED_On(LED1);
 
-  /*##-3- Start the transmission process #####################################*/
-  /* While the I2C in reception process, user can transmit data through
+  /*##-3- Start the transmission process #####################################*/  
+  /* While the I2C in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   /* Timeout is set to 10S */
   if(HAL_I2C_Slave_Transmit(&I2cHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE, 10000)!= HAL_OK)
@@ -214,7 +214,7 @@ int main(void)
 
   /* Turn LED1 off: Transfer in transmission process is correct */
   BSP_LED_Off(LED1);
-
+  
 #endif /* MASTER_BOARD */
 
   /*##-4- Compare the sent and received buffers ##############################*/
@@ -223,7 +223,7 @@ int main(void)
     /* Processing Error */
     Error_Handler();
   }
-
+ 
   /* Infinite loop */
   while (1)
   {
@@ -232,7 +232,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -260,8 +260,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -276,23 +276,23 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    while(1) { ; } 
   }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    while(1) { ; }  
   }
 }
 

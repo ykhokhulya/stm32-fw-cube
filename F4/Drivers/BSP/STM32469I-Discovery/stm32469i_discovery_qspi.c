@@ -212,7 +212,7 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
 
   /* Set S# timing for Read command: Min 20ns for N25Q128A memory */
   MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_2_CYCLE);
-
+  
   /* Reception of the data */
   if (HAL_QSPI_Receive(&QSPIHandle, pData, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
   {
@@ -221,7 +221,7 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
 
   /* Restore S# timing for nonRead commands */
   MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_5_CYCLE);
-
+  
   return QSPI_OK;
 }
 
@@ -239,7 +239,7 @@ uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size)
 
   /* Calculation of the size between the write address and the end of the page */
   current_size = N25Q128A_PAGE_SIZE - (WriteAddr % N25Q128A_PAGE_SIZE);
-
+  
   /* Check if the size of the data is less than the remaining place in the page */
   if (current_size > Size)
   {
@@ -334,8 +334,8 @@ uint8_t BSP_QSPI_Erase_Block(uint32_t BlockAddress)
   {
     return QSPI_ERROR;
   }
-
-  /* Configure automatic polling mode to wait for end of erase */
+  
+  /* Configure automatic polling mode to wait for end of erase */  
   if (QSPI_AutoPollingMemReady(&QSPIHandle, N25Q128A_SUBSECTOR_ERASE_MAX_TIME) != QSPI_OK)
   {
     return QSPI_ERROR;
@@ -374,8 +374,8 @@ uint8_t BSP_QSPI_Erase_Chip(void)
   {
     return QSPI_ERROR;
   }
-
-  /* Configure automatic polling mode to wait for end of erase */
+  
+  /* Configure automatic polling mode to wait for end of erase */  
   if (QSPI_AutoPollingMemReady(&QSPIHandle, N25Q128A_BULK_ERASE_MAX_TIME) != QSPI_OK)
   {
     return QSPI_ERROR;
@@ -416,7 +416,7 @@ uint8_t BSP_QSPI_GetStatus(void)
   {
     return QSPI_ERROR;
   }
-
+  
   /* Check the value of the register */
   if ((reg & (N25Q128A_FSR_PRERR | N25Q128A_FSR_VPPERR | N25Q128A_FSR_PGERR | N25Q128A_FSR_ERERR)) != 0)
   {
@@ -454,7 +454,7 @@ uint8_t BSP_QSPI_GetInfo(QSPI_InfoTypeDef* pInfo)
 }
 
 /**
-  * @brief  Configure the QSPI in memory-mapped mode
+  * @brief  Configure the QSPI in memory-mapped mode 
   * @retval QSPI memory status
   */
 uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
@@ -473,10 +473,10 @@ uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
   s_command.DdrMode           = QSPI_DDR_MODE_DISABLE;
   s_command.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;
   s_command.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
-
+  
   /* Configure the memory mapped mode */
   s_mem_mapped_cfg.TimeOutActivation = QSPI_TIMEOUT_COUNTER_DISABLE;
-
+  
   if (HAL_QSPI_MemoryMapped(&QSPIHandle, &s_command, &s_mem_mapped_cfg) != HAL_OK)
   {
     return QSPI_ERROR;
@@ -607,7 +607,7 @@ static uint8_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
     return QSPI_ERROR;
   }
 
-  /* Configure automatic polling mode to wait the memory is ready */
+  /* Configure automatic polling mode to wait the memory is ready */  
   if (QSPI_AutoPollingMemReady(hqspi, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != QSPI_OK)
   {
     return QSPI_ERROR;
@@ -655,10 +655,10 @@ static uint8_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
     return QSPI_ERROR;
   }
 
-  /* Update volatile configuration register (with new dummy cycles) */
+  /* Update volatile configuration register (with new dummy cycles) */  
   s_command.Instruction = WRITE_VOL_CFG_REG_CMD;
   MODIFY_REG(reg, N25Q128A_VCR_NB_DUMMY, (N25Q128A_DUMMY_CYCLES_READ_QUAD << POSITION_VAL(N25Q128A_VCR_NB_DUMMY)));
-
+      
   /* Configure the write volatile configuration register command */
   if (HAL_QSPI_Command(hqspi, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
   {
@@ -670,7 +670,7 @@ static uint8_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
   {
     return QSPI_ERROR;
   }
-
+  
   return QSPI_OK;
 }
 
@@ -698,8 +698,8 @@ static uint8_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
   {
     return QSPI_ERROR;
   }
-
-  /* Configure automatic polling mode to wait for write enabling */
+  
+  /* Configure automatic polling mode to wait for write enabling */  
   s_config.Match           = N25Q128A_SR_WREN;
   s_config.Mask            = N25Q128A_SR_WREN;
   s_config.MatchMode       = QSPI_MATCH_MODE_AND;
@@ -728,7 +728,7 @@ static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Time
   QSPI_CommandTypeDef     s_command;
   QSPI_AutoPollingTypeDef s_config;
 
-  /* Configure automatic polling mode to wait for memory ready */
+  /* Configure automatic polling mode to wait for memory ready */  
   s_command.InstructionMode   = QSPI_INSTRUCTION_1_LINE;
   s_command.Instruction       = READ_STATUS_REG_CMD;
   s_command.AddressMode       = QSPI_ADDRESS_NONE;

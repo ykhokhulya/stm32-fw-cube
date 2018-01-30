@@ -3,15 +3,15 @@
   * @file    stm32f4xx_hal_msp.c
   * @author  MCD Application Team
   * @brief   HAL MSP module.
-  *
+  *         
   @verbatim
   ===============================================================================
   ##### How to use this driver #####
   ===============================================================================
   [..]
-  This file is generated automatically by STM32CubeMX and eventually modified
+  This file is generated automatically by STM32CubeMX and eventually modified 
   by the user
-
+  
   @endverbatim
   ******************************************************************************
   * @attention
@@ -24,14 +24,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -64,52 +64,52 @@
   */
 void HAL_MspInit(void)
 {
-  /* NOTE : This function is generated automatically by STM32CubeMX and eventually
+  /* NOTE : This function is generated automatically by STM32CubeMX and eventually  
   modified by the user
   */
   /* Enable UART 4 clock  */
   __HAL_RCC_UART4_CLK_ENABLE();
-
+  
   /* RNG Periph clock enable */
   __HAL_RCC_RNG_CLK_ENABLE();
-
-#ifdef USE_STM32F4XX_HW_CRYPTO
+  
+#ifdef USE_STM32F4XX_HW_CRYPTO   
   /* Enable CRYP clock */
   __HAL_RCC_CRYP_CLK_ENABLE();
-
+    
   /* Enable Hash clock */
   __HAL_RCC_HASH_CLK_ENABLE();
 
 #endif
-
+  
 }
 
-#ifdef USE_STM32F4XX_HW_CRYPTO
+#ifdef USE_STM32F4XX_HW_CRYPTO  
 /**
   * @brief  DeInitializes the HASH MSP.
-  * @param  None
+  * @param  None  
   * @retval None
   */
 void HAL_HASH_MspDeInit(HASH_HandleTypeDef *hhash)
 {
-  /* Force the HASH Periheral Clock Reset */
-  __HAL_RCC_HASH_FORCE_RESET();
-
-  /* Release the HASH Periheral Clock Reset */
+  /* Force the HASH Periheral Clock Reset */  
+  __HAL_RCC_HASH_FORCE_RESET(); 
+  
+  /* Release the HASH Periheral Clock Reset */  
   __HAL_RCC_HASH_RELEASE_RESET();
 }
 
 /**
   * @brief  DeInitializes the CRYP MSP.
-  * @param  None
+  * @param  None  
   * @retval None
   */
 void HAL_CRYP_MspDeInit(CRYP_HandleTypeDef *hcryp)
 {
-  /* Force the CRYP Periheral Clock Reset */
-  __HAL_RCC_CRYP_FORCE_RESET();
-
-  /* Release the CRYP Periheral Clock Reset */
+  /* Force the CRYP Periheral Clock Reset */  
+  __HAL_RCC_CRYP_FORCE_RESET(); 
+  
+  /* Release the CRYP Periheral Clock Reset */  
   __HAL_RCC_CRYP_RELEASE_RESET();
 }
 #endif

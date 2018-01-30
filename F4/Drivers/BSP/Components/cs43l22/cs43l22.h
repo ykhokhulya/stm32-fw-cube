@@ -42,12 +42,12 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup Component
   * @{
-  */
-
+  */ 
+  
 /** @addtogroup CS43L22
   * @{
   */
@@ -62,7 +62,7 @@
 
 /** @defgroup CS43L22_Exported_Constants
   * @{
-  */
+  */ 
 
 /******************************************************************************/
 /***************************  Codec User defines ******************************/
@@ -98,7 +98,7 @@
 #define AUDIO_FREQUENCY_22K           ((uint32_t)22050)
 #define AUDIO_FREQUENCY_16K           ((uint32_t)16000)
 #define AUDIO_FREQUENCY_11K           ((uint32_t)11025)
-#define AUDIO_FREQUENCY_8K            ((uint32_t)8000)
+#define AUDIO_FREQUENCY_8K            ((uint32_t)8000)  
 
 /** CS43l22 Registers  ***/
 #define   CS43L22_REG_ID                  0x01
@@ -143,9 +143,9 @@
 /******************************************************************************/
 /****************************** REGISTER MAPPING ******************************/
 /******************************************************************************/
-/**
-  * @brief  CS43L22 ID
-  */
+/** 
+  * @brief  CS43L22 ID  
+  */  
 #define  CS43L22_ID            0xE0
 #define  CS43L22_ID_MASK       0xF8
 /**
@@ -155,7 +155,7 @@
   *  [7:3] CHIPID[4:0]: I.D. code for the CS43L22.
   *        Default value: 11100b
   *  [2:0] REVID[2:0]: CS43L22 revision level.
-  *        Default value:
+  *        Default value: 
   *        000 - Rev A0
   *        001 - Rev A1
   *        010 - Rev B0
@@ -165,7 +165,7 @@
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup CS43L22_Exported_Macros
   * @{
@@ -173,14 +173,14 @@
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup CS43L22_Exported_Functions
   * @{
   */
-
+    
 /*------------------------------------------------------------------------------
-                           Audio Codec functions
+                           Audio Codec functions 
 ------------------------------------------------------------------------------*/
 /* High Layer codec functions */
 uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
@@ -209,7 +209,11 @@ extern AUDIO_DrvTypeDef   cs43l22_drv;
 
 /**
   * @}
-  */
+  */ 
+
+/**
+  * @}
+  */ 
 
 /**
   * @}
@@ -217,10 +221,6 @@ extern AUDIO_DrvTypeDef   cs43l22_drv;
 
 /**
   * @}
-  */
-
-/**
-  * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

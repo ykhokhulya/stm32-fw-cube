@@ -92,11 +92,11 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure LED4 and LED5 */
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
@@ -162,7 +162,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /*##-3- Master sends number of data to be written ########################*/
     do
@@ -186,8 +186,8 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
-
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
+    
     /*##-4- Master sends aTxBuffer to slave ##################################*/
     do
     {
@@ -210,7 +210,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /* Update bTransferRequest to send buffer read request for Slave */
     bTransferRequest = MASTER_REQ_READ;
@@ -237,7 +237,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /*##-6- Master sends number of data to be read ###########################*/
     do
@@ -261,7 +261,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /*##-7- Master receives aRxBuffer from slave #############################*/
     do
@@ -443,12 +443,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;

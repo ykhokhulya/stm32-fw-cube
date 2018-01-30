@@ -120,24 +120,24 @@ void AudioRecAnalog_demo (void)
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 50, (uint8_t *)"START PLAYBACK...", CENTER_MODE);
 
   /* -----------Start Playback -------------- */
-  /* Initialize audio IN at REC_FREQ*/
+  /* Initialize audio IN at REC_FREQ*/ 
   BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, 90, DEFAULT_AUDIO_IN_FREQ);
-
+  
   /* Play the recorded buffer*/
   AUDIO_Start((uint32_t)(&internal_buffer[0]), AUDIO_BLOCK_SIZE * 2);  /* Use Audio play demo to playback sound */
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 35, (uint8_t *)"PLAYBACK DONE", CENTER_MODE);
-
+  
   while (1)
   {
-    /* IMPORTANT: AUDIO_Process() should be called within a periodic process */
+    /* IMPORTANT: AUDIO_Process() should be called within a periodic process */    
     AUDIO_Process();
-
+    
     if (CheckForUserInput() > 0)
     {
       /* Stop Player before close Test */
       BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
       BSP_AUDIO_OUT_DeInit();
-      BSP_AUDIO_IN_DeInit();
+      BSP_AUDIO_IN_DeInit();      
       return;
     }
   }

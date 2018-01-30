@@ -1,10 +1,10 @@
 /**
   @page CRYP_AESModes  Encrypt and Decrypt data using AES Algo in ECB/CBC/CTR
                        chaining modes with all possible key sizes example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CRYP/CRYP_AESModes/readme.txt
+  * @file    CRYP/CRYP_AESModes/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES Algorithm in all modes and all key sizes
              example.
@@ -35,7 +35,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example provides a short description of how to use the CRYPTO peripheral to
 encrypt and decrypt data using AES in chaining modes (ECB, CBC, CTR) and all key
@@ -77,31 +77,31 @@ The Plain data, encrypted data and decrypted data can be displayed on a PC
 HyperTerminal using the UART.
 
 The USARTx is configured as follows:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
     - Hardware flow control disabled (RTS and CTS signals)
     - Receive and transmit enabled
 
-@note To ensure right functionality of this example, please ensure that used
+@note To ensure right functionality of this example, please ensure that used 
       buffers are 32-bit aligned, once enabling the DMA capability.
-
+      
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - CRYP/CRYP_AESModes/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CRYP/CRYP_AESModes/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CRYP/CRYP_AESModes/Inc/main.h                  Main program header file
+  - CRYP/CRYP_AESModes/Inc/main.h                  Main program header file  
   - CRYP/CRYP_AESModes/Src/stm32f4xx_it.c          Interrupt handlers
   - CRYP/CRYP_AESModes/Src/main.c                  Main program
   - CRYP/CRYP_AESModes/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -110,28 +110,28 @@ The USARTx is configured as follows:
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F417xx devices.
-
-  - This example has been tested with STMicroelectronics STM32417G-EVAL RevC
-    evaluation boards and can be easily tailored to any other supported device
-    and development board.
-
+  - This example runs on STM32F417xx devices.  
+    
+  - This example has been tested with STMicroelectronics STM32417G-EVAL RevC 
+    evaluation boards and can be easily tailored to any other supported device 
+    and development board. 
+    
   - Hyperterminal configuration:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
     - Hardware flow control disabled (RTS and CTS signals)
     - Receive and transmit enabled
-
+    
   - STM32417G-EVAL RevC Set-up
-    - Please ensure that jumper JP22 is in position RS232.
+    - Please ensure that jumper JP22 is in position RS232.          
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

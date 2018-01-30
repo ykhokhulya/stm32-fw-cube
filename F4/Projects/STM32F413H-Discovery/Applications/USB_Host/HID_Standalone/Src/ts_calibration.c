@@ -61,9 +61,9 @@ uint8_t Touchscreen_Calibration(void)
 {
   uint8_t ts_status = TS_OK;
   uint8_t i;
-
+    
   TouchscreenCalibration_SetHint();
-
+  
   /* Start touchscreen internal calibration and configuration + start */
   ts_status = BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
   if (ts_status != TS_OK)
@@ -90,21 +90,21 @@ uint8_t Touchscreen_Calibration(void)
   {
     /* status == TS_OK */
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 65, (uint8_t *)"FT6x06 internal calibration passed", CENTER_MODE);
-
+    
     /* Get touch points for SW calibration processing */
     aLogX[0] = 20;
     aLogY[0] = 20;
     aLogX[1] = BSP_LCD_GetXSize() - 20;
     aLogY[1] = BSP_LCD_GetYSize() - 20;
-
+    
     for (i = 0; i < 2; i++)
     {
       TouchScreen_Calibration_GetPhysValues(aLogX[i], aLogY[i], &aPhysX[i], &aPhysY[i]);
     }
-
+   
     ts_calibration_done = 1;
   }
-
+  
   return (ts_status);
 }
 

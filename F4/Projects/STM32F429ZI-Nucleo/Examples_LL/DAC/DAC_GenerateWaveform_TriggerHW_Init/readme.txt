@@ -1,9 +1,9 @@
 /**
   @page DAC_GenerateWaveform_TriggerHW_Init DAC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/DAC/DAC_GenerateWaveform_TriggerHW_Init/readme.txt
+  * @file    Examples_LL/DAC/DAC_GenerateWaveform_TriggerHW_Init/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the DAC_GenerateWaveform_TriggerHW_Init example.
   ******************************************************************************
@@ -35,8 +35,8 @@
 
 @par Example Description
 This example describes how to use the DAC peripheral to generate
-a waveform voltage from digital data stream transfered by DMA;
-This example is based on the STM32F4xx DAC LL API;
+a waveform voltage from digital data stream transfered by DMA; 
+This example is based on the STM32F4xx DAC LL API; 
 peripheral initialization done using LL initialization function
 to demonstrate LL init usage.
 
@@ -62,7 +62,7 @@ Finally, LED1 is turned-on.
 LED1 is toggling slowly when error is detected.
 
 Connection needed:
-None.
+None. 
 Oscilloscope for monitoring DAC channel output (cf pin below).
 Other peripheral used:
   1 GPIO for push button
@@ -73,7 +73,7 @@ Other peripheral used:
 
 Analog, DAC, Waveform, Voltage output, Oscilloscope, Signal, Hardware trigger, DMA, Timer, Sinus
 
-@par Directory contents
+@par Directory contents 
 
   - DAC/DAC_GenerateWaveform_TriggerHW_Init/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - DAC/DAC_GenerateWaveform_TriggerHW_Init/Inc/main.h                  Header for main.c module
@@ -85,12 +85,12 @@ Analog, DAC, Waveform, Voltage output, Oscilloscope, Signal, Hardware trigger, D
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx devices.
-
+    
   - This example has been tested with STM32F429ZI-Nucleo Rev B board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

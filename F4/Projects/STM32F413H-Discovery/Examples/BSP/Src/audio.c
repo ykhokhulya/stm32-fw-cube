@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/audio.c
+  * @file    BSP/Src/audio.c 
   * @author  MCD Application Team
-  * @brief   This example code shows how to use the audio feature in the
+  * @brief   This example code shows how to use the audio feature in the 
   *          stm32f413h_discovery driver
   ******************************************************************************
   * @attention
@@ -46,11 +46,11 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private define ------------------------------------------------------------*/
 
-/*Since SysTick is set to 1ms (unless to set it quicker) */
+/*Since SysTick is set to 1ms (unless to set it quicker) */ 
 /* to run up to 48khz, a buffer around 1000 (or more) is requested*/
 /* to run up to 96khz, a buffer around 2000 (or more) is requested*/
 #define AUDIO_BUFFER_SIZE       2048
@@ -121,15 +121,15 @@ AUDIO_ErrorTypeDef AUDIO_Start(uint32_t audio_start_address, uint32_t audio_file
   * @retval None
   */
 void AudioPlay_demo (void)
-{
+{ 
   uint32_t *AudioFreq_ptr;
   AudioFreq_ptr = AudioFreq+6; /*AF_48K*/
   uint8_t frequency_str[256] = {0};
   uint8_t volume_str[256] = {0};
   uint8_t ts_status = TS_OK;
-
+  
   uwVolume = 40;
-
+  
   /* If calibration is not yet done, proceed with calibration */
   if (TouchScreen_IsCalibrationDone() == 0)
   {
@@ -140,10 +140,10 @@ void AudioPlay_demo (void)
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 65, (uint8_t *)"Touchscreen calibration success.", CENTER_MODE);
     }
   } /* of if (TouchScreen_IsCalibrationDone() == 0) */
-
-  Audio_SetHint();
+  
+  Audio_SetHint(); 
   BSP_LCD_SetFont(&Font12);
-
+  
   if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, uwVolume, *AudioFreq_ptr) == 0)
   {
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
@@ -157,7 +157,7 @@ void AudioPlay_demo (void)
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 120, (uint8_t *)"  AUDIO CODEC  FAIL ", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 105, (uint8_t *)" Try to reset board ", CENTER_MODE);
   }
-
+  
   /*
   Start playing the file from a circular buffer, once the DMA is enabled, it is
   always in running state. Application has to fill the buffer with the audio data
@@ -165,39 +165,39 @@ void AudioPlay_demo (void)
   (BSP_AUDIO_OUT_TransferComplete_CallBack() or BSP_AUDIO_OUT_HalfTransfer_CallBack()...
   */
   AUDIO_Start(AUDIO_FILE_ADDRESS, AUDIO_FILE_SIZE);
-
+  
   /* Display the state on the screen */
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 105, (uint8_t *)"       PLAYING...     ", CENTER_MODE);
-
+  
   sprintf((char*)volume_str,"    VOL:    %lu ",uwVolume);
   BSP_LCD_DisplayStringAt(0, 90, (uint8_t *)volume_str, CENTER_MODE);
-
+  
   sprintf((char*)frequency_str,"      FREQ: %lu     ",*AudioFreq_ptr);
   BSP_LCD_DisplayStringAt(0, 215, (uint8_t *)frequency_str, CENTER_MODE);
-
+  
   if(ts_status == TS_OK)
   {
     /* Set touchscreen in Interrupt mode and program EXTI accordingly on falling edge of TS_INT pin */
     ts_status = BSP_TS_ITConfig();
-    Touchscreen_DrawControl_Buttons();
+    Touchscreen_DrawControl_Buttons();  
   }
-
+  
   BSP_LCD_SetFont(&Font12);
-
+  
   /* Infinite loop */
   while (1)
   {
-    /* IMPORTANT: AUDIO_Process() should be called within a periodic process */
+    /* IMPORTANT: AUDIO_Process() should be called within a periodic process */ 
     AUDIO_Process();
-
+    
     /* Get the TouchScreen State */
     ts_action = (TS_ActionTypeDef) TouchScreen_GetTouchButtonPosition();
-
+    
     switch (ts_action)
     {
-    case TS_ACT_VOLUME_UP:
+    case TS_ACT_VOLUME_UP:  
       TS_State.touchDetected = 0;
       if(uwPauseEnabledStatus != 1)
       {
@@ -206,13 +206,13 @@ void AudioPlay_demo (void)
           uwVolume += 5;
         else
           uwVolume = 100;
-
-        BSP_AUDIO_OUT_SetVolume(uwVolume);
+        
+        BSP_AUDIO_OUT_SetVolume(uwVolume);        
         sprintf((char*)volume_str,"  VOL:    %lu ",uwVolume);
         BSP_LCD_DisplayStringAt(0, 90, (uint8_t *)volume_str, CENTER_MODE);
       }
       break;
-
+      
     case TS_ACT_VOLUME_DOWN:
       if(uwPauseEnabledStatus != 1)
       {
@@ -221,13 +221,13 @@ void AudioPlay_demo (void)
           uwVolume -= 5;
         else
           uwVolume = 0;
-
+        
         BSP_AUDIO_OUT_SetVolume(uwVolume);
         sprintf((char*)volume_str,"  VOL:    %lu ",uwVolume);
         BSP_LCD_DisplayStringAt(0, 90, (uint8_t *)volume_str, CENTER_MODE);
       }
       break;
-
+      
     case TS_ACT_FREQ_DOWN:
       /*Decrease Frequency */
       if ((*AudioFreq_ptr != 8000) && (uwPauseEnabledStatus != 1))
@@ -235,19 +235,19 @@ void AudioPlay_demo (void)
         AudioFreq_ptr--;
         BSP_AUDIO_OUT_SetFrequency(*AudioFreq_ptr);
         sprintf((char*)frequency_str, " FREQ: %6lu ", *AudioFreq_ptr);
-        BSP_LCD_DisplayStringAt(0, 215, (uint8_t *)frequency_str, CENTER_MODE);
+        BSP_LCD_DisplayStringAt(0, 215, (uint8_t *)frequency_str, CENTER_MODE);        
       }
-
+      
       break;
     case TS_ACT_FREQ_UP:
       /* Increase Frequency */
       if ((*AudioFreq_ptr != 96000) && (uwPauseEnabledStatus != 1))
       {
         AudioFreq_ptr++;
-
+        
         BSP_AUDIO_OUT_SetFrequency(*AudioFreq_ptr);
         sprintf((char*)frequency_str, " FREQ: %6lu ", *AudioFreq_ptr);
-        BSP_LCD_DisplayStringAt(0, 215, (uint8_t *)frequency_str, CENTER_MODE);
+        BSP_LCD_DisplayStringAt(0, 215, (uint8_t *)frequency_str, CENTER_MODE);        
       }
       break;
     case TS_ACT_PAUSE:
@@ -258,7 +258,7 @@ void AudioPlay_demo (void)
         BSP_AUDIO_OUT_Resume();
         uwPauseEnabledStatus = 0;
         BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 105, (uint8_t *)"       PLAYING...     ", CENTER_MODE);
-
+        
         BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
         BSP_LCD_DisplayStringAt(105, 165, (uint8_t *)"Pause", LEFT_MODE);
       }
@@ -272,7 +272,7 @@ void AudioPlay_demo (void)
       }
       HAL_Delay(200);
       break;
-
+      
     default:
       break;
     }
@@ -292,14 +292,14 @@ void AudioPlay_demo (void)
   */
 static void Audio_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set Audio Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), HEADBAND_HEIGHT);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"AUDIO PLAY", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -310,15 +310,15 @@ static void Audio_SetHint(void)
 
 
 /**
-  * @brief  Starts Audio streaming.
+  * @brief  Starts Audio streaming.    
   * @param  audio_start_address : buffer start address
   * @param  audio_file_size : buffer size in bytes
   * @retval Audio error
-  */
+  */ 
 AUDIO_ErrorTypeDef AUDIO_Start(uint32_t audio_start_address, uint32_t audio_file_size)
 {
   uint32_t bytesread;
-
+  
   buffer_ctl.state = BUFFER_OFFSET_NONE;
   AudioStartAddress = audio_start_address;
   AudioFileSize = audio_file_size;
@@ -329,7 +329,7 @@ AUDIO_ErrorTypeDef AUDIO_Start(uint32_t audio_start_address, uint32_t audio_file
   if(bytesread > 0)
   {
     BSP_AUDIO_OUT_Play((uint16_t*)&buffer_ctl.buff[0], AUDIO_BUFFER_SIZE);
-    audio_state = AUDIO_STATE_PLAYING;
+    audio_state = AUDIO_STATE_PLAYING;      
     buffer_ctl.fptr = bytesread;
     return AUDIO_ERROR_NONE;
   }
@@ -337,23 +337,23 @@ AUDIO_ErrorTypeDef AUDIO_Start(uint32_t audio_start_address, uint32_t audio_file
 }
 
 /**
-  * @brief  Manages Audio process.
+  * @brief  Manages Audio process. 
   * @param  None
   * @retval Audio error
   */
 uint8_t AUDIO_Process(void)
 {
   uint32_t bytesread;
-  AUDIO_ErrorTypeDef error_state = AUDIO_ERROR_NONE;
-
+  AUDIO_ErrorTypeDef error_state = AUDIO_ERROR_NONE;  
+  
   switch(audio_state)
   {
   case AUDIO_STATE_PLAYING:
-
+    
     if(buffer_ctl.fptr >= AudioFileSize)
     {
       /* Play audio sample again ... */
-      buffer_ctl.fptr = 0;
+      buffer_ctl.fptr = 0; 
       error_state = AUDIO_ERROR_EOF;
     }
 
@@ -364,19 +364,19 @@ uint8_t AUDIO_Process(void)
                           buffer_ctl.fptr,
                           &buffer_ctl.buff[0],
                           AUDIO_BUFFER_SIZE /2);
-
+      
       if( bytesread >0)
-      {
+      { 
         buffer_ctl.state = BUFFER_OFFSET_NONE;
-        buffer_ctl.fptr += bytesread;
+        buffer_ctl.fptr += bytesread; 
       }
     }
-
-    /* 2nd half buffer played; so fill it and continue playing from top */
+    
+    /* 2nd half buffer played; so fill it and continue playing from top */    
     if(buffer_ctl.state == BUFFER_OFFSET_FULL)
     {
       bytesread = GetData((void *)AudioStartAddress,
-                          buffer_ctl.fptr,
+                          buffer_ctl.fptr, 
                           &buffer_ctl.buff[AUDIO_BUFFER_SIZE /2],
                           AUDIO_BUFFER_SIZE /2);
       if( bytesread > 0)
@@ -386,12 +386,12 @@ uint8_t AUDIO_Process(void)
       }
     }
     break;
-
+    
   default:
     error_state = AUDIO_ERROR_NOTREADY;
     break;
   }
-
+  
   return (uint8_t) error_state;
 }
 
@@ -404,7 +404,7 @@ static uint32_t GetData(void *pdata, uint32_t offset, uint8_t *pbuf, uint32_t Nb
 {
   uint8_t *lptr = pdata;
   uint32_t ReadDataNbr;
-
+  
   ReadDataNbr = 0;
   while(((offset + ReadDataNbr) < AudioFileSize) && (ReadDataNbr < NbrOfData))
   {
@@ -469,13 +469,13 @@ void BSP_AUDIO_OUT_Error_CallBack(void)
 }
 
 
+  
+/**
+  * @}
+  */ 
 
 /**
   * @}
-  */
-
-/**
-  * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

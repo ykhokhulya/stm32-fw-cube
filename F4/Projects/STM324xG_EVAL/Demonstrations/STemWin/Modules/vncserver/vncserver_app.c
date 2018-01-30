@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -71,14 +71,14 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
 #define _VNCServer_PRIO         osPriorityAboveNormal
-#define _VNCServer_Stack         (10 * configMINIMAL_STACK_SIZE)
+#define _VNCServer_Stack         (10 * configMINIMAL_STACK_SIZE) 
 #define MAX_DHCP_TRIES  4
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
 __IO uint8_t DHCP_state;
-struct netif gnetif;
-uint8_t ip_address[4], sn_mask[4], gw_address[4];
+struct netif gnetif; 
+uint8_t ip_address[4], sn_mask[4], gw_address[4]; 
 static GUI_VNC_CONTEXT    _Context;
 static struct sockaddr_in _Addr;
 int _Sock;
@@ -92,7 +92,7 @@ osThreadId   _DHCPClinet_TCB = NULL;
   * @brief  Called by the server to send data
   * @param  buf: buffer to be sent.
   * @param  len: length of buf.
-  * @param  pConnectionInfo: Connection info
+  * @param  pConnectionInfo: Connection info  
   * @retval transmit status.
   */
 static int _Send(const U8 * buf, int len, void * pConnectionInfo) {
@@ -106,7 +106,7 @@ static int _Send(const U8 * buf, int len, void * pConnectionInfo) {
   * @brief  Called by the server when data is received
   * @param  buf: buffer to get the received data.
   * @param  len: length of received data.
-  * @param  pConnectionInfo: Connection info
+  * @param  pConnectionInfo: Connection info  
   * @retval receive status.
   */
 static int _Recv(U8 * buf, int len, void * pConnectionInfo) {
@@ -115,7 +115,7 @@ static int _Recv(U8 * buf, int len, void * pConnectionInfo) {
 
 /**
   * @brief  Starts listening at a TCP port.
-  * @param  Port: TCP port to listen at
+  * @param  Port: TCP port to listen at 
   * @retval listen status.
   */
 static int _ListenAtTcpAddr(U16 Port) {
@@ -142,11 +142,11 @@ static void _ServerThread(void const * argument)
   int s;
   u32_t AddrLen;
   U16 Port;
-
-  /* Prepare socket (one time setup)
+  
+  /* Prepare socket (one time setup) 
   Default port for VNC is is 590x, where x is the 0-based layer index */
-  Port = 5900 + _Context.ServerIndex;
-
+  Port = 5900 + _Context.ServerIndex; 
+  
   /* Loop until we get a socket into listening state */
   do {
     s = _ListenAtTcpAddr(Port);
@@ -155,17 +155,17 @@ static void _ServerThread(void const * argument)
     }
     vTaskDelay(100); // Try again
   } while (1);
-
+  
   /* Loop once per client and create a thread for the actual server */
-  while (1)
+  while (1) 
   {
     /* Wait for an incoming connection */
     AddrLen = sizeof(_Addr);
     _Sock = accept(s, (struct sockaddr*)&_Addr, &AddrLen);
-
+    
     /* Run the actual server */
     GUI_VNC_Process(&_Context, _Send, _Recv, (void *)_Sock);
-
+    
     /* Close the connection */
     closesocket(_Sock);
     memset(&_Addr, 0, sizeof(struct sockaddr_in));
@@ -173,7 +173,7 @@ static void _ServerThread(void const * argument)
 }
 
 /**
-  * @brief  starts VNC server thread
+  * @brief  starts VNC server thread  
   * @param  LayerIndex: LCD layer index
   * @param  ServerIndex: Server index
   * @retval server started or not
@@ -184,11 +184,11 @@ int GUI_VNC_X_StartServer(int LayerIndex, int ServerIndex) {
   GUI_VNC_AttachToLayer(&_Context, LayerIndex);
   _Context.ServerIndex = ServerIndex;
   _Context.LayerIndex = LayerIndex;
-
+  
   /* Create task for VNC Server */
   osThreadDef(VNC_Server, _ServerThread, _VNCServer_PRIO, 0, _VNCServer_Stack);
   _VNCServer_TCB = osThreadCreate (osThread(VNC_Server), NULL);
-
+ 
   if (_VNCServer_TCB == 0)
   {
     /* K.O., server initialization failed */
@@ -196,13 +196,13 @@ int GUI_VNC_X_StartServer(int LayerIndex, int ServerIndex) {
   }
   else
   {
-    /* O.k., server has been started */
+    /* O.k., server has been started */ 
     return 1;
   }
 }
 
 /**
-  * @brief  Retrieves the IP addr. of the currently connected VNC client.
+  * @brief  Retrieves the IP addr. of the currently connected VNC client. 
   * @param  Addr: IP address
   * @retval None
   */
@@ -211,8 +211,8 @@ void GUI_VNC_X_getpeername(U32 * Addr) {
 }
 
 /**
-  * @brief  Get IP, MASK or GW address from VNC server GUI
-  * @param  type: type of address can be (IP_ADDRESS, SUBNET_MASK, GW_ADDRESS)
+  * @brief  Get IP, MASK or GW address from VNC server GUI 
+  * @param  type: type of address can be (IP_ADDRESS, SUBNET_MASK, GW_ADDRESS) 
   * @param  addrx: x: 3 -> 0 specify the byte of the address
   * @retval None
   */
@@ -242,7 +242,7 @@ void _VNCApp_GetIPAddress(uint8_t type, uint8_t addr3, uint8_t addr2, uint8_t ad
 }
 
 /**
-  * @brief  Network configuration
+  * @brief  Network configuration 
   * @param  use_dhcp: indicates if DHCP client is activated or not
   * @retval None
   */
@@ -251,38 +251,38 @@ void NetworkInit(uint8_t use_dhcp)
   struct ip_addr ipaddr;
   struct ip_addr netmask;
   struct ip_addr gw;
-
+  
   /* Create tcp_ip stack thread */
   tcpip_init( NULL, NULL );
-
+  
   /* IP address setting */
   if (use_dhcp)
   {
     ipaddr.addr = 0;
     netmask.addr = 0;
     gw.addr = 0;
-  }
+  } 
   else
   {
     IP4_ADDR(&ipaddr, ip_address[3], ip_address[2], ip_address[1], ip_address[0]);
     IP4_ADDR(&netmask, sn_mask[3], sn_mask[2] , sn_mask[1], sn_mask[0]);
-    IP4_ADDR(&gw, gw_address[3], gw_address[2], gw_address[1], gw_address[0]);
+    IP4_ADDR(&gw, gw_address[3], gw_address[2], gw_address[1], gw_address[0]); 
   }
-
+  
   /* Add the network interface */
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
-
+  
   /*  Registers the default network interface. */
   netif_set_default(&gnetif);
-
+  
   if (netif_is_link_up(&gnetif))
   {
     /* When the netif is fully configured this function must be called.*/
     netif_set_up(&gnetif);
-
+    
     _VNCServer_Notify(NOTIFY_SERVER_NETIF_UP);
-
-    if (use_dhcp)
+    
+    if (use_dhcp) 
     {
       DHCP_state = DHCP_START;
     }
@@ -294,14 +294,14 @@ void NetworkInit(uint8_t use_dhcp)
 
     _VNCServer_Notify(NOTIFY_SERVER_NETIF_DOWN);
   }
-
-  if (use_dhcp)
+  
+  if (use_dhcp) 
   {
     /* Start DHCPClient */
     osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE);
     _DHCPClinet_TCB = osThreadCreate (osThread(DHCP), &gnetif);
   }
-
+  
   /* Cable management BSP Configuration ***************************************/
   /* Init IO Expander */
   BSP_IO_Init();
@@ -326,12 +326,12 @@ void ethernetif_notify_conn_changed(struct netif *netif)
     IP4_ADDR(&ipaddr, ip_address[3], ip_address[2], ip_address[1], ip_address[0]);
     IP4_ADDR(&netmask, sn_mask[3], sn_mask[2] , sn_mask[1], sn_mask[0]);
     IP4_ADDR(&gw, gw_address[3], gw_address[2], gw_address[1], gw_address[0]);
-
+    
     netif_set_addr(netif, &ipaddr , &netmask, &gw);
-
+    
     /* When the netif is fully configured this function must be called.*/
     netif_set_up(netif);
-
+    
     _VNCServer_Notify(NOTIFY_SERVER_NETIF_UP);
 
     /* If DHCP: re-start process */
@@ -342,12 +342,12 @@ void ethernetif_notify_conn_changed(struct netif *netif)
     }
   }
   else
-  {
+  {   
     /*  When the netif link is down this function must be called.*/
     netif_set_down(netif);
-
+    
     _VNCServer_Notify(NOTIFY_SERVER_NETIF_DOWN);
-
+    
     /* If DHCP: stop process */
     if (_DHCPClinet_TCB != 0)
     {
@@ -371,7 +371,7 @@ void DHCP_thread(void const * argument)
   struct ip_addr netmask;
   struct ip_addr gw;
   uint32_t IPaddress;
-
+  
   for (;;)
   {
     switch (DHCP_state)
@@ -388,28 +388,28 @@ void DHCP_thread(void const * argument)
         _VNCServer_Notify(NOTIFY_SERVER_DHCP_WAIT_ADDRESS);
       }
       break;
-
+      
     case DHCP_WAIT_ADDRESS:
       {
         /* Read the new IP address */
         IPaddress = netif->ip_addr.addr;
-
-        if (IPaddress!=0)
+        
+        if (IPaddress!=0) 
         {
           /* Stop DHCP */
           dhcp_stop(netif);
-
+          
           DHCP_state = DHCP_ADDRESS_ASSIGNED;
-
+  
           _VNCServer_GetAssignedAddress(IP_ADDRESS, (uint8_t)(IPaddress), (uint8_t)(IPaddress >> 8), (uint8_t)(IPaddress >> 16), (uint8_t)(IPaddress >> 24));
-
+          
           IPaddress = netif->netmask.addr;
           _VNCServer_GetAssignedAddress(SUBNET_MASK, (uint8_t)(IPaddress), (uint8_t)(IPaddress >> 8), (uint8_t)(IPaddress >> 16), (uint8_t)(IPaddress >> 24));
-
+          
           IPaddress = netif->gw.addr;
           _VNCServer_GetAssignedAddress(GW_ADDRESS, (uint8_t)(IPaddress), (uint8_t)(IPaddress >> 8), (uint8_t)(IPaddress >> 16), (uint8_t)(IPaddress >> 24));
-
-          _VNCServer_Notify(NOTIFY_SERVER_DHCP_ADDRESS_ASSIGNED);
+          
+          _VNCServer_Notify(NOTIFY_SERVER_DHCP_ADDRESS_ASSIGNED);        
         }
         else
         {
@@ -417,16 +417,16 @@ void DHCP_thread(void const * argument)
           if (netif->dhcp->tries > MAX_DHCP_TRIES)
           {
             DHCP_state = DHCP_TIMEOUT;
-
+            
             /* Stop DHCP */
             dhcp_stop(netif);
-
+            
             /* Static address used */
             IP4_ADDR(&ipaddr, IP_ADDR3 ,IP_ADDR2 , IP_ADDR1 , IP_ADDR0 );
             IP4_ADDR(&netmask, NETMASK_ADDR3, NETMASK_ADDR2, NETMASK_ADDR1, NETMASK_ADDR0);
             IP4_ADDR(&gw, GW_ADDR3, GW_ADDR2, GW_ADDR1, GW_ADDR0);
             netif_set_addr(netif, &ipaddr , &netmask, &gw);
-
+            
             _VNCServer_GetAssignedAddress(IP_ADDRESS, IP_ADDR3, IP_ADDR2, IP_ADDR1, IP_ADDR0);
             _VNCServer_GetAssignedAddress(SUBNET_MASK, NETMASK_ADDR3, NETMASK_ADDR2, NETMASK_ADDR1, NETMASK_ADDR0);
             _VNCServer_GetAssignedAddress(GW_ADDRESS, GW_ADDR3, GW_ADDR2, GW_ADDR1, GW_ADDR0);
@@ -435,10 +435,10 @@ void DHCP_thread(void const * argument)
         }
       }
       break;
-
+      
     default: break;
     }
-
+    
     /* wait 250 ms */
     osDelay(250);
   }
@@ -454,23 +454,23 @@ void _VNCApp_Notify(uint8_t ID)
   struct ip_addr ipaddr;
   struct ip_addr netmask;
   struct ip_addr gw;
-
+  
   switch (ID)
   {
   case NOTIFY_APP_DHCP_ENABLED:
     DHCP_state = DHCP_START;
-
-    if (_DHCPClinet_TCB == 0)
+    
+    if (_DHCPClinet_TCB == 0) 
     {
       /* Start DHCPClient */
       osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
       _DHCPClinet_TCB = osThreadCreate (osThread(DHCP), &gnetif);
     }
-
+    
     break;
   case NOTIFY_APP_DHCP_DISABLED:
-
-    if (_DHCPClinet_TCB)
+    
+    if (_DHCPClinet_TCB) 
     {
       /* Delete DHCP thread */
       osThreadTerminate(_DHCPClinet_TCB);
@@ -482,9 +482,9 @@ void _VNCApp_Notify(uint8_t ID)
     IP4_ADDR(&ipaddr, ip_address[3], ip_address[2], ip_address[1], ip_address[0]);
     IP4_ADDR(&netmask, sn_mask[3], sn_mask[2] , sn_mask[1], sn_mask[0]);
     IP4_ADDR(&gw, gw_address[3], gw_address[2], gw_address[1], gw_address[0]);
-
-    netif_set_addr(&gnetif, &ipaddr , &netmask, &gw);
-
+    
+    netif_set_addr(&gnetif, &ipaddr , &netmask, &gw); 
+    
     break;
   }
 }

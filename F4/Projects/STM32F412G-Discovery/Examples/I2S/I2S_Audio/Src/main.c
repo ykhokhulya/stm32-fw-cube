@@ -48,24 +48,24 @@
 /* Private typedef -----------------------------------------------------------*/
 typedef struct
 {
-  uint32_t   ChunkID;       /* 0 */
+  uint32_t   ChunkID;       /* 0 */ 
   uint32_t   FileSize;      /* 4 */
   uint32_t   FileFormat;    /* 8 */
   uint32_t   SubChunk1ID;   /* 12 */
-  uint32_t   SubChunk1Size; /* 16*/
-  uint16_t   AudioFormat;   /* 20 */
-  uint16_t   NbrChannels;   /* 22 */
+  uint32_t   SubChunk1Size; /* 16*/  
+  uint16_t   AudioFormat;   /* 20 */ 
+  uint16_t   NbrChannels;   /* 22 */   
   uint32_t   SampleRate;    /* 24 */
-
+  
   uint32_t   ByteRate;      /* 28 */
-  uint16_t   BlockAlign;    /* 32 */
-  uint16_t   BitPerSample;  /* 34 */
-  uint32_t   SubChunk2ID;   /* 36 */
-  uint32_t   SubChunk2Size; /* 40 */
+  uint16_t   BlockAlign;    /* 32 */  
+  uint16_t   BitPerSample;  /* 34 */  
+  uint32_t   SubChunk2ID;   /* 36 */   
+  uint32_t   SubChunk2Size; /* 40 */    
 
 }WAVE_FormatTypeDef;
 
-typedef enum
+typedef enum 
 {
   AUDIO_STATE_IDLE = 0,
   AUDIO_STATE_INIT,
@@ -73,8 +73,8 @@ typedef enum
 }AUDIO_PLAYBACK_StateTypeDef;
 
 /* Private define ------------------------------------------------------------*/
-/* Audio file size and start offset address are defined here since the audio wave file is
-   stored in Flash memory as a constant table of 16-bit data
+/* Audio file size and start offset address are defined here since the audio wave file is 
+   stored in Flash memory as a constant table of 16-bit data 
  */
 #define AUDIO_FILE_SIZE               147500       /* Size of audio file */
 #define AUDIO_START_OFFSET_ADDRESS    44           /* Offset relative to audio file header size */
@@ -111,10 +111,10 @@ int main(void)
 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization
@@ -143,29 +143,29 @@ int main(void)
   /* Initialize the LCD */
   BSP_LCD_Init();
 
-  /*##-2- Display welcome messages on LCD ####################################*/
+  /*##-2- Display welcome messages on LCD ####################################*/  
   Display_ExampleDescription();
 
   /* Wait for Joystick Sel push-button press before starting the Example */
   while (BSP_JOY_GetState() != JOY_SEL)
   {
   }
-
+  
   /* Wait for Joystick Sel push-button release before starting the Example */
   while (BSP_JOY_GetState() == JOY_SEL)
   {
   }
 
-  /*##-3- Display Example Template ###########################################*/
+  /*##-3- Display Example Template ###########################################*/  
   AudioPlay_SetHint();
 
-  /*##-4- Turn on LEDs available on STM32412G-DISCOVERY Eval board ###################*/
+  /*##-4- Turn on LEDs available on STM32412G-DISCOVERY Eval board ###################*/  
   BSP_LED_On(LED1);
   BSP_LED_On(LED2);
   BSP_LED_On(LED3);
   BSP_LED_On(LED4);
-
-  /* Set audio initialization state */
+  
+  /* Set audio initialization state */ 
   audio_state = AUDIO_STATE_INIT;
 
   /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOs...) */
@@ -191,7 +191,7 @@ int main(void)
   /* Retrieve Wave Sample rate */
   waveformat = (WAVE_FormatTypeDef*)AUDIO_FILE_ADDRESS;
   AudioPlay_DisplayInfos(waveformat);
-
+  
   /*##-6- Start AUDIO playback #####################################*/
   /*
   Normal mode description:
@@ -210,7 +210,7 @@ int main(void)
      size 65535 so there is no need to load buffer continuously or manage the
      transfer complete or Half transfer interrupts callbacks.
    */
-
+   
   /* Set the total number of data to be played (count in half-word) */
   AudioTotalSize = (AUDIO_FILE_SIZE - AUDIO_START_OFFSET_ADDRESS)/(waveformat->NbrChannels);
   /* Set the current audio pointer position */
@@ -358,7 +358,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   if(ret != HAL_OK)
   {
     while(1) { ; }
@@ -386,7 +386,7 @@ static void SystemClock_Config(void)
 static void Display_ExampleDescription(void)
 {
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-
+  
   /* Clear the LCD */
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
   BSP_LCD_Clear(LCD_COLOR_WHITE);
@@ -396,13 +396,13 @@ static void Display_ExampleDescription(void)
 
   /* Display LCD messages */
   BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32F412xG Example", CENTER_MODE);
-
+  
   /* Draw Bitmap */
   BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 35, (uint8_t *)stlogo);
-
+  
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 35, (uint8_t *)"Copyright (c)", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 20, (uint8_t *)"STMicroelectronics 2017", CENTER_MODE);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
   BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 - 10, BSP_LCD_GetXSize(), 60);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
@@ -421,7 +421,7 @@ static void AudioPlay_SetHint(void)
 {
   /* Clear the LCD */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 95);
@@ -470,10 +470,10 @@ static void AudioPlay_DisplayInfos(WAVE_FormatTypeDef * format)
     sprintf((char *) string, "Format : %d bits mono", format->BitPerSample);
     BSP_LCD_DisplayStringAt(20, 146, string, LEFT_MODE);
   }
-
+  
   sprintf((char *) Volume_string, "Volume : %lu%% ", uwVolume);
   BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-79, Volume_string, LEFT_MODE);
-
+  
   BSP_LCD_DisplayStringAt(20, 176, (uint8_t *)"Joy Sel: Pause/Resume", LEFT_MODE);
   BSP_LCD_DisplayStringAt(20, 191, (uint8_t *)"Joy UP/DOWN: change Volume", LEFT_MODE);
 }
@@ -499,13 +499,13 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
     from the beginning of the file ... */
     /* Check if the end of file has been reached */
     if(AudioRemSize > 0)
-    {
+    { 
       /* Replay from the current position */
       BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)CurrentPos, DMA_MAX(AudioRemSize));
-
+      
       /* Update the current pointer position */
       CurrentPos += DMA_MAX(AudioRemSize);
-
+      
       /* Update the remaining number of data to be played */
       AudioRemSize -= DMA_MAX(AudioRemSize);
     }

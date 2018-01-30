@@ -35,7 +35,7 @@
 
 @par Example Description
 
-This example describes how to use the embedded LCD DSI controller
+This example provides a description of how to use the embedded LCD DSI controller 
 (using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board.
 
 The goal of this example is to display a QVGA landscape (320x240) images on LCD glass
@@ -76,7 +76,7 @@ Each image is displayed for two secondes.
   - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Inc/stm32f4xx_it.h                Interrupt handlers header file
   - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Inc/main.h                        Header for main.c module
   - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Inc/life_augmented_argb8888.h   Image 320x240 in ARGB8888 to display on LCD
-  - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Inc/image_320x240_argb8888.h    Image 320x240 in ARGB8888 to display on LCD
+  - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Inc/image_320x240_argb8888.h    Image 320x240 in ARGB8888 to display on LCD  
   - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Src/stm32f4xx_it.c                Interrupt handlers
   - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Src/main.c                        Main program
   - LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Src/stm32f4xx_hal_msp.c           HAL MSP file

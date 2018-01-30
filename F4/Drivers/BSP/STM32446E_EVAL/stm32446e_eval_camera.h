@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32446E_EVAL_CAMERA_H
@@ -40,7 +40,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 /* Include Camera component Driver */
@@ -56,33 +56,33 @@
 /** @addtogroup STM32446E_EVAL
   * @{
   */
-
+    
 /** @addtogroup STM32446E_EVAL_CAMERA
   * @{
-  */
-
+  */ 
+   
 /** @defgroup STM32446E_EVAL_CAMERA_Exported_Types STM32446E EVAL CAMERA Exported Types
   * @{
   */
-
-/**
-  * @brief  Camera State structures definition
-  */
-typedef enum
+  
+/** 
+  * @brief  Camera State structures definition  
+  */  
+typedef enum 
 {
   CAMERA_OK       = 0x00,
   CAMERA_ERROR    = 0x01,
-  CAMERA_TIMEOUT  = 0x02
+  CAMERA_TIMEOUT  = 0x02 
 }Camera_StatusTypeDef;
 
 #define RESOLUTION_R160x120      CAMERA_R160x120      /* QQVGA Resolution     */
 #define RESOLUTION_R320x240      CAMERA_R320x240      /* QVGA Resolution      */
 #define RESOLUTION_R480x272      CAMERA_R480x272      /* 480x272 Resolution   */
-#define RESOLUTION_R640x480      CAMERA_R640x480      /* VGA Resolution       */
+#define RESOLUTION_R640x480      CAMERA_R640x480      /* VGA Resolution       */  
 /**
   * @}
-  */
-
+  */ 
+ 
 /** @defgroup STM32446E_EVAL_CAMERA_Exported_Constants STM32446E EVAL CAMERA Exported Constants
   * @{
   */
@@ -92,14 +92,14 @@ typedef enum
 
 /** @defgroup STM32446E_EVAL_CAMERA_Exported_Functions STM32446E EVAL CAMERA Exported Functions
   * @{
-  */
-uint8_t BSP_CAMERA_Init(uint32_t Resolution);
+  */    
+uint8_t BSP_CAMERA_Init(uint32_t Resolution);  
 uint8_t BSP_CAMERA_DeInit(void);
 void    BSP_CAMERA_ContinuousStart(uint8_t *buff);
 void    BSP_CAMERA_SnapshotStart(uint8_t *buff);
 void    BSP_CAMERA_Suspend(void);
 void    BSP_CAMERA_Resume(void);
-uint8_t BSP_CAMERA_Stop(void);
+uint8_t BSP_CAMERA_Stop(void); 
 void    BSP_CAMERA_HwReset(void);
 void    BSP_CAMERA_PwrDown(void);
 void    BSP_CAMERA_LineEventCallback(void);
@@ -116,7 +116,7 @@ void    BSP_CAMERA_ColorEffectConfig(uint32_t Effect);
 void    BSP_CAMERA_IRQHandler(void);
 /* To be called in DMA2_Stream1_IRQHandler function */
 void    BSP_CAMERA_DMA_IRQHandler(void);
-
+   
 /* These functions can be modified in case the current settings (e.g. DMA stream)
    need to be changed for specific application needs */
 void BSP_CAMERA_MspInit(DCMI_HandleTypeDef *hdcmi, void *Params);
@@ -125,11 +125,11 @@ void BSP_CAMERA_MspDeInit(DCMI_HandleTypeDef *hdcmi, void *Params);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

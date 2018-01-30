@@ -92,10 +92,10 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED2 */
   BSP_LED_Init(LED2);
 
@@ -119,7 +119,7 @@ int main(void)
 #ifdef MASTER_BOARD
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-
+  
   /* Wait for USER Button press before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) == 1)
   {
@@ -127,12 +127,12 @@ int main(void)
     BSP_LED_Toggle(LED2);
     HAL_Delay(1000);
   }
-
+  
   /* Wait for USER Button release before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) == 0)
   {
   }
-
+  
   BSP_LED_Off(LED2);
 
   while(1)
@@ -166,7 +166,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /*##-3- Master sends number of data to be written ########################*/
     do
@@ -190,7 +190,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /*##-4- Master sends aTxBuffer to slave ##################################*/
     do
@@ -214,7 +214,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /* Update bTransferRequest to send buffer read request for Slave */
     bTransferRequest = MASTER_REQ_READ;
@@ -241,7 +241,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /*##-6- Master sends number of data to be read ###########################*/
     do
@@ -265,7 +265,7 @@ int main(void)
       /* When Acknowledge failure occurs (Slave don't acknowledge its address)
       Master restarts communication */
     }
-    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF);
+    while(HAL_I2C_GetError(&I2CxHandle) == HAL_I2C_ERROR_AF); 
 
     /*##-7- Master receives aRxBuffer from slave #############################*/
     do
@@ -423,7 +423,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follows:
+  *         The system Clock is configured as follows: 
   *            System Clock source            = PLL (HSI)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -449,12 +449,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -470,14 +470,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();

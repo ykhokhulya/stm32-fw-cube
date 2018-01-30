@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324x9I_EVAL_TS_H
@@ -40,26 +40,26 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
-
+#endif   
+   
 /* Includes ------------------------------------------------------------------*/
 #include "stm324x9i_eval.h"
-/* Include IOExpander(STMPE811) component Driver */
+/* Include IOExpander(STMPE811) component Driver */ 
 #include "../Components/stmpe811/stmpe811.h"
 /* Include TouchScreen component drivers */
 #include "../Components/ts3510/ts3510.h"
-#include "../Components/exc7200/exc7200.h"
+#include "../Components/exc7200/exc7200.h"   
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM324x9I_EVAL
   * @{
   */
-
+    
 /** @addtogroup STM324x9I_EVAL_TS
   * @{
-  */
+  */    
 
 /** @defgroup STM324x9I_EVAL_TS_Exported_Types STM324x9I EVAL TS Exported Types
   * @{
@@ -72,7 +72,7 @@ typedef struct
   uint16_t z;
 }TS_StateTypeDef;
 
-typedef enum
+typedef enum 
 {
   TS_OK       = 0x00,
   TS_ERROR    = 0x01,
@@ -81,7 +81,7 @@ typedef enum
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324x9I_EVAL_TS_Exported_Constants STM324x9I EVAL TS Exported Constants
   * @{
@@ -95,7 +95,7 @@ typedef enum
 #define TS_INT_PIN                      0x0010
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324x9I_EVAL_TS_Exported_Functions STM324x9I EVAL TS Exported Functions
   * @{
@@ -109,7 +109,7 @@ void    BSP_TS_ITClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -117,7 +117,7 @@ void    BSP_TS_ITClear(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

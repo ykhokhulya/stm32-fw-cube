@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    SMARTCARD/SMARTCARD_T0/Inc/smartcard.h
+  * @file    SMARTCARD/SMARTCARD_T0/Inc/smartcard.h 
   * @author  MCD Application Team
   * @brief   This file contains all the functions prototypes for the Smartcard
   *          firmware library.
@@ -15,8 +15,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -61,7 +61,7 @@
 #define SC_UPDATE_RECORD   0xDC
 #define SC_READ_RECORD     0xB2
 
-/*-------------------------- Administrative Commands -------------------------*/
+/*-------------------------- Administrative Commands -------------------------*/ 
 #define SC_CREATE_FILE     0xE0
 
 /*-------------------------- Safety Management Commands ----------------------*/
@@ -73,7 +73,7 @@
 #define SC_EXTERNAL_AUTH   0x82
 #define SC_GET_CHALLENGE   0x84
 
-/*-------------------------- Answer to reset Commands ------------------------*/
+/*-------------------------- Answer to reset Commands ------------------------*/ 
 #define SC_GET_A2R         0x00
 
 /* SC STATUS: Status Code ----------------------------------------------------*/
@@ -91,7 +91,7 @@ typedef enum
   SC_POWER_ON = 0x00,
   SC_RESET_LOW = 0x01,
   SC_RESET_HIGH = 0x02,
-  SC_ACTIVE = 0x03,
+  SC_ACTIVE = 0x03,	 
   SC_ACTIVE_ON_T0 = 0x04,
   SC_POWER_OFF = 0x05
 } SC_State;
@@ -117,7 +117,7 @@ typedef struct
 } SC_Header;
 
 /* ADPU-Body command structure -----------------------------------------------*/
-typedef struct
+typedef struct 
 {
   uint8_t LC;           /* Data field length */
   uint8_t Data[LC_MAX];  /* Command parameters */

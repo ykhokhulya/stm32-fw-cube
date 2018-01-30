@@ -1,9 +1,9 @@
 /**
   @page GPIO_EXTI GPIO EXTI example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    GPIO/GPIO_EXTI/readme.txt
+  * @file    GPIO/GPIO_EXTI/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the GPIO EXTI example.
   ******************************************************************************
@@ -35,7 +35,7 @@
 
 @par Example Description
 
-This example shows how to configure external interrupt lines.
+How to configure external interrupt lines.
 
 In this example, one EXTI line (EXTI15_10) is configured to generate
 an interrupt on each falling edge.
@@ -55,18 +55,18 @@ In this example, HCLK is configured at 180 MHz.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - GPIO/GPIO_EXTI/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - GPIO/GPIO_EXTI/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - GPIO/GPIO_EXTI/Inc/main.h                  Header for main.c module
+  - GPIO/GPIO_EXTI/Inc/main.h                  Header for main.c module  
   - GPIO/GPIO_EXTI/Src/stm32f4xx_it.c          Interrupt handlers
   - GPIO/GPIO_EXTI/Src/main.c                  Main program
   - GPIO/GPIO_EXTI/Src/system_stm32f4xx.c      STM32F4xx system source file
@@ -78,7 +78,7 @@ In this example, HCLK is configured at 180 MHz.
   - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

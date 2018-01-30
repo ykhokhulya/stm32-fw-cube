@@ -105,6 +105,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

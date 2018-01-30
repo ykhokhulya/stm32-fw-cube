@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_TimeBase/Src/main.c
+  * @file    TIM/TIM_TimeBase/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx TIM HAL API to generate
   *          a time base.
@@ -44,7 +44,7 @@
 
 /** @addtogroup TIM_TimeBase
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -75,41 +75,41 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
-
-  /*##-1- Configure the TIM peripheral #######################################*/
+  
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* -----------------------------------------------------------------------
-    In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1),
-    since APB1 prescaler is different from 1.
-      TIM3CLK = 2 * PCLK1
-      PCLK1 = HCLK / 4
+    In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1), 
+    since APB1 prescaler is different from 1.   
+      TIM3CLK = 2 * PCLK1  
+      PCLK1 = HCLK / 4 
       => TIM3CLK = HCLK / 2 = SystemCoreClock /2
     To get TIM3 counter clock at 10 KHz, the Prescaler is computed as following:
     Prescaler = (TIM3CLK / TIM3 counter clock) - 1
     Prescaler = ((SystemCoreClock /2) /10 KHz) - 1
-
-    Note:
+       
+    Note: 
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
-     Each time the core clock (HCLK) changes, user had to update SystemCoreClock
+     Each time the core clock (HCLK) changes, user had to update SystemCoreClock 
      variable value. Otherwise, any configuration based on this variable will be incorrect.
      This variable is updated in three ways:
       1) by calling CMSIS function SystemCoreClockUpdate()
       2) by calling HAL API function HAL_RCC_GetSysClockFreq()
-      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency
-  ----------------------------------------------------------------------- */
-
+      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency  
+  ----------------------------------------------------------------------- */  
+  
   /* Compute the prescaler value to have TIM3 counter clock equal to 10 KHz */
   uwPrescalerValue = (uint32_t) ((SystemCoreClock /2) / 10000) - 1;
-
+  
   /* Set TIMx instance */
   TimHandle.Instance = TIMx;
-
+   
   /* Initialize TIM3 peripheral as follow:
        + Period = 10000 - 1
        + Prescaler = ((SystemCoreClock/2)/10000) - 1
@@ -125,7 +125,7 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /*##-2- Start the TIM Base generation in interrupt mode ####################*/
   /* Start Channel1 */
   if(HAL_TIM_Base_Start_IT(&TimHandle) != HAL_OK)
@@ -133,7 +133,7 @@ int main(void)
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -166,7 +166,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -192,8 +192,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -207,14 +207,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -234,7 +234,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

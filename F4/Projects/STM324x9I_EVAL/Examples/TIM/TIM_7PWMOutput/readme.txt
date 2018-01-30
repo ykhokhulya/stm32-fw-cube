@@ -3,7 +3,7 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_7PWMOutput/readme.txt
+  * @file    TIM/TIM_7PWMOutput/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PWM signals generation using Timer3 Example
   ******************************************************************************
@@ -33,14 +33,14 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-  This example shows how to configure the TIM1 peripheral to generate 7 PWM signals
+  This example shows how to configure the TIM1 peripheral to generate 7 PWM signals 
   with 4 different duty cycles (50%, 37.5%, 25% and 12.5%).
-
+  
   TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
   SystemCoreClock is set to 180 MHz.
-
+  
   The objective is to generate 7 PWM signal at 17.57 KHz:
     - TIM1_Period = (SystemCoreClock / 17570) - 1
   The channel 1 and channel 1N duty cycle is set to 50%
@@ -48,9 +48,9 @@
   The channel 3 and channel 3N duty cycle is set to 25%
   The channel 4 duty cycle is set to 12.5%
   The Timer pulse is calculated as follows:
-
+  
     - ChannelxPulse = DutyCycle * (TIM1_Period - 1) / 100
-
+  
   The TIM1 waveforms can be displayed using an oscilloscope.
 
 
@@ -59,30 +59,30 @@
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_7PWMOutput/Inc/stm32f4xx_hal_conf.h     HAL configuration file
   - TIM/TIM_7PWMOutput/Inc/stm32f4xx_it.h           Interrupt handlers header file
-  - TIM/TIM_7PWMOutput/Inc/main.h                   Main program header file
+  - TIM/TIM_7PWMOutput/Inc/main.h                   Main program header file  
   - TIM/TIM_7PWMOutput/Src/stm32f4xx_it.c           Interrupt handlers
   - TIM/TIM_7PWMOutput/Src/main.c                   Main program
   - TIM/TIM_7PWMOutput/Src/stm32f4xx_hal_msp.c      HAL MSP module
   - TIM/TIM_7PWMOutput/Src/system_stm32f4xx.c       STM32F4xx system clock configuration file
 
 
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This example runs on STM32F429xx/STM32F439xx devices.
-
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB
+    
+  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device and development board
 
-  - STM324x9I-EVAL RevB Set-up
+  - STM324x9I-EVAL RevB Set-up 
     - Connect the TIM1 pins to an oscilloscope to monitor the different waveforms:
       - TIM1_CH1  pin (PA.08)
       - TIM1_CH1N pin (PB.13)
@@ -93,10 +93,10 @@
       - TIM1_CH4  pin (PE.14)
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

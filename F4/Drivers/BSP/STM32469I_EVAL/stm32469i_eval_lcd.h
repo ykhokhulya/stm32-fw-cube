@@ -47,7 +47,7 @@
 
 /* Include OTM8009A LCD Driver IC driver code */
 #include "../Components/otm8009a/otm8009a.h"
-
+   
 /* Include SDRAM Driver */
 #include "stm32469i_eval_sdram.h"
 #include "stm32469i_eval.h"
@@ -73,11 +73,11 @@
   */
 
 #define LCD_LayerCfgTypeDef    LTDC_LayerCfgTypeDef
-/**
-  * @brief  LCD FB_StartAddress
+/** 
+  * @brief  LCD FB_StartAddress  
   */
 #define LCD_FB_START_ADDRESS       ((uint32_t)0xC0000000)
-
+   
 /** @brief Maximum number of LTDC layers
  */
 #define LTDC_MAX_LAYER_NUMBER             ((uint32_t) 2)
@@ -98,18 +98,18 @@
  */
 #define LTDC_DEFAULT_ACTIVE_LAYER         LTDC_ACTIVE_LAYER_FOREGROUND
 
-/**
-  * @brief  LCD status structure definition
-  */
+/** 
+  * @brief  LCD status structure definition  
+  */     
 #define   LCD_OK         0x00
 #define   LCD_ERROR      0x01
 #define   LCD_TIMEOUT    0x02
 
-/**
-  * @brief  LCD Display OTM8009A ID
-  */
+/** 
+  * @brief  LCD Display OTM8009A ID  
+  */ 
 #define LCD_OTM8009A_ID  ((uint32_t) 0)
-
+   
 /**
   * @brief  LCD color definitions values
   * in ARGB8888 format.
@@ -235,7 +235,7 @@
 /**
   * @}
   */
-
+   
 /** @defgroup STM32469I-EVAL_LCD_Exported_Types STM32469I EVAL LCD Exported Types
   * @{
   */
@@ -296,12 +296,12 @@ typedef enum
 /** @defgroup STM32469I-EVAL_LCD_Exported_Macro STM32469I EVAL LCD Exported Macro
   * @{
   */
-
+  
 /**
   * @}
   */
 
-/** @addtogroup STM32469I-EVAL_LCD_Exported_Functions
+/** @addtogroup STM32469I-EVAL_LCD_Exported_Functions 
   * @{
   */
 
@@ -368,7 +368,7 @@ void     BSP_LCD_DisplayOn(void);
   * @}
   */
 
-/** @addtogroup STM32469I-EVAL_LCD_Exported_Variables
+/** @addtogroup STM32469I-EVAL_LCD_Exported_Variables 
   * @{
   */
 

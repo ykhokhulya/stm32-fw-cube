@@ -11,7 +11,7 @@
  * \#define lwip_htonl(x) your_htonl
  *
  * Note lwip_ntohs() and lwip_ntohl() are merely references to the htonx counterparts.
- *
+ * 
  * If you \#define them to htons() and htonl(), you should
  * \#define LWIP_DONT_PROVIDE_BYTEORDER_FUNCTIONS to prevent lwIP from
  * defining htonx/ntohx compatibility macros.
@@ -20,6 +20,10 @@
  * @ingroup sys_layer
  * lwIP provides default implementations for non-standard functions.
  * These can be mapped to OS functions to reduce code footprint if desired.
+ * All defines related to this section must not be placed in lwipopts.h,
+ * but in arch/cc.h!
+ * These options cannot be \#defined in lwipopts.h since they are not options
+ * of lwIP itself, but options of the lwIP port to your system.
  */
 
 /*
@@ -101,13 +105,13 @@ char*
 lwip_strnstr(const char* buffer, const char* token, size_t n)
 {
   const char* p;
-  int tokenlen = (int)strlen(token);
+  size_t tokenlen = strlen(token);
   if (tokenlen == 0) {
-    return (char *)(size_t)buffer;
+    return LWIP_CONST_CAST(char *, buffer);
   }
   for (p = buffer; *p && (p + tokenlen <= buffer + n); p++) {
     if ((*p == *token) && (strncmp(p, token, tokenlen) == 0)) {
-      return (char *)(size_t)p;
+      return LWIP_CONST_CAST(char *, p);
     }
   }
   return NULL;

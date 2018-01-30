@@ -2,7 +2,7 @@
   @page IAP_Binary_Template Binary Template Readme file
 
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    IAP/IAP_Binary_Template/readme.txt
+  * @file    IAP/IAP_Binary_Template/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the IAP_Binary_Template directory.
   ******************************************************************************
@@ -50,38 +50,38 @@ To build such application, some special configuration has to be performed:
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
-
+      
 Four LEDs are toggled with a timing defined by the Delay function.
 
 
-@par Directory contents
+@par Directory contents 
 
  - IAP\IAP_Binary_Template/Inc/stm32f4xx_hal_conf.h          HAL Configuration file
  - IAP\IAP_Binary_Template/Inc/main.h                        Header for main.c module
  - IAP\IAP_Binary_Template/Inc/stm32f4xx_it.h                Header for stm32f4xx_it.c
  - IAP\IAP_Binary_Template/Src/main.c                        Main program
  - IAP\IAP_Binary_Template/Src/stm32f4xx_it.c                Interrupt handlers
- - IAP\IAP_Binary_Template/Src/system_stm32f4xx.c            STM32F4xx system clock configuration file
+ - IAP\IAP_Binary_Template/Src/system_stm32f4xx.c            STM32F4xx system clock configuration file 
 
-
-@par Hardware and Software environment
+     
+@par Hardware and Software environment 
 
   - This application runs on STM32F429xx/STM32F439xx devices.
-
+    
   - This application has been tested with STM324x9I-EVAL board revB and can be
     easily tailored to any other supported device and development board.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to load the SysTick example with the IAP, you must do the following:
-
+ 
  - EWARM:
     - Open the Project.eww workspace
     - Rebuild all files
-    - A binary file "STM324x9I-EVAL_SysTick.bin" will be generated under "STM324x9I-EVAL/Exe" folder.
+    - A binary file "STM324x9I-EVAL_SysTick.bin" will be generated under "STM324x9I-EVAL/Exe" folder.  
     - Finally load this image with IAP application
 
  - MDK-ARM:
@@ -89,14 +89,14 @@ In order to load the SysTick example with the IAP, you must do the following:
     - Rebuild all files: Project->Rebuild all target files
     - Go to "/IAP_Binary_Template/MDK-ARM" directory and run "axftobin.bat"
       (Fromelf Exe path might have to be updated in "axftobin.bat" file, according to your Keil setup).
-    - A binary file "STM324x9I-EVAL_SysTick.bin" will be generated under "STM324x9I-EVAL" folder.
+    - A binary file "STM324x9I-EVAL_SysTick.bin" will be generated under "STM324x9I-EVAL" folder. 
     - Finally load this image with IAP application
 
- - System Workbench for STM32:
+ - System Workbench for STM32: 
     - Open System Workbench for STM32 toolchain
-    - Browse to the SW4STM32 workspace directory, select the project
+    - Browse to the SW4STM32 workspace directory, select the project 
       (.project file in \IAP_Binary_Template\SW4STM32 \STM324x9I-EVAL directory).
-    - Rebuild all project files: Select the project in the "Project explorer" window
+    - Rebuild all project files: Select the project in the "Project explorer" window 
       then click on Project->build project menu.
     - Load this image with the IAP application (Select option 1 in IAP_Main menu)
 

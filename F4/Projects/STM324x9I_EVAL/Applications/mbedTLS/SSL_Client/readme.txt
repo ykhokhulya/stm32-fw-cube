@@ -3,49 +3,49 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    mbedTLS/SSL_Client/readme.txt
+  * @file    mbedTLS/SSL_Client/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of SSL Client application.
   ******************************************************************************
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   @endverbatim
 
-@par Application Description
+@par Application Description 
 
 This application describes how  to run an SSL client application based on mbedTLS
 crypto library and LwIP TCP/IP stack on STM32F4 family.
@@ -62,7 +62,7 @@ Scenario 2:
 ===========
 In this second scenario, the the client (STM32F4x9I_EVAL):
 - connects to local network either through DHCP or static IP address.
-- establishes a secured connect to a second STM32F4x9I_EVAL borad running
+- establishes a secured connect to a second STM32F4x9I_EVAL borad running 
   the "SSL_Sever" application.
 - sends an encrypted message to the second board.
 - receives an answser from the server board.
@@ -77,7 +77,7 @@ In case of errors the red led is loggling.
       a peripheral ISR process, then the HAL time base interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the HAL time base interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the HAL time base is always set to 1 millisecond
       to have correct HAL operation.
 
@@ -91,17 +91,17 @@ AES 192, AES 256, Triple DES, MD5, SHA-1, RNG
 @par Directory contents
 
     - mbedTLS/SSL_Client/Inc/ethernetif.h                   header for ethernetif.c file
-    - mbedTLS/SSL_Client/Inc/main.h                         Main program header file
+    - mbedTLS/SSL_Client/Inc/main.h                         Main program header file 
     - mbedTLS/SSL_Client/Inc/mbedtls_config.h               mbedTLS library configuration options
     - mbedTLS/SSL_Client/Inc/FreeRTOSConfig.h               FreeRTOS configuration options
     - mbedTLS/SSL_Client/Inc/lwipopts.h                     LwIP stack configuration options
-    - mbedTLS/SSL_Client/Inc/stm32f4xx_it.h                 Interrupt handlers header file
+    - mbedTLS/SSL_Client/Inc/stm32f4xx_it.h                 Interrupt handlers header file 
     - mbedTLS/SSL_Client/Inc/stm32f4xx_hal_conf.h           Library Configuration file
     - mbedTLS/SSL_Client/Src/main.c                         Main program
     - mbedTLS/SSL_Client/Src/ssl_client.c                   SSL client main thread
     - mbedTLS/SSL_Client/Src/ethernetif.c                   Interfacing the LwIP stack to ETH driver
     - mbedTLS/SSL_Client/Src/stm32f4xx_hal_msp.c            HAL MSP module
-    - mbedTLS/SSL_Client/Src/stm32f4xx_it.c                 Interrupt handlers
+    - mbedTLS/SSL_Client/Src/stm32f4xx_it.c                 Interrupt handlers 
     - mbedTLS/SSL_Client/Src/stm32f4xx_hal_timebase_tim.c   HAL time base functions
     - mbedTLS/SSL_Client/Src/net_socket.c                   mbedTLS TCP/IP socket API implementation using LwIP.
     - mbedTLS/SSL_Client/Src/system_stm32f4xx.c             STM32 system clock configuration file
@@ -110,7 +110,7 @@ AES 192, AES 256, Triple DES, MD5, SHA-1, RNG
 This file is the minimal configuration required for the  TLS NSA Suite B Profile RFC(6460).
 https://tools.ietf.org/html/rfc6460. Thus to get this application working both the SSL_Server and SSL_Client need to be configured with the same profile.
 
-@par Hardware and Software environment
+@par Hardware and Software environment  
 
   - This application runs on STM32F429xx/439xx Devices.
 
@@ -118,7 +118,7 @@ https://tools.ietf.org/html/rfc6460. Thus to get this application working both t
      - Using a Host PC as server, running a Fedora 23 operating System or similar.
 	 - Using a Windows PC as server, running Windows 7 operating system or later.
      - using two STM32F4x9I_EVAL boards the first as server, the second as client.
-
+  
   - Senario 1:
       - Remote PC Set-up
 	  - Make sure that the PC is in the same local network as the baord.
@@ -132,14 +132,14 @@ https://tools.ietf.org/html/rfc6460. Thus to get this application working both t
 
   - Senario 2:
     - a second STM32F4x9I_EVAL running the "mdedTLS/SSL_Server" application
-
-  - STM32F4x9I_EVAL Set-up
+	
+  - STM32F4x9I_EVAL Set-up 
     - Connect STM32F4x9I_EVAL to your local network (through a straight ethernet cable).
-
-@par How to use it ?
+   
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - edit the file "main.h" setup the correct "SERVER_NAME"
  - Rebuild all files and load your image into target memory
  - Run the application.
@@ -147,10 +147,10 @@ In order to make the program work, you must do the following :
  @Note: 1 Please ensure that the remote PC IP address is the same IP address
           as the one defined in main.h in the "SERVER_NAME", and the port number
 		  used for the connection is the same as the one defined in "SERVER_PORT"
-
+		  
         2 If using two boards for testing and the DHCP is enabled then the "SSL_Server" needs to be
 		  run first, to get the board IP Address and use it in the "SSL_Client" application.
-
+        
 	3 To avoid network issues please make sure to assign different MAC addresses for boards connected
 	  to the same LAN. Edit the values MAC_ADDR0, MAC_ADDR1, MAC_ADDR2, MAC_ADDR3, MAC_ADDR4, MAC_ADDR5
 	  in the file "stm32f4xx_hal_conf.h"

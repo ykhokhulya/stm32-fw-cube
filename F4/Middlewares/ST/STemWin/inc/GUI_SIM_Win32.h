@@ -107,6 +107,6 @@ void LCDSIM_SetChroma     (int LayerIndex, unsigned long ChromaMin, unsigned lon
 
 #if defined(__cplusplus)
 }
-#endif
+#endif 
 
 #endif /* SIM_GUI_H */

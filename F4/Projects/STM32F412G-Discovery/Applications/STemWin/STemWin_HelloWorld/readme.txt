@@ -1,9 +1,9 @@
 /**
   @page STemWin_HelloWorld Readme file
-
+ 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    STemWin/STemWin_HelloWorld/readme.txt
+  * @file    STemWin/STemWin_HelloWorld/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STemWin Hello World application.
   ******************************************************************************
@@ -38,8 +38,7 @@
 
 @par Application Description
 
-This directory contains a set of source files that implement a simple "Hello
-World" application based on STemWin for STM32F4xx devices.
+Simple "Hello World" example based on STemWin for STM32F4xx devices.
 
 The application allows also to run the different Segger samples that can be
 downloaded from here:
@@ -57,14 +56,14 @@ Note that the following user files may need to be updated:
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note If the application is not running normally as mentionned above , you can accordingly modify either
       the Heap and Stack of the application or the GUI_NUMBYTES define in the GUIConf.c file.
 
-@par Directory contents
+@par Directory contents 
 
   - STemWin/STemWin_HelloWorld/STemWin/Target/GUIConf.h           Header for GUIConf_stm32412g_discovery.c
   - STemWin/STemWin_HelloWorld/STemWin/Target/LCDConf.h           Header for LCDConf_stm32412g_discovery.c
@@ -78,19 +77,19 @@ Note that the following user files may need to be updated:
   - STemWin/STemWin_HelloWorld/Core/Src/stm32f4xx_it.c            STM32F4xx Interrupt handlers
   - STemWin/STemWin_HelloWorld/Core/Src/system_stm32f4xx.c        STM32F4xx system file
 
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This application runs on STM32F412xG devices.
-
+    
   - This application has been tested with STM32412G-DISCOVERY discovery board and can be
     easily tailored to any other supported device and development board.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
-  - Open your preferred toolchain
+  - Open your preferred toolchain 
   - Rebuild all files and load your image into target memory
   - Run the application
-
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

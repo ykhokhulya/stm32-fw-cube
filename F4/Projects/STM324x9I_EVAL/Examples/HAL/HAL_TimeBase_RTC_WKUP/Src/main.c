@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HAL/HAL_TimeBase_RTC_WKUP/Src/main.c
+  * @file    HAL/HAL_TimeBase_RTC_WKUP/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   ******************************************************************************
@@ -42,7 +42,7 @@
 /** @defgroup HAL_TimeBase_RTC_WakeUp  HAL TimeBase RTC WakeUp
   * @{
   */
-
+  
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -53,7 +53,7 @@ static void SystemClock_Config(void);
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 int main(void)
-{
+{ 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the RTC Wakeup to generate an interrupt each 1 msec
@@ -64,13 +64,13 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /* Configure BUTTON_KEY */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   /* -3- Toggle LED1, LED2, LED3 and LED4 in an Infinite loop */
@@ -102,7 +102,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Suspend tick increment */
       HAL_SuspendTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 1;
     }
@@ -110,7 +110,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Resume tick increment */
       HAL_ResumeTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 0;
     }
@@ -119,7 +119,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -152,16 +152,16 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   HAL_PWREx_ActivateOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -187,10 +187,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-*/
+*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

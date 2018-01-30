@@ -3,7 +3,7 @@
   * @file    Examples_LL/ADC/ADC_AnalogWatchdog/Src/main.c
   * @author  MCD Application Team
   * @brief   This example describes how to use a ADC peripheral
-  *          with ADC analog watchdog to monitor a channel and detect
+  *          with ADC analog watchdog to monitor a channel and detect 
   *          when the corresponding conversion data is out of window thresholds.
   *          This example is based on the STM32F4xx ADC LL API;
   *          Peripheral initialization done using LL unitary services functions.
@@ -122,13 +122,13 @@ int main(void)
 {
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+  
   /* Initialize LED2 */
   LED_Init();
-
+  
   /* Initialize button in EXTI mode */
   UserButton_Init();
-
+  
   /* Configure ADC */
   /* Note: This function configures the ADC but does not enable it.           */
   /*       To enable it, use function "Activate_ADC()".                       */
@@ -141,11 +141,11 @@ int main(void)
   /*          "Deactivate_ADC()", ..., without having to set again            */
   /*          ADC configuration.                                              */
   Configure_ADC();
-
+  
   /* Activate ADC */
   /* Perform ADC activation procedure to make it ready to convert. */
   Activate_ADC();
-
+  
   /* Start ADC group regular conversion */
   /* Note: Hardware constraint (refer to description of the functions         */
   /*       below):                                                            */
@@ -165,7 +165,7 @@ int main(void)
     /* Error: ADC conversion start could not be performed */
     LED_Blinking(LED_BLINK_ERROR);
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -176,7 +176,7 @@ int main(void)
     /*       After analog watchdog interruption, press on push button         */
     /*       to rearm ADC analog watchdog to be ready for another trig,       */
     /*       refer to function "UserButton_Callback()".                       */
-
+    
   }
 }
 
@@ -198,10 +198,10 @@ int main(void)
   *         - If ADC is not in the appropriate state to modify some parameters,
   *           the setting of these parameters is bypassed without error
   *           reporting:
-  *           it can be the expected behavior in case of recall of this
+  *           it can be the expected behavior in case of recall of this 
   *           function to update only a few parameters (which update fullfills
   *           the ADC state).
-  *           Otherwise, it is up to the user to set the appropriate error
+  *           Otherwise, it is up to the user to set the appropriate error 
   *           reporting in user application.
   * @note   Peripheral configuration is minimal configuration from reset values.
   *         Thus, some useless LL unitary functions calls below are provided as
@@ -212,27 +212,27 @@ int main(void)
 void Configure_ADC(void)
 {
   /*## Configuration of GPIO used by ADC channels ############################*/
-
-  /* Note: On this STM32 device, ADC1 channel 4 is mapped on GPIO pin PA.04 */
-
+  
+  /* Note: On this STM32 device, ADC1 channel 4 is mapped on GPIO pin PA.04 */ 
+  
   /* Enable GPIO Clock */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-
+  
   /* Configure GPIO in analog mode to be used as ADC input */
   LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_4, LL_GPIO_MODE_ANALOG);
-
+  
   /*## Configuration of NVIC #################################################*/
   /* Configure NVIC to enable ADC1 interruptions */
   NVIC_SetPriority(ADC_IRQn, 0);
   NVIC_EnableIRQ(ADC_IRQn);
-
+  
   /*## Configuration of ADC ##################################################*/
-
+  
   /*## Configuration of ADC hierarchical scope: common to several ADC ########*/
-
+  
   /* Enable ADC clock (core clock) */
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_ADC1);
-
+  
   /* Note: Hardware constraint (refer to description of the functions         */
   /*       below):                                                            */
   /*       On this STM32 serie, setting of these features are not             */
@@ -247,32 +247,32 @@ void Configure_ADC(void)
     /* Note: Call of the functions below are commented because they are       */
     /*       useless in this example:                                         */
     /*       setting corresponding to default configuration from reset state. */
-
+    
     /* Set ADC clock (conversion clock) common to several ADC instances */
     LL_ADC_SetCommonClock(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_CLOCK_SYNC_PCLK_DIV2);
-
+    
     /* Set ADC measurement path to internal channels */
     // LL_ADC_SetCommonPathInternalCh(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_PATH_INTERNAL_NONE);
-
-
+    
+    
   /*## Configuration of ADC hierarchical scope: multimode ####################*/
-
+  
     /* Note: ADC multimode is not available on this device:                   */
     /*       only 1 ADC instance is present.                                  */
     /* Set ADC multimode configuration */
     // LL_ADC_SetMultimode(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_MULTI_INDEPENDENT);
-
+    
     /* Set ADC multimode DMA transfer */
     // LL_ADC_SetMultiDMATransfer(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_MULTI_REG_DMA_EACH_ADC);
-
+    
     /* Set ADC multimode: delay between 2 sampling phases */
     // LL_ADC_SetMultiTwoSamplingDelay(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_MULTI_TWOSMP_DELAY_1CYCLE);
-
+    
   }
-
-
+  
+  
   /*## Configuration of ADC hierarchical scope: ADC instance #################*/
-
+  
   /* Note: Hardware constraint (refer to description of the functions         */
   /*       below):                                                            */
   /*       On this STM32 serie, setting of these features are not             */
@@ -284,22 +284,22 @@ void Configure_ADC(void)
     /* Note: Call of the functions below are commented because they are       */
     /*       useless in this example:                                         */
     /*       setting corresponding to default configuration from reset state. */
-
+    
     /* Set ADC data resolution */
     // LL_ADC_SetResolution(ADC1, LL_ADC_RESOLUTION_12B);
-
+    
     /* Set ADC conversion data alignment */
     // LL_ADC_SetResolution(ADC1, LL_ADC_DATA_ALIGN_RIGHT);
-
+    
     /* Set Set ADC sequencers scan mode, for all ADC groups                   */
     /* (group regular, group injected).                                       */
     // LL_ADC_SetSequencersScanMode(ADC1, LL_ADC_SEQ_SCAN_DISABLE);
-
+    
   }
-
-
+  
+  
   /*## Configuration of ADC hierarchical scope: ADC group regular ############*/
-
+  
   /* Note: Hardware constraint (refer to description of the functions         */
   /*       below):                                                            */
   /*       On this STM32 serie, setting of these features are not             */
@@ -310,41 +310,41 @@ void Configure_ADC(void)
   {
     /* Set ADC group regular trigger source */
     LL_ADC_REG_SetTriggerSource(ADC1, LL_ADC_REG_TRIG_SOFTWARE);
-
+    
     /* Set ADC group regular trigger polarity */
     // LL_ADC_REG_SetTriggerEdge(ADC1, LL_ADC_REG_TRIG_EXT_RISING);
-
+    
     /* Set ADC group regular continuous mode */
     LL_ADC_REG_SetContinuousMode(ADC1, LL_ADC_REG_CONV_CONTINUOUS);
-
+    
     /* Set ADC group regular conversion data transfer */
     // LL_ADC_REG_SetDMATransfer(ADC1, LL_ADC_REG_DMA_TRANSFER_NONE);
-
+    
     /* Specify which ADC flag between EOC (end of unitary conversion)         */
     /* or EOS (end of sequence conversions) is used to indicate               */
     /* the end of conversion.                                                 */
     // LL_ADC_REG_SetFlagEndOfConversion(ADC1, LL_ADC_REG_FLAG_EOC_SEQUENCE_CONV);
-
+    
     /* Set ADC group regular sequencer */
     /* Note: On this STM32 serie, ADC group regular sequencer is              */
     /*       fully configurable: sequencer length and each rank               */
     /*       affectation to a channel are configurable.                       */
     /*       Refer to description of function                                 */
     /*       "LL_ADC_REG_SetSequencerLength()".                               */
-
+    
     /* Set ADC group regular sequencer length and scan direction */
     LL_ADC_REG_SetSequencerLength(ADC1, LL_ADC_REG_SEQ_SCAN_DISABLE);
-
+    
     /* Set ADC group regular sequencer discontinuous mode */
     // LL_ADC_REG_SetSequencerDiscont(ADC1, LL_ADC_REG_SEQ_DISCONT_DISABLE);
-
+    
     /* Set ADC group regular sequence: channel on the selected sequence rank. */
     LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_4);
   }
-
-
+  
+  
   /*## Configuration of ADC hierarchical scope: ADC group injected ###########*/
-
+  
   /* Note: Hardware constraint (refer to description of the functions         */
   /*       below):                                                            */
   /*       On this STM32 serie, setting of these features are not             */
@@ -356,36 +356,36 @@ void Configure_ADC(void)
     /* Note: Call of the functions below are commented because they are       */
     /*       useless in this example:                                         */
     /*       setting corresponding to default configuration from reset state. */
-
+    
     /* Set ADC group injected trigger source */
     // LL_ADC_INJ_SetTriggerSource(ADC1, LL_ADC_INJ_TRIG_SOFTWARE);
-
+    
     /* Set ADC group injected trigger polarity */
     // LL_ADC_INJ_SetTriggerEdge(ADC1, LL_ADC_INJ_TRIG_EXT_RISING);
-
+    
     /* Set ADC group injected conversion trigger  */
     // LL_ADC_INJ_SetTrigAuto(ADC1, LL_ADC_INJ_TRIG_INDEPENDENT);
-
+    
     /* Set ADC group injected sequencer */
     /* Note: On this STM32 serie, ADC group injected sequencer is             */
     /*       fully configurable: sequencer length and each rank               */
     /*       affectation to a channel are configurable.                       */
     /*       Refer to description of function                                 */
     /*       "LL_ADC_INJ_SetSequencerLength()".                               */
-
+    
     /* Set ADC group injected sequencer length and scan direction */
     // LL_ADC_INJ_SetSequencerLength(ADC1, LL_ADC_INJ_SEQ_SCAN_DISABLE);
-
+    
     /* Set ADC group injected sequencer discontinuous mode */
     // LL_ADC_INJ_SetSequencerDiscont(ADC1, LL_ADC_INJ_SEQ_DISCONT_DISABLE);
-
+    
     /* Set ADC group injected sequence: channel on the selected sequence rank. */
     // LL_ADC_INJ_SetSequencerRanks(ADC1, LL_ADC_INJ_RANK_1, LL_ADC_CHANNEL_4);
   }
-
-
+  
+  
   /*## Configuration of ADC hierarchical scope: channels #####################*/
-
+  
   /* Note: Hardware constraint (refer to description of the functions         */
   /*       below):                                                            */
   /*       On this STM32 serie, setting of these features are not             */
@@ -404,31 +404,31 @@ void Configure_ADC(void)
     /*       select sampling time and ADC clock with sufficient               */
     /*       duration to not create an overhead situation in IRQHandler.      */
     LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_4, LL_ADC_SAMPLINGTIME_56CYCLES);
-
+    
   }
-
-
+  
+  
   /*## Configuration of ADC transversal scope: analog watchdog ###############*/
-
+  
   /* Note: On this STM32 serie, there is only 1 analog watchdog available.    */
-
+  
   /* Set ADC analog watchdog: channels to be monitored */
   LL_ADC_SetAnalogWDMonitChannels(ADC1, LL_ADC_AWD_ALL_CHANNELS_REG);
-
+  
   /* Set ADC analog watchdog: thresholds */
   LL_ADC_SetAnalogWDThresholds(ADC1, LL_ADC_AWD_THRESHOLD_HIGH, ADC_AWD_THRESHOLD_HIGH);
   LL_ADC_SetAnalogWDThresholds(ADC1, LL_ADC_AWD_THRESHOLD_LOW, ADC_AWD_THRESHOLD_LOW);
-
-
+  
+  
   /*## Configuration of ADC transversal scope: oversampling ##################*/
-
+  
   /* Note: Feature not available on this STM32 serie */
-
-
+  
+  
   /*## Configuration of ADC interruptions ####################################*/
   /* Enable ADC analog watchdog 1 interruption */
   LL_ADC_EnableIT_AWD1(ADC1);
-
+  
 }
 
 /**
@@ -451,9 +451,9 @@ void Activate_ADC(void)
   #if (USE_TIMEOUT == 1)
   uint32_t Timeout = 0; /* Variable used for timeout management */
   #endif /* USE_TIMEOUT */
-
+  
   /*## Operation on ADC hierarchical scope: ADC instance #####################*/
-
+  
   /* Note: Hardware constraint (refer to description of the functions         */
   /*       below):                                                            */
   /*       On this STM32 serie, setting of these features are not             */
@@ -467,21 +467,21 @@ void Activate_ADC(void)
   {
     /* Enable ADC */
     LL_ADC_Enable(ADC1);
-
+    
   }
-
+  
   /*## Operation on ADC hierarchical scope: ADC group regular ################*/
   /* Note: No operation on ADC group regular performed here.                  */
   /*       ADC group regular conversions to be performed after this function  */
   /*       using function:                                                    */
   /*       "LL_ADC_REG_StartConversion();"                                    */
-
+  
   /*## Operation on ADC hierarchical scope: ADC group injected ###############*/
   /* Note: No operation on ADC group injected performed here.                 */
   /*       ADC group injected conversions to be performed after this function */
   /*       using function:                                                    */
   /*       "LL_ADC_INJ_StartConversion();"                                    */
-
+  
 }
 
 /**
@@ -539,11 +539,11 @@ void LED_Blinking(uint32_t Period)
 {
   /* Turn LED2 on */
   LL_GPIO_SetOutputPin(LED2_GPIO_PORT, LED2_PIN);
-
+  
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -557,23 +557,23 @@ void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
-
+  
   /* if(Button_Mode == BUTTON_MODE_EXTI) */
   {
     /* Connect External Line to the GPIO */
     USER_BUTTON_SYSCFG_SET_EXTI();
-
+    
     /* Enable a rising trigger EXTI line 13 Interrupt */
     USER_BUTTON_EXTI_LINE_ENABLE();
     USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
+    
     /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-    NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-    NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
+    NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+    NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
   }
 }
 
@@ -648,20 +648,20 @@ void UserButton_Callback(void)
 
   /* Turn LED2 off */
   LED_Off();
-
+  
   /* Reset status variable of ADC analog watchdog 1 */
   ubAnalogWatchdog1Status = 0;
-
+  
   /* Clear flag ADC analog watchdog 1 */
   LL_ADC_ClearFlag_AWD1(ADC1);
-
+  
   /* Enable ADC analog watchdog 1 interruption */
   LL_ADC_EnableIT_AWD1(ADC1);
 }
 
 /**
   * @brief  ADC analog watchdog 1 interruption callback
-  * @note   This function is executed when the ADC conversion data is
+  * @note   This function is executed when the ADC conversion data is 
   *         out of analog watchdog 1 window thresholds.
   * @retval None
   */
@@ -669,10 +669,10 @@ void AdcAnalogWatchdog1_Callback()
 {
   /* Disable ADC analog watchdog 1 interruption */
   LL_ADC_DisableIT_AWD1(ADC1);
-
+  
   /* Update status variable of ADC analog watchdog 1 */
   ubAnalogWatchdog1Status = 1;
-
+  
   /* Set LED depending on ADC analog watchdog status */
   /* - Turn-on if voltage is out of AWD window */
   LED_On();

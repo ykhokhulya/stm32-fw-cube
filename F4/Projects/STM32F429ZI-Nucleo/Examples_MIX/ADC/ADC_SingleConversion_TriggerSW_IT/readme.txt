@@ -1,9 +1,9 @@
 /**
   @page ADC_SingleConversion_TriggerSW_IT ADC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_MIX/ADC/ADC_SingleConversion_TriggerSW_IT/readme.txt
+  * @file    Examples_MIX/ADC/ADC_SingleConversion_TriggerSW_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC_SingleConversion_TriggerSW_IT example.
   ******************************************************************************
@@ -81,7 +81,7 @@ for test (located in main.h):
    waveform voltage on a spare DAC channel LL_DAC_CHANNEL_1 (pin PA.04)
    so user has just to connect a wire between DAC channel output and ADC input to run this example.
    If ADC channel and DAC channel are selected on the same GPIO, then no external wire is required.
-   Waveform generation: waveform circular, shape of ramp: Voltage is increasing at each press on push button,
+   Waveform generation: waveform circular, shape of ramp: Voltage is increasing at each press on push button, 
                         from 0V to maximum range (Vdda) in 5 steps (with vdda=3.3V: 0V, 0.8V, 1.65V, 2.5V, 3.3V),
                         then starting back from 0V.
    and follows circular cycles: At clicks counter maximum value reached, counter is set back to 0.
@@ -89,7 +89,7 @@ for test (located in main.h):
    to connect a voltage source to the selected ADC channel input to run this example.
 
 
-@par Directory contents
+@par Directory contents 
 
   - ADC/ADC_SingleConversion_TriggerSW_IT/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - ADC/ADC_SingleConversion_TriggerSW_IT/Inc/main.h                  Header for main.c module
@@ -101,12 +101,12 @@ for test (located in main.h):
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx devices.
-
+    
   - This example has been tested with STM32F429ZI-Nucleo Rev B board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

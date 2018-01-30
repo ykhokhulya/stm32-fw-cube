@@ -157,11 +157,11 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-
-  /* Check periodically the buffer state and fill played buffer with new data
+  
+  /* Check periodically the buffer state and fill played buffer with new data 
      following the state that has been updated by the BSP_AUDIO_OUT_TransferComplete_CallBack()
      and BSP_AUDIO_OUT_HalfTransfer_CallBack() */
-  AUDIO_Process();
+  AUDIO_Process();  
 }
 
 /******************************************************************************/
@@ -183,7 +183,7 @@ void DMA2_Stream6_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

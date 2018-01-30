@@ -3,7 +3,7 @@
   * @file    Examples_LL/RTC/RTC_Tamper/Src/main.c
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx RTC LL API
-  *          to write/read data to/from RTC Backup data registers and demonstrates
+  *          to write/read data to/from RTC Backup data registers and demonstrates 
   *          the Tamper detection feature.
   ******************************************************************************
   * @attention
@@ -115,13 +115,13 @@ int main(void)
   /* Wait for Tamper detection */
   while(TamperStatus != SET)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(LED_BLINK_FAST);
   }
-
+  
   /* LED2 On: Tamper button pressed */
   LED_On();
-
+    
   /* Infinite loop */
   while (1)
   {
@@ -139,7 +139,7 @@ void Configure_RTC(void)
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
   LL_PWR_EnableBkUpAccess();
 
-  /* Enable RTC Clock */
+  /* Enable RTC Clock */ 
   LL_RCC_EnableRTC();
 }
 
@@ -165,22 +165,22 @@ void Configure_RTC_Tamper(void)
   /* Disable timestamp on tamper detection */
   /* Reset value is timestamp on tamper disabled */
   //LL_RTC_TS_DisableOnTamper(RTC);
-
+  
   /* Set Tamper trigger to falling edge */
   /* Reset value is LL_RTC_TAMPER_FILTER_DISABLE */
   //LL_RTC_TAMPER_SetFilterCount(RTC, LL_RTC_TAMPER_FILTER_DISABLE);
   LL_RTC_TAMPER_EnableActiveLevel(RTC, LL_RTC_TAMPER_ACTIVELEVEL_TAMP1);
-
+  
   /* Enable tamper detection */
   LL_RTC_TAMPER_Enable(RTC, LL_RTC_TAMPER_1);
-
+  
   /* Enable IT TAMPER */
   LL_RTC_EnableIT_TAMP(RTC);
 
   /* Configure the NVIC for RTC Tamper */
   NVIC_SetPriority(TAMP_STAMP_IRQn, 0x0F);
   NVIC_EnableIRQ(TAMP_STAMP_IRQn);
-
+  
   /* RTC Tamper Interrupt Configuration: EXTI configuration */
   LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_21);
   LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_21);
@@ -234,7 +234,7 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -306,10 +306,10 @@ void SystemClock_Config(void)
 void Tamper_Callback(void)
 {
   register uint32_t index = 0;
-
+  
   /* Deactivate the tamper */
   LL_RTC_TAMPER_Disable(RTC, LL_RTC_TAMPER_1);
-
+    
   /* Check Data is cleared on the Back Up registers */
   for (index = 0; index < BACKUP_COUNT; index++)
   {

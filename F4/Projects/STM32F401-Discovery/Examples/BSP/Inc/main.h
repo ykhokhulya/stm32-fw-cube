@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Inc/main.h
+  * @file    BSP/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -51,7 +51,7 @@
 typedef struct
 {
   void   (*DemoFunc)(void);
-  uint8_t DemoName[50];
+  uint8_t DemoName[50]; 
   uint32_t DemoIndex;
 }BSP_DemoTypedef;
 

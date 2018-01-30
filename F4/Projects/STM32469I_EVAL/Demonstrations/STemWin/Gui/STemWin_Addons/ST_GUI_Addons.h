@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -49,20 +49,20 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
-
-/* Includes ------------------------------------------------------------------*/
+ 
+/* Includes ------------------------------------------------------------------*/   
 #include "GUI.h"
 #include "WM.h"
 #include "DIALOG.h"
 #include "CHOOSEFILE.h"
-
+   
 #ifndef GUI_CONST_STORAGE
   #define GUI_CONST_STORAGE const
 #endif
 
 #ifndef GUI_FLASH
   #define GUI_FLASH
-#endif
+#endif    
 
 /* Exported types ------------------------------------------------------------*/
 typedef WM_HMEM ST_ANIMATED_ICONVIEW_Handle;
@@ -94,7 +94,7 @@ extern GUI_FLASH const GUI_FONT GUI_FontLubalGraph32B;
 /* Exported macros -----------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
-/** ST Skins ***/
+/** ST Skins ***/ 
 void SLIDER_SetSTSkin(WM_HMEM hObj);
 void SCROLLBAR_SetSTSkin(WM_HMEM hObj);
 void HEADER_SetSTSkin(WM_HMEM hObj);
@@ -102,7 +102,7 @@ void SLIDER_SetDefaultSTSkin(void);
 void SCROLLBAR_SetDefaultSTSkin(void);
 void HEADER_SetDefaultSTSkin(void);
 
-/** ST Widgets ***/
+/** ST Widgets ***/ 
 ST_ANIMATED_ICONVIEW_Handle ST_AnimatedIconView_CreateEx      (int x0, int y0, int xSize, int ySize, WM_HWIN hParent, int WinFlags, int ExFlags, int Id, int xSizeItems, int ySizeItems, int delay, int FrameNbr);
 ST_ANIMATED_ICONVIEW_Handle ST_AnimatedIconView_CreateUser    (int x0, int y0, int xSize, int ySize, WM_HWIN hParent, int WinFlags, int ExFlags, int Id, int xSizeItems, int ySizeItems, int NumExtraBytes, int delay, int FrameNbr);
 ST_ANIMATED_ICONVIEW_Handle ST_AnimatedIconView_CreateIndirect(const GUI_WIDGET_CREATE_INFO * pCreateInfo, WM_HWIN hWinParent, int x0, int y0, WM_CALLBACK * cb, int delay, int FrameNbr);
@@ -133,17 +133,17 @@ int  ST_AnimatedIconView_AddIcon(ST_ANIMATED_ICONVIEW_Handle hObj, const GUI_BIT
 void ST_AnimatedIconView_SetNextButton(ST_ANIMATED_ICONVIEW_Handle hObj);
 
 
-WM_HWIN ST_CHOOSEFILE_Create(WM_HWIN        hParent,
-                          int               xPos,
-                          int               yPos,
-                          int               xSize,
-                          int               ySize,
-                          const char      * apRoot[],
-                          int               NumRoot,
-                          int               SelRoot,
-                          const char      * sCaption,
-                          int               Flags,
-                          CHOOSEFILE_INFO * pInfo
+WM_HWIN ST_CHOOSEFILE_Create(WM_HWIN        hParent,  
+                          int               xPos,     
+                          int               yPos,     
+                          int               xSize,    
+                          int               ySize,    
+                          const char      * apRoot[], 
+                          int               NumRoot,  
+                          int               SelRoot,  
+                          const char      * sCaption, 
+                          int               Flags,    
+                          CHOOSEFILE_INFO * pInfo  
                           );
 
 void    ST_CHOOSEFILE_Callback            (WM_MESSAGE * pMsg);
@@ -154,10 +154,10 @@ void    ST_CHOOSEFILE_SetDelim            (char Delim);
 void    ST_CHOOSEFILE_SetToolTips         (const TOOLTIP_INFO * pInfo, int NumItems);
 void    ST_CHOOSEFILE_SetTopMode          (unsigned OnOff);
 void    ST_CHOOSEFILE_SetButtonSize       (int XSize, int YSize) ;
-void    ST_CHOOSEFILE_SetButtonBitmaps    (int index,
-                                           const GUI_BITMAP * EnabledBMP,
+void    ST_CHOOSEFILE_SetButtonBitmaps    (int index, 
+                                           const GUI_BITMAP * EnabledBMP, 
                                            const GUI_BITMAP * DisabledBMP) ;
-/** ST 2D Drawing methods ***/
+/** ST 2D Drawing methods ***/ 
 void DrawRect3D(int x0, int y0, int width, int height);
 
 #ifdef __cplusplus

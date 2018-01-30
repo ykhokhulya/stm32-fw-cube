@@ -333,6 +333,6 @@
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/BSP/STM32412G-Discovery/stm32412g_discovery.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_USBDisk_RTOS/Src/main.c
+  * @file    FatFs/FatFs_USBDisk_RTOS/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive in RTOS
@@ -8,44 +8,44 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "main.h"    
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -57,13 +57,13 @@ char USBDISKPath[4];          /* USB Host logical drive path */
 USBH_HandleTypeDef hUSBHost; /* USB Host handle */
 
 typedef enum {
-  DISCONNECTION_EVENT = 1,
+  DISCONNECTION_EVENT = 1,  
   CONNECTION_EVENT,
 }MSC_ApplicationTypeDef;
 
 osMessageQId AppliEvent;
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/ 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id);
@@ -86,25 +86,25 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+ 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /*Initialize the IO module*/
   BSP_IO_Init ();
-
+  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
-  BSP_LED_Init(LED3);
-
+  BSP_LED_Init(LED3);  
+  
   /*##-1- Start task #########################################################*/
   osThreadDef(USER_Thread, StartThread, osPriorityNormal, 0, 8 * configMINIMAL_STACK_SIZE);
   osThreadCreate(osThread(USER_Thread), NULL);
-
+  
   /*##-2- Create Application Queue ###########################################*/
   osMessageQDef(osqueue, 1, uint16_t);
   AppliEvent = osMessageCreate(osMessageQ(osqueue), NULL);
-
+  
   /*##-3- Start scheduler ####################################################*/
   osKernelStart();
 
@@ -120,23 +120,23 @@ int main(void)
 static void StartThread(void const *argument)
 {
   osEvent event;
-
+  
   /* Link the USB Host disk I/O driver */
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   {
     /* Init Host Library */
     USBH_Init(&hUSBHost, USBH_UserProcess, 0);
-
+    
     /* Add Supported Class */
     USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
-
+    
     /* Start Host Process */
     USBH_Start(&hUSBHost);
-
+    
     for( ;; )
     {
       event = osMessageGet(AppliEvent, osWaitForever);
-
+      
       if(event.status == osEventMessage)
       {
         switch(event.value.v)
@@ -144,11 +144,11 @@ static void StartThread(void const *argument)
         case CONNECTION_EVENT:
           MSC_Application();
           break;
-
+          
         case DISCONNECTION_EVENT:
           f_mount(NULL, (TCHAR const*)"", 0);
-          break;
-
+          break; 
+          
         default:
           break;
         }
@@ -168,7 +168,7 @@ static void MSC_Application(void)
   uint32_t byteswritten, bytesread;                     /* File write/read counts */
   uint8_t wtext[] = "This is STM32 working with FatFs"; /* File write buffer */
   uint8_t rtext[100];                                   /* File read buffer */
-
+  
   /* Register the file system object to the FatFs module */
   if(f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 0) != FR_OK)
   {
@@ -176,9 +176,9 @@ static void MSC_Application(void)
     Error_Handler();
   }
   else
-  {
+  {  
     /* Create and Open a new text file object with write access */
-    if(f_open(&MyFile, "STM32.TXT", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
+    if(f_open(&MyFile, "STM32.TXT", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK) 
     {
       /* 'STM32.TXT' file Open for write Error */
       Error_Handler();
@@ -187,7 +187,7 @@ static void MSC_Application(void)
     {
       /* Write data to the text file */
       res = f_write(&MyFile, wtext, sizeof(wtext), (void *)&byteswritten);
-
+      
       if((byteswritten == 0) || (res != FR_OK))
       {
         /* 'STM32.TXT' file Write or EOF Error */
@@ -197,7 +197,7 @@ static void MSC_Application(void)
       {
         /* Close the open text file */
         f_close(&MyFile);
-
+        
         /* Open the text file object with read access */
         if(f_open(&MyFile, "STM32.TXT", FA_READ) != FR_OK)
         {
@@ -208,7 +208,7 @@ static void MSC_Application(void)
         {
           /* Read data from the text file */
           res = f_read(&MyFile, rtext, sizeof(rtext), (void *)&bytesread);
-
+          
           if((bytesread == 0) || (res != FR_OK))
           {
             /* 'STM32.TXT' file Read or EOF Error */
@@ -218,10 +218,10 @@ static void MSC_Application(void)
           {
             /* Close the open text file */
             f_close(&MyFile);
-
+            
             /* Compare read data with the expected data */
             if((bytesread != byteswritten))
-            {
+            {                
               /* Read data is different from the expected data */
               Error_Handler();
             }
@@ -229,13 +229,13 @@ static void MSC_Application(void)
             {
               /* Success of the demo: no error occurrence */
               BSP_LED_On(LED1);
-            }
+            }     
           }
         }
       }
     }
   }
-
+  
   /* Unlink the USB disk I/O driver */
   FATFS_UnLinkDriver(USBDISKPath);
 }
@@ -247,22 +247,22 @@ static void MSC_Application(void)
   * @retval None
   */
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
-{
+{  
   switch(id)
-  {
+  { 
   case HOST_USER_SELECT_CONFIGURATION:
     break;
-
+    
   case HOST_USER_DISCONNECTION:
     osMessagePut(AppliEvent, DISCONNECTION_EVENT, 0);
-    BSP_LED_Off(LED1);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1); 
+    BSP_LED_Off(LED3);  
     break;
-
+    
   case HOST_USER_CLASS_ACTIVE:
     osMessagePut(AppliEvent, CONNECTION_EVENT, 0);
     break;
-
+    
   default:
     break;
   }
@@ -270,7 +270,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -301,8 +301,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -317,10 +317,10 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   HAL_PWREx_EnableOverDrive();
-
+  
   /* Select PLLSAI output as USB clock source */
   PeriphClkInitStruct.PLLSAI.PLLSAIM = 8;
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 384;
@@ -328,14 +328,14 @@ static void SystemClock_Config(void)
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CK48;
   PeriphClkInitStruct.Clk48ClockSelection = RCC_CK48CLKSOURCE_PLLSAIP;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -362,7 +362,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

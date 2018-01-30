@@ -1,284 +1,334 @@
-urn _interact(cookiejar, url, set_cookie_hdrs, "Set-Cookie2")
-
-def interact_netscape(cookiejar, url, *set_cookie_hdrs):
-    return _interact(cookiejar, url, set_cookie_hdrs, "Set-Cookie")
-
-def _interact(cookiejar, url, set_cookie_hdrs, hdr_name):
-    """Perform a single request / response cycle, returning Cookie: header."""
-    from urllib2 import Request
-    req = Request(url)
-    cookiejar.add_cookie_header(req)
-    cookie_hdr = req.get_header("Cookie", "")
-    headers = []
-    for hdr in set_cookie_hdrs:
-        headers.append("%s: %s" % (hdr_name, hdr))
-    res = FakeResponse(headers, url)
-    cookiejar.extract_cookies(res, req)
-    return cookie_hdr
-
-
-class FileCookieJarTests(TestCase):
-    def test_lwp_valueless_cookie(self):
-        # cookies with no value should be saved and loaded consistently
-        from cookielib import LWPCookieJar
-        filename = test_support.TESTFN
-        c = LWPCookieJar()
-        interact_netscape(c, "http://www.acme.com/", 'boo')
-        self.assertEqual(c._cookies["www.acme.com"]["/"]["boo"].value, None)
-        try:
-            c.save(filename, ignore_discard=True)
-            c = LWPCookieJar()
-            c.load(filename, ignore_discard=True)
-        finally:
-            try: os.unlink(filename)
-            except OSError: pass
-        self.assertEqual(c._cookies["www.acme.com"]["/"]["boo"].value, None)
-
-    def test_bad_magic(self):
-        from cookielib import LWPCookieJar, MozillaCookieJar, LoadError
-        # IOErrors (eg. file doesn't exist) are allowed to propagate
-        filename = test_support.TESTFN
-        for cookiejar_class in LWPCookieJar, MozillaCookieJar:
-            c = cookiejar_class()
-            try:
-                c.load(filename="for this test to work, a file with this "
-                                "filename should not exist")
-            except IOError, exc:
-                # exactly IOError, not LoadError
-                self.assertEqual(exc.__class__, IOError)
-            else:
-                self.fail("expected IOError for invalid filename")
-        # Invalid contents of cookies file (eg. bad magic string)
-        # causes a LoadError.
-        try:
-            f = open(filename, "w")
-            f.write("oops\n")
-            for cookiejar_class in LWPCookieJar, MozillaCookieJar:
-                c = cookiejar_class()
-                self.assertRaises(LoadError, c.load, filename)
-        finally:
-            try: os.unlink(filename)
-            except OSError: pass
-
-class CookieTests(TestCase):
-    # XXX
-    # Get rid of string comparisons where not actually testing str / repr.
-    # .clear() etc.
-    # IP addresses like 50 (single number, no dot) and domain-matching
-    #  functions (and is_HDN)?  See draft RFC 2965 errata.
-    # Strictness switches
-    # is_third_party()
-    # unverifiability / third-party blocking
-    # Netscape cookies work the same as RFC 2965 with regard to port.
-    # Set-Cookie with negative max age.
-    # If turn RFC 2965 handling off, Set-Cookie2 cookies should not clobber
-    #  Set-Cookie cookies.
-    # Cookie2 should be sent if *any* cookies are not V1 (ie. V0 OR V2 etc.).
-    # Cookies (V1 and V0) with no expiry date should be set to be discarded.
-    # RFC 2965 Quoting:
-    #  Should accept unquoted cookie-attribute values?  check errata draft.
-    #   Which are required on the way in and out?
-    #  Should always return quoted cookie-attribute values?
-    # Proper testing of when RFC 2965 clobbers Netscape (waiting for errata).
-    # Path-match on return (same for V0 and V1).
-    # RFC 2965 acceptance and returning rules
-    #  Set-Cookie2 without version attribute is rejected.
-
-    # Netscape peculiarities list from Ronald Tschalar.
-    # The first two still need tests, the rest are covered.
-## - Quoting: only quotes around the expires value are recognized as such
-##   (and yes, some folks quote the expires value); quotes around any other
-##   value are treated as part of the value.
-## - White space: white space around names and values is ignored
-## - Default path: if no path parameter is given, the path defaults to the
-##   path in the request-uri up to, but not including, the last '/'. Note
-##   that this is entirely different from what the spec says.
-## - Commas and other delimiters: Netscape just parses until the next ';'.
-##   This means it will allow commas etc inside values (and yes, both
-##   commas and equals are commonly appear in the cookie value). This also
-##   means that if you fold multiple Set-Cookie header fields into one,
-##   comma-separated list, it'll be a headache to parse (at least my head
-##   starts hurting every time I think of that code).
-## - Expires: You'll get all sorts of date formats in the expires,
-##   including emtpy expires attributes ("expires="). Be as flexible as you
-##   can, and certainly don't expect the weekday to be there; if you can't
-##   parse it, just ignore it and pretend it's a session cookie.
-## - Domain-matching: Netscape uses the 2-dot rule for _all_ domains, not
-##   just the 7 special TLD's listed in their spec. And folks rely on
-##   that...
-
-    def test_domain_return_ok(self):
-        # test optimization: .domain_return_ok() should filter out most
-        # domains in the CookieJar before we try to access them (because that
-        # may require disk access -- in particular, with MSIECookieJar)
-        # This is only a rough check for performance reasons, so it's not too
-        # critical as long as it's sufficiently liberal.
-        import cookielib, urllib2
-        pol = cookielib.DefaultCookiePolicy()
-        for url, domain, ok in [
-            ("http://foo.bar.com/", "blah.com", False),
-            ("http://foo.bar.com/", "rhubarb.blah.com", False),
-            ("http://foo.bar.com/", "rhubarb.foo.bar.com", False),
-            ("http://foo.bar.com/", ".foo.bar.com", True),
-            ("http://foo.bar.com/", "foo.bar.com", True),
-            ("http://foo.bar.com/", ".bar.com", True),
-            ("http://foo.bar.com/", "com", True),
-            ("http://foo.com/", "rhubarb.foo.com", False),
-            ("http://foo.com/", ".foo.com", True),
-            ("http://foo.com/", "foo.com", True),
-            ("http://foo.com/", "com", True),
-            ("http://foo/", "rhubarb.foo", False),
-            ("http://foo/", ".foo", True),
-            ("http://foo/", "foo", True),
-            ("http://foo/", "foo.local", True),
-            ("http://foo/", ".local", True),
-            ]:
-            request = urllib2.Request(url)
-            r = pol.domain_return_ok(domain, request)
-            if ok: self.assertTrue(r)
-            else: self.assertFalse(r)
-
-    def test_missing_value(self):
-        from cookielib import MozillaCookieJar, lwp_cookie_str
-
-        # missing = sign in Cookie: header is regarded by Mozilla as a missing
-        # name, and by cookielib as a missing value
-        filename = test_support.TESTFN
-        c = MozillaCookieJar(filename)
-        interact_netscape(c, "http://www.acme.com/", 'eggs')
-        interact_netscape(c, "http://www.acme.com/", '"spam"; path=/foo/')
-        cookie = c._cookies["www.acme.com"]["/"]["eggs"]
-        self.assertIsNone(cookie.value)
-        self.assertEqual(cookie.name, "eggs")
-        cookie = c._cookies["www.acme.com"]['/foo/']['"spam"']
-        self.assertIsNone(cookie.value)
-        self.assertEqual(cookie.name, '"spam"')
-        self.assertEqual(lwp_cookie_str(cookie), (
-            r'"spam"; path="/foo/"; domain="www.acme.com"; '
-            'path_spec; discard; version=0'))
-        old_str = repr(c)
-        c.save(ignore_expires=True, ignore_discard=True)
-        try:
-            c = MozillaCookieJar(filename)
-            c.revert(ignore_expires=True, ignore_discard=True)
-        finally:
-            os.unlink(c.filename)
-        # cookies unchanged apart from lost info re. whether path was specified
-        self.assertEqual(
-            repr(c),
-            re.sub("path_specified=%s" % True, "path_specified=%s" % False,
-                   old_str)
-            )
-        self.assertEqual(interact_netscape(c, "http://www.acme.com/foo/"),
-                         '"spam"; eggs')
-
-    def test_rfc2109_handling(self):
-        # RFC 2109 cookies are handled as RFC 2965 or Netscape cookies,
-        # dependent on policy settings
-        from cookielib import CookieJar, DefaultCookiePolicy
-
-        for rfc2109_as_netscape, rfc2965, version in [
-            # default according to rfc2965 if not explicitly specified
-            (None, False, 0),
-            (None, True, 1),
-            # explicit rfc2109_as_netscape
-            (False, False, None),  # version None here means no cookie stored
-            (False, True, 1),
-            (True, False, 0),
-            (True, True, 0),
-            ]:
-            policy = DefaultCookiePolicy(
-                rfc2109_as_netscape=rfc2109_as_netscape,
-                rfc2965=rfc2965)
-            c = CookieJar(policy)
-            interact_netscape(c, "http://www.example.com/", "ni=ni; Version=1")
-            try:
-                cookie = c._cookies["www.example.com"]["/"]["ni"]
-            except KeyError:
-                self.assertIsNone(version)  # didn't expect a stored cookie
-            else:
-                self.assertEqual(cookie.version, version)
-                # 2965 cookies are unaffected
-                interact_2965(c, "http://www.example.com/",
-                              "foo=bar; Version=1")
-                if rfc2965:
-                    cookie2965 = c._cookies["www.example.com"]["/"]["foo"]
-                    self.assertEqual(cookie2965.version, 1)
-
-    def test_ns_parser(self):
-        from cookielib import CookieJar, DEFAULT_HTTP_PORT
-
-        c = CookieJar()
-        interact_netscape(c, "http://www.acme.com/",
-                          'spam=eggs; DoMain=.acme.com; port; blArgh="feep"')
-        interact_netscape(c, "http://www.acme.com/", 'ni=ni; port=80,8080')
-        interact_netscape(c, "http://www.acme.com:80/", 'nini=ni')
-        interact_netscape(c, "http://www.acme.com:80/", 'foo=bar; expires=')
-        interact_netscape(c, "http://www.acme.com:80/", 'spam=eggs; '
-                          'expires="Foo Bar 25 33:22:11 3022"')
-        interact_netscape(c, 'http://www.acme.com/', 'fortytwo=')
-        interact_netscape(c, 'http://www.acme.com/', '=unladenswallow')
-        interact_netscape(c, 'http://www.acme.com/', 'holyhandgrenade')
-
-        cookie = c._cookies[".acme.com"]["/"]["spam"]
-        self.assertEqual(cookie.domain, ".acme.com")
-        self.assertTrue(cookie.domain_specified)
-        self.assertEqual(cookie.port, DEFAULT_HTTP_PORT)
-        self.assertFalse(cookie.port_specified)
-        # case is preserved
-        self.assertTrue(cookie.has_nonstandard_attr("blArgh"))
-        self.assertFalse(cookie.has_nonstandard_attr("blargh"))
-
-        cookie = c._cookies["www.acme.com"]["/"]["ni"]
-        self.assertEqual(cookie.domain, "www.acme.com")
-        self.assertFalse(cookie.domain_specified)
-        self.assertEqual(cookie.port, "80,8080")
-        self.assertTrue(cookie.port_specified)
-
-        cookie = c._cookies["www.acme.com"]["/"]["nini"]
-        self.assertIsNone(cookie.port)
-        self.assertFalse(cookie.port_specified)
-
-        # invalid expires should not cause cookie to be dropped
-        foo = c._cookies["www.acme.com"]["/"]["foo"]
-        spam = c._cookies["www.acme.com"]["/"]["foo"]
-        self.assertIsNone(foo.expires)
-        self.assertIsNone(spam.expires)
-
-        cookie = c._cookies['www.acme.com']['/']['fortytwo']
-        self.assertIsNotNone(cookie.value)
-        self.assertEqual(cookie.value, '')
-
-        # there should be a distinction between a present but empty value
-        # (above) and a value that's entirely missing (below)
-
-        cookie = c._cookies['www.acme.com']['/']['holyhandgrenade']
-        self.assertIsNone(cookie.value)
-
-    def test_ns_parser_special_names(self):
-        # names such as 'expires' are not special in first name=value pair
-        # of Set-Cookie: header
-        from cookielib import CookieJar
-
-        c = CookieJar()
-        interact_netscape(c, "http://www.acme.com/", 'expires=eggs')
-        interact_netscape(c, "http://www.acme.com/", 'version=eggs; spam=eggs')
-
-        cookies = c._cookies["www.acme.com"]["/"]
-        self.assertTrue('expires' in cookies)
-        self.assertTrue('version' in cookies)
-
-    def test_expires(self):
-        from cookielib import time2netscape, CookieJar
-
-        # if expires is in future, keep cookie...
-        c = CookieJar()
-        future = time2netscape(time.time()+3600)
-        interact_netscape(c, "http://www.acme.com/", 'spam="bar"; expires=%s' %
-                          future)
-        self.assertEqual(len(c), 1)
-        now = time2netscape(time.time()-1)
-        # ... and if in past or present, discard it
-        interact_netscape(c, "http://www.acme.com/", 'foo="eggs"; expires=%s' %
-                          now)
-        h = interact_netscape(c, "http://www.acme.
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>STM32F412ZG_Nucleo_USBH-FS</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>fr.ac6.mcu.ide.core.MCUProjectNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Doc/readme.txt</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>
+		</link>
+		<link>
+			<name>Utilities/lcd_log.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Log/lcd_log.c</locationURI>
+		</link>
+		<link>
+			<name>Application/SW4STM32/startup_stm32f412zx.s</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/startup_stm32f412zx.s</locationURI>
+		</link>
+		<link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/explorer.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/explorer.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/file_operations.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/file_operations.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/main.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/main.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/menu.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/menu.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/stm32f4xx_hal_timebase_tim.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32f4xx_hal_timebase_tim.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/stm32f4xx_it.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32f4xx_it.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/usbh_conf.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_conf.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/usbh_diskio_dma.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_diskio_dma.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/system_stm32f4xx.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_adc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_adc_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_cortex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_hcd.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_ltdc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pwr_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sdram.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_spi.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sram.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_tim.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_tim_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_uart.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_fmc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_fsmc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_usb.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/croutine.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/croutine.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/list.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/list.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/queue.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/queue.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/tasks.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/tasks.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/timers.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Adafruit_Shield/stm32_adafruit_lcd.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Adafruit_Shield/stm32_adafruit_lcd.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Adafruit_Shield/stm32_adafruit_sd.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Adafruit_Shield/stm32_adafruit_sd.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/st7735.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/st7735/st7735.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo_144.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFS/Core/diskio.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/diskio.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFS/Core/ff.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFS/Core/ff_gen_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/CMSIS_RTOS/cmsis_os.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/Portable/heap_4.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FreeRTOS/Portable/port.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_ctlreq.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_ioreq.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_pipes.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_bot.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_scsi.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

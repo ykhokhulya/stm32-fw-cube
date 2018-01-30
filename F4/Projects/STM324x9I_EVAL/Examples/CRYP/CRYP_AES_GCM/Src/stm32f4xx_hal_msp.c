@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AES_GCM/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -64,7 +64,7 @@
 void HAL_CRYP_MspInit(CRYP_HandleTypeDef *hcryp)
 {
   /* Enable CRYP clock */
-  __HAL_RCC_CRYP_CLK_ENABLE();
+  __HAL_RCC_CRYP_CLK_ENABLE(); 
 }
 
 /**

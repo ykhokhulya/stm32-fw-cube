@@ -387,7 +387,7 @@ typedef enum
 /**
   * @}
   */
-
+  
 /** @defgroup STM32469I_EVAL_LOW_LEVEL_Exported_Macros STM32469I EVAL LOW LEVEL Exported Macros
   * @{
   */

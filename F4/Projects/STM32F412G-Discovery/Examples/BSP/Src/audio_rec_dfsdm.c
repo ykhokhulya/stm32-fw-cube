@@ -96,28 +96,28 @@ void AudioRecDfsdm_demo (void)
   uint32_t AudioFreq[8] = {I2S_AUDIOFREQ_8K ,I2S_AUDIOFREQ_11K, I2S_AUDIOFREQ_16K, I2S_AUDIOFREQ_22K, I2S_AUDIOFREQ_32K, I2S_AUDIOFREQ_44K, I2S_AUDIOFREQ_48K, I2S_AUDIOFREQ_96K};
   uint32_t *AudioFreq_ptr;
   uint8_t FreqStr[25] = {0};
-
+  
   AudioFreq_ptr = AudioFreq + 6; /*I2S_AUDIOFREQ_48K*/
   BSP_JOY_Init(JOY_MODE_GPIO);
-
+  
   while (end_of_test == 0)
   {
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     BSP_LCD_FillRect(0, HEADBAND_HEIGHT, BSP_LCD_GetXSize(), BSP_LCD_GetYSize() - HEADBAND_HEIGHT);
     BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-
+    
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 160, (uint8_t *)"TOP MP34 MICROPHONES TEST", CENTER_MODE);
-
+    
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
     BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-
+    
     sprintf((char*)FreqStr,"      FREQ: %lu     ", *AudioFreq_ptr);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 145, (uint8_t *)FreqStr, CENTER_MODE);
-
+    
     /* Allocate channel buffer scratch */
     BSP_AUDIO_IN_AllocScratch (Scratch, SCRATCH_BUFF_SIZE);
-
+    
     /* Initialize Audio Recorder */
     if (BSP_AUDIO_IN_Init(*AudioFreq_ptr, DEFAULT_AUDIO_IN_BIT_RESOLUTION, DEFAULT_AUDIO_IN_CHANNEL_NBR) != AUDIO_OK)
     {
@@ -132,39 +132,39 @@ void AudioRecDfsdm_demo (void)
       BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
       BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 130, (uint8_t *)"Audio record init OK", CENTER_MODE);
-
+      
       audio_rec_buffer_state = BUFFER_OFFSET_NONE;
-
+      
       /* Display the state on the screen */
       BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
       BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 115, (uint8_t *)"Buffering...", CENTER_MODE);
-
+      
       /* Start Recording */
       BSP_AUDIO_IN_Record(internal_buffer, AUDIO_BLOCK_SIZE);
-
+      
       BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
       BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 85, (uint8_t *)"Start Playback...", CENTER_MODE);
-
+      
       /* -----------Start Playback -------------- */
       /* Initialize audio IN at REC_FREQ*/
       BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, uwVolume, *AudioFreq_ptr);
-
+      
       /* Play the recorded buffer*/
       BSP_AUDIO_OUT_Play((uint16_t*)(&internal_buffer[0]), AUDIO_BLOCK_SIZE * 2);
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 70, (uint8_t *)"Streaming to headphones", CENTER_MODE);
     }
-
+    
     next_freq = 0;
     while (next_freq == 0)
     {
       /* Insert 100 ms delay */
       HAL_Delay(100);
-
+      
       /* Get the Joystick State */
       JoyState = BSP_JOY_GetState();
-
+      
       switch(JoyState)
       {
       case JOY_UP:
@@ -175,7 +175,7 @@ void AudioRecDfsdm_demo (void)
           uwVolume = 100;
         BSP_AUDIO_OUT_SetVolume(uwVolume);
         break;
-
+        
       case JOY_DOWN:
         /* Decrease volume by 5% */
         if (uwVolume > 5)
@@ -184,7 +184,7 @@ void AudioRecDfsdm_demo (void)
           uwVolume = 0;
         BSP_AUDIO_OUT_SetVolume(uwVolume);
         break;
-
+        
       case JOY_LEFT:
         /*Decrease Frequency */
         if (*AudioFreq_ptr != 8000)
@@ -193,7 +193,7 @@ void AudioRecDfsdm_demo (void)
           next_freq = 1;
         }
         break;
-
+        
       case JOY_RIGHT:
         /* Increase Frequency */
         if (*AudioFreq_ptr != 96000)
@@ -202,19 +202,19 @@ void AudioRecDfsdm_demo (void)
           next_freq = 1;
         }
         break;
-
+        
       default:
         break;
       }
-
+      
       if (CheckForUserInput() > 0)
       {
-        end_of_test = 1;
+        end_of_test = 1; 
         /* Stop Player before close Test */
         BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW);
         BSP_AUDIO_OUT_DeInit();
         BSP_AUDIO_IN_Stop();
-        BSP_AUDIO_IN_DeInit();
+        BSP_AUDIO_IN_DeInit(); 
         return;
       }
     }

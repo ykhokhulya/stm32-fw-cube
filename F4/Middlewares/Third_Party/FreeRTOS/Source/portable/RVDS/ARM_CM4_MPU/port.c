@@ -241,7 +241,7 @@ static uint32_t prvPortGetIPSR( void );
 #if configUSE_TICKLESS_IDLE == 1
 	static uint32_t ulStoppedTimerCompensation = 0;
 #endif /* configUSE_TICKLESS_IDLE */
-
+	
 /*
  * Used by the portASSERT_IF_INTERRUPT_PRIORITY_INVALID() macro to ensure
  * FreeRTOS API functions are not called from interrupts that have been assigned
@@ -332,7 +332,7 @@ uint32_t ulReg;
 __asm void vPortSVCHandler( void )
 {
 	extern prvSVCHandler
-
+		
 	PRESERVE8
 
 	/* Assumes psp was in use. */
@@ -459,7 +459,7 @@ BaseType_t xPortStartScheduler( void )
 __asm void prvStartFirstTask( void )
 {
 	PRESERVE8
-
+	
 	ldr r0, =0xE000ED08	/* Use the NVIC offset register to locate the stack. */
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -753,18 +753,18 @@ uint32_t ulDummy;
 __asm void vPortSwitchToUserMode( void )
 {
 	PRESERVE8
-
+	
 	mrs r0, control
 	orr r0, #1
 	msr control, r0
 	bx r14
 }
 /*-----------------------------------------------------------*/
-
+	
 __asm void vPortEnableVFP( void )
 {
 	PRESERVE8
-
+	
 	ldr.w r0, =0xE000ED88		/* The FPU enable bits are in the CPACR. */
 	ldr r1, [r0]
 
@@ -878,7 +878,7 @@ extern uint32_t __SRAM_segment_end__;
 extern uint32_t __privileged_data_start__;
 extern uint32_t __privileged_data_end__;
 
-
+	
 int32_t lIndex;
 uint32_t ul;
 

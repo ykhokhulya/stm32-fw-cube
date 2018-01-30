@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_6Steps/Src/main.c
+  * @file    TIM/TIM_6Steps/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example shows how to use TIM1 peripheral to generate 6 Steps.
   ******************************************************************************
@@ -42,13 +42,13 @@
 
 /** @addtogroup TIM_6Steps
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-
+ 
 /* Step Index */
  __IO uint32_t uwStep = 0;
 
@@ -81,14 +81,14 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
-  /*##-1- Configure the TIM peripheral #######################################*/
+  
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* Initialize TIMx peripheral as follow:
        + Prescaler = 0
        + Period = 4095
@@ -96,20 +96,20 @@ int main(void)
        + Counter direction = Up
   */
   TimHandle.Instance = TIM1;
-
+  
   TimHandle.Init.Period            = 4095;
   TimHandle.Init.Prescaler         = 0;
   TimHandle.Init.ClockDivision     = 0;
   TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-  TimHandle.Init.RepetitionCounter = 0;
-
+  TimHandle.Init.RepetitionCounter = 0;  
+  
   if(HAL_TIM_OC_Init(&TimHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the output channels ######################################*/
+  
+  /*##-2- Configure the output channels ######################################*/ 
   /* Common configuration for all channels */
   sConfig.OCMode       = TIM_OCMODE_TIMING;
   sConfig.OCPolarity   = TIM_OCPOLARITY_HIGH;
@@ -119,13 +119,13 @@ int main(void)
   sConfig.OCFastMode   = TIM_OCFAST_DISABLE;
 
   /* Set the pulse value for channel 1 */
-  sConfig.Pulse = 2047;
+  sConfig.Pulse = 2047;  
   if(HAL_TIM_OC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse value for channel 2 */
   sConfig.Pulse = 1023;
   if(HAL_TIM_OC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_2) != HAL_OK)
@@ -133,7 +133,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Set the pulse value for channel 3 */
   sConfig.Pulse = 511;
   if(HAL_TIM_OC_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_3) != HAL_OK)
@@ -150,33 +150,33 @@ int main(void)
   sConfigBK.BreakPolarity    = TIM_BREAKPOLARITY_HIGH;
   sConfigBK.AutomaticOutput  = TIM_AUTOMATICOUTPUT_ENABLE;
   sConfigBK.DeadTime         = 1;
-
+  
   if(HAL_TIMEx_ConfigBreakDeadTime(&TimHandle, &sConfigBK) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /*##-4- Configure the commutation event: software event ####################*/
   HAL_TIMEx_ConfigCommutationEvent_IT(&TimHandle, TIM_TS_NONE, TIM_COMMUTATION_SOFTWARE);
-
-  /*##-5- Start signals generation ###########################################*/
+  
+  /*##-5- Start signals generation ###########################################*/ 
   /*--------------------------------------------------------------------------*/
   /* Start channel 1 */
   if(HAL_TIM_OC_Start(&TimHandle, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
-  }
+  }  
   /* Start channel 1N */
   if(HAL_TIMEx_OCN_Start(&TimHandle, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
-  }
+  } 
   /*--------------------------------------------------------------------------*/
-
-
+  
+  
   /*--------------------------------------------------------------------------*/
   /* Start channel 2 */
   if(HAL_TIM_OC_Start(&TimHandle, TIM_CHANNEL_2) != HAL_OK)
@@ -189,10 +189,10 @@ int main(void)
   {
     /* Starting Error */
     Error_Handler();
-  }
+  } 
   /*--------------------------------------------------------------------------*/
-
-
+  
+  
   /*--------------------------------------------------------------------------*/
   /* Start channel 3 */
   if(HAL_TIM_OC_Start(&TimHandle, TIM_CHANNEL_3) != HAL_OK)
@@ -205,9 +205,9 @@ int main(void)
   {
     /* Starting Error */
     Error_Handler();
-  }
+  } 
   /*--------------------------------------------------------------------------*/
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -215,7 +215,7 @@ int main(void)
 }
 
 /**
-  * @brief  Commutation event callback in non blocking mode
+  * @brief  Commutation event callback in non blocking mode 
   * @param  htim : Timer handle
   * @retval None
   */
@@ -229,67 +229,67 @@ void HAL_TIMEx_CommutationCallback(TIM_HandleTypeDef *htim)
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_1);
     HAL_TIMEx_OCN_Stop(&TimHandle, TIM_CHANNEL_1);
-
+    
     /*  Channel3 configuration */
-    sConfig.OCMode     = TIM_OCMODE_PWM1;
+    sConfig.OCMode     = TIM_OCMODE_PWM1; 
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_3);
     HAL_TIMEx_OCN_Start(&TimHandle, TIM_CHANNEL_3);
     HAL_TIM_PWM_Stop(&TimHandle, TIM_CHANNEL_3);
-
+    
     /*  Channel2 configuration */
     HAL_TIM_OC_Stop(&TimHandle, TIM_CHANNEL_2);
     HAL_TIMEx_OCN_Stop(&TimHandle, TIM_CHANNEL_2);
     uwStep = 1;
   }
-
+  
   if (uwStep == 1)
   {
     /* Next step: Step 2 Configuration -------------------------------------- */
     /*  Channel1 configuration */
-    /* Same configuration as the previous step */
-
+    /* Same configuration as the previous step */  
+    
     /*  Channel2 configuration */
-    sConfig.OCMode     = TIM_OCMODE_PWM1;
+    sConfig.OCMode     = TIM_OCMODE_PWM1; 
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_2);
     HAL_TIMEx_OCN_Start(&TimHandle, TIM_CHANNEL_2);
 
     /*  Channel3 configuration */
     HAL_TIMEx_OCN_Stop(&TimHandle, TIM_CHANNEL_3);
-
+    
     uwStep++;
   }
-
+  
   else if (uwStep == 2)
   {
     /* Next step: Step 3 Configuration -------------------------------------- */
     /*  Channel2 configuration */
     /* Same configuration as the previous step */
-
+    
     /*  Channel3 configuration */
-    sConfig.OCMode     = TIM_OCMODE_PWM1;
+    sConfig.OCMode     = TIM_OCMODE_PWM1; 
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_3);
     HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_3);
-
+   
     /*  Channel1 configuration */
     HAL_TIM_OC_Stop(&TimHandle, TIM_CHANNEL_1);
-
+    
     uwStep++;
   }
-
+  
   else if (uwStep == 3)
   {
     /* Next step: Step 4 Configuration -------------------------------------- */
     /*  Channel3 configuration */
     /* Same configuration as the previous step */
-
+    
     /*  Channel2 configuration */
     HAL_TIMEx_OCN_Stop(&TimHandle, TIM_CHANNEL_2);
-
+    
     /*  Channel1 configuration */
-    sConfig.OCMode     = TIM_OCMODE_PWM1;
+    sConfig.OCMode     = TIM_OCMODE_PWM1; 
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
     HAL_TIMEx_OCN_Start(&TimHandle, TIM_CHANNEL_1);
-
+    
     uwStep++;
   }
   else if (uwStep == 4)
@@ -297,10 +297,10 @@ void HAL_TIMEx_CommutationCallback(TIM_HandleTypeDef *htim)
     /* Next step: Step 5 Configuration -------------------------------------- */
     /*  Channel3 configuration */
     HAL_TIM_OC_Stop(&TimHandle, TIM_CHANNEL_3);
-
+  
     /*  Channel1 configuration */
     /* Same configuration as the previous step */
-
+    
     /*  Channel2 configuration */
     sConfig.OCMode     = TIM_OCMODE_PWM1;
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_2);
@@ -308,24 +308,24 @@ void HAL_TIMEx_CommutationCallback(TIM_HandleTypeDef *htim)
 
     uwStep++;
   }
-
+  
   else if (uwStep == 5)
   {
     /* Next step: Step 6 Configuration -------------------------------------- */
     /*  Channel3 configuration */
-    sConfig.OCMode     = TIM_OCMODE_PWM1;
+    sConfig.OCMode     = TIM_OCMODE_PWM1; 
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_3);
     HAL_TIMEx_OCN_Start(&TimHandle, TIM_CHANNEL_3);
-
+  
     /*  Channel1 configuration */
     HAL_TIMEx_OCN_Stop(&TimHandle, TIM_CHANNEL_1);
-
+    
     /*  Channel2 configuration */
     /* Same configuration as the previous step */
-
+    
     uwStep++;
   }
-
+  
   else
   {
     /* Next step: Step 1 Configuration -------------------------------------- */
@@ -333,17 +333,17 @@ void HAL_TIMEx_CommutationCallback(TIM_HandleTypeDef *htim)
     sConfig.OCMode     = TIM_OCMODE_PWM1;
     HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&TimHandle, TIM_CHANNEL_1);
-
+    
     /*  Channel3 configuration */
     /* Same configuration as the previous step */
-
+    
     /*  Channel2 configuration */
     HAL_TIM_OC_Stop(&TimHandle, TIM_CHANNEL_2);
-
+    
     uwStep = 1;
   }
-}
-
+}  
+  
 /**
   * @brief  This function is executed in case of error occurrence.
   * @param  None
@@ -360,7 +360,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -386,8 +386,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -401,17 +401,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -424,7 +424,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

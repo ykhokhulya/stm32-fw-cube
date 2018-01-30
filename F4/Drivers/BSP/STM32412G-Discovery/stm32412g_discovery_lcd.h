@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32412G_DISCOVERY_LCD_H
@@ -40,10 +40,10 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32412g_discovery.h"
+#include "stm32412g_discovery.h" 
 #include "../Components/ls016b8uy/ls016b8uy.h"
 #include "../Components/st7789h2/st7789h2.h"
 #include "../../../Utilities/Fonts/fonts.h"
@@ -55,30 +55,30 @@
 /** @addtogroup STM32412G_DISCOVERY
   * @{
   */
-
+    
 /** @addtogroup STM32412G_DISCOVERY_LCD
   * @{
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_LCD_Exported_Types STM32412G DISCOVERY LCD Exported Types
   * @{
   */
-typedef struct
-{
+typedef struct 
+{ 
   uint32_t TextColor;
   uint32_t BackColor;
-  sFONT    *pFont;
+  sFONT    *pFont; 
 }LCD_DrawPropTypeDef;
 
-typedef struct
+typedef struct 
 {
   int16_t X;
   int16_t Y;
-}Point, * pPoint;
+}Point, * pPoint; 
 
-/**
+/** 
   * @brief  Line mode structures definition
-  */
+  */ 
 typedef enum
 {
   CENTER_MODE          = 0x01,    /* Center mode */
@@ -88,28 +88,28 @@ typedef enum
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32412G_DISCOVERY_LCD_Exported_Constants STM32412G DISCOVERY LCD Exported Constants
   * @{
   */
-/**
-  * @brief  LCD status structure definition
-  */
+/** 
+  * @brief  LCD status structure definition  
+  */     
 #define LCD_OK         ((uint8_t)0x00)
 #define LCD_ERROR      ((uint8_t)0x01)
 #define LCD_TIMEOUT    ((uint8_t)0x02)
 
-/**
-  * @brief  LCD orientation
-  */
+/** 
+  * @brief  LCD orientation  
+  */ 
 #define  LCD_ORIENTATION_PORTRAIT   ((uint8_t)0x00) /*!< Portrait orientation choice of LCD screen  */
 #define  LCD_ORIENTATION_LANDSCAPE  ((uint8_t)0x01) /*!< Landscape orientation choice of LCD screen */
 #define  LCD_ORIENTATION_LANDSCAPE_ROT180 ((uint8_t)0x02) /*!< Landscape rotated 180° orientation choice of LCD screen */
 
-/**
-  * @brief  LCD color
-  */
+/** 
+  * @brief  LCD color  
+  */ 
 #define LCD_COLOR_BLUE          ((uint16_t)0x001F)
 #define LCD_COLOR_GREEN         ((uint16_t)0x07E0)
 #define LCD_COLOR_RED           ((uint16_t)0xF800)
@@ -135,9 +135,9 @@ typedef enum
 #define LCD_COLOR_BROWN         ((uint16_t)0xA145)
 #define LCD_COLOR_ORANGE        ((uint16_t)0xFD20)
 
-/**
-  * @brief LCD default font
-  */
+/** 
+  * @brief LCD default font 
+  */ 
 #define LCD_DEFAULT_FONT         Font12
 
 /**
@@ -167,13 +167,13 @@ typedef enum
 
 /** @defgroup STM32412G_DISCOVERY_LCD_Exported_Functions STM32412G DISCOVERY LCD Exported Functions
   * @{
-  */
+  */   
 uint8_t  BSP_LCD_Init(void);
 uint8_t  BSP_LCD_InitEx(uint32_t orientation);
 uint8_t  BSP_LCD_DeInit(void);
 uint32_t BSP_LCD_GetXSize(void);
 uint32_t BSP_LCD_GetYSize(void);
-
+ 
 uint16_t BSP_LCD_GetTextColor(void);
 uint16_t BSP_LCD_GetBackColor(void);
 void     BSP_LCD_SetTextColor(__IO uint16_t Color);
@@ -210,22 +210,22 @@ void     BSP_LCD_DisplayOn(void);
    need to be changed for specific application needs */
 __weak void BSP_LCD_MspInit(void);
 __weak void BSP_LCD_MspDeInit(void);
-
+ 
 /**
   * @}
   */
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 #ifdef __cplusplus
 }

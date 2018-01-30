@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_Hyperterminal_IT/Src/stm32f4xx_it.c
+  * @file    UART/UART_Hyperterminal_IT/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -37,7 +37,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32f4xx_it.h"
+#include "stm32f4xx_it.h"   
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -166,11 +166,11 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles UART interrupt request.
+  * @brief  This function handles UART interrupt request.  
   * @param  None
   * @retval None
-  * @Note   This function is redefined in "main.h" and related to DMA stream
-  *         used for USART data transmission
+  * @Note   This function is redefined in "main.h" and related to DMA stream 
+  *         used for USART data transmission     
   */
 void USARTx_IRQHandler(void)
 {
@@ -188,7 +188,7 @@ void USARTx_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

@@ -22,7 +22,7 @@
 
 
 /* Expanded data source object for stdio input */
-#ifdef JFILE
+#ifdef JFILE 
 typedef struct {
   struct jpeg_source_mgr pub;	/* public fields */
 
@@ -41,7 +41,7 @@ typedef my_source_mgr * my_src_ptr;
  * Initialize source --- called by jpeg_read_header
  * before any data is actually read.
  */
-#ifdef JFILE
+#ifdef JFILE 
 METHODDEF(void)
 init_source (j_decompress_ptr cinfo)
 {
@@ -94,7 +94,7 @@ init_mem_source (j_decompress_ptr cinfo)
  * Data beyond this point must be rescanned after resumption, so move it to
  * the front of the buffer rather than discarding it.
  */
-#ifdef JFILE
+#ifdef JFILE 
 METHODDEF(boolean)
 fill_input_buffer (j_decompress_ptr cinfo)
 {
@@ -102,7 +102,7 @@ fill_input_buffer (j_decompress_ptr cinfo)
   size_t nbytes;
 
   nbytes = JFREAD(src->infile, src->buffer, INPUT_BUF_SIZE);
-
+  
   if (nbytes <= 0) {
     if (src->start_of_file)	/* Treat empty input file as fatal error */
       ERREXIT(cinfo, JERR_INPUT_EMPTY);

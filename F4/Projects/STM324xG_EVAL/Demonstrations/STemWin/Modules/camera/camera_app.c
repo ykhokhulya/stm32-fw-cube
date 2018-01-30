@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -104,7 +104,7 @@ static void RGB16toRGB24(uint8_t *pDestBuffer, uint8_t *pSrcBuffer);
 void CAMERA_Set_ContrastBrightness(uint32_t contrast_Level, uint32_t brightness_level)
 {
   uint32_t contrast = 0, brithness = 0;
-
+  
   switch (contrast_Level)
   {
   case 1:
@@ -140,7 +140,7 @@ void CAMERA_Set_ContrastBrightness(uint32_t contrast_Level, uint32_t brightness_
   case 5:
     brithness = CAMERA_BRIGHTNESS_LEVEL4;
     break;
-  }
+  } 
   BSP_CAMERA_ContrastBrightnessConfig(contrast, brithness);
 }
 
@@ -173,7 +173,7 @@ void CAMERA_SelectEffect(uint32_t effect)
     break;
   case 6:
     BSP_CAMERA_ColorEffectConfig(CAMERA_COLOR_EFFECT_RED);
-    break;
+    break;    
   }
 }
 
@@ -183,16 +183,16 @@ void CAMERA_SelectEffect(uint32_t effect)
   * @retval None
   */
 void CAMERA_Init(void)
-{
+{  
   /* Initialize the Camera */
   CameraError = BSP_CAMERA_Init(RESOLUTION_R160x120);
   if( CameraError != CAMERA_ERROR)
   {
-
+    
     GUI_Delay(100);
     /* Start the capture */
     BSP_CAMERA_ContinuousStart((uint8_t *)CAMERA_FRAME_BUFFER);
-
+    
     CAMERA_Set_ContrastBrightness(CameraSettings.b.contrast, CameraSettings.b.brightness);
   }
 }
@@ -205,7 +205,7 @@ void CAMERA_Init(void)
 void CAMERA_Suspend(void)
 {
   if( CameraError != CAMERA_ERROR)
-  {
+  {  
     /* Suspend the CAMERA capture */
     BSP_CAMERA_Suspend();
   }
@@ -235,9 +235,9 @@ void CAMERA_Resume(void)
 void CAMERA_Stop(void)
 {
   if( CameraError != CAMERA_ERROR)
-  {
+  {  
     /* Disable Camera request and Disable DCMI capture */
-    BSP_CAMERA_Stop();
+    BSP_CAMERA_Stop(); 
   }
 }
 
@@ -277,14 +277,14 @@ uint8_t  CAMERA_SaveToFile(uint8_t *path)
   FIL               file;
   uint32_t  NumWrittenData;
   uint8_t ret = 1;
-
+  
   char filename[FILEMGR_FILE_NAME_SIZE];
   char fullpath[FILEMGR_FILE_NAME_SIZE];
-
+  
     /* Create filename */
     k_GetTime(&Time);
     k_GetDate(&Date);
-    sprintf((char *)filename, "/Camera_%02d%02d%04d_%02d%02d%02d.bmp",
+    sprintf((char *)filename, "/Camera_%02d%02d%04d_%02d%02d%02d.bmp", 
             Date.Date,
             Date.Month,
             Date.Year + 2015,
@@ -293,7 +293,7 @@ uint8_t  CAMERA_SaveToFile(uint8_t *path)
             Time.Seconds);
     strcpy((char *)fullpath, (char *)path);
     strcat ((char *)fullpath, (char *)filename);
-
+    
     BSP_CAMERA_Suspend();
     /* Can not create file */
     if (f_open(&file, (char *)fullpath, FA_CREATE_NEW | FA_WRITE) == FR_OK)
@@ -304,17 +304,17 @@ uint8_t  CAMERA_SaveToFile(uint8_t *path)
         f_sync(&file);
         /* Convert RGB16 image to RGB24 */
         RGB16toRGB24((uint8_t *)CAMERA_CVRT_BUFFER, (uint8_t *)CAMERA_FRAME_BUFFER);
-
+        
         if (f_write(&file, (char *)CAMERA_CVRT_BUFFER, MAX_IMAGE_SIZE, (UINT*)&NumWrittenData)== FR_OK)
         {
           /*File Written correctly */
           ret = 0;
         }
-
+        
       }
       f_close(&file);
     }
-
+    
     BSP_CAMERA_Resume();
   return ret;
 }
@@ -322,7 +322,7 @@ uint8_t  CAMERA_SaveToFile(uint8_t *path)
 /**
   * @brief  Convert RGB16 image to RGB24.
   * @param  pDestBuffer: buffer hold the data in RGB24 format
-  * @param  pSrcBuffer: buffer hold the data in RGB16 format
+  * @param  pSrcBuffer: buffer hold the data in RGB16 format    
   * @retval None
   */
 static void RGB16toRGB24(uint8_t *pDestBuffer, uint8_t *pSrcBuffer)
@@ -331,16 +331,16 @@ static void RGB16toRGB24(uint8_t *pDestBuffer, uint8_t *pSrcBuffer)
   uint8_t *pDest;
   uint32_t i = 0, j = 0;
   uint16_t value;
-
+  
   pSrc = (uint16_t*) & pSrcBuffer[IMAGE_BUFFER_SIZE] - 1;
   pDest = (uint8_t*) & pDestBuffer[0];
-
+  
   for (i = IMAGE_COLUMN_SIZE; i > 0; i-- )
   {
     for ( j = 0; j < 2 * IMAGE_LINE_SIZE;  j += 2 )
     {
       value    = (uint16_t) * pSrc;
-
+      
       *pDest++   = BMP_PIXEL16_TO_R(value);
       *pDest++   = BMP_PIXEL16_TO_G(value);
       *pDest++   = BMP_PIXEL16_TO_B(value);
@@ -351,7 +351,7 @@ static void RGB16toRGB24(uint8_t *pDestBuffer, uint8_t *pSrcBuffer)
 
 /**
 * @}
-*/
+*/ 
 
 /**
 * @}

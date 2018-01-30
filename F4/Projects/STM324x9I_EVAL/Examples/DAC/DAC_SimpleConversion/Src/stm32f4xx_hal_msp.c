@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    DAC/DAC_SimpleConversion/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -56,24 +56,24 @@
   */
 
 /**
-  * @brief DAC MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief DAC MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hdac: DAC handle pointer
   * @retval None
   */
 void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
 {
   GPIO_InitTypeDef          GPIO_InitStruct;
-
+  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* Enable GPIO clock ****************************************/
   DACx_CHANNEL_GPIO_CLK_ENABLE();
   /* DAC Periph clock enable */
   DACx_CLK_ENABLE();
-
-  /*##-2- Configure peripheral GPIO ##########################################*/
+    
+  /*##-2- Configure peripheral GPIO ##########################################*/ 
   /* DAC Channel1 GPIO pin configuration */
   GPIO_InitStruct.Pin = DACx_CHANNEL_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -84,14 +84,14 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
 /**
   * @brief  DeInitializes the DAC MSP.
   * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
-  *         the configuration information for the specified DAC.
+  *         the configuration information for the specified DAC.  
   * @retval None
   */
 void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
 {
   /* Enable DAC reset state */
   DACx_FORCE_RESET();
-
+  
   /* Release DAC from reset state */
   DACx_RELEASE_RESET();
 }

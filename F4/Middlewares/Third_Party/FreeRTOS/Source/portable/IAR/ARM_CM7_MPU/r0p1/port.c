@@ -280,9 +280,9 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	own exec return value. */
 	pxTopOfStack--;
 	*pxTopOfStack = portINITIAL_EXEC_RETURN;
-
+        
 	pxTopOfStack -= 9;	/* R11, R10, R9, R8, R7, R6, R5 and R4. */
-
+        
         if( xRunPrivileged == pdTRUE )
 	{
           *pxTopOfStack = portINITIAL_CONTROL_IF_PRIVILEGED;
@@ -291,7 +291,7 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	{
           *pxTopOfStack = portINITIAL_CONTROL_IF_UNPRIVILEGED;
 	}
-
+        
 	return pxTopOfStack;
 }
 
@@ -306,7 +306,7 @@ uint32_t ulReg;
 	ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC ] )[ -2 ];
 	switch( ucSVCNumber )
 	{
-		case portSVC_START_SCHEDULER :
+		case portSVC_START_SCHEDULER :	
                   portNVIC_SYSPRI1_REG |= portNVIC_SVC_PRI;
 		  vRestoreContextOfFirstTask();
 		 break;
@@ -326,7 +326,7 @@ uint32_t ulReg;
                             ulReg = __get_CONTROL();
           ulReg &= 0xFFFFFFFE;
           __set_CONTROL(ulReg);
-
+                  
 		break;
 
 		default	:	/* Unknown SVC call. */
@@ -388,7 +388,7 @@ BaseType_t xPortStartScheduler( void )
 	/* Make PendSV and SysTick the lowest priority interrupts. */
 	portNVIC_SYSPRI2_REG |= portNVIC_PENDSV_PRI;
 	portNVIC_SYSPRI2_REG |= portNVIC_SYSTICK_PRI;
-
+        
 	/* Configure the regions in the MPU that are common to all tasks. */
 	prvSetupMPU();
 
@@ -473,8 +473,8 @@ void xPortSysTickHandler( void )
 void vPortResetPrivilege( BaseType_t xRunningPrivileged )
 {
 uint32_t ulReg;
-
-	if( xRunningPrivileged != pdTRUE )
+	
+	if( xRunningPrivileged != pdTRUE ) 
 	{
           ulReg = __get_CONTROL();
           ulReg |= 0x1;
@@ -749,7 +749,7 @@ extern uint32_t __SRAM_segment_end__;
 extern uint32_t __privileged_data_start__;
 extern uint32_t __privileged_data_end__;
 
-
+	
 int32_t lIndex;
 uint32_t ul;
 

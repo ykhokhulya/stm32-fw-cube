@@ -1,9 +1,9 @@
 /**
   @page WWDG_RefreshUntilUserEvent WWDG example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/WWDG/WWDG_RefreshUntilUserEvent/readme.txt
+  * @file    Examples_LL/WWDG/WWDG_RefreshUntilUserEvent/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the WWDG_RefreshUntilUserEvent example.
   ******************************************************************************
@@ -53,7 +53,7 @@ Waiting a new user button pressed to re-activate the WWDG
 
 System, WWDG, Timeout, Refresh, Counter update, MCU Reset, Downcounter, Event, Window
 
-@par Directory contents
+@par Directory contents 
 
   - WWDG/WWDG_RefreshUntilUserEvent/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - WWDG/WWDG_RefreshUntilUserEvent/Inc/main.h                  Header for main.c module
@@ -66,11 +66,11 @@ System, WWDG, Timeout, Refresh, Counter update, MCU Reset, Downcounter, Event, W
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

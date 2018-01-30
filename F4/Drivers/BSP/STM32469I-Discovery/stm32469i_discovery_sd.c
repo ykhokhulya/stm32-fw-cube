@@ -52,23 +52,23 @@
        also includes the micro SD initialization sequence.
      o To check the SD card presence you can use the function BSP_SD_IsDetected() which
        returns the detection status
-     o If SD presence detection interrupt mode is desired, you must configure the
-       SD detection interrupt mode by calling the function BSP_SD_ITConfig(). The interrupt
-       is generated as an external interrupt whenever the micro SD card is
+     o If SD presence detection interrupt mode is desired, you must configure the 
+       SD detection interrupt mode by calling the function BSP_SD_ITConfig(). The interrupt 
+       is generated as an external interrupt whenever the micro SD card is 
        plugged/unplugged in/from the board.
      o The function BSP_SD_GetCardInfo() is used to get the micro SD card information
        which is stored in the structure "HAL_SD_CardInfoTypeDef".
 
      + Micro SD card operations
-        o The micro SD card can be accessed with read/write block(s) operations once
+        o The micro SD card can be accessed with read/write block(s) operations once 
           it is ready for access. The access can be performed whether using the polling
-          mode by calling the functions BSP_SD_ReadBlocks()/BSP_SD_WriteBlocks(), or by DMA
+          mode by calling the functions BSP_SD_ReadBlocks()/BSP_SD_WriteBlocks(), or by DMA 
           transfer using the functions BSP_SD_ReadBlocks_DMA()/BSP_SD_WriteBlocks_DMA()
         o The DMA transfer complete is used with interrupt mode. Once the SD transfer
           is complete, the SD interrupt is handled using the function BSP_SD_IRQHandler(),
           the DMA Tx/Rx transfer complete are handled using the functions
-          BSP_SD_DMA_Tx_IRQHandler()/BSP_SD_DMA_Rx_IRQHandler(). The corresponding user callbacks
-          are implemented by the user at application level.
+          BSP_SD_DMA_Tx_IRQHandler()/BSP_SD_DMA_Rx_IRQHandler(). The corresponding user callbacks 
+          are implemented by the user at application level. 
         o The SD erase block(s) is performed using the function BSP_SD_Erase() with specifying
           the number of blocks to erase.
         o The SD runtime status is returned when calling the function BSP_SD_GetCardState().
@@ -267,7 +267,7 @@ uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBloc
 }
 
 /**
-  * @brief  Writes block(s) to a specified address in an SD card, in polling mode.
+  * @brief  Writes block(s) to a specified address in an SD card, in polling mode. 
   * @param  pData: Pointer to the buffer that will contain the data to transmit
   * @param  WriteAddr: Address from where data is to be written
   * @param  NumOfBlocks: Number of SD blocks to write
@@ -290,11 +290,11 @@ uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBl
   * @brief  Reads block(s) from a specified address in an SD card, in DMA mode.
   * @param  pData: Pointer to the buffer that will contain the data to transmit
   * @param  ReadAddr: Address from where data is to be read
-  * @param  NumOfBlocks: Number of SD blocks to read
+  * @param  NumOfBlocks: Number of SD blocks to read 
   * @retval SD status
   */
 uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks)
-{
+{  
   /* Read block(s) in DMA transfer mode */
   if(HAL_SD_ReadBlocks_DMA(&uSdHandle, (uint8_t *)pData, ReadAddr, NumOfBlocks) != HAL_OK)
   {
@@ -310,11 +310,11 @@ uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOf
   * @brief  Writes block(s) to a specified address in an SD card, in DMA mode.
   * @param  pData: Pointer to the buffer that will contain the data to transmit
   * @param  WriteAddr: Address from where data is to be written
-  * @param  NumOfBlocks: Number of SD blocks to write
+  * @param  NumOfBlocks: Number of SD blocks to write 
   * @retval SD status
   */
 uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks)
-{
+{ 
   /* Write block(s) in DMA transfer mode */
   if(HAL_SD_WriteBlocks_DMA(&uSdHandle, (uint8_t *)pData, WriteAddr, NumOfBlocks) != HAL_OK)
   {
@@ -327,7 +327,7 @@ uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t Num
 }
 
 /**
-  * @brief  Erases the specified memory area of the given SD card.
+  * @brief  Erases the specified memory area of the given SD card. 
   * @param  StartAddr: Start byte address
   * @param  EndAddr: End byte address
   * @retval SD status
@@ -508,12 +508,12 @@ uint8_t BSP_SD_GetCardState(void)
 {
   return((HAL_SD_GetCardState(&uSdHandle) == HAL_SD_CARD_TRANSFER ) ? SD_TRANSFER_OK : SD_TRANSFER_BUSY);
 }
-
+  
 
 /**
   * @brief  Get SD information about specific SD card.
   * @param  CardInfo: Pointer to HAL_SD_CardInfoTypedef structure
-  * @retval None
+  * @retval None 
   */
 void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypeDef *CardInfo)
 {

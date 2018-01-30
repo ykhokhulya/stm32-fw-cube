@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/ADC/ADC_SingleConversion_TriggerTimer_DMA/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -174,7 +174,7 @@ void USER_BUTTON_IRQHANDLER(void)
   {
     /* Call interruption treatment function */
     UserButton_Callback();
-
+    
     /* Clear EXTI line flag */
     /* Note: Clear flag after callback function to minimize user button       */
     /*       switch debounce parasitics.                                      */
@@ -194,7 +194,7 @@ void ADC_IRQHandler(void)
   {
     /* Clear flag ADC group regular overrun */
     LL_ADC_ClearFlag_OVR(ADC1);
-
+    
     /* Call interruption treatment function */
     AdcGrpRegularOverrunError_Callback();
   }
@@ -212,27 +212,27 @@ void DMA2_Stream0_IRQHandler(void)
   {
     /* Clear flag DMA transfer complete */
     LL_DMA_ClearFlag_TC0(DMA2);
-
+    
     /* Call interruption treatment function */
     AdcDmaTransferComplete_Callback();
   }
-
+  
   /* Check whether DMA half transfer caused the DMA interruption */
   if(LL_DMA_IsActiveFlag_HT0(DMA2) == 1)
   {
     /* Clear flag DMA half transfer */
     LL_DMA_ClearFlag_HT0(DMA2);
-
+    
     /* Call interruption treatment function */
     AdcDmaTransferHalf_Callback();
   }
-
+  
   /* Check whether DMA transfer error caused the DMA interruption */
   if(LL_DMA_IsActiveFlag_TE0(DMA2) == 1)
   {
     /* Clear flag DMA transfer error */
     LL_DMA_ClearFlag_TE0(DMA2);
-
+    
     /* Call interruption treatment function */
     AdcDmaTransferError_Callback();
   }

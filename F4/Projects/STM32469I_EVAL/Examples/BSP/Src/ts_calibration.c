@@ -110,7 +110,7 @@ uint8_t Touchscreen_Calibration(void)
     aLogX[1] = BSP_LCD_GetXSize() - 40;
     aLogY[1] = BSP_LCD_GetYSize() - 40;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < 2; i++) 
     {
       TouchScreen_Calibration_GetPhysValues(aLogX[i], aLogY[i], &aPhysX[i], &aPhysY[i]);
     }

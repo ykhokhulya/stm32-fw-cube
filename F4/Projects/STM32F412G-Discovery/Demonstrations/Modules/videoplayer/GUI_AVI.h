@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -54,45 +54,45 @@
 extern "C" {     /* Make sure we have C-declarations in C++ programs */
 #endif
 
-/* Exported types ------------------------------------------------------------*/
+/* Exported types ------------------------------------------------------------*/  
 typedef enum {
-	AVI_OK   =0,
-	AVI_RIFF_ERR,
-	AVI_AVI_ERR,
-	AVI_LIST_ERR,
-	AVI_HDRL_ERR,
-	AVI_AVIH_ERR,
-	AVI_STRL_ERR,
-	AVI_STRH_ERR,
-	AVI_STRF_ERR,
-	AVI_MOVI_ERR,
-	AVI_FORMAT_ERR,
-	AVI_STREAM_ERR,
+	AVI_OK   =0,			
+	AVI_RIFF_ERR,			
+	AVI_AVI_ERR,			
+	AVI_LIST_ERR,			
+	AVI_HDRL_ERR,			
+	AVI_AVIH_ERR,			
+	AVI_STRL_ERR,			
+	AVI_STRH_ERR,			
+	AVI_STRF_ERR,			
+	AVI_MOVI_ERR,			
+	AVI_FORMAT_ERR,			
+	AVI_STREAM_ERR,			
 }AVISTATUS;
 
 
 
-#define AVI_RIFF_ID			0x46464952
+#define AVI_RIFF_ID			0x46464952  
 #define AVI_AVI_ID			0x20495641
-#define AVI_LIST_ID			0x5453494C
-#define AVI_HDRL_ID			0x6C726468
-#define AVI_MOVI_ID			0x69766F6D
-#define AVI_STRL_ID			0x6C727473
+#define AVI_LIST_ID			0x5453494C  
+#define AVI_HDRL_ID			0x6C726468	
+#define AVI_MOVI_ID			0x69766F6D 	
+#define AVI_STRL_ID			0x6C727473	
 
-#define AVI_AVIH_ID			0x68697661
-#define AVI_STRH_ID			0x68727473
-#define AVI_STRF_ID			0x66727473
-#define AVI_STRD_ID			0x64727473
+#define AVI_AVIH_ID			0x68697661 	
+#define AVI_STRH_ID			0x68727473	
+#define AVI_STRF_ID			0x66727473 	
+#define AVI_STRD_ID			0x64727473 	
 
-#define AVI_VIDS_STREAM		        0x73646976
-#define AVI_AUDS_STREAM		        0x73647561
+#define AVI_VIDS_STREAM		        0x73646976		
+#define AVI_AUDS_STREAM		        0x73647561 		
+                                        
+                                        
+#define AVI_VIDS_FLAG		        0x6463			
+#define AVI_AUDS_FLAG		        0x7762 
 
 
-#define AVI_VIDS_FLAG		        0x6463
-#define AVI_AUDS_FLAG		        0x7762
-
-
-#define AVI_FORMAT_MJPG		        0x47504A4D
+#define AVI_FORMAT_MJPG		        0x47504A4D 
 
 typedef GUI_HMEM GUI_AVI_HANDLE;
 typedef void GUI_AVI_FUNC(GUI_AVI_HANDLE havi, int Notification, U32 CurrentFrame);
@@ -114,153 +114,153 @@ typedef struct {
 #endif
 
 typedef PACKED_STRUCT
-{
-	U32 SecPerFrame;
-	U32 TotalFrame;
-	U32 Width;
-	U32 Height;
-	U32 SampleRate;
-	U16 Channels;
-	U16 AudioBufSize;
-	U16 AudioType;
-	U16 StreamID;
-	U32 StreamSize;
-	U8* VideoFLAG;
-	U8* AudioFLAG;
+{	  
+	U32 SecPerFrame;		
+	U32 TotalFrame;			
+	U32 Width;			
+	U32 Height;			
+	U32 SampleRate; 		
+	U16 Channels;	  		
+	U16 AudioBufSize;		
+	U16 AudioType;	  		
+	U16 StreamID;			
+	U32 StreamSize;			
+	U8* VideoFLAG;			
+	U8* AudioFLAG;			
 }AVI_INFO;
 
-typedef struct
-{
-	U32 RiffID;
-	U32 FileSize;
-	U32 AviID;
+typedef struct  
+{	
+	U32 RiffID;			
+	U32 FileSize;			
+	U32 AviID;			
 }AVI_HEADER;
 
 typedef struct
-{
-	U32 FrameID;
-	U32 FrameSize;
+{	
+	U32 FrameID;			
+	U32 FrameSize;			
 }FRAME_HEADER;
 
 typedef struct
-{
-	U32 ListID;
-	U32 BlockSize;
-	U32 ListType;
+{	
+	U32 ListID;			
+	U32 BlockSize;			
+	U32 ListType;			
 }LIST_HEADER;
 
 typedef struct
-{
-	U32 BlockID;
-	U32 BlockSize;
-	U32 SecPerFrame;
-	U32 MaxByteSec;
-	U32 PaddingGranularity;
-	U32 Flags;
-	U32 TotalFrame;
-	U32 InitFrames;
-	U32 Streams;
-	U32 RefBufSize;
-	U32 Width;
-	U32 Height;
-	U32 Reserved[4];
+{	
+	U32 BlockID;		
+	U32 BlockSize;		
+	U32 SecPerFrame;	
+	U32 MaxByteSec; 	
+	U32 PaddingGranularity; 
+	U32 Flags;		
+	U32 TotalFrame;		
+	U32 InitFrames;  	
+	U32 Streams;		
+	U32 RefBufSize;		
+	U32 Width;		
+	U32 Height;		
+	U32 Reserved[4];	
 }AVIH_HEADER;
 
 
 typedef struct
-{
-	U32 BlockID;
-	U32 BlockSize;
-	U32 StreamType;
-	U32 Handler;
-	U32 Flags;
-	U16 Priority;
-	U16 Language;
-	U32 InitFrames;
-	U32 Scale;
-	U32 Rate;
-	U32 Start;
-	U32 Length;
- 	U32 RefBufSize;
-        U32 Quality;
-	U32 SampleSize;
-	struct
-	{
+{	
+	U32 BlockID;			
+	U32 BlockSize;			
+	U32 StreamType;			
+	U32 Handler;			
+	U32 Flags;  			
+	U16 Priority;			
+	U16 Language;			
+	U32 InitFrames;  		
+	U32 Scale;			
+	U32 Rate; 			
+	U32 Start;			
+	U32 Length;			
+ 	U32 RefBufSize;  		
+        U32 Quality;			
+	U32 SampleSize;			
+	struct				
+	{				
 	   	U16 Left;
 		U16 Top;
 		U16 Right;
 		U16 Bottom;
-	}Frame;
+	}Frame;				
 }STRH_HEADER;
 
 
 typedef struct
 {
-	U32	 BmpSize;
- 	U32      Width;
-	U32      Height;
-	U16      Planes;
-	U16      BitCount;
-	U32      Compression;
-	U32      SizeImage;
-	U32      XpixPerMeter;
-	U32      YpixPerMeter;
-	U32      ClrUsed;
-	U32      ClrImportant;
+	U32	 BmpSize;		
+ 	U32      Width;			
+	U32      Height;			
+	U16      Planes;			
+	U16      BitCount;			
+	U32      Compression;		
+	U32      SizeImage;			
+	U32      XpixPerMeter;		
+	U32      YpixPerMeter;		
+	U32      ClrUsed;			
+	U32      ClrImportant;		
 }BMP_HEADER;
 
 
-typedef struct
+typedef struct 
 {
-	U8  rgbBlue;
-	U8  rgbGreen;
-	U8  rgbRed;
-	U8  rgbReserved;
+	U8  rgbBlue;			
+	U8  rgbGreen; 			
+	U8  rgbRed; 			
+	U8  rgbReserved;		
 }AVIRGBQUAD;
 
-typedef struct
+typedef struct 
 {
-	U32 BlockID;
-	U32 BlockSize;
-	BMP_HEADER bmiHeader;
-	AVIRGBQUAD bmColors[1];
-}STRF_BMPHEADER;
+	U32 BlockID;		
+	U32 BlockSize;		
+	BMP_HEADER bmiHeader;  	
+	AVIRGBQUAD bmColors[1];	
+}STRF_BMPHEADER;  
 
 
-typedef struct
+typedef struct 
 {
-	U32 BlockID;
-	U32 BlockSize;
-   	U16 FormatTag;
-	U16 Channels;
-	U32 SampleRate;
-	U32 BaudRate;
-	U16 BlockAlign;
-	U16 Size;
+	U32 BlockID;			
+	U32 BlockSize;			
+   	U16 FormatTag;			
+	U16 Channels;	  		
+	U32 SampleRate; 		
+	U32 BaudRate;   		
+	U16 BlockAlign; 		
+	U16 Size;			
 }STRF_WAVHEADER;
 
 
 typedef struct {
-  AVI_INFO            aviInfo;
-  U32                 CurrentImage;
-  U32                 TimeNextFrame;
-  int                 xPos, yPos;
-  int                 DoLoop;
-  GUI_GET_DATA_FUNC   * pfGetData;
-  void                * pParam;
-  const U8            * pVideoBuffer;
-  U32                 VideoBufferSize;
+  AVI_INFO            aviInfo;       
+  U32                 CurrentImage;  
+  U32                 TimeNextFrame; 
+  int                 xPos, yPos;    
+  int                 DoLoop;        
+  GUI_GET_DATA_FUNC   * pfGetData;     
+  void                * pParam;  
+  const U8            * pVideoBuffer;  
+  U32                 VideoBufferSize;      
   const U8            * pAudioBuffer;
-  U32                 AudioRdPtr;
-  U32                 AudioWdPtr;
-  U32                 AudioBufferSize;
-  U32                 FileSize;
-  GUI_AVI_FUNC        * pfNotify;
-  GUI_TIMER_HANDLE    hTimer;
+  U32                 AudioRdPtr; 
+  U32                 AudioWdPtr;     
+  U32                 AudioBufferSize;    
+  U32                 FileSize;        
+  GUI_AVI_FUNC        * pfNotify;        
+  GUI_TIMER_HANDLE    hTimer;        
   U8                  SkipMode;
-  U8                  AudioSync;
+  U8                  AudioSync;  
   tHW_JPEG_Draw       * pfDraw;
-
+  
   tHW_JPEG_Init       * pfJpegInit;
   tHW_JPEG_Draw       * pfJpegDraw;
   tHW_JPEG_DeInit     * pfJpegDeInit;
@@ -269,7 +269,7 @@ typedef struct {
 
 #define	 MAKEWORD(ptr)	(U16)(((U16)*((U8*)(ptr))<<8)|(U16)*(U8*)((ptr)+1))
 #define  MAKEDWORD(ptr)	(U32)(((U16)*(U8*)(ptr)|(((U16)*(U8*)(ptr+1))<<8)|\
-						(((U16)*(U8*)(ptr+2))<<16)|(((U16)*(U8*)(ptr+3))<<24)))
+						(((U16)*(U8*)(ptr+2))<<16)|(((U16)*(U8*)(ptr+3))<<24))) 
 
 
 
@@ -279,9 +279,9 @@ typedef struct {
 *
 *       AVI callbacks ID
 */
-#define GUI_AVI_JPEG_INIT             0
-#define GUI_AVI_JPEG_DRAW             1
-#define GUI_AVI_JPEG_DEINIT           2
+#define GUI_AVI_JPEG_INIT             0 
+#define GUI_AVI_JPEG_DRAW             1 
+#define GUI_AVI_JPEG_DEINIT           2 
 /*********************************************************************
 *
 *       AVI file support

@@ -56,10 +56,10 @@
   */
 
 /**
-  * @brief SPI MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief SPI MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hspi: SPI handle pointer
   * @retval None
   */
@@ -68,16 +68,16 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 GPIO_InitTypeDef  GPIO_InitStruct;
 
   if(hspi->Instance == SPIx)
-  {
+  {     
     /*##-1- Enable peripherals and GPIO Clocks #################################*/
     /* Enable GPIO TX/RX clock */
     SPIx_SCK_GPIO_CLK_ENABLE();
     SPIx_MISO_GPIO_CLK_ENABLE();
     SPIx_MOSI_GPIO_CLK_ENABLE();
     /* Enable SPI clock */
-    SPIx_CLK_ENABLE();
-
-    /*##-2- Configure peripheral GPIO ##########################################*/
+    SPIx_CLK_ENABLE(); 
+    
+    /*##-2- Configure peripheral GPIO ##########################################*/  
     /* SPI SCK GPIO pin configuration  */
     GPIO_InitStruct.Pin       = SPIx_SCK_PIN;
     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
@@ -99,7 +99,7 @@ GPIO_InitTypeDef  GPIO_InitStruct;
 }
 
 /**
-  * @brief SPI MSP De-Initialization
+  * @brief SPI MSP De-Initialization 
   *        This function frees the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO configuration to its default state
@@ -109,11 +109,11 @@ GPIO_InitTypeDef  GPIO_InitStruct;
 void HAL_SPI_MspDeInit(SPI_HandleTypeDef *hspi)
 {
   if(hspi->Instance == SPIx)
-  {
+  {   
     /*##-1- Reset peripherals ##################################################*/
     SPIx_FORCE_RESET();
     SPIx_RELEASE_RESET();
-
+    
     /*##-2- Disable peripherals and GPIO Clocks ################################*/
     /* Configure SPI SCK as alternate function  */
     HAL_GPIO_DeInit(SPIx_SCK_GPIO_PORT, SPIx_SCK_PIN);

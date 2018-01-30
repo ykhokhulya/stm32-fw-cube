@@ -1,9 +1,9 @@
 /**
   @page ADC_GroupsRegularInjected ADC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/ADC/ADC_GroupsRegularInjected/readme.txt
+  * @file    Examples_LL/ADC/ADC_GroupsRegularInjected/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC_GroupsRegularInjected example.
   ******************************************************************************
@@ -35,8 +35,8 @@
 
 @par Example Description
 This example describes how to use a ADC peripheral with both ADC groups
-(ADC group regular and ADC group injected) in their intended use case;
-This example is based on the STM32F4xx ADC LL API;
+(ADC group regular and ADC group injected) in their intended use case; 
+This example is based on the STM32F4xx ADC LL API; 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -94,7 +94,7 @@ Other peripherals used:
   Timer
 
 
-@par Directory contents
+@par Directory contents 
 
   - ADC/ADC_GroupsRegularInjected/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - ADC/ADC_GroupsRegularInjected/Inc/main.h                  Header for main.c module
@@ -107,12 +107,12 @@ Other peripherals used:
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

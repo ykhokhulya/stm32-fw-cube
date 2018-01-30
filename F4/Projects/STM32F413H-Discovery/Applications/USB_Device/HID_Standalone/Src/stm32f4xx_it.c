@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    USB_Device/HID_Standalone/Src/stm32f4xx_it.c
+  * @file    USB_Device/HID_Standalone/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -187,9 +187,9 @@ void OTG_FS_WKUP_IRQHandler(void)
   {
     /* Reset SLEEPDEEP bit of Cortex System Control Register */
     SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
-
+    
     SystemClockConfig_STOP();
-
+    
     /* Ungate PHY clock */
      __HAL_PCD_UNGATE_PHYCLOCK((&hpcd));
   }

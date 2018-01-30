@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Inc/main.h
+  * @file    BSP/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -59,7 +59,7 @@
 typedef struct
 {
   void   (*DemoFunc)(void);
-  uint8_t DemoName[50];
+  uint8_t DemoName[50]; 
   uint32_t DemoIndex;
 }BSP_DemoTypedef;
 
@@ -77,8 +77,8 @@ extern uint16_t ErrorCounter;
 #define CAMERA_RES_MAX_Y          272
 #define RGB565_BYTE_PER_PIXEL     2
 /* Memories addresses */
-#define FLASH_CODE_ADDRESS         0x08000000
-#define FLASH_DATA_ADDRESS         0x08040000
+#define FLASH_CODE_ADDRESS         0x08000000   
+#define FLASH_DATA_ADDRESS         0x08040000   
 #define SRAM_WRITE_READ_ADDR       0x2000b000
 #define SDRAM_WRITE_READ_ADDR      SDRAM_DEVICE_ADDR + (CAMERA_RES_MAX_X * CAMERA_RES_MAX_Y * RGB565_BYTE_PER_PIXEL)
 

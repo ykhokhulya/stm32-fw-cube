@@ -59,11 +59,11 @@ static DMA_HandleTypeDef hdma_rx;
   */
 
 /**
-  * @brief SPI MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief SPI MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
-  *           - DMA configuration for transmission request by peripheral
+  *           - Peripheral's GPIO Configuration  
+  *           - DMA configuration for transmission request by peripheral 
   *           - NVIC configuration for DMA interrupt request enable
   * @param hspi: SPI handle pointer
   * @retval None
@@ -71,7 +71,7 @@ static DMA_HandleTypeDef hdma_rx;
 void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 {
 GPIO_InitTypeDef  GPIO_InitStruct;
-
+	
   if (hspi->Instance == SPIx)
   {
     /*##-1- Enable peripherals and GPIO Clocks #################################*/
@@ -84,7 +84,7 @@ GPIO_InitTypeDef  GPIO_InitStruct;
     /* Enable DMA clock */
     DMAx_CLK_ENABLE();
 
-    /*##-2- Configure peripheral GPIO ##########################################*/
+    /*##-2- Configure peripheral GPIO ##########################################*/  
     /* SPI SCK GPIO pin configuration  */
     GPIO_InitStruct.Pin       = SPIx_SCK_PIN;
     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
@@ -144,12 +144,12 @@ GPIO_InitTypeDef  GPIO_InitStruct;
 
     /* Associate the initialized DMA handle to the the SPI handle */
     __HAL_LINKDMA(hspi, hdmarx, hdma_rx);
-
-    /*##-4- Configure the NVIC for DMA #########################################*/
+    
+    /*##-4- Configure the NVIC for DMA #########################################*/ 
     /* NVIC configuration for DMA transfer complete interrupt (SPI1_TX) */
     HAL_NVIC_SetPriority(SPIx_DMA_TX_IRQn, 1, 1);
     HAL_NVIC_EnableIRQ(SPIx_DMA_TX_IRQn);
-
+    
     /* NVIC configuration for DMA transfer complete interrupt (SPI1_RX) */
     HAL_NVIC_SetPriority(SPIx_DMA_RX_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(SPIx_DMA_RX_IRQn);
@@ -167,7 +167,7 @@ GPIO_InitTypeDef  GPIO_InitStruct;
 void HAL_SPI_MspDeInit(SPI_HandleTypeDef *hspi)
 {
   if(hspi->Instance == SPIx)
-  {
+  {   
     /*##-1- Reset peripherals ##################################################*/
     SPIx_FORCE_RESET();
     SPIx_RELEASE_RESET();

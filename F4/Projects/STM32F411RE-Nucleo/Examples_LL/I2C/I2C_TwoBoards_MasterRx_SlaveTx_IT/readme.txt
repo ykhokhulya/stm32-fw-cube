@@ -1,9 +1,9 @@
 /**
   @page I2C_TwoBoards_MasterRx_SlaveTx_IT I2C example (IT Mode)
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/I2C/I2C_TwoBoards_MasterRx_SlaveTx_IT/readme.txt
+  * @file    Examples_LL/I2C/I2C_TwoBoards_MasterRx_SlaveTx_IT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the I2C_TwoBoards_MasterRx_SlaveTx_IT I2C example (IT Mode).
   ******************************************************************************
@@ -34,7 +34,7 @@
   @endverbatim
 
 @par Example Description
-
+  
 This example describes how to receive one data byte from an I2C Slave device to an
 I2C Master device. Both devices operate in Interrupt mode. Peripheral initialization
 is done using LL unitary services functions for optimization purpose (performance and size).
@@ -63,7 +63,7 @@ SDA Pin: PB.9 (CN10, pin 5)
 The project is splitted in two parts the Master Board and the Slave Board
 - Master Board
   I2C1 Peripheral is configured in Master mode with EXTI (Fast Mode @400kHz).
-And GPIO associated to User push-button is linked with EXTI.
+And GPIO associated to User push-button is linked with EXTI. 
 - Slave Board
   I2C1 Peripheral is configured in Slave mode with EXTI (Fast Mode @400kHz, Own address 7-bit enabled).
 
@@ -72,7 +72,7 @@ in the "main.h" file:
 - Comment "#define SLAVE_BOARD" to select Master board.
 - Uncomment "#define SLAVE_BOARD" to select Slave board.
 
-LED2 blinks quickly on both BOARD to wait for user-button press.
+LED2 blinks quickly on both BOARD to wait for user-button press. 
 
 Example execution:
 To perform this example, two steps are necessary to prevent a wrong start/stop detection due to the initialization of the oposite GPIO board.
@@ -101,7 +101,7 @@ In case of errors, LED2 is blinking.
 
 Connectivity, Communication, I2C, Interrupt, Master Rx, Slave Tx, Transmission, Reception, Fast mode, SDA, SCL
 
-@par Directory contents
+@par Directory contents 
 
   - I2C/I2C_TwoBoards_MasterRx_SlaveTx_IT/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - I2C/I2C_TwoBoards_MasterRx_SlaveTx_IT/Inc/main.h                  Header for main.c module
@@ -113,14 +113,14 @@ Connectivity, Communication, I2C, Interrupt, Master Rx, Slave Tx, Transmission, 
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-F411RE Set-up
     - Connect GPIOs connected to Board Slave I2C1 SCL/SDA (PB.8 and PB.9)
     to respectively Board Master SCL and SDA pins of I2C1 (PB.8 and PB.9).
-      - I2C1_SCL  PB.8 (CN10, pin 3) : connected to I2C1_SCL PB.8 (CN10, pin 3)
+      - I2C1_SCL  PB.8 (CN10, pin 3) : connected to I2C1_SCL PB.8 (CN10, pin 3) 
       - I2C1_SDA  PB.9 (CN10, pin 5) : connected to I2C1_SDA PB.9 (CN10, pin 5)
     - Connect Master board GND to Slave Board GND
 
@@ -130,11 +130,11 @@ Connectivity, Communication, I2C, Interrupt, Master Rx, Slave Tx, Transmission, 
   - User can easily change the number of data to transfer by modifying the initialization
       of SLAVE_BYTE_TO_SEND.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - Rebuild all files and load your image into target memory (The user can choose between Master
+ - Rebuild all files and load your image into target memory (The user can choose between Master 
    and Slave target through "#define SLAVE_BOARD" in the "main.h" file)
     o Comment "#define SLAVE_BOARD" and load the project in Master Board
     o Uncomment "#define SLAVE_BOARD" and load the project in Slave Board

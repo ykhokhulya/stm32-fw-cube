@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -56,8 +56,8 @@
   */
 
 /**
-  * @brief RTC MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief RTC MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
   * @param hrtc: RTC handle pointer
   * @retval None
@@ -66,7 +66,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 {
  RCC_OscInitTypeDef        RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
-
+  
   /*##-1- Configue the RTC clock soucre ######################################*/
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
@@ -76,25 +76,25 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   {
     Error_Handler();
   }
-
+  
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
   PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   if(HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
+  { 
     Error_Handler();
   }
-
-  /*##-2- Enable the RTC peripheral Clock ####################################*/
-  /* Enable RTC Clock */
+  
+  /*##-2- Enable the RTC peripheral Clock ####################################*/ 
+  /* Enable RTC Clock */ 
   __HAL_RCC_RTC_ENABLE();
-
+  
   /*##-3- Configure the NVIC for RTC Alarm ###################################*/
   HAL_NVIC_SetPriority(RTC_WKUP_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(RTC_WKUP_IRQn);
 }
 
 /**
-  * @brief RTC MSP De-Initialization
+  * @brief RTC MSP De-Initialization 
   *        This function freeze the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   * @param hrtc: RTC handle pointer
@@ -103,7 +103,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
 {
   /*##-1- Reset peripherals ##################################################*/
-   __HAL_RCC_RTC_DISABLE();
+   __HAL_RCC_RTC_DISABLE();     
 }
 
 /**

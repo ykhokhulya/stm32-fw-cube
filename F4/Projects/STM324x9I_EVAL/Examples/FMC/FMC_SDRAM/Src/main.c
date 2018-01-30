@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    FMC/FMC_SDRAM/Src/main.c
+  * @file    FMC/FMC_SDRAM/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access
+  * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access 
   *          by read and write operation the SDRAM external memory device.
   ******************************************************************************
   * @attention
@@ -43,13 +43,13 @@
 
 /** @addtogroup FMC_SDRAM
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define BUFFER_SIZE         ((uint32_t)0x0100)
 #define WRITE_READ_ADDR     ((uint32_t)0x0800)
-
+    
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* SDRAM handler declaration */
@@ -82,7 +82,7 @@ static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwO
   * @retval None
   */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -90,19 +90,19 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the SDRAM device #########################################*/
-  /* SDRAM device configuration */
+  /* SDRAM device configuration */ 
   hsdram.Instance = FMC_SDRAM_DEVICE;
-
+  
   SDRAM_Timing.LoadToActiveDelay    = 2;
   SDRAM_Timing.ExitSelfRefreshDelay = 6;
   SDRAM_Timing.SelfRefreshTime      = 4;
@@ -110,7 +110,7 @@ int main(void)
   SDRAM_Timing.WriteRecoveryTime    = 2;
   SDRAM_Timing.RPDelay              = 2;
   SDRAM_Timing.RCDDelay             = 2;
-
+  
   hsdram.Init.SDBank             = FMC_SDRAM_BANK1;
   hsdram.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_8;
   hsdram.Init.RowBitsNumber      = FMC_SDRAM_ROW_BITS_NUM_12;
@@ -121,58 +121,58 @@ int main(void)
   hsdram.Init.SDClockPeriod      = SDCLOCK_PERIOD;
   hsdram.Init.ReadBurst          = FMC_SDRAM_RBURST_ENABLE;
   hsdram.Init.ReadPipeDelay      = FMC_SDRAM_RPIPE_DELAY_0;
-
+  
   /* Initialize the SDRAM controller */
   if(HAL_SDRAM_Init(&hsdram, &SDRAM_Timing) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /* Program the SDRAM external device */
-  BSP_SDRAM_Initialization_Sequence(&hsdram, &command);
-
-  /*##-2- SDRAM memory read/write access #####################################*/
-
+  BSP_SDRAM_Initialization_Sequence(&hsdram, &command);   
+  
+  /*##-2- SDRAM memory read/write access #####################################*/  
+  
   /* Fill the buffer to write */
-  Fill_Buffer(aTxBuffer, BUFFER_SIZE, 0xA244250F);
-
+  Fill_Buffer(aTxBuffer, BUFFER_SIZE, 0xA244250F);   
+  
   /* Write data to the SDRAM memory */
   for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
   {
     *(__IO uint32_t*) (SDRAM_BANK_ADDR + WRITE_READ_ADDR + 4*uwIndex) = aTxBuffer[uwIndex];
-  }
-
+  }    
+  
   /* Read back data from the SDRAM memory */
   for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
   {
     aRxBuffer[uwIndex] = *(__IO uint32_t*) (SDRAM_BANK_ADDR + WRITE_READ_ADDR + 4*uwIndex);
-  }
-
-  /*##-3- Checking data integrity ############################################*/
-
+  } 
+  
+  /*##-3- Checking data integrity ############################################*/    
+  
   for (uwIndex = 0; (uwIndex < BUFFER_SIZE) && (uwWriteReadStatus == 0); uwIndex++)
   {
     if (aRxBuffer[uwIndex] != aTxBuffer[uwIndex])
     {
       uwWriteReadStatus++;
     }
-  }
-
+  }	
+  
   if (uwWriteReadStatus)
   {
     /* KO */
     /* Turn on LED2 */
-    BSP_LED_On(LED2);
+    BSP_LED_On(LED2);     
   }
   else
-  {
+  { 
     /* OK */
     /* Turn on LED1 */
     BSP_LED_On(LED1);
   }
-
-  /* Infinite loop */
+  
+  /* Infinite loop */  
   while (1)
   {
   }
@@ -180,7 +180,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -206,8 +206,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -221,17 +221,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
-  HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  HAL_PWREx_EnableOverDrive();  
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -258,59 +258,59 @@ static void Error_Handler(void)
 static void BSP_SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_SDRAM_CommandTypeDef *Command)
 {
   __IO uint32_t tmpmrd = 0;
-
+  
   /* Configure a clock configuration enable command */
   Command->CommandMode = FMC_SDRAM_CMD_CLK_ENABLE;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 1;
   Command->ModeRegisterDefinition = 0;
-
+  
   /* Send the command */
   HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);
-
-  /* Insert 100 us minimum delay */
+  
+  /* Insert 100 us minimum delay */ 
   /* Inserted delay is equal to 1 ms due to systick time base unit (ms) */
   HAL_Delay(1);
-
-  /* Configure a PALL (precharge all) command */
+  
+  /* Configure a PALL (precharge all) command */ 
   Command->CommandMode = FMC_SDRAM_CMD_PALL;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 1;
   Command->ModeRegisterDefinition = 0;
-
+  
   /* Send the command */
-  HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);
-
-  /* Configure a Auto-Refresh command */
+  HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);  
+  
+  /* Configure a Auto-Refresh command */ 
   Command->CommandMode = FMC_SDRAM_CMD_AUTOREFRESH_MODE;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 8;
   Command->ModeRegisterDefinition = 0;
-
+  
   /* Send the command */
   HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);
-
+  
   /* Program the external memory mode register */
   tmpmrd = (uint32_t)SDRAM_MODEREG_BURST_LENGTH_1          |
                      SDRAM_MODEREG_BURST_TYPE_SEQUENTIAL   |
                      SDRAM_MODEREG_CAS_LATENCY_3           |
                      SDRAM_MODEREG_OPERATING_MODE_STANDARD |
                      SDRAM_MODEREG_WRITEBURST_MODE_SINGLE;
-
+  
   Command->CommandMode = FMC_SDRAM_CMD_LOAD_MODE;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 1;
   Command->ModeRegisterDefinition = tmpmrd;
-
+  
   /* Send the command */
   HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);
-
+  
   /* Set the refresh rate counter */
   /* (15.62 us x Freq) - 20 */
   /* Set the device refresh counter */
   hsdram->Instance->SDRTR |= ((uint32_t)((1292)<< 1));
 }
-
+                  
 /**
   * @brief  Fills buffer with user predefined data.
   * @param  pBuffer: pointer on the buffer to fill
@@ -327,7 +327,7 @@ static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwO
   {
     pBuffer[tmpIndex] = tmpIndex + uwOffset;
   }
-}
+}                  
 
 #ifdef  USE_FULL_ASSERT
 /**
@@ -338,7 +338,7 @@ static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwO
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -351,10 +351,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

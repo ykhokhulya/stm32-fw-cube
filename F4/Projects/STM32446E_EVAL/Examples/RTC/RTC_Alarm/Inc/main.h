@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_Alarm/Inc/main.h
+  * @file    RTC/RTC_Alarm/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************

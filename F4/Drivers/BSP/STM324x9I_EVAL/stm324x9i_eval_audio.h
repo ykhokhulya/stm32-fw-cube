@@ -40,7 +40,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 /* Include audio component Driver */
@@ -50,12 +50,12 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM324x9I_EVAL
   * @{
   */
-
+    
 /** @addtogroup STM324x9I_EVAL_AUDIO
   * @{
   */
@@ -63,28 +63,28 @@
 /** @defgroup STM324x9I_EVAL_AUDIO_Exported_Constants STM324x9I EVAL AUDIO Exported Constants
   * @{
   */
-
+ 
 /*------------------------------------------------------------------------------
                           USER SAI defines parameters
  -----------------------------------------------------------------------------*/
-/** CODEC_AudioFrame_SLOT_TDMMode
+/** CODEC_AudioFrame_SLOT_TDMMode 
   * @brief In W8994 codec the Audio frame contains 4 slots : TDM Mode
   * TDM format :
-  * +------------------|------------------|--------------------|-------------------+
+  * +------------------|------------------|--------------------|-------------------+ 
   * | CODEC_SLOT0 Left | CODEC_SLOT1 Left | CODEC_SLOT0 Right  | CODEC_SLOT1 Right |
   * +------------------------------------------------------------------------------+
   */
 /* To have 2 separate audio stream in Both headphone and speaker the 4 slot must be activated */
 #define CODEC_AUDIOFRAME_SLOT_0123                   SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_1 | SAI_SLOTACTIVE_2 | SAI_SLOTACTIVE_3
-/* To have an audio stream in headphone only SAI Slot 0 and Slot 2 must be activated */
-#define CODEC_AUDIOFRAME_SLOT_02                     SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2
-/* To have an audio stream in speaker only SAI Slot 1 and Slot 3 must be activated */
+/* To have an audio stream in headphone only SAI Slot 0 and Slot 2 must be activated */ 
+#define CODEC_AUDIOFRAME_SLOT_02                     SAI_SLOTACTIVE_0 | SAI_SLOTACTIVE_2 
+/* To have an audio stream in speaker only SAI Slot 1 and Slot 3 must be activated */ 
 #define CODEC_AUDIOFRAME_SLOT_13                     SAI_SLOTACTIVE_1 | SAI_SLOTACTIVE_3
-
+  
 /* SAI peripheral configuration defines */
 #define AUDIO_SAIx                           SAI1_Block_B
 #define AUDIO_SAIx_CLK_ENABLE()              __HAL_RCC_SAI1_CLK_ENABLE()
-#define AUDIO_SAIx_CLK_DISABLE()             __HAL_RCC_SAI1_CLK_DISABLE()
+#define AUDIO_SAIx_CLK_DISABLE()             __HAL_RCC_SAI1_CLK_DISABLE()   
 #define AUDIO_SAIx_MCLK_SCK_SD_FS_AF         GPIO_AF6_SAI1
 
 #define AUDIO_SAIx_MCLK_SCK_SD_FS_ENABLE()   __HAL_RCC_GPIOF_CLK_ENABLE()
@@ -103,11 +103,11 @@
 #define AUDIO_SAIx_DMAx_PERIPH_DATA_SIZE     DMA_PDATAALIGN_HALFWORD
 #define AUDIO_SAIx_DMAx_MEM_DATA_SIZE        DMA_MDATAALIGN_HALFWORD
 #define DMA_MAX_SZE                          0xFFFF
-
+   
 #define AUDIO_SAIx_DMAx_IRQHandler           DMA2_Stream5_IRQHandler
 
 /* Select the interrupt preemption priority for the DMA interrupt */
-#define AUDIO_OUT_IRQ_PREPRIO           0x0E   /* Select the preemption priority level(0 is the highest) */
+#define AUDIO_OUT_IRQ_PREPRIO           0x0E   /* Select the preemption priority level(0 is the highest) */   
 
 /*------------------------------------------------------------------------------
                         AUDIO IN CONFIGURATION
@@ -133,15 +133,15 @@
 #define AUDIO_I2Sx_DMAx_IRQ                 DMA1_Stream2_IRQn
 #define AUDIO_I2Sx_DMAx_PERIPH_DATA_SIZE    DMA_PDATAALIGN_HALFWORD
 #define AUDIO_I2Sx_DMAx_MEM_DATA_SIZE       DMA_MDATAALIGN_HALFWORD
-
+   
 #define AUDIO_I2Sx_DMAx_IRQHandler          DMA1_Stream2_IRQHandler
-
+  
 /* Select the interrupt preemption priority and subpriority for the IT/DMA interrupt */
 #define AUDIO_IN_IRQ_PREPRIO                0x0F   /* Select the preemption priority level(0 is the highest) */
 
 
 /* Two channels are used:
-   - one channel as input which is connected to I2S SCK in stereo mode
+   - one channel as input which is connected to I2S SCK in stereo mode 
    - one channel as output which divides the frequency on the input
 */
 
@@ -162,7 +162,7 @@
 
 #define AUDIODATA_SIZE                      2   /* 16-bits audio data size */
 
-/* Audio status definition */
+/* Audio status definition */     
 #define AUDIO_OK                            0
 #define AUDIO_ERROR                         1
 #define AUDIO_TIMEOUT                       2
@@ -178,18 +178,18 @@
 /* PCM buffer output size */
 #define PCM_OUT_SIZE                        DEFAULT_AUDIO_IN_FREQ/1000*2
 #define CHANNEL_DEMUX_MASK                  0x55
-
+   
 /*------------------------------------------------------------------------------
                     OPTIONAL Configuration defines parameters
 ------------------------------------------------------------------------------*/
 
 /* Delay for the Codec to be correctly reset */
 #define CODEC_RESET_DELAY           5
-
+   
 /**
   * @}
   */
-
+ 
 /** @defgroup STM324x9I_EVAL_AUDIO_Exported_Variables STM324x9I EVAL AUDIO Exported Variables
   * @{
   */
@@ -197,20 +197,20 @@ extern __IO uint16_t AudioInVolume;
  /**
   * @}
   */
-
+   
 /** @defgroup STM324x9I_EVAL_AUDIO_Exported_Macros STM324x9I EVAL AUDIO Exported Macros
   * @{
   */
 #define DMA_MAX(x)           (((x) <= DMA_MAX_SZE)? (x):DMA_MAX_SZE)
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324x9I_EVAL_AUDIO_OUT_Exported_Functions STM324x9I EVAL AUDIO OUT Exported Functions
   * @{
   */
 uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
-void    BSP_AUDIO_OUT_DeInit(void);
+void    BSP_AUDIO_OUT_DeInit(void);    
 uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size);
 void    BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size);
 uint8_t BSP_AUDIO_OUT_Pause(void);
@@ -240,7 +240,7 @@ void  BSP_AUDIO_OUT_MspInit(SAI_HandleTypeDef *hsai, void *Params);
 void  BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params);
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324x9I_EVAL_AUDIO_IN_Exported_Functions STM324x9I EVAL AUDIO IN Exported Functions
   * @{
@@ -266,17 +266,17 @@ void    BSP_AUDIO_IN_Error_Callback(void);
 
 /* These function can be modified in case the current settings (e.g. DMA stream)
    need to be changed for specific application needs */
-void BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params);
+void BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params);     
 void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params);
 void BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

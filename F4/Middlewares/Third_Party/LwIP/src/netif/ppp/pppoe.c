@@ -6,13 +6,13 @@
 * The authors hereby grant permission to use, copy, modify, distribute,
 * and license this software and its documentation for any purpose, provided
 * that existing copyright notices are retained in all copies and that this
-* notice and the following disclaimer are included verbatim in any
+* notice and the following disclaimer are included verbatim in any 
 * distributions. No written agreement, license, or royalty fee is required
 * for any of the authorized uses.
 *
 * THIS SOFTWARE IS PROVIDED BY THE CONTRIBUTORS *AS IS* AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
 * IN NO EVENT SHALL THE CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
@@ -119,7 +119,7 @@ LWIP_MEMPOOL_DECLARE(PPPOE_IF, MEMP_NUM_PPPOE_INTERFACES, sizeof(struct pppoe_so
 /* callbacks called from PPP core */
 static err_t pppoe_write(ppp_pcb *ppp, void *ctx, struct pbuf *p);
 static err_t pppoe_netif_output(ppp_pcb *ppp, void *ctx, struct pbuf *p, u_short protocol);
-static err_t pppoe_connect(ppp_pcb *ppp, void *ctx);
+static void pppoe_connect(ppp_pcb *ppp, void *ctx);
 static void pppoe_disconnect(ppp_pcb *ppp, void *ctx);
 static err_t pppoe_destroy(ppp_pcb *ppp, void *ctx);
 
@@ -387,7 +387,7 @@ pppoe_disc_input(struct netif *netif, struct pbuf *pb)
   struct pppoetag pt;
   int off;
 #if defined(LWIP_DEBUG) && (LOG_DEBUG == LWIP_DBG_ON)
-	int err;
+  int err;
 #endif
   struct eth_hdr *ethhdr;
 
@@ -606,12 +606,12 @@ breakbreak:;
       sc->sc_padr_retried = 0;
       sc->sc_state = PPPOE_STATE_PADR_SENT;
 #if defined(LWIP_DEBUG) && (LOG_DEBUG == LWIP_DBG_ON)
-      if ((err = pppoe_send_padr(sc)) != 0)
-			{
+      if ((err = pppoe_send_padr(sc)) != 0) 
+      {
         PPPDEBUG(LOG_DEBUG, ("pppoe: %c%c%"U16_F": failed to send PADR, error=%d\n", sc->sc_ethif->name[0], sc->sc_ethif->name[1], sc->sc_ethif->num, err));
       }
 #else
-		pppoe_send_padr(sc);
+      pppoe_send_padr(sc);
 #endif 	/*defined(LWIP_DEBUG) && (DEBUG_LOG == LWIP_DEBUG_ON) */
       sys_timeout(PPPOE_DISC_TIMEOUT * (1 + sc->sc_padr_retried), pppoe_timeout, sc);
       break;
@@ -672,7 +672,7 @@ pppoe_data_input(struct netif *netif, struct pbuf *pb)
     PPPDEBUG(LOG_ERR, ("pppoe_data_input: pbuf_header failed\n"));
     LINK_STATS_INC(link.lenerr);
     goto drop;
-  }
+  } 
 
   if (pb->len < sizeof(*ph)) {
     PPPDEBUG(LOG_DEBUG, ("pppoe_data_input: could not get PPPoE header\n"));
@@ -705,7 +705,7 @@ pppoe_data_input(struct netif *netif, struct pbuf *pb)
     PPPDEBUG(LOG_ERR, ("pppoe_data_input: pbuf_header PPPOE_HEADERLEN failed\n"));
     LINK_STATS_INC(link.lenerr);
     goto drop;
-  }
+  } 
 
   PPPDEBUG(LOG_DEBUG, ("pppoe_data_input: %c%c%"U16_F": pkthdr.len=%d, pppoe.len=%d\n",
         sc->sc_ethif->name[0], sc->sc_ethif->name[1], sc->sc_ethif->num,
@@ -864,7 +864,7 @@ pppoe_timeout(void *arg)
         PPPDEBUG(LOG_DEBUG, ("pppoe: %c%c%"U16_F": failed to transmit PADI, error=%d\n", sc->sc_ethif->name[0], sc->sc_ethif->name[1], sc->sc_ethif->num, err));
       }
 #else
-			pppoe_send_padi(sc);
+      pppoe_send_padi(sc);
 #endif
       sys_timeout(retry_wait, pppoe_timeout, sc);
       break;
@@ -880,7 +880,7 @@ pppoe_timeout(void *arg)
           PPPDEBUG(LOG_DEBUG, ("pppoe: %c%c%"U16_F": failed to send PADI, error=%d\n", sc->sc_ethif->name[0], sc->sc_ethif->name[1], sc->sc_ethif->num, err));
         }
 #else
-				pppoe_send_padi(sc);
+        pppoe_send_padi(sc);
 #endif
         sys_timeout(PPPOE_DISC_TIMEOUT * (1 + sc->sc_padi_retried), pppoe_timeout, sc);
         return;
@@ -891,7 +891,9 @@ pppoe_timeout(void *arg)
         PPPDEBUG(LOG_DEBUG, ("pppoe: %c%c%"U16_F": failed to send PADR, error=%d\n", sc->sc_ethif->name[0], sc->sc_ethif->name[1], sc->sc_ethif->num, err));
       }
 #else
-				pppoe_send_padr(sc);
+      if (pppoe_send_padr(sc) != 0) {
+        sc->sc_padr_retried--; 
+      }
 #endif
       sys_timeout(PPPOE_DISC_TIMEOUT * (1 + sc->sc_padr_retried), pppoe_timeout, sc);
       break;
@@ -901,10 +903,12 @@ pppoe_timeout(void *arg)
 }
 
 /* Start a connection (i.e. initiate discovery phase) */
-static err_t
+static void
 pppoe_connect(ppp_pcb *ppp, void *ctx)
 {
+#if defined(LWIP_DEBUG) && (LOG_DEBUG == LWIP_DBG_ON)
   err_t err;
+#endif
   struct pppoe_softc *sc = (struct pppoe_softc *)ctx;
   lcp_options *lcp_wo;
   lcp_options *lcp_ao;
@@ -952,11 +956,14 @@ pppoe_connect(ppp_pcb *ppp, void *ctx)
 
   /* save state, in case we fail to send PADI */
   sc->sc_state = PPPOE_STATE_PADI_SENT;
+#if defined(LWIP_DEBUG) && (LOG_DEBUG == LWIP_DBG_ON)
   if ((err = pppoe_send_padi(sc)) != 0) {
     PPPDEBUG(LOG_DEBUG, ("pppoe: %c%c%"U16_F": failed to send PADI, error=%d\n", sc->sc_ethif->name[0], sc->sc_ethif->name[1], sc->sc_ethif->num, err));
-  }
+    }
+#else
+    pppoe_send_padi(sc);
+#endif
   sys_timeout(PPPOE_DISC_TIMEOUT, pppoe_timeout, sc);
-  return err;
 }
 
 /* disconnect */

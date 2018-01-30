@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32_ADAFRUIT_SD_H
@@ -40,39 +40,39 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
 
 /** @addtogroup BSP
   * @{
-  */
-#define __IO    volatile
-
+  */ 
+#define __IO    volatile   
+   
 /** @addtogroup STM32_ADAFRUIT
   * @{
   */
-
+    
 /** @defgroup STM32_ADAFRUIT_SD
   * @{
-  */
+  */    
 
 /** @defgroup STM32_ADAFRUIT_SD_Exported_Types
   * @{
   */
-
-/**
-  * @brief  SD status structure definition
-  */
-enum {
-      BSP_SD_OK = 0x00,
+   
+/** 
+  * @brief  SD status structure definition  
+  */     
+enum {    
+      BSP_SD_OK = 0x00,      
       MSD_OK = 0x00,
       BSP_SD_ERROR = 0x01,
       BSP_SD_TIMEOUT
 };
-
-typedef struct
+   
+typedef struct              
 {
   uint8_t  Reserved1:2;               /* Reserved */
   uint16_t DeviceSize:12;             /* Device Size */
@@ -84,16 +84,16 @@ typedef struct
 } struct_v1;
 
 
-typedef struct
+typedef struct              
 {
   uint8_t  Reserved1:6;               /* Reserved */
   uint32_t DeviceSize:22;             /* Device Size */
   uint8_t  Reserved2:1;               /* Reserved */
 } struct_v2;
 
-/**
+/** 
   * @brief  Card Specific Data: CSD Register
-  */
+  */ 
 typedef struct
 {
   /* Header part */
@@ -108,13 +108,13 @@ typedef struct
   uint8_t  WrBlockMisalign:1;      /* Write block misalignment */
   uint8_t  RdBlockMisalign:1;      /* Read block misalignment */
   uint8_t  DSRImpl:1;              /* DSR implemented */
-
+  
   /* v1 or v2 struct */
   union csd_version {
     struct_v1 v1;
     struct_v2 v2;
   } version;
-
+  
   uint8_t  EraseSingleBlockEnable:1;  /* Erase single block enable */
   uint8_t  EraseSectorSize:7;         /* Erase group size multiplier */
   uint8_t  WrProtectGrSize:7;         /* Write protect group size */
@@ -132,11 +132,11 @@ typedef struct
   uint8_t  Reserved4:2;               /* Reserved */
   uint8_t  crc:7;                     /* Reserved */
   uint8_t  Reserved5:1;               /* always 1*/
-
+  
 } SD_CSD;
 
-/**
-  * @brief  Card Identification Data: CID Register
+/** 
+  * @brief  Card Identification Data: CID Register   
   */
 typedef struct
 {
@@ -152,8 +152,8 @@ typedef struct
   __IO uint8_t  Reserved2;            /* always 1 */
 } SD_CID;
 
-/**
-  * @brief SD Card information
+/** 
+  * @brief SD Card information 
   */
 typedef struct
 {
@@ -168,11 +168,11 @@ typedef struct
 /**
   * @}
   */
-
+  
 /** @defgroup STM32_ADAFRUIT_SPI_SD_Exported_Constants
   * @{
-  */
-
+  */ 
+  
 /**
   * @brief  Block Size
   */
@@ -186,33 +186,33 @@ typedef struct
 
 #define SD_DATATIMEOUT           ((uint32_t)100000000)
 
-/**
-  * @brief SD Card information structure
-  */
+/** 
+  * @brief SD Card information structure 
+  */   
 #define BSP_SD_CardInfo SD_CardInfo
 
 /**
   * @}
   */
-
+  
 /** @defgroup STM32_ADAFRUIT_SD_Exported_Macro
   * @{
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32_ADAFRUIT_SD_Exported_Functions
   * @{
-  */
+  */   
 uint8_t BSP_SD_Init(void);
 uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks, uint32_t Timeout);
 uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks, uint32_t Timeout);
 uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr);
 uint8_t BSP_SD_GetCardState(void);
 uint8_t BSP_SD_GetCardInfo(SD_CardInfo *pCardInfo);
-
+   
 /* Link functions for SD Card peripheral*/
 void    SD_IO_Init(void);
 void    SD_IO_CSState(uint8_t state);
@@ -230,18 +230,18 @@ void HAL_Delay(__IO uint32_t Delay);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

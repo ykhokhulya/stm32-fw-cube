@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___i_i_r___lattice.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -141,18 +141,18 @@ Functions</h2></td></tr>
 <img src="IIRLattice.gif" alt="IIRLattice.gif"/>
 <div class="caption">
 Infinite Impulse Response Lattice filter</div></div>
- <pre>
-     fN(n)   =  x(n)
-     fm-1(n) = fm(n) - km * gm-1(n-1)   for m = N, N-1, ...1
-     gm(n)   = km * fm-1(n) + gm-1(n-1) for m = N, N-1, ...1
-     y(n)    = vN * gN(n) + vN-1 * gN-1(n) + ...+ v0 * g0(n)
+ <pre>    
+     fN(n)   =  x(n)    
+     fm-1(n) = fm(n) - km * gm-1(n-1)   for m = N, N-1, ...1    
+     gm(n)   = km * fm-1(n) + gm-1(n-1) for m = N, N-1, ...1    
+     y(n)    = vN * gN(n) + vN-1 * gN-1(n) + ...+ v0 * g0(n)    
   </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pkCoeffs</code> points to array of reflection coefficients of size <code>numStages</code>. Reflection coefficients are stored in time-reversed order. </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-     {kN, kN-1, ....k1}
+<dl class="section user"><dt></dt><dd><pre>    
+     {kN, kN-1, ....k1}    
   </pre> <code>pvCoeffs</code> points to the array of ladder coefficients of size <code>(numStages+1)</code>. Ladder coefficients are stored in time-reversed order. </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-     {vN, vN-1, ...v0}
+<dl class="section user"><dt></dt><dd><pre>    
+     {vN, vN-1, ...v0}    
   </pre> <code>pState</code> points to a state array of size <code>numStages + blockSize</code>. The state variables shown in the figure above (the g values) are stored in the <code>pState</code> array. The state variables are updated after each block of data is processed; the coefficients are untouched. </dd></dl>
 <dl class="section user"><dt>Instance Structure </dt><dd>The coefficients and state variables for a filter are stored together in an instance data structure. A separate instance structure must be defined for each filter. Coefficient arrays may be shared among several instances while state variable arrays cannot be shared. There are separate instance structure declarations for each of the 3 supported data types.</dd></dl>
 <dl class="section user"><dt>Initialization Functions </dt><dd>There is also an associated initialization function for each data type. The initialization function performs the following operations:<ul>
@@ -160,10 +160,10 @@ Infinite Impulse Response Lattice filter</div></div>
 <li>Zeros out the values in the state buffer. To do this manually without calling the init function, assign the follow subfields of the instance structure: numStages, pkCoeffs, pvCoeffs, pState. Also set all of the values in pState to zero.</li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. Set the values in the state buffer to zeros and then manually initialize the instance structure as follows: <pre>
-*arm_iir_lattice_instance_f32 S = {numStages, pState, pkCoeffs, pvCoeffs};
-*arm_iir_lattice_instance_q31 S = {numStages, pState, pkCoeffs, pvCoeffs};
-*arm_iir_lattice_instance_q15 S = {numStages, pState, pkCoeffs, pvCoeffs};
+<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. Set the values in the state buffer to zeros and then manually initialize the instance structure as follows: <pre>    
+*arm_iir_lattice_instance_f32 S = {numStages, pState, pkCoeffs, pvCoeffs};    
+*arm_iir_lattice_instance_q31 S = {numStages, pState, pkCoeffs, pvCoeffs};    
+*arm_iir_lattice_instance_q15 S = {numStages, pState, pkCoeffs, pvCoeffs};    
   </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>where <code>numStages</code> is the number of stages in the filter; <code>pState</code> points to the state buffer array; <code>pkCoeffs</code> points to array of the reflection coefficients; <code>pvCoeffs</code> points to the array of ladder coefficients. </dd></dl>
 <dl class="section user"><dt>Fixed-Point Behavior </dt><dd>Care must be taken when using the fixed-point versions of the IIR lattice filter functions. In particular, the overflow and saturation behavior of the accumulator used in each function must be considered. Refer to the function specific documentation below for usage guidelines. </dd></dl>
@@ -522,7 +522,7 @@ Infinite Impulse Response Lattice filter</div></div>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

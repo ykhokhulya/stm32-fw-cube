@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    CAN/CAN_LoopBack/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -45,7 +45,7 @@
 
 /** @addtogroup CAN_LoopBack
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -172,7 +172,7 @@ void SysTick_Handler(void)
 * @retval None
 */
 void DMA1_Stream5_IRQHandler(void)
-{
+{ 
 }
 
 /**
@@ -257,7 +257,7 @@ void CAN2_TX_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

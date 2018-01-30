@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_TimeBase/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to use a timer instance to generate a
+  * @brief   This example describes how to use a timer instance to generate a 
   *          time base using the STM32F4xx TIM LL API.
   *          Peripheral initialization done using LL unitary services functions.
   ******************************************************************************
@@ -109,8 +109,8 @@ int main(void)
 __STATIC_INLINE void  Configure_TIMTimeBase(void)
 {
   /* Enable the timer peripheral clock */
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
-
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2); 
+  
   /* Set counter mode */
   /* Reset value is LL_TIM_COUNTERMODE_UP */
   //LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
@@ -127,24 +127,24 @@ __STATIC_INLINE void  Configure_TIMTimeBase(void)
     Prescaler = (SystemCoreClock /10 KHz) - 1
   */
   LL_TIM_SetPrescaler(TIM2, __LL_TIM_CALC_PSC(SystemCoreClock, 10000));
-
+  
   /* Set the auto-reload value to have an initial update event frequency of 10 Hz */
     /* TIM2CLK = SystemCoreClock / (APB prescaler & multiplier)                 */
   TimOutClock = SystemCoreClock/2;
-
+  
   InitialAutoreload = __LL_TIM_CALC_ARR(TimOutClock, LL_TIM_GetPrescaler(TIM2), 10);
   LL_TIM_SetAutoReload(TIM2, InitialAutoreload);
-
+  
   /* Enable the update interrupt */
   LL_TIM_EnableIT_UPDATE(TIM2);
-
+  
   /* Configure the NVIC to handle TIM2 update interrupt */
   NVIC_SetPriority(TIM2_IRQn, 0);
   NVIC_EnableIRQ(TIM2_IRQn);
-
+  
   /* Enable counter */
   LL_TIM_EnableCounter(TIM2);
-
+  
   /* Force update generation */
   LL_TIM_GenerateEvent_UPDATE(TIM2);
 }
@@ -178,21 +178,21 @@ __STATIC_INLINE void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
-
+  
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+    
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
+    
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
 }
 
 /**
@@ -283,7 +283,7 @@ void UserButton_Callback(void)
   */
 void TimerUpdate_Callback(void)
 {
-  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
 }
 
 #ifdef  USE_FULL_ASSERT

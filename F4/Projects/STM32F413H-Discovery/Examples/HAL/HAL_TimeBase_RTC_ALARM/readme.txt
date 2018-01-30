@@ -1,9 +1,9 @@
 /**
   @page HAL_TimeBase_RTC_Alarm HAL TimeBase RTC Alarm
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt
+  * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HAL TimeBase RTC Alarm example.
   ******************************************************************************
@@ -33,23 +33,23 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example describes how to customize the HAL time base using RTC alarm instead
-of Systick as main source of time base. The User push-button will be used
-to Suspend or Resume tick increment.
+This example describes how to customize the HAL time base using RTC alarm instead 
+of Systick as main source of time base. The User push-button will be used 
+to Suspend or Resume tick increment. 
 Each time the button is pressed; an interrupt is generated (EXTI_Line_0)
 and in the ISR the uwIncrementState is checked:
-  1- If the uwIncrementState = 0: the tick increment is suspended by calling
+  1- If the uwIncrementState = 0: the tick increment is suspended by calling 
      HAL_SuspendTick() API (RTC alarm interrupt is disabled).
-  2- If the uwIncrementState = 1: the tick increment is Resumed by calling
+  2- If the uwIncrementState = 1: the tick increment is Resumed by calling 
      HAL_ResumeTick() API(RTC alarm interrupt is enabled).
 
-The alarm is configured to assert an interrupt when the RTC reaches 1 ms
+The alarm is configured to assert an interrupt when the RTC reaches 1 ms 
 
 The example brings, in user file, a new implementation of the following HAL weak functions:
 
-HAL_InitTick()
+HAL_InitTick() 
 HAL_SuspendTick()
 HAL_ResumeTick()
 
@@ -68,15 +68,15 @@ In an infinite loop, LED3 toggles spaced out over 500ms delay.
       a peripheral ISR process, then the HAL time base interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the HAL time base interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the HAL time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents  
 
   - HAL/HAL_TimeBase_RTC_ALARM/Inc/stm32f4xx_hal_conf.h                   HAL configuration file
   - HAL/HAL_TimeBase_RTC_ALARM/Inc/stm32f4xx_it.h                         Interrupt handlers header file
-  - HAL/HAL_TimeBase_RTC_ALARM/Inc/main.h                                 Header for main.c module
+  - HAL/HAL_TimeBase_RTC_ALARM/Inc/main.h                                 Header for main.c module  
   - HAL/HAL_TimeBase_RTC_ALARM/Src/stm32f4xx_it.c                         Interrupt handlers
   - HAL/HAL_TimeBase_RTC_ALARM/Src/main.c                                 Main program
   - HAL/HAL_TimeBase_RTC_ALARM/Src/stm32f4xx_hal_timebase_rtc_alarm.c     HAL time base rtc alarm functions
@@ -85,14 +85,14 @@ In an infinite loop, LED3 toggles spaced out over 500ms delay.
 @par Hardware and Software environment
 
   - This example runs on STM32F413xx devices.
-
+    
   - This example has been tested with STMicroelectronics STM32F413H-DISCOVERY board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.      
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

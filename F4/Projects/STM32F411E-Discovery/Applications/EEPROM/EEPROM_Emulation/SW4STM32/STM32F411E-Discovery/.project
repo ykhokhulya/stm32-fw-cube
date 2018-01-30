@@ -105,6 +105,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F411E-Discovery/stm32f411e_discovery.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

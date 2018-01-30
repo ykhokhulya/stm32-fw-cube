@@ -1,45 +1,45 @@
 /**
   @page MSC_Standalone USB Host Mass Storage (MSC) application
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    USB_Host/MSC_Standalone/readme.txt
+  * @file    USB_Host/MSC_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the USB Host MSC application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -48,10 +48,9 @@
 
 @par Application Description
 
-This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
-USB host application based on the Mass Storage Class (MSC) on the STM32F446xx device.
+This application shows how to use the USB host application based on the Mass Storage Class (MSC) on the STM32F446xx device.
 
-This is a typical application on how to use the STM32F446ZE USB OTG Host peripheral to operate with an USB
+This is a typical application on how to use the STM32F446ZE USB OTG Host peripheral to operate with an USB 
 flash disk using the Bulk Only Transfer (BOT) and Small Computer System Interface (SCSI) transparent
 commands combined with a file system FatFs (Middleware component).
 
@@ -66,9 +65,9 @@ The 48 MHz clock for the USB FS can be derived from one of the two following sou
   – PLLSAI clock (clocked by the HSE): If the USB uses the PLLSAI as clock source, the PLLSAI clock must be programmed
     to output 48 MHz frequency (USBCLK = PLLSAIVCO/PLLSAIP).
 
-When the application is started, the connected USB flash disk device is detected in MSC mode and gets
-initialized. The STM32 MCU behaves as a MSC Host, it enumerates the device and extracts VID, PID,
-manufacturer name, Serial no and product name information and displays it on the LCD screen.
+When the application is started, the connected USB flash disk device is detected in MSC mode and gets 
+initialized. The STM32 MCU behaves as a MSC Host, it enumerates the device and extracts VID, PID, 
+manufacturer name, Serial no and product name information and displays it on the LCD screen. 
 This application is based on read/write file and explore the USB flash disk content trough a MSC routine.
 LCD and joystick are provided by Adafruit 1.8" TFT shield to be plugged on Arduino connectors.
 
@@ -82,11 +81,11 @@ User can start any operations using User button:
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-For more details about the STM32Cube USB Host library, please refer to UM1720
+For more details about the STM32Cube USB Host library, please refer to UM1720  
 "STM32Cube USB Host library".
 
 @par USB Library Configuration
@@ -121,17 +120,17 @@ requirements, such as:
   - USB_Host/MSC_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/MSC_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/MSC_Standalone/Inc/ffconf.h                FAT file system module configuration file
-
+ 
 
 @par Hardware and Software environment
 
   - This application runs on STM32F446xx device.
-
+    
   - This application has been tested with STMicroelectronics NUCLEO-F446ZE Rev.B
     boards and can be easily tailored to any other supported device and board.
 
   - NUCLEO-F446ZE Set-up
-    - Plug the USB key into the NUCLEO-F446ZE board through 'USB micro A-Male
+    - Plug the USB key into the NUCLEO-F446ZE board through 'USB micro A-Male 
       to A-Female' cable to the connector CN13.
 
   - Make sure that the jumper JP4 is closed.
@@ -144,9 +143,9 @@ requirements, such as:
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the application
-
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

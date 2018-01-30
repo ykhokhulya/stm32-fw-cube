@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/AUDIO_Standalone/Inc/stm32f4xx_it.h
+  * @file    USB_Host/AUDIO_Standalone/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
@@ -39,7 +39,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -47,8 +47,8 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
-
+/* Exported functions ------------------------------------------------------- */   
+   
 void NMI_Handler(void);
 void HardFault_Handler(void);
 void MemManage_Handler(void);

@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324xG_EVAL_SD_H
@@ -40,51 +40,51 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM324xG_EVAL
   * @{
   */
-
+    
 /** @addtogroup STM324xG_EVAL_SD
   * @{
-  */
+  */    
 
 /** @defgroup STM324xG_EVAL_SD_Exported_Types STM324xG EVAL SD Exported Types
   * @{
   */
 
-/**
-  * @brief SD Card information structure
-  */
+/** 
+  * @brief SD Card information structure 
+  */   
 #define BSP_SD_CardInfo HAL_SD_CardInfoTypeDef
 /**
   * @}
   */
-
+   
 
 /** @defgroup STM324xG_EVAL_SD_Exported_Constants STM324xG EVAL SD Exported Constants
   * @{
   */
-/**
-  * @brief  SD status structure definition
-  */
+/** 
+  * @brief  SD status structure definition  
+  */     
 #define   MSD_OK                        ((uint8_t)0x00)
 #define   MSD_ERROR                     ((uint8_t)0x01)
 
-/**
-  * @brief  SD transfer state definition
-  */
+/** 
+  * @brief  SD transfer state definition  
+  */     
 #define   SD_TRANSFER_OK                ((uint8_t)0x00)
 #define   SD_TRANSFER_BUSY              ((uint8_t)0x01)
-
+   
 #define SD_DETECT_PIN                    GPIO_PIN_13
 #define SD_DETECT_GPIO_PORT              GPIOH
 #define __SD_DETECT_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOH_CLK_ENABLE()
@@ -94,13 +94,13 @@
 
 #define SD_PRESENT               ((uint8_t)0x01)
 #define SD_NOT_PRESENT           ((uint8_t)0x00)
-
+   
 /* DMA definitions for SD DMA transfer */
 #define __DMAx_TxRx_CLK_ENABLE            __HAL_RCC_DMA2_CLK_ENABLE
 #define SD_DMAx_Tx_CHANNEL                DMA_CHANNEL_4
 #define SD_DMAx_Rx_CHANNEL                DMA_CHANNEL_4
-#define SD_DMAx_Tx_STREAM                 DMA2_Stream6
-#define SD_DMAx_Rx_STREAM                 DMA2_Stream3
+#define SD_DMAx_Tx_STREAM                 DMA2_Stream6  
+#define SD_DMAx_Rx_STREAM                 DMA2_Stream3  
 #define SD_DMAx_Tx_IRQn                   DMA2_Stream6_IRQn
 #define SD_DMAx_Rx_IRQn                   DMA2_Stream3_IRQn
 #define BSP_SD_IRQHandler                 SDIO_IRQHandler
@@ -111,10 +111,10 @@
 /**
   * @}
   */
-
+  
 /** @defgroup STM324xG_EVAL_SD_Exported_Functions STM324xG EVAL SD Exported Functions
   * @{
-  */
+  */  
 uint8_t BSP_SD_Init(void);
 uint8_t BSP_SD_ITConfig(void);
 void    BSP_SD_DetectIT(void);
@@ -135,23 +135,23 @@ void    BSP_SD_Detect_MspInit(SD_HandleTypeDef *hsd, void *Params);
 void    BSP_SD_MspDeInit(SD_HandleTypeDef *hsd, void *Params);
 void    BSP_SD_AbortCallback(void);
 void    BSP_SD_WriteCpltCallback(void);
-void    BSP_SD_ReadCpltCallback(void);
+void    BSP_SD_ReadCpltCallback(void); 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
-
+  */ 
+  
 /**
   * @}
-  */
-
+  */ 
+  
 /**
   * @}
-  */
+  */ 
 
 #ifdef __cplusplus
 }

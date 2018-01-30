@@ -31,8 +31,8 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
-
+  */ 
+  
 /* Includes ------------------------------------------------------------------*/
 #include "pulse_skipper.h"
 
@@ -45,7 +45,7 @@
   * @{
   */
 /* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/ 
 #define NB_BITSTREAM_CLOCK_PERIOD               4
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -63,7 +63,7 @@ static void Skipper_MspInit(void);
   * @retval None
   */
 void Pulse_Skipper_Init(void)
-{
+{ 
   /* Configure TIM3 and TIM4 */
   Skipper_MspInit();
 
@@ -100,104 +100,104 @@ void Pulse_Skipper_Bitstream_Stop(void)
   */
 void Pulse_Skipper_Generate_Pulse(PulseSkipper_InitTypeDef* skipperstruct)
 {
-
+  
   /*****************DFSDM1 Pulse Skipper Channel Generation ********************/
   if (skipperstruct->DFSDM1PulseSkipperCh == DFSDM1_PULSE_SKIPPER_CH02)
   {
     /* Disable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm1Handle.Instance, DFSDM1_TIM4_OC2, TIM_CCx_DISABLE);
-
+        
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm1Handle.Instance, DFSDM1_TIM4_OC2, TIM_CCx_ENABLE);
-
+    
     /* Use TIM_Base in order to get interrupt once pulse ended */
     /* Enable the TIM Update interrupt */
-    __HAL_TIM_ENABLE_IT(&TimDfsdm1Handle, TIM_IT_UPDATE);
-
+    __HAL_TIM_ENABLE_IT(&TimDfsdm1Handle, TIM_IT_UPDATE);  
+        
     /* Enable the Peripheral */
-    __HAL_TIM_ENABLE(&TimDfsdm1Handle);
+    __HAL_TIM_ENABLE(&TimDfsdm1Handle);   
   }
   else if (skipperstruct->DFSDM1PulseSkipperCh == DFSDM1_PULSE_SKIPPER_CH13)
   {
     /* Disable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm1Handle.Instance, DFSDM1_TIM4_OC1, TIM_CCx_DISABLE);
-
+        
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm1Handle.Instance, DFSDM1_TIM4_OC1, TIM_CCx_ENABLE);
-
+    
     /* Use TIM_Base in order to get interrupt once pulse ended */
     /* Enable the TIM Update interrupt */
-    __HAL_TIM_ENABLE_IT(&TimDfsdm1Handle, TIM_IT_UPDATE);
-
+    __HAL_TIM_ENABLE_IT(&TimDfsdm1Handle, TIM_IT_UPDATE);  
+        
     /* Enable the Peripheral */
-    __HAL_TIM_ENABLE(&TimDfsdm1Handle);
+    __HAL_TIM_ENABLE(&TimDfsdm1Handle);   
   }
-
+  
   /*****************DFSDM2 Pulse Skipper Channel Generation ********************/
   if (skipperstruct->DFSDM2PulseSkipperCh == DFSDM2_PULSE_SKIPPER_CH04)
   {
     /* Disable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC4, TIM_CCx_DISABLE);
-
+        
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC4, TIM_CCx_ENABLE);
-
+    
     /* Use TIM_Base in order to get interrupt once pulse ended */
     /* Enable the TIM Update interrupt */
-    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);
-
+    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);  
+        
     /* Enable the Peripheral */
-    __HAL_TIM_ENABLE(&TimDfsdm2Handle);
+    __HAL_TIM_ENABLE(&TimDfsdm2Handle);   
   }
   else if (skipperstruct->DFSDM2PulseSkipperCh == DFSDM2_PULSE_SKIPPER_CH15)
   {
     /* Disable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC3, TIM_CCx_DISABLE);
-
+        
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC3, TIM_CCx_ENABLE);
-
+    
     /* Use TIM_Base in order to get interrupt once pulse ended */
     /* Enable the TIM Update interrupt */
-    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);
-
+    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);  
+        
     /* Enable the Peripheral */
-    __HAL_TIM_ENABLE(&TimDfsdm2Handle);
+    __HAL_TIM_ENABLE(&TimDfsdm2Handle);   
   }
   else if (skipperstruct->DFSDM2PulseSkipperCh == DFSDM2_PULSE_SKIPPER_CH26)
   {
     /* Disable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC2, TIM_CCx_DISABLE);
-
+        
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC2, TIM_CCx_ENABLE);
-
+    
     /* Use TIM_Base in order to get interrupt once pulse ended */
     /* Enable the TIM Update interrupt */
-    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);
-
+    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);  
+        
     /* Enable the Peripheral */
-    __HAL_TIM_ENABLE(&TimDfsdm2Handle);
+    __HAL_TIM_ENABLE(&TimDfsdm2Handle);   
   }
   else if (skipperstruct->DFSDM2PulseSkipperCh == DFSDM2_PULSE_SKIPPER_CH37)
   {
     /* Disable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC1, TIM_CCx_DISABLE);
-
+        
     /* Enable the Capture compare channel */
     TIM_CCxChannelCmd(TimDfsdm2Handle.Instance, DFSDM2_TIM3_OC1, TIM_CCx_ENABLE);
-
+    
     /* Use TIM_Base in order to get interrupt once pulse ended */
     /* Enable the TIM Update interrupt */
-    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);
-
+    __HAL_TIM_ENABLE_IT(&TimDfsdm2Handle, TIM_IT_UPDATE);  
+        
     /* Enable the Peripheral */
-    __HAL_TIM_ENABLE(&TimDfsdm2Handle);
-  }
+    __HAL_TIM_ENABLE(&TimDfsdm2Handle);   
+  }  
 }
 
 /**
-  * @brief  Turns selected LED Off.
+  * @brief  Turns selected LED Off. 
   * @param  Led: LED to be set off
   *          This parameter can be one of the following values:
   *            @arg  LED5
@@ -210,7 +210,7 @@ static void Skipper_MspInit(void)
    TIM_OC_InitTypeDef           sOCConfig;
    /* Slave configuration structure */
    TIM_SlaveConfigTypeDef       sSlaveConfig;
-
+   
   /* Timers Configuration */
   TimDfsdm2Handle.Instance = TIM3;
   TimDfsdm1Handle.Instance = TIM4;
@@ -228,9 +228,9 @@ static void Skipper_MspInit(void)
     while(1);
   }
 
-  /* Configure the OPM Mode */
+  /* Configure the OPM Mode */ 
   HAL_TIM_OnePulse_Init(&TimDfsdm2Handle, TIM_OPMODE_SINGLE);
-
+  
   /* Configure the PWM_channel_1 */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_LOW;
@@ -285,7 +285,7 @@ static void Skipper_MspInit(void)
 
   /* Configure the OPM Mode */
   HAL_TIM_OnePulse_Init(&TimDfsdm1Handle, TIM_OPMODE_SINGLE);
-
+  
   /* Configure the PWM_channel_1 */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_LOW;
@@ -327,12 +327,12 @@ static void Skipper_MspInit(void)
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 {
   GPIO_InitTypeDef   GPIO_InitStruct;
-
+  
   /* Enable  TIM4, TIM3 clocks */
   __HAL_RCC_TIM3_CLK_ENABLE();
   __HAL_RCC_TIM4_CLK_ENABLE();
-
-  /* Enable  GPIOB, GPIOD clocks */
+  
+  /* Enable  GPIOB, GPIOD clocks */  
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
@@ -344,23 +344,23 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
   GPIO_InitStruct.Pin = GPIO_PIN_4;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
+  
   /* Configure PB.05 (TIM3_Channel2): pin D11 from CN6 */
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
   GPIO_InitStruct.Pin = GPIO_PIN_5;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
+  
   /* Configure PB.00 (TIM3_Channel3):  pin D6 from CN8 */
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
   GPIO_InitStruct.Pin = GPIO_PIN_0;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
+  
   /* Configure PB.01 (TIM3_Channel4):  pin A4 from CN9 */
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
   GPIO_InitStruct.Pin = GPIO_PIN_1;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /* Configure PB.06 (TIM4_Channel1) :  pin D4 from CN8 */
+  /* Configure PB.06 (TIM4_Channel1) :  pin D4 from CN8 */ 
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM4;
   GPIO_InitStruct.Pin = GPIO_PIN_6;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -369,11 +369,11 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitStruct.Alternate = GPIO_AF2_TIM4;
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
+  
+  HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);   
   HAL_NVIC_EnableIRQ(TIM3_IRQn);
-
-  HAL_NVIC_SetPriority(TIM4_IRQn, 0, 0);
+  
+  HAL_NVIC_SetPriority(TIM4_IRQn, 0, 0);   
   HAL_NVIC_EnableIRQ(TIM4_IRQn);
 }
 
@@ -385,7 +385,7 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -393,6 +393,6 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 
 /**
   * @}
-  */
-
+  */    
+    
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

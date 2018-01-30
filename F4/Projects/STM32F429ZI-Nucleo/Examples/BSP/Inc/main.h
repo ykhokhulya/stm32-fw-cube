@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    main.h
+  * @file    main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -31,8 +31,8 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
-
+  */ 
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -51,7 +51,7 @@
 typedef struct
 {
   void   (*DemoFunc)(void);
-  uint8_t DemoName[30];
+  uint8_t DemoName[30]; 
   uint32_t DemoIndex;
 }BSP_DemoTypedef;
 
@@ -92,5 +92,5 @@ void SD_demo (void);
 
 #endif /* __MAIN_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 
 

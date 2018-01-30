@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/ADC/ADC_AnalogWatchdog/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -174,7 +174,7 @@ void USER_BUTTON_IRQHANDLER(void)
   {
     /* Call interruption treatment function */
     UserButton_Callback();
-
+    
     /* Clear EXTI line flag */
     /* Note: Clear flag after callback function to minimize user button       */
     /*       switch debounce parasitics.                                      */
@@ -194,7 +194,7 @@ void ADC_IRQHandler(void)
   {
     /* Clear flag ADC analog watchdog 1 */
     LL_ADC_ClearFlag_AWD1(ADC1);
-
+    
     /* Call interruption treatment function */
     AdcAnalogWatchdog1_Callback();
   }

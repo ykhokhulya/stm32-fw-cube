@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___l_m_s___n_o_r_m.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -144,24 +144,24 @@ Functions</h2></td></tr>
 Internal structure of the NLMS adaptive filter</div></div>
 <p>The functions operate on blocks of data and each call to the function processes <code>blockSize</code> samples through the filter. <code>pSrc</code> points to input signal, <code>pRef</code> points to reference signal, <code>pOut</code> points to output signal and <code>pErr</code> points to error signal. All arrays contain <code>blockSize</code> values.</p>
 <p>The functions operate on a block-by-block basis. Internally, the filter coefficients <code>b[n]</code> are updated on a sample-by-sample basis. The convergence of the LMS filter is slower compared to the normalized LMS algorithm.</p>
-<dl class="section user"><dt>Algorithm: </dt><dd>The output signal <code>y[n]</code> is computed by a standard FIR filter: <pre>
-     y[n] = b[0] * x[n] + b[1] * x[n-1] + b[2] * x[n-2] + ...+ b[numTaps-1] * x[n-numTaps+1]
+<dl class="section user"><dt>Algorithm: </dt><dd>The output signal <code>y[n]</code> is computed by a standard FIR filter: <pre>    
+     y[n] = b[0] * x[n] + b[1] * x[n-1] + b[2] * x[n-2] + ...+ b[numTaps-1] * x[n-numTaps+1]    
  </pre></dd></dl>
-<dl class="section user"><dt></dt><dd>The error signal equals the difference between the reference signal <code>d[n]</code> and the filter output: <pre>
-     e[n] = d[n] - y[n].
+<dl class="section user"><dt></dt><dd>The error signal equals the difference between the reference signal <code>d[n]</code> and the filter output: <pre>    
+     e[n] = d[n] - y[n].    
  </pre></dd></dl>
-<dl class="section user"><dt></dt><dd>After each sample of the error signal is computed the instanteous energy of the filter state variables is calculated: <pre>
-    E = x[n]^2 + x[n-1]^2 + ... + x[n-numTaps+1]^2.
- </pre> The filter coefficients <code>b[k]</code> are then updated on a sample-by-sample basis: <pre>
-     b[k] = b[k] + e[n] * (mu/E) * x[n-k],  for k=0, 1, ..., numTaps-1
+<dl class="section user"><dt></dt><dd>After each sample of the error signal is computed the instanteous energy of the filter state variables is calculated: <pre>    
+    E = x[n]^2 + x[n-1]^2 + ... + x[n-numTaps+1]^2.    
+ </pre> The filter coefficients <code>b[k]</code> are then updated on a sample-by-sample basis: <pre>    
+     b[k] = b[k] + e[n] * (mu/E) * x[n-k],  for k=0, 1, ..., numTaps-1    
  </pre> where <code>mu</code> is the step size and controls the rate of coefficient convergence. </dd></dl>
 <dl class="section user"><dt></dt><dd>In the APIs, <code>pCoeffs</code> points to a coefficient array of size <code>numTaps</code>. Coefficients are stored in time reversed order. </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-    {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><pre>    
+    {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
  </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to a state array of size <code>numTaps + blockSize - 1</code>. Samples in the state buffer are stored in the order: </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-    {x[n-numTaps+1], x[n-numTaps], x[n-numTaps-1], x[n-numTaps-2]....x[0], x[1], ..., x[blockSize-1]}
+<dl class="section user"><dt></dt><dd><pre>    
+    {x[n-numTaps+1], x[n-numTaps], x[n-numTaps-1], x[n-numTaps-2]....x[0], x[1], ..., x[blockSize-1]}    
  </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>Note that the length of the state buffer exceeds the length of the coefficient array by <code>blockSize-1</code> samples. The increased state buffer length allows circular addressing, which is traditionally used in FIR filters, to be avoided and yields a significant speed improvement. The state variables are updated after each block of data is processed. </dd></dl>
 <dl class="section user"><dt>Instance Structure </dt><dd>The coefficients and state variables for a filter are stored together in an instance data structure. A separate instance structure must be defined for each filter and coefficient and state arrays cannot be shared among instances. There are separate instance structure declarations for each of the 3 supported data types.</dd></dl>
@@ -305,8 +305,8 @@ Internal structure of the NLMS adaptive filter</div></div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none.</dd></dl>
-<dl class="section user"><dt>Description: </dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt>Description: </dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
 </pre> The initial filter coefficients serve as a starting point for the adaptive filter. <code>pState</code> points to an array of length <code>numTaps+blockSize-1</code> samples, where <code>blockSize</code> is the number of input samples processed by each call to <code><a class="el" href="group___l_m_s___n_o_r_m.html#ga2418c929087c6eba719758eaae3f3300" title="Processing function for floating-point normalized LMS filter.">arm_lms_norm_f32()</a></code>. </dd></dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="arm_signal_converge_example_f32_8c-example.html#a23">arm_signal_converge_example_f32.c</a>.</dd>
 </dl>
@@ -383,8 +383,8 @@ Internal structure of the NLMS adaptive filter</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
 </pre> The initial filter coefficients serve as a starting point for the adaptive filter. <code>pState</code> points to the array of state variables and size of array is <code>numTaps+blockSize-1</code> samples, where <code>blockSize</code> is the number of input samples processed by each call to <code><a class="el" href="group___l_m_s___n_o_r_m.html#gad47486a399dedb0bc85a5990ec5cf981" title="Processing function for Q15 normalized LMS filter.">arm_lms_norm_q15()</a></code>. </dd></dl>
 
 <p>References <a class="el" href="arm__common__tables_8c.html#a66ca8ac5f3a63d9962f501ae60aa32be">armRecipTableQ15</a>, <a class="el" href="structarm__lms__norm__instance__q15.html#a1c81ded399919d8181026bc1c8602e7b">arm_lms_norm_instance_q15::energy</a>, <a class="el" href="structarm__lms__norm__instance__q15.html#a7ce00f21d11cfda6d963240641deea8c">arm_lms_norm_instance_q15::mu</a>, <a class="el" href="structarm__lms__norm__instance__q15.html#a9ee7a45f4f315d7996a969e25fdc7146">arm_lms_norm_instance_q15::numTaps</a>, <a class="el" href="structarm__lms__norm__instance__q15.html#ae7bca648c75a2ffa02d87852bb78bc8a">arm_lms_norm_instance_q15::pCoeffs</a>, <a class="el" href="structarm__lms__norm__instance__q15.html#aa0d435fbcf7dedb7179d4467e9b79e9f">arm_lms_norm_instance_q15::postShift</a>, <a class="el" href="structarm__lms__norm__instance__q15.html#aa4de490b3bdbd03561b76ee07901c8e3">arm_lms_norm_instance_q15::pState</a>, <a class="el" href="structarm__lms__norm__instance__q15.html#a9aabb0e4c79f3db807e7a441fa36f5f8">arm_lms_norm_instance_q15::recipTable</a>, and <a class="el" href="structarm__lms__norm__instance__q15.html#a3fc1d6f97d2c6d5324871de6895cb7e9">arm_lms_norm_instance_q15::x0</a>.</p>
@@ -458,8 +458,8 @@ Internal structure of the NLMS adaptive filter</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
 </pre> The initial filter coefficients serve as a starting point for the adaptive filter. <code>pState</code> points to an array of length <code>numTaps+blockSize-1</code> samples, where <code>blockSize</code> is the number of input samples processed by each call to <code><a class="el" href="group___l_m_s___n_o_r_m.html#ga7128775e99817c183a7d7ad34e8b6e05" title="Processing function for Q31 normalized LMS filter.">arm_lms_norm_q31()</a></code>. </dd></dl>
 
 <p>References <a class="el" href="arm__common__tables_8c.html#aae6056f6c4e8f7e494445196bf864479">armRecipTableQ31</a>, <a class="el" href="structarm__lms__norm__instance__q31.html#a3c0ae42869afec8555dc8e3a7ef9b386">arm_lms_norm_instance_q31::energy</a>, <a class="el" href="structarm__lms__norm__instance__q31.html#ad3dd2a2406e02fdaa7782ba6c3940a64">arm_lms_norm_instance_q31::mu</a>, <a class="el" href="structarm__lms__norm__instance__q31.html#a28e4c085af69c9c3e2e95dacf8004c3e">arm_lms_norm_instance_q31::numTaps</a>, <a class="el" href="structarm__lms__norm__instance__q31.html#a57a64c1ff102d033c1bd05043f1d9955">arm_lms_norm_instance_q31::pCoeffs</a>, <a class="el" href="structarm__lms__norm__instance__q31.html#a28d7b9e437817f83397e081967e90f3c">arm_lms_norm_instance_q31::postShift</a>, <a class="el" href="structarm__lms__norm__instance__q31.html#a6b25c96cf048b77078d62f4252a01ec4">arm_lms_norm_instance_q31::pState</a>, <a class="el" href="structarm__lms__norm__instance__q31.html#a85836d0907077b9ac660f7bbbaa9d694">arm_lms_norm_instance_q31::recipTable</a>, and <a class="el" href="structarm__lms__norm__instance__q31.html#a47c4466d644e0d8ba407995adfa9b917">arm_lms_norm_instance_q31::x0</a>.</p>
@@ -608,7 +608,7 @@ Internal structure of the NLMS adaptive filter</div></div>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

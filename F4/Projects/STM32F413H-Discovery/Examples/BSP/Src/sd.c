@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/sd.c
+  * @file    BSP/Src/sd.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the SD Driver
   ******************************************************************************
@@ -42,7 +42,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -74,7 +74,7 @@ extern uint8_t SDDetectIT;
   * @retval None
   */
 void SD_demo (void)
-{
+{ 
   SD_SetHint();
   BSP_SD_Init();
   while(BSP_SD_IsDetected() != SD_PRESENT)
@@ -82,16 +82,16 @@ void SD_demo (void)
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(5, BSP_LCD_GetYSize()-15, (uint8_t *)"SD Not Connected", LEFT_MODE);
   }
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
   BSP_LCD_DisplayStringAt(5, BSP_LCD_GetYSize()-15, (uint8_t *)"SD Connected    ", LEFT_MODE);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   SD_main_test();
-
+  
   while (1)
   {
     SD_Detection();
-
+    
     if(CheckForUserInput() > 0)
     {
       BSP_SD_DeInit();
@@ -112,18 +112,18 @@ void SD_DMA_demo (void)
   while(BSP_SD_IsDetected() != SD_PRESENT)
   {
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(5, BSP_LCD_GetYSize()-15, (uint8_t *)"SD Not Connected", LEFT_MODE);
+    BSP_LCD_DisplayStringAt(5, BSP_LCD_GetYSize()-15, (uint8_t *)"SD Not Connected", LEFT_MODE);   
   }
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
   BSP_LCD_DisplayStringAt(5, BSP_LCD_GetYSize()-15, (uint8_t *)"SD Connected    ", LEFT_MODE);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   SD_DMA_test();
-
+  
   while (1)
   {
     SD_Detection();
-
+    
     if(CheckForUserInput() > 0)
     {
       BSP_SD_DeInit();
@@ -139,7 +139,7 @@ void SD_DMA_demo (void)
   * @retval None
   */
 void SD_exti_demo (void)
-{
+{ 
   SD_SetHint();
   BSP_SD_Init();
   while(BSP_SD_IsDetected() != SD_PRESENT)
@@ -147,14 +147,14 @@ void SD_exti_demo (void)
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(5, BSP_LCD_GetYSize()-15, (uint8_t *)"SD Not Connected", LEFT_MODE);
   }
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
   BSP_LCD_DisplayStringAt(5, BSP_LCD_GetYSize()-15, (uint8_t *)"SD Connected    ", LEFT_MODE);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  SD_main_test();
-
+  SD_main_test();    
+  
   BSP_SD_ITConfig();
-
+  
   while (1)
   {
     /* Check SDDetectIT global variable state set in HAL_GPIO_EXTI_Callback in main.c */
@@ -163,7 +163,7 @@ void SD_exti_demo (void)
       SD_Detection();
       SDDetectIT = 0;
     }
-
+    
     if(CheckForUserInput() > 0)
     {
       BSP_SD_DeInit();
@@ -180,7 +180,7 @@ void SD_exti_demo (void)
 void SD_Detection(void)
 {
   static uint8_t prev_status = 2;
-
+ 
    /* Check if the SD card is plugged in the slot */
   if(BSP_SD_IsDetected() != SD_PRESENT)
   {
@@ -205,11 +205,11 @@ void SD_Detection(void)
   * @retval None
   */
 void SD_main_test (void)
-{
+{ 
   uint8_t SD_state = MSD_OK;
 
   SD_state = BSP_SD_Init();
-
+  
   if(SD_state != MSD_OK)
   {
     if(SD_state == MSD_ERROR_SD_NOT_PRESENT)
@@ -225,13 +225,13 @@ void SD_main_test (void)
   else
   {
     BSP_LCD_DisplayStringAt(5, 70, (uint8_t *)"SD Initialization : OK.", LEFT_MODE);
-
+    
     SD_state = BSP_SD_Erase(BLOCK_START_ADDR, NUM_OF_BLOCKS);
     /* Wait until SD cards are ready to use for new operation */
     while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
     {
     }
-
+    
     if(SD_state != MSD_OK)
     {
       BSP_LCD_DisplayStringAt(5, 85, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
@@ -240,7 +240,7 @@ void SD_main_test (void)
     else
     {
       BSP_LCD_DisplayStringAt(5, 85, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
-
+      
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
       SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, SD_DATATIMEOUT);
@@ -248,7 +248,7 @@ void SD_main_test (void)
       while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
       {
       }
-
+      
       if(SD_state != MSD_OK)
       {
         BSP_LCD_DisplayStringAt(5, 100, (uint8_t *)"SD WRITE : FAILED.", LEFT_MODE);
@@ -262,7 +262,7 @@ void SD_main_test (void)
         while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
         {
         }
-
+      
         if(SD_state != MSD_OK)
         {
           BSP_LCD_DisplayStringAt(5, 115, (uint8_t *)"SD READ : FAILED.", LEFT_MODE);
@@ -293,12 +293,12 @@ void SD_main_test (void)
   * @retval None
   */
 void SD_DMA_test (void)
-{
+{ 
   uint8_t SD_state = MSD_OK;
   SdmmcTest = 1;
-
+  
   SD_state = BSP_SD_Init();
-
+  
   if(SD_state != MSD_OK)
   {
     if(SD_state == MSD_ERROR_SD_NOT_PRESENT)
@@ -314,13 +314,13 @@ void SD_DMA_test (void)
   else
   {
     BSP_LCD_DisplayStringAt(5, 70, (uint8_t *)"SD Initialization : OK.", LEFT_MODE);
-
+    
     SD_state = BSP_SD_Erase(BLOCK_START_ADDR, NUM_OF_BLOCKS);
     /* Wait until SD cards are ready to use for new operation */
     while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
     {
     }
-
+    
     if(SD_state != MSD_OK)
     {
       BSP_LCD_DisplayStringAt(5, 85, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
@@ -329,7 +329,7 @@ void SD_DMA_test (void)
     else
     {
       BSP_LCD_DisplayStringAt(5, 85, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
-
+      
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
       SD_state = BSP_SD_WriteBlocks_DMA(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS);
@@ -342,7 +342,7 @@ void SD_DMA_test (void)
       while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
       {
       }
-
+      
       if(SD_state != MSD_OK)
       {
         BSP_LCD_DisplayStringAt(5, 100, (uint8_t *)"SD WRITE : FAILED.", LEFT_MODE);
@@ -361,7 +361,7 @@ void SD_DMA_test (void)
         while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
         {
         }
-
+      
         if(SD_state != MSD_OK)
         {
           BSP_LCD_DisplayStringAt(5, 115, (uint8_t *)"SD READ : FAILED.", LEFT_MODE);
@@ -393,14 +393,14 @@ void SD_DMA_test (void)
   */
 static void SD_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), HEADBAND_HEIGHT);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAt(0, 1, (uint8_t *)"SD", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -410,7 +410,7 @@ static void SD_SetHint(void)
 
    /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
  }
 
 /**
@@ -420,14 +420,14 @@ static void SD_SetHint(void)
   */
 static void SD_DMA_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), HEADBAND_HEIGHT);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAt(0, 1, (uint8_t *)"SD DMA Mode", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -437,7 +437,7 @@ static void SD_DMA_SetHint(void)
 
    /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
  }
 
 /**
@@ -502,9 +502,9 @@ void BSP_SD_ReadCpltCallback(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

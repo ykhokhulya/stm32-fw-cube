@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_CurrentConsumption/Src/main.c
+  * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   *          and exit the stop mode.
@@ -43,7 +43,7 @@
 
 /** @addtogroup PWR_CurrentConsumption
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -62,40 +62,40 @@ static void SystemClock_Config(void);
   * @retval None
   */
 int main(void)
-{
+{ 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
        - Set NVIC Group Priority to 4
        - Global MSP (MCU Support Package) initialization
      */
-  HAL_Init();
+  HAL_Init(); 
 
   /* Configure the system clock to 100 MHz */
   SystemClock_Config();
-
+    
   /* Configure LED2 */
   BSP_LED_Init(LED2);
 
   /* Enable Power Clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* Check and handle if the system was resumed from Standby mode */
+  
+  /* Check and handle if the system was resumed from Standby mode */ 
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET)
   {
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
-
+  
     /* Infinite loop */
     while (1)
     {
       /* Toggle LED2 */
       BSP_LED_Toggle(LED2);
-
+   
       /* Insert a 100ms delay */
       HAL_Delay(100);
     }
   }
-
+  
   /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 
@@ -104,7 +104,7 @@ int main(void)
   {
     /* Toggle LED2 */
     BSP_LED_Toggle(LED2);
-
+   
     /* Insert 1s Delay */
     HAL_Delay(1000);
   }
@@ -114,7 +114,7 @@ int main(void)
   }
 
 #if defined (SLEEP_MODE)
-  /* Sleep Mode Entry
+  /* Sleep Mode Entry 
       - System Running at PLL (168MHz)
       - Flash 5 wait state
       - Instruction and Data caches ON
@@ -125,17 +125,17 @@ int main(void)
    */
   SleepMode_Measure();
 #elif defined (STOP_MODE)
-  /* STOP Mode Entry
+  /* STOP Mode Entry 
       - RTC Clocked by LSI
       - Regulator in LP mode
-      - HSI, HSE OFF and LSI OFF if not used as RTC Clock source
+      - HSI, HSE OFF and LSI OFF if not used as RTC Clock source  
       - No IWDG
       - FLASH in deep power down mode
       - Automatic Wake-up using RTC clocked by LSI (after ~20s)
    */
   StopMode_Measure();
 #elif defined (STANDBY_MODE)
-  /* STANDBY Mode Entry
+  /* STANDBY Mode Entry 
       - Backup SRAM and RTC OFF
       - IWDG and LSI OFF
       - Wake-up using WakeUp Pin (PA.00)
@@ -143,7 +143,7 @@ int main(void)
   StandbyMode_Measure();
 
 #elif defined (STANDBY_RTC_MODE)
-  /* STANDBY Mode with RTC on LSI Entry
+  /* STANDBY Mode with RTC on LSI Entry 
       - RTC Clocked by LSI
       - IWDG OFF and LSI OFF if not used as RTC Clock source
       - Backup SRAM OFF
@@ -152,7 +152,7 @@ int main(void)
   StandbyRTCMode_Measure();
 
 #elif defined (STANDBY_RTC_BKPSRAM_MODE)
-  /* STANDBY Mode with RTC on LSI Entry
+  /* STANDBY Mode with RTC on LSI Entry 
       - RTC Clocked by LSI
       - Backup SRAM ON
       - IWDG OFF
@@ -165,13 +165,13 @@ int main(void)
   {
     BSP_LED_Init(LED2);
   }
-
+  
   /* Infinite loop */
   while (1)
   {
     /* Toggle LED2 */
     BSP_LED_Toggle(LED2);
-
+   
     /* Inserted Delay */
     HAL_Delay(100);
   }
@@ -179,7 +179,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSI)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -204,12 +204,12 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
+  
   /* Enable HSI Oscillator and activate PLL with HSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -224,14 +224,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
@@ -251,7 +251,7 @@ void Error_Handler(void)
   {
   }
 }
-
+    
 /**
   * @brief SYSTICK callback
   * @param None
@@ -284,7 +284,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   BSP_LED_Init(LED2);
   /* NOTE : add the specific code to handle the wake up button interrupt */
   if(GPIO_Pin == KEY_BUTTON_PIN)
-  {
+  { 
     uwCounter = 2;
   }
 }
@@ -298,7 +298,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

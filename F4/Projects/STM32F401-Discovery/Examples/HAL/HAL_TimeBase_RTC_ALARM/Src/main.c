@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/main.c
+  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example describes how to configure HAL time base using
   *          the STM32F4xx HAL RTC ALARM API.
@@ -71,7 +71,7 @@ int main(void)
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
-
+  
   /* Configure BUTTON_KEY */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   /* -3- Toggle LED3, LED4, LED5 and LED6 in an Infinite loop */
@@ -103,7 +103,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Suspend tick increment */
       HAL_SuspendTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 1;
     }
@@ -111,16 +111,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Resume tick increment */
       HAL_ResumeTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 0;
     }
-  }
+  }  
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 84000000
   *            HCLK(Hz)                       = 84000000
@@ -145,9 +145,9 @@ static void SystemClock_Config(void)
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
@@ -161,15 +161,15 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ 
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
+  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);  
 }
 
 #ifdef USE_FULL_ASSERT
@@ -194,7 +194,7 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

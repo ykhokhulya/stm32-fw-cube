@@ -70,7 +70,7 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
 void SD_demo (void)
 {
   SD_main_test();
-
+  
   while (1)
   {
     SD_Detection();
@@ -90,7 +90,7 @@ void SD_demo (void)
   * @retval None
   */
 void SD_exti_demo (void)
-{
+{ 
   uint32_t ITstatus = 0;
 
   SD_main_test();
@@ -101,7 +101,7 @@ void SD_exti_demo (void)
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
         BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-30, (uint8_t *)"SD Not Connected", LEFT_MODE);
   }
-  else
+  else 
   {
       BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
       BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-30,   (uint8_t *)"SD Connected    ", LEFT_MODE);
@@ -121,7 +121,7 @@ void SD_exti_demo (void)
       }
       BSP_IO_ITClear();
     }
-
+    
     if(CheckForUserInput() > 0)
     {
       BSP_SD_DeInit();
@@ -137,15 +137,15 @@ void SD_exti_demo (void)
   */
 void SD_Detection(void)
 {
-   static uint8_t prev_status = 2;
-
+   static uint8_t prev_status = 2; 
+ 
     /* Check if the SD card is plugged in the slot */
    if(BSP_SD_IsDetected() != SD_PRESENT)
     {
       if(prev_status != SD_NOT_PRESENT)
       {
         //BSP_SD_Init();
-        prev_status = SD_NOT_PRESENT;
+        prev_status = SD_NOT_PRESENT; 
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
         BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-30, (uint8_t *)"SD Not Connected", LEFT_MODE);
       }
@@ -164,7 +164,7 @@ void SD_Detection(void)
   * @retval None
   */
 void SD_main_test (void)
-{
+{ 
   uint8_t SD_state = MSD_OK;
 
   SD_SetHint();
@@ -203,7 +203,7 @@ void SD_main_test (void)
 
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
-      SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, SD_DATATIMEOUT);
+      SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, SD_DATATIMEOUT);     
       /* Wait until SD cards are ready to use for new operation */
       while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
       {

@@ -104,10 +104,10 @@ int main(void)
 
   /* Wait for User push-button press to start transfer */
   WaitForUserButtonPress();
-
+  
   /* Initiate DMA transfers */
   StartTransfers();
-
+  
   /* Wait for the end of the transfer and check received data */
   WaitAndCheckEndOfTransfer();
 
@@ -121,7 +121,7 @@ int main(void)
   * @brief  This function configures the DMA Channels for TX and RX transfers
   * @note   This function is used to :
   *         -1- Enable DMA1 clock
-  *         -2- Configure NVIC for DMA transfer complete/error interrupts
+  *         -2- Configure NVIC for DMA transfer complete/error interrupts 
   *         -3- Configure DMA TX channel functional parameters
   *         -4- Configure DMA RX channel functional parameters
   *         -5- Enable transfer complete/error interrupts
@@ -143,13 +143,13 @@ void Configure_DMA(void)
 
   /* (3) Configure the DMA functional parameters for transmission */
   LL_DMA_SetChannelSelection(DMA1, LL_DMA_STREAM_6, LL_DMA_CHANNEL_4);
-  LL_DMA_ConfigTransfer(DMA1, LL_DMA_STREAM_6,
-                        LL_DMA_DIRECTION_MEMORY_TO_PERIPH |
-                        LL_DMA_PRIORITY_HIGH              |
-                        LL_DMA_MODE_NORMAL                |
-                        LL_DMA_PERIPH_NOINCREMENT         |
-                        LL_DMA_MEMORY_INCREMENT           |
-                        LL_DMA_PDATAALIGN_BYTE            |
+  LL_DMA_ConfigTransfer(DMA1, LL_DMA_STREAM_6, 
+                        LL_DMA_DIRECTION_MEMORY_TO_PERIPH | 
+                        LL_DMA_PRIORITY_HIGH              | 
+                        LL_DMA_MODE_NORMAL                | 
+                        LL_DMA_PERIPH_NOINCREMENT         | 
+                        LL_DMA_MEMORY_INCREMENT           | 
+                        LL_DMA_PDATAALIGN_BYTE            | 
                         LL_DMA_MDATAALIGN_BYTE);
   LL_DMA_ConfigAddresses(DMA1, LL_DMA_STREAM_6,
                          (uint32_t)aTxBuffer,
@@ -159,13 +159,13 @@ void Configure_DMA(void)
 
   /* (4) Configure the DMA functional parameters for reception */
   LL_DMA_SetChannelSelection(DMA1, LL_DMA_STREAM_7, LL_DMA_CHANNEL_6);
-  LL_DMA_ConfigTransfer(DMA1, LL_DMA_STREAM_7,
-                        LL_DMA_DIRECTION_PERIPH_TO_MEMORY |
-                        LL_DMA_PRIORITY_HIGH              |
-                        LL_DMA_MODE_NORMAL                |
-                        LL_DMA_PERIPH_NOINCREMENT         |
-                        LL_DMA_MEMORY_INCREMENT           |
-                        LL_DMA_PDATAALIGN_BYTE            |
+  LL_DMA_ConfigTransfer(DMA1, LL_DMA_STREAM_7, 
+                        LL_DMA_DIRECTION_PERIPH_TO_MEMORY | 
+                        LL_DMA_PRIORITY_HIGH              | 
+                        LL_DMA_MODE_NORMAL                | 
+                        LL_DMA_PERIPH_NOINCREMENT         | 
+                        LL_DMA_MEMORY_INCREMENT           | 
+                        LL_DMA_PDATAALIGN_BYTE            | 
                         LL_DMA_MDATAALIGN_BYTE);
   LL_DMA_ConfigAddresses(DMA1, LL_DMA_STREAM_7,
                          LL_USART_DMA_GetRegAddr(USART2),
@@ -220,7 +220,7 @@ void Configure_USART(void)
 
 
   /* (3) Configure USART2 functional parameters ********************************/
-
+  
   /* Disable USART prior modifying configuration registers */
   /* Note: Commented as corresponding to Reset value */
   // LL_USART_Disable(USART2);
@@ -243,10 +243,10 @@ void Configure_USART(void)
   /* Frequency available for USART peripheral can also be calculated through LL RCC macro */
   /* Ex :
       Periphclk = LL_RCC_GetUSARTClockFreq(Instance); or LL_RCC_GetUARTClockFreq(Instance); depending on USART/UART instance
-
+  
       In this example, Peripheral Clock is expected to be equal to 500000000 Hz => equal to SystemCoreClock/2
   */
-  LL_USART_SetBaudRate(USART2, SystemCoreClock/2, LL_USART_OVERSAMPLING_16, 115200);
+  LL_USART_SetBaudRate(USART2, SystemCoreClock/2, LL_USART_OVERSAMPLING_16, 115200); 
 
   /* (4) Enable USART2 **********************************************************/
   LL_USART_Enable(USART2);
@@ -328,21 +328,21 @@ void LED_Blinking(uint32_t Period)
   /* Toggle LED2 in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -355,13 +355,13 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);  
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
 }
 
 /**
   * @brief  Wait for User push-button press to start transfer.
-  * @param  None
+  * @param  None 
   * @retval None
   */
   /*  */
@@ -378,7 +378,7 @@ void WaitForUserButtonPress(void)
 
 /**
   * @brief  Wait end of transfer and check if received Data are well.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void WaitAndCheckEndOfTransfer(void)
@@ -401,7 +401,7 @@ void WaitAndCheckEndOfTransfer(void)
   if(Buffercmp8((uint8_t*)aStringToReceive, (uint8_t*)aRxBuffer, ubNbDataToReceive))
   {
     /* Processing Error */
-    LED_Blinking(LED_BLINK_ERROR);
+    LED_Blinking(LED_BLINK_ERROR);    
   }
   else
   {
@@ -505,7 +505,7 @@ void UserButton_Callback(void)
 }
 
 /**
-  * @brief  Function called from DMA1 IRQ Handler when Tx transfer is completed
+  * @brief  Function called from DMA1 IRQ Handler when Tx transfer is completed 
   * @param  None
   * @retval None
   */
@@ -516,7 +516,7 @@ void DMA1_TransmitComplete_Callback(void)
 }
 
 /**
-  * @brief  Function called from DMA1 IRQ Handler when Rx transfer is completed
+  * @brief  Function called from DMA1 IRQ Handler when Rx transfer is completed 
   * @param  None
   * @retval None
   */

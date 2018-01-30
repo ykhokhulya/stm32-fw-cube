@@ -56,49 +56,49 @@
   */
 
 /**
-  * @brief CAN MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief CAN MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hcan: CAN handle pointer
   * @retval None
   */
 void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 {
   GPIO_InitTypeDef   GPIO_InitStruct;
-
+  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* CAN1 Periph clock enable */
   CANx_CLK_ENABLE();
   /* Enable GPIO clock ****************************************/
   CANx_GPIO_CLK_ENABLE();
-
-  /*##-2- Configure peripheral GPIO ##########################################*/
+  
+  /*##-2- Configure peripheral GPIO ##########################################*/ 
   /* CAN1 TX GPIO pin configuration */
   GPIO_InitStruct.Pin = CANx_TX_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Alternate =  CANx_TX_AF;
-
+  
   HAL_GPIO_Init(CANx_TX_GPIO_PORT, &GPIO_InitStruct);
-
+  
   /* CAN1 RX GPIO pin configuration */
   GPIO_InitStruct.Pin = CANx_RX_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Alternate =  CANx_RX_AF;
-
+  
   HAL_GPIO_Init(CANx_TX_GPIO_PORT, &GPIO_InitStruct);
 }
 
 /**
-  * @brief ADC MSP De-Initialization
+  * @brief CAN MSP De-Initialization 
   *        This function frees the hardware resources used in this example:
   *          - Disable the Peripheral's clock
-  *          - Revert GPIO to their default state
-  * @param hadc: ADC handle pointer
+  *          - Revert GPIO configuration to their default state
+  * @param hcan: CAN handle pointer
   * @retval None
   */
 void HAL_CAN_MspDeInit(CAN_HandleTypeDef *hcan)

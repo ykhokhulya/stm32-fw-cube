@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_IAP/Src/flash_if.c
+  * @file    LwIP/LwIP_IAP/Src/flash_if.c 
   * @author  MCD Application Team
-  * @brief   This file provides high level routines to manage internal Flash
-  *          programming (erase and write).
+  * @brief   This file provides high level routines to manage internal Flash 
+  *          programming (erase and write). 
   ******************************************************************************
   * @attention
   *
@@ -35,8 +35,8 @@
   * @retval None
   */
 void FLASH_If_Init(void)
-{
-   HAL_FLASH_Unlock();
+{ 
+   HAL_FLASH_Unlock(); 
 }
 
 /**
@@ -48,22 +48,22 @@ void FLASH_If_Init(void)
 int8_t FLASH_If_Erase(uint32_t StartSector)
 {
   uint32_t FlashAddress;
-
+ 
   FlashAddress = StartSector;
 
   /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
-     be done by word */
-
+     be done by word */ 
+ 
   if (FlashAddress <= (uint32_t) USER_FLASH_LAST_PAGE_ADDRESS)
   {
     FLASH_EraseInitTypeDef FLASH_EraseInitStruct;
     uint32_t sectornb = 0;
-
+    
     FLASH_EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
     FLASH_EraseInitStruct.Sector = FLASH_SECTOR_5;
     FLASH_EraseInitStruct.NbSectors = 7;
     FLASH_EraseInitStruct.VoltageRange = FLASH_VOLTAGE_RANGE_3;
-
+    
     if (HAL_FLASHEx_Erase(&FLASH_EraseInitStruct, &sectornb) != HAL_OK)
       return (1);
   }
@@ -79,7 +79,7 @@ int8_t FLASH_If_Erase(uint32_t StartSector)
   * @note   After writing data buffer, the flash content is checked.
   * @param  FlashAddress: start address for writing data buffer
   * @param  Data: pointer on data buffer
-  * @param  DataLength: length of data buffer (unit is 32-bit word)
+  * @param  DataLength: length of data buffer (unit is 32-bit word)   
   * @retval 0: Data successfully written to Flash memory
   *         1: Error occurred while writing data in Flash memory
   *         2: Written Data in flash memory is different from expected one
@@ -91,7 +91,7 @@ uint32_t FLASH_If_Write(__IO uint32_t* FlashAddress, uint32_t* Data ,uint16_t Da
   for (i = 0; (i < DataLength) && (*FlashAddress <= (USER_FLASH_END_ADDRESS-4)); i++)
   {
     /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
-       be done by word */
+       be done by word */ 
     if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, *FlashAddress,  *(uint32_t*)(Data+i)) == HAL_OK)
     {
      /* Check the written value */

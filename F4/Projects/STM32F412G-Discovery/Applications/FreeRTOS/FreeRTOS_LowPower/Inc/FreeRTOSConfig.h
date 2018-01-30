@@ -171,7 +171,7 @@ void PostSleepProcessing(uint32_t * ulExpectedIdleTime);
 allow the application writer to add additional code before and after the MCU is
 placed into the low power state respectively.  The empty implementations
 provided in this demo can be extended to save even more power. */
-#if configUSE_TICKLESS_IDLE == 1
+#if configUSE_TICKLESS_IDLE == 1 
 #define configPRE_SLEEP_PROCESSING                        PreSleepProcessing
 #define configPOST_SLEEP_PROCESSING                       PostSleepProcessing
 #endif /* configUSE_TICKLESS_IDLE == 1 */

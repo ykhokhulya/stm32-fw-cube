@@ -149,9 +149,9 @@ void HAL_FMPI2C_MspInit(FMPI2C_HandleTypeDef *hi2c)
   /* NVIC configuration for DMA transfer complete interrupt (I2C1_RX) */
   HAL_NVIC_SetPriority(I2Cx_DMA_RX_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(I2Cx_DMA_RX_IRQn);
-
-
-  /*##-5- Configure the NVIC for I2C #########################################*/
+  
+    
+  /*##-5- Configure the NVIC for I2C #########################################*/   
   /* NVIC for FMPI2C1 */
   HAL_NVIC_SetPriority(I2Cx_ER_IRQn, 0, 1);
   HAL_NVIC_EnableIRQ(I2Cx_ER_IRQn);
@@ -192,7 +192,7 @@ void HAL_FMPI2C_MspDeInit(FMPI2C_HandleTypeDef *hi2c)
   /*##-4- Disable the NVIC for DMA ###########################################*/
   HAL_NVIC_DisableIRQ(I2Cx_DMA_TX_IRQn);
   HAL_NVIC_DisableIRQ(I2Cx_DMA_RX_IRQn);
-
+  
   /*##-5- Disable the NVIC for I2C ###########################################*/
   HAL_NVIC_DisableIRQ(I2Cx_ER_IRQn);
   HAL_NVIC_DisableIRQ(I2Cx_EV_IRQn);

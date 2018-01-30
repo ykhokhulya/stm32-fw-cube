@@ -62,10 +62,10 @@ int main(void)
 {
   /* Configure the system clock to 84 MHz */
   SystemClock_Config();
-
+  
   /* Add your application code here */
-
-
+  
+  
   /* Infinite loop */
   while (1)
   {

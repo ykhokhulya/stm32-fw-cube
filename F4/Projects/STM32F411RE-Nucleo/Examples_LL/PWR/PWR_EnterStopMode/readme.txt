@@ -1,9 +1,9 @@
 /**
   @page PWR_EnterStopMode PWR standby example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/PWR/PWR_EnterStopMode/readme.txt
+  * @file    Examples_LL/PWR/PWR_EnterStopMode/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PWR STOP_MAINREGU mode example.
   ******************************************************************************
@@ -37,21 +37,21 @@
 
 This example shows how to enter the system in STOP_MAINREGU mode.
 
-After start-up LED2 is toggling during 5 seconds, then the system automatically
+After start-up LED2 is toggling during 5 seconds, then the system automatically 
 enter in STOP_MAINREGU mode (Final state).
 
 LED2 is used to monitor the system state as follows:
  - LED2 toggling : system in RUN mode
  - LED2 off : system in STOP_MAINREGU mode
 
-@note To measure the current consumption in STOP_MAINREGU mode, remove JP6 jumper
-      and connect an ampere meter to JP6 to measure IDD current.
+@note To measure the current consumption in STOP_MAINREGU mode, remove JP6 jumper 
+      and connect an ampere meter to JP6 to measure IDD current.     
 
-@note This example can not be used in DEBUG mode due to the fact
-      that the Cortex-M4 core is no longer clocked during low power mode
+@note This example can not be used in DEBUG mode due to the fact 
+      that the Cortex-M4 core is no longer clocked during low power mode 
       so debugging features are disabled.
 
-@par Directory contents
+@par Directory contents 
 
   - PWR/PWR_EnterStopMode/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - PWR/PWR_EnterStopMode/Inc/main.h                  Header for main.c module
@@ -63,12 +63,12 @@ LED2 is used to monitor the system state as follows:
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with STMicroelectronics NUCLEO-F411RE
     board and can be easily tailored to any other supported device
     and development board.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

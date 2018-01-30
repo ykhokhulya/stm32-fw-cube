@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/joystick.c
+  * @file    BSP/Src/joystick.c 
   * @author  MCD Application Team
-  * @brief   This example code shows how to use the joystick feature in the
+  * @brief   This example code shows how to use the joystick feature in the 
   *          stm324xx_nucleo_144 driver
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -65,23 +65,23 @@ void Joystick_SetCursorPosition(void);
   * @retval None
   */
 void Joystick_demo (void)
-{
+{ 
 
   uint8_t status = 0;
 
   Joystick_SetHint();
-
+  
   status = BSP_JOY_Init();
-
+  
   if (status != HAL_OK)
   {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 70, (uint8_t *)"ERROR", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)"Joystick cannot", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 40, (uint8_t *)"be initialized", CENTER_MODE);
   }
-
+  
   while (1)
   {
     if (status == HAL_OK)
@@ -105,23 +105,23 @@ void Joystick_demo (void)
   */
 static void Joystick_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set Joystick Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 40);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
 
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"Joystick Demo", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 25, (uint8_t *)"Move the pointer", CENTER_MODE);
 
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 50, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 60);
   BSP_LCD_DrawRect(11, 51, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 62);
 }
@@ -138,7 +138,7 @@ void Joystick_SetCursorPosition(void)
   static uint16_t old_xPtr = 12;
   static uint16_t old_yPtr = 52;
 
-
+      
       switch(JoyState)
       {
       case JOY_UP:
@@ -146,50 +146,50 @@ void Joystick_SetCursorPosition(void)
         {
           yPtr--;
         }
-        break;
+        break;     
       case JOY_DOWN:
         if(yPtr < (BSP_LCD_GetYSize() - 12 - 11))
         {
           yPtr++;
         }
-        break;
+        break;          
       case JOY_LEFT:
         if(xPtr > 12)
         {
           xPtr--;
         }
-        break;
+        break;         
       case JOY_RIGHT:
         if(xPtr < (BSP_LCD_GetXSize() - 8 - 11))
         {
           xPtr++;
         }
-        break;
+        break;                 
       default:
-        break;
+        break;           
       }
-
+      
       BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
       BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-
+      
       if(JoyState == JOY_SEL)
       {
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
         BSP_LCD_DisplayChar(xPtr, yPtr, 'X');
-
+        
       }
       else if(JoyState == JOY_NONE)
       {
         BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-        BSP_LCD_DisplayChar(xPtr, yPtr, 'X');
+        BSP_LCD_DisplayChar(xPtr, yPtr, 'X');   
       }
       else
       {
         BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
         BSP_LCD_DisplayChar(old_xPtr, old_yPtr, 'X');
-        BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+        BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
         BSP_LCD_DisplayChar(xPtr, yPtr, 'X');
-
+        
         old_xPtr = xPtr;
         old_yPtr = yPtr;
       }
@@ -198,10 +198,10 @@ void Joystick_SetCursorPosition(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

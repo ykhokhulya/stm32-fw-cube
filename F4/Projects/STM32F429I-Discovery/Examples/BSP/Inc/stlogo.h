@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    BSP/Inc/stlogo.h
+  * @file    BSP/Inc/stlogo.h 
   * @author  MCD Application Team
-  * @brief   This file contains image used for BSP example.
+  * @brief   This file contains image used for BSP example.   
   ******************************************************************************
   * @attention
   *
@@ -31,14 +31,14 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STLOGO_H
 #define __STLOGO_H
 
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4
+  #pragma data_alignment=4   
 #endif
 
 __ALIGN_BEGIN const  unsigned char stlogo[9174] __ALIGN_END =

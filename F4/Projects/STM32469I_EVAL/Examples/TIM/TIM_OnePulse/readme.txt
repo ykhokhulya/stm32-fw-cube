@@ -1,11 +1,11 @@
 /**
   @page TIM_OnePulse TIM One Pulse example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_OnePulse/readme.txt
+  * @file    TIM/TIM_OnePulse/readme.txt 
   * @author  MCD Application Team
-  * @brief   Description of the TIM One Pulse example.
+  * @brief   Description of the TIM One Pulse example.      
   ******************************************************************************
   *
   * Redistribution and use in source and binary forms, with or without modification,
@@ -33,62 +33,62 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to use the TIM peripheral to generate a One pulse Mode
-after a Rising edge of an external signal is received in Timer Input pin.
+This example shows how to use the TIM peripheral to generate a single pulse when
+a rising edge of an external signal is received on the timer Input pin.
 
 
 Clock setup for TIM5
 ================================
 
   TIM5CLK = SystemCoreClock = 180 MHz.
-
+  
   Prescaler = (TIM5CLK /TIM5 counter clock) - 1
-
-  The prescaler value is computed in order to have TIM5 counter clock
+  
+  The prescaler value is computed in order to have TIM5 counter clock 
   set at 18000000 Hz.
-
-  The Autoreload value is 65535 (TIM5->ARR), so the maximum frequency value to
+  
+  The Autoreload value is 65535 (TIM5->ARR), so the maximum frequency value to 
   trigger the TIM5 input is 18000000/65535 [Hz].
-
+ 
 Configuration of TIM5 in One Pulse Mode
 ===================================================
-
-  - The external signal is connected to TIM5_CH2 pin (PH.11),
+ 
+  - The external signal is connected to TIM5_CH2 pin (PH.11), 
     and a rising edge on this input is used to trigger the Timer.
   - The One Pulse signal is output on TIM5_CH1 (PA.00).
 
   The delay value is fixed to:
-   - Delay =  CCR1/TIM5 counter clock
+   - Delay =  CCR1/TIM5 counter clock 
            = 16383 / 18000000 [sec]
-
-  The pulse value is fixed to :
-   - Pulse value = (TIM_Period - TIM_Pulse)/TIM5 counter clock
+           
+  The pulse value is fixed to : 
+   - Pulse value = (TIM_Period - TIM_Pulse)/TIM5 counter clock  
                  = (65535 - 16383) / 18000000 [sec]
 
   The one pulse waveform can be displayed using an oscilloscope and it looks
   like this.
-
+  
                                ____
                                |   |
   CH2 _________________________|   |__________________________________________
-
+ 
                                              ___________________________
                                             |                           |
   CH1 ______________________________________|                           |_____
                                <---Delay----><------Pulse--------------->
-
+  
 
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OnePulse/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_OnePulse/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_OnePulse/Inc/main.h                  Header for main.c module
+  - TIM/TIM_OnePulse/Inc/main.h                  Header for main.c module  
   - TIM/TIM_OnePulse/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_OnePulse/Src/main.c                  Main program
   - TIM/TIM_OnePulse/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -105,13 +105,13 @@ Configuration of TIM5 in One Pulse Mode
 
   - STM32469I-EVAL Set-up
    - Connect the external signal to the TIM5_CH2 pin (PH.11) (pin 25 of CN10 connector)
-   - Connect the TIM5_CH1 pin(PA.00) (pin 15 of CN5 connector) to an oscilloscope to monitor the waveform.
+   - Connect the TIM5_CH1 pin(PA.00) (pin 15 of CN5 connector) to an oscilloscope to monitor the waveform.  
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

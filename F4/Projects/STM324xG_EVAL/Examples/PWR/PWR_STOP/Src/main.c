@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_STOP/Src/main.c
+  * @file    PWR/PWR_STOP/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   * and exit the stop mode.
@@ -43,7 +43,7 @@
 
 /** @addtogroup PWR_STOP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -64,7 +64,7 @@ static void SYSCLKConfig_STOP(void);
 * @retval None
 */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -86,14 +86,14 @@ int main(void)
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 
   /*## Configure the RTC peripheral #######################################*/
-  RTCHandle.Instance = RTC;
+  RTCHandle.Instance = RTC;  
   /* Configure RTC prescaler and RTC data registers as follow:
   - Hour Format = Format 24
   - Asynch Prediv = Value according to source clock
   - Synch Prediv = Value according to source clock
   - OutPut = Output Disable
   - OutPutPolarity = High Polarity
-  - OutPutType = Open Drain */
+  - OutPutType = Open Drain */ 
   RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
   RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
   RTCHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
@@ -103,10 +103,10 @@ int main(void)
   if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
   {
     /* Insert 5 second delay */
@@ -115,12 +115,12 @@ int main(void)
   /*## Configure the Wake up timer ###########################################*/
   /*  RTC Wakeup Interrupt Generation:
       Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSE or LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter
+      Wakeup Time = Wakeup Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSE or LSI)) * WakeUpCounter
       ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
 
       To configure the wake up timer to 4s the WakeUpCounter is set to 0x1FFF:
-        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16
+        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
         Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
         Wakeup Time = ~4s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~4s/0,488ms = 8191 = 0x1FFF */
@@ -131,14 +131,14 @@ int main(void)
     BSP_LED_Off(LED2);
     BSP_LED_Off(LED3);
     BSP_LED_Off(LED4);
-
+    
     /* Enter Stop Mode */
     HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
-
+    
     /* Disable Wakeup Counter */
     HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle);
-
-    /* Configures system clock after wake-up from STOP: enable HSE, PLL and select
+    
+    /* Configures system clock after wake-up from STOP: enable HSE, PLL and select 
     PLL as system clock source (HSE and PLL are disabled in STOP mode) */
     SYSCLKConfig_STOP();
   }
@@ -146,7 +146,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -172,8 +172,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -191,13 +191,13 @@ static void SystemClock_Config(void)
     Error_Handler();
   }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
@@ -225,15 +225,15 @@ static void SYSCLKConfig_STOP(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   uint32_t pFLatency = 0;
-
+  
   /* Get the Oscillators configuration according to the internal RCC registers */
   HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
-
+  
   /* After wake-up from STOP reconfigure the system clock: Enable HSE and PLL */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -245,8 +245,8 @@ static void SYSCLKConfig_STOP(void)
 
   /* Get the Clocks configuration according to the internal RCC registers */
   HAL_RCC_GetClockConfig(&RCC_ClkInitStruct, &pFLatency);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -278,9 +278,9 @@ void Error_Handler(void)
 void HAL_SYSTICK_Callback(void)
 {
   HAL_IncTick();
-
+  
   if (TimingDelay != 0)
-  {
+  { 
     TimingDelay--;
   }
   else
@@ -310,7 +310,7 @@ void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == KEY_BUTTON_PIN)
-  {
+  { 
     /* Toggle LED4 */
     BSP_LED_Toggle(LED4);
   }
@@ -325,7 +325,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -338,10 +338,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

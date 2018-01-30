@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/main.c
+  * @file    BSP/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the STM32412G_DISCOVERY BSP Drivers
   ******************************************************************************
@@ -43,7 +43,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,7 +51,7 @@
 /* Private variables ---------------------------------------------------------*/
 uint8_t DemoIndex = 0;
 uint8_t NbLoop = 1;
-uint32_t SdmmcTest = 0;
+uint32_t SdmmcTest = 0; 
 
 /* Global variables ----------------------------------------------------------*/
 uint8_t SDDetectIT = 0;
@@ -66,11 +66,11 @@ static void Display_DemoDescription(void);
 BSP_DemoTypedef  BSP_examples[]=
 {
   {LCD_demo, "LCD", 0},
-  {Touchscreen_demo1, "TS demo 1", 0},
-  {Touchscreen_demo2, "TS demo 2", 0},
-  {Touchscreen_demo3, "TS Interrupt demo", 0},
+  {Touchscreen_demo1, "TS demo 1", 0}, 
+  {Touchscreen_demo2, "TS demo 2", 0},   
+  {Touchscreen_demo3, "TS Interrupt demo", 0},  
   {SD_demo, "mSD", 0},
-  {SD_DMA_demo, "mSD in DMA Mode", 0},
+  {SD_DMA_demo, "mSD in DMA Mode", 0},  
   {SD_exti_demo, "mSD exti detect", 0},
   {Log_demo, "LCD LOG", 0},
   {QSPI_demo, "QSPI", 0},
@@ -96,24 +96,24 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 100 Mhz */
   SystemClock_Config();
 
   BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
+  BSP_LED_Init(LED4); 
 
-  BSP_LED_On(LED3);
-
+  BSP_LED_On(LED3); 
+ 
   /* Configure the User Button in GPIO Mode */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
-
+ 
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init();
 
   Display_DemoDescription();
-
+     
   /* Wait For User inputs */
   while (1)
   {
@@ -123,7 +123,7 @@ int main(void)
       while (BSP_PB_GetState(BUTTON_WAKEUP) != GPIO_PIN_RESET);   /* Wait for button released */
 
       BSP_examples[DemoIndex++].DemoFunc();
-
+      
       if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
       {
         /* Increment number of loops which be used by EEPROM example */
@@ -142,9 +142,9 @@ int main(void)
   */
 static void Error_Handler(void)
 {
-  BSP_LED_Off(LED3);
+  BSP_LED_Off(LED3); 
   BSP_LED_On(LED4);
-
+  
   while(1)
   {
   }
@@ -152,7 +152,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -175,14 +175,14 @@ static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
-
+  
   HAL_StatusTypeDef ret = HAL_OK;
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -197,13 +197,13 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   if(ret != HAL_OK)
   {
     Error_Handler();
   }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -214,7 +214,7 @@ static void SystemClock_Config(void)
   if(ret != HAL_OK)
   {
     Error_Handler();
-  }
+  }  
 }
 
 /**
@@ -225,31 +225,31 @@ static void SystemClock_Config(void)
 static void Display_DemoDescription(void)
 {
   uint8_t desc[50];
-
+  
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-
-  /* Clear the LCD */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  
+  /* Clear the LCD */ 
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
-
+  BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);  
+  
   /* Display LCD messages */
   BSP_LCD_DisplayStringAt(0, 2, (uint8_t *)"STM32F413H BSP", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 14, (uint8_t *)"Drivers examples", CENTER_MODE);
-
+  
   /* Draw Bitmap */
   BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 30, (uint8_t *)stlogo);
-
+  
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()-12, (uint8_t *)"STMicroelectronics 2017", CENTER_MODE);
-
+  
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 1, BSP_LCD_GetXSize(), 60);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 20, (uint8_t *)"Press button to start :", CENTER_MODE);
   sprintf((char *)desc,"%s example", BSP_examples[DemoIndex].DemoName);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 35, (uint8_t *)desc, CENTER_MODE);
@@ -285,7 +285,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     if((HAL_GetTick() - debounce_time) > 50)
     {
       debounce_time = HAL_GetTick();
-    }
+    }  
   }
   else if(GPIO_Pin == SD_DETECT_PIN)
   {
@@ -304,7 +304,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -313,14 +313,14 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-#endif /* USE_FULL_ASSERT */
+#endif /* USE_FULL_ASSERT */ 
+
+/**
+  * @}
+  */ 
 
 /**
   * @}
   */
-
-/**
-  * @}
-  */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

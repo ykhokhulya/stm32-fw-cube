@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/stm32f4xx_it.c
+  * @file    BSP/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -46,7 +46,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -231,7 +231,7 @@ void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void)
 {
   if(SdmmcTest == 1)
   {
-    HAL_DMA_IRQHandler(uSdHandle.hdmatx);
+    HAL_DMA_IRQHandler(uSdHandle.hdmatx); 
   }
   else
   {
@@ -276,7 +276,7 @@ void BSP_SD_DMA_Rx_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

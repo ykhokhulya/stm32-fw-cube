@@ -1,10 +1,10 @@
 /**
   @page CRYP_AES_DMA  Encrypt and Decrypt data using AES Algo in ECB chaining
    modes using DMA
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CRYP/CRYP_AES_DMA/readme.txt
+  * @file    CRYP/CRYP_AES_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES-128 Algo in ECB mode with DMA Example
   ******************************************************************************
@@ -34,9 +34,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example provides a short description of how to use the CRYPTO peripheral to
+This example provides a short description of how to use the CRYPTO peripheral to 
 encrypt and decrypt data using AES-128 Algorithm with ECB chaining mode.
 
 For this example, DMA is used to transfer data from memory to the CRYPTO
@@ -46,7 +46,7 @@ to memory.
 The data to be encrypted is a 256-bit data (8 words), which correspond to
 2x AES-128 Blocks.
 
-This example behaves as below:
+This example behaves as below: 
 - AES Encryption (Plain Data --> Encrypted Data)
 - AES Key preparation for decryption (Encryption Key --> Decryption Key)
 - AES Decryption (Encrypted Data --> Decrypted Data)
@@ -56,7 +56,7 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
  - LED2 is ON when encryption is wrong.
  - LED3 is ON when there is an initialization error occurred.
 
-@note To ensure right functionality of this example, please ensure that used
+@note To ensure right functionality of this example, please ensure that used 
       buffers are 32-bit aligned, once enabling the DMA capability.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -64,16 +64,16 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - CRYP/CRYP_AES_DMA/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CRYP/CRYP_AES_DMA/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CRYP/CRYP_AES_DMA/Inc/main.h                  Main program header file
+  - CRYP/CRYP_AES_DMA/Inc/main.h                  Main program header file  
   - CRYP/CRYP_AES_DMA/Src/stm32f4xx_it.c          Interrupt handlers
   - CRYP/CRYP_AES_DMA/Src/main.c                  Main program
   - CRYP/CRYP_AES_DMA/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -83,16 +83,16 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
 @par Hardware and Software environment
 
   - This example runs on STM32F439xx devices.
-
-  - This example has been tested with STMicroelectronics STM32439I-EVAL RevB
-    evaluation boards and can be easily tailored to any other supported device
+  
+  - This example has been tested with STMicroelectronics STM32439I-EVAL RevB 
+    evaluation boards and can be easily tailored to any other supported device 
     and development board.
+  
 
-
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

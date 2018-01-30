@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRYP/CRYP_AES_CCM/Src/main.c
+  * @file    CRYP/CRYP_AES_CCM/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example provides a short description of how to use the CRYPTO
   *          peripheral to encrypt data using AES with Combined Cypher Machine (CCM).
@@ -43,7 +43,7 @@
 
 /** @addtogroup CRYP_AES_CCM
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -62,21 +62,21 @@ CRYP_HandleTypeDef     CrypHandle;
 
 uint8_t aAES128Key[KEY_SIZE/8] = {0x40,0x41,0x42,0x43,0x44,0x45,0x46,0x47,
                                   0x48,0x49,0x4a,0x4b,0x4c,0x4d,0x4e,0x4f};
-
+                                   
 uint8_t aNonce[NONCE_SIZE] = {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17};
-
+                                        
 uint32_t uwNonceSize = NONCE_SIZE;
 
 uint8_t aHeaderMessage[HEADER_SIZE] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
                                        0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,0x0f};
 
 /* Temporary buffer used to append the header. aHBuffer size must be equal to HEADER_SIZE + 21 */
-uint8_t aHBuffer[HEADER_SIZE + 21];
-
+uint8_t aHBuffer[HEADER_SIZE + 21]; 
+                                      
 
 uint8_t aPlaintext[PLAINTEXT_SIZE] = {0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,
                                       0x28,0x29,0x2a,0x2b,0x2c,0x2d,0x2e,0x2f};
-
+                                       
 
 uint8_t aExpectedCyphertext[PLAINTEXT_SIZE] = {0xd2,0xa1,0xf0,0xe0,
                                                0x51,0xea,0x5f,0x62,
@@ -111,19 +111,19 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the CRYP peripheral ######################################*/
   /* Set the CRYP parameters */
   CrypHandle.Instance = CRYP;
-
+  
   CrypHandle.Init.DataType   = CRYP_DATATYPE_8B;
   CrypHandle.Init.KeySize    = CRYP_KEYSIZE_128B;
   CrypHandle.Init.pKey       = aAES128Key;
@@ -137,23 +137,23 @@ int main(void)
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-2- Start the AES Encryption in CCM chaining mode ######################*/
   if(HAL_CRYPEx_AESCCM_Encrypt(&CrypHandle, aPlaintext, PLAINTEXT_SIZE, aOutputText, 0xFF) != HAL_OK)
   {
     /* Encryption Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
-  /*##-3- Compute the authentication TAG for AES CCM mode ####################*/
+  
+  /*##-3- Compute the authentication TAG for AES CCM mode ####################*/ 
   if(HAL_CRYPEx_AESCCM_Finish(&CrypHandle, aMAC, 0xFF) != HAL_OK)
   {
     /* TAG Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-4- Compare the encrypted text and the aMAC with the expected ones #####*/
   if( (memcmp(aOutputText, aExpectedCyphertext, PLAINTEXT_SIZE) != 0) ||  (memcmp(aMAC, aExpectedMAC, MAC_SIZE) != 0))
   {
@@ -165,7 +165,7 @@ int main(void)
     /* Right encryption: Turn LED1 on */
     BSP_LED_On(LED1);
   }
-
+  
   /* Infinite loop */
   while(1)
   {
@@ -174,7 +174,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -200,8 +200,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -218,14 +218,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -252,7 +252,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -265,10 +265,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

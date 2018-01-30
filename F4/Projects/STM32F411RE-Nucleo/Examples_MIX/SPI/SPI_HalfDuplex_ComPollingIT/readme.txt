@@ -1,9 +1,9 @@
 /**
   @page SPI_HalfDuplex_ComPollingIT SPI Half Duplex IT example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    SPI/SPI_HalfDuplex_ComPollingIT/readme.txt
+  * @file    SPI/SPI_HalfDuplex_ComPollingIT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the SPI Half Duplex IT example.
   ******************************************************************************
@@ -33,9 +33,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to ensure SPI data buffer transmission/reception between
+This example shows how to ensure SPI data buffer transmission/reception between 
 two boards by using Polling (LL Driver) an interrupt mode (HAL Driver).
 
    _________________________                        _________________________
@@ -55,25 +55,25 @@ two boards by using Polling (LL Driver) an interrupt mode (HAL Driver).
   |_STM32F4 Master _________|                      |_STM32F4 Slave __________|
 
 
-At the beginning of the main program the HAL_Init() function is called to reset
+At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 100 MHz.
 
 The SPI peripheral configuration is ensured by the HAL_SPI_Init() function.
 This later is calling the HAL_SPI_MspInit()function which core is implementing
-the configuration of the needed SPI resources according to the used hardware (CLOCK &
+the configuration of the needed SPI resources according to the used hardware (CLOCK & 
 GPIO). You may update this function to change SPI configuration.
-The Half-Duplex SPI transmission (8bit) is done using LL Driver on Master board (Tx) by using function
+The Half-Duplex SPI transmission (8bit) is done using LL Driver on Master board (Tx) by using function 
 LL_SPI_TransmitData8.
-The The Half-Duplex SPI reception (8bit) is done using HAL Driver on Slave board (Rx) by using function
+The The Half-Duplex SPI reception (8bit) is done using HAL Driver on Slave board (Rx) by using function 
 HAL_SPI_Receive_IT.
 
 Example execution:
-First step, press the User push-button, this action initiates a Half-Duplex transfer
+First step, press the User push-button, this action initiates a Half-Duplex transfer 
 between Master and Slave.
-After end of transfer, aRxBuffer and aTxBuffer are compared through Buffercmp() in order to
-check buffers correctness.
+After end of transfer, aRxBuffer and aTxBuffer are compared through Buffercmp() in order to 
+check buffers correctness.  
 
 The user can choose between Master and Slave through "#define MASTER_BOARD"
 in the "main.c" file.
@@ -83,7 +83,7 @@ If the Slave board is used the "#define MASTER_BOARD" must be commented.
 STM32 board's LEDs can be used to monitor the transfer status:
  - LED2 toggles quickly on master board waiting User push-button to be pressed.
  - LED2 turns ON on slave board if reception is complete and OK.
- - LED2 toggles slowly when there is a timeout or an error in transmission/reception process.
+ - LED2 toggles slowly when there is a timeout or an error in transmission/reception process.   
 
 @note SPIx instance used and associated resources can be updated in "main.h"
       file depending hardware configuration used.
@@ -98,15 +98,15 @@ STM32 board's LEDs can be used to monitor the transfer status:
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Inc/stm32f4xx_it.h          SPI interrupt handlers header file
-  - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Inc/main.h                  Header for main.c module
+  - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Inc/main.h                  Header for main.c module  
   - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Src/stm32f4xx_it.c          SPI interrupt handlers
   - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Src/main.c                  Main program
   - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Src/system_stm32f4xx.c      STM32F4xx system source file
-  - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Src/stm32f4xx_hal_msp.c     HAL MSP file
+  - Examples_MIX/SPI/SPI_HalfDuplex_ComPollingIT/Src/stm32f4xx_hal_msp.c     HAL MSP file    
 
 
 @par Hardware and Software environment
@@ -124,10 +124,10 @@ STM32 board's LEDs can be used to monitor the transfer status:
     - Connect Master board PC12 to Slave Board PC11 (pin 3 and pin 2 in CN7 connector)
     - Connect Master board GND  to Slave Board GND
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following:
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
     o Uncomment "#define MASTER_BOARD" and load the project in Master Board
     o Comment "#define MASTER_BOARD" and load the project in Slave Board
@@ -135,3 +135,4 @@ In order to make the program work, you must do the following:
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
+ 

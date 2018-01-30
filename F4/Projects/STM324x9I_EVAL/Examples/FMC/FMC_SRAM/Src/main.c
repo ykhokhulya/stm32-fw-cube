@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    FMC/FMC_SRAM/Src/main.c
+  * @file    FMC/FMC_SRAM/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access
+  * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access 
   *          by read and write operation the SRAM external memory device.
   ******************************************************************************
   * @attention
@@ -43,13 +43,13 @@
 
 /** @addtogroup FMC_SRAM_Basic
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define BUFFER_SIZE         ((uint32_t)0x0100)
 #define WRITE_READ_ADDR     ((uint32_t)0x0800)
-
+    
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 SRAM_HandleTypeDef hsram;
@@ -79,7 +79,7 @@ static TestStatus Buffercmp(uint16_t *pBuffer1, uint16_t *pBuffer2, uint16_t Buf
   * @retval None
   */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -87,21 +87,21 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the SRAM device ##########################################*/
-  /* SRAM device configuration */
-
+  /* SRAM device configuration */ 
+  
   hsram.Instance  = FMC_NORSRAM_DEVICE;
   hsram.Extended  = FMC_NORSRAM_EXTENDED_DEVICE;
-
+  
   SRAM_Timing.AddressSetupTime       = 2;
   SRAM_Timing.AddressHoldTime        = 1;
   SRAM_Timing.DataSetupTime          = 2;
@@ -109,7 +109,7 @@ int main(void)
   SRAM_Timing.CLKDivision            = 2;
   SRAM_Timing.DataLatency            = 2;
   SRAM_Timing.AccessMode             = FMC_ACCESS_MODE_A;
-
+  
   hsram.Init.NSBank             = FMC_NORSRAM_BANK2;
   hsram.Init.DataAddressMux     = FMC_DATA_ADDRESS_MUX_DISABLE;
   hsram.Init.MemoryType         = FMC_MEMORY_TYPE_SRAM;
@@ -129,42 +129,42 @@ int main(void)
   if(HAL_SRAM_Init(&hsram, &SRAM_Timing, &SRAM_Timing) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
-  /*##-2- SRAM memory read/write access ######################################*/
+    
+  /*##-2- SRAM memory read/write access ######################################*/  
   /* Fill the buffer to write */
-  Fill_Buffer(aTxBuffer, BUFFER_SIZE, 0xC20F);
-
+  Fill_Buffer(aTxBuffer, BUFFER_SIZE, 0xC20F);   
+  
   /* Write data to the SRAM memory */
   for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
   {
     *(__IO uint16_t*) (SRAM_BANK_ADDR + WRITE_READ_ADDR + 2*uwIndex) = aTxBuffer[uwIndex];
-  }
-
+  }    
+  
   /* Read back data from the SRAM memory */
   for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
   {
     aRxBuffer[uwIndex] = *(__IO uint16_t*) (SRAM_BANK_ADDR + WRITE_READ_ADDR + 2*uwIndex);
-  }
+  } 
 
-  /*##-3- Checking data integrity ############################################*/
-  uwWriteReadStatus = Buffercmp(aTxBuffer, aRxBuffer, BUFFER_SIZE);
+  /*##-3- Checking data integrity ############################################*/    
+  uwWriteReadStatus = Buffercmp(aTxBuffer, aRxBuffer, BUFFER_SIZE);	
 
   if (uwWriteReadStatus != PASSED)
   {
     /* KO */
     /* Turn on LED2 */
-    BSP_LED_On(LED2);
+    BSP_LED_On(LED2);     
   }
   else
-  {
+  { 
     /* OK */
     /* Turn on LED1 */
     BSP_LED_On(LED1);
   }
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
   {
   }
@@ -172,7 +172,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -198,8 +198,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -213,19 +213,19 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
-  HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  HAL_PWREx_EnableOverDrive();   
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-}
+} 
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -240,7 +240,7 @@ static void Error_Handler(void)
   {
   }
 }
-
+                  
 /**
   * @brief  Fills buffer with user predefined data.
   * @param  pBuffer: pointer on the buffer to fill
@@ -257,7 +257,7 @@ static void Fill_Buffer(uint16_t *pBuffer, uint32_t uwBufferLenght, uint16_t uwO
   {
     pBuffer[tmpIndex] = tmpIndex + uwOffset;
   }
-}
+} 
 
 /**
   * @brief  Compares two buffers.
@@ -291,7 +291,7 @@ static TestStatus Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t Buf
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -304,10 +304,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

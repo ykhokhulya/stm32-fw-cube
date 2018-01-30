@@ -1,9 +1,9 @@
 /**
   @page ADC_MultiChannelSingleConversion ADC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/ADC/ADC_MultiChannelSingleConversion/readme.txt
+  * @file    Examples_LL/ADC/ADC_MultiChannelSingleConversion/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC_MultiChannelSingleConversion example.
   ******************************************************************************
@@ -34,9 +34,9 @@
   @endverbatim
 
 @par Example Description
-This example describes how to use a ADC peripheral to convert several channels,
-ADC conversions are performed successively in a scan sequence;
-This example is based on the STM32F4xx ADC LL API;
+This example describes how to use a ADC peripheral to convert several channels, 
+ADC conversions are performed successively in a scan sequence; 
+This example is based on the STM32F4xx ADC LL API; 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -50,7 +50,7 @@ address for conversion data of each channel), in circular mode to update
 results array at each ADC sequence conversions.
 
 Example execution:
-At each press on User Button, the ADC executes the scan sequence:
+At each press on User Button, the ADC executes the scan sequence: 
 ADC performs conversion of the three selected channels successively,
 in burst (discontinuous mode not enabled).
 The 3 ADC conversions data are transferred by DMA into the results array
@@ -92,7 +92,7 @@ Other peripherals used:
   DMA
 
 
-@par Directory contents
+@par Directory contents 
 
   - ADC/ADC_MultiChannelSingleConversion/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - ADC/ADC_MultiChannelSingleConversion/Inc/main.h                  Header for main.c module
@@ -105,12 +105,12 @@ Other peripherals used:
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

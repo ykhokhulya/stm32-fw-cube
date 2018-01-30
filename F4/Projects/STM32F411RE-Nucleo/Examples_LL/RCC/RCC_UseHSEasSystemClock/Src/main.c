@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/RCC/RCC_UseHSEasSystemClock/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to use the RCC LL API how to start the HSE
+  * @brief   This example describes how to use the RCC LL API how to start the HSE 
   *          and use it as system clock.
   ******************************************************************************
   * @attention
@@ -70,10 +70,10 @@ void     LED_Blinking(uint32_t Period);
 int main(void)
 {
   register uint32_t frequency = 0;
-
+  
   /* Configure Systick to 1 ms with the current frequency which should be HSI */
   frequency = HSI_VALUE;
-
+									   
   LL_Init1msTick(frequency);
 
   /* Initialize LED2 */
@@ -92,7 +92,7 @@ int main(void)
     /* Problem to switch to HSE, blink LED2 */
      LED_Blinking(LED_BLINK_ERROR);
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -108,19 +108,19 @@ int main(void)
 void StartHSE(void)
 {
   /* Configure NVIC for RCC */
-  NVIC_EnableIRQ(RCC_IRQn);
-  NVIC_SetPriority(RCC_IRQn,0);
-
+  NVIC_EnableIRQ(RCC_IRQn); 
+  NVIC_SetPriority(RCC_IRQn,0); 
+  
   /* Enable interrupt on HSE ready */
-  /* Enable the CSS
-     Enable the HSE and set HSEBYP to use the external clock
-     instead of an oscillator
+  /* Enable the CSS 
+     Enable the HSE and set HSEBYP to use the external clock 
+     instead of an oscillator 
      Enable HSE */
   /* Note : the clock is switched to HSE in the RCC_IRQHandler ISR */
-  LL_RCC_EnableIT_HSERDY();
-  LL_RCC_HSE_EnableCSS();
-  LL_RCC_HSE_EnableBypass();
-  LL_RCC_HSE_Enable();
+  LL_RCC_EnableIT_HSERDY(); 
+  LL_RCC_HSE_EnableCSS(); 
+  LL_RCC_HSE_EnableBypass(); 
+  LL_RCC_HSE_Enable(); 
 }
 
 /**
@@ -134,20 +134,20 @@ uint32_t RCC_WaitForHSEReady()
   /* Set timeout to 1 sec */
   uint32_t timeout = TIMEOUT_VALUE;
 #endif /* USE_TIMEOUT */
-
+  
   /* Check that the condition is met */
   while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSE)
   {
 #if (USE_TIMEOUT == 1)
     /* Check Systick counter flag to decrement the time-out value */
-    if (LL_SYSTICK_IsActiveCounterFlag())
-    {
+    if (LL_SYSTICK_IsActiveCounterFlag()) 
+    { 
       if(--timeout == 0)
       {
         /* Time-out occurred. Return an error */
         return RCC_ERROR_TIMEOUT;
       }
-    }
+    } 
 #endif /* USE_TIMEOUT */
   }
   return RCC_ERROR_NONE;
@@ -191,12 +191,12 @@ void LED_Blinking(uint32_t Period)
 {
   /* Turn LED2 on */
   LL_GPIO_SetOutputPin(LED2_GPIO_PORT, LED2_PIN);
-
+  
   /* Toggle IO in an infinite loop */
   while (1)
   {
     /* Error if LED2 is slowly blinking (1 sec. period) */
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -212,8 +212,8 @@ void LED_Blinking(uint32_t Period)
 void HSEReady_Callback(void)
 {
   /* Switch the system clock to HSE */
-  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSE);
-
+  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSE); 
+  
   /* 1ms config with HSE 8MHz*/
   LL_Init1msTick(HSE_VALUE);
 }

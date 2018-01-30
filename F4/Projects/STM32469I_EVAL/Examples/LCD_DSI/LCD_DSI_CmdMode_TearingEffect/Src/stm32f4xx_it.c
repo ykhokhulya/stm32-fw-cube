@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Src/stm32f4xx_it.c
+  * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and
@@ -48,7 +48,7 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
-extern LTDC_HandleTypeDef hltdc_eval;
+extern LTDC_HandleTypeDef hltdc_eval;   
 extern DSI_HandleTypeDef hdsi_eval;
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -176,7 +176,7 @@ void LTDC_IRQHandler(void)
 }
 
 void LTDC_ER_IRQHandler(void)
-{
+{ 
   /* Check the interrupt and clear flag */
   HAL_LTDC_IRQHandler(&hltdc_eval);
 

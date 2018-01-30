@@ -1,9 +1,9 @@
 /**
   @page TIM_OnePulse TIM example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/TIM/TIM_OnePulse/readme.txt
+  * @file    Examples_LL/TIM/TIM_OnePulse/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM_OnePulse example.
   ******************************************************************************
@@ -45,8 +45,8 @@ The pulse is generated on OC1.
 This example uses 2 timer instances:
 
   - TIM3 generates a positive pulse of 50 us after a delay of 50 us. User push-button
-    is used to start TIM3 counter.
-                                              ___
+    is used to start TIM3 counter. 
+                                              ___ 
                                              |   |
     User push-button ________________________|   |________________________________
                                                             ___________
@@ -56,7 +56,7 @@ This example uses 2 timer instances:
                                                 |            |_ uwMeasuredPulseLength
                                                 |_ uwMeasuredDelay
 
-  TIM3_CH1 delay and pulse length are measured every time a pulse is generated.
+  TIM3_CH1 delay and pulse length are measured every time a pulse is generated. 
   Both can be observed through the debugger by monitoring the variables uwMeasuredDelay and
   uwMeasuredPulseLength respectively.
 
@@ -73,16 +73,16 @@ This example uses 2 timer instances:
                                               |                           |
     OC1 ______________________________________|                           |____
     (TIM2_CH1)                   <-----2s-----><----------3 s------------->
+   
 
 
-
-Both TIM3 and TIM2 are configured to generate a single pulse (timer counter
+Both TIM3 and TIM2 are configured to generate a single pulse (timer counter 
 stops automatically at the next update event (UEV).
 
 Connecting TIM3 OC1 to TIM2 TI2 allows to trigger TIM2 counter by pressing
 the User push-button.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OnePulse/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - TIM/TIM_OnePulse/Inc/main.h                  Header for main.c module
@@ -95,16 +95,16 @@ the User push-button.
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-F411RE Set-up:
-      - TIM3_CH1  PA.06: connected to pin 5 of CN5 connector
-      - TIM2_CH1  PA.05: connected to pin 6 of CN5 connector
-      - TIM2_CH2  PA.01: connected to pin 2 of CN8 connector
+      - TIM3_CH1  PA.06: connected to pin 5 of CN5 connector  
+      - TIM2_CH1  PA.05: connected to pin 6 of CN5 connector 
+      - TIM2_CH2  PA.01: connected to pin 2 of CN8 connector 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

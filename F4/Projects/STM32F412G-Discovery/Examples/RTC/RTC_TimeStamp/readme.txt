@@ -1,6 +1,6 @@
 /**
   @page RTC_TimeStamp RTC time stamp Example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    RTC/RTC_TimeStamp/readme.txt
@@ -35,8 +35,8 @@
 
 @par Example Description
 
-This example guides you through the different configuration steps by mean of HAL API
-to ensure Time Stamp configuration using the RTC peripheral.
+This example guides you through the different configuration steps by means of the RTC 
+HAL API to demonstrate the timestamp feature.
 
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
@@ -80,13 +80,13 @@ If the user comment USE_LCD, the current time and Time Stamp are updated and dis
 on the debugger in aShowTime and aShowTimeStamp variables.
 
 - LED3 is toggling : This indicates that the system generates an error.
-
+       
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
@@ -94,7 +94,7 @@ on the debugger in aShowTime and aShowTimeStamp variables.
 
   - RTC/RTC_TimeStamp/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - RTC/RTC_TimeStamp/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - RTC/RTC_TimeStamp/Inc/main.h                  Header for main.c module
+  - RTC/RTC_TimeStamp/Inc/main.h                  Header for main.c module  
   - RTC/RTC_TimeStamp/Src/stm32f4xx_it.c          Interrupt handlers
   - RTC/RTC_TimeStamp/Src/main.c                  Main program
   - RTC/RTC_TimeStamp/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -104,17 +104,18 @@ on the debugger in aShowTime and aShowTimeStamp variables.
 @par Hardware and Software environment
 
   - This example runs on STM32F412xG devices.
-  - This example has been tested with STMicroelectronics STM32412G-DISCOVERY
-    board and can be easily tailored to any other supported device
+  - This example has been tested with STMicroelectronics STM32412G-DISCOVERY 
+    board and can be easily tailored to any other supported device 
     and development board.
 
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
+ 

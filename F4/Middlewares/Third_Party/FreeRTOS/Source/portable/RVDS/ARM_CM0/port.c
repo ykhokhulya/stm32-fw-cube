@@ -541,7 +541,7 @@ uint32_t ulPreviousMask;
 				ulStoppedTimerCompensation = portMISSED_COUNTS_FACTOR / ( configCPU_CLOCK_HZ / configSYSTICK_CLOCK_HZ );
 			}
 			#endif /* configUSE_TICKLESS_IDLE */
-
+		
 		/* Configure SysTick to interrupt at the requested rate. */
 		portNVIC_SYSTICK_LOAD = ( configCPU_CLOCK_HZ / configTICK_RATE_HZ ) - 1UL;
 		portNVIC_SYSTICK_CTRL = portNVIC_SYSTICK_CLK | portNVIC_SYSTICK_INT | portNVIC_SYSTICK_ENABLE;

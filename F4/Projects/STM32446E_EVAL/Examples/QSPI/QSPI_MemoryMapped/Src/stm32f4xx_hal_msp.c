@@ -61,7 +61,7 @@
   *        This function configures the hardware resources used in this example:
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration
-  *           - DMA configuration for requests by peripheral
+  *           - DMA configuration for requests by peripheral 
   *           - NVIC configuration for DMA and QSPI interrupts
   * @param hqspi: QSPI handle pointer
   * @retval None
@@ -85,7 +85,7 @@ void HAL_QSPI_MspInit(QSPI_HandleTypeDef *hqspi)
   QSPI_D2_GPIO_CLK_ENABLE();
   QSPI_D3_GPIO_CLK_ENABLE();
   /* Enable DMA clock */
-  QSPI_DMA_CLK_ENABLE();
+  QSPI_DMA_CLK_ENABLE();   
 
   /*##-2- Configure peripheral GPIO ##########################################*/
   /* QSPI CS GPIO pin configuration  */
@@ -129,7 +129,7 @@ void HAL_QSPI_MspInit(QSPI_HandleTypeDef *hqspi)
 
   /*##-4- Configure the DMA channel ###########################################*/
   /* QSPI DMA channel configuration */
-  hdma.Init.Channel             = QSPI_DMA_CHANNEL;
+  hdma.Init.Channel             = QSPI_DMA_CHANNEL;                     
   hdma.Init.PeriphInc           = DMA_PINC_DISABLE;
   hdma.Init.MemInc              = DMA_MINC_ENABLE;
   hdma.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;

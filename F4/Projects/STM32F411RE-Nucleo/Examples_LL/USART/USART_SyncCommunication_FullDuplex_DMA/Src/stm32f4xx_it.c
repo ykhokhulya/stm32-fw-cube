@@ -175,7 +175,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Handle user button press in dedicated function */
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 

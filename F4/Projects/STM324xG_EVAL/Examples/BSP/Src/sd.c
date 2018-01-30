@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/sd.c
+  * @file    BSP/Src/sd.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the SD Driver
   ******************************************************************************
@@ -68,13 +68,13 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
   * @retval None
   */
 void SD_demo(void)
-{
+{ 
   uint8_t SD_state = MSD_OK;
-  static uint8_t prev_status = 0;
-
+  static uint8_t prev_status = 0; 
+  
   SD_SetHint();
   SD_state = BSP_SD_Init();
-
+  
   if(SD_state != MSD_OK)
   {
     BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"SD Initialization : FAIL.", LEFT_MODE);
@@ -83,13 +83,13 @@ void SD_demo(void)
   else
   {
     BSP_LCD_DisplayStringAt(20, 100, (uint8_t *)"SD Initialization : OK.", LEFT_MODE);
-
+    
     SD_state = BSP_SD_Erase(BLOCK_START_ADDR,  NUM_OF_BLOCKS);
     /* Wait until SD cards are ready to use for new operation */
     while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
     {
     }
-
+    
     if(SD_state != MSD_OK)
     {
       BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
@@ -98,10 +98,10 @@ void SD_demo(void)
     else
     {
       BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
-
+      
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
-      SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, SD_DATATIMEOUT);
+      SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, SD_DATATIMEOUT);     
       /* Wait until SD cards are ready to use for new operation */
       while((BSP_SD_GetCardState() != SD_TRANSFER_OK))
       {
@@ -137,20 +137,20 @@ void SD_demo(void)
       }
     }
   }
-
+  
   /* Check if the SD card is plugged in the slot */
   if(BSP_SD_IsDetected() == SD_PRESENT)
   {
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
     BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-30, (uint8_t *)"SD Connected    ", LEFT_MODE);
   }
-  else
+  else 
   {
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-30,   (uint8_t *)"SD Not Connected", LEFT_MODE);
   }
-
-
+  
+  
   while (1)
   {
     /* Check if the SD card is plugged in the slot */
@@ -159,7 +159,7 @@ void SD_demo(void)
       if(prev_status == 0)
       {
         BSP_SD_Init();
-        prev_status = 1;
+        prev_status = 1; 
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
         BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-30, (uint8_t *)"SD Not Connected", LEFT_MODE);
       }
@@ -170,7 +170,7 @@ void SD_demo(void)
       BSP_LCD_DisplayStringAt(20, BSP_LCD_GetYSize()-30,   (uint8_t *)"SD Connected    ", LEFT_MODE);
       prev_status = 0;
     }
-
+    
     if(CheckForUserInput() > 0)
     {
       return;
@@ -185,14 +185,14 @@ void SD_demo(void)
   */
 static void SD_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
   BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"SD", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -201,12 +201,12 @@ static void SD_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
 
    /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
 }
 
 /**
@@ -251,9 +251,9 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
 }
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -3,7 +3,7 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Cortex/CORTEXM_ModePrivilege/readme.txt
+  * @file    Cortex/CORTEXM_ModePrivilege/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CortexM4 Mode Privilege example.
   ******************************************************************************
@@ -33,11 +33,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to modify CortexM4 Thread mode privilege access and stack.
-CortexM4 Thread mode is entered on Reset, and can be entered as a result of an
-exception return.
+This example shows how to modify Thread mode privilege access and stack. Thread 
+mode is entered on reset or when returning from an exception.
 
 The associated program is used to:
 
@@ -50,13 +49,13 @@ The associated program is used to:
 To monitor the stack used and the privileged or unprivileged access level of code
 in Thread mode, a set of variables is available within the program. It is also
 possible to use the 'Cortex register' window of the debugger.
-
+ 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
@@ -67,24 +66,25 @@ possible to use the 'Cortex register' window of the debugger.
   - Cortex/CORTEXM_ModePrivilege/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - Cortex/CORTEXM_ModePrivilege/Inc/main.h                  Main program header file
   - Cortex/CORTEXM_ModePrivilege/Src/stm32f4xx_it.c          Interrupt handlers
-  - Cortex/CORTEXM_ModePrivilege/Src/main.c                  Main program
+  - Cortex/CORTEXM_ModePrivilege/Src/main.c                  Main program 
   - Cortex/CORTEXM_ModePrivilege/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
 
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This example runs on STM32F42xxx/STM32F43xxx devices.
-
+    
   - This example has been tested with STM324x9I-EVAL RevB evaluation board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board. 
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
+ 

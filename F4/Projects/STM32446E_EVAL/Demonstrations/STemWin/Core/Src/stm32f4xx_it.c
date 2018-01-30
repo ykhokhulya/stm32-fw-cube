@@ -3,7 +3,7 @@
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -33,7 +33,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -42,11 +42,11 @@
   * @{
   */
 
-/** @defgroup
-  * @brief
+/** @defgroup 
+  * @brief  
   * @{
   */
-
+  
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -140,7 +140,7 @@ void DebugMon_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  osSystickHandler();
+  osSystickHandler(); 
 }
 
 /******************************************************************************/
@@ -178,7 +178,7 @@ void OTG_FS_IRQHandler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8); 
 }
 
 /**
@@ -208,7 +208,7 @@ void DMA2_Stream3_IRQHandler(void)
   */
 void DMA2_Stream6_IRQHandler(void)
 {
-  BSP_SD_DMA_Tx_IRQHandler();
+  BSP_SD_DMA_Tx_IRQHandler(); 
 }
 
 
@@ -219,7 +219,7 @@ void DMA2_Stream6_IRQHandler(void)
   */
 void DMA2_Stream7_IRQHandler(void)
 {
-
+  
     HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
 }
 /**
@@ -248,7 +248,7 @@ void AUDIO_I2Sx_DMAx_IRQHandler(void)
   */
 void DMA2_Stream1_IRQHandler(void)
 {
-  BSP_CAMERA_DMA_IRQHandler();
+  BSP_CAMERA_DMA_IRQHandler();   
 }
 
 /**
@@ -287,5 +287,5 @@ void QUADSPI_IRQHandler(void)
 /**
   * @}
   */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,9 +1,9 @@
 /**
   @page SPI_TwoBoards_FullDuplex_DMA SPI example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/SPI/SPI_TwoBoards_FullDuplex_DMA/readme.txt
+  * @file    Examples_LL/SPI/SPI_TwoBoards_FullDuplex_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the SPI_TwoBoards_FullDuplex_DMA example.
   ******************************************************************************
@@ -33,7 +33,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example shows how to ensure SPI data buffer transmission and reception in
 DMA mode. The example is based on the STM32F4xx SPI LL API. Peripheral initialization
@@ -67,8 +67,8 @@ The project is splitted in two parts the Master Board and the Slave Board:
 - Master Board
   SPI1 Peripheral is configured in Master mode.
   DMA2_Stream2 and DMA2_Stream3 configured to transfer Data via SPI peripheral
-  GPIO associated to User push-button is linked with EXTI.
-
+  GPIO associated to User push-button is linked with EXTI. 
+  
 - Slave Board
   SPI1 Peripheral is configured in Slave mode.
   DMA2_Stream2 and DMA2_Stream3 configured to transfer Data via SPI peripheral
@@ -81,8 +81,8 @@ in the "main.c" file:
 Example execution:
 On BOARD MASTER, LED2 is blinking Fast (200ms) and wait User push-button action.
 Press User push-button on BOARD MASTER start a Full-Duplex communication through DMA.
-On MASTER side, Clock will be generated on SCK line, Transmission(MOSI Line) and reception (MISO Line)
-will be done at the same time.
+On MASTER side, Clock will be generated on SCK line, Transmission(MOSI Line) and reception (MISO Line) 
+will be done at the same time. 
 SLAVE SPI will received  the Clock (SCK Line), so Transmission(MISO Line) and reception (MOSI Line) will be done also.
 
 LED2 is On if data is well received.
@@ -93,7 +93,7 @@ In case of errors, LED2 is blinking Slowly (1s).
       to have the correct behaviour of this example.
 
 
-@par Directory contents
+@par Directory contents 
 
   - SPI/SPI_TwoBoards_FullDuplex_DMA/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - SPI/SPI_TwoBoards_FullDuplex_DMA/Inc/main.h                  Header for main.c module
@@ -115,7 +115,7 @@ In case of errors, LED2 is blinking Slowly (1s).
     - Connect Master board PB5 to Slave Board PB5 (connected to pin 29 of CN7 connector)
     - Connect Master board GND to Slave Board GND
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

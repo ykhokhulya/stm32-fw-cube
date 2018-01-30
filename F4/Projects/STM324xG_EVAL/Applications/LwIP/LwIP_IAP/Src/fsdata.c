@@ -1,7 +1,7 @@
 /*************************************************************************
-fsdata.c generator for UIP0.9
-Works with cc65 C compiler
-Based on the work of Adam Dunkels <adam@dunkels.com>
+fsdata.c generator for UIP0.9       
+Works with cc65 C compiler        
+Based on the work of Adam Dunkels <adam@dunkels.com> 
 The syntax has been left as-is, with respect to the perl version
 Supports for a maximum of 2 levels directory and 999 files in each directory
 For more information, please go to http://www.design4fpga.com
@@ -9,15 +9,15 @@ For more information, please go to http://www.design4fpga.com
 *************************************************************************/
 
 /*************************************************************************
-REDISTRIBUTION OF THIS PIECE OF SOFTWARE IN SOURCE OR AS A BINARY FILE IS PERMITTED IF AND ONLY IF
-THE FOLLOWING RULES ARE OBSERVED:
+REDISTRIBUTION OF THIS PIECE OF SOFTWARE IN SOURCE OR AS A BINARY FILE IS PERMITTED IF AND ONLY IF 
+THE FOLLOWING RULES ARE OBSERVED: 
 
 1) THE REDISTRIBUTION FILE OR ARCHIVE SHOULD INCLUDE THIS README FILE AS WELL AS THE COPYRIGHT NOTICE.
 
-BY USING THIS SOFTWARE, YOU ARE ACKNOWLEDGING THAT YOU HAVE READ AND AGREED WITH THE FOLLOWING
+BY USING THIS SOFTWARE, YOU ARE ACKNOWLEDGING THAT YOU HAVE READ AND AGREED WITH THE FOLLOWING 
 DISCLAIMER AND THE COPYRIGHT NOTICE ABOVE.
 
-DISCLAIMER:
+DISCLAIMER: 
 
 THIS PIECE OF SOFTWARE IS SUPPLIED ''AS IS'', WE (DESIGN4FPGA) SHALL NOT BE HELD RESPONSIBLE OR LIABLE
 FOR ANY RESULTING EVENTS THAT MIGHT HAPPEN DURING THE USE OF THIS PROGRAM IN PARTICULAR:
@@ -27,7 +27,7 @@ FOR ANY RESULTING EVENTS THAT MIGHT HAPPEN DURING THE USE OF THIS PROGRAM IN PAR
 AS A RESULT OF A SYSTEM FAILURE, DIRECTLY OR INDIRECTLY DUE TO THE USE OF FS_GENERATOR.EXE
 *************************************************************************/
 
-#include "fsdata.h"
+#include "fsdata.h" 
 
 static const char data_index_html[] = {
 	0x2f,0x69,0x6e,0x64,0x65,0x78,0x2e,0x68,

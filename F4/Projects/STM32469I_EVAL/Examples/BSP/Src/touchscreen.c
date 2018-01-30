@@ -279,7 +279,7 @@ void Touchscreen_demo3(void)
           /* Handle the new touch */
           Touchscreen_Handle_NewTouch();
         }
-      }
+      } 
 
       /* Wait for a key button press to switch to next test case of BSP validation application */
       /* Otherwise stay in the test */

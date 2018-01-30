@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HASH/HASH_SHA1_MD5/Src/main.c
+  * @file    HASH/HASH_SHA1_MD5/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example provides a short description of HASH digest calculation
   *          using SHA1 and MD5 example.
@@ -43,7 +43,7 @@
 
 /** @addtogroup HASH_SHA1_MD5
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -53,13 +53,13 @@
 /* Private variables ---------------------------------------------------------*/
 /* HASH handler declaration */
 HASH_HandleTypeDef     HashHandle;
-/*
+/* 
   "The hash processor is a fully compliant implementation of the secure
-   hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash
+   hash algorithm (SHA-1), the MD5 (message-digest algorithm 5) hash 
    algorithm and the HMAC (keyed-hash message authentication code)
    algorithm suitable for a variety of applications.*** STM32 ***"
 */
-__ALIGN_BEGIN const uint8_t aInput[INPUT_TAB_SIZE] __ALIGN_END =
+__ALIGN_BEGIN const uint8_t aInput[INPUT_TAB_SIZE] __ALIGN_END = 
                         {0x54,0x68,0x65,0x20,0x68,0x61,0x73,0x68,
                          0x20,0x70,0x72,0x6f,0x63,0x65,0x73,0x73,
                          0x6f,0x72,0x20,0x69,0x73,0x20,0x61,0x20,
@@ -93,7 +93,7 @@ __ALIGN_BEGIN const uint8_t aInput[INPUT_TAB_SIZE] __ALIGN_END =
                          0x63,0x61,0x74,0x69,0x6f,0x6e,0x73,0x2e,
                          0x2a,0x2a,0x2a,0x20,0x53,0x54,0x4d,0x33,
                          0x32,0x20,0x2a,0x2a,0x2a};
-
+ 
 __ALIGN_BEGIN static uint8_t aMD5Digest[16] __ALIGN_END;
 __ALIGN_BEGIN static uint8_t aExpectMD5Digest[16] __ALIGN_END = {0x67, 0x07, 0x86, 0x2c, 0x7c, 0xd0, 0xb5, 0x22,
                                                                  0xb2, 0xdd, 0x22, 0xd8, 0x47, 0x7b, 0xe3, 0x18};
@@ -121,26 +121,26 @@ static void Error_Handler(void);
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /****************************************************************************/
   /******************************** SHA1 **************************************/
   /****************************************************************************/
   HAL_HASH_DeInit(&HashHandle);
   HashHandle.Init.DataType = HASH_DATATYPE_8B;
-
+  
   if(HAL_HASH_Init(&HashHandle) != HAL_OK)
   {
     Error_Handler();
   }
-
+  
   /* Compute SHA1 */
   if(HAL_HASH_SHA1_Start(&HashHandle, (uint8_t*)aInput, INPUT_TAB_SIZE, aSHA1Digest, 0xFF) != HAL_OK)
   {
@@ -155,14 +155,14 @@ static void Error_Handler(void);
   {
     BSP_LED_On(LED1);
   }
-
+  
   /****************************************************************************/
   /******************************** MD5 ***************************************/
   /****************************************************************************/
   HAL_HASH_DeInit(&HashHandle);
   HashHandle.Init.DataType = HASH_DATATYPE_8B;
   HAL_HASH_Init(&HashHandle);
-
+  
   /* Compute SHA1 */
   if(HAL_HASH_MD5_Start(&HashHandle, (uint8_t*)aInput, INPUT_TAB_SIZE, aMD5Digest, 0xFF) != HAL_OK)
   {
@@ -184,7 +184,7 @@ static void Error_Handler(void);
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -210,8 +210,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -228,14 +228,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+    
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -262,7 +262,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -275,10 +275,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

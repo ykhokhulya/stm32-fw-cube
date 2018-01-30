@@ -1,9 +1,9 @@
 /**
   @page CORTEX_MPU CORTEX example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/CORTEX/CORTEX_MPU/readme.txt
+  * @file    Examples_LL/CORTEX/CORTEX_MPU/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CORTEX_MPU example.
   ******************************************************************************
@@ -39,13 +39,13 @@ This example presents the MPU feature. Its purpose is to configure a memory area
 as privileged read-only area and attempt to perform read and write operations
 in different modes.
 
-If the access is permitted LED1 is toggling. If the access is not permitted,
+If the access is permitted LED1 is toggling. If the access is not permitted, 
 a memory management fault is generated and LED3 is ON.
 
-To generate an MPU memory fault exception due to an access right error, press
+To generate an MPU memory fault exception due to an access right error, press 
 user button.
 
-@par Directory contents
+@par Directory contents 
 
   - CORTEX/CORTEX_MPU/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - CORTEX/CORTEX_MPU/Inc/main.h                  Header for main.c module
@@ -58,12 +58,12 @@ user button.
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx devices.
-
+    
   - This example has been tested with STM32F429ZI-Nucleo Rev B board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_ExtTriggerSynchro/Src/main.c
+  * @file    TIM/TIM_ExtTriggerSynchro/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example shows how to synchronize TIM peripherals in cascade
   *          mode with an external trigger.
@@ -43,7 +43,7 @@
 
 /** @addtogroup TIM_ExtTriggerSynchro
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -92,12 +92,12 @@ int main(void)
 
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /* Set Timers instance */
   TimMasterHandle.Instance      = TIM1;
   TimSlaveMasterHandle.Instance = TIM3;
   TimSlaveHandle.Instance       = TIM4;
-
+ 
   /*======= Master1/Slave for an external trigger configuration : TIM1 =======*/
   /* Initialize TIM1 peripheral in Output Compare mode*/
   TimMasterHandle.Init.Period            = 149;
@@ -109,11 +109,11 @@ int main(void)
   {
     /* Initialization Error */
     Error_Handler();
-  }
-
+  }  
+  
   /* Configure the output: Channel_1 */
   sOCConfig.OCMode     = TIM_OCMODE_TOGGLE;
-  sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;    
   if(HAL_TIM_OC_ConfigChannel(&TimMasterHandle, &sOCConfig, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Configuration Error */
@@ -124,13 +124,13 @@ int main(void)
   sICConfig.ICPolarity  = TIM_ICPOLARITY_RISING;
   sICConfig.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sICConfig.ICPrescaler = TIM_ICPSC_DIV1;
-  sICConfig.ICFilter = 0;
+  sICConfig.ICFilter = 0;  
   if(HAL_TIM_IC_ConfigChannel(&TimMasterHandle, &sICConfig, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure TIM1 in Gated Slave mode for the external trigger (Filtered Timer
      Input 2) */
   sSlaveConfig.InputTrigger = TIM_TS_TI2FP2;
@@ -140,7 +140,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure TIM1 in Master Enable mode & use the update event as Trigger
      Output (TRGO) */
   sMasterConfig.MasterSlaveMode     = TIM_MASTERSLAVEMODE_ENABLE;
@@ -149,10 +149,10 @@ int main(void)
   {
     /* Configuration Error */
     Error_Handler();
-  }
+  }  
   /*=== End of Master1/Slave for an external trigger configuration : TIM1 ====*/
 
-
+  
   /*=================== Slave/Master configuration : TIM3 ====================*/
   /* Initialize TIM3 peripheral in Output Compare mode*/
   TimSlaveMasterHandle.Init.Period            = 74;
@@ -165,7 +165,7 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure the Output Compare channel_1  */
   sOCConfig.OCMode     = TIM_OCMODE_TOGGLE;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -174,8 +174,8 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
-  /* Configure TIM3 in Gated Slave mode for the internal trigger 0(ITR0) */
+  
+  /* Configure TIM3 in Gated Slave mode for the internal trigger 0(ITR0) */  
   sSlaveConfig.InputTrigger = TIM_TS_ITR0;
   sSlaveConfig.SlaveMode    = TIM_SLAVEMODE_GATED;
   if( HAL_TIM_SlaveConfigSynchronization(&TimSlaveMasterHandle, &sSlaveConfig) != HAL_OK)
@@ -183,7 +183,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure TIM3 in Master Enable mode & use the update event as Trigger
      Output (TRGO) */
   sMasterConfig.MasterSlaveMode     = TIM_MASTERSLAVEMODE_ENABLE;
@@ -194,8 +194,8 @@ int main(void)
     Error_Handler();
   }
   /*=============== End of Slave/Master configuration : TIM3 =================*/
-
-
+  
+  
   /*====================== Slave configuration : TIM4 ========================*/
   /* Initialize TIM4 peripheral in Output Compare mode*/
   TimSlaveHandle.Init.Period            = 74;
@@ -207,8 +207,8 @@ int main(void)
   {
     /* Initialization Error */
     Error_Handler();
-  }
-
+  } 
+ 
   /* Configure the Output Compare channel_1  */
   sOCConfig.OCMode     = TIM_OCMODE_TOGGLE;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -216,26 +216,26 @@ int main(void)
   {
     /* Configuration Error */
     Error_Handler();
-  }
-
-  /* Configure TIM4 in Gated Slave mode for the internal trigger 2(ITR2) */
+  }  
+  
+  /* Configure TIM4 in Gated Slave mode for the internal trigger 2(ITR2) */ 
   sSlaveConfig.SlaveMode    = TIM_SLAVEMODE_GATED;
   sSlaveConfig.InputTrigger = TIM_TS_ITR2;
   if(HAL_TIM_SlaveConfigSynchronization(&TimSlaveHandle, &sSlaveConfig) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
-  }
+  }  
   /*================== End of Slave configuration : TIM4 =====================*/
-
-
+  
+  
   /* 1- Start Timer1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
   /* Start Channel2 in Input Capture */
   if(HAL_TIM_IC_Start(&TimMasterHandle, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
-  }
+  }  
   /* Start the Output Compare */
   if(HAL_TIM_OC_Start(&TimMasterHandle, TIM_CHANNEL_1) != HAL_OK)
   {
@@ -250,7 +250,7 @@ int main(void)
     /* Start Error */
     Error_Handler();
   }
-
+  
   /* 3- Start Timer3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
   /* Start the Output Compare */
   if(HAL_TIM_OC_Start(&TimSlaveHandle, TIM_CHANNEL_1) != HAL_OK)
@@ -281,7 +281,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -307,8 +307,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -325,14 +325,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+    
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -345,7 +345,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

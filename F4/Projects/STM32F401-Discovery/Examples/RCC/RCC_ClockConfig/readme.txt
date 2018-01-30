@@ -3,7 +3,7 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    RCC/RCC_ClockConfig/readme.txt
+  * @file    RCC/RCC_ClockConfig/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the RCC Clock Configuration example.
   ******************************************************************************
@@ -33,25 +33,25 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example describes how to use the RCC HAL API to configure the system clock (SYSCLK)
-and modify the clock settings on run time.
+and modify the clock settings in Run mode.
 
 In this example, after startup SYSCLK is configured to the max frequency using the PLL with
-HSE as clock source, the USER Button (connected to EXTI Line15) will be
-used to change the PLL source: from HSE to HSI, and vice versa.
+HSE as clock source, the USER Button (connected to EXTI Line15) will be 
+used to change the PLL source: from HSE to HSI, and vice versa. 
 Each time the Key button is pressed; EXTI_0 interrupt is generated and in the ISR
 the PLL oscillator source is checked using __HAL_RCC_GET_PLL_OSCSOURCE() macro:
 
-1- If the HSE oscillator is selected as PLL source, the following steps will be followed to switch
+1- If the HSE oscillator is selected as PLL source, the following steps will be followed to switch 
    the PLL source to HSI oscillator:
      a- Switch the system clock source to HSE to allow modification of the PLL configuration
      b- Enable HSI Oscillator, select it as PLL source and finally activate the PLL
      c- Select the PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers
      d- Disable the HSE oscillator (optional, if the HSE is no more needed by the application)
 
-2- If the HSI oscillator is selected as PLL source, the following steps will be followed to switch
+2- If the HSI oscillator is selected as PLL source, the following steps will be followed to switch 
    the PLL source to HSE oscillator:
      a- Switch the system clock source to HSI to allow modification of the PLL configuration
      b- Enable HSE Oscillator, select it as PLL source and finally activate the PLL
@@ -78,11 +78,11 @@ Three LEDs are toggled with a timing defined by the HAL_Delay() API.
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - RCC/RCC_ClockConfig/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - RCC/RCC_ClockConfig/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - RCC/RCC_ClockConfig/Inc/main.h                  Main program header file
+  - RCC/RCC_ClockConfig/Inc/main.h                  Main program header file  
   - RCC/RCC_ClockConfig/Src/stm32f4xx_it.c          Interrupt handlers
   - RCC/RCC_ClockConfig/Src/main.c                  Main program
   - RCC/RCC_ClockConfig/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
@@ -96,11 +96,11 @@ Three LEDs are toggled with a timing defined by the HAL_Delay() API.
 
 
 @par How to use it ?
-
+ 
 In order to make the program work, you must do the following :
-- Open your preferred toolchain
+- Open your preferred toolchain 
 - Rebuild all files and load your image into target memory
 - Run the example
-
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

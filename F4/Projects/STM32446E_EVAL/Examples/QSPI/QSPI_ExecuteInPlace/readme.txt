@@ -1,9 +1,9 @@
 /**
   @page QSPI_ExecuteInPlace QSPI execute in place example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    QSPI/QSPI_ExecuteInPlace/readme.txt
+  * @file    QSPI/QSPI_ExecuteInPlace/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the code execution from QSPI memory example.
   ******************************************************************************
@@ -35,11 +35,13 @@
 
 @par Example Description
 
-This example describes how to execute a part of the code from the QSPI memory. To do this,
+How to execute code from QSPI memory after code loading.
+
+This example describes how to execute a part of the code from a QSPI memory. To do this, 
 a section is created where the function is stored.
 
 At the startup, the QSPI memory is erased, then the data are copied from the initialization
-section of the flash to the QSPI memory. And finally the QSPI is configured in memory-mapped
+section of the flash to the QSPI memory. And finally the QSPI is configured in memory-mapped 
 mode and the code in executed in a forever loop.
 
 LED1 and LED3 toggle in a forever loop.
@@ -58,19 +60,19 @@ and Read operations.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - QSPI/QSPI_ExecuteInPlace/Inc/stm32f4xx_hal_conf.h HAL configuration file
   - QSPI/QSPI_ExecuteInPlace/Inc/stm32f4xx_it.h       Interrupt handlers header file
-  - QSPI/QSPI_ExecuteInPlace/Inc/main.h               Header for main.c module
+  - QSPI/QSPI_ExecuteInPlace/Inc/main.h               Header for main.c module  
   - QSPI/QSPI_ExecuteInPlace/Src/stm32f4xx_it.c       Interrupt handlers
   - QSPI/QSPI_ExecuteInPlace/Src/main.c               Main program
   - QSPI/QSPI_ExecuteInPlaceQSPI_ReadWrite_DMA/Src/system_stm32f4xx.c   STM32F4xx system source file
-  - QSPI/QSPI_ExecuteInPlace/Src/stm32f4xx_hal_msp.c  HAL MSP file
+  - QSPI/QSPI_ExecuteInPlace/Src/stm32f4xx_hal_msp.c  HAL MSP file    
 
 
 @par Hardware and Software environment
@@ -81,13 +83,13 @@ and Read operations.
     easily tailored to any other supported device and development board.
 
   - STM32446E-EVAL Set-up :
-     Make sure that board is configured for QuadSPI memory interface as
+     Make sure that board is configured for QuadSPI memory interface as 
       described in MB1162_UM.pdf
 
-  - A specific region for the QSPI memory has been added in the scatter file
+  - A specific region for the QSPI memory has been added in the scatter file 
    (STM32F446xx_flash.icf for IAR toolchain) in order to map functions in this memory
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

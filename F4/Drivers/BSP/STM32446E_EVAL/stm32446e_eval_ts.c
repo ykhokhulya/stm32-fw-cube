@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32446e_eval_ts.c
   * @author  MCD Application Team
-  * @brief   This file provides a set of functions needed to manage the Touch
+  * @brief   This file provides a set of functions needed to manage the Touch 
   *          Screen on STM32446E-EVAL evaluation board.
   ******************************************************************************
   * @attention
@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* File Info : -----------------------------------------------------------------
                                    User NOTES
@@ -40,35 +40,35 @@
 --------------------------
    - This driver is used to drive the touch screen module of the STM32446E-EVAL
      evaluation board on AMPIRE 480x272 LCD mounted on MB1046 daughter board.
-   - the MFXSTM32L152 IO expander device component
-     driver must be included in order to run the TS module commanded by the IO
-     expander device, the MFX IO expander device component driver must be
+   - the MFXSTM32L152 IO expander device component 
+     driver must be included in order to run the TS module commanded by the IO 
+     expander device, the MFX IO expander device component driver must be 
      also included in case of interrupt mode use of the TS.
 
 2. Driver description:
 ---------------------
   + Initialization steps:
-     o Initialize the TS module using the BSP_TS_Init() function. This
+     o Initialize the TS module using the BSP_TS_Init() function. This 
        function includes the MSP layer hardware resources initialization and the
        communication layer configuration to start the TS use. The LCD size properties
        (x and y) are passed as parameters.
      o If TS interrupt mode is desired, you must configure the TS interrupt mode
        by calling the function BSP_TS_ITConfig(). The TS interrupt mode is generated
-       as an external interrupt whenever a touch is detected.
+       as an external interrupt whenever a touch is detected. 
        The interrupt mode internally uses the IO functionalities driver driven by
        the IO expander, to configure the IT line.
-
+  
   + Touch screen use
-     o The touch screen state is captured whenever the function BSP_TS_GetState() is
+     o The touch screen state is captured whenever the function BSP_TS_GetState() is 
        used. This function returns information about the last LCD touch occurred
        in the TS_StateTypeDef structure.
      o If TS interrupt mode is used, the function BSP_TS_ITGetStatus() is needed to get
-       the interrupt status. To clear the IT pending bits, you should call the
+       the interrupt status. To clear the IT pending bits, you should call the 
        function BSP_TS_ITClear().
      o The IT is handled using the corresponding external interrupt IRQ handler,
        the user IT callback treatment is implemented on the same external interrupt
        callback.
-
+ 
 ------------------------------------------------------------------------------*/
 
 /* Includes ------------------------------------------------------------------*/
@@ -81,87 +81,87 @@
 
 /** @addtogroup STM32446E_EVAL
   * @{
-  */
-
-/** @defgroup STM32446E_EVAL_TS STM32446E EVAL TS
+  */ 
+  
+/** @defgroup STM32446E_EVAL_TS STM32446E EVAL TS 
   * @{
-  */
+  */   
 
 /** @defgroup STM32446E_EVAL_TS_Private_Types_Definitions STM32446E EVAL TS Private Types Definitions
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_TS_Private_Defines STM32446E EVAL TS Private Defines
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_TS_Private_Macros STM32446E EVAL TS Private Macros
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */  
 
 /** @defgroup STM32446E_EVAL_TS_Private_Variables STM32446E EVAL TS Private Variables
   * @{
-  */
+  */ 
 static TS_DrvTypeDef *ts_driver;
-static uint16_t tsBundaryX, tsBundaryY;
+static uint16_t tsBundaryX, tsBundaryY; 
 static uint8_t  tsOrientation;
 static uint8_t  AddressI2C;
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_TS_Private_Function_Prototypes STM32446E EVAL TS Private Function Prototypes
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_TS_Private_Functions STM32446E EVAL TS Private Functions
   * @{
-  */
+  */ 
 
 /**
-  * @brief  Initializes and configures the touch screen functionalities and
+  * @brief  Initializes and configures the touch screen functionalities and 
   *         configures all necessary hardware resources (GPIOs, clocks..).
   * @param  xSize: Maximum X size of the TS area on LCD
-  * @param  ySize: Maximum Y size of the TS area on LCD
+  * @param  ySize: Maximum Y size of the TS area on LCD  
   * @retval TS_OK if all initializations are OK. Other value if error.
   */
 uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
 {
   uint8_t mfxstm32l152_id = 0;
-
+  
   tsBundaryX = xSize;
   tsBundaryY = ySize;
 
   /* Initialize IO functionalities (MFX) used by TS */
-  BSP_IO_Init();
-
+  BSP_IO_Init(); 
+  
   /* Read ID and verify if the IO expander is ready */
   mfxstm32l152_id = mfxstm32l152_io_drv.ReadID(IO_I2C_ADDRESS);
   if((mfxstm32l152_id == MFXSTM32L152_ID_1) || (mfxstm32l152_id == MFXSTM32L152_ID_2))
-  {
+  { 
     /* Initialize the TS driver structure */
-    ts_driver = &mfxstm32l152_ts_drv;
+    ts_driver = &mfxstm32l152_ts_drv;  
     AddressI2C = TS_I2C_ADDRESS;
     tsOrientation = TS_SWAP_NONE;
   }
 
-
+  
   /* Initialize the TS driver */
   ts_driver->Init(AddressI2C);
   ts_driver->Start(AddressI2C);
-
+  
   return TS_OK;
 }
 
@@ -170,7 +170,7 @@ uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
   * @retval TS state
   */
 uint8_t BSP_TS_DeInit(void)
-{
+{ 
   /* Actually ts_driver does not provide a DeInit function */
   return TS_OK;
 }
@@ -183,7 +183,7 @@ uint8_t BSP_TS_ITEnable(void)
 {
   /* Enable the TS ITs */
   ts_driver->EnableIT(AddressI2C);
-  return TS_OK;
+  return TS_OK;  
 }
 
 /**
@@ -194,7 +194,7 @@ uint8_t BSP_TS_ITDisable(void)
 {
   /* Disable the TS ITs */
   ts_driver->DisableIT(AddressI2C);
-  return TS_OK;
+  return TS_OK;  
 }
 
 /**
@@ -205,11 +205,11 @@ uint8_t BSP_TS_ITConfig(void)
 {
   /* Initialize the IO */
   BSP_IO_Init();
-
+    
   /* Enable the TS ITs */
   ts_driver->EnableIT(AddressI2C);
 
-  return TS_OK;
+  return TS_OK;  
 }
 
 /**
@@ -218,7 +218,7 @@ uint8_t BSP_TS_ITConfig(void)
 void BSP_TS_ITClear(void)
 {
   /* Clear TS IT pending bits */
-  ts_driver->ClearIT(AddressI2C);
+  ts_driver->ClearIT(AddressI2C); 
 }
 
 /**
@@ -253,42 +253,42 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
   static uint32_t _x = 0, _y = 0;
   uint16_t x_diff, y_diff , x , y;
   uint16_t swap;
-
+  
   TS_State->TouchDetected = ts_driver->DetectTouch(AddressI2C);
-
+  
   if(TS_State->TouchDetected)
   {
-    ts_driver->GetXY(AddressI2C, &x, &y);
-
+    ts_driver->GetXY(AddressI2C, &x, &y); 
+    
     if(tsOrientation & TS_SWAP_X)
     {
-      x = 4096 - x;
+      x = 4096 - x;  
     }
-
+    
     if(tsOrientation & TS_SWAP_Y)
     {
       y = 4096 - y;
     }
-
+    
     if(tsOrientation & TS_SWAP_XY)
     {
-      swap = y;
-      y = x;
-      x = swap;
+      swap = y; 
+      y = x;      
+      x = swap;      
     }
-
+    
     x_diff = x > _x? (x - _x): (_x - x);
-    y_diff = y > _y? (y - _y): (_y - y);
-
+    y_diff = y > _y? (y - _y): (_y - y); 
+    
     if (x_diff + y_diff > 5)
     {
       _x = x;
-      _y = y;
+      _y = y; 
     }
-
+    
     TS_State->x = (tsBundaryX * _x) >> 12;
-    TS_State->y = (tsBundaryY * _y) >> 12;
-  }
+    TS_State->y = (tsBundaryY * _y) >> 12; 
+  }  
   return TS_OK;
 }
 
@@ -296,18 +296,18 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */  
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/CDC_Standalone/Src/menu.c
+  * @file    USB_Host/CDC_Standalone/Src/menu.c 
   * @author  MCD Application Team
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -52,7 +52,7 @@
 CDC_DEMO_StateMachine CdcDemo;
 CDC_DEMO_SelectMode   CdcSelectMode;
 uint8_t               PrevSelect = 0;
-uint8_t *CDC_main_menu[] =
+uint8_t *CDC_main_menu[] = 
 {
   (uint8_t *)"      1 - Send Data                                                         ",
   (uint8_t *)"      2 - Receive Data                                                      ",
@@ -74,7 +74,7 @@ void Menu_Init(void)
   BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                          ");
   BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down");
   BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll CDC menu ");
-
+  
   CdcDemo.state = CDC_DEMO_IDLE;
   CDC_MenuProcess();
 }
@@ -89,17 +89,17 @@ void CDC_MenuProcess(void)
   switch(CdcDemo.state)
   {
   case CDC_DEMO_IDLE:
-    CDC_SelectItem(CDC_main_menu, 0);
+    CDC_SelectItem(CDC_main_menu, 0); 
     CdcDemo.state = CDC_DEMO_WAIT;
     CdcDemo.select = 0;
-    break;
-
+    break;    
+    
   case CDC_DEMO_WAIT:
     if(CdcDemo.select != PrevSelect)
     {
       PrevSelect = CdcDemo.select;
       CDC_SelectItem(CDC_main_menu, CdcDemo.select & 0x7F);
-
+      
       /* Handle select item */
       if(CdcDemo.select & 0x80)
       {
@@ -109,50 +109,50 @@ void CDC_MenuProcess(void)
           CdcDemo.state = CDC_DEMO_SEND;
           CdcDemo.Send_state = CDC_SEND_IDLE;
           break;
-
+          
         case 1:
-          CdcDemo.state = CDC_DEMO_RECEIVE;
-          CdcDemo.Receive_state = CDC_RECEIVE_IDLE;
+          CdcDemo.state = CDC_DEMO_RECEIVE; 
+          CdcDemo.Receive_state = CDC_RECEIVE_IDLE;   
           break;
-
+          
         case 2:
-          CdcDemo.state = CDC_DEMO_CONFIGURATION;
-          CdcDemo.Configuration_state = CDC_CONFIGURATION_IDLE;
+          CdcDemo.state = CDC_DEMO_CONFIGURATION;  
+          CdcDemo.Configuration_state = CDC_CONFIGURATION_IDLE; 
           break;
-
+          
         case 3:
-          CdcDemo.state = CDC_DEMO_REENUMERATE;
+          CdcDemo.state = CDC_DEMO_REENUMERATE;  
           break;
-
+          
         default:
           break;
         }
       }
     }
     break;
-
-  case CDC_DEMO_SEND:
+    
+  case CDC_DEMO_SEND: 
     if(Appli_state == APPLICATION_READY)
-    {
+    {    
       CDC_Handle_Send_Menu();
     }
     else
     {
       CdcDemo.state = CDC_DEMO_WAIT;
-    }
-    break;
-
+    }  
+    break; 
+    
   case CDC_DEMO_RECEIVE:
     if(Appli_state == APPLICATION_READY)
-    {
+    {    
       CDC_Handle_Receive_Menu();
-    }
+    }    
     else
     {
       CdcDemo.state = CDC_DEMO_WAIT;
     }
-    break;
-
+    break; 
+    
   case CDC_DEMO_CONFIGURATION:
     if(Appli_state == APPLICATION_READY)
     {
@@ -163,29 +163,29 @@ void CDC_MenuProcess(void)
       CdcDemo.state = CDC_DEMO_WAIT;
     }
     break;
-
+    
   case CDC_DEMO_REENUMERATE:
     /* Force MSC Device to re-enumerate */
-    USBH_ReEnumerate(&hUSBHost);
+    USBH_ReEnumerate(&hUSBHost); 
     CdcDemo.state = CDC_DEMO_WAIT;
     break;
-
+    
   default:
     break;
-  }
-
+  } 
+  
   CdcDemo.select &= 0x7F;
-
+  
   if(Appli_state == APPLICATION_DISCONNECT)
   {
-    Appli_state = APPLICATION_IDLE;
+    Appli_state = APPLICATION_IDLE; 
     LCD_LOG_ClearTextZone();
     LCD_ErrLog("CDC device disconnected!\n");
     CDC_ChangeSelectMode(CDC_SELECT_MENU);
     CdcDemo.state = CDC_DEMO_IDLE;
-    CdcDemo.select = 0;
-  }
-}
+    CdcDemo.select = 0;    
+  } 
+} 
 
 /**
   * @brief  Manages the menu on the screen.
@@ -194,63 +194,63 @@ void CDC_MenuProcess(void)
   * @retval None
   */
 void CDC_SelectItem(uint8_t **menu, uint8_t item)
-{
+{ 
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-
+  
   switch(item)
   {
-  case 0:
+  case 0: 
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(17, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
     BSP_LCD_DisplayStringAtLine(18, menu[1]);
     BSP_LCD_DisplayStringAtLine(19, menu[2]);
     break;
-
-  case 1:
+    
+  case 1: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(17, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);    
     BSP_LCD_DisplayStringAtLine(18, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[2]);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
+    BSP_LCD_DisplayStringAtLine(19, menu[2]); 
     break;
-
-  case 2:
+    
+  case 2: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(17, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
     BSP_LCD_DisplayStringAtLine(18, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[2]);
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
+    BSP_LCD_DisplayStringAtLine(19, menu[2]); 
     break;
-
-  case 3:
+    
+  case 3: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(17, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
     BSP_LCD_DisplayStringAtLine(18, menu[2]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[3]);
-    break;
-
-  case 4:
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
+    BSP_LCD_DisplayStringAtLine(19, menu[3]); 
+    break;    
+    
+  case 4: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(17, menu[2]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
     BSP_LCD_DisplayStringAtLine(18, menu[3]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu[4]);
-    break;
-
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
+    BSP_LCD_DisplayStringAtLine(19, menu[4]); 
+    break; 
+    
   default:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(17, menu[0]);
     BSP_LCD_DisplayStringAtLine(18, menu[1]);
-    BSP_LCD_DisplayStringAtLine(19, menu[2]);
+    BSP_LCD_DisplayStringAtLine(19, menu[2]); 
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK); 
 }
 
 /**
@@ -265,7 +265,7 @@ void CDC_ChangeSelectMode(CDC_DEMO_SelectMode select_mode)
     LCD_ClearTextZone();
     CDC_SelectItem(DEMO_CONFIGURATION_menu, 0xFF);
     CdcSettingsState.select = 0;
-    CDC_SelectSettingsItem(0);
+    CDC_SelectSettingsItem(0); 
   }
   else if(select_mode == CDC_SELECT_FILE)
   {
@@ -275,17 +275,17 @@ void CDC_ChangeSelectMode(CDC_DEMO_SelectMode select_mode)
   else if(select_mode == CDC_SELECT_MENU)
   {
     if(CdcDemo.state == CDC_DEMO_CONFIGURATION)
-    {
-      CDC_SelectSettingsItem(0xFF);
-      CDC_SelectItem(DEMO_CONFIGURATION_menu, 0);
+    {     
+      CDC_SelectSettingsItem(0xFF); 
+      CDC_SelectItem(DEMO_CONFIGURATION_menu, 0); 
     }
-
+    
     if(CdcDemo.state == CDC_DEMO_SEND)
-    {
-      CDC_SelectItem(DEMO_SEND_menu, 1);
+    {  
+      CDC_SelectItem(DEMO_SEND_menu, 1); 
     }
   }
-  CdcSelectMode = select_mode;
+  CdcSelectMode = select_mode; 
   CdcDemo.select = 0;
 }
 
@@ -303,9 +303,9 @@ static void CDC_DEMO_ProbeKey(JOYState_TypeDef state)
     {
       CdcDemo.select--;
     }
-    else if(((CdcDemo.state == CDC_DEMO_WAIT) && (state == JOY_DOWN) && (CdcDemo.select < 3))||
-            ((CdcDemo.state == CDC_DEMO_SEND) && (state == JOY_DOWN) && (CdcDemo.select < 2))||
-            ((CdcDemo.state == CDC_DEMO_RECEIVE) && (state == JOY_DOWN) && (CdcDemo.select < 1))||
+    else if(((CdcDemo.state == CDC_DEMO_WAIT) && (state == JOY_DOWN) && (CdcDemo.select < 3))|| 
+            ((CdcDemo.state == CDC_DEMO_SEND) && (state == JOY_DOWN) && (CdcDemo.select < 2))|| 
+            ((CdcDemo.state == CDC_DEMO_RECEIVE) && (state == JOY_DOWN) && (CdcDemo.select < 1))||                 
             ((CdcDemo.state == CDC_DEMO_CONFIGURATION) && (state == JOY_DOWN) && (CdcDemo.select < 2)))
     {
       CdcDemo.select++;
@@ -313,7 +313,7 @@ static void CDC_DEMO_ProbeKey(JOYState_TypeDef state)
     else if(state == JOY_SEL)
     {
       CdcDemo.select |= 0x80;
-    }
+    }  
   }
   else  if(CdcSelectMode == CDC_SELECT_CONFIG)
   {
@@ -336,15 +336,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   static uint32_t debounce_time = 0;
 
   if(GPIO_Pin == GPIO_PIN_2)
-  {
+  {    
     /* Get the Joystick State */
     JoyState = BSP_JOY_GetState();
-
-    CDC_DEMO_ProbeKey(JoyState);
-
+    
+    CDC_DEMO_ProbeKey(JoyState); 
+    
     /* Clear joystick interrupt pending bits */
     BSP_IO_ITClear(JOY_ALL_PINS);
-
+    
     if((CdcSelectMode == CDC_SELECT_MENU) && (CdcDemo.state != CDC_DEMO_RECEIVE))
     {
       switch(JoyState)
@@ -352,21 +352,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       case JOY_LEFT:
         LCD_LOG_ScrollBack();
         break;
-
+             
       case JOY_RIGHT:
         LCD_LOG_ScrollForward();
-        break;
-
+        break;          
+        
       default:
-        break;
+        break;           
       }
     }
   }
-
+  
   if(CdcDemo.state == CDC_DEMO_CONFIGURATION)
   {
     if(GPIO_Pin == KEY_BUTTON_PIN)
-    {
+    {  
       /* Prevent debounce effect for user key */
       if((HAL_GetTick() - debounce_time) > 50)
       {
@@ -375,29 +375,29 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       else
       {
         return;
-      }
-      BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+      }  
+      BSP_LCD_SetBackColor(LCD_COLOR_BLACK);   
       /* Change the selection type */
       if(CdcSelectMode == CDC_SELECT_MENU)
       {
-        CDC_ChangeSelectMode(CDC_SELECT_CONFIG);
+        CDC_ChangeSelectMode(CDC_SELECT_CONFIG); 
       }
       else if(CdcSelectMode == CDC_SELECT_CONFIG)
       {
         CDC_ChangeSelectMode(CDC_SELECT_MENU);
       }
-
+      
       else if(CdcSelectMode == CDC_SELECT_FILE)
       {
         CDC_ChangeSelectMode(CDC_SELECT_FILE);
-      }
+      } 
     }
   }
-
+  
   if(CdcDemo.state == CDC_DEMO_SEND)
   {
     if(GPIO_Pin == KEY_BUTTON_PIN)
-    {
+    { 
       /* Prevent debounce effect for user key */
       if((HAL_GetTick() - debounce_time) > 50)
       {
@@ -406,26 +406,26 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       else
       {
         return;
-      }
-
+      }  
+      
       if(CdcDemo.Send_state == CDC_SEND_SELECT_FILE)
       {
-        BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+        BSP_LCD_SetBackColor(LCD_COLOR_BLACK);   
         /* Change the selection type */
         if(CdcSelectMode == CDC_SELECT_MENU)
         {
-          CDC_ChangeSelectMode(CDC_SELECT_FILE);
+          CDC_ChangeSelectMode(CDC_SELECT_FILE); 
         }
         else if(CdcSelectMode == CDC_SELECT_FILE)
         {
-          LCD_ClearTextZone();
+          LCD_ClearTextZone();    
           LCD_LOG_UpdateDisplay();
           CDC_ChangeSelectMode(CDC_SELECT_MENU);
           CdcDemo.Send_state = CDC_SEND_WAIT;
         }
       }
     }
-  }
+  }  
 }
 
 /**

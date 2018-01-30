@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___sys_tick__gr.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('group___sys_tick__gr.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Initialize and start the SysTick timer.
+<p>Initialize and start the SysTick timer.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -126,7 +126,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Description</h2>
 <pre class="fragment">The System Tick Time (SysTick) generates interrupt requests on a regular basis.
 This allows an OS to carry out context switching to support multiple tasking. For applications
-that do not require an OS, the SysTick can be used for time keeping, time measurement, or as an
+that do not require an OS, the SysTick can be used for time keeping, time measurement, or as an 
 interrupt source for tasks that need to be executed regularly.
 </pre><h1><a class="anchor" id="SysTick_code_ex_sec"></a>
 Code Example</h1>
@@ -188,7 +188,7 @@ Code Example</h1>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:21 for CMSIS-CORE by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

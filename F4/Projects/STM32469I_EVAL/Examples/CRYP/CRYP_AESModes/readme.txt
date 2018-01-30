@@ -1,10 +1,10 @@
 /**
   @page CRYP_AESModes  Encrypt and Decrypt data using AES Algo in ECB/CBC/CTR
   chaining modes with all possible key sizes.
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CRYP/CRYP_AESModes/readme.txt
+  * @file    CRYP/CRYP_AESModes/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES Algorithm in all modes and all key sizes
              Example
@@ -35,7 +35,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example provides a short description of how to use the CRYPTO peripheral to
 encrypt and decrypt data using AES in chaining modes (ECB, CBC, CTR) and all key
@@ -72,7 +72,7 @@ Firstly, The Plain data, encrypted data and decrypted data can be displayed on a
 HyperTerminal using the UART.
 
 The USARTx is configured as follows:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
@@ -80,18 +80,18 @@ The USARTx is configured as follows:
     - Receive and transmit enabled
 
 
-Or either, the Plain data, encrypted data and decrypted data can be displayed on
-debugger terminal IO by uncomment following line in main file:
-//#define TERMINAL_IO_OUT
-
+Or either, the Plain data, encrypted data and decrypted data can be displayed on 
+debugger terminal IO by uncomment following line in main file: 
+//#define TERMINAL_IO_OUT 
+  
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - CRYP/CRYP_AESModes/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CRYP/CRYP_AESModes/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CRYP/CRYP_AESModes/Inc/main.h                  Header for main.c module
+  - CRYP/CRYP_AESModes/Inc/main.h                  Header for main.c module  
   - CRYP/CRYP_AESModes/Src/stm32f4xx_it.c          Interrupt handlers
   - CRYP/CRYP_AESModes/Src/main.c                  Main program
   - CRYP/CRYP_AESModes/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -104,24 +104,24 @@ debugger terminal IO by uncomment following line in main file:
 
   - This example has been tested and validated with STM32479I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
-
+  
   - Hyperterminal configuration:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
     - Hardware flow control disabled (RTS and CTS signals)
     - Receive and transmit enabled
-
+    
   @note Make sure that :
-    - jumper JP8  is on RS232_RX position (1-2)  and
-    - jumper JP15 is on USART1_RX position 1-2)and
-    - jumper JP19 is on USART1_TX position (1-2).
+    - jumper JP8  is on RS232_RX position (1-2)  and 
+    - jumper JP15 is on USART1_RX position 1-2)and 
+    - jumper JP19 is on USART1_TX position (1-2). 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following:
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

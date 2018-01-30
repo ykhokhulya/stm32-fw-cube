@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    HASH/HASH_SHA1MD5_DMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -58,7 +58,7 @@
 
 /**
   * @brief  Initializes the HASH MSP.
-  *        This function configures the hardware resources used in this example:
+  *        This function configures the hardware resources used in this example: 
   *           - HASH's clock enable
   * @param  hhash: HASH handle pointer
   * @retval None
@@ -66,13 +66,13 @@
 void HAL_HASH_MspInit(HASH_HandleTypeDef *hhash)
 {
   static DMA_HandleTypeDef  hdma_hash;
-
+  
   /* Enable HASH clock */
   __HAL_RCC_HASH_CLK_ENABLE();
-
+  
   /* Enable DMA clocks */
   DMA_CLK_ENABLE();
-
+  
   /***************** Configure common DMA In parameters ***********************/
   hdma_hash.Init.Channel             = HASH_DMA_CHANNEL;
   hdma_hash.Init.Direction           = DMA_MEMORY_TO_PERIPH;
@@ -85,18 +85,18 @@ void HAL_HASH_MspInit(HASH_HandleTypeDef *hhash)
   hdma_hash.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;
   hdma_hash.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_HALFFULL;
   hdma_hash.Init.MemBurst            = DMA_MBURST_SINGLE;
-  hdma_hash.Init.PeriphBurst         = DMA_PBURST_SINGLE;
+  hdma_hash.Init.PeriphBurst         = DMA_PBURST_SINGLE; 
   hdma_hash.Instance = HASH_DMA_STREAM;
-
+  
   /* Associate the DMA handle */
   __HAL_LINKDMA(hhash, hdmain, hdma_hash);
-
+  
   /* Deinitialize the Stream for new transfer */
   HAL_DMA_DeInit(hhash->hdmain);
-
+  
   /* Configure the DMA Stream */
-  HAL_DMA_Init(hhash->hdmain);
-
+  HAL_DMA_Init(hhash->hdmain);      
+  
   /* NVIC configuration for DMA Input data interrupt */
   HAL_NVIC_SetPriority(HASH_DMA_IRQn, 0x0F, 0x0f);
   HAL_NVIC_EnableIRQ(HASH_DMA_IRQn);

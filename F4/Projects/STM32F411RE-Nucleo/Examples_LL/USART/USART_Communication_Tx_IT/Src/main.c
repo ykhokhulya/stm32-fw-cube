@@ -135,14 +135,14 @@ void Configure_USART(void)
   /* (2) NVIC Configuration for USART interrupts */
   /*  - Set priority for USARTx_IRQn */
   /*  - Enable USARTx_IRQn */
-  NVIC_SetPriority(USARTx_IRQn, 0);
+  NVIC_SetPriority(USARTx_IRQn, 0);  
   NVIC_EnableIRQ(USARTx_IRQn);
 
   /* (3) Enable USART peripheral clock and clock source ***********************/
   USARTx_CLK_ENABLE();
 
   /* (4) Configure USART functional parameters ********************************/
-
+  
   /* Disable USART prior modifying configuration registers */
   /* Note: Commented as corresponding to Reset value */
   // LL_USART_Disable(USARTx_INSTANCE);
@@ -165,10 +165,10 @@ void Configure_USART(void)
   /* Frequency available for USART peripheral can also be calculated through LL RCC macro */
   /* Ex :
       Periphclk = LL_RCC_GetUSARTClockFreq(Instance); or LL_RCC_GetUARTClockFreq(Instance); depending on USART/UART instance
-
+  
       In this example, Peripheral Clock is expected to be equal to 100000000/APB_Div Hz => equal to SystemCoreClock/APB_Div
   */
-  LL_USART_SetBaudRate(USARTx_INSTANCE, SystemCoreClock/APB_Div, LL_USART_OVERSAMPLING_16, 115200);
+  LL_USART_SetBaudRate(USARTx_INSTANCE, SystemCoreClock/APB_Div, LL_USART_OVERSAMPLING_16, 115200); 
 
   /* (5) Enable USART *********************************************************/
   LL_USART_Enable(USARTx_INSTANCE);
@@ -230,21 +230,21 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -257,8 +257,8 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 3);  
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
 }
 
 /**
@@ -332,10 +332,10 @@ void UserButton_Callback(void)
   if (ubSend == 0)
   {
     /* Start USART transmission : Will initiate TXE interrupt after DR register is empty */
-    LL_USART_TransmitData8(USARTx_INSTANCE, aStringToSend[ubSend++]);
+    LL_USART_TransmitData8(USARTx_INSTANCE, aStringToSend[ubSend++]); 
 
     /* Enable TXE interrupt */
-    LL_USART_EnableIT_TXE(USARTx_INSTANCE);
+    LL_USART_EnableIT_TXE(USARTx_INSTANCE); 
   }
 }
 
@@ -350,7 +350,7 @@ void USART_TXEmpty_Callback(void)
   {
     /* Disable TXE interrupt */
     LL_USART_DisableIT_TXE(USARTx_INSTANCE);
-
+    
     /* Enable TC interrupt */
     LL_USART_EnableIT_TC(USARTx_INSTANCE);
   }
@@ -369,10 +369,10 @@ void USART_CharTransmitComplete_Callback(void)
   if(ubSend == sizeof(aStringToSend))
   {
     ubSend = 0;
-
+    
     /* Disable TC interrupt */
     LL_USART_DisableIT_TC(USARTx_INSTANCE);
-
+    
     /* Turn LED2 On at end of transfer : Tx sequence completed successfully */
     LED_On();
   }
@@ -389,7 +389,7 @@ void Error_Callback(void)
 
   /* Disable USARTx_IRQn */
   NVIC_DisableIRQ(USARTx_IRQn);
-
+  
   /* Error handling example :
     - Read USART SR register to identify flag that leads to IT raising
     - Perform corresponding error handling treatment according to flag

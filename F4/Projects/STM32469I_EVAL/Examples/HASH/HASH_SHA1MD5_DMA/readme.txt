@@ -1,7 +1,7 @@
 /**
   @page HASH_SHA1MD5_DMA  HASH digest calculation using SHA1 and MD5 example
   with DMA transfer.
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    HASH/HASH_SHA1MD5_DMA/readme.txt
@@ -34,10 +34,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example provides a short description of how to use the HASH peripheral to
-hash data using SHA-1 and MD5 Algorithms.
+How to use the HASH peripheral to hash data using SHA-1 and MD5 algorithms 
+when data are fed to the HASH unit with DMA.
 
 For this example, DMA is used to transfer data from memory to the HASH processor.
 The message to hash is a 2048 bit data.
@@ -52,11 +52,11 @@ In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - HASH/HASH_SHA1MD5_DMA/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - HASH/HASH_SHA1MD5_DMA/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - HASH/HASH_SHA1MD5_DMA/Inc/main.h                  Header for main.c module
+  - HASH/HASH_SHA1MD5_DMA/Inc/main.h                  Header for main.c module  
   - HASH/HASH_SHA1MD5_DMA/Src/stm32f4xx_it.c          Interrupt handlers
   - HASH/HASH_SHA1MD5_DMA/Src/main.c                  Main program
   - HASH/HASH_SHA1MD5_DMA/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -66,17 +66,18 @@ In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
 @par Hardware and Software environment
 
   - This example runs on STM32F479xx devices.
-
+  
   - This example has been tested and validated with STM32479I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the example 
 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
+ 

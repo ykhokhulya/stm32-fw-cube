@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    stm32f4xx_it.h
+  * @file    stm32f4xx_it.h 
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_IT_H
@@ -39,7 +39,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
@@ -64,4 +64,4 @@ void EXTI15_10_IRQHandler(void);
 
 #endif /* __STM32F4xx_IT_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 

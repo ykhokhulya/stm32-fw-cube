@@ -4,7 +4,7 @@ to be used with the following projects:
 - audio_sample.wav
    - /Projects/STM32F4-Discovery/Applications/Audio/Audio_playback_and_record
    - /Projects/STM32F401-Discovery/Applications/Audio/Audio_playback_and_record
-   - /Projects/STM324x9I_EVAL/Applications/Audio/Audio_playback_and_record
+   - /Projects/STM324x9I_EVAL/Applications/Audio/Audio_playback_and_record   
 
 - art_of_gard_128K.bin
    - /Projects/STM32F401-Discovery/Examples/BSP

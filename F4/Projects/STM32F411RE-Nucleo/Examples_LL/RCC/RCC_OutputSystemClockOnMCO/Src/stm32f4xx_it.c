@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/RCC/RCC_OutputSystemClockOnMCO/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -173,7 +173,7 @@ void USER_BUTTON_IRQHANDLER(void)
   if(LL_EXTI_IsActiveFlag_0_31(USER_BUTTON_EXTI_LINE) != RESET)
   {
     /* Manage code in main.c. */
-    UserButton_Callback();
+    UserButton_Callback(); 
 
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
   }

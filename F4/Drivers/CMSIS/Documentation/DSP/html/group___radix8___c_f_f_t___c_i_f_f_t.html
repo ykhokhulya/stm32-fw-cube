@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___radix8___c_f_f_t___c_i_f_f_t.h
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -119,22 +119,22 @@ $(document).ready(function(){initNavTree('group___radix8___c_f_f_t___c_i_f_f_t.h
 <dl class="section user"><dt></dt><dd>Internally, the function utilize a Radix-8 decimation in frequency(DIF) algorithm and the size of the FFT supported are of the lengths [ 64, 512, 4096].</dd></dl>
 <dl class="section user"><dt>Algorithm: </dt><dd></dd></dl>
 <p><b>Complex Fast Fourier Transform:</b> </p>
-<dl class="section user"><dt></dt><dd>Input real and imaginary data: <pre>
-x(n) = xa + j * ya
-x(n+N/4 ) = xb + j * yb
-x(n+N/2 ) = xc + j * yc
-x(n+3N 4) = xd + j * yd
+<dl class="section user"><dt></dt><dd>Input real and imaginary data: <pre>    
+x(n) = xa + j * ya    
+x(n+N/4 ) = xb + j * yb    
+x(n+N/2 ) = xc + j * yc    
+x(n+3N 4) = xd + j * yd    
 </pre> where N is length of FFT </dd></dl>
-<dl class="section user"><dt></dt><dd>Output real and imaginary data: <pre>
-X(4r) = xa'+ j * ya'
-X(4r+1) = xb'+ j * yb'
-X(4r+2) = xc'+ j * yc'
-X(4r+3) = xd'+ j * yd'
+<dl class="section user"><dt></dt><dd>Output real and imaginary data: <pre>    
+X(4r) = xa'+ j * ya'    
+X(4r+1) = xb'+ j * yb'    
+X(4r+2) = xc'+ j * yc'    
+X(4r+3) = xd'+ j * yd'    
 </pre> </dd></dl>
-<dl class="section user"><dt></dt><dd>Twiddle factors for Radix-8 FFT: <pre>
-Wn = co1 + j * (- si1)
-W2n = co2 + j * (- si2)
-W3n = co3 + j * (- si3)
+<dl class="section user"><dt></dt><dd>Twiddle factors for Radix-8 FFT: <pre>    
+Wn = co1 + j * (- si1)    
+W2n = co2 + j * (- si2)    
+W3n = co3 + j * (- si3)    
 </pre></dd></dl>
 <dl class="section user"><dt></dt><dd><div class="image">
 <img src="CFFT.gif" alt="CFFT.gif"/>
@@ -142,15 +142,15 @@ W3n = co3 + j * (- si3)
 Radix-8 Decimation-in Frequency Complex Fast Fourier Transform</div></div>
 </dd></dl>
 <dl class="section user"><dt></dt><dd>Output from Radix-8 CFFT Results in Digit reversal order. Interchange middle two branches of every butterfly results in Bit reversed output. </dd></dl>
-<dl class="section user"><dt></dt><dd><b> Butterfly CFFT equations:</b> <pre>
-xa' = xa + xb + xc + xd
-ya' = ya + yb + yc + yd
-xc' = (xa+yb-xc-yd)* co1 + (ya-xb-yc+xd)* (si1)
-yc' = (ya-xb-yc+xd)* co1 - (xa+yb-xc-yd)* (si1)
-xb' = (xa-xb+xc-xd)* co2 + (ya-yb+yc-yd)* (si2)
-yb' = (ya-yb+yc-yd)* co2 - (xa-xb+xc-xd)* (si2)
-xd' = (xa-yb-xc+yd)* co3 + (ya+xb-yc-xd)* (si3)
-yd' = (ya+xb-yc-xd)* co3 - (xa-yb-xc+yd)* (si3)
+<dl class="section user"><dt></dt><dd><b> Butterfly CFFT equations:</b> <pre>    
+xa' = xa + xb + xc + xd    
+ya' = ya + yb + yc + yd    
+xc' = (xa+yb-xc-yd)* co1 + (ya-xb-yc+xd)* (si1)    
+yc' = (ya-xb-yc+xd)* co1 - (xa+yb-xc-yd)* (si1)    
+xb' = (xa-xb+xc-xd)* co2 + (ya-yb+yc-yd)* (si2)    
+yb' = (ya-yb+yc-yd)* co2 - (xa-xb+xc-xd)* (si2)    
+xd' = (xa-yb-xc+yd)* co3 + (ya+xb-yc-xd)* (si3)    
+yd' = (ya+xb-yc-xd)* co3 - (xa-yb-xc+yd)* (si3)    
 </pre></dd></dl>
 <dl class="section user"><dt></dt><dd>where <code>fftLen</code> length of CFFT/CIFFT; <code>ifftFlag</code> Flag for selection of CFFT or CIFFT(Set ifftFlag to calculate CIFFT otherwise calculates CFFT); <code>bitReverseFlag</code> Flag for selection of output order(Set bitReverseFlag to output in normal order otherwise output in bit reversed order); <code>pTwiddle</code>points to array of twiddle coefficients; <code>pBitRevTable</code> points to the array of bit reversal table. <code>twidCoefModifier</code> modifier for twiddle factor table which supports all FFT lengths with same table; <code>pBitRevTable</code> modifier for bit reversal table which supports all FFT lengths with same table. <code>onebyfftLen</code> value of 1/fftLen to calculate CIFFT;</dd></dl>
 <dl class="section user"><dt>Fixed-Point Behavior </dt><dd>Care must be taken when using the fixed-point versions of the CFFT/CIFFT function. Refer to the function specific documentation below for usage guidelines. </dd></dl>
@@ -162,7 +162,7 @@ yd' = (ya+xb-yc-xd)* co3 - (xa-yb-xc+yd)* (si3)
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

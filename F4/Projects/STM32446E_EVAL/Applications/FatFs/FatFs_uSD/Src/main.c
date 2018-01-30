@@ -193,7 +193,7 @@ static void FS_FileOperations(void)
       }
       isFsCreated = 1;
     }
-
+    
     /* Create and Open a new text file object with write access */
     if(f_open(&MyFile, "STM32.TXT", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
     {

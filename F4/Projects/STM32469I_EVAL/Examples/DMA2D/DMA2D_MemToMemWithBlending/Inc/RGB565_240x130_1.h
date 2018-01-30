@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA2D/DMA2D_MemToMemWithBlending/Inc/RGB565_240x130_1.h
+  * @file    DMA2D/DMA2D_MemToMemWithBlending/Inc/RGB565_240x130_1.h 
   * @author  MCD Application Team
   * @brief   This file contains the DMA2D scenario foreground layer texture in RGB565 and size 240x130.
   ******************************************************************************
@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __RGB565_240x130_1_H

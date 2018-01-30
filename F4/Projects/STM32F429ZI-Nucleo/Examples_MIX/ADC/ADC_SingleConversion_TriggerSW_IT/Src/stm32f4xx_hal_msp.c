@@ -68,27 +68,27 @@
 void HAL_ADC_MspInit(ADC_HandleTypeDef *hadc)
 {
   GPIO_InitTypeDef          GPIO_InitStruct;
-
+  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* Enable clock of GPIO associated to the peripheral channels */
   ADCx_CHANNELa_GPIO_CLK_ENABLE();
-
+  
   /* Enable clock of ADCx peripheral (core clock) */
   ADCx_CLK_ENABLE();
-
+  
   /*##-2- Configure peripheral GPIO ##########################################*/
   /* Configure GPIO pin of the selected ADC channel */
   GPIO_InitStruct.Pin = ADCx_CHANNELa_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(ADCx_CHANNELa_GPIO_PORT, &GPIO_InitStruct);
-
+  
   /*##-4- Configure the NVIC #################################################*/
   /* NVIC configuration for ADC interrupt */
   /* Priority: high-priority */
   HAL_NVIC_SetPriority(ADCx_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(ADCx_IRQn);
-
+  
 }
 
 /**
@@ -121,7 +121,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef *hadc)
   /*##-4- Disable the NVIC ###################################################*/
   /* Disable the NVIC configuration for ADC interrupt */
   HAL_NVIC_DisableIRQ(ADCx_IRQn);
-
+  
 }
 
 
@@ -138,20 +138,20 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef *hadc)
 void HAL_DAC_MspInit(DAC_HandleTypeDef *hdac)
 {
   GPIO_InitTypeDef          GPIO_InitStruct;
-
+  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* Enable GPIO clock */
   DACx_CHANNEL_GPIO_CLK_ENABLE();
   /* DAC peripheral clock enable */
   DACx_CLK_ENABLE();
-
+  
   /*##-2- Configure peripheral GPIO ##########################################*/
   /* Configure GPIO pin of the selected DAC channel */
   GPIO_InitStruct.Pin = DACx_CHANNEL_TO_ADCx_CHANNELa_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(DACx_CHANNEL_TO_ADCx_CHANNELa_GPIO_PORT, &GPIO_InitStruct);
-
+  
   /*##-3- Configure the NVIC #################################################*/
   /* NVIC configuration for DAC interrupt */
   /* Priority: mid-priority */

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/stm32f4xx_it.c
+  * @file    BSP/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -187,12 +187,12 @@ void EXTI1_IRQHandler(void)
 }
 
 /**
-  * @brief  This function handles main I2S interrupt.
+  * @brief  This function handles main I2S interrupt. 
   * @param  None
   * @retval 0 if correct communication, else wrong communication
   */
 void I2S3_IRQHandler(void)
-{
+{ 
   HAL_DMA_IRQHandler(hAudioOutI2s.hdmatx);
 }
 
@@ -208,7 +208,7 @@ void I2S2_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

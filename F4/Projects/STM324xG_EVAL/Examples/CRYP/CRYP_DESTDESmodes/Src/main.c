@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRYP/CRYP_DESTDESmodes/Src/main.c
+  * @file    CRYP/CRYP_DESTDESmodes/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example provides a short description of how to use the CRYPTO
   *          peripheral to encrypt and decrypt data using DES and TDES in all
@@ -44,7 +44,7 @@
 
 /** @addtogroup CRYP_DESTDESmodes
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -66,23 +66,23 @@ UART_HandleTypeDef     UartHandle;
 uint8_t aInitVector[8] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07};
 
 /* Key size 8 bytes */
-uint8_t aDESKey[8] = {0x75,0x28,0x78,0x39,0x74,0x93,0xCB,0x70};
+uint8_t aDESKey[8] = {0x75,0x28,0x78,0x39,0x74,0x93,0xCB,0x70}; 
 
 uint8_t aTDESKey[24] = {0x01,0x23,0x45,0x67,0x89,0xAB,0xCD,0xEF,  /* Key 1 */
                         0xFE,0xDC,0xBA,0x98,0x76,0x54,0x32,0x10,  /* Key 2 */
                         0x89,0xAB,0xCD,0xEF,0x01,0x23,0x45,0x67}; /* Key 3 */
 /* Plaintext */
 uint8_t aPlaintext[16] = {0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,
-                          0x99,0xaa,0xbb,0xcc,0xdd,0xee,0xff,0x00};
+                          0x99,0xaa,0xbb,0xcc,0xdd,0xee,0xff,0x00}; 
 /* Cyphertext */
 uint8_t aCyphertext[16] = {0xB5,0x21,0x9E,0xE8,0x1A,0xA7,0x49,0x9D,
                            0x21,0x96,0x68,0x7E,0x13,0x97,0x38,0x56};
 
 /* Used for storing the encrypted text */
-uint8_t aEncryptedText[PLAINTEXT_SIZE];
+uint8_t aEncryptedText[PLAINTEXT_SIZE]; 
 
 /* Used for storing the decrypted text */
-uint8_t aDecryptedText[PLAINTEXT_SIZE];
+uint8_t aDecryptedText[PLAINTEXT_SIZE]; 
 
 /* Private function prototypes -----------------------------------------------*/
 #ifdef __GNUC__
@@ -115,10 +115,10 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Configure the COM port */
   UartHandle.Init.BaudRate = 115200;
   UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
@@ -128,32 +128,32 @@ int main(void)
   UartHandle.Init.Mode = UART_MODE_TX_RX;
   UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
   BSP_COM_Init(COM1, &UartHandle);
-
+  
   /*##-1- Configure the CRYP peripheral ######################################*/
   /* Set the common CRYP parameters */
   CrypHandle.Instance = CRYP;
-
+  
   CrypHandle.Init.DataType = CRYP_DATATYPE_8B;
   CrypHandle.Init.KeySize  = CRYP_KEYSIZE_128B;
   CrypHandle.Init.pKey     = aDESKey;
-
+ 
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Display Plain Data */
   Display_PlainData(PLAINTEXT_SIZE);
-
+  
   /*##-2- Start Encryption ###################################################*/
-
+  
   /****************************************************************************/
   /*                             DES mode ECB                                 */
   /****************************************************************************/
-
+  
   /*=====================================================
-  Encryption ECB mode
+  Encryption ECB mode                                        
   ======================================================*/
   /* Encrypt the plaintext message */
   if(HAL_CRYP_DESECB_Encrypt(&CrypHandle, aPlaintext, 16, aEncryptedText, TIMEOUT_VALUE) == HAL_OK)
@@ -167,17 +167,17 @@ int main(void)
     Error_Handler();
   }
   /*=====================================================
-  Decryption ECB mode
+  Decryption ECB mode                                        
   ======================================================*/
   /* ReInitialize the DES Key */
   CrypHandle.Init.pKey = aDESKey;
-
+  
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Decrypt the Encrypted message */
   if(HAL_CRYP_DESECB_Decrypt(&CrypHandle, aEncryptedText, 16, aDecryptedText, TIMEOUT_VALUE) == HAL_OK)
   {
@@ -189,21 +189,21 @@ int main(void)
     /* Processing Error */
     Error_Handler();
   }
-
+  
   /****************************************************************************/
   /*                             DES mode CBC                                 */
   /****************************************************************************/
   /* Insert the Initialization Vector & reInitialize the DES Key */
   CrypHandle.Init.pKey      = aDESKey;
   CrypHandle.Init.pInitVect = aInitVector;
-
+  
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
-  }
+  }  
   /*=====================================================
-  Encryption CBC mode
+  Encryption CBC mode                                        
   ======================================================*/
   /* Encrypt the plaintext message */
   if(HAL_CRYP_DESCBC_Encrypt(&CrypHandle, aPlaintext, 16, aEncryptedText, TIMEOUT_VALUE) == HAL_OK)
@@ -217,11 +217,11 @@ int main(void)
     Error_Handler();
   }
   /*=====================================================
-  Decryption CBC mode
+  Decryption CBC mode                                        
   ======================================================*/
   /* ReInitialize the DES Key */
   CrypHandle.Init.pKey = aDESKey;
-
+  
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -238,20 +238,20 @@ int main(void)
     /* Processing Error */
     Error_Handler();
   }
-
+  
   /****************************************************************************/
   /*                             TDES mode ECB                                */
   /****************************************************************************/
   /* ReInitialize the DES Key */
-  CrypHandle.Init.pKey = aTDESKey;
-
+  CrypHandle.Init.pKey = aTDESKey; 
+  
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
   /*=====================================================
-  Encryption ECB mode
+  Encryption ECB mode                                        
   ======================================================*/
   /* Encrypt the plaintext message */
   if(HAL_CRYP_TDESECB_Encrypt(&CrypHandle, aPlaintext, 16, aEncryptedText, TIMEOUT_VALUE) == HAL_OK)
@@ -265,11 +265,11 @@ int main(void)
     Error_Handler();
   }
   /*=====================================================
-  Decryption ECB mode
+  Decryption ECB mode                                        
   ======================================================*/
   /* ReInitialize the DES Key */
   CrypHandle.Init.pKey = aTDESKey;
-
+  
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -286,23 +286,23 @@ int main(void)
     /* Processing Error */
     Error_Handler();
   }
-
+  
   /****************************************************************************/
   /*                             TDES mode CBC                                */
   /****************************************************************************/
   /* Insert the Initialization Vector & reInitialize the DES Key */
   CrypHandle.Init.pKey      = aTDESKey;
   CrypHandle.Init.pInitVect = aInitVector;
-
+  
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
-  }
+  }  
   /*=====================================================
-  Encryption CBC mode
+  Encryption CBC mode                                        
   ======================================================*/
-
+  
   /* Encrypt the plaintext message */
   if(HAL_CRYP_TDESCBC_Encrypt(&CrypHandle, aPlaintext, 16, aEncryptedText, TIMEOUT_VALUE) == HAL_OK)
   {
@@ -315,17 +315,17 @@ int main(void)
     Error_Handler();
   }
   /*=====================================================
-  Decryption CBC mode
+  Decryption CBC mode                                        
   ======================================================*/
   /* Insert the Initialization Vector & reInitialize the TDES Key */
   CrypHandle.Init.pKey      = aTDESKey;
   CrypHandle.Init.pInitVect = aInitVector;
-
+  
   if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
-  }
+  }  
   /* Decrypt the Encrypted message */
   if(HAL_CRYP_TDESCBC_Decrypt(&CrypHandle, aEncryptedText, 16, aDecryptedText, TIMEOUT_VALUE) == HAL_OK)
   {
@@ -337,8 +337,8 @@ int main(void)
     /* Processing Error */
     Error_Handler();
   }
-
-  /* Infinite loop */
+  
+  /* Infinite loop */   
   while(1)
   {
   }
@@ -346,7 +346,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -372,8 +372,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -387,14 +387,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -420,7 +420,7 @@ static void Error_Handler(void)
 }
 
 /**
-  * @brief  Display Plain Data
+  * @brief  Display Plain Data 
   * @param  datalength: length of the data to display
   * @retval None
   */
@@ -428,21 +428,21 @@ static void Display_PlainData(uint32_t datalength)
 {
   uint32_t BufferCounter =0;
   uint32_t count = 0;
-
+  
   printf("\n\r=============================================================\n\r");
   printf("================= Crypt Using HW Crypto  ====================\n\r");
   printf("=============================================================\n\r");
   printf("---------------------------------------\n\r");
   printf("Plain Data :\n\r");
   printf("---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aPlaintext[BufferCounter]);
     count++;
 
     if(count == 8)
-    {
+    { 
       count = 0;
       printf("  Block %d \n\r", (int)BufferCounter/8);
     }
@@ -450,7 +450,7 @@ static void Display_PlainData(uint32_t datalength)
 }
 
 /**
-  * @brief  Display Decrypted Data
+  * @brief  Display Decrypted Data 
   * @param  algo: Algorithm used (DES or TDES)
   * @param  mode: chaining mode
   * @param  datalength: length of the data to display
@@ -467,21 +467,21 @@ static void Display_DecryptedData(uint32_t algo, uint32_t mode, uint32_t datalen
   if(mode == ECB)
   {
     printf("ECB\n\r");
-  }
+  } 
   else   /* if(mode == CBC)*/
   {
     printf("CBC\n\r");
   }
-
+   
   printf(" --------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aDecryptedText[BufferCounter]);
     count++;
 
     if(count == 8)
-    {
+    { 
       count = 0;
       printf(" Block %d \n\r", (int)BufferCounter/8);
     }
@@ -489,7 +489,7 @@ static void Display_DecryptedData(uint32_t algo, uint32_t mode, uint32_t datalen
 }
 
 /**
-  * @brief  Display Encrypted Data
+  * @brief  Display Encrypted Data 
   * @param  algo: Algorithm used (DES or TDES)
   * @param  mode: chaining mode
   * @param  datalength: length of the data to display
@@ -506,21 +506,21 @@ static void Display_EncryptedData(uint32_t algo, uint32_t mode, uint32_t datalen
   if(mode == ECB)
   {
     printf("ECB\n\r");
-  }
+  } 
   else  /* if(mode == CBC) */
   {
     printf("CBC\n\r");
   }
-
+     
   printf("---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aEncryptedText[BufferCounter]);
     count++;
 
     if(count == 8)
-    {
+    { 
       count = 0;
       printf(" Block %d \n\r", (int)BufferCounter/8);
     }
@@ -536,7 +536,7 @@ PUTCHAR_PROTOTYPE
 {
   /* Place your implementation of fputc here */
   /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
-  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 5);
+  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 5); 
 
   return ch;
 }
@@ -550,7 +550,7 @@ PUTCHAR_PROTOTYPE
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -563,10 +563,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

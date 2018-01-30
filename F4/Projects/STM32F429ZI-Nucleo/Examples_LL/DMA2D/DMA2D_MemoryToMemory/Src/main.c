@@ -116,26 +116,26 @@ int main(void)
 
   /* Configure DMA2D (DMA2D Mode, Output Color Mode and output offset) */
   Configure_DMA2D();
-
+  
   /* Set input (foreground) memory address */
   LL_DMA2D_FGND_SetMemAddr(DMA2D, (uint32_t)&aBufferInput);
-
+  
   /* Set output memory address */
-  LL_DMA2D_SetOutputMemAddr(DMA2D, (uint32_t)&aBufferResult);
-
+  LL_DMA2D_SetOutputMemAddr(DMA2D, (uint32_t)&aBufferResult);  
+  
   /* Set number of lines and number of pixels per line */
-  LL_DMA2D_SetNbrOfLines(DMA2D, LAYER_SIZE_Y);
+  LL_DMA2D_SetNbrOfLines(DMA2D, LAYER_SIZE_Y);  
   LL_DMA2D_SetNbrOfPixelsPerLines(DMA2D, LAYER_SIZE_X);
 
   /* Start transfer */
   LL_DMA2D_Start(DMA2D);
-
+  
   /* Wait until transfer is over */
   while (LL_DMA2D_IsTransferOngoing(DMA2D));
 
   /* Check whether or not DMA2D transfer is successful */
-  CheckDMA2DTransfer(aBufferInput,
-                     aBufferResult,
+  CheckDMA2DTransfer(aBufferInput, 
+                     aBufferResult, 
                     ((LAYER_SIZE_X * LAYER_SIZE_Y * LAYER_NB_BYTES_PER_PIXEL) / 4));
 
   /* Infinite loop */
@@ -165,47 +165,47 @@ void Configure_DMA2D(void)
 
   /* Configure DMA2D output color mode */
   LL_DMA2D_SetOutputColorMode(DMA2D, LL_DMA2D_OUTPUT_MODE_ARGB4444);
-
+  
   /* Initialize default DMA2D mode */
   /* Reset value is LL_DMA2D_MODE_M2M */
-  // LL_DMA2D_SetMode(DMA2D, LL_DMA2D_MODE_M2M);
-
+  // LL_DMA2D_SetMode(DMA2D, LL_DMA2D_MODE_M2M);  
+  
   /* Initialize default Red and Blue swap */
   /* Reset value is LL_DMA2D_RB_MODE_REGULAR */
-  // LL_DMA2D_SetOutputRBSwapMode(DMA2D, LL_DMA2D_RB_MODE_REGULAR);
-
+  // LL_DMA2D_SetOutputRBSwapMode(DMA2D, LL_DMA2D_RB_MODE_REGULAR);   
+  
   /* Initialize default alpha inversion */
   /* Reset value is LL_DMA2D_ALPHA_REGULAR */
-  // LL_DMA2D_SetOutputAlphaInvMode(DMA2D, LL_DMA2D_ALPHA_REGULAR);
-
+  // LL_DMA2D_SetOutputAlphaInvMode(DMA2D, LL_DMA2D_ALPHA_REGULAR);  
+  
   /* Initialize default output line offset */
   /* Reset value is 0x0 */
-  // LL_DMA2D_SetLineOffset(DMA2D, 0x0);
-
-
-  /* (3) Configure DMA2D input (foreground layer) parameters  *****************/
-
+  // LL_DMA2D_SetLineOffset(DMA2D, 0x0);     
+  
+  
+  /* (3) Configure DMA2D input (foreground layer) parameters  *****************/  
+  
   /* Configure Foreground layer input color mode and alpha value */
   LL_DMA2D_FGND_SetColorMode(DMA2D, LL_DMA2D_INPUT_MODE_ARGB4444);
   LL_DMA2D_FGND_SetAlpha(DMA2D, 0xFF); /* Fully opaque */
-
+  
   /* Initialize default DMA2D input alpha mode */
   /* Reset value is LL_DMA2D_ALPHA_MODE_NO_MODIF */
-  // LL_DMA2D_FGND_SetAlphaMode(DMA2D, LL_DMA2D_ALPHA_MODE_NO_MODIF);
-
+  // LL_DMA2D_FGND_SetAlphaMode(DMA2D, LL_DMA2D_ALPHA_MODE_NO_MODIF);    
+  
   /* Initialize default input Red and Blue swap */
   /* Reset value is LL_DMA2D_RB_MODE_REGULAR */
-  // LL_DMA2D_FGND_SetRBSwapMode(DMA2D, LL_DMA2D_RB_MODE_REGULAR);
-
+  // LL_DMA2D_FGND_SetRBSwapMode(DMA2D, LL_DMA2D_RB_MODE_REGULAR);  
+  
   /* Initialize default alpha inversion */
   /* Reset value is LL_DMA2D_ALPHA_REGULAR */
-  // LL_DMA2D_FGND_SetAlphaInvMode(DMA2D, LL_DMA2D_ALPHA_REGULAR);
-
+  // LL_DMA2D_FGND_SetAlphaInvMode(DMA2D, LL_DMA2D_ALPHA_REGULAR); 
+  
   /* Initialize default input line offset */
   /* Reset value is 0x0 */
-  // LL_DMA2D_FGND_SetLineOffset(DMA2D, 0x0);
+  // LL_DMA2D_FGND_SetLineOffset(DMA2D, 0x0);           
 }
-
+  
 /**
   * @brief  Compares input and output buffers.
   * @param  pBuffer1, pBuffer2: buffers to be compared.
@@ -224,11 +224,11 @@ void CheckDMA2DTransfer(uint32_t* pBuffer1, uint32_t* pBuffer2, uint32_t BufferL
     pBuffer1++;
     pBuffer2++;
   }
-
+  
   /* No error detected, turn on LED */
   LED_On();
   return;
-}
+}  
 
 
 /**
@@ -270,7 +270,7 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);
+    LL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);  
     LL_mDelay(Period);
   }
 }
@@ -305,7 +305,7 @@ void SystemClock_Config(void)
 
   /* Set FLASH latency */
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_5);
-
+  
   /* Enable PWR clock */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 

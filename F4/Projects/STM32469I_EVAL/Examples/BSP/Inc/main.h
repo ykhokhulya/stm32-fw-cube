@@ -79,7 +79,7 @@
 /**
   * @brief  LCD FB_StartAddress
   * LCD Frame buffer start address : starts at beginning of SDRAM
-  */
+  */                                                           
 #define LCD_FB_LENGTH              ((uint32_t)(OTM8009A_480X800_HEIGHT * OTM8009A_480X800_WIDTH * ARBG8888_BYTE_PER_PIXEL))
 
                                                            /**

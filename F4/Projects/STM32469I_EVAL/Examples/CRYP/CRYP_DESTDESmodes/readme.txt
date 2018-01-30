@@ -1,10 +1,10 @@
 /**
   @page CRYP_DESTDESmodes  Encrypt and Decrypt data using DES and TDES Algorithms
   in all chaining modes.
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CRYP/CRYP_DESTDESmodes/readme.txt
+  * @file    CRYP/CRYP_DESTDESmodes/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP DES and TDES Algorithm in all modes Example
   ******************************************************************************
@@ -34,12 +34,12 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example provides a short description of how to use the CRYPTO peripheral to
+This example provides a short description of how to use the CRYPTO peripheral to 
 encrypt and decrypt data using DES and TDES in all modes (ECB, CBC) Algorithm.
 
-For this example, a firmware is used to interface with the Crypto peripheral
+For this example, a firmware is used to interface with the Crypto peripheral 
 in polling mode.
 
 This example is behaves as follows:
@@ -54,11 +54,11 @@ This example is behaves as follows:
   - TDES CBC Encryption
   - TDES CBC Decryption
 
-The Plain data, encrypted data and decrypted data can be displayed on a PC
+The Plain data, encrypted data and decrypted data can be displayed on a PC 
 HyperTerminal using the USART.
 
 The USARTx is configured as follows:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
@@ -68,11 +68,11 @@ The USARTx is configured as follows:
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - CRYP/CRYP_DESTDESmodes/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CRYP/CRYP_DESTDESmodes/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CRYP/CRYP_DESTDESmodes/Inc/main.h                  Header for main.c module
+  - CRYP/CRYP_DESTDESmodes/Inc/main.h                  Header for main.c module  
   - CRYP/CRYP_DESTDESmodes/Src/stm32f4xx_it.c          Interrupt handlers
   - CRYP/CRYP_DESTDESmodes/Src/main.c                  Main program
   - CRYP/CRYP_DESTDESmodes/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -85,24 +85,24 @@ The USARTx is configured as follows:
 
   - This example has been tested and validated with STM32479I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
-
+  
   - Hyperterminal configuration:
-    - BaudRate = 115200 baud
+    - BaudRate = 115200 baud  
     - Word Length = 8 Bits
     - One Stop Bit
     - No parity
     - Hardware flow control disabled (RTS and CTS signals)
     - Receive and transmit enabled
-
+    
     @note Make sure that :
-    - jumper JP8  is on RS232_RX position (1-2)  and
-    - jumper JP15 is on USART1_RX position 1-2)and
-    - jumper JP19 is on USART1_TX position (1-2).
+    - jumper JP8  is on RS232_RX position (1-2)  and 
+    - jumper JP15 is on USART1_RX position 1-2)and 
+    - jumper JP19 is on USART1_TX position (1-2). 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following:
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

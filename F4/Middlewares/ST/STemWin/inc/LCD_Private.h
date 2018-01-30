@@ -41,15 +41,15 @@ Purpose     : To be used only by the display drivers
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-
+  
 #ifndef LCD_Private_H
 #define LCD_Private_H
 
@@ -97,7 +97,7 @@ extern const struct tLCDDEV_APIList_struct * /* const */ LCD_aAPI[GUI_NUM_LAYERS
   void     LCD_##DISTX##_SetLUTEntry  (U8 Pos, LCD_COLOR Color); \
   void   * LCD_##DISTX##_GetDevFunc   (int Index); \
   void     LCD_##DISTX##_ReInit       (void)
-
+    
 DECLARE_PROTOTYPES(DIST0);
 DECLARE_PROTOTYPES(DIST1);
 DECLARE_PROTOTYPES(DIST2);

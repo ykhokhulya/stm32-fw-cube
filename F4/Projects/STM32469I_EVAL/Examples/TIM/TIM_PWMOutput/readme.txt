@@ -1,9 +1,9 @@
 /**
   @page TIM_PWMOutput TIM PWM Output example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_PWMOutput/readme.txt
+  * @file    TIM/TIM_PWMOutput/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PWM signals generation using TIM8
   ******************************************************************************
@@ -33,9 +33,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to configure the TIM peripheral in PWM (Pulse Width Modulation)
+This example shows how to configure the TIM peripheral in PWM (Pulse Width Modulation) 
 mode.
 
 SystemCoreClock is set to 180 MHz for STM32F4xx Devices.
@@ -67,18 +67,18 @@ The PWM waveforms can be displayed using an oscilloscope.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_PWMOutput/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_PWMOutput/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_PWMOutput/Inc/main.h                  Header for main.c module
+  - TIM/TIM_PWMOutput/Inc/main.h                  Header for main.c module  
   - TIM/TIM_PWMOutput/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_PWMOutput/Src/main.c                  Main program
   - TIM/TIM_PWMOutput/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -90,9 +90,9 @@ The PWM waveforms can be displayed using an oscilloscope.
   - This example runs on STM32F469xx/STM32F479xx devices.
 
   - In this example, the clock is set to 180 MHz.
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC
-    board and can be easily tailored to any other supported device
-    and development board.
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
+    board and can be easily tailored to any other supported device 
+    and development board.      
 
   - STM32469I-EVAL Set-up
    Connect the following pins to an oscilloscope to monitor the different waveforms:
@@ -102,7 +102,7 @@ The PWM waveforms can be displayed using an oscilloscope.
         - TIM8_CH4 : PC.09 (pin 46 in CN6 connector)
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

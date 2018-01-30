@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CEC/CEC_MultiAddress/Inc/main.h
+  * @file    CEC/CEC_MultiAddress/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -47,9 +47,9 @@
 #define CEC_MAX_PAYLOAD                  16
 
 /* Uncomment the line below if you use the CEC peripheral as a Device 1 */
-#define DEVICE_1
-/* Uncomment the line below if you use the CEC peripheral as a Device 2 */
-//#define DEVICE_2
+#define DEVICE_1   
+/* Uncomment the line below if you use the CEC peripheral as a Device 2 */ 
+//#define DEVICE_2 
 
 #define DEVICE_ADDRESS_1               0x01  /* CEC device 1 address   */
 #define DEVICE_ADDRESS_2               0x03  /* Tuner: CEC device 2 address        */

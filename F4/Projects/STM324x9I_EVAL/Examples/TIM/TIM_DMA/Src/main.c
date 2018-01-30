@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_DMA/Src/main.c
+  * @file    TIM/TIM_DMA/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use DMA with TIM1 Update request to
   *          transfer Data from memory to TIM1 Capture Compare Register 3 (CCR3).
@@ -81,10 +81,10 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
 
@@ -96,9 +96,9 @@ int main(void)
   aCCValue_Buffer[1] = (uint32_t) ((50 * (uwTimerPeriod - 1)) / 100);
   /* Compute CCR3 value to generate a duty cycle at 25% */
   aCCValue_Buffer[2] = (uint32_t) ((25 * (uwTimerPeriod - 1)) / 100);
-
-
-  /*##-1- Configure the TIM peripheral #######################################*/
+  
+  
+  /*##-1- Configure the TIM peripheral #######################################*/ 
   /* Initialize TIM3 peripheral as follow:
       + Period = TimerPeriod (To have an output frequency equal to 17.570 KHz)
       + Repetition Counter = 3
@@ -107,7 +107,7 @@ int main(void)
       + Counter direction = Up
   */
   TimHandle.Instance = TIMx;
-
+  
   TimHandle.Init.Period            = uwTimerPeriod;
   TimHandle.Init.RepetitionCounter = 3;
   TimHandle.Init.Prescaler         = 0;
@@ -118,8 +118,8 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
-  /*##-2- Configure the PWM channel 3 ########################################*/
+  
+  /*##-2- Configure the PWM channel 3 ########################################*/ 
   sConfig.OCMode     = TIM_OCMODE_PWM1;
   sConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfig.Pulse      = aCCValue_Buffer[0];
@@ -128,25 +128,25 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
-  /*##-3- Start PWM signal generation in DMA mode ############################*/
+  
+  /*##-3- Start PWM signal generation in DMA mode ############################*/ 
   if(  HAL_TIM_PWM_Start_DMA(&TimHandle, TIM_CHANNEL_3, aCCValue_Buffer, 3) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Wait till the channel3 start process finish */
-  while(TimHandle.State != HAL_TIM_STATE_READY)
+  while(TimHandle.State != HAL_TIM_STATE_READY) 
   {}
-
-  /*##-4- Start PWM Complementary signal generation in DMA mode ##############*/
+  
+  /*##-4- Start PWM Complementary signal generation in DMA mode ##############*/ 
   if(  HAL_TIMEx_PWMN_Start_DMA(&TimHandle, TIM_CHANNEL_3, aCCValue_Buffer, 3) != HAL_OK)
   {
     /* Starting Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -169,7 +169,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -195,8 +195,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -213,14 +213,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+    
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -233,7 +233,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

@@ -42,8 +42,8 @@ Purpose     : Template driver, could be used as starting point for new
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -68,28 +68,28 @@ Purpose     : Template driver, could be used as starting point for new
 *       Macros for MIRROR_, SWAP_ and LUT_
 */
 #if (!defined (LCD_LUT_COM) && !defined(LCD_LUT_SEG))
-  #if   (!LCD_MIRROR_X && !LCD_MIRROR_Y && !LCD_SWAP_XY)
+  #if   (!LCD_MIRROR_X && !LCD_MIRROR_Y && !LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) x
     #define LOG2PHYS_Y(x, y) y
-  #elif (!LCD_MIRROR_X && !LCD_MIRROR_Y &&  LCD_SWAP_XY)
+  #elif (!LCD_MIRROR_X && !LCD_MIRROR_Y &&  LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) y
     #define LOG2PHYS_Y(x, y) x
-  #elif (!LCD_MIRROR_X &&  LCD_MIRROR_Y && !LCD_SWAP_XY)
+  #elif (!LCD_MIRROR_X &&  LCD_MIRROR_Y && !LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) x
     #define LOG2PHYS_Y(x, y) LCD_YSIZE - 1 - (y)
-  #elif (!LCD_MIRROR_X &&  LCD_MIRROR_Y &&  LCD_SWAP_XY)
+  #elif (!LCD_MIRROR_X &&  LCD_MIRROR_Y &&  LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) y
     #define LOG2PHYS_Y(x, y) LCD_XSIZE - 1 - (x)
-  #elif ( LCD_MIRROR_X && !LCD_MIRROR_Y && !LCD_SWAP_XY)
+  #elif ( LCD_MIRROR_X && !LCD_MIRROR_Y && !LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) LCD_XSIZE - 1 - (x)
     #define LOG2PHYS_Y(x, y) y
-  #elif ( LCD_MIRROR_X && !LCD_MIRROR_Y &&  LCD_SWAP_XY)
+  #elif ( LCD_MIRROR_X && !LCD_MIRROR_Y &&  LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) LCD_YSIZE - 1 - (y)
     #define LOG2PHYS_Y(x, y) x
-  #elif ( LCD_MIRROR_X &&  LCD_MIRROR_Y && !LCD_SWAP_XY)
+  #elif ( LCD_MIRROR_X &&  LCD_MIRROR_Y && !LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) LCD_XSIZE - 1 - (x)
     #define LOG2PHYS_Y(x, y) LCD_YSIZE - 1 - (y)
-  #elif ( LCD_MIRROR_X &&  LCD_MIRROR_Y &&  LCD_SWAP_XY)
+  #elif ( LCD_MIRROR_X &&  LCD_MIRROR_Y &&  LCD_SWAP_XY) 
     #define LOG2PHYS_X(x, y) LCD_YSIZE - 1 - (y)
     #define LOG2PHYS_Y(x, y) LCD_XSIZE - 1 - (x)
   #endif
@@ -520,7 +520,7 @@ static void _DrawBitLine32BPP(GUI_DEVICE * pDevice, int x, int y, U32 const GUI_
 */
 static void _DrawBitmap(GUI_DEVICE * pDevice, int x0, int y0,
                        int xSize, int ySize,
-                       int BitsPerPixel,
+                       int BitsPerPixel, 
                        int BytesPerLine,
                        const U8 GUI_UNI_PTR * pData, int Diff,
                        const LCD_PIXELINDEX * pTrans) {

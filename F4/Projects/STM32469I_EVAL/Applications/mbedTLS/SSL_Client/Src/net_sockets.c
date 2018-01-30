@@ -1,4 +1,4 @@
-/**
+/** 
   *  Portions COPYRIGHT 2016 STMicroelectronics
   *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
   *
@@ -60,7 +60,7 @@
 #include "lwip/tcpip.h"
 #include "lwip/netdb.h"
 #include "lwip/sockets.h"
-
+   
 #include "netif/ethernet.h"
 
 #include "ethernetif.h"
@@ -75,28 +75,28 @@ static int net_would_block( const mbedtls_net_context *ctx );
  */
 void mbedtls_net_init( mbedtls_net_context *ctx )
 {
-
+  
   ip4_addr_t addr;
   ip4_addr_t netmask;
   ip4_addr_t gw;
   uint32_t start;
-
+ 
   ctx->fd = -1;
-
+  
   tcpip_init(NULL, NULL);
 
-  /* IP default settings, to be overridden by DHCP */
+  /* IP default settings, to be overridden by DHCP */  
 
   IP4_ADDR(&addr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
   IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
   IP4_ADDR(&netmask, MASK_ADDR0, MASK_ADDR1, MASK_ADDR2, MASK_ADDR3);
-
-  /* add the network interface */
+  
+  /* add the network interface */    
   netif_add(&netif, &addr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
-
+  
   /* register the default network interface. */
   netif_set_default(&netif);
-
+ 
   if (netif_is_link_up(&netif))
   {
     netif_set_up(&netif);
@@ -110,11 +110,11 @@ void mbedtls_net_init( mbedtls_net_context *ctx )
 #endif
 
   start = HAL_GetTick();
-
+  
   while((netif.ip_addr.addr == 0) && (HAL_GetTick() - start < 10000))
   {
   }
-
+  
   if (netif.ip_addr.addr == 0)
   {
     printf(" Failed to get ip address! Please check your network configuration.\n");
@@ -233,7 +233,7 @@ int mbedtls_net_recv( void *ctx, unsigned char *buf, size_t len )
   {
     return MBEDTLS_ERR_NET_INVALID_CONTEXT;
   }
-
+ 
   ret = (int32_t) read( fd, buf, len );
 
   if( ret < 0 )
@@ -242,7 +242,7 @@ int mbedtls_net_recv( void *ctx, unsigned char *buf, size_t len )
     {
       return MBEDTLS_ERR_SSL_WANT_READ;
     }
-
+    
     if(errno == EPIPE || errno == ECONNRESET)
     {
       return MBEDTLS_ERR_NET_CONN_RESET;
@@ -266,7 +266,7 @@ int mbedtls_net_recv_timeout( void *ctx, unsigned char *buf, size_t len,
                       uint32_t timeout )
 {
   mbedtls_printf ("%s() NOT IMPLEMENTED!!\n", __FUNCTION__);
-
+  
   return mbedtls_net_recv( ctx, buf, len );
 }
 
@@ -308,7 +308,7 @@ int mbedtls_net_send( void *ctx, const unsigned char *buf, size_t len )
   {
     return MBEDTLS_ERR_NET_INVALID_CONTEXT;
   }
-
+  
   ret = (int32_t) write(fd, buf, len);
 
   if( ret < 0 )
@@ -317,12 +317,12 @@ int mbedtls_net_send( void *ctx, const unsigned char *buf, size_t len )
     {
       return MBEDTLS_ERR_SSL_WANT_WRITE;
     }
-
+    
     if(errno == EPIPE || errno == ECONNRESET)
     {
       return MBEDTLS_ERR_NET_CONN_RESET;
     }
-
+    
     if(errno == EINTR)
     {
       return MBEDTLS_ERR_SSL_WANT_WRITE;

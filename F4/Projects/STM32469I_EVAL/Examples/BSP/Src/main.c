@@ -145,14 +145,14 @@ int main(void)
 
   /* Configure the User Button in GPIO Mode */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-
+ 
   /* Initialize DSI LCD */
-  lcd_status = BSP_LCD_Init();
+  lcd_status = BSP_LCD_Init(); 
   while(lcd_status != LCD_OK);
 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_SelectLayer(0);
-
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
+  BSP_LCD_SelectLayer(0);  
+  
   if(BSP_LCD_GetXSize() > BSP_LCD_GetYSize())
   {
     lcd_display_orientation = LCD_ORIENTATION_LANDSCAPE;
@@ -161,7 +161,7 @@ int main(void)
   {
     lcd_display_orientation = LCD_ORIENTATION_PORTRAIT;
   }
-
+  
   BSP_TEST_APPLI_ASSERT(lcd_status != LCD_OK);
 
   /* Configuration of the Camera line IRQ callback to rotate
@@ -385,20 +385,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
   if (GPIO_Pin == MFX_IRQOUT_PIN)
   {
-    /* The different functionalities of MFX (TS, Joystick, SD detection, etc, ) can be
+    /* The different functionalities of MFX (TS, Joystick, SD detection, etc, ) can be 
     configured in exti mode to generate an IRQ on given events.
-    The MFX IRQ_OUT pin is unique and common to all functionalities, so if several
-    functionalities are configured in exit mode, the MCU has to enquire MFX about the IRQ source
-    (see function BSP_IO_ITGetStatus). Communication with Mfx is done by I2C.
-    Often the sw requires ISRs (interrupt service routines) to be quick while communication
-    with I2C can be considered relatively long (depending on SW requirements).
-    Considering that the features for human interaction like TS, Joystick, SD detection
-    don’t need immediate reaction, it is suggested to use polling mode instead of EXTI mode,
+    The MFX IRQ_OUT pin is unique and common to all functionalities, so if several 
+    functionalities are configured in exit mode, the MCU has to enquire MFX about the IRQ source 
+    (see function BSP_IO_ITGetStatus). Communication with Mfx is done by I2C. 
+    Often the sw requires ISRs (interrupt service routines) to be quick while communication 
+    with I2C can be considered relatively long (depending on SW requirements). 
+    Considering that the features for human interaction like TS, Joystick, SD detection 
+    don’t need immediate reaction, it is suggested to use polling mode instead of EXTI mode, 
     in order to avoid blocking I2C communication on interrupt service routines */
 
     /* Here an example of implementation is proposed which is a mix between pooling and exit mode:
     On ISR a flag is set (MfxIrqReceived), the main loop polls on the flag rather then polling the Mfx;
-    Mcu communicates with Mfx only when the  flag has been set by ISR. This is just an example:
+    Mcu communicates with Mfx only when the  flag has been set by ISR. This is just an example: 
     the users should choose they strategy depending on their application needs.*/
     mfx_exti_received = 1;
   }

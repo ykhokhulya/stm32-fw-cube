@@ -213,7 +213,7 @@ static void prvSVCHandler( uint32_t *pulRegisters ) __attribute__(( noinline )) 
  * Function to enable the VFP.
  */
  static void vPortEnableVFP( void ) __attribute__ (( naked ));
-
+ 
 /*
  * The number of SysTick increments that make up one tick period.
  */
@@ -265,12 +265,12 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	*pxTopOfStack = 0;	/* LR */
 	pxTopOfStack -= 5;	/* R12, R3, R2 and R1. */
 	*pxTopOfStack = ( StackType_t ) pvParameters;	/* R0 */
-
+	
 	/* A save method is being used that requires each task to maintain its
 	own exec return value. */
 	pxTopOfStack--;
 	*pxTopOfStack = portINITIAL_EXEC_RETURN;
-
+	
 	pxTopOfStack -= 9;	/* R11, R10, R9, R8, R7, R6, R5 and R4. */
 
 	if( xRunPrivileged == pdTRUE )

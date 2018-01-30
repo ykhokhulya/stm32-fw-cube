@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/sdram_dma.c
+  * @file    BSP/Src/sdram_dma.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the SDRAM Driver
   ******************************************************************************
@@ -42,7 +42,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -72,11 +72,11 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
   * @retval None
   */
 void SDRAM_DMA_demo (void)
-{
-
+{ 
+  
   SDRAM_DMA_SetHint();
 
-  /* -1- SDRAM device configuration */
+  /* -1- SDRAM device configuration */ 
   if(BSP_SDRAM_Init() != SDRAM_OK)
   {
     BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SDRAM Initialization : FAILED.", LEFT_MODE);
@@ -88,8 +88,8 @@ void SDRAM_DMA_demo (void)
   }
 
   /* -2- Fill the buffer to write */
-  Fill_Buffer(sdram_aTxBuffer, BUFFER_SIZE, 0xA244250F);
-
+  Fill_Buffer(sdram_aTxBuffer, BUFFER_SIZE, 0xA244250F);   
+  
   /* -3- Write data to the SDRAM memory using DMA */
   uwDMA_Transfer_Complete = 0;
   if(BSP_SDRAM_WriteData_DMA((SDRAM_WRITE_READ_ADDR + WRITE_READ_ADDR_OFFSET), sdram_aTxBuffer, BUFFER_SIZE) != SDRAM_OK)
@@ -98,7 +98,7 @@ void SDRAM_DMA_demo (void)
     BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SDRAM Test Aborted.", LEFT_MODE);
   }
   else
-  {
+  { 
     BSP_LCD_DisplayStringAt(20, 115, (uint8_t *)"SDRAM WRITE DMA : REQUESTED", LEFT_MODE);
   }
 
@@ -107,7 +107,7 @@ void SDRAM_DMA_demo (void)
   {
   }
   BSP_LCD_DisplayStringAt(20, 130, (uint8_t *)"SDRAM WRITE DMA : COMPLETED", LEFT_MODE);
-
+ 
   /* -4- Read back data from the SDRAM memory using DMA */
   uwDMA_Transfer_Complete = 0;
 
@@ -127,7 +127,7 @@ void SDRAM_DMA_demo (void)
   }
 
   BSP_LCD_DisplayStringAt(20, 160, (uint8_t *)"SDRAM READ  DMA : COMPLETED", LEFT_MODE);
-
+  
   /* -5- Compare both buffers */
   if(Buffercmp(sdram_aTxBuffer, sdram_aRxBuffer, BUFFER_SIZE) > 0)
   {
@@ -138,9 +138,9 @@ void SDRAM_DMA_demo (void)
   {
     BSP_LCD_DisplayStringAt(20, 175, (uint8_t *)"SDRAM TEST      : SUCCESSFULL", LEFT_MODE);
   }
-
+ 
   while (1)
-  {
+  {    
     if(CheckForUserInput() > 0)
     {
       return;
@@ -150,7 +150,7 @@ void SDRAM_DMA_demo (void)
 
 /**
   * @brief  DMA conversion complete callback
-  * @note   This function is executed when the transfer complete interrupt
+  * @note   This function is executed when the transfer complete interrupt 
   *         is generated
   * @retval None
   */
@@ -178,14 +178,14 @@ void HAL_SDRAM_DMA_XferErrorCallback(DMA_HandleTypeDef *hdma)
   */
 static void SDRAM_DMA_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set LCD Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 80);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
   BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"SDRAM DMA", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -193,12 +193,12 @@ static void SDRAM_DMA_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on SDRAM", CENTER_MODE);
 
    /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
  }
 
 /**
@@ -211,7 +211,7 @@ static void SDRAM_DMA_SetHint(void)
 static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLength, uint32_t uwOffset)
 {
   uint32_t tmpIndex = 0;
-
+  
   /* Put in global buffer different values */
   for (tmpIndex = 0; tmpIndex < uwBufferLength; tmpIndex++ )
   {
@@ -244,9 +244,9 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

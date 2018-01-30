@@ -126,37 +126,37 @@ void Configure_RNG(void)
 {
   /* (1) Enable peripheral clock for RNG                   *********************/
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_RNG);
-
+  
   /* Set system to HSI and disable PLL */
   while (SetSystemToHSI()!= 0)
   {
-  };
+  };  
 
-  /* Configure PLLSAI to enable 48M domain
-    - Keep same PLLSAI source (HSE) and PLLM factor (DIV8) used for main PLL
+  /* Configure PLLSAI to enable 48M domain 
+    - Keep same PLLSAI source (HSE) and PLLM factor (DIV8) used for main PLL 
     - Select PLL_N & PLL_Q to have a frequency of 48MHz
         * PLL_P output = (((HSE Freq / PLLM) * PLLSAI_N) / PLLSAI_P)
         *              = (((8000000  /   8 ) *    336    ) /    7     ) */
   LL_RCC_PLL_ConfigDomain_48M(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_8, 336, LL_RCC_PLLQ_DIV_7);
-
-  /* set FLASH latency to 5 */
+  
+  /* set FLASH latency to 5 */  
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_5);
-
+   
   /* Enable PLL*/
   LL_RCC_PLL_Enable();
-
+  
   /* Wait for PLL ready flag */
-  while(LL_RCC_PLL_IsReady() != 1)
+  while(LL_RCC_PLL_IsReady() != 1) 
   {
   };
-
+  
   /* Sysclk activation on the main PLL */
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
-
+  
   while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
   {
   };
-
+  
   /* Set systick to 1ms */
   SysTick_Config(168000000 / 1000);
 
@@ -166,7 +166,7 @@ void Configure_RNG(void)
   /* (2) NVIC Configuration for RNG interrupts */
   /*  - Set priority for HASH_RNG_IRQn */
   /*  - Enable HASH_RNG_IRQn */
-  NVIC_SetPriority(HASH_RNG_IRQn, 0);
+  NVIC_SetPriority(HASH_RNG_IRQn, 0);  
   NVIC_EnableIRQ(HASH_RNG_IRQn);
 }
 
@@ -200,14 +200,14 @@ void RandomNumbersGenerationIT(void)
     {
 #if (USE_TIMEOUT == 1)
       /* Check Systick counter flag to decrement the time-out value */
-      if (LL_SYSTICK_IsActiveCounterFlag())
-      {
+      if (LL_SYSTICK_IsActiveCounterFlag()) 
+      { 
         if(Timeout-- == 0)
         {
           /* Time-out occurred. Set LED to blinking mode */
           LED_Blinking(LED_BLINK_SLOW);
         }
-      }
+      } 
 #endif /* USE_TIMEOUT */
     }
   }
@@ -265,21 +265,21 @@ void LED_Blinking(uint32_t Period)
   /* Toggle LED1 in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);
+    LL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);  
     LL_mDelay(Period);
   }
 }
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None 
   * @retval None
   */
 void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
@@ -292,13 +292,13 @@ void UserButton_Init(void)
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
 
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 0x03);
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn, 0x03);  
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
 }
 
 /**
   * @brief  Wait for User push-button press to start transfer.
-  * @param  None
+  * @param  None 
   * @retval None
   */
   /*  */
@@ -309,7 +309,7 @@ void WaitForUserButtonPress(void)
     LL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);
     LL_mDelay(LED_BLINK_FAST);
   }
-
+  
   /* Turn LED1 off */
   LL_GPIO_ResetOutputPin(LED1_GPIO_PORT, LED1_PIN);
 }
@@ -396,24 +396,24 @@ uint32_t SetSystemToHSI(void)
     timeout = 1000;
     while ((LL_RCC_HSI_IsReady() != 1) && (timeout != 0))
     {
-      if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk)
+      if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) 
       {
         timeout --;
       }
       if (timeout == 0)
       {
         return 1;
-      }
+      }  
     }
   }
-
+  
   /* Set SYS clock source to HSI */
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
 
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
 
   SystemCoreClock = HSI_VALUE;
-
+  
   /* Disable PLL if enabled */
   if (LL_RCC_PLL_IsReady() != 0)
   {
@@ -421,14 +421,14 @@ uint32_t SetSystemToHSI(void)
     timeout = 1000;
     while ((LL_RCC_PLL_IsReady() != 0) && (timeout != 0))
     {
-      if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk)
+      if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) 
       {
         timeout --;
       }
       if (timeout == 0)
       {
         return 1;
-      }
+      }  
     }
   }
   /* Test end */
@@ -465,7 +465,7 @@ void Error_Callback(void)
 {
   /* Disable HASH_RNG_IRQn */
   NVIC_DisableIRQ(HASH_RNG_IRQn);
-
+  
   /* Clock or Seed Error detected. Set LED to blinking mode (Error type)*/
   LED_Blinking(LED_BLINK_ERROR);
 }

@@ -234,16 +234,16 @@ static void RTC_Config(void)
       /* Initialization Error */
       Error_Handler();
     }
-
+    
     /* Enable the write protection for RTC registers */
     __HAL_RTC_WRITEPROTECTION_ENABLE(&RTCHandle);
-
+    
     /* Check and Clear the Alarm A flag */
     if (__HAL_RTC_ALARM_GET_FLAG(&RTCHandle, RTC_FLAG_ALRAF) != RESET)
     {
       /* Clear the Alarm Flag */
       __HAL_RTC_ALARM_CLEAR_FLAG(&RTCHandle, RTC_FLAG_ALRAF);
-
+      
       /* RTC Wakeup flag workaround */
       HAL_NVIC_SystemReset();
     }

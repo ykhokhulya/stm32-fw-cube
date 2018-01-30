@@ -1,9 +1,9 @@
 /**
   @page PWR_BOR PWR Brown Out Reset (BOR) example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    PWR/PWR_BOR/readme.txt
+  * @file    PWR/PWR_BOR/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the PWR Brown Out Reset (BOR) example.
   ******************************************************************************
@@ -33,13 +33,13 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to configure the programmable BOR thresholds using the
+This example shows how to configure the programmable BOR thresholds using the 
 FLASH option bytes.
 
-By maintaining the Key push-button pressed at Reset, the new BOR level will be
-programmed. To modify the BOR threshold, select the voltage range using the
+By maintaining the Key push-button pressed at Reset, the new BOR level will be 
+programmed. To modify the BOR threshold, select the voltage range using the 
 appropriate line "#define BOR_LEVEL OB_BOR_XXXX" in main.c file.
 
 LED1 is toggling to indicate that the reset is released and the system is in RUN
@@ -50,12 +50,12 @@ mode otherwise the BOR is maintaining the reset.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - PWR/PWR_BOR/Inc/stm32f4xx_hal_conf.h     HAL configuration file
   - PWR/PWR_BOR/Inc/stm32f4xx_it.h           Interrupt handlers header file
@@ -69,9 +69,9 @@ mode otherwise the BOR is maintaining the reset.
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx/STM32F439xx devices.
-
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB
-    evaluation boards and can be easily tailored to any other supported device
+  
+  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+    evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
   - STM324x9I-EVAL RevB Set-up
@@ -79,10 +79,10 @@ mode otherwise the BOR is maintaining the reset.
     - Use the Key push-button connected to pin PC13 (EXTI Line13)
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

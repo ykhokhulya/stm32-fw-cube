@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/UTILS/UTILS_ConfigureSystemClock/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to configure system clock using PLL with
+  * @brief   This example describes how to configure system clock using PLL with 
   *          HSI as source clock through the STM32F4xx UTILS LL API.
   ******************************************************************************
   * @attention
@@ -50,7 +50,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Variable to store PLL parameters */
-/* Configuration will allow to reach a SYSCLK frequency set to 100MHz:
+/* Configuration will allow to reach a SYSCLK frequency set to 100MHz: 
    Syst freq = ((HSI_VALUE / PLLM) * PLLN)/ PLLR)
                ((16MHz /8) * 200)/ 4)             = 100MHz             */
 LL_UTILS_PLLInitTypeDef sUTILS_PLLInitStruct = {LL_RCC_PLLM_DIV_8, 200, LL_RCC_PLLP_DIV_4};
@@ -78,12 +78,12 @@ int main(void)
 
   /* Switch to PLL with HSI as clock source             */
   LL_PLL_ConfigSystemClock_HSI(&sUTILS_PLLInitStruct, &sUTILS_ClkInitStruct);
-
-  /*
+  
+  /* 
      CMSIS variable automatically updated according to new configuration.
      SystemCoreClock should be equal to calculated HCLK frequency.
-     FLASH latency is also tuned according to system constraints described
-     in the reference manual.
+     FLASH latency is also tuned according to system constraints described 
+     in the reference manual.           
   */
 
   /* Set Systick to 1ms in using frequency set to SystemCoreClock */
@@ -98,7 +98,7 @@ int main(void)
   /* Toggle LED2 in an infinite loop with a period of 1Hz */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(1000);
   }
 }
@@ -139,7 +139,7 @@ void MCO_ConfigGPIO(void)
   LL_GPIO_SetPinSpeed(GPIOA, LL_GPIO_PIN_8, LL_GPIO_SPEED_FREQ_HIGH);
   LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_8, LL_GPIO_PULL_NO);
   LL_GPIO_SetAFPin_8_15(GPIOA, LL_GPIO_PIN_8, LL_GPIO_AF_0);
-
+  
   /* Select MCO clock source and prescaler */
   LL_RCC_ConfigMCO(LL_RCC_MCO1SOURCE_PLLCLK, LL_RCC_MCO1_DIV_4);
 }

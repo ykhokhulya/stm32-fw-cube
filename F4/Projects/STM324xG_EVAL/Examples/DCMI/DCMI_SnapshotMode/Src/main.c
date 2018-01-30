@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DCMI/DCMI_SnapshotMode/Src/main.c
+  * @file    DCMI/DCMI_SnapshotMode/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example describes how to configure the camera in snapshot mode
   *          and QVGA resolution.
@@ -43,7 +43,7 @@
 
 /** @addtogroup DCMI_SnapshotMode
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -68,27 +68,27 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /*##-1- Initialize the SRAM ################################################*/
-  BSP_SRAM_Init();
-
+  BSP_SRAM_Init();  
+  
   /*##-2- Initialize the LCD #################################################*/
-  BSP_LCD_Init();
+  BSP_LCD_Init(); 
 
   /*##-3- Camera Initialization and start capture ############################*/
   /* Initialize the Camera */
-  BSP_CAMERA_Init(CAMERA_R320x240);
-
+  BSP_CAMERA_Init(CAMERA_R320x240);  
+  
   /* Wait 1s before Camera snapshot */
   HAL_Delay(1000);
-
+  
   /* Start the Camera Capture */
-  BSP_CAMERA_SnapshotStart((uint8_t *)CAMERA_FRAME_BUFFER);
+  BSP_CAMERA_SnapshotStart((uint8_t *)CAMERA_FRAME_BUFFER); 
 
-  /* Infinite loop */
+  /* Infinite loop */    
   while (1)
   {
   }
@@ -107,7 +107,7 @@ void BSP_CAMERA_FrameEventCallback(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -133,8 +133,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -148,13 +148,13 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -174,7 +174,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

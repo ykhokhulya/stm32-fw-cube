@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/stm32f4xx_it.c
+  * @file    BSP/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -202,7 +202,7 @@ void EXTI15_10_IRQHandler(void)
   * @retval None
   */
 void EEPROM_I2C_DMA_TX_IRQHandler(void)
-{
+{ 
   HAL_DMA_IRQHandler(heval_I2c.hdmatx);
 }
 
@@ -212,7 +212,7 @@ void EEPROM_I2C_DMA_TX_IRQHandler(void)
   * @retval None
   */
 void EEPROM_I2C_DMA_RX_IRQHandler(void)
-{
+{ 
   HAL_DMA_IRQHandler(heval_I2c.hdmarx);
 }
 
@@ -227,7 +227,7 @@ void EEPROM_I2C_DMA_RX_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

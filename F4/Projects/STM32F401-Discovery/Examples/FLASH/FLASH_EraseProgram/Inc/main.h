@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FLASH/FLASH_EraseProgram/Inc/main.h
+  * @file    FLASH/FLASH_EraseProgram/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************

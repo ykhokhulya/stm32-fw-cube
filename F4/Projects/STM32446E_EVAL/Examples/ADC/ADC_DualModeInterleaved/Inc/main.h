@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC_DualModeInterleaved/Inc/main.h
+  * @file    ADC/ADC_DualModeInterleaved/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -43,7 +43,7 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* User can use this section to tailor ADCx instance used and associated
+/* User can use this section to tailor ADCx instance used and associated 
    resources */
 /* Definition for ADCx clock resources */
 #define ADCx                             ADC1
@@ -52,10 +52,10 @@
 /* Definition for ADCy clock resources */
 #define ADCy                             ADC2
 #define ADCy_CLK_ENABLE()                __HAL_RCC_ADC2_CLK_ENABLE()
-
-#define DMAxy_CLK_ENABLE()               __HAL_RCC_DMA2_CLK_ENABLE()
+     
+#define DMAxy_CLK_ENABLE()               __HAL_RCC_DMA2_CLK_ENABLE()     
 #define ADCxy_CHANNEL_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOA_CLK_ENABLE()
-
+     
 #define ADCxy_FORCE_RESET()              __HAL_RCC_ADC_FORCE_RESET()
 #define ADCxy_RELEASE_RESET()            __HAL_RCC_ADC_RELEASE_RESET()
 
@@ -68,7 +68,7 @@
 
 /* Definition for ADCx's DMA */
 #define ADCxy_DMA_CHANNEL                DMA_CHANNEL_0
-#define ADCxy_DMA_STREAM                 DMA2_Stream0
+#define ADCxy_DMA_STREAM                 DMA2_Stream0         
 
 /* Definition for ADCx's NVIC */
 #define ADCxy_DMA_IRQn                   DMA2_Stream0_IRQn

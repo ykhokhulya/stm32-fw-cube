@@ -55,8 +55,8 @@ static DMA2D_HandleTypeDef           hdma2d;
 extern DSI_HandleTypeDef hdsi_eval;
 
 /* Private define ------------------------------------------------------------*/
-#define VSYNC               1
-#define VBP                 1
+#define VSYNC               1 
+#define VBP                 1 
 #define VFP                 1
 #define VACT                480
 #define HSYNC               1
@@ -70,25 +70,25 @@ extern DSI_HandleTypeDef hdsi_eval;
 static __IO int32_t  front_buffer   = 0;
 static __IO int32_t  pend_buffer   = -1;
 static uint32_t ImageIndex = 0;
-static const uint32_t * Images[] =
+static const uint32_t * Images[] = 
 {
   image_320x240_argb8888,
-  life_augmented_argb8888,
+  life_augmented_argb8888,  
 };
 
-static const uint32_t Buffers[] =
+static const uint32_t Buffers[] = 
 {
   LAYER0_ADDRESS,
-  LAYER0_ADDRESS + (800*480*4),
+  LAYER0_ADDRESS + (800*480*4),  
 };
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void OnError_Handler(uint32_t condition);
-static void CopyBuffer(uint32_t *pSrc,
-                           uint32_t *pDst,
-                           uint16_t x,
-                           uint16_t y,
-                           uint16_t xsize,
+static void CopyBuffer(uint32_t *pSrc, 
+                           uint32_t *pDst, 
+                           uint16_t x, 
+                           uint16_t y, 
+                           uint16_t xsize, 
                            uint16_t ysize);
 static uint8_t LCD_Init(void);
 void LTDC_Init(void);
@@ -118,54 +118,54 @@ static void OnError_Handler(uint32_t condition)
 int main(void)
 {
   uint8_t  lcd_status = LCD_OK;
-
+  
   /* STM32F4xx HAL library initialization:
     - Configure the Flash prefetch, instruction and Data caches
-    - Systick timer is configured by default as source of time base, but user
-      can eventually implement his proper time base source (a general purpose
-      timer for example or other time source), keeping in mind that Time base
-      duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+    - Systick timer is configured by default as source of time base, but user 
+      can eventually implement his proper time base source (a general purpose 
+      timer for example or other time source), keeping in mind that Time base 
+      duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
       handled in milliseconds basis.
     - Set NVIC Group Priority to 4
     - Low Level Initialization: global MSP (MCU Support Package) initialization
   */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Initialize the SDRAM */
   BSP_SDRAM_Init();
-
+  
   /* Initialize the LCD   */
   lcd_status = LCD_Init();
-  OnError_Handler(lcd_status != LCD_OK);
-
-  BSP_LCD_LayerDefaultInit(0, LAYER0_ADDRESS);
-  BSP_LCD_SelectLayer(0);
-
+  OnError_Handler(lcd_status != LCD_OK); 
+  
+  BSP_LCD_LayerDefaultInit(0, LAYER0_ADDRESS);     
+  BSP_LCD_SelectLayer(0); 
+    
   /* Display example brief   */
   LCD_BriefDisplay();
 
   /* Copy Buffer 0 into buffer 1, so only image area to be redrawn later */
   CopyBuffer((uint32_t *)Buffers[0], (uint32_t *)Buffers[1], 0, 0, 800, 480);
-
+  
   /*Draw first image */
   CopyBuffer((uint32_t *)Images[ImageIndex++], (uint32_t *)Buffers[front_buffer], 240, 160, 320, 240);
   pend_buffer = 0;
-
+  
   /*Refresh the LCD display*/
   HAL_DSI_Refresh(&hdsi_eval);
-
+  
   /* Infinite loop */
   while (1)
   {
     if(pend_buffer < 0)
     {
-      /* Prepare back buffer */
+      /* Prepare back buffer */     
       CopyBuffer((uint32_t *)Images[ImageIndex++], (uint32_t *)Buffers[1- front_buffer], 240, 160, 320, 240);
       pend_buffer = 1- front_buffer;
-
+      
       if(ImageIndex >= 2)
       {
         ImageIndex = 0;
@@ -173,10 +173,10 @@ int main(void)
 
       /* Refresh the display */
       HAL_DSI_Refresh(&hdsi_eval);
-
+      
       /* Wait some time before switching to next stage */
-      HAL_Delay(2000);
-    }
+      HAL_Delay(2000); 
+    }     
   }
 }
 
@@ -189,7 +189,7 @@ int main(void)
 void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
 {
   if(pend_buffer >= 0)
-  {
+  { 
     /* Disable DSI Wrapper */
     __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
     /* Update LTDC configuaration */
@@ -197,8 +197,8 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
     /* Enable DSI Wrapper */
     __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
-
-    front_buffer = pend_buffer;
+    
+    front_buffer = pend_buffer;  
     pend_buffer = -1;
   }
 }
@@ -206,7 +206,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -234,8 +234,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -249,27 +249,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 6;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {
@@ -278,7 +278,7 @@ static void SystemClock_Config(void)
 }
 
 /**
-  * @brief  Initializes the DSI LCD.
+  * @brief  Initializes the DSI LCD. 
   * The ititialization is done as below:
   *     - DSI PLL ititialization
   *     - DSI ititialization
@@ -298,7 +298,7 @@ static uint8_t LCD_Init(void)
   /* Toggle Hardware Reset of the DSI LCD using
   * its XRES signal (active low) */
   BSP_LCD_Reset();
-
+  
   /* Call first MSP Initialize only in case of first initialization
   * This will set IP blocks LTDC, DSI and DMA2D
   * - out of reset
@@ -306,7 +306,7 @@ static uint8_t LCD_Init(void)
   * - NVIC IRQ related to IP blocks enabled
   */
   BSP_LCD_MspInit();
-
+  
   /* LCD clock configuration */
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 417 Mhz */
@@ -317,20 +317,20 @@ static uint8_t LCD_Init(void)
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-
+  
   /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
   hdsi_eval.Instance = DSI;
-
+  
   HAL_DSI_DeInit(&(hdsi_eval));
-
+  
   dsiPllInit.PLLNDIV  = 100;
   dsiPllInit.PLLIDF   = DSI_PLL_IN_DIV5;
-  dsiPllInit.PLLODF   = DSI_PLL_OUT_DIV1;
-
+  dsiPllInit.PLLODF   = DSI_PLL_OUT_DIV1;  
+  
   hdsi_eval.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
   hdsi_eval.Init.TXEscapeCkdiv = 0x4;
   HAL_DSI_Init(&(hdsi_eval), &(dsiPllInit));
-
+  
   /* Configure the DSI for Command mode */
   CmdCfg.VirtualChannelID      = 0;
   CmdCfg.HSPolarity            = DSI_HSYNC_ACTIVE_HIGH;
@@ -344,7 +344,7 @@ static uint8_t LCD_Init(void)
   CmdCfg.AutomaticRefresh      = DSI_AR_DISABLE;
   CmdCfg.TEAcknowledgeRequest  = DSI_TE_ACKNOWLEDGE_ENABLE;
   HAL_DSI_ConfigAdaptedCommandMode(&hdsi_eval, &CmdCfg);
-
+  
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_ENABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_ENABLE;
   LPCmd.LPGenShortWriteTwoP   = DSI_LP_GSW2P_ENABLE;
@@ -357,7 +357,7 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_ENABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
-
+  
   /* Configure DSI PHY HS2LP and LP2HS timings */
   PhyTimings.ClockLaneHS2LPTime = 35;
   PhyTimings.ClockLaneLP2HSTime = 35;
@@ -366,16 +366,16 @@ static uint8_t LCD_Init(void)
   PhyTimings.DataLaneMaxReadTime = 0;
   PhyTimings.StopWaitTime = 10;
   HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
-
+  
   /* Initialize LTDC */
   LTDC_Init();
-
+  
   /* Start DSI */
   HAL_DSI_Start(&(hdsi_eval));
-
+  
   /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver) */
   OTM8009A_Init(OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
-
+  
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
   LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
   LPCmd.LPGenShortWriteTwoP   = DSI_LP_GSW2P_DISABLE;
@@ -388,16 +388,16 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_DISABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_DISABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
-
+  
   HAL_DSI_ConfigFlowControl(&hdsi_eval, DSI_FLOW_CONTROL_BTA);
   /* Refresh the display */
   HAL_DSI_Refresh(&hdsi_eval);
-
-  return LCD_OK;
+  
+  return LCD_OK; 
 }
 
 /**
-  * @brief
+  * @brief  
   * @param  None
   * @retval None
   */
@@ -405,7 +405,7 @@ void LTDC_Init(void)
 {
   /* DeInit */
   HAL_LTDC_DeInit(&hltdc_eval);
-
+  
   /* LTDC Config */
   /* Timing and polarity */
   hltdc_eval.Init.HorizontalSync = HSYNC;
@@ -416,12 +416,12 @@ void LTDC_Init(void)
   hltdc_eval.Init.AccumulatedActiveW = HSYNC+HBP+HACT;
   hltdc_eval.Init.TotalHeigh = VSYNC+VBP+VACT+VFP;
   hltdc_eval.Init.TotalWidth = HSYNC+HBP+HACT+HFP;
-
+  
   /* background value */
   hltdc_eval.Init.Backcolor.Blue = 0;
   hltdc_eval.Init.Backcolor.Green = 0;
   hltdc_eval.Init.Backcolor.Red = 0;
-
+  
   /* Polarity */
   hltdc_eval.Init.HSPolarity = LTDC_HSPOLARITY_AL;
   hltdc_eval.Init.VSPolarity = LTDC_VSPOLARITY_AL;
@@ -439,16 +439,16 @@ void LTDC_Init(void)
   */
 static void LCD_BriefDisplay(void)
 {
-  BSP_LCD_SetFont(&Font24);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-  BSP_LCD_FillRect(0, 0, 800, 112);
+  BSP_LCD_SetFont(&Font24);  
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
+  BSP_LCD_FillRect(0, 0, 800, 112);  
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillRect(0, 112, 800, 368);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
   BSP_LCD_DisplayStringAtLine(1, (uint8_t *)"           LCD_DSI_CmdMode_DoubleBuffering");
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"This example shows how to display images on LCD DSI using two buffers");
-  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"one for display and the other for draw");
+  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"one for display and the other for draw");  
 }
 
 /**
@@ -456,43 +456,43 @@ static void LCD_BriefDisplay(void)
   * @param  pSrc: Pointer to source buffer
   * @param  pDst: Output color
   * @param  xSize: Buffer width
-  * @param  ColorMode: Input color mode
+  * @param  ColorMode: Input color mode   
   * @retval None
   */
 static void CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize)
-{
-
+{   
+  
   uint32_t destination = (uint32_t)pDst + (y * 800 + x) * 4;
   uint32_t source      = (uint32_t)pSrc;
-
-  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/
+  
+  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
   hdma2d.Init.Mode         = DMA2D_M2M;
   hdma2d.Init.ColorMode    = DMA2D_ARGB8888;
-  hdma2d.Init.OutputOffset = 800 - xsize;
-
+  hdma2d.Init.OutputOffset = 800 - xsize;     
+  
   /*##-2- DMA2D Callbacks Configuration ######################################*/
   hdma2d.XferCpltCallback  = NULL;
-
+  
   /*##-3- Foreground Configuration ###########################################*/
   hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d.LayerCfg[1].InputAlpha = 0xFF;
   hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
   hdma2d.LayerCfg[1].InputOffset = 0;
 
-  hdma2d.Instance          = DMA2D;
-
+  hdma2d.Instance          = DMA2D; 
+   
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d) == HAL_OK)
+  if(HAL_DMA2D_Init(&hdma2d) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d, 1) == HAL_OK)
+    if(HAL_DMA2D_ConfigLayer(&hdma2d, 1) == HAL_OK) 
     {
       if (HAL_DMA2D_Start(&hdma2d, source, destination, xsize, ysize) == HAL_OK)
       {
-        /* Polling For DMA transfer */
+        /* Polling For DMA transfer */  
         HAL_DMA2D_PollForTransfer(&hdma2d, 100);
       }
     }
-  }
+  }   
 }
 #ifdef  USE_FULL_ASSERT
 

@@ -1,4 +1,5 @@
-void eth_mac_irq()
+void
+eth_mac_irq()
 {
   /* Service MAC IRQ here */
 
@@ -17,7 +18,8 @@ void eth_mac_irq()
   }
 }
 
-static err_t netif_output(struct netif *netif, struct pbuf *p)
+static err_t 
+netif_output(struct netif *netif, struct pbuf *p)
 {
   LINK_STATS_INC(link.xmit);
 
@@ -38,12 +40,14 @@ static err_t netif_output(struct netif *netif, struct pbuf *p)
   return ERR_OK;
 }
 
-static void netif_status_callback(struct netif *netif)
+static void 
+netif_status_callback(struct netif *netif)
 {
   printf("netif status changed %s\n", ip4addr_ntoa(netif_ip4_addr(netif)));
 }
 
-static err_t netif_init(struct netif *netif)
+static err_t 
+netif_init(struct netif *netif)
 {
   netif->linkoutput = netif_output;
   netif->output     = etharp_output;
@@ -58,7 +62,8 @@ static err_t netif_init(struct netif *netif)
   return ERR_OK;
 }
 
-void main(void)
+void 
+main(void)
 {
   struct netif netif;
 
@@ -72,9 +77,9 @@ void main(void)
   netif_set_status_callback(&netif, netif_status_callback);
   netif_set_default(&netif);
   netif_set_up(&netif);
-
+  
   /* Start DHCP and HTTPD */
-  dhcp_init();
+  dhcp_start(&netif );
   httpd_init();
 
   while(1) {
@@ -94,7 +99,7 @@ void main(void)
 
     if(p != NULL) {
       LINK_STATS_INC(link.recv);
-
+ 
       /* Update SNMP stats (only if you use SNMP) */
       MIB2_STATS_NETIF_ADD(netif, ifinoctets, p->tot_len);
       int unicast = ((p->payload[0] & 0x01) == 0);
@@ -108,10 +113,10 @@ void main(void)
         pbuf_free(p);
       }
     }
-
+     
     /* Cyclic lwIP timers check */
     sys_check_timeouts();
-
+     
     /* your application goes here */
   }
 }

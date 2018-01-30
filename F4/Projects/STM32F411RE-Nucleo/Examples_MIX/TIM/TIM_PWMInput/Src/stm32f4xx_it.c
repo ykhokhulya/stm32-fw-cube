@@ -169,7 +169,7 @@ void SysTick_Handler(void)
 * @param  None
 * @retval None
 */
-void TIMx_IRQHandler(void)
+void TIMx_IRQHandler(void)  
 {
   /* Check whether CC2 interrupt is pending */
   /* It is sufficient to callback just on one front (either rising or falling) */
@@ -197,7 +197,7 @@ void EXTI15_10_IRQHandler(void)
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_13);
 
     /* User button interrupt processing(function defined in main.c) */
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 

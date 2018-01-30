@@ -92,14 +92,14 @@ void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
-
+  
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
   /* Configure FLASH region as REGION N°1, 256KB of size and R/W region */
   MPU_InitStruct.BaseAddress = EXAMPLE_FLASH_ADDRESS_START;
   MPU_InitStruct.Size = EXAMPLE_FLASH_SIZE;
   MPU_InitStruct.Number = EXAMPLE_FLASH_REGION_NUMBER;
-
+  
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
   /* Configure Peripheral region as REGION N°2, 512MB of size, R/W and Execute
@@ -140,9 +140,9 @@ void MPU_AccessPermConfig(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
-
+  
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-
+  
   /* Enable MPU (any access not covered by any enabled region will cause a fault) */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 

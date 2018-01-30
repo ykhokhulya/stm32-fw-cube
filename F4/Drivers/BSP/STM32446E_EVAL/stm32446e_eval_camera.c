@@ -32,8 +32,8 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
-
+  */ 
+  
 /* File Info: ------------------------------------------------------------------
                                    User NOTES
 1. How to use this driver:
@@ -50,15 +50,15 @@
       - BSP_CAMERA_Suspend()
       - BSP_CAMERA_Resume()
       - BSP_CAMERA_Stop()
-
+      
   + Options
      o Increase or decrease on the fly the brightness and/or contrast
        using the following function:
-       - BSP_CAMERA_ContrastBrightnessConfig
+       - BSP_CAMERA_ContrastBrightnessConfig 
      o Add a special effect on the fly using the following functions:
        - BSP_CAMERA_BlackWhiteConfig()
-       - BSP_CAMERA_ColorEffectConfig()
-
+       - BSP_CAMERA_ColorEffectConfig()  
+      
 ------------------------------------------------------------------------------*/
 
 /* Includes ------------------------------------------------------------------*/
@@ -71,39 +71,39 @@
 /** @addtogroup STM32446E_EVAL
   * @{
   */
-
+    
 /** @defgroup STM32446E_EVAL_CAMERA STM32446E EVAL CAMERA
   * @{
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_CAMERA_Private_TypesDefinitions STM32446E EVAL CAMERA Private TypesDefinitions
   * @{
-  */
+  */ 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32446E_EVAL_CAMERA_Private_Defines STM32446E EVAL CAMERA Private Defines
   * @{
   */
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup STM32446E_EVAL_CAMERA_Private_Macros STM32446E EVAL CAMERA Private Macros
   * @{
   */
 /**
   * @}
-  */
+  */  
 
 /** @defgroup STM32446E_EVAL_CAMERA_Private_Variables STM32446E EVAL CAMERA Private Variables
   * @{
-  */
-
+  */ 
+  
   /*
-Note:
-  camera_drv variable is not compliant to naming rules (upper case without "_" ),
+Note: 
+  camera_drv variable is not compliant to naming rules (upper case without "_" ), 
   but we keep this naming for compatibility, in fact these variables (not static)
   could have been used by the application, example the stm32f4xx_it.c.
 */
@@ -114,16 +114,16 @@ uint32_t currentResolution;
 static uint32_t  cameraHwAddress;
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup STM32446E_EVAL_CAMERA_Private_FunctionPrototypes STM32446E EVAL CAMERA Private FunctionPrototypes
   * @{
   */
 static uint32_t GetSize(uint32_t Resolution);
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup STM32446E_EVAL_CAMERA_Private_Functions STM32446E EVAL CAMERA Private Functions
   * @{
   */
@@ -134,11 +134,11 @@ static uint32_t GetSize(uint32_t Resolution);
   * @retval Camera status
   */
 uint8_t BSP_CAMERA_Init(uint32_t Resolution)
-{
+{ 
   DCMI_HandleTypeDef *phdcmi;
-
+  
   uint8_t ret = CAMERA_ERROR;
-
+  
   /* Get the DCMI handle structure */
   phdcmi = &hDcmiEval;
 
@@ -153,12 +153,12 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
   phdcmi->Init.ByteSelectMode   = DCMI_BSM_ALL;
   phdcmi->Init.ByteSelectStart  = DCMI_OEBS_ODD;
   phdcmi->Init.LineSelectMode   = DCMI_LSM_ALL;
-  phdcmi->Init.LineSelectStart  = DCMI_OELS_ODD;
+  phdcmi->Init.LineSelectStart  = DCMI_OELS_ODD; 
   phdcmi->Instance              = DCMI;
 
   /* Configure IO functionalities for CAMERA detect pin */
-  BSP_IO_Init();
-
+  BSP_IO_Init(); 
+  
   /* Apply Camera hardware reset */
   BSP_CAMERA_HwReset();
 
@@ -191,7 +191,7 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
     /* No supported camera sensor found */
     ret = CAMERA_ERROR;
   }
-
+  
   return ret;
 }
 
@@ -201,7 +201,7 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
   * @retval Camera status
   */
 uint8_t BSP_CAMERA_DeInit(void)
-{
+{ 
   hDcmiEval.Instance              = DCMI;
 
   HAL_DCMI_DeInit(&hDcmiEval);
@@ -214,9 +214,9 @@ uint8_t BSP_CAMERA_DeInit(void)
   * @param  buff: pointer to the camera output buffer
   */
 void BSP_CAMERA_ContinuousStart(uint8_t *buff)
-{
+{ 
   /* Start the camera capture */
-  HAL_DCMI_Start_DMA(&hDcmiEval, DCMI_MODE_CONTINUOUS, (uint32_t)buff, GetSize(currentResolution));
+  HAL_DCMI_Start_DMA(&hDcmiEval, DCMI_MODE_CONTINUOUS, (uint32_t)buff, GetSize(currentResolution));  
 }
 
 /**
@@ -224,47 +224,47 @@ void BSP_CAMERA_ContinuousStart(uint8_t *buff)
   * @param  buff: pointer to the camera output buffer
   */
 void BSP_CAMERA_SnapshotStart(uint8_t *buff)
-{
+{ 
   /* Start the camera capture */
-  HAL_DCMI_Start_DMA(&hDcmiEval, DCMI_MODE_SNAPSHOT, (uint32_t)buff, GetSize(currentResolution));
+  HAL_DCMI_Start_DMA(&hDcmiEval, DCMI_MODE_SNAPSHOT, (uint32_t)buff, GetSize(currentResolution));  
 }
 
 /**
-  * @brief Suspend the CAMERA capture
+  * @brief Suspend the CAMERA capture 
   */
-void BSP_CAMERA_Suspend(void)
+void BSP_CAMERA_Suspend(void) 
 {
   /* Suspend the Camera Capture */
   HAL_DCMI_Suspend(&hDcmiEval);
 }
 
 /**
-  * @brief Resume the CAMERA capture
+  * @brief Resume the CAMERA capture 
   */
-void BSP_CAMERA_Resume(void)
+void BSP_CAMERA_Resume(void) 
 {
   /* Start the Camera Capture */
   HAL_DCMI_Resume(&hDcmiEval);
 }
 
 /**
-  * @brief  Stop the CAMERA capture
+  * @brief  Stop the CAMERA capture 
   * @retval Camera status
   */
-uint8_t BSP_CAMERA_Stop(void)
+uint8_t BSP_CAMERA_Stop(void) 
 {
   DCMI_HandleTypeDef *phdcmi;
-
+  
   uint8_t ret = CAMERA_ERROR;
-
+  
   /* Get the DCMI handle structure */
-  phdcmi = &hDcmiEval;
-
+  phdcmi = &hDcmiEval;  
+  
   if(HAL_DCMI_Stop(phdcmi) == HAL_OK)
   {
      ret = CAMERA_OK;
   }
-
+  
   /* Set Camera in Power Down */
   BSP_CAMERA_PwrDown();
 
@@ -330,14 +330,14 @@ void BSP_CAMERA_PwrDown(void)
   *            @arg  CAMERA_BRIGHTNESS_LEVEL3: for brightness +1
   *            @arg  CAMERA_BRIGHTNESS_LEVEL2: for brightness  0
   *            @arg  CAMERA_BRIGHTNESS_LEVEL1: for brightness -1
-  *            @arg  CAMERA_BRIGHTNESS_LEVEL0: for brightness -2
+  *            @arg  CAMERA_BRIGHTNESS_LEVEL0: for brightness -2    
   */
 void BSP_CAMERA_ContrastBrightnessConfig(uint32_t contrast_level, uint32_t brightness_level)
 {
   if(camera_drv->Config != NULL)
   {
     camera_drv->Config(cameraHwAddress, CAMERA_CONTRAST_BRIGHTNESS, contrast_level, brightness_level);
-  }
+  }  
 }
 
 /**
@@ -347,37 +347,37 @@ void BSP_CAMERA_ContrastBrightnessConfig(uint32_t contrast_level, uint32_t brigh
   *            @arg  CAMERA_BLACK_WHITE_BW
   *            @arg  CAMERA_BLACK_WHITE_NEGATIVE
   *            @arg  CAMERA_BLACK_WHITE_BW_NEGATIVE
-  *            @arg  CAMERA_BLACK_WHITE_NORMAL
+  *            @arg  CAMERA_BLACK_WHITE_NORMAL       
   */
 void BSP_CAMERA_BlackWhiteConfig(uint32_t Mode)
 {
   if(camera_drv->Config != NULL)
   {
     camera_drv->Config(cameraHwAddress, CAMERA_BLACK_WHITE, Mode, 0);
-  }
+  }  
 }
 
 /**
   * @brief  Configures the camera color effect.
   * @param  Effect: Color effect
   *          This parameter can be one of the following values:
-  *            @arg  CAMERA_COLOR_EFFECT_ANTIQUE
-  *            @arg  CAMERA_COLOR_EFFECT_BLUE
-  *            @arg  CAMERA_COLOR_EFFECT_GREEN
-  *            @arg  CAMERA_COLOR_EFFECT_RED
+  *            @arg  CAMERA_COLOR_EFFECT_ANTIQUE               
+  *            @arg  CAMERA_COLOR_EFFECT_BLUE        
+  *            @arg  CAMERA_COLOR_EFFECT_GREEN    
+  *            @arg  CAMERA_COLOR_EFFECT_RED        
   */
 void BSP_CAMERA_ColorEffectConfig(uint32_t Effect)
 {
   if(camera_drv->Config != NULL)
   {
     camera_drv->Config(cameraHwAddress, CAMERA_COLOR_EFFECT, Effect, 0);
-  }
+  }  
 }
 
 /**
   * @brief  Handles DCMI interrupt request.
   */
-void BSP_CAMERA_IRQHandler(void)
+void BSP_CAMERA_IRQHandler(void) 
 {
   HAL_DCMI_IRQHandler(&hDcmiEval);
 }
@@ -385,7 +385,7 @@ void BSP_CAMERA_IRQHandler(void)
 /**
   * @brief  Handles DMA interrupt request.
   */
-void BSP_CAMERA_DMA_IRQHandler(void)
+void BSP_CAMERA_DMA_IRQHandler(void) 
 {
   HAL_DMA_IRQHandler(hDcmiEval.DMA_Handle);
 }
@@ -396,9 +396,9 @@ void BSP_CAMERA_DMA_IRQHandler(void)
   * @retval capture size.
   */
 static uint32_t GetSize(uint32_t Resolution)
-{
+{ 
   uint32_t size = 0;
-
+  
   /* Get capture size */
   switch (Resolution)
   {
@@ -406,7 +406,7 @@ static uint32_t GetSize(uint32_t Resolution)
     {
       size =  0x2580;
     }
-    break;
+    break;    
   case CAMERA_R320x240:
     {
       size =  0x9600;
@@ -420,34 +420,34 @@ static uint32_t GetSize(uint32_t Resolution)
   case CAMERA_R640x480:
     {
       size =  0x25800;
-    }
+    }    
     break;
   default:
     {
       break;
     }
   }
-
+  
   return size;
 }
 
 /**
   * @brief  Initializes the DCMI MSP.
-  * @param  hdcmi: HDMI handle
+  * @param  hdcmi: HDMI handle 
   * @param  Params: pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_CAMERA_MspInit(DCMI_HandleTypeDef *hdcmi, void *Params)
 {
   static DMA_HandleTypeDef hdma_eval;
   GPIO_InitTypeDef gpio_init_structure;
-
+  
   /*** Enable peripherals and GPIO clocks ***/
   /* Enable DCMI clock */
   __HAL_RCC_DCMI_CLK_ENABLE();
 
   /* Enable DMA2 clock */
-  __HAL_RCC_DMA2_CLK_ENABLE();
-
+  __HAL_RCC_DMA2_CLK_ENABLE(); 
+  
   /* Enable GPIO clocks */
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -457,45 +457,45 @@ __weak void BSP_CAMERA_MspInit(DCMI_HandleTypeDef *hdcmi, void *Params)
 
   /*** Configure the GPIO ***/
   /* Configure DCMI GPIO as alternate function */
-  gpio_init_structure.Pin       = GPIO_PIN_4 | GPIO_PIN_6;
+  gpio_init_structure.Pin       = GPIO_PIN_4 | GPIO_PIN_6; 
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Pull      = GPIO_PULLUP;
   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
-  gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+  gpio_init_structure.Alternate = GPIO_AF13_DCMI;  
   HAL_GPIO_Init(GPIOA, &gpio_init_structure);
-
+ 
 #if !defined(USE_STM32446E_EVAL_REVA)
-  gpio_init_structure.Pin       = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9;
+  gpio_init_structure.Pin       = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9; 
 #else
-  gpio_init_structure.Pin       = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9;
+  gpio_init_structure.Pin       = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9; 
 #endif // !USE_STM32446E_EVAL_REVA
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Pull      = GPIO_PULLUP;
   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
-  gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+  gpio_init_structure.Alternate = GPIO_AF13_DCMI;   
   HAL_GPIO_Init(GPIOB, &gpio_init_structure);
 
   gpio_init_structure.Pin       = GPIO_PIN_6 | GPIO_PIN_7  | GPIO_PIN_8  |\
                                   GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 |\
-                                  GPIO_PIN_12;
+                                  GPIO_PIN_12; 
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Pull      = GPIO_PULLUP;
   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
-  gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+  gpio_init_structure.Alternate = GPIO_AF13_DCMI;   
   HAL_GPIO_Init(GPIOC, &gpio_init_structure);
 
 #if !defined(USE_STM32446E_EVAL_REVA)
-  gpio_init_structure.Pin       = GPIO_PIN_2 | GPIO_PIN_6;
+  gpio_init_structure.Pin       = GPIO_PIN_2 | GPIO_PIN_6; 
 #else
-  gpio_init_structure.Pin       = GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_6;
+  gpio_init_structure.Pin       = GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_6; 
 #endif // !USE_STM32446E_EVAL_REVA
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Pull      = GPIO_PULLUP;
   gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
-  gpio_init_structure.Alternate = GPIO_AF13_DCMI;
+  gpio_init_structure.Alternate = GPIO_AF13_DCMI;   
   HAL_GPIO_Init(GPIOD, &gpio_init_structure);
 
-
+  
   /*** Configure the DMA ***/
   /* Set the parameters to be configured */
   hdma_eval.Init.Channel             = DMA_CHANNEL_1;
@@ -506,59 +506,59 @@ __weak void BSP_CAMERA_MspInit(DCMI_HandleTypeDef *hdcmi, void *Params)
   hdma_eval.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
   hdma_eval.Init.Mode                = DMA_CIRCULAR;
   hdma_eval.Init.Priority            = DMA_PRIORITY_HIGH;
-  hdma_eval.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+  hdma_eval.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;         
   hdma_eval.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   hdma_eval.Init.MemBurst            = DMA_MBURST_SINGLE;
-  hdma_eval.Init.PeriphBurst         = DMA_PBURST_SINGLE;
+  hdma_eval.Init.PeriphBurst         = DMA_PBURST_SINGLE; 
 
   hdma_eval.Instance = DMA2_Stream1;
 
   /* Associate the initialized DMA handle to the DCMI handle */
   __HAL_LINKDMA(hdcmi, DMA_Handle, hdma_eval);
-
+  
   /*** Configure the NVIC for DCMI and DMA ***/
   /* NVIC configuration for DCMI transfer complete interrupt */
   HAL_NVIC_SetPriority(DCMI_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DCMI_IRQn);
-
+  HAL_NVIC_EnableIRQ(DCMI_IRQn);  
+  
   /* NVIC configuration for DMA2D transfer complete interrupt */
   HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
-
+  
   /* Configure the DMA stream */
-  HAL_DMA_Init(hdcmi->DMA_Handle);
+  HAL_DMA_Init(hdcmi->DMA_Handle);  
 }
 
 
 /**
   * @brief  DeInitializes the DCMI MSP.
-  * @param  hdcmi: HDMI handle
+  * @param  hdcmi: HDMI handle 
   * @param  Params: pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_CAMERA_MspDeInit(DCMI_HandleTypeDef *hdcmi, void *Params)
 {
     /* Disable NVIC  for DCMI transfer complete interrupt */
-    HAL_NVIC_DisableIRQ(DCMI_IRQn);
-
+    HAL_NVIC_DisableIRQ(DCMI_IRQn);  
+  
     /* Disable NVIC for DMA2 transfer complete interrupt */
     HAL_NVIC_DisableIRQ(DMA2_Stream1_IRQn);
-
+  
     /* Configure the DMA stream */
-    HAL_DMA_DeInit(hdcmi->DMA_Handle);
+    HAL_DMA_DeInit(hdcmi->DMA_Handle);  
 
     /* Disable DCMI clock */
     __HAL_RCC_DCMI_CLK_DISABLE();
 
-    /* GPIO pins clock and DMA clock can be shut down in the application
-       by surcharging this __weak function */
+    /* GPIO pins clock and DMA clock can be shut down in the application 
+       by surcharging this __weak function */ 
 }
 
 /**
   * @brief  Line event callback
-  * @param  hdcmi: pointer to the DCMI handle
+  * @param  hdcmi: pointer to the DCMI handle  
   */
 void HAL_DCMI_LineEventCallback(DCMI_HandleTypeDef *hdcmi)
-{
+{        
   BSP_CAMERA_LineEventCallback();
 }
 
@@ -574,10 +574,10 @@ __weak void BSP_CAMERA_LineEventCallback(void)
 
 /**
   * @brief  VSYNC event callback
-  * @param  hdcmi: pointer to the DCMI handle
+  * @param  hdcmi: pointer to the DCMI handle  
   */
 void HAL_DCMI_VsyncEventCallback(DCMI_HandleTypeDef *hdcmi)
-{
+{        
   BSP_CAMERA_VsyncEventCallback();
 }
 
@@ -593,10 +593,10 @@ __weak void BSP_CAMERA_VsyncEventCallback(void)
 
 /**
   * @brief  Frame event callback
-  * @param  hdcmi: pointer to the DCMI handle
+  * @param  hdcmi: pointer to the DCMI handle  
   */
 void HAL_DCMI_FrameEventCallback(DCMI_HandleTypeDef *hdcmi)
-{
+{        
   BSP_CAMERA_FrameEventCallback();
 }
 
@@ -612,10 +612,10 @@ __weak void BSP_CAMERA_FrameEventCallback(void)
 
 /**
   * @brief  Error callback
-  * @param  hdcmi: pointer to the DCMI handle
+  * @param  hdcmi: pointer to the DCMI handle  
   */
 void HAL_DCMI_ErrorCallback(DCMI_HandleTypeDef *hdcmi)
-{
+{        
   BSP_CAMERA_ErrorCallback();
 }
 
@@ -631,18 +631,18 @@ __weak void BSP_CAMERA_ErrorCallback(void)
 
 /**
   * @}
-  */
-
+  */  
+  
 /**
   * @}
   */
-
+  
 /**
   * @}
   */
-
+  
 /**
   * @}
-  */
+  */      
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

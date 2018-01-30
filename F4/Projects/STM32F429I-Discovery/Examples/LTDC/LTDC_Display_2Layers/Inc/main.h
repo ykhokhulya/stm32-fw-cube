@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    LTDC/LTDC_Display_2Layers/Inc/main.h
+  * @file    LTDC/LTDC_Display_2Layers/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,14 +32,14 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f429i_discovery.h"
-#include "../Components/ili9341/ili9341.h"
+#include "../Components/ili9341/ili9341.h" 
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

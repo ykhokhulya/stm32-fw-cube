@@ -89,7 +89,7 @@ SECTIONS
     *(.ARM.exidx*)
     __exidx_end = .;
   } >FLASH
-
+  
    .qspi :
   {
     . = ALIGN(4);
@@ -98,9 +98,9 @@ SECTIONS
     *(.qspi*)        /* .qspi* sections */
     . = ALIGN(4);
     _qspi_end = .;         /* define a global symbols at end of qspi */
-
+    
   } >QSPI
-
+  
   .preinit_array     :
   {
     PROVIDE_HIDDEN (__preinit_array_start = .);
@@ -126,7 +126,7 @@ SECTIONS
   _sidata = LOADADDR(.data);
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
-  .data :
+  .data : 
   {
     . = ALIGN(4);
     _sdata = .;        /* create a global symbol at data start */
@@ -137,7 +137,7 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
-
+  
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -165,7 +165,7 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-
+  
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

@@ -3,9 +3,9 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_OCToggle/readme.txt
+  * @file    TIM/TIM_OCToggle/readme.txt 
   * @author  MCD Application Team
-  * @brief   This example shows how to configure the Timer to generate four
+  * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************
   *
@@ -34,9 +34,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to configure the TIM peripheral to generate four different
+This example shows how to configure the TIM peripheral to generate four different 
 signals with four different frequencies.
 
 The TIM3CLK frequency is set to SystemCoreClock / 2 (Hz), and we want to get TIM3
@@ -44,7 +44,7 @@ counter clock at 21 MHz so the Prescaler is computed as following:
 - Prescaler = (TIM3CLK / TIM3 counter clock) - 1
 SystemCoreClock is set to 180 MHz for STM32F4xx devices
 
-The TIM3 CCR1 register value is equal to 40961:
+The TIM3 CCR1 register value is equal to 40961: 
 CC1 update rate = TIM3 counter clock / CCR1_Val = 439.44 Hz,
 so the TIM3 Channel 1 generates a periodic signal with a frequency equal to 219.72 Hz.
 
@@ -66,43 +66,43 @@ so the TIM3 channel 4 generates a periodic signal with a frequency equal to 1757
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OCToggle/Inc/stm32f4xx_hal_conf.h     HAL configuration file
   - TIM/TIM_OCToggle/Inc/stm32f4xx_it.h           Interrupt handlers header file
-  - TIM/TIM_OCToggle/Inc/main.h                   Main program header file
+  - TIM/TIM_OCToggle/Inc/main.h                   Main program header file  
   - TIM/TIM_OCToggle/Src/stm32f4xx_it.c           Interrupt handlers
   - TIM/TIM_OCToggle/Src/main.c                   Main program
   - TIM/TIM_OCToggle/Src/stm32f4xx_hal_msp.c     HAL MSP module
   - TIM/TIM_OCToggle/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
-
-@par Hardware and Software environment
+      
+@par Hardware and Software environment 
 
   - This example runs on STM32F429xx/STM32F439xx devices.
-
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB
+    
+  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device and development board
 
-  - STM324x9I-EVAL RevB Set-up
+  - STM324x9I-EVAL RevB Set-up 
     - Connect the TIM3 pins to an oscilloscope to monitor the different waveforms:
        - PC.06 (TIM3_CH1)
        - PC.07 (TIM3_CH2)
        - PC.08 (TIM3_CH3)
-       - PC.09 (TIM3_CH4)
+       - PC.09 (TIM3_CH4) 
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
-
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

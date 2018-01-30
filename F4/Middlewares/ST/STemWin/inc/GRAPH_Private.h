@@ -41,8 +41,8 @@ Purpose     : GRAPH private header file
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -71,9 +71,9 @@ typedef struct GRAPH_SCALE_OBJ  GRAPH_SCALE_OBJ;
 typedef struct GRAPH_PAINT_OBJ  GRAPH_PAINT_OBJ;
 
 struct GRAPH_PAINT_OBJ {
-  void    (* pfOnPaint)  (WM_HMEM hObj, GUI_RECT * pRectInvalid); /* Pointer to paint function */
+  void    (* pfOnPaint)  (WM_HMEM hObj, GUI_RECT * pRectInvalid); /* Pointer to paint function */ 
   void    (* pfOnDelete) (WM_HMEM hObj);                          /* Pointer to delete function */
-  WM_HWIN hGraph;                                                 /* Handle of graph widget */
+  WM_HWIN hGraph;                                                 /* Handle of graph widget */    
 };
 
 typedef struct {

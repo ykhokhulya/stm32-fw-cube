@@ -2,34 +2,34 @@
   ******************************************************************************
   * @file    stm32469i_eval_qspi.c
   * @author  MCD Application Team
-  * @brief   This file includes a standard driver for the N25Q256A QSPI
+  * @brief   This file includes a standard driver for the N25Q256A QSPI 
   *          memory mounted on STM32469I-EVAL board.
   @verbatim
   ==============================================================================
                      ##### How to use this driver #####
-  ==============================================================================
+  ==============================================================================  
   [..]
-   (#) This driver is used to drive the S25FL512SAGMFI01 and N25Q512A QSPI external
+   (#) This driver is used to drive the S25FL512SAGMFI01 and N25Q512A QSPI external 
        memory mounted on STM32469I-EVAL evaluation board.
-
+       
    (#) This driver need a specific component driver (FL512SAGMFI01 and N25Q512A) to be included with.
 
    (#) Initialization steps:
-       (++) Initialize the QPSI external memory using the BSP_QSPI_Init() function. This
+       (++) Initialize the QPSI external memory using the BSP_QSPI_Init() function. This 
             function includes the MSP layer hardware resources initialization and the
             QSPI interface with the external memory.
-
+  
    (#) QSPI memory operations
        (++) QSPI memory can be accessed with read/write operations once it is
             initialized.
             Read/write operation can be performed with AHB access using the functions
-            BSP_QSPI_Read()/BSP_QSPI_Write().
-       (++) The function BSP_QSPI_GetInfo() returns the configuration of the QSPI memory.
+            BSP_QSPI_Read()/BSP_QSPI_Write(). 
+       (++) The function BSP_QSPI_GetInfo() returns the configuration of the QSPI memory. 
             (see the QSPI memory data sheet)
        (++) Perform erase block operation using the function BSP_QSPI_Erase_Block() and by
-            specifying the block address. You can perform an erase operation of the whole
-            chip by calling the function BSP_QSPI_Erase_Chip().
-       (++) The function BSP_QSPI_GetStatus() returns the current status of the QSPI memory.
+            specifying the block address. You can perform an erase operation of the whole 
+            chip by calling the function BSP_QSPI_Erase_Chip(). 
+       (++) The function BSP_QSPI_GetStatus() returns the current status of the QSPI memory. 
             (see the QSPI memory data sheet)
   @endverbatim
   ******************************************************************************
@@ -60,7 +60,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32469i_eval_qspi.h"
@@ -71,11 +71,11 @@
 
 /** @addtogroup STM32469I_EVAL
   * @{
-  */
-
+  */ 
+  
 /** @defgroup STM32469I_EVAL_QSPI STM32469I EVAL QSPI
   * @{
-  */
+  */ 
 
 
 /* Private variables ---------------------------------------------------------*/
@@ -83,21 +83,21 @@
 #define JEDEC_MANUF_ID_SPANSION ((uint8_t) 0x01)
 /** @defgroup STM32469I_EVAL_QSPI_Private_Variables STM32469I EVAL QSPI Private Variables
   * @{
-  */
+  */       
 QSPI_HandleTypeDef QSPIHandle;
 QSPI_InfoTypeDef QspiInfo;
 
 /**
   * @}
-  */
+  */ 
 
 
 
 /* Private functions ---------------------------------------------------------*/
-
+    
 /** @defgroup STM32469I_EVAL_QSPI_Private_Functions STM32469I EVAL QSPI Private Functions
   * @{
-  */
+  */ 
 static uint8_t QSPI_ResetMemory          (QSPI_HandleTypeDef *hqspi);
 static uint8_t QSPI_EnterFourBytesAddress(QSPI_HandleTypeDef *hqspi);
 static uint8_t QSPI_DummyCyclesCfg       (QSPI_HandleTypeDef *hqspi);
@@ -108,17 +108,17 @@ static uint8_t QSPI_ReadID               (QSPI_InfoTypeDef *pqspi_info);
 /**
   * @}
   */
-
+    
 /** @defgroup STM32469I_EVAL_QSPI_Exported_Functions STM32469I EVAL QSPI Exported Functions
   * @{
-  */
+  */ 
 
 /**
   * @brief  Initializes the QSPI interface.
   * @retval QSPI memory status
   */
 uint8_t BSP_QSPI_Init(void)
-{
+{ 
   QSPIHandle.Instance = QUADSPI;
 
   /* Call the DeInit function to reset the driver */
@@ -126,10 +126,10 @@ uint8_t BSP_QSPI_Init(void)
   {
     return QSPI_ERROR;
   }
-
+        
   /* System level initialization */
   BSP_QSPI_MspInit(&QSPIHandle, NULL);
-
+  
   /* QSPI initialization */
   /* Init typedef is the same for both S25FL512S and N25Q512A memories, as they have the same FLASH size */
   QSPIHandle.Init.ClockPrescaler     = 1; /* QSPI Freq= 180 MHz / (1+1) = 90 MHz */
@@ -151,19 +151,19 @@ uint8_t BSP_QSPI_Init(void)
   {
     return QSPI_NOT_SUPPORTED;
   }
-
+  
   /* QSPI memory reset */
   if (QSPI_ResetMemory(&QSPIHandle) != QSPI_OK)
   {
     return QSPI_NOT_SUPPORTED;
   }
-
+ 
   /* Set the QSPI memory in 4-bytes address mode */
   if (QSPI_EnterFourBytesAddress(&QSPIHandle) != QSPI_OK)
   {
     return QSPI_NOT_SUPPORTED;
   }
-
+ 
   /* Configuration of the dummy cucles on QSPI memory side */
   if (QSPI_DummyCyclesCfg(&QSPIHandle) != QSPI_OK)
   {
@@ -178,7 +178,7 @@ uint8_t BSP_QSPI_Init(void)
   * @retval QSPI memory status
   */
 uint8_t BSP_QSPI_DeInit(void)
-{
+{ 
   QSPIHandle.Instance = QUADSPI;
 
   /* Call the DeInit function to reset the driver */
@@ -186,10 +186,10 @@ uint8_t BSP_QSPI_DeInit(void)
   {
     return QSPI_ERROR;
   }
-
+        
   /* System level De-initialization */
   BSP_QSPI_MspDeInit(&QSPIHandle, NULL);
-
+  
   return QSPI_OK;
 }
 
@@ -197,7 +197,7 @@ uint8_t BSP_QSPI_DeInit(void)
   * @brief  Reads an amount of data from the QSPI memory.
   * @param  pData: Pointer to data to be read
   * @param  ReadAddr: Read start address
-  * @param  Size: Size of data to read
+  * @param  Size: Size of data to read    
   * @retval QSPI memory status
   */
 uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
@@ -217,7 +217,7 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
   s_command.DdrMode           = QSPI_DDR_MODE_DISABLE;
   s_command.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;
   s_command.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
-
+  
   /* Configure the command */
   if (HAL_QSPI_Command(&QSPIHandle, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
   {
@@ -226,7 +226,7 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
 
   /* Set S# timing for Read command: Min 20ns for N25Q512A memory and 10ns for S25FL512S memory */
   MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_2_CYCLE);
-
+  
   /* Reception of the data */
   if (HAL_QSPI_Receive(&QSPIHandle, pData, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
   {
@@ -235,7 +235,7 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
 
   /* Restore S# timing for nonRead commands */
   MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_5_CYCLE);
-
+  
   return QSPI_OK;
 }
 
@@ -243,17 +243,17 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
   * @brief  Writes an amount of data to the QSPI memory.
   * @param  pData: Pointer to data to be written
   * @param  WriteAddr: Write start address
-  * @param  Size: Size of data to write
+  * @param  Size: Size of data to write    
   * @retval QSPI memory status
   */
 uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size)
 {
   QSPI_CommandTypeDef s_command;
   uint32_t end_addr, current_size, current_addr;
-
+  
   /* Calculation of the size between the write address and the end of the page */
   current_size = QspiInfo.ProgPageSize - (WriteAddr % (QspiInfo.ProgPageSize));
-
+  
   /* Check if the size of the data is less than the remaining place in the page */
   if (current_size > Size)
   {
@@ -275,7 +275,7 @@ uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size)
   s_command.DdrMode           = QSPI_DDR_MODE_DISABLE;
   s_command.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;
   s_command.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
-
+  
   /* Perform the write page by page */
   do
   {
@@ -287,37 +287,37 @@ uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size)
     {
       return QSPI_ERROR;
     }
-
+    
     /* Configure the command */
     if (HAL_QSPI_Command(&QSPIHandle, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
     {
       return QSPI_ERROR;
     }
-
+    
     /* Transmission of the data */
     if (HAL_QSPI_Transmit(&QSPIHandle, pData, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
     {
       return QSPI_ERROR;
     }
-
-    /* Configure automatic polling mode to wait for end of program */
+    
+    /* Configure automatic polling mode to wait for end of program */  
     if (QSPI_AutoPollingMemReady(&QSPIHandle, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != QSPI_OK)
     {
       return QSPI_ERROR;
     }
-
+    
     /* Update the address and size variables for next page programming */
     current_addr += current_size;
     pData += current_size;
     current_size = ((current_addr + QspiInfo.ProgPageSize) > end_addr) ? (end_addr - current_addr) : QspiInfo.ProgPageSize;
   } while (current_addr < end_addr);
-
+  
   return QSPI_OK;
 }
 
 /**
-  * @brief  Erases the specified block of the QSPI memory.
-  * @param  BlockAddress: Block address to erase
+  * @brief  Erases the specified block of the QSPI memory. 
+  * @param  BlockAddress: Block address to erase  
   * @retval QSPI memory status
   */
 uint8_t BSP_QSPI_Erase_Block(uint32_t BlockAddress)
@@ -348,8 +348,8 @@ uint8_t BSP_QSPI_Erase_Block(uint32_t BlockAddress)
   {
     return QSPI_ERROR;
   }
-
-  /* Configure automatic polling mode to wait for end of erase */
+  
+  /* Configure automatic polling mode to wait for end of erase */  
   if (QSPI_AutoPollingMemReady(&QSPIHandle, QspiInfo.SectorEraseMaxTime) != QSPI_OK)
   {
     return QSPI_ERROR;
@@ -388,8 +388,8 @@ uint8_t BSP_QSPI_Erase_Chip(void)
   {
     return QSPI_ERROR;
   }
-
-  /* Configure automatic polling mode to wait for end of erase */
+  
+  /* Configure automatic polling mode to wait for end of erase */  
   if (QSPI_AutoPollingMemReady(&QSPIHandle, QspiInfo.BulkEraseMaxTime) != QSPI_OK)
   {
     return QSPI_ERROR;
@@ -489,13 +489,13 @@ uint8_t BSP_QSPI_GetStatus(void)
     s_command.DdrMode           = QSPI_DDR_MODE_DISABLE;
     s_command.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;
     s_command.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
-
+  
     /* Configure the command */
     if (HAL_QSPI_Command(&QSPIHandle, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
     {
       return QSPI_ERROR;
     }
-
+  
     /* Reception of the data */
     if (HAL_QSPI_Receive(&QSPIHandle, &reg2, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
     {
@@ -544,7 +544,7 @@ uint8_t BSP_QSPI_GetInfo(QSPI_InfoTypeDef* pInfo)
 }
 
 /**
-* @brief Configure the QSPI in memory-mapped mode
+* @brief Configure the QSPI in memory-mapped mode 
 * @retval QSPI memory status
 */
 uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
@@ -579,9 +579,9 @@ uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
   * @}
   */
 
-/** @addtogroup STM32469I_EVAL_QSPI_Private_Functions
+/** @addtogroup STM32469I_EVAL_QSPI_Private_Functions 
   * @{
-  */
+  */ 
 
 /**
   * @brief QSPI MSP Initialization
@@ -710,7 +710,7 @@ static uint8_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
     return QSPI_ERROR;
   }
 
-  /* Configure automatic polling mode to wait the memory is ready */
+  /* Configure automatic polling mode to wait the memory is ready */  
   if (QSPI_AutoPollingMemReady(&QSPIHandle, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != QSPI_OK)
   {
     return QSPI_ERROR;
@@ -969,8 +969,8 @@ static uint8_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
   {
     return QSPI_ERROR;
   }
-
-  /* Configure automatic polling mode to wait for write enabling */
+  
+  /* Configure automatic polling mode to wait for write enabling */  
   sConfig.Match           = S25FL512S_SR1_WREN;
   sConfig.Mask            = S25FL512S_SR1_WREN; /* equal on both memory types */
   sConfig.MatchMode       = QSPI_MATCH_MODE_AND;
@@ -999,7 +999,7 @@ static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Time
   QSPI_CommandTypeDef     s_command;
   QSPI_AutoPollingTypeDef sConfig;
 
-  /* Configure automatic polling mode to wait for memory ready */
+  /* Configure automatic polling mode to wait for memory ready */  
   s_command.InstructionMode   = QSPI_INSTRUCTION_1_LINE;
   s_command.Instruction       = READ_STATUS_REG_CMD; /* same value on both memory types */
   s_command.AddressMode       = QSPI_ADDRESS_NONE;
@@ -1088,19 +1088,19 @@ static uint8_t QSPI_ReadID(QSPI_InfoTypeDef *pqspi_info)
 }
 /**
   * @}
-  */
-
+  */  
+  
 /**
   * @}
-  */
-
+  */ 
+  
 /**
   * @}
-  */
-
+  */ 
+  
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

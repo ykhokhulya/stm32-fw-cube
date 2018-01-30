@@ -117,7 +117,7 @@ SECTIONS
   _sidata = LOADADDR(.data);
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
-  .data :
+  .data : 
   {
     . = ALIGN(4);
     _sdata = .;        /* create a global symbol at data start */
@@ -128,7 +128,7 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
-
+  
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -154,7 +154,7 @@ SECTIONS
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
-  } >RAM
+  } >RAM 
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
@@ -166,8 +166,8 @@ SECTIONS
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
   .ExtRAMData(NOLOAD) : {*(.ExtRAMData)} >MEMORY_ARRAY
-  .ExtRAMData1(NOLOAD)  : {*(.ExtRAMData1)} > MEMORY_ARRAY1
-  .ExtFlashSection : {*(.ExtFlashSection)} >QSPI
+  .ExtRAMData1(NOLOAD)  : {*(.ExtRAMData1)} > MEMORY_ARRAY1 
+  .ExtFlashSection : {*(.ExtFlashSection)} >QSPI 
 }
 
 

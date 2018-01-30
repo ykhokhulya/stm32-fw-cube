@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    TIM/TIM_DMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -58,8 +58,8 @@
 
 
 /**
-  * @brief TIM MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief TIM MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration
   *           - DMA configuration for transmission request by peripheral
@@ -74,14 +74,14 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* TIMx clock enable */
   TIMx_CLK_ENABLE();
-
+    
   /* Enable GPIO Channel3/3N Clocks */
   TIMx_CHANNEL3_GPIO_CLK_ENABLE();
 
   /* Enable DMA2 clock */
   DMAx_CLK_ENABLE
-
-
+  
+  
   /* Configure TIM1_Channel3 in output, push-pull & alternate function mode */
   GPIO_InitStruct.Pin = GPIO_PIN_CHANNEL3;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -100,23 +100,23 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   hdma_tim.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
   hdma_tim.Init.Mode = DMA_CIRCULAR;
   hdma_tim.Init.Priority = DMA_PRIORITY_HIGH;
-  hdma_tim.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+  hdma_tim.Init.FIFOMode = DMA_FIFOMODE_DISABLE;         
   hdma_tim.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
   hdma_tim.Init.MemBurst = DMA_MBURST_SINGLE;
-  hdma_tim.Init.PeriphBurst = DMA_PBURST_SINGLE;
+  hdma_tim.Init.PeriphBurst = DMA_PBURST_SINGLE; 
 
   /* Set hdma_tim instance */
   hdma_tim.Instance = TIMx_CC3_DMA_STREAM;
 
   /* Link hdma_tim to hdma[3] (channel3) */
   __HAL_LINKDMA(htim, hdma[3], hdma_tim);
-
+  
   /* Initialize TIMx DMA handle */
-  HAL_DMA_Init(htim->hdma[3]);
-
+  HAL_DMA_Init(htim->hdma[3]); 
+  
   /*##-2- Configure the NVIC for DMA #########################################*/
   /* NVIC configuration for DMA transfer complete interrupt */
-  HAL_NVIC_SetPriority(TIMx_DMA_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(TIMx_DMA_IRQn, 0, 0);   
   HAL_NVIC_EnableIRQ(TIMx_DMA_IRQn);
 }
 

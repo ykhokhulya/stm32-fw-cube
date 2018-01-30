@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/app_ethernet.c
+  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/app_ethernet.c 
   * @author  MCD Application Team
   * @brief   Ethernet specefic module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -82,7 +82,7 @@ extern void VNC_SERVER_StatusChanged (uint8_t status);
   * @brief  Called by the server to send data
   * @param  buf: buffer to be sent.
   * @param  len: length of buf.
-  * @param  pConnectionInfo: Connection info
+  * @param  pConnectionInfo: Connection info  
   * @retval transmit status.
   */
 static int _Send(const U8 * buf, int len, void * pConnectionInfo) {
@@ -93,7 +93,7 @@ static int _Send(const U8 * buf, int len, void * pConnectionInfo) {
   * @brief  Called by the server when data is received
   * @param  buf: buffer to get the received data.
   * @param  len: length of received data.
-  * @param  pConnectionInfo: Connection info
+  * @param  pConnectionInfo: Connection info  
   * @retval receive status.
   */
 static int _Recv(U8 * buf, int len, void * pConnectionInfo) {
@@ -102,13 +102,13 @@ static int _Recv(U8 * buf, int len, void * pConnectionInfo) {
 
 /**
   * @brief  Starts listening at a TCP port.
-  * @param  Port: TCP port to listen at
+  * @param  Port: TCP port to listen at 
   * @retval listen status.
   */
 static int _ListenAtTcpAddr(U16 Port) {
   struct sockaddr_in addr;
   int sock;
-
+  
   sock = socket(AF_INET, SOCK_STREAM, 0);
   memset(&addr, 0, sizeof(addr));
   addr.sin_family      = AF_INET;
@@ -129,14 +129,14 @@ static void VNC_Process( void)
   static uint8_t Is_SocketAssigned = 0;
   u32_t AddrLen;
   U16 Port;
-
+  
   if(Is_SocketAssigned == 0)
   {
     Is_SocketAssigned = 1;
-    /* Prepare socket (one time setup)
+    /* Prepare socket (one time setup) 
     Default port for VNC is is 590x, where x is the 0-based layer index */
-    Port = 5900 + _Context.ServerIndex;
-
+    Port = 5900 + _Context.ServerIndex; 
+    
     /* Loop until we get a socket into listening state */
     do {
       s = _ListenAtTcpAddr(Port);
@@ -148,21 +148,21 @@ static void VNC_Process( void)
   }
   VNC_SERVER_StatusChanged(VNC_CONN_ESTABLISHED);
   /* Loop once per client and create a thread for the actual server */
-  while (VNC_State == VNC_PROCESS)
+  while (VNC_State == VNC_PROCESS) 
   {
-
+    
     /* Wait for an incoming connection */
     AddrLen = sizeof(_Addr);
     Connection_accepted = 1;
     if ((_Sock = accept(s, (struct sockaddr*)&_Addr, &AddrLen)) < 1) {
       closesocket(_Sock);
-      vTaskDelay(100);
+      vTaskDelay(100);      
       continue; /* Error */
     }
     Connection_accepted = 0;
     VNC_SERVER_LogMessage ("Connected to VNC Client");
     GUI_VNC_Process(&_Context, _Send, _Recv, (void *)_Sock);
-    VNC_SERVER_LogMessage ((char *)iptxt);
+    VNC_SERVER_LogMessage ((char *)iptxt); 
 
     /* Close the connection */
     closesocket(_Sock);
@@ -178,31 +178,31 @@ static void Netif_Config(void)
 {
   struct ip4_addr ipaddr;
   struct ip4_addr netmask;
-  struct ip4_addr gw;
-
+  struct ip4_addr gw;	
+  
   /* IP address setting */
   IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
   IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
   IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-
+  
   /* - netif_add(struct netif *netif, struct ip_addr *ipaddr,
   struct ip_addr *netmask, struct ip_addr *gw,
   void *state, err_t (* init)(struct netif *netif),
   err_t (* input)(struct pbuf *p, struct netif *netif))
-
+  
   Adds your network interface to the netif_list. Allocate a struct
   netif and pass a pointer to this structure as the first argument.
   Give pointers to cleared ip_addr structures when using DHCP,
   or fill them with sane numbers otherwise. The state pointer may be NULL.
-
+  
   The init function pointer must point to a initialization function for
   your ethernet netif interface. The following code illustrates it's use.*/
-
+  
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
-
+  
   /*  Registers the default network interface. */
   netif_set_default(&gnetif);
-
+  
   if (netif_is_link_up(&gnetif))
   {
     /* When the netif is fully configured this function must be called.*/
@@ -241,17 +241,17 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   */
 void VNC_SERVER_Start (void)
 {
-
+ 
   if(is_initialized == 0)
   {
     is_initialized = 1;
-
+   
     /* Create tcp_ip stack thread */
     tcpip_init(NULL, NULL);
-
+    
     /* Initialize the LwIP stack */
     Netif_Config();
-
+    
     /* Check connection */
     if (netif_is_up(&gnetif))
     {
@@ -260,12 +260,12 @@ void VNC_SERVER_Start (void)
       VNC_SERVER_StatusChanged(VNC_LINK_UP);
     }
     else
-    {
+    {  
       /* Update VNC state machine */
       VNC_State = VNC_LINK_DOWN;
       VNC_SERVER_LogMessage ("Cable is not connected \n");
       VNC_SERVER_StatusChanged(VNC_LINK_DOWN);
-    }
+    } 
   }
   else if(VNC_State == VNC_INIT)
   {
@@ -277,19 +277,19 @@ void VNC_SERVER_Start (void)
       VNC_SERVER_StatusChanged(VNC_LINK_UP);
     }
     else
-    {
+    {  
       /* Update VNC state machine */
       VNC_State = VNC_LINK_DOWN;
       VNC_SERVER_LogMessage ("Cable is not connected \n");
       VNC_SERVER_StatusChanged(VNC_LINK_DOWN);
-    }
+    } 
   }
-
+  
   /* Start VNC Task */
   if(VNC_ThreadId == 0)
   {
     osThreadDef(VNC, VNC_Thread, osPriorityAboveNormal, 0, 1024);
-    VNC_ThreadId = osThreadCreate (osThread(VNC), NULL);
+    VNC_ThreadId = osThreadCreate (osThread(VNC), NULL);  
   }
 }
 
@@ -306,12 +306,12 @@ void VNC_SERVER_Stop (void)
 
   VNC_SERVER_StatusChanged(VNC_IDLE);
   VNC_SERVER_LogMessage ("VNC Connection OFF");
-
+  
   if(VNC_ThreadId != 0)
   {
     osThreadTerminate(VNC_ThreadId);
     VNC_ThreadId = 0;
-  }
+  }   
 }
 /**
   * @brief  This function notify user about link status changement.
@@ -333,18 +333,18 @@ void ethernetif_notify_conn_changed(struct netif *netif)
     VNC_State = VNC_LINK_UP;
     VNC_SERVER_StatusChanged(VNC_LINK_UP);
     netif_set_addr(netif, &ipaddr , &netmask, &gw);
-
+    
     /* When the netif is fully configured this function must be called.*/
-    netif_set_up(netif);
+    netif_set_up(netif);     
   }
   else
   {
     /* Update DHCP state machine */
     VNC_State = VNC_LINK_DOWN;
-
+   
     /*  When the netif link is down this function must be called.*/
     netif_set_down(netif);
-
+    
 
     VNC_SERVER_LogMessage ("Cable is not connected.");
     closesocket(_Sock);
@@ -398,9 +398,9 @@ void  VNC_SetLockState(uint8_t LockState)
 void VNC_Thread(void const * argument)
 {
   struct dhcp *dhcp;
-
+  
   for (;;)
-  {
+  { 
     switch (VNC_State)
     {
     case VNC_LINK_UP:
@@ -414,18 +414,18 @@ void VNC_Thread(void const * argument)
         VNC_SERVER_StatusChanged(VNC_WAIT_FOR_ADDRESS);
       }
       break;
-
+      
     case VNC_WAIT_FOR_ADDRESS:
-      {
-        if (dhcp_supplied_address(&gnetif))
+      {        
+        if (dhcp_supplied_address(&gnetif)) 
         {
           VNC_State = VNC_START;
-          VNC_SERVER_StatusChanged(VNC_START);
+          VNC_SERVER_StatusChanged(VNC_START);          
         }
         else
         {
           dhcp = (struct dhcp *)netif_get_client_data(&gnetif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
-
+          
           /* DHCP timeout */
           if (dhcp->tries > MAX_DHCP_TRIES)
           {
@@ -436,18 +436,18 @@ void VNC_Thread(void const * argument)
         }
       }
       break;
-
-    case VNC_START:
-
-      sprintf((char*)iptxt,
-              "IP address : %d.%d.%d.%d\n",
-              (uint8_t)(gnetif.ip_addr.addr),
-              (uint8_t)((gnetif.ip_addr.addr) >> 8),
-              (uint8_t)((gnetif.ip_addr.addr) >> 16),
-              (uint8_t)((gnetif.ip_addr.addr) >> 24));
-
+      
+    case VNC_START: 
+      
+      sprintf((char*)iptxt, 
+              "IP address : %d.%d.%d.%d\n", 
+              (uint8_t)(gnetif.ip_addr.addr), 
+              (uint8_t)((gnetif.ip_addr.addr) >> 8), 
+              (uint8_t)((gnetif.ip_addr.addr) >> 16), 
+              (uint8_t)((gnetif.ip_addr.addr) >> 24));       
+      
       VNC_SERVER_LogMessage ((char *)iptxt);
-
+      
       /* Init VNC context and attach to layer (so context is updated if the display-layer-contents change */
       GUI_VNC_AttachToLayer(&_Context, 0);
       _Context.ServerIndex = 0;
@@ -462,16 +462,16 @@ void VNC_Thread(void const * argument)
       }
       VNC_State = VNC_PROCESS;
       break;
-
-
-    case VNC_PROCESS:
+      
+      
+    case VNC_PROCESS: 
       VNC_Process();
       break;
-
+      
     case VNC_IDLE:
       break;
-
-    default:
+      
+    default: 
       break;
     }
     osDelay(250);

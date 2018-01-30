@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    FMC/FMC_SDRAM_LowPower/Src/main.c
+  * @file    FMC/FMC_SDRAM_LowPower/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access
+  * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access 
   *          by read and write operation the SDRAM external memory device.
   ******************************************************************************
   * @attention
@@ -43,13 +43,13 @@
 
 /** @addtogroup FMC_SDRAM_LowPower
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define BUFFER_SIZE         ((uint32_t)0x0100)
 #define WRITE_READ_ADDR     ((uint32_t)0x0800)
-
+    
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* SDRAM handler declaration */
@@ -84,7 +84,7 @@ static TestStatus Buffercmp(uint32_t *pBuffer1, uint32_t *pBuffer2, uint16_t Buf
   * @retval None
   */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -92,91 +92,91 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
+  BSP_LED_Init(LED2); 
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /* WAKEUP button (EXTI_Line0) will be used to wakeup the system from STOP mode */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
-
+  
   /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
-
+  
   /*##-1- Configure the SDRAM device #########################################*/
-  /* SDRAM device configuration */
-  BSP_SDRAM_Init();
-
-  /*##-2- SDRAM memory write access ##########################################*/
+  /* SDRAM device configuration */ 
+  BSP_SDRAM_Init();  
+    
+  /*##-2- SDRAM memory write access ##########################################*/  
   /* Fill the buffer to write */
   Fill_Buffer(aTxBuffer, BUFFER_SIZE, 0xA244250F);
-
+  
   /* Write data to the SDRAM memory */
   BSP_SDRAM_WriteData(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR, aTxBuffer, BUFFER_SIZE);
-
+  
   /* Wait for TAMPER/KEY to be pushed to enter stop mode */
   while(BSP_PB_GetState(BUTTON_TAMPER) != RESET)
   {
-  }
+  }  
 
-  /*##-3- Issue self-refresh command to SDRAM device #########################*/
+  /*##-3- Issue self-refresh command to SDRAM device #########################*/ 
   SDRAMCommandStructure.CommandMode            = FMC_SDRAM_CMD_SELFREFRESH_MODE;
   SDRAMCommandStructure.CommandTarget          = FMC_SDRAM_CMD_TARGET_BANK1;
   SDRAMCommandStructure.AutoRefreshNumber      = 1;
   SDRAMCommandStructure.ModeRegisterDefinition = 0;
-
-  if(BSP_SDRAM_Sendcmd(&SDRAMCommandStructure) != HAL_OK)
+  
+  if(BSP_SDRAM_Sendcmd(&SDRAMCommandStructure) != HAL_OK) 
   {
     /* Command send Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
-  /*##-4- Enter CPU power stop mode ##########################################*/
+   
+  /*##-4- Enter CPU power stop mode ##########################################*/   
   /* Put LED4 on to indicate entering to STOP mode */
-  BSP_LED_On(LED4);
-
+  BSP_LED_On(LED4);  
+                        
   /* Request to enter STOP mode */
   HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFI);
-
-  /*##-5- Wakeup CPU from  power stop mode ###################################*/
-  /* Configure the system clock after wakeup from STOP: enable HSE, PLL and select
+  
+  /*##-5- Wakeup CPU from  power stop mode ###################################*/  
+  /* Configure the system clock after wakeup from STOP: enable HSE, PLL and select 
        PLL as system clock source (HSE and PLL are disabled in STOP mode) */
   SystemClock_Config();
-
+  
   /*##-6- SDRAM memory read back access ######################################*/
   SDRAMCommandStructure.CommandMode = FMC_SDRAM_CMD_NORMAL_MODE;
-
-  if(BSP_SDRAM_Sendcmd(&SDRAMCommandStructure) != HAL_OK)
+  
+  if(BSP_SDRAM_Sendcmd(&SDRAMCommandStructure) != HAL_OK) 
   {
     /* Command send Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 
   /* Read back data from the SDRAM memory */
-  BSP_SDRAM_ReadData(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR, aRxBuffer, BUFFER_SIZE);
+  BSP_SDRAM_ReadData(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR, aRxBuffer, BUFFER_SIZE); 
 
-  /*##-7- Checking data integrity ############################################*/
+  /*##-7- Checking data integrity ############################################*/    
   uwWriteReadStatus = Buffercmp(aTxBuffer, aRxBuffer, BUFFER_SIZE);
 
   if (uwWriteReadStatus != PASSED)
   {
     /* KO */
     /* Turn on LED2 */
-    BSP_LED_On(LED2);
+    BSP_LED_On(LED2);     
   }
   else
-  {
+  { 
     /* OK */
     /* Turn on LED1 */
     BSP_LED_On(LED1);
   }
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
   {
   }
@@ -184,7 +184,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -210,8 +210,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -225,17 +225,17 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   /* Activate the Over-Drive mode */
-  HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  HAL_PWREx_EnableOverDrive();  
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -269,7 +269,7 @@ static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwO
   {
     pBuffer[tmpIndex] = tmpIndex + uwOffset;
   }
-}
+} 
 
 /**
   * @brief  Compares two buffers.
@@ -303,7 +303,7 @@ static TestStatus Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buf
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -316,10 +316,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

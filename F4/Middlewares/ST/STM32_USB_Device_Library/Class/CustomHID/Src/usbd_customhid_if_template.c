@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -38,7 +38,7 @@ static int8_t TEMPLATE_CUSTOM_HID_Init     (void);
 static int8_t TEMPLATE_CUSTOM_HID_DeInit   (void);
 static int8_t TEMPLATE_CUSTOM_HID_OutEvent (uint8_t event_idx, uint8_t state);
 /* Private variables ---------------------------------------------------------*/
-USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_template_fops =
+USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_template_fops = 
 {
   TEMPLATE_CUSTOM_HID_ReportDesc,
   TEMPLATE_CUSTOM_HID_Init,
@@ -69,21 +69,21 @@ static int8_t TEMPLATE_CUSTOM_HID_Init(void)
 static int8_t TEMPLATE_CUSTOM_HID_DeInit(void)
 {
   /*
-     Add your deinitialization code here
-  */
+     Add your deinitialization code here 
+  */  
   return (0);
 }
 
 
 /**
   * @brief  TEMPLATE_CUSTOM_HID_Control
-  *         Manage the CUSTOM HID class events
+  *         Manage the CUSTOM HID class events       
   * @param  event_idx: event index
   * @param  state: event state
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_CUSTOM_HID_OutEvent  (uint8_t event_idx, uint8_t state)
-{
+{ 
 
   return (0);
 }

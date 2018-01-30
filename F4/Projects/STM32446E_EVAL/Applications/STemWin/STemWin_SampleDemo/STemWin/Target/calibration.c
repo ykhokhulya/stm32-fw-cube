@@ -44,12 +44,12 @@ typedef union
 {
   struct
   {
-    uint32_t     A1 : 15;
+    uint32_t     A1 : 15; 
     uint32_t     B1 : 16;
-    uint32_t     Reserved : 1;
+    uint32_t     Reserved : 1; 
   }b;
   uint32_t d32;
-}CALIBRATION_Data1Typedef;
+}CALIBRATION_Data1Typedef; 
 
 typedef union
 {
@@ -60,8 +60,8 @@ typedef union
     uint32_t      IsCalibrated : 1;
   }b;
   uint32_t d32;
-
-}CALIBRATION_Data2Typedef;
+  
+}CALIBRATION_Data2Typedef; 
 
 uint32_t CALIBRATION_Done = 0;
 /********************************************************************
@@ -171,7 +171,7 @@ static void _GetPhysValues(int LogX, int LogY, int * pPhysX, int * pPhysY, const
 
    GUI_TOUCH_GetState(&State);
   *pPhysX = State.x;
-  *pPhysY = State.y;
+  *pPhysY = State.y; 
   /* Wait until touch is released */
   _WaitForPressedState(0);
 }
@@ -207,15 +207,15 @@ void CALIBRATION_Check(void)
 
   int aPhysX[2], aPhysY[2], aLogX[2], aLogY[2], i;
 
-
+  
   data1.d32 = BACKUP_RestoreParameter(RTC_BKP_DR0);
   data2.d32 = BACKUP_RestoreParameter(RTC_BKP_DR1);
-
+  
   A2 = data2.b.A2 ;
-  B2 = data2.b.B2 ;
+  B2 = data2.b.B2 ;    
   A1 = data1.b.A1 ;
   B1 = data1.b.B1 ;
-
+  
   if(data2.b.IsCalibrated == 0)
   {
     GUI_SetBkColor(GUI_WHITE);
@@ -233,26 +233,26 @@ void CALIBRATION_Check(void)
       _GetPhysValues(aLogX[i], aLogY[i], &aPhysX[i], &aPhysY[i], _acPos[i]);
     }
     /* Use the physical values to calibrate the touch screen */
-
-    A1 = (1000 * ( aLogX[1] - aLogX[0]))/ ( aPhysX[1] - aPhysX[0]);
-    B1 = (1000 * aLogX[0]) - A1 * aPhysX[0];
-
-    A2 = (1000 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]);
-    B2 = (1000 * aLogY[0]) - A2 * aPhysY[0];
-
+    
+    A1 = (1000 * ( aLogX[1] - aLogX[0]))/ ( aPhysX[1] - aPhysX[0]); 
+    B1 = (1000 * aLogX[0]) - A1 * aPhysX[0]; 
+    
+    A2 = (1000 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]); 
+    B2 = (1000 * aLogY[0]) - A2 * aPhysY[0]; 
+    
     data1.b.A1 = A1;
     data1.b.B1 = B1;
     BACKUP_SaveParameter(RTC_BKP_DR0, data1.d32);
-
+    
     data2.b.A2 = A2;
     data2.b.B2 = B2;
     data2.b.IsCalibrated = 1;
-    BACKUP_SaveParameter(RTC_BKP_DR1, data2.d32);
+    BACKUP_SaveParameter(RTC_BKP_DR1, data2.d32);  
 
     GUI_Clear();
   }
   CALIBRATION_Done = 1;
-
+  
   GUI_Delay(1000);
 }
 

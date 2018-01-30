@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards_ComDMA/Src/stm32f4xx_it.c
+  * @file    I2C/I2C_TwoBoards_ComDMA/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -37,7 +37,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32f4xx_it.h"
+#include "stm32f4xx_it.h"   
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -166,10 +166,10 @@ void SysTick_Handler(void)
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 /**
-  * @brief  This function handles I2C event interrupt request.
+  * @brief  This function handles I2C event interrupt request.  
   * @param  None
   * @retval None
-  * @Note   This function is redefined in "main.h" and related to I2C data transmission
+  * @Note   This function is redefined in "main.h" and related to I2C data transmission     
   */
 void I2Cx_EV_IRQHandler(void)
 {
@@ -187,11 +187,11 @@ void I2Cx_ER_IRQHandler(void)
   HAL_I2C_ER_IRQHandler(&I2cHandle);
 }
 /**
-  * @brief  This function handles DMA interrupt request.
+  * @brief  This function handles DMA interrupt request.  
   * @param  None
   * @retval None
-  * @Note   This function is redefined in "main.h" and related to DMA stream
-  *         used for I2C data transmission
+  * @Note   This function is redefined in "main.h" and related to DMA stream 
+  *         used for I2C data transmission     
   */
 void I2Cx_DMA_RX_IRQHandler(void)
 {
@@ -202,8 +202,8 @@ void I2Cx_DMA_RX_IRQHandler(void)
   * @brief  This function handles DMA interrupt request.
   * @param  None
   * @retval None
-  * @Note   This function is redefined in "main.h" and related to DMA stream
-  *         used for I2C data reception
+  * @Note   This function is redefined in "main.h" and related to DMA stream 
+  *         used for I2C data reception    
   */
 void I2Cx_DMA_TX_IRQHandler(void)
 {
@@ -221,7 +221,7 @@ void I2Cx_DMA_TX_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

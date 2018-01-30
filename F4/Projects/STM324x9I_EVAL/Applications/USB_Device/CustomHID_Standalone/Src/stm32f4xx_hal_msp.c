@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,7 +30,7 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
+  ******************************************************************************  
   */
 
 /* Includes ------------------------------------------------------------------ */
@@ -44,10 +44,10 @@
 /* Private functions --------------------------------------------------------- */
 
 /**
-  * @brief ADC MSP Initialization
-  *        This function configures the hardware resources used in this application:
+  * @brief ADC MSP Initialization 
+  *        This function configures the hardware resources used in this application: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param hadc: ADC handle pointer
   * @retval None
   */
@@ -100,7 +100,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef * hadc)
 }
 
 /**
-  * @brief ADC MSP De-Initialization
+  * @brief ADC MSP De-Initialization 
   *        This function frees the hardware resources used in this application:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO to their default state

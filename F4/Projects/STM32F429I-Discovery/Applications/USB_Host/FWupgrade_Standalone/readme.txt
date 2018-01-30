@@ -1,64 +1,64 @@
 /**
   @page FWupgrade_Standalone FWupgrade_Standalone application
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
-  * @file    USB_Host/FWupgrade_Standalone/readme.txt
+  * @file    USB_Host/FWupgrade_Standalone/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the Upgrading STM32F429I-Discovery firmware using a USB key
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   @endverbatim
 
-@par Application Description
+@par Application Description 
 
-The firmware upgrade application or In-Application programming (IAP) is a feature that
-allows a user application to erase and write to on-chip flash memory.
+The firmware upgrade application or In-Application programming (IAP) is a feature that 
+allows a user application to erase and write to on-chip flash memory. 
 This application describes how to perform it.
-
+  
 This application uses The USB HOST to:
-	- Download a binary file (.bin) from a Flash disk (thumb drive) to the STM32F4xx's
+	- Download a binary file (.bin) from a Flash disk (thumb drive) to the STM32F4xx's 
 	  internal flash memory.
 	- Upload all the STM32F4xx's internal Flash memory content into a binary file.
 	- Execute the user program.
 
-This application is based on the STM32 USB On-The-Go (OTG) Host library.
+This application is based on the STM32 USB On-The-Go (OTG) Host library. 
 For more details about the USB Host stack and a mass storage demonstration,
 please refer to user manual.
 
@@ -67,21 +67,21 @@ please refer to user manual.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-For more details about the STM32Cube USB Host library, please refer to UM1720
+For more details about the STM32Cube USB Host library, please refer to UM1720  
 "STM32Cube USB Host library".
 
 
-@par Directory contents
+@par Directory contents 
 
   - USB_Host/FWupgrade_Standalone/Src/main.c                  Main program
   - USB_Host/FWupgrade_Standalone/Src/usbh_diskio_dma.c      FatFS usbh diskio driver implementation
   - USB_Host/FWupgrade_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/FWupgrade_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
-  - USB_Host/FWupgrade_Standalone/Src/iap_menu.c              IAP State Machine
+  - USB_Host/FWupgrade_Standalone/Src/iap_menu.c              IAP State Machine   
   - USB_Host/FWupgrade_Standalone/Src/usbh_conf.c             General low level driver configuration
   - USB_Host/FWupgrade_Standalone/Src/command.c               IAP command functions
   - USB_Host/FWupgrade_Standalone/Src/flash_if.c              Flash layer functions
@@ -94,7 +94,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
   - USB_Host/FWupgrade_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/FWupgrade_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
   - USB_Host/FWupgrade_Standalone/Inc/ffconf.h                FAT file system module configuration file
-
+  
   - USB_Host/FWupgrade_Standalone/Binary/
     This folder contains images that can be loaded and executed by the FW upgrade application:
     - STM32F429I_DISCO_GPIO_EXTI.bin
@@ -104,25 +104,25 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par Hardware and Software environment
 
   - This application runs on STM32F429xx devices.
-
+    
   - This application has been tested with STMicroelectronics STM32F429I-Discovery RevC
-    boards and can be easily tailored to any other supported device
-    and development board.
-
+    boards and can be easily tailored to any other supported device 
+    and development board.    
+     
   - STM32F429I-Discovery RevC Set-up
-    - Plug the USB key into the STM32F429I-Discovery board through 'USB micro A-Male
-      to A-Female' cable connector CN6.
+    - Plug the USB key into the STM32F429I-Discovery board through 'USB micro A-Male 
+      to A-Female' cable connector CN6. 
 
-
-@par How to use it ?
+   
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - To run the firmware upgrade application, proceed as follows:
-
+ 
 1. Load the binary image of the user program to the root directory of a USB key. You can
-use the provided binary images under the "USB_Host/FWupgrade_Standalone/Binary" folder.
+use the provided binary images under the "USB_Host/FWupgrade_Standalone/Binary" folder. 
 The binary should be renamed to “image.bin”.
 
 2. Program the firmware upgrade application into the internal Flash memory.
@@ -147,7 +147,7 @@ UPLOAD command will be executed immediately after completed execution of the DOW
 => If Key Button is Pressed less than< 3 seconds Only the DOWNLOAD command is executed.
 
 + LEDs status
-* Red LED blinks in infinite loop
+* Red LED blinks in infinite loop 
 	– Error: USB key disconnected.
 
 * Red LED blinks in infinite loop
@@ -158,32 +158,32 @@ UPLOAD command will be executed immediately after completed execution of the DOW
 
 * Red LED blinks in infinite loop
 	– Error: Buffer size limit, Exceed 32Kbyte
-
+	
 * Red LED blinks in infinite loop
 	– Error: No available Flash memory size to load the binary file.
-
+	
 * Red LED blinks in infinite loop
 	– Error: Flash erase error.
-
+        
 * Red LED blinks in infinite loop and Green LED On
 	– Error: Flash programming error.
-
+        
 * Red LED blinks in infinite loop and Green LED ON
 	– USB key read out protection ON.
-
+        
 * Green LED and Red LED ON
 	– UPLOAD condition verified and the user should release the Key button.
-
+	
 * Red LED ON
 	– DOWNLOAD ongoing.
-
-* Green LED ON
+	
+* Green LED ON 
 	– DOWNLOAD done.
 
-* Red LED ON
+* Red LED ON 
 	– UPLOAD ongoing.
 
-* Green LED ON
+* Green LED ON 
 	– UPLOAD done.
 
 * Green LED ON
@@ -192,12 +192,12 @@ UPLOAD command will be executed immediately after completed execution of the DOW
 
 * Green LED and Red LED blink in infinite loop
 	– JUMP command done. new Biary after FW upgrade is launched.
-
+	
 + User Program Condition
 The user application (binary file) to be loaded into the Flash memory using the firmware
 upgrade application is built by the following configuration settings:
 	- Set the program load address to APPLICATION_ADDRESS in the toolchain linker file.
-	- Relocate the vector table to address APPLICATION_ADDRESS using the the VECT_TAB_OFFSET
+	- Relocate the vector table to address APPLICATION_ADDRESS using the the VECT_TAB_OFFSET 
 	definition inside the system_stm32f4xx.c file.
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>

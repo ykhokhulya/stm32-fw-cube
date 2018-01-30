@@ -72,20 +72,20 @@ uint8_t aAES128Key[KEY_SIZE] = {0xc9,0x39,0xcc,0x13,0x39,0x7c,0x1d,0x37,
 uint8_t aInitVector[16] = {0xb3,0xd8,0xcc,0x01,0x7c,0xbb,0x89,0xb3,
                            0x9e,0x0f,0x67,0xe2,0x00,0x00,0x00,0x02};
 
-uint8_t aHeaderMessage[HEADER_SIZE] = {0x24,0x82,0x56,0x02,0xbd,0x12,0xa9,0x84,
-                                       0xe0,0x09,0x2d,0x3e,0x44,0x8e,0xda, 0x5f};
-
+uint8_t aHeaderMessage[HEADER_SIZE] = {0x24,0x82,0x56,0x02,0xbd,0x12,0xa9,0x84, 
+                                       0xe0,0x09,0x2d,0x3e,0x44,0x8e,0xda, 0x5f}; 
+                                       
 uint8_t aPlaintext[PLAINTEXT_SIZE] = {0xc3,0xb3,0xc4,0x1f,0x11,0x3a,0x31,0xb7,
                                       0x3d,0x9a,0x5c,0xd4,0x32,0x10,0x30,0x69};
 
-uint8_t aCyphertext[PLAINTEXT_SIZE] = {0x93,0xfe,0x7d,0x9e,0x9b,0xfd,0x10,0x34,
-                                       0x8a,0x56,0x06,0xe5,0xca,0xfa,0x73,0x54};
-
+uint8_t aCyphertext[PLAINTEXT_SIZE] = {0x93,0xfe,0x7d,0x9e,0x9b,0xfd,0x10,0x34, 
+                                       0x8a,0x56,0x06,0xe5,0xca,0xfa,0x73,0x54}; 
+                                       
 /* Used for storing the encrypted text */
-uint8_t aEncryptedText[PLAINTEXT_SIZE];
+uint8_t aEncryptedText[PLAINTEXT_SIZE]; 
 
 /* Used for storing the decrypted text */
-uint8_t aDecryptedText[PLAINTEXT_SIZE];
+uint8_t aDecryptedText[PLAINTEXT_SIZE]; 
 
 /* Used for storing the computed MAC (aTAG) */
 uint8_t aTAG[16];
@@ -118,10 +118,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization: global MSP (MCU Support Package) initialization
@@ -130,9 +130,9 @@ int main(void)
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED3 */
-  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED3);  
 
   /* Configure the COM port */
   UartHandle.Init.BaudRate = 115200;
@@ -146,7 +146,7 @@ int main(void)
   /*##-1- Configure the CRYP peripheral ######################################*/
   /* Set the CRYP parameters */
   CrypHandle.Instance = CRYP;
-
+  
   CrypHandle.Init.DataType   = CRYP_DATATYPE_8B;
   CrypHandle.Init.KeySize    = CRYP_KEYSIZE_128B;
   CrypHandle.Init.pKey       = aAES128Key;
@@ -159,89 +159,89 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while(1)
   {
     /* Display Plaintext */
     Display_Plaintext(PLAINTEXT_SIZE);
-
+    
     /*##-2- Encryption Phase #################################################*/
     /* Set the Initialization vector */
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+  
     /* Encrypt the plaintext message */
     if(HAL_CRYPEx_AESGCM_Encrypt(&CrypHandle, aPlaintext, 16, aEncryptedText, TIMEOUT_VALUE) == HAL_OK)
     {
       /* Display encrypted Data */
       Display_EncryptedData(AES_MODE_GCM, KEY_SIZE, PLAINTEXT_SIZE);
     }
-    else
+    else 
     {
       /* Processing Error */
       Error_Handler();
     }
-
+    
     /* Compute the authentication aTAG */
     if(HAL_CRYPEx_AESGCM_Finish(&CrypHandle, 16, aTAG, TIMEOUT_VALUE) == HAL_OK)
     {
       /* Display the computed aTAG, aTAG size is 16 bytes */
       Display_TAG(aTAG);
     }
-    else
+    else 
     {
       /* Processing Error */
       Error_Handler();
     }
 
-    /*##-3- Decryption Phase #################################################*/
+    /*##-3- Decryption Phase #################################################*/    
     /* Set the Initialization vector */
     CrypHandle.Init.pInitVect = aInitVector;
-
+    
     if(HAL_CRYP_Init(&CrypHandle) != HAL_OK)
     {
       /* Initialization Error */
-      Error_Handler();
+      Error_Handler(); 
     }
-
+  
     /* Encrypt the plaintext message */
     if(HAL_CRYPEx_AESGCM_Decrypt(&CrypHandle, aCyphertext, 16, aDecryptedText, TIMEOUT_VALUE) == HAL_OK)
     {
       /* Display encrypted Data */
       Display_DecryptedData(AES_MODE_GCM, KEY_SIZE, PLAINTEXT_SIZE);
     }
-    else
+    else 
     {
       /* Processing Error */
       Error_Handler();
     }
-
+       
     /* Compute the authentication aTAG */
     if(HAL_CRYPEx_AESGCM_Finish(&CrypHandle, 16, aTAG, TIMEOUT_VALUE) == HAL_OK)
     {
       /* Display the computed aTAG, aTAG size is 16 bytes */
       Display_TAG(aTAG);
     }
-    else
+    else 
     {
       /* Processing Error */
       Error_Handler();
-    }
-
+    }    
+    
     PressToContinue();
-    printf("\n\r Example restarted...\n ");
+    printf("\n\r Example restarted...\n ");   
   }
 }
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -269,8 +269,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -284,27 +284,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 6;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {
@@ -327,7 +327,7 @@ static void Error_Handler(void)
 }
 
 /**
-  * @brief  Display Plain Data
+  * @brief  Display Plain Data 
   * @param  datalength: length of the data to display
   * @retval None
   */
@@ -335,21 +335,21 @@ static void Display_Plaintext(uint32_t datalength)
 {
   uint32_t BufferCounter =0;
   uint32_t count = 0;
-
+  
   printf("\n\r =============================================================\n\r");
   printf(" =================== AES using GCM mode  =====================\n\r");
   printf(" =============================================================\n\r");
   printf(" ---------------------------------------\n\r");
   printf(" Plain Data :\n\r");
   printf(" ---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aPlaintext[BufferCounter]);
     count++;
 
     if(count == 16)
-    {
+    { 
       count = 0;
       printf("  Block %d \n\r", (int)BufferCounter/16);
     }
@@ -357,7 +357,7 @@ static void Display_Plaintext(uint32_t datalength)
 }
 
 /**
-  * @brief  Display Encrypted Data
+  * @brief  Display Encrypted Data 
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -375,14 +375,14 @@ static void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
     printf("GCM\n\r");
   }
   printf(" ---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aEncryptedText[BufferCounter]);
 
     count++;
     if(count == 16)
-    {
+    { 
       count = 0;
       printf(" Block %d \n\r", (int)BufferCounter/16);
     }
@@ -390,7 +390,7 @@ static void Display_EncryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
 }
 
 /**
-  * @brief  Display Decrypted Data
+  * @brief  Display Decrypted Data 
   * @param  mode: chaining mode
   * @param  keysize: AES key size used
   * @param  datalength: length of the data to display
@@ -402,20 +402,20 @@ static void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
   uint32_t count = 0;
 
   printf("\n\r =======================================\n\r");
-  printf(" Decrypted Data with AES %d  mode  ",keysize );
+  printf(" Decrypted Data with AES %d  mode  ",keysize ); 
   if(mode == AES_MODE_GCM)
   {
     printf("GCM\n\r");
   }
   printf(" ---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < datalength; BufferCounter++)
   {
     printf("[0x%02X]", aDecryptedText[BufferCounter]);
     count++;
 
     if(count == 16)
-    {
+    { 
       count = 0;
       printf(" Block %d \n\r", (int)BufferCounter/16);
     }
@@ -431,11 +431,11 @@ static void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
 static void Display_TAG(uint8_t* aTAG)
 {
   uint32_t BufferCounter = 0;
-
+  
   printf("\n\r =======================================\n\r");
-  printf(" Message Authentication Code (aTAG):\n\r  ");
+  printf(" Message Authentication Code (aTAG):\n\r  "); 
   printf("---------------------------------------\n\r");
-
+  
   for(BufferCounter = 0; BufferCounter < 16; BufferCounter++)
   {
     printf("[0x%02X]", aTAG[BufferCounter]);
@@ -450,14 +450,14 @@ static void Display_TAG(uint8_t* aTAG)
 static void PressToContinue(void)
 {
   uint8_t data = 0;
-
-  printf("\n\r Press any key to continue...\n\r ");
-
+  
+  printf("\n\r Press any key to continue...\n\r ");  
+  
   while (data == 0)
   {
     /* Read a character from the EVAL_COM1 */
     HAL_UART_Receive(&UartHandle, (uint8_t *)&data, 1, TIMEOUT_VALUE);
-  }
+  }  
 }
 /**
   * @brief  Retargets the C library printf function to the USART.
@@ -468,7 +468,7 @@ PUTCHAR_PROTOTYPE
 {
   /* Place your implementation of fputc here */
   /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
-  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 5);
+  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 5); 
 
   return ch;
 }

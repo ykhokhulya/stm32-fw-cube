@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_OnePulse/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to use a timer instance in one
+  * @brief   This example describes how to use a timer instance in one 
   *          pulse mode through the STM32F4xx TIM LL API.
   *          Peripheral initialization done using LL unitary services functions.
   ******************************************************************************
@@ -80,7 +80,7 @@ int main(void)
 
   /* Initialize button in EXTI mode */
   UserButton_Init();
-
+  
   /* Configure timer instance in one pulse mode: timer counter is started by  */
   /* software.                                                                */
   ConfigureTIMOnePulse_SwTrigger();
@@ -96,7 +96,7 @@ int main(void)
 }
 
 /**
-  * @brief  This function configures TIM3 to generate a positive pulse on OC1
+  * @brief  This function configures TIM3 to generate a positive pulse on OC1 
   *         with a length of 50 us and after a delay of 50 us after enabling
   *         the timer counter.
   * @note   The counter is enabled every time the user presses the user button.
@@ -109,13 +109,13 @@ int main(void)
   * @retval None
   */
 __STATIC_INLINE void ConfigureTIMOnePulse_SwTrigger(void)
-{
+{  
   /*************************/
   /* GPIO AF configuration */
   /*************************/
   /* Enable the peripheral clock of GPIOs */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-
+  
   /* GPIO TIM3_CH1 configuration */
   LL_GPIO_SetPinMode(GPIOA, LL_GPIO_PIN_6, LL_GPIO_MODE_ALTERNATE);
   LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_6, LL_GPIO_PULL_DOWN);
@@ -127,33 +127,33 @@ __STATIC_INLINE void ConfigureTIMOnePulse_SwTrigger(void)
   /***********************************************/
   NVIC_SetPriority(TIM3_IRQn, 0);
   NVIC_EnableIRQ(TIM3_IRQn);
-
+  
   /******************************/
   /* Peripheral clocks enabling */
   /******************************/
   /* Enable the peripheral clock of TIM3 */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
-
+  
   /*********************************/
   /* Output waveform configuration */
   /*********************************/
   /* Select counter mode: counting up */
   LL_TIM_SetCounterMode(TIM3, LL_TIM_COUNTERMODE_UP);
-
+  
   /* Set the one pulse mode:  generate only 1 pulse*/
   LL_TIM_SetOnePulseMode(TIM3, LL_TIM_ONEPULSEMODE_SINGLE);
-
+  
   /* Set the TIM3 prescaler to get counter clock frequency at 10 MHz          */
   /* In this example TIM3 input clock (TIM3CLK) is set to APB1 clock (PCLK2), */
   /* since APB1 pre-scaler is equal to 1.                                     */
   /*    TIM3CLK = PCLK2                                                       */
   /*    PCLK2 = HCLK                                                          */
-  /*    => TIM3CLK = SystemCoreClock (100 MHz)                                */
+  /*    => TIM3CLK = SystemCoreClock (100 MHz)                                */  
   LL_TIM_SetPrescaler(TIM3, __LL_TIM_CALC_PSC(SystemCoreClock, 10000000));
-
+  
   /* Set the capture/compare register to get a pulse delay of 50 us */
   LL_TIM_OC_SetCompareCH1(TIM3, __LL_TIM_CALC_DELAY(SystemCoreClock, LL_TIM_GetPrescaler(TIM3), 50));
-
+  
   /* Set the autoreload register to get a pulse length of 50s */
   LL_TIM_SetAutoReload(TIM3, __LL_TIM_CALC_PULSE(SystemCoreClock, LL_TIM_GetPrescaler(TIM3), 50, 50));
 
@@ -162,31 +162,31 @@ __STATIC_INLINE void ConfigureTIMOnePulse_SwTrigger(void)
 
   /* Configure output channel 1 */
   LL_TIM_OC_ConfigOutput(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_OCPOLARITY_HIGH | LL_TIM_OCIDLESTATE_LOW);
-
+  
   /**************************/
   /* TIM3 interrupts set-up */
   /**************************/
   /* Enable the capture/compare interrupt for channel 1 */
   LL_TIM_EnableIT_CC1(TIM3);
-
+  
   /**************************/
   /* Start pulse generation */
   /**************************/
   /* Enable channel 1 */
   LL_TIM_CC_EnableChannel(TIM3, LL_TIM_CHANNEL_CH1);
-
+  
   /* Enable TIM3 outputs */
   LL_TIM_EnableAllOutputs(TIM3);
-
+  
   /* Enable auto-reload register preload */
   LL_TIM_EnableARRPreload(TIM3);
 
   /* Force update generation */
-  LL_TIM_GenerateEvent_UPDATE(TIM3);
+  LL_TIM_GenerateEvent_UPDATE(TIM3);  
 }
 
 /**
-  * @brief  This function configures TIM2 to generate a positive pulse on OC1
+  * @brief  This function configures TIM2 to generate a positive pulse on OC1 
   *         with a length of 3 s and after a delay of 2 s as soon as a positive
   *         edge is detected on the TI2 input pin.
   * @param  None
@@ -201,7 +201,7 @@ __STATIC_INLINE void ConfigureTIMOnePulse_TI2Trigger(void)
   /******************************/
   /* Enable the peripheral clock of GPIOs */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);;
-
+  
   /* Enable the peripheral clock of TIM2 */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
 
@@ -219,59 +219,59 @@ __STATIC_INLINE void ConfigureTIMOnePulse_TI2Trigger(void)
   LL_GPIO_SetPinPull(GPIOA, LL_GPIO_PIN_1, LL_GPIO_PULL_DOWN);
   LL_GPIO_SetPinSpeed(GPIOA, LL_GPIO_PIN_1, LL_GPIO_SPEED_FREQ_HIGH);
   LL_GPIO_SetAFPin_0_7(GPIOA, LL_GPIO_PIN_1, LL_GPIO_AF_1);
-
+  
   /*******************************/
   /* Input trigger configuration */
   /*******************************/
   /* Map TI2FP2 on TI2 */
   LL_TIM_IC_SetActiveInput(TIM2, LL_TIM_CHANNEL_CH2, LL_TIM_ACTIVEINPUT_DIRECTTI);
-
+  
   /* TI2FP2 must detect a rising edge */
   LL_TIM_IC_SetPolarity(TIM2, LL_TIM_CHANNEL_CH2, LL_TIM_IC_POLARITY_RISING);
-
+  
   /* Configure TI2FP2 as trigger */
   LL_TIM_SetTriggerInput(TIM2, LL_TIM_TS_TI2FP2);
-
+  
   /* Enable the slave mode controller: TI2FP2 is used to start the counter */
   LL_TIM_SetSlaveMode(TIM2, LL_TIM_SLAVEMODE_TRIGGER);
-
+  
   /*********************************/
   /* Output waveform configuration */
   /*********************************/
   /* Select counter mode: counting up */
   LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
-
+  
   /* Set the one pulse mode: generate only 1 pulse */
   LL_TIM_SetOnePulseMode(TIM2, LL_TIM_ONEPULSEMODE_SINGLE);
-
+  
   /* In this example TIM2 input clock (TIM2CLK) is set to APB1 clock (PCLK1), */
   /* since APB1 pre-scaler is equal to 1.                                     */
   /*    TIM2CLK = PCLK1                                                       */
   /*    PCLK1 = HCLK                                                          */
-  /*    => TIM2CLK = SystemCoreClock (100 MHz)                                */
+  /*    => TIM2CLK = SystemCoreClock (100 MHz)                                */  
   TIM2_clk = SystemCoreClock/1;
 
-  /* Set the TIM2 prescaler to get counter clock frequency at 2 kHz */
+  /* Set the TIM2 prescaler to get counter clock frequency at 2 kHz */ 
   LL_TIM_SetPrescaler(TIM2, __LL_TIM_CALC_PSC(TIM2_clk, 2000));
-
+  
   /* Set the capture/compare register to get a pulse delay of 2s (2000000 us)*/
   LL_TIM_OC_SetCompareCH1(TIM2, __LL_TIM_CALC_DELAY(TIM2_clk, LL_TIM_GetPrescaler(TIM2), 2000000));
-
+  
   /* Set the autoreload register to get a pulse length of 3s (3000000 us)*/
   LL_TIM_SetAutoReload(TIM2, __LL_TIM_CALC_PULSE(TIM2_clk, LL_TIM_GetPrescaler(TIM2), 2000000, 3000000));
-
+  
   /* Set output channel 1 in PWM2 mode */
   LL_TIM_OC_SetMode(TIM2,  LL_TIM_CHANNEL_CH1,  LL_TIM_OCMODE_PWM2);
-
+  
   /* Configure output channel 1 configuration */
   LL_TIM_OC_ConfigOutput(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_OCPOLARITY_HIGH | LL_TIM_OCIDLESTATE_LOW);
-
+  
   /**************************/
   /* Start pulse generation */
   /**************************/
   /* Enable channel 1 */
   LL_TIM_CC_EnableChannel(TIM2, LL_TIM_CHANNEL_CH1);
-
+  
   /* Enable auto-reload register preload */
   LL_TIM_EnableARRPreload(TIM2);
 
@@ -308,21 +308,21 @@ __STATIC_INLINE void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
 
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+    
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
+    
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
 }
 
 /**
@@ -386,7 +386,7 @@ void SystemClock_Config(void)
 /******************************************************************************/
 /**
   * @brief  User button interrupt processing
-  * @note   TIM3 counter is enabled every time the user button is presssed.
+  * @note   TIM3 counter is enabled every time the user button is presssed. 
   * @param  None
   * @retval None
   */
@@ -407,15 +407,15 @@ void UserButton_Callback(void)
 void TimerCaptureCompare_Callback(void)
 {
   uint32_t CNT;
-  uint32_t PSC;
-  uint32_t ARR;
-
+  uint32_t PSC; 
+  uint32_t ARR; 
+  
   CNT = LL_TIM_GetCounter(TIM3);
   PSC = LL_TIM_GetPrescaler(TIM3);
   ARR = LL_TIM_GetAutoReload(TIM3);
-
+  
   uwMeasuredDelay = (CNT * 1000000)/(SystemCoreClock/(PSC + 1));
-  uwMeasuredPulseLength = ((ARR - CNT) * 1000000)/(SystemCoreClock/(PSC + 1));
+  uwMeasuredPulseLength = ((ARR - CNT) * 1000000)/(SystemCoreClock/(PSC + 1)); 
 }
 
 

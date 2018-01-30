@@ -82,10 +82,10 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
-       - Systick timer is configured by default as source of time base, but user
-         can eventually implement his proper time base source (a general purpose
-         timer for example or other time source), keeping in mind that Time base
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+       - Systick timer is configured by default as source of time base, but user 
+         can eventually implement his proper time base source (a general purpose 
+         timer for example or other time source), keeping in mind that Time base 
+         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
          handled in milliseconds basis.
        - Set NVIC Group Priority to 4
        - Low Level Initialization: global MSP (MCU Support Package) initialization
@@ -97,18 +97,18 @@ int main(void)
 
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /* Timers configuration ------------------------------------------------------
      1/TIM3 is configured as Master Timer:
          - PWM Mode is used
-         - The TIM3 Update event is used as Trigger Output
+         - The TIM3 Update event is used as Trigger Output  
 
      2/TIM2 is slave for TIM3 and Master for TIM4,
          - PWM Mode is used
-         - The ITR2(TIM3) is used as input trigger
+         - The ITR2(TIM3) is used as input trigger 
          - Gated mode is used, so start and stop of slave counter
            are controlled by the Master trigger output signal(TIM3 update event).
-         - The TIM2 Update event is used as Trigger Output.
+         - The TIM2 Update event is used as Trigger Output. 
 
      3/TIM4 is slave for TIM2,
          - PWM Mode is used
@@ -116,10 +116,10 @@ int main(void)
          - Gated mode is used, so start and stop of slave counter
            are controlled by the Master trigger output signal(TIM2 update event).
 
-     In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1),
-     since APB1 prescaler is different from 1.
-     TIM3CLK = 2 * PCLK1
-     PCLK1 = HCLK / 4
+     In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1), 
+     since APB1 prescaler is different from 1.   
+     TIM3CLK = 2 * PCLK1  
+     PCLK1 = HCLK / 4 
      => TIM3CLK = HCLK / 2 = SystemCoreClock /2
 
     The TIM3 counter clock is equal to SystemCoreClock/2 = 180 MHz/2.
@@ -151,7 +151,7 @@ int main(void)
   TimMasterHandle.Instance = TIM3;
   TimSlave1Handle.Instance = TIM2;
   TimSlave2Handle.Instance = TIM4;
-
+ 
   /*====================== Master configuration : TIM3 =======================*/
   /* Initialize TIM3 peripheral in PWM mode*/
   TimMasterHandle.Init.Period            = 255;
@@ -168,7 +168,7 @@ int main(void)
   /* Configure the PWM_channel_1  */
   sOCConfig.OCMode       = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity   = TIM_OCPOLARITY_HIGH;
-  sOCConfig.Pulse        = 64;
+  sOCConfig.Pulse        = 64;  
   sOCConfig.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
   sOCConfig.OCFastMode   = TIM_OCFAST_DISABLE;
   sOCConfig.OCIdleState  = TIM_OCIDLESTATE_RESET;
@@ -186,8 +186,8 @@ int main(void)
   {
     /* Configuration Error */
     Error_Handler();
-  }
-
+  }     
+  
   /*================== End of Master configuration : TIM3 ====================*/
 
 
@@ -226,7 +226,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure TIM3 as master & use the update event as Trigger Output (TRGO) */
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
   sMasterConfig.MasterSlaveMode     = TIM_MASTERSLAVEMODE_ENABLE;
@@ -234,7 +234,7 @@ int main(void)
   {
     /* Configuration Error */
     Error_Handler();
-  }
+  } 
 
   /*================== End of Slave1 configuration : TIM2 ====================*/
 
@@ -294,7 +294,7 @@ int main(void)
     /* PWM generation Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -318,7 +318,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -346,8 +346,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -361,27 +361,27 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 6;
-
+  
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
-  /* Activate the OverDrive to reach the 180 MHz Frequency */
+  
+  /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
   }
-
+  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {

@@ -1,9 +1,9 @@
 /**
   @page SAI_AudioPlay  Description of the SAI audio play example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    SAI/SAI_AudioPlay/readme.txt
+  * @file    SAI/SAI_AudioPlay/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the SAI audio play example.
   ******************************************************************************
@@ -33,22 +33,21 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example show how to play an audio file using the DMA circular mode and
-how to handle the buffer update.
+Use of the SAI HAL API to play an audio file in DMA circular mode and handle the buffer update.
 
       Plug a headphone to ear the sound  /!\ Take care of yours ears.
       Default volume is 20%.
       The audio file is played in loop
-      @Note: Copy file 'audio.bin' (available in AudioFile) directly in the flash
+      @Note: Copy file 'audio.bin' (available in AudioFile) directly in the flash 
       at @0x08080000 using ST-Link utility
       The sound is output on Audio_out1 connector CN27 of  STM32469I-EVAL.
-
+      
 In case of error, LED3 is on.
 Once started, LED1 is toggling on STM32469I-EVAL.
 
-@note Note the DMA runs in circular buffer mode and never stops. If you break with
+@note Note the DMA runs in circular buffer mode and never stops. If you break with 
       the debugger, the DMA hw will keep running and a noise will be heard.
 
 @note This example does not use BSP_AUDIO so the MspInit is coded in the main.c.
@@ -56,7 +55,7 @@ Once started, LED1 is toggling on STM32469I-EVAL.
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents  
 
   - SAI/SAI_AudioPlay/Src/main.c                  Main program
   - SAI/SAI_AudioPlay/Src/system_stm32f4xx.c      STM32F4xx system source file
@@ -70,19 +69,19 @@ Once started, LED1 is toggling on STM32469I-EVAL.
 
   - This example runs on STM32F469xx/STM32F479xx devices.
 
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
     board and can be easily tailored to any other supported device
-    and development board.
+    and development board.      
 
   - STM32469I-EVAL Set-up :
-    There are no special switches for this example
+    There are no special switches for this example 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the example 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

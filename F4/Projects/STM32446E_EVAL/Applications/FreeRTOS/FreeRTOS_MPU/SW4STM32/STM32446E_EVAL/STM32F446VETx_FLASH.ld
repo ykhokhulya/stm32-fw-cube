@@ -75,7 +75,7 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH_priv
 
-  .privileged_functions :
+  .privileged_functions : 
   {
     . = ALIGN(4);
     *(privileged_functions)
@@ -136,11 +136,11 @@ SECTIONS
     KEEP (*(.fini_array*))
     PROVIDE_HIDDEN (__fini_array_end = .);
   } >FLASH
-
+  
   /* used by the startup to initialize data */
   _sipdata = LOADADDR(.pdata);
 
-  .pdata :
+  .pdata : 
   {
     . = ALIGN(4);
     _spdata = .;
@@ -150,7 +150,7 @@ SECTIONS
     _epdata = .;
   } >RAM_priv AT> FLASH_priv
 
-  .pbss :
+  .pbss : 
   {
     . = ALIGN(4);
     _spbss = .;
@@ -158,13 +158,13 @@ SECTIONS
     *(privileged_data*)
     . = ALIGN(4);
     _epbss = .;
-  } >RAM_priv
+  } >RAM_priv 
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
-  .data :
+  .data : 
   {
     . = ALIGN(4);
     _sdata = .;        /* create a global symbol at data start */
@@ -175,7 +175,7 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
-
+  
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -203,7 +203,7 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-
+  
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

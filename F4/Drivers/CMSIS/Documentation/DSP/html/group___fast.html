@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___fast.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -132,26 +132,26 @@ Real Inverse Fast Fourier Transform</div></div>
 *X[0] - real data
 *X[1] - complex data
 *X[2] - complex data
- ...
+ ... 
 *X[fftLen/2-1] - complex data
 *X[fftLen/2] - real data
 *X[fftLen/2+1] - conjugate of X[fftLen/2-1]
 *X[fftLen/2+2] - conjugate of X[fftLen/2-2]
- ...
+ ... 
 *X[fftLen-1] - conjugate of X[1]
   </pre> Looking at the data, we see that we can uniquely represent the FFT using only <pre>
 *N/2+1 samples:
 *X[0] - real data
 *X[1] - complex data
 *X[2] - complex data
- ...
+ ... 
 *X[fftLen/2-1] - complex data
 *X[fftLen/2] - real data
   </pre> Looking more closely we see that the first and last samples are real valued. They can be packed together and we can thus represent the FFT of an N-point real sequence by N/2 complex values: <pre>
 *X[0],X[N/2] - packed real data: X[0] + jX[N/2]
 *X[1] - complex data
 *X[2] - complex data
- ...
+ ... 
 *X[fftLen/2-1] - complex data
   </pre> The real FFT functions pack the frequency domain data in this fashion. The forward transform outputs the data in this form and the inverse transform expects input data in this form. The function always performs the needed bitreversal so that the input and output data is always in normal order. The functions support lengths of [32, 64, 128, ..., 4096] samples. </dd></dl>
 <dl class="section user"><dt></dt><dd>The forward and inverse real FFT functions apply the standard FFT scaling; no scaling on the forward transform and 1/fftLen scaling on the inverse transform. </dd></dl>
@@ -165,8 +165,8 @@ Real Inverse Fast Fourier Transform</div></div>
 </ul>
 </dd></dl>
 <dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure should be manually initialized as follows: <pre>
-*arm_rfft_instance_q31 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};
-*arm_rfft_instance_q15 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};
+*arm_rfft_instance_q31 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};    
+*arm_rfft_instance_q15 S = {fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft};    
   </pre> where <code>fftLenReal</code> is the length of the real transform; <code>fftLenBy2</code> length of the internal complex transform. <code>ifftFlagR</code> Selects forward (=0) or inverse (=1) transform. <code>bitReverseFlagR</code> Selects bit reversed output (=0) or normal order output (=1). <code>twidCoefRModifier</code> stride modifier for the twiddle factor table. The value is based on the FFT length; <code>pTwiddleAReal</code>points to the A array of twiddle coefficients; <code>pTwiddleBReal</code>points to the B array of twiddle coefficients; <code>pCfft</code> points to the CFFT Instance structure. The CFFT structure must also be initialized. Refer to <a class="el" href="group___complex_f_f_t.html#ga521f670cd9c571bc61aff9bec89f4c26" title="Processing function for the floating-point Radix-4 CFFT/CIFFT.">arm_cfft_radix4_f32()</a> for details regarding static initialization of the complex FFT instance structure. </dd></dl>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -176,7 +176,7 @@ Real Inverse Fast Fourier Transform</div></div>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

@@ -69,9 +69,9 @@ void NMI_Handler(void)
   {
     /* Clear the flag */
     LL_RCC_ClearFlag_HSECSS();
-
+    
     /* Handle the HSE failure directly in main.c */
-    HSEFailureDetection_Callback();
+    HSEFailureDetection_Callback(); 
   }
 }
 
@@ -171,7 +171,7 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * Brief   This function handles RCC interrupt request
+  * Brief   This function handles RCC interrupt request 
   *         and switch the system clock to HSE.
   * Retval  None
   */
@@ -182,7 +182,7 @@ void RCC_IRQHandler(void)
   {
     /* Clear the flag HSE ready */
     LL_RCC_ClearFlag_HSERDY();
-
+    
     /* Switch the system clock to HSE */
     HSEReady_Callback();
   }

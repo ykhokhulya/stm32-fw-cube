@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_DMABurst/Inc/stm32f4xx_it.h
+  * @file    TIM/TIM_DMABurst/Inc/stm32f4xx_it.h  
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
@@ -39,7 +39,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Examples_LL/EXTI/EXTI_ToggleLedOnIT_Init/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to configure the EXTI and use
-  *          GPIOs using the STM32F4xx LL API to toggles the available
+  * @brief   This example describes how to configure the EXTI and use 
+  *          GPIOs using the STM32F4xx LL API to toggles the available 
   *          users Leds on the board when User button is pressed.
   *          Peripheral initialization done using LL initialization function.
   ******************************************************************************
@@ -70,7 +70,7 @@ int main(void)
 
   /* Initialize LED2 */
   LED_Init();
-
+  
   /* Configure the EXTI Line on User Button */
   Configure_EXTI();
 
@@ -94,7 +94,7 @@ void Configure_EXTI()
   USER_BUTTON_GPIO_CLK_ENABLE();
   /* Configure IO */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
-  LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
+  LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO); 
 
   /* -2- Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
@@ -108,9 +108,9 @@ void Configure_EXTI()
 
   /* Initialize EXTI according to parameters defined in initialization structure. */
   LL_EXTI_Init(&exti_initstruct);
-
+  
   /*-4- Configure NVIC for EXTI15_10_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
   NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0);
 }
 
@@ -200,7 +200,7 @@ void SystemClock_Config(void)
   */
 void UserButton_Callback(void)
 {
-  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+  LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
 }
 
 #ifdef  USE_FULL_ASSERT

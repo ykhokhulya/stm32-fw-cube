@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -140,7 +140,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCameraSettings[] =
   { TEXT_CreateIndirect, "-2   -1   0    1    2", ID_TEXT_4, 100, 45, 80, 20,  0,   0x64, 0 }
 };
 
-static const GUI_WIDGET_CREATE_INFO _aDialogFileControl[] =
+static const GUI_WIDGET_CREATE_INFO _aDialogFileControl[] = 
 {
   { WINDOW_CreateIndirect, "",                                    0, 0, 0, 260, 140, FRAMEWIN_CF_MOVEABLE },
   { TEXT_CreateIndirect, "Capture Folder : ", ID_FOLDER_CAPTION,  15, 30, 120, 20, 0, 0x64, 0 },
@@ -184,12 +184,12 @@ K_ModuleItem_Typedef  camera_capture =
 static void _OnPaint_close(BUTTON_Handle hObj)
 {
   int Index;
-
+  
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
-
+  
   if(Index)
   {
     GUI_DrawBitmap(&bmclose_pressed, 0, 0);
@@ -208,12 +208,12 @@ static void _OnPaint_close(BUTTON_Handle hObj)
 static void _OnPaint_capture(BUTTON_Handle hObj)
 {
   int Index;
-
+  
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
-
+  
   if(Index)
   {
     GUI_DrawBitmap(&bmcapturebutton_pressed, 0, 0);
@@ -232,12 +232,12 @@ static void _OnPaint_capture(BUTTON_Handle hObj)
 static void _OnPaint_settings(BUTTON_Handle hObj)
 {
   int Index;
-
+  
   GUI_SetBkColor(FRAMEWIN_GetDefaultClientColor());
   GUI_Clear();
-
+  
   Index = (WIDGET_GetState(hObj) & BUTTON_STATE_PRESSED) ? 1 : 0;
-
+  
   if(Index)
   {
     GUI_DrawBitmap(&bmsettings_button_pressed, 0, 0);
@@ -333,39 +333,39 @@ static void _cbCameraSettings(WM_MESSAGE * pMsg)
 
   switch (pMsg->MsgId)
   {
-  case WM_INIT_DIALOG:
+  case WM_INIT_DIALOG:  
     /* Initialization of 'Brightness' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_0);
     TEXT_SetFont(hItem, GUI_FONT_13B_1);
     TEXT_SetTextAlign(hItem, GUI_TA_RIGHT | GUI_TA_VCENTER);
-
+    
     /* Initialization of 'Contrast' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_1);
     TEXT_SetFont(hItem, GUI_FONT_13B_1);
     TEXT_SetTextAlign(hItem, GUI_TA_RIGHT | GUI_TA_VCENTER);
-
+    
     /* Initialization of '-2   -1   0    1    2' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_3);
     TEXT_SetFont(hItem, GUI_FONT_13_1);
     TEXT_SetTextAlign(hItem, GUI_TA_HCENTER | GUI_TA_VCENTER);
-
+    
     /* Initialization of '-2   -1   0    1    2' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_4);
     TEXT_SetTextAlign(hItem, GUI_TA_HCENTER | GUI_TA_VCENTER);
-
+    
     hItem = WM_GetDialogItem(pMsg->hWin, ID_SLIDER_0);
     SLIDER_SetRange(hItem, 1, 5);
     SLIDER_SetNumTicks(hItem, 5);
-    if(CameraSettings.b.brightness == 0)
+    if(CameraSettings.b.brightness == 0) 
     {
       CameraSettings.b.brightness = 3;
     }
     SLIDER_SetValue(hItem, CameraSettings.b.brightness);
-
+    
     hItem = WM_GetDialogItem(pMsg->hWin, ID_SLIDER_1);
     SLIDER_SetRange(hItem, 1, 5);
     SLIDER_SetNumTicks(hItem, 5);
-    if(CameraSettings.b.contrast == 0)
+    if(CameraSettings.b.contrast == 0) 
     {
       CameraSettings.b.contrast = 3;
     }
@@ -386,8 +386,8 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
   WM_HWIN hItem;
   int     NCode;
   int     Id;
-  int     result;
-
+  int     result;  
+  
   switch (pMsg->MsgId)
   {
   case WM_INIT_DIALOG:
@@ -398,7 +398,7 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
     EDIT_SetText(hItem, (char *)capture_folder);
 
     break;
-
+    
   case WM_NOTIFY_PARENT:
     Id    = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
@@ -412,12 +412,12 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
         pFileInfo->pMask = acMask_folder;
         BSP_SD_Init();
         SD_Configured = 1;
-
+        
         chooser_select_folder = CHOOSEFILE_Create(CAMERA_hWin, 20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Select a folder", 0, pFileInfo);
 
         result = GUI_ExecCreatedDialog(chooser_select_folder);
-        if (result == 0)
-        {
+        if (result == 0) 
+        {  
           if(((pFileInfo->pRoot[0] == '0' ) || (pFileInfo->pRoot[0] == '1' )))
           {
             hItem = WM_GetDialogItem(hDialogFileControl, ID_FOLDER);
@@ -427,7 +427,7 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
             WM_Paint(hDialogFileControl);
             strncpy((char *)(CAMERA_SAVE_PATH),pFileInfo->pRoot , FILEMGR_FULL_PATH_SIZE);
             strncpy((char *)capture_folder,pFileInfo->pRoot , FILEMGR_FULL_PATH_SIZE);
-          }
+          }          
         }
 
         break;
@@ -435,7 +435,7 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
       break;
     }
     break;
-
+    
   default:
     WM_DefaultProc(pMsg);
     break;
@@ -451,45 +451,45 @@ static void _cbSettingsDialog(WM_MESSAGE * pMsg)
 {
   int     Id, NCode;
   WM_HWIN hItem;
-
+  
   switch (pMsg->MsgId)
   {
   case WM_INIT_DIALOG:
-
+    
     /* Settings frame initialization */
     hItem = pMsg->hWin;
     FRAMEWIN_AddCloseButton(hItem, FRAMEWIN_BUTTON_RIGHT, 0);
-
+    
     /* Create and attache the MULTIPAGE dialog windows */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_MULTIPAGE);
-
+    
     hDialogCameraSettings = GUI_CreateDialogBox(_aDialogCameraSettings,
                                                GUI_COUNTOF(_aDialogCameraSettings),
                                                &_cbCameraSettings, WM_UNATTACHED, 0, 0);
     MULTIPAGE_AddPage(hItem, hDialogCameraSettings, "Camera Settings");
-
+    
     hDialogFileControl = GUI_CreateDialogBox(_aDialogFileControl,
                                              GUI_COUNTOF(_aDialogFileControl),
                                              &_cbFileControl, WM_UNATTACHED, 0, 0);
 
     MULTIPAGE_AddPage(hItem, hDialogFileControl, "File Settings");
-
+    
     MULTIPAGE_SelectPage(hItem, 0);
-
+    
     /* 'OK' button initialization */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_BUTTON_OK);
     BUTTON_SetFont(hItem, GUI_FONT_13B_1);
-
+    
     /* 'Cancel' button initialization */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_BUTTON_CANCEL);
     BUTTON_SetFont(hItem, GUI_FONT_13B_1);
-
+    
     break;
-
-  case WM_DELETE:
-    camera_disabled = 0;
+   
+  case WM_DELETE:    
+    camera_disabled = 0;   
     hSettings = 0;
-
+    
     if(SD_Configured == 1)
     {
       BSP_CAMERA_Init(RESOLUTION_R160x120);
@@ -497,29 +497,29 @@ static void _cbSettingsDialog(WM_MESSAGE * pMsg)
       /* Apply new settings*/
       SD_Configured = 0;
     }
-
+    
     /* Delete choosfile window */
     WM_DeleteWindow(chooser_select_folder);
-
+       
     break;
-
+    
   case WM_NOTIFY_PARENT:
     Id = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
-
+           
     switch (Id)
     {
     case ID_BUTTON_OK: /* Notification sent by "OK" button */
       switch (NCode)
       {
       case WM_NOTIFICATION_RELEASED:
-
+        
         /* Save camera settings before delete settings frame */
         hItem = WM_GetDialogItem(hDialogCameraSettings, ID_SLIDER_0);
         CameraSettings.b.brightness = SLIDER_GetValue(hItem);
         hItem = WM_GetDialogItem(hDialogCameraSettings, ID_SLIDER_1);
         CameraSettings.b.contrast = SLIDER_GetValue(hItem);
-
+        
         /* Back to normal mode (no effects) */
         hItem = WM_GetDialogItem(CAMERA_hWin, ID_RADIO);
         RADIO_SetValue(hItem, 0);
@@ -527,7 +527,7 @@ static void _cbSettingsDialog(WM_MESSAGE * pMsg)
         {
           /* Apply new settings*/
           CAMERA_Set_ContrastBrightness(CameraSettings.b.contrast, CameraSettings.b.brightness);
-          BSP_CAMERA_BlackWhiteConfig(CAMERA_BLACK_WHITE_NORMAL);
+          BSP_CAMERA_BlackWhiteConfig(CAMERA_BLACK_WHITE_NORMAL); 
         }
         GUI_EndDialog(pMsg->hWin, 0);
         break;
@@ -554,14 +554,14 @@ static void _cbSettingsDialog(WM_MESSAGE * pMsg)
 static void _cbCameraWindow(WM_MESSAGE * pMsg)
 {
   GUI_RECT r;
-
+  
   switch (pMsg->MsgId)
   {
-
+    
   case WM_CREATE:
-    CAMERA_Init();
+    CAMERA_Init();     
     break;
-
+    
   case WM_PAINT:
     if(IsFrameAvailable() > 0)
     {
@@ -569,17 +569,17 @@ static void _cbCameraWindow(WM_MESSAGE * pMsg)
     }
     else
     {
-      WM_GetInsideRect(&r);
-      GUI_ClearRectEx(&r);
-
+      WM_GetInsideRect(&r); 
+      GUI_ClearRectEx(&r);      
+     
       if(CAMERA_GetState() == CAMERA_ERROR)
       {
-        GUI_DispStringAt("Error while Initializing Camera Interface", 45,  120);
+        GUI_DispStringAt("Error while Initializing Camera Interface", 45,  120); 
         GUI_DispStringAt("Please, check if the camera module is mounted.", 35,  140);
       }
-    }
+    }    
     break;
-
+    
   case WM_POST_PAINT:
     if(IsFrameAvailable() > 0)
     {
@@ -589,7 +589,7 @@ static void _cbCameraWindow(WM_MESSAGE * pMsg)
       }
     }
     break;
-
+    
   default:
     WM_DefaultProc(pMsg);
   }
@@ -600,11 +600,11 @@ static void _cbCameraWindow(WM_MESSAGE * pMsg)
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
   * @retval None
   */
-static void _cbHint(WM_MESSAGE * pMsg)
+static void _cbHint(WM_MESSAGE * pMsg) 
 {
   GUI_RECT Rect;
-
-  switch (pMsg->MsgId)
+  
+  switch (pMsg->MsgId) 
   {
   case WM_PAINT:
     GUI_SetBkColor(GUI_LIGHTBLUE);
@@ -617,10 +617,10 @@ static void _cbHint(WM_MESSAGE * pMsg)
     GUI_SetColor(GUI_DARKGRAY);
     GUI_DrawRectEx(&Rect);
     break;
-
+    
   default:
     WM_DefaultProc(pMsg);
-    break;
+    break;  
   }
 }
 
@@ -635,22 +635,22 @@ static void _cbDialog(WM_MESSAGE * pMsg)
   GUI_RECT r;
   int NCode, Id;
   uint32_t tmp_param = 0;
-
+  
   switch (pMsg->MsgId)
   {
   case WM_INIT_DIALOG:
-
+  
     pFileInfo = (CHOOSEFILE_INFO *)k_malloc(sizeof(CHOOSEFILE_INFO));
     CameraSettings.d32 = k_BkupRestoreParameter(CALIBRATION_CAMERA_SETTING_BKP);
-
+    
     /* Initialization of 'Image' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_IMAGE);
     IMAGE_SetBitmap(hItem, &bmwizard);
-
+    
     /* Initialization of 'Effects' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT);
     TEXT_SetFont(hItem, GUI_FONT_16B_1);
-
+    
     /* Initialization of 'Radio' */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_RADIO);
     RADIO_SetText(hItem, "None", 0);
@@ -660,28 +660,28 @@ static void _cbDialog(WM_MESSAGE * pMsg)
     RADIO_SetText(hItem, "Blue", 4);
     RADIO_SetText(hItem, "Green", 5);
     RADIO_SetText(hItem, "Red", 6);
-
+    
     /* Camera frame initialization */
     hItem = WM_GetClientWindow(pMsg->hWin);
     WM_GetClientRectEx(hItem, &r);
-    hCameraFrame = WM_CreateWindowAsChild(r.x0 + 79,
-                                          r.y0 + 49, r.x1 - 159,
-                                          r.y1 - 93,
-                                          hItem,
-                                          WM_CF_SHOW | WM_CF_LATE_CLIP,
-                                          _cbCameraWindow,
+    hCameraFrame = WM_CreateWindowAsChild(r.x0 + 79, 
+                                          r.y0 + 49, r.x1 - 159, 
+                                          r.y1 - 93, 
+                                          hItem, 
+                                          WM_CF_SHOW | WM_CF_LATE_CLIP, 
+                                          _cbCameraWindow, 
                                           0);
-
+    
     /* Buttons initialization */
     hItem = BUTTON_CreateEx(266, 175, 30, 30, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_CLOSE);
     WM_SetCallback(hItem, _cbButton_close);
-
+    
     hItem = BUTTON_CreateEx(256, 79, 50, 50, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_CAPTURE);
     WM_SetCallback(hItem, _cbButton_capture);
-
+    
     hItem = BUTTON_CreateEx(266, 14, 30, 30, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_SETTINGS);
     WM_SetCallback(hItem, _cbButton_settings);
-
+    
     _Check_DefaultPath (capture_folder);
     FrameAvailable = 0;
     break;
@@ -689,7 +689,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
   case WM_NOTIFY_PARENT:
     Id    = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
-
+    
     if(hSettings == 0)
     {
       switch(Id)
@@ -721,18 +721,18 @@ static void _cbDialog(WM_MESSAGE * pMsg)
           /* Show Hint */
           if(CAMERA_GetState() == CAMERA_OK)
           {
-
+            
             Hint = WM_CreateWindowAsChild(100,
                                           90,
                                           120, 32,
                                           pMsg->hWin,
-                                          WM_CF_SHOW ,
-                                          _cbHint,
+                                          WM_CF_SHOW , 
+                                          _cbHint, 
                                           0);
-
+            
             GUI_Exec();
             if(CAMERA_GetState() == CAMERA_OK)
-            {
+            {             
               CAMERA_SaveToFile(capture_folder);
             }
             WM_DeleteWindow(Hint);
@@ -754,14 +754,14 @@ static void _cbDialog(WM_MESSAGE * pMsg)
     break;
   case WM_DELETE:
     tmp_param = k_BkupRestoreParameter(CALIBRATION_CAMERA_SETTING_BKP);
-
+    
     /* check if new settings have to be saved */
     if(CameraSettings.d32 != tmp_param)
     {
-      k_BkupSaveParameter(CALIBRATION_CAMERA_SETTING_BKP, CameraSettings.d32);
+      k_BkupSaveParameter(CALIBRATION_CAMERA_SETTING_BKP, CameraSettings.d32); 
     }
     break;
-
+    
   default:
     WM_DefaultProc(pMsg);
     break;
@@ -771,7 +771,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 /**
   * @brief  Camera window Startup
   * @param  hWin: pointer to the parent handle.
-  * @param  xpos: X position
+  * @param  xpos: X position 
   * @param  ypos: Y position
   * @retval None
   */
@@ -810,10 +810,10 @@ static uint8_t IsFrameAvailable(void)
 
 /**
 * @}
-*/
+*/ 
 
 /**
 * @}
-*/
+*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,9 +1,9 @@
 /**
   @page RTC_ExitStandbyWithWakeUpTimer RTC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/RTC/RTC_ExitStandbyWithWakeUpTimer/readme.txt
+  * @file    Examples_LL/RTC/RTC_ExitStandbyWithWakeUpTimer/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the RTC example.
   ******************************************************************************
@@ -38,22 +38,22 @@
 This example shows how to configure the RTC in order to wake up from Standby mode
 using RTC Wakeup Timer. Peripheral initialization is done using LL unitary services
 functions for optimization purpose (performance and size).
-
-In this example, after start-up, SYSCLK is configured to the max frequency using
+  
+In this example, after start-up, SYSCLK is configured to the max frequency using 
 the PLL with HSI as clock source.
 
    @note LSI oscillator clock is used as RTC clock source by default.
-      The user can use also LSE as RTC clock source. The user uncomment the adequate
+      The user can use also LSE as RTC clock source. The user uncomment the adequate 
       line on the main.h file.
       @code
-        #define RTC_CLOCK_SOURCE_LSI
+        #define RTC_CLOCK_SOURCE_LSI  
         /* #define RTC_CLOCK_SOURCE_LSE */
       @endcode
       LSI oscillator clock is delivered by a 32 kHz RC.
       LSE (when available on board) is delivered by a 32.768 kHz crystal.
 
 Example execution:
-   - 1st execution of the system, LED2 is quickly blinking (every 200ms).
+   - 1st execution of the system, LED2 is quickly blinking (every 200ms). 
    - Press the user button:
      * RTC wakup timer is configured to 5 seconds
      * System enters in standby mode (LED2 is switched off)
@@ -61,7 +61,7 @@ Example execution:
 
    - LED2 is toggling every 1 second: This indicates that the system generates an error.
 
-@par Directory contents
+@par Directory contents 
 
   - RTC/RTC_ExitStandbyWithWakeUpTimer/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - RTC/RTC_ExitStandbyWithWakeUpTimer/Inc/main.h                  Header for main.c module
@@ -74,12 +74,12 @@ Example execution:
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

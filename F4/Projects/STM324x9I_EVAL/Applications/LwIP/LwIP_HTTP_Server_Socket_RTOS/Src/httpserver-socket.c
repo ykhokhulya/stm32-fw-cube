@@ -2,46 +2,46 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/httpserver-socket.c
   * @author  MCD Application Team
-  * @brief   Basic http server implementation using LwIP socket API
+  * @brief   Basic http server implementation using LwIP socket API   
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */  
 #include "lwip/sys.h"
 #include "lwip/sockets.h"
 #include "lwip/apps/fs.h"
@@ -167,39 +167,39 @@ static const unsigned char PAGE_START[] = {
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief serve tcp connection
-  * @param conn: connection socket
+  * @brief serve tcp connection  
+  * @param conn: connection socket 
   * @retval None
   */
-void http_server_serve(int conn)
+void http_server_serve(int conn) 
 {
   int buflen = 1500;
   int ret;
   struct fs_file file;
   unsigned char recv_buffer[1500];
-
+				
   /* Read in the request */
-  ret = read(conn, recv_buffer, buflen);
+  ret = read(conn, recv_buffer, buflen); 
   if(ret < 0) return;
 
   /* Check if request to get ST.gif */
   if (strncmp((char *)recv_buffer,"GET /STM32F4xx_files/ST.gif",27)==0)
   {
-    fs_open(&file, "/STM32F4xx_files/ST.gif");
+    fs_open(&file, "/STM32F4xx_files/ST.gif"); 
     write(conn, (const unsigned char*)(file.data), (size_t)file.len);
     fs_close(&file);
   }
   /* Check if request to get stm32.jpeg */
   else if (strncmp((char *)recv_buffer,"GET /STM32F4xx_files/stm32.jpg",30)==0)
   {
-    fs_open(&file, "/STM32F4xx_files/stm32.jpg");
+    fs_open(&file, "/STM32F4xx_files/stm32.jpg"); 
     write(conn, (const unsigned char*)(file.data), (size_t)file.len);
     fs_close(&file);
   }
   /* Check if request to get ST logo.jpeg */
   else if (strncmp((char *)recv_buffer,"GET /STM32F4xx_files/logo.jpg", 29) == 0)
   {
-    fs_open(&file, "/STM32F4xx_files/logo.jpg");
+    fs_open(&file, "/STM32F4xx_files/logo.jpg"); 
     write(conn, (const unsigned char*)(file.data), (size_t)file.len);
     fs_close(&file);
   }
@@ -211,7 +211,7 @@ void http_server_serve(int conn)
   else if((strncmp((char *)recv_buffer, "GET /STM32F4xx.html", 19) == 0)||(strncmp((char *)recv_buffer, "GET / ", 6) == 0))
   {
     /* Load STM32F4xx */
-    fs_open(&file, "/STM32F4xx.html");
+    fs_open(&file, "/STM32F4xx.html"); 
     write(conn, (const unsigned char*)(file.data), (size_t)file.len);
     fs_close(&file);
   }
@@ -227,8 +227,8 @@ void http_server_serve(int conn)
 }
 
 /**
-  * @brief  http server thread
-  * @param arg: pointer on argument(not used here)
+  * @brief  http server thread 
+  * @param arg: pointer on argument(not used here) 
   * @retval None
   */
 static void http_server_socket_thread(void *arg)
@@ -237,11 +237,11 @@ static void http_server_socket_thread(void *arg)
   struct sockaddr_in address, remotehost;
 
  /* create a TCP socket */
-  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
   {
     return;
   }
-
+  
   /* bind to port 80 at any interface */
   address.sin_family = AF_INET;
   address.sin_port = htons(80);
@@ -251,13 +251,13 @@ static void http_server_socket_thread(void *arg)
   {
     return;
   }
-
+  
   /* listen for incoming connections (TCP listen backlog = 5) */
   listen(sock, 5);
-
+  
   size = sizeof(remotehost);
-
-  while (1)
+  
+  while (1) 
   {
     newconn = accept(sock, (struct sockaddr *)&remotehost, (socklen_t *)&size);
     http_server_serve(newconn);
@@ -265,7 +265,7 @@ static void http_server_socket_thread(void *arg)
 }
 
 /**
-  * @brief  Initialize the HTTP server (start its thread)
+  * @brief  Initialize the HTTP server (start its thread) 
   * @param  none
   * @retval None
   */
@@ -275,8 +275,8 @@ void http_server_socket_init()
 }
 
 /**
-  * @brief  Create and send a dynamic Web Page. This page contains the list of
-  *         running tasks and the number of page hits.
+  * @brief  Create and send a dynamic Web Page. This page contains the list of 
+  *         running tasks and the number of page hits. 
   * @param  conn connection socket
   * @retval None
   */
@@ -291,13 +291,13 @@ void DynWebPage(int conn)
   sprintf( pagehits, "%d", (int)nPageHits );
   strcat(PAGE_BODY, pagehits);
   strcat((char *) PAGE_BODY, "<pre><br>Name          State  Priority  Stack   Num" );
-  strcat((char *) PAGE_BODY, "<br>---------------------------------------------<br>");
-
+  strcat((char *) PAGE_BODY, "<br>---------------------------------------------<br>"); 
+    
   /* The list of tasks and their status */
   osThreadList((unsigned char *)(PAGE_BODY + strlen(PAGE_BODY)));
-  strcat((char *) PAGE_BODY, "<br><br>---------------------------------------------");
+  strcat((char *) PAGE_BODY, "<br><br>---------------------------------------------"); 
   strcat((char *) PAGE_BODY, "<br>B : Blocked, R : Ready, D : Deleted, S : Suspended<br>");
-
+  
   /* Send the dynamically generated page */
   write(conn, PAGE_START, strlen((char*)PAGE_START));
   write(conn, PAGE_BODY, strlen(PAGE_BODY));

@@ -1,9 +1,9 @@
 /**
   @page Templates_LL Description of the Templates_LL example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Templates_LL/readme.txt
+  * @file    Templates_LL/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the Templates_LL example.
   ******************************************************************************
@@ -57,14 +57,14 @@ To port a LL example to the targeted board:
    Note: Code specific to board is specified between tags:
          /* ==============   BOARD SPECIFIC CONFIGURATION CODE BEGIN    ============== */
          /* ==============   BOARD SPECIFIC CONFIGURATION CODE END      ============== */
-
+         
    - Replace file main.h, with updates:
      - Keep LED and user button definition of the LL template under tags
-
+    
    - Replace file main.c, with updates:
      - Keep clock configuration of the LL template: function "SystemClock_Config()"
      - Depending of LED availability, replace LEDx_PIN by another LEDx (number) available in file main.h
-
+     
    - Replace file stm32f4xx_it.h
    - Replace file stm32f4xx_it.c
 
@@ -72,7 +72,7 @@ To port a LL example to the targeted board:
 
 Reference, Template_LL
 
-@par Directory contents
+@par Directory contents 
 
   - Templates_LL/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - Templates_LL/Inc/main.h                  Header for main.c module
@@ -85,12 +85,12 @@ Reference, Template_LL
 @par Hardware and Software environment
 
   - This template runs on STM32F429xx devices.
-
+    
   - This template has been tested with NUCLEO-F429ZI RevB board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

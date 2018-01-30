@@ -156,7 +156,7 @@ void Configure_DMA(void)
                         LL_DMA_DIRECTION_MEMORY_TO_PERIPH | LL_DMA_PRIORITY_HIGH | LL_DMA_MODE_NORMAL |
                         LL_DMA_PERIPH_NOINCREMENT | LL_DMA_MEMORY_INCREMENT |
                         LL_DMA_PDATAALIGN_BYTE | LL_DMA_MDATAALIGN_BYTE);
-  LL_DMA_ConfigAddresses(DMA2,
+  LL_DMA_ConfigAddresses(DMA2, 
                          LL_DMA_STREAM_5,
                          (uint32_t)aTxBuffer, LL_SPI_DMA_GetRegAddr(SPI1),
                          LL_DMA_GetDataTransferDirection(DMA2, LL_DMA_STREAM_5));
@@ -170,7 +170,7 @@ void Configure_DMA(void)
                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY | LL_DMA_PRIORITY_HIGH | LL_DMA_MODE_NORMAL |
                         LL_DMA_PERIPH_NOINCREMENT | LL_DMA_MEMORY_INCREMENT |
                         LL_DMA_PDATAALIGN_BYTE | LL_DMA_MDATAALIGN_BYTE);
-  LL_DMA_ConfigAddresses(DMA1,
+  LL_DMA_ConfigAddresses(DMA1, 
                          LL_DMA_STREAM_3,
                          LL_SPI_DMA_GetRegAddr(SPI2), (uint32_t)aRxBuffer,
                          LL_DMA_GetDataTransferDirection(DMA1, LL_DMA_STREAM_3));

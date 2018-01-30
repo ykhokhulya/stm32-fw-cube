@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    LwIP/LwIP_IAP/Inc/main.h
   * @author  MCD Application Team
-  * @brief   This file contains all the functions prototypes for the main.c
+  * @brief   This file contains all the functions prototypes for the main.c 
   *          file.
   ******************************************************************************
   * @attention
@@ -37,11 +37,11 @@
 /* IAP options selection ******************************************************/
 #define USE_IAP_TFTP   /* enable IAP using TFTP */
 #define USE_IAP_HTTP   /* enable IAP using HTTP */
-#define USE_LCD        /* enable LCD  */
+#define USE_LCD        /* enable LCD  */  
 #define USE_DHCP       /* enable DHCP, if disabled static address is used */
 
-/* Flash user area definition *************************************************/
-/*
+/* Flash user area definition *************************************************/   
+/* 
    IMPORTANT NOTE:
    ==============
    Be sure that USER_FLASH_FIRST_PAGE_ADDRESS do not overlap with IAP code.
@@ -55,13 +55,13 @@
    */
 #define USER_FLASH_FIRST_PAGE_ADDRESS 0x08020000 /* Only as example see comment */
 #define USER_FLASH_LAST_PAGE_ADDRESS  0x080E0000
-#define USER_FLASH_END_ADDRESS        0x080FFFFF
-
+#define USER_FLASH_END_ADDRESS        0x080FFFFF  
+   
 /* UserID and Password definition *********************************************/
 #define USERID       "user"
 #define PASSWORD     "stm32"
 #define LOGIN_SIZE   (15+ sizeof(USERID) + sizeof(PASSWORD))
-
+ 
 /* Static IP Address definition ***********************************************/
 #define IP_ADDR0   (uint8_t) 192
 #define IP_ADDR1   (uint8_t) 168
@@ -81,7 +81,7 @@
 #define GW_ADDR3   (uint8_t) 1
 
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
+/* Exported functions ------------------------------------------------------- */  
 /* Exported function prototypes ----------------------------------------------*/
 
 #ifdef __cplusplus

@@ -1,42 +1,42 @@
 /**
   ******************************************************************************
-  * @file    Display/LCD_Paint/Src/ts_calibration.c
+  * @file    Display/LCD_Paint/Src/ts_calibration.c 
   * @author  MCD Application Team
   * @brief   This application code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -73,22 +73,22 @@ static void WaitForPressedState(uint8_t Pressed);
   * @retval None
   */
 void Touchscreen_Calibration(void)
-{
+{ 
   uint8_t status = 0;
   uint8_t i = 0;
 
   TouchscreenCalibration_SetHint();
-
+  
   status = BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
-
+  
   if (status != TS_OK)
   {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, (uint8_t*)"ERROR", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, (uint8_t*)"Touchscreen cannot be initialized", CENTER_MODE);
   }
-
+  
   while (1)
   {
     if (status == TS_OK)
@@ -97,21 +97,21 @@ void Touchscreen_Calibration(void)
       aLogY[0] = 15;
       aLogX[1] = BSP_LCD_GetXSize() - 15;
       aLogY[1] = BSP_LCD_GetYSize() - 15;
-
-      for (i = 0; i < 2; i++)
+      
+      for (i = 0; i < 2; i++) 
       {
         GetPhysValues(aLogX[i], aLogY[i], &aPhysX[i], &aPhysY[i]);
       }
-      A1 = (1000 * ( aLogX[1] - aLogX[0]))/ ( aPhysX[1] - aPhysX[0]);
-      B1 = (1000 * aLogX[0]) - A1 * aPhysX[0];
-
-      A2 = (1000 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]);
-      B2 = (1000 * aLogY[0]) - A2 * aPhysY[0];
-
+      A1 = (1000 * ( aLogX[1] - aLogX[0]))/ ( aPhysX[1] - aPhysX[0]); 
+      B1 = (1000 * aLogX[0]) - A1 * aPhysX[0]; 
+      
+      A2 = (1000 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]); 
+      B2 = (1000 * aLogY[0]) - A2 * aPhysY[0]; 
+      
       Calibration_Done = 1;
       return;
     }
-
+   
     HAL_Delay(5);
   }
 }
@@ -123,9 +123,9 @@ void Touchscreen_Calibration(void)
   */
 static void TouchscreenCalibration_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set Touchscreen Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
@@ -145,21 +145,21 @@ static void TouchscreenCalibration_SetHint(void)
   * @param  pPhysY : Physical Y position
   * @retval None
   */
-static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY)
+static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY) 
 {
   /* Draw the ring */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_FillCircle(LogX, LogY, 5);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillCircle(LogX, LogY, 2);
-
+  
   /* Wait until touch is pressed */
   WaitForPressedState(1);
-
+  
   BSP_TS_GetState(&TS_State);
   *pPhysX = TS_State.x;
-  *pPhysY = TS_State.y;
-
+  *pPhysY = TS_State.y; 
+  
   /* Wait until touch is released */
   WaitForPressedState(0);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
@@ -168,27 +168,27 @@ static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t 
 
 /**
   * @brief  wait for touch detected
-  * @param  Pressed: touch pressed.
+  * @param  Pressed: touch pressed. 
   * @retval None
   */
-static void WaitForPressedState(uint8_t Pressed)
+static void WaitForPressedState(uint8_t Pressed) 
 {
   TS_StateTypeDef  State;
-
-  do
+  
+  do 
   {
     BSP_TS_GetState(&State);
     HAL_Delay(10);
-    if (State.TouchDetected == Pressed)
+    if (State.TouchDetected == Pressed) 
     {
       uint16_t TimeStart = HAL_GetTick();
       do {
-        BSP_TS_GetState(&State);
+        BSP_TS_GetState(&State);      
         HAL_Delay(10);
-        if (State.TouchDetected != Pressed)
+        if (State.TouchDetected != Pressed) 
         {
           break;
-        } else if ((HAL_GetTick() - 100) > TimeStart)
+        } else if ((HAL_GetTick() - 100) > TimeStart) 
         {
           return;
         }
@@ -228,10 +228,10 @@ uint8_t IsCalibrationDone(void)
 
 /**
   * @}
-  */
-
+  */ 
+  
 /**
   * @}
   */
-
+    
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

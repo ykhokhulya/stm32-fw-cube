@@ -33,28 +33,28 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "ls016b8uy.h"
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup Components
   * @{
-  */
-
+  */ 
+  
 /** @addtogroup ls016b8uy
-  * @brief     This file provides a set of functions needed to drive the
+  * @brief     This file provides a set of functions needed to drive the 
   *            LS016B8UY LCD.
   * @{
   */
 
 /** @defgroup LS016B8UY_Private_TypesDefinitions
   * @{
-  */
+  */ 
 typedef struct  {
   uint8_t red;
   uint8_t green;
@@ -63,7 +63,7 @@ typedef struct  {
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup LS016B8UY_Private_Defines
   * @{
@@ -71,20 +71,20 @@ typedef struct  {
 
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup LS016B8UY_Private_Macros
   * @{
   */
-
+     
 /**
   * @}
-  */
+  */  
 
 /** @defgroup LS016B8UY_Private_Variables
   * @{
-  */
-LCD_DrvTypeDef   ls016b8uy_drv =
+  */ 
+LCD_DrvTypeDef   ls016b8uy_drv = 
 {
   ls016b8uy_Init,
   ls016b8uy_ReadID,
@@ -99,7 +99,7 @@ LCD_DrvTypeDef   ls016b8uy_drv =
   ls016b8uy_GetLcdPixelWidth,
   ls016b8uy_GetLcdPixelHeight,
   ls016b8uy_DrawBitmap,
-  ls016b8uy_DrawRGBImage,
+  ls016b8uy_DrawRGBImage,  
 };
 
 static uint16_t WindowsXstart = 0;
@@ -108,8 +108,8 @@ static uint16_t WindowsXend = LS016B8UY_LCD_PIXEL_WIDTH-1;
 static uint16_t WindowsYend = LS016B8UY_LCD_PIXEL_HEIGHT-1;
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup LS016B8UY_Private_FunctionPrototypes
   * @{
   */
@@ -118,11 +118,11 @@ static void ls016b8uy_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
 
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup LS016B8UY_Private_Functions
   * @{
-  */
+  */   
 
 /**
   * @brief  Initialize the LS016B8UY LCD Component.
@@ -136,7 +136,7 @@ void ls016b8uy_Init(void)
 
   /* Initialize LS016B8UY low level bus layer ----------------------------------*/
   LCD_IO_Init();
-
+  
   parameter[0] = 0x00;     /* VSYNC output */
   ls016b8uy_WriteReg(LCD_CMD_VSYNC_OUTPUT, parameter, 1);
   parameter[0] = 0x06;     /* 18 bits color mode */
@@ -257,11 +257,11 @@ uint16_t ls016b8uy_GetLcdPixelHeight(void)
 /**
   * @brief  Get the LS016B8UY ID.
   * @param  None
-  * @retval The LS016B8UY ID
+  * @retval The LS016B8UY ID 
   */
 uint16_t ls016b8uy_ReadID(void)
 {
-  LCD_IO_Init();
+  LCD_IO_Init(); 
   /* TODO : LCD read ID command not known for now, so assumption that the connected LCD is LS016B8UY */
   return (LS016B8UY_ID);
 }
@@ -289,7 +289,7 @@ void ls016b8uy_SetCursor(uint16_t Xpos, uint16_t Ypos)
 }
 
 /**
-  * @brief  Write pixel.
+  * @brief  Write pixel.   
   * @param  Xpos: specifies the X position.
   * @param  Ypos: specifies the Y position.
   * @param  RGBCode: the RGB pixel color in RGB565 format
@@ -333,17 +333,17 @@ uint16_t ls016b8uy_ReadPixel(uint16_t Xpos, uint16_t Ypos)
 
   /* Set Cursor */
   ls016b8uy_SetCursor(Xpos, Ypos);
-
+  
   /* Read RGB888 data from LCD RAM */
   rgb888 = ls016b8uy_ReadPixel_rgb888(Xpos, Ypos);
-
+  
   /* Convert RGB888 to RGB565 */
   r = ((rgb888.red & 0xF8) >> 3);    /* Extract the red component 5 most significant bits */
   g = ((rgb888.green & 0xFC) >> 2);  /* Extract the green component 6 most significant bits */
   b = ((rgb888.blue & 0xF8) >> 3);   /* Extract the blue component 5 most significant bits */
 
   rgb565 = ((uint16_t)(r) << 11) + ((uint16_t)(g) << 5) + ((uint16_t)(b) << 0);
-
+  
   return (rgb565);
 }
 
@@ -360,7 +360,7 @@ void ls016b8uy_WriteReg(uint8_t Command, uint8_t *Parameters, uint8_t NbParamete
 
   /* Send command */
   LCD_IO_WriteReg(Command);
-
+  
   /* Send command's parameters if any */
   for (i=0; i<NbParameters; i++)
   {
@@ -380,7 +380,7 @@ uint8_t ls016b8uy_ReadReg(uint8_t Command)
 
   /* Read dummy data */
   LCD_IO_ReadData();
-
+  
   /* Read register value */
   return (LCD_IO_ReadData());
 }
@@ -437,7 +437,7 @@ void ls016b8uy_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, ui
   * @param  RGBCode: Specifies the RGB color in RGB565 format
   * @param  Xpos:     specifies the X position.
   * @param  Ypos:     specifies the Y position.
-  * @param  Length:   specifies the Line length.
+  * @param  Length:   specifies the Line length.  
   * @retval None
   */
 void ls016b8uy_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_t Length)
@@ -445,7 +445,7 @@ void ls016b8uy_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_
   uint16_t counter = 0;
   uint16_t r, g, b;
   uint16_t rgb888_part1, rgb888_part2, rgb888_part3;
-
+  
   r = (RGBCode & 0xF800) >> 11;        /* Extract red component from RGB565 pixel data */
   g = (RGBCode & 0x07E0) >> 5;         /* Extract green component from RGB565 pixel data  */
   b = (RGBCode & 0x001F) >> 0;         /* Extract blue component from RGB565 pixel data  */
@@ -455,8 +455,8 @@ void ls016b8uy_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_
   rgb888_part3 = (g << 10) + (b << 3); /* Build pattern third part to write in LCD RAM */
 
   /* Set Cursor */
-  ls016b8uy_SetCursor(Xpos, Ypos);
-
+  ls016b8uy_SetCursor(Xpos, Ypos); 
+  
   /* Prepare to write to LCD RAM */
   ls016b8uy_WriteReg(LCD_CMD_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
@@ -470,15 +470,15 @@ void ls016b8uy_DrawHLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_
     {
       LCD_IO_WriteData(rgb888_part3);
     }
-  }
+  }  
 }
 
 /**
   * @brief  Draw vertical line.
-  * @param  RGBCode: Specifies the RGB color
+  * @param  RGBCode: Specifies the RGB color    
   * @param  Xpos:     specifies the X position.
   * @param  Ypos:     specifies the Y position.
-  * @param  Length:   specifies the Line length.
+  * @param  Length:   specifies the Line length.  
   * @retval None
   */
 void ls016b8uy_DrawVLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_t Length)
@@ -487,7 +487,7 @@ void ls016b8uy_DrawVLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_
 
   /* Set Cursor */
   ls016b8uy_SetCursor(Xpos, Ypos);
-
+  
   /* Prepare to write to LCD RAM */
   ls016b8uy_WriteReg(LCD_CMD_WRITE_RAM, (uint8_t*)NULL, 0);   /* RAM write data command */
 
@@ -502,7 +502,7 @@ void ls016b8uy_DrawVLine(uint16_t RGBCode, uint16_t Xpos, uint16_t Ypos, uint16_
   * @brief  Displays a bitmap picture.
   * @param  BmpAddress: Bmp picture address.
   * @param  Xpos: Bmp X position in the LCD
-  * @param  Ypos: Bmp Y position in the LCD
+  * @param  Ypos: Bmp Y position in the LCD    
   * @retval None
   */
 void ls016b8uy_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
@@ -654,18 +654,18 @@ static void ls016b8uy_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
 
 /**
   * @}
-  */
+  */ 
+
+/**
+  * @}
+  */ 
+  
+/**
+  * @}
+  */ 
 
 /**
   * @}
   */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

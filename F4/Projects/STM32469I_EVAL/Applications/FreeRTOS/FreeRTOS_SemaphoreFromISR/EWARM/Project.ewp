@@ -972,7 +972,7 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_tim.c</name>
-      </file>
+      </file> 
     </group>
   </group>
   <group>

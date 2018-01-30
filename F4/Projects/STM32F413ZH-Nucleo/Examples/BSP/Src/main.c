@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    main.c
+  * @file    main.c 
   * @author  MCD Application Team
   * @brief   This example code shows how to use the STM324xx_Nucleo BSP Drivers
   ******************************************************************************
@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -42,9 +42,9 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
-typedef enum
+typedef enum 
 {
-  SHIELD_NOT_DETECTED = 0,
+  SHIELD_NOT_DETECTED = 0, 
   SHIELD_DETECTED
 }ShieldStatus;
 
@@ -67,7 +67,7 @@ static void Display_DemoDescription(void);
 BSP_DemoTypedef  BSP_examples[]=
 {
   {Joystick_demo, "JOYSTICK", 0},
-  {LCD_demo, "LCD", 0},
+  {LCD_demo, "LCD", 0}, 
   {SD_demo, "mSD", 0},
 };
 
@@ -87,17 +87,17 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
+  
   /* Retrieve System Core Clock */
   SystemCoreClock = HAL_RCC_GetHCLKFreq();
-
+  
   /* Initialize User_Button on STM32F4xx-Nucleo ------------------*/
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI); 
 
   /* Check the availability of adafruit 1.8" TFT shield on top of STM32NUCLEO
      board. This is done by reading the state of IO PC.01 pin (mapped to JoyStick
      available on adafruit 1.8" TFT shield). If the state of PC.01 is high then
-     the adafruit 1.8" TFT shield is available. */
+     the adafruit 1.8" TFT shield is available. */  
   if(TFT_ShieldDetect() == SHIELD_DETECTED)
   {
 #ifdef ADAFRUIT_TFT_JOY_SD_ID802
@@ -117,9 +117,9 @@ int main(void)
       {
         HAL_Delay(10);
         while (BSP_PB_GetState(BUTTON_USER) != RESET);
-
+      
         BSP_examples[DemoIndex++].DemoFunc();
-
+      
         if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
         {
           DemoIndex = 0;
@@ -128,7 +128,7 @@ int main(void)
       }
     }
 #endif /* ADAFRUIT_TFT_JOY_SD_ID802 */
-  }
+  }  
   else /* there is no AdaFruit shield 802 connected */
   {
     /* Initialize Led1 on STM32F4xx-Nucleo ------------------*/
@@ -174,7 +174,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -202,8 +202,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -218,19 +218,19 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
+  
   if(ret != HAL_OK)
   {
     Error_Handler();
  }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);
   if(ret != HAL_OK)
   {
@@ -249,32 +249,32 @@ static void SystemClock_Config(void)
 static void Display_DemoDescription(void)
 {
   uint8_t desc[50];
-
+  
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-
-  /* Clear the LCD */
-  BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  
+  /* Clear the LCD */ 
+  BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
+  
   /* Display LCD messages */
   BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32F413ZH BSP", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 25, (uint8_t *)"Drivers examples", CENTER_MODE);
-
+  
   /* Draw Bitmap */
   BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 35, (uint8_t *)stlogo);
-
+  
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 15, (uint8_t *)"Copyright (c) STM 2017", CENTER_MODE);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 15, BSP_LCD_GetXSize(), 40);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 25, (uint8_t *)"Use User Button to start", CENTER_MODE);
   sprintf((char *)desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 40, (uint8_t *)desc, CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 40, (uint8_t *)desc, CENTER_MODE);   
 }
 #endif /* ADAFRUIT_TFT_JOY_SD_ID802 */
 
@@ -298,8 +298,8 @@ uint8_t CheckForUserInput(void)
 
 /**
   * @brief  Check the availability of adafruit 1.8" TFT shield on top of STM32NUCLEO
-  *         board. This is done by reading the state of IO PC.01 pin (mapped to
-  *         JoyStick available on adafruit 1.8" TFT shield). If the state of PC.01
+  *         board. This is done by reading the state of IO PC.01 pin (mapped to 
+  *         JoyStick available on adafruit 1.8" TFT shield). If the state of PC.01 
   *         is high then the adafruit 1.8" TFT shield is available.
   * @param  None
   * @retval SHIELD_DETECTED: 1.8" TFT shield is available
@@ -307,16 +307,16 @@ uint8_t CheckForUserInput(void)
   */
 static ShieldStatus TFT_ShieldDetect(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct;
+  GPIO_InitTypeDef  GPIO_InitStruct; 
 
   /* Enable GPIO clock */
   __HAL_RCC_GPIOC_CLK_ENABLE();
-
+  
   GPIO_InitStruct.Pin = GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
+  
   if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) != 0)
   {
     return SHIELD_DETECTED;
@@ -367,7 +367,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -376,10 +376,10 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-#endif /* USE_FULL_ASSERT */
+#endif /* USE_FULL_ASSERT */ 
 
 /**
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 

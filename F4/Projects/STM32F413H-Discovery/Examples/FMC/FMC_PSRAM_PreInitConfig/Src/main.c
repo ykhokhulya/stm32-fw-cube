@@ -72,11 +72,11 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure LEDs */
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED3);
-
+  
   while(1)
   {
     /* Execute the code from PSRAM memory ------------------------------------ */

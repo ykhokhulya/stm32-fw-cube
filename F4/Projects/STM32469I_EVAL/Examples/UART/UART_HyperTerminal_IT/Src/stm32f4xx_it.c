@@ -154,7 +154,7 @@ void PendSV_Handler(void)
   * @retval None
   */
 void SysTick_Handler(void)
-{
+{ 
   HAL_IncTick();
 }
 
@@ -166,11 +166,11 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles UART interrupt request.
+  * @brief  This function handles UART interrupt request.  
   * @param  None
   * @retval None
-  * @Note   This function is redefined in "main.h" and related to DMA stream
-  *         used for USART data transmission
+  * @Note   This function is redefined in "main.h" and related to DMA stream 
+  *         used for USART data transmission     
   */
 void USARTx_IRQHandler(void)
 {
@@ -188,7 +188,7 @@ void USARTx_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 /**
   * @}
   */

@@ -318,17 +318,17 @@ void    BSP_AUDIO_IN_Error_Callback(void);
 
 /* These function can be modified in case the current settings (e.g. DMA stream)
    need to be changed for specific application needs */
-void  BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params);
+void  BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params);   
 void  BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params);
 void  BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_Synchronization/Src/main.c
+  * @file    TIM/TIM_Synchronization/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example shows how to command 2 Timers as slaves (TIM3 & TIM4)
   *          using a Timer as master (TIM1)
@@ -44,7 +44,7 @@
 
 /** @addtogroup TIM_Synchronization
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -94,12 +94,12 @@ int main(void)
 
   /* Configure LED3 */
   BSP_LED_Init(LED3);
-
+  
   /* Set Timers instance */
   TimMasterHandle.Instance = TIM1;
   TimSlave1Handle.Instance = TIM3;
   TimSlave2Handle.Instance = TIM4;
-
+ 
   /*====================== Master configuration : TIM1 =======================*/
   /* Initialize TIM1 peripheral in PWM mode*/
   TimMasterHandle.Init.Period            = 255;
@@ -111,12 +111,12 @@ int main(void)
   {
     /* Initialization Error */
     Error_Handler();
-  }
-
+  }  
+  
   /* Configure the PWM_channel_1  */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sOCConfig.Pulse = 127;
+  sOCConfig.Pulse = 127;  
   if(HAL_TIM_PWM_ConfigChannel(&TimMasterHandle, &sOCConfig, TIM_CHANNEL_1) != HAL_OK)
   {
     /* Configuration Error */
@@ -131,10 +131,10 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /*================== End of Master configuration : TIM1 ====================*/
 
-
+  
   /*====================== Slave1 configuration : TIM3 =======================*/
   /* Initialize TIM3 peripheral in PWM mode*/
   TimSlave1Handle.Init.Period            = 2;
@@ -147,7 +147,7 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure the PWM_channel_1  */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -156,7 +156,7 @@ int main(void)
   {
     /* Configuration Error */
     Error_Handler();
-  }
+  }  
 
   /* Configure TIM3 in Gated slave mode &
   use the Internal Trigger 0 (ITR0) as trigger source */
@@ -169,8 +169,8 @@ int main(void)
   }
 
   /*================== End of Slave1 configuration : TIM3 ====================*/
-
-
+  
+  
   /*====================== Slave2 configuration : TIM4 =======================*/
   /* Initialize TIM4 peripheral in PWM mode*/
   TimSlave2Handle.Init.Period            = 1;
@@ -183,7 +183,7 @@ int main(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Configure the PWM_channel_1  */
   sOCConfig.OCMode     = TIM_OCMODE_PWM1;
   sOCConfig.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -193,7 +193,7 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /* Configure TIM3 in Gated slave mode &
   use the Internal Trigger 0 (ITR0) as trigger source */
   sSlaveConfig.SlaveMode     = TIM_SLAVEMODE_GATED;
@@ -203,17 +203,17 @@ int main(void)
     /* Configuration Error */
     Error_Handler();
   }
-
+  
   /*================== End of Slave2 configuration : TIM4 ====================*/
-
-
+   
+  
   /* Start Master PWM generation */
   if(HAL_TIM_PWM_Start(&TimMasterHandle, TIM_CHANNEL_1) != HAL_OK)
   {
     /* PWM generation Error */
     Error_Handler();
   }
-
+  
   /* Start Slave1 PWM generation */
   if(HAL_TIM_PWM_Start(&TimSlave1Handle, TIM_CHANNEL_1) != HAL_OK)
   {
@@ -226,7 +226,7 @@ int main(void)
     /* PWM generation Error */
     Error_Handler();
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -249,7 +249,7 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -275,8 +275,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -293,14 +293,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+    
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -313,7 +313,7 @@ static void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

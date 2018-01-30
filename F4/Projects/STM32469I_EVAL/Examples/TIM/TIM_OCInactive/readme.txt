@@ -1,11 +1,11 @@
 /**
   @page TIM_OCInactive TIM_OCInactive example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_OCInactive/readme.txt
+  * @file    TIM/TIM_OCInactive/readme.txt 
   * @author  MCD Application Team
-  * @brief   This example shows how to configure the Timer to generate four
+  * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************
   *
@@ -34,15 +34,15 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-  This example shows how to configure the TIM peripheral in Output Compare Inactive
+  This example shows how to configure the TIM peripheral in Output Compare Inactive 
   mode with the corresponding Interrupt requests for each channel.
 
   The TIM1 frequency is set to SystemCoreClock, and the objective is
   to get TIM1 counter clock at 10 kHz so the Prescaler is computed as following:
      - Prescaler = (TIM1CLK /TIM1 counter clock) - 1
-
+   
   SystemCoreClock is set to 180 MHz for STM32F4xx Devices.
 
   The TIM1 CCR1 register value is equal to 10000:
@@ -61,33 +61,33 @@
   TIM1_CH4 delay = CCR4_Val/TIM1 counter clock = 125 ms
   so the TIM1 Channel 4 generates a signal with a delay equal to 125 ms.
 
-  While the counter is lower than the Output compare registers values, which
-  determines the Output delay, the PB.00, PB.01, PB.03 and PB.05 pin are turned ON.
+  While the counter is lower than the Output compare registers values, which 
+  determines the Output delay, the PB.00, PB.01, PB.03 and PB.05 pin are turned ON. 
 
-  When the counter value reaches the Output compare registers values, the Output
+  When the counter value reaches the Output compare registers values, the Output 
   Compare interrupts are generated and, in the handler routine, these pins are turned OFF.
-
-@note Delay values mentioned above are theoretical (obtained when the system clock frequency
+  
+@note Delay values mentioned above are theoretical (obtained when the system clock frequency 
       is exactly 180 MHz). Since the generated system clock frequency may vary from one board to another observed
       delay might be slightly different.
-
+  
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OCInactive/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_OCInactive/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_OCInactive/Inc/main.h                  Header for main.c module
+  - TIM/TIM_OCInactive/Inc/main.h                  Header for main.c module  
   - TIM/TIM_OCInactive/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_OCInactive/Src/main.c                  Main program
   - TIM/TIM_OCInactive/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -98,9 +98,9 @@
 
   - This example runs on STM32F469xx/STM32F479xx devices.
 
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC
-    board and can be easily tailored to any other supported device
-    and development board.
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
+    board and can be easily tailored to any other supported device 
+    and development board.      
 
   - STM32469I-EVAL Set-up
    Connect the following pins to an oscilloscope to monitor the different waveforms:
@@ -109,7 +109,7 @@
       - PB.03: wave form of (TIM1_CH3) (pin 45 in CN6 connector)
       - PB.05: wave form of (TIM1_CH4) (pin 4 in CN5 connector)
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
@@ -117,24 +117,24 @@ In order to make the program work, you must do the following :
  - Run the example
 
 
-  PB.00
+  PB.00 
               ______________________________________________________
  _____________|                                                     |________________
               <---------------------- 1sec------------------------->
-  PB.01
+  PB.01 
               ____________________________
  _____________|                           |__________________________________________
               <------------500ms---------->
-  PB.03
+  PB.03   
               __________________
  _____________|                 |____________________________________________________
               <----250ms------->
-
-  PB.05
+ 
+  PB.05 
               ____________
  _____________|           |___________________________________________________________
               <--125ms--->
-
+           
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

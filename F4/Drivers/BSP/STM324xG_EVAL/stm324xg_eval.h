@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm324xg_eval.h
   * @author  MCD Application Team
-  * @brief   This file contains definitions for STM324xG_EVAL's LEDs,
+  * @brief   This file contains definitions for STM324xG_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
   * @attention
@@ -32,8 +32,8 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
-
+  */ 
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM324xG_EVAL_H
 #define __STM324xG_EVAL_H
@@ -44,23 +44,23 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
+   
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM324xG_EVAL
   * @{
-  */
-
+  */ 
+      
 /** @addtogroup STM324xG_EVAL_LOW_LEVEL
   * @{
-  */
+  */ 
 
 /** @defgroup STM324xG_EVAL_LOW_LEVEL_Exported_Types STM324xG EVAL LOW LEVEL Exported Types
   * @{
   */
-typedef enum
+typedef enum 
 {
   LED1 = 0,
   LED2 = 1,
@@ -68,8 +68,8 @@ typedef enum
   LED4 = 3
 }Led_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_WAKEUP = 0,
   BUTTON_TAMPER = 1,
   BUTTON_KEY    = 2,
@@ -80,20 +80,20 @@ typedef enum
   BUTTON_SEL    = 7
 }Button_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
 }ButtonMode_TypeDef;
-
-typedef enum
-{
+  
+typedef enum 
+{  
   JOY_MODE_GPIO = 0,
   JOY_MODE_EXTI = 1
 }JOYMode_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{ 
   JOY_NONE  = 0,
   JOY_SEL   = 1,
   JOY_DOWN  = 2,
@@ -102,22 +102,22 @@ typedef enum
   JOY_UP    = 5
 }JOYState_TypeDef;
 
-typedef enum
+typedef enum 
 {
   COM1 = 0,
   COM2 = 1
 }COM_TypeDef;
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324xG_EVAL_LOW_LEVEL_Exported_Constants STM324xG EVAL LOW LEVEL Exported Constants
   * @{
-  */
+  */ 
 
-/**
-  * @brief  Define for STM324xG_EVAL board
-  */
+/** 
+  * @brief  Define for STM324xG_EVAL board  
+  */ 
 #if !defined (USE_STM324xG_EVAL)
  #define USE_STM324xG_EVAL
 #endif
@@ -131,17 +131,17 @@ typedef enum
 #define LED1_GPIO_PORT                   GPIOG
 #define LED1_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOG_CLK_ENABLE()
 #define LED1_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOG_CLK_DISABLE()
-
+  
 #define LED2_PIN                         GPIO_PIN_8
 #define LED2_GPIO_PORT                   GPIOG
 #define LED2_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOG_CLK_ENABLE()
 #define LED2_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOG_CLK_DISABLE()
-
+  
 #define LED3_PIN                         GPIO_PIN_9
 #define LED3_GPIO_PORT                   GPIOI
 #define LED3_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOI_CLK_ENABLE()
 #define LED3_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOI_CLK_DISABLE()
-
+  
 #define LED4_PIN                         GPIO_PIN_7
 #define LED4_GPIO_PORT                   GPIOC
 #define LED4_GPIO_CLK                    RCC_AHB1Periph_GPIOC
@@ -160,11 +160,11 @@ typedef enum
                                             }while(0)
 /**
   * @}
-  */
-
+  */ 
+  
 /** @addtogroup STM324xG_EVAL_LOW_LEVEL_BUTTON STM324xG EVAL LOW LEVEL BUTTON
   * @{
-  */
+  */  
 /* Joystick pins are connected to IO Expander (accessible through I2C1 interface) */
 #define BUTTONn                              3
 
@@ -205,7 +205,7 @@ typedef enum
                                                }while(0)
 /**
   * @}
-  */
+  */ 
 
 /** @addtogroup STM324xG_EVAL_LOW_LEVEL_COM STM324xG EVAL LOW LEVEL COM
   * @{
@@ -214,7 +214,7 @@ typedef enum
 
 /**
  * @brief Definition for COM port1, connected to USART3
- */
+ */ 
 #define EVAL_COM1                            USART3
 #define EVAL_COM1_CLK_ENABLE()               __HAL_RCC_USART3_CLK_ENABLE()
 #define EVAL_COM1_CLK_DISABLE()              __HAL_RCC_USART3_CLK_DISABLE()
@@ -249,8 +249,8 @@ typedef enum
                                                        }while(0)
 
 /**
-  * @brief Joystick Pins definition
-  */
+  * @brief Joystick Pins definition 
+  */ 
 #define JOY_SEL_PIN                  IO_PIN_7
 #define JOY_DOWN_PIN                 IO_PIN_6
 #define JOY_LEFT_PIN                 IO_PIN_5
@@ -260,9 +260,9 @@ typedef enum
 #define JOY_ALL_PINS                 (IO_PIN_3 | IO_PIN_4 | IO_PIN_5 | IO_PIN_6 | IO_PIN_7)
 
 /* Exported constantIO -------------------------------------------------------*/
-/* I2C clock speed configuration (in Hz)
-   WARNING:
-   Make sure that this define is not already declared in other files (ie.
+/* I2C clock speed configuration (in Hz) 
+   WARNING: 
+   Make sure that this define is not already declared in other files (ie. 
    stm324xg_eval.h file). It can be used in parallel by other modules. */
 #ifndef BSP_I2C_SPEED
  #define BSP_I2C_SPEED                            100000
@@ -272,12 +272,12 @@ typedef enum
 #define TS_I2C_ADDRESS                        0x82
 #define CAMERA_I2C_ADDRESS                    0x60
 #define AUDIO_I2C_ADDRESS                     0x94
-/* For M24C64 devices, E0, E1 and E2 pins are all used for device
-  address selection (no need for additional address lines). According to the
+/* For M24C64 devices, E0, E1 and E2 pins are all used for device 
+  address selection (no need for additional address lines). According to the 
   Hardware connection on the board (on STM324xG-EVAL board E0 = E1 = E2 = 0) */
 #define EEPROM_I2C_ADDRESS                    0xA0
 
-/* User can use this section to tailor I2Cx/I2Cx instance used and associated
+/* User can use this section to tailor I2Cx/I2Cx instance used and associated 
    resources */
 /* Definition for I2Cx clock resources */
 #define EVAL_I2Cx                            I2C1
@@ -294,22 +294,22 @@ typedef enum
 #define EVAL_I2Cx_SCL_SDA_AF                 GPIO_AF4_I2C1
 #define EVAL_I2Cx_SDA_PIN                    GPIO_PIN_9
 
-/* I2C interrupt requests */
+/* I2C interrupt requests */                  
 #define EVAL_I2Cx_EV_IRQn                    I2C1_EV_IRQn
 #define EVAL_I2Cx_ER_IRQn                    I2C1_ER_IRQn
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM324xG_EVAL_LOW_LEVEL_Exported_Functions STM324xG EVAL LOW LEVEL Exported Functions
   * @{
   */
-uint32_t         BSP_GetVersion(void);
+uint32_t         BSP_GetVersion(void);  
 void             BSP_LED_Init(Led_TypeDef Led);
 void             BSP_LED_On(Led_TypeDef Led);
 void             BSP_LED_Off(Led_TypeDef Led);
@@ -326,11 +326,11 @@ JOYState_TypeDef BSP_JOY_GetState(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
@@ -341,5 +341,5 @@ JOYState_TypeDef BSP_JOY_GetState(void);
 #endif
 
 #endif /* __STM324xG_EVAL_H */
-
+ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    BSP/Inc/stlogo.h
+  * @file    BSP/Inc/stlogo.h 
   * @author  MCD Application Team
-  * @brief   This file contains image used for BSP example.
+  * @brief   This file contains image used for BSP example.   
   ******************************************************************************
   * @attention
   *
@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STLOGO_H

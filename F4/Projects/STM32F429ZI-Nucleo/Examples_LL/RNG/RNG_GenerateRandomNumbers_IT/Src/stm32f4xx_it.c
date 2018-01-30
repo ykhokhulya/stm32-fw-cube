@@ -1,4 +1,4 @@
-/**
+/** 
   ******************************************************************************
   * @file    Examples_LL/RNG/RNG_GenerateRandomNumbers_IT/Src/stm32f4xx_it.c
   * @author  MCD Application Team
@@ -176,7 +176,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Handle user button press in dedicated function */
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 
@@ -196,7 +196,7 @@ void HASH_RNG_IRQHandler(void)
 
   if(LL_RNG_IsActiveFlag_DRDY(RNG))
   {
-    /* DRDY flag will be automatically cleared when reading
+    /* DRDY flag will be automatically cleared when reading 
        newly generated random number in DR register */
 
     /* Call function in charge of handling DR reading */

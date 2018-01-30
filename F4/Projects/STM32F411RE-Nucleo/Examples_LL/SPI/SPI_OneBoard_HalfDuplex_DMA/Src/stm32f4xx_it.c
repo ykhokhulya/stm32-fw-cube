@@ -175,7 +175,7 @@ void USER_BUTTON_IRQHANDLER(void)
     LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
     /* Manage code in main.c */
-    UserButton_Callback();
+    UserButton_Callback(); 
   }
 }
 

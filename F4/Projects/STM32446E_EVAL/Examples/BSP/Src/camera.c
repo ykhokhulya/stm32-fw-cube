@@ -46,13 +46,13 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
 /* Camera Frame Buffer address */
-#define CAMERA_FRAME_BUFFER       SDRAM_WRITE_READ_ADDR
+#define CAMERA_FRAME_BUFFER       SDRAM_WRITE_READ_ADDR  
 
 #define CAMERA_STATUS_TEXT_POS    30       /* Number of lines from bottom of screen */
 
@@ -91,7 +91,7 @@ void Camera_DisplayFrame(void);
   * @retval None
   */
 void Camera_demo (void)
-{
+{ 
   uint8_t status = 0;
   uint16_t  *ptrCamera;
   uint32_t  i;
@@ -150,7 +150,7 @@ void Camera_demo (void)
         BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
         BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- CAMERA_STATUS_TEXT_POS, (uint8_t *)"Wait for camera initialization...", CENTER_MODE);
       }
-
+ 
       BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
       BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
 
@@ -306,10 +306,10 @@ void BSP_CAMERA_FrameEventCallback(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

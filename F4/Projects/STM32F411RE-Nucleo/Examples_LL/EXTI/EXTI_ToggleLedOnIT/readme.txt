@@ -1,9 +1,9 @@
 /**
   @page EXTI_ToggleLedOnIT EXTI example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/EXTI/EXTI_ToggleLedOnIT/readme.txt
+  * @file    Examples_LL/EXTI/EXTI_ToggleLedOnIT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the EXTI example.
   ******************************************************************************
@@ -57,7 +57,7 @@ On NUCLEO-F411RE:
 
 System, GPIO, Output, Alternate function, EXTI, Toggle
 
-@par Directory contents
+@par Directory contents 
 
   - EXTI/EXTI_ToggleLedOnIT/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - EXTI/EXTI_ToggleLedOnIT/Inc/main.h                  Header for main.c module
@@ -69,12 +69,12 @@ System, GPIO, Output, Alternate function, EXTI, Toggle
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

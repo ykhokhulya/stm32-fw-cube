@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Cortex/CORTEXM_MPU/Inc/stm32_mpu.h
+  * @file    Cortex/CORTEXM_MPU/Inc/stm32_mpu.h 
   * @author  MCD Application Team
   * @brief   Header for stm32_mpu.c module
   ******************************************************************************

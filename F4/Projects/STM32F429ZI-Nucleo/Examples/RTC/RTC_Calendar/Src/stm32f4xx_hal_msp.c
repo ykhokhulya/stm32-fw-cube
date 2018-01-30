@@ -56,15 +56,15 @@
   */
 
 /**
-  * @brief RTC MSP Initialization
+  * @brief RTC MSP Initialization 
   *        This function configures the hardware resources used in this example
   * @param hrtc RTC handle pointer
-  *
-  * @note  Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to select
-  *        the RTC clock source; in this case the Backup domain will be reset in
-  *        order to modify the RTC Clock source, as consequence RTC registers (including
+  * 
+  * @note  Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to select 
+  *        the RTC clock source; in this case the Backup domain will be reset in  
+  *        order to modify the RTC Clock source, as consequence RTC registers (including 
   *        the backup registers) and RCC_BDCR register are set to their reset values.
-  *
+  *             
   * @retval None
   */
 void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
@@ -75,31 +75,31 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   /*##-1- Enables the PWR Clock and Enables access to the backup domain ###################################*/
   /* To change the source clock of the RTC feature (LSE, LSI), You have to:
      - Enable the power clock using __HAL_RCC_PWR_CLK_ENABLE()
-     - Enable write access using HAL_PWR_EnableBkUpAccess() function before to
+     - Enable write access using HAL_PWR_EnableBkUpAccess() function before to 
        configure the RTC clock source (to be done once after reset).
-     - Reset the Back up Domain using __HAL_RCC_BACKUPRESET_FORCE() and
+     - Reset the Back up Domain using __HAL_RCC_BACKUPRESET_FORCE() and 
        __HAL_RCC_BACKUPRESET_RELEASE().
      - Configure the needed RTc clock source */
   __HAL_RCC_PWR_CLK_ENABLE();
   HAL_PWR_EnableBkUpAccess();
 
-
+  
   /*##-2- Configure LSE as RTC clock source ###################################*/
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
+  { 
     Error_Handler();
   }
-
+  
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
   PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
   if(HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
+  { 
     Error_Handler();
   }
-
+  
   /*##-3- Enable RTC peripheral Clocks #######################################*/
   /* Enable RTC Clock */
   __HAL_RCC_RTC_ENABLE();
@@ -120,7 +120,7 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
   /*##-2- Disables the PWR Clock and Disables access to the backup domain ###################################*/
   HAL_PWR_DisableBkUpAccess();
   __HAL_RCC_PWR_CLK_DISABLE();
-
+  
 }
 
 /**

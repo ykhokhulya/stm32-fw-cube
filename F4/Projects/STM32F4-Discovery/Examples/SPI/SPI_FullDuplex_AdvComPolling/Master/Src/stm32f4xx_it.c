@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_AdvComPolling/Master/Src/stm32f4xx_it.c
+  * @file    SPI/SPI_FullDuplex_AdvComPolling/Master/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -46,11 +46,11 @@
 /** @addtogroup SPI_FullDuplex_AdvComPolling
   * @{
   */
-
+    
 /** @addtogroup Master
   * @{
   */
-
+  
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -188,7 +188,7 @@ void EXTI0_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

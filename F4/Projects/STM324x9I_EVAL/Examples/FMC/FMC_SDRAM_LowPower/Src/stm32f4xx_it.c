@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    FMC/FMC_SDRAM_LowPower/Src/stm32f4xx_it.c
+  * @file    FMC/FMC_SDRAM_LowPower/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -37,7 +37,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32f4xx_it.h"
+#include "stm32f4xx_it.h"   
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -166,7 +166,7 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
-
+  
   /* Turn off LED4 */
   BSP_LED_Off(LED4);
 }
@@ -182,7 +182,7 @@ void EXTI0_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 /* Exported types ------------------------------------------------------------*/
@@ -43,9 +43,9 @@ typedef struct
                                          This parameter can be a value of @ref DFSDM2_PULSESKIPPER_CH */
 }PulseSkipper_InitTypeDef;
 /* Exported constants --------------------------------------------------------*/
-/**
-  * @brief  Skipper Delay parameters structure definition
-  */
+/** 
+  * @brief  Skipper Delay parameters structure definition  
+  */  
 
 /**
   * @brief DFSDM1_PULSESKIPPER_CH

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/RTC_TimeStamp/Src/main.c
+  * @file    RTC/RTC_TimeStamp/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx RTC HAL API to
   *          ensure Time Stamp configuration.
@@ -58,7 +58,7 @@ RTC_HandleTypeDef RtcHandle;
 /* RTC time stamp variable declaration */
 RTC_DateTypeDef sTimeStampDateget;
 RTC_TimeTypeDef sTimeStampget;
-#if !defined USE_LCD
+#if !defined USE_LCD 
 /* Buffers used for displaying Time and Date */
 uint8_t aShowTime[50] = {0}, aShowTimeStamp[50] = {0};
 uint8_t aShowDate[50] = {0}, aShowDateStamp[50] = {0};
@@ -136,7 +136,7 @@ int main(void)
   if(HAL_RTC_Init(&RtcHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 
   /*##-2-  Configure RTC Timestamp ############################################*/
@@ -225,10 +225,10 @@ static void SystemClock_Config(void)
 
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    while(1) { ; } 
   }
 
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -318,7 +318,7 @@ static void RTC_CalendarShow(void)
 {
   RTC_DateTypeDef sdatestructureget;
   RTC_TimeTypeDef stimestructureget;
-
+  
 #ifdef USE_LCD
   /* Get the RTC current Time */
   HAL_RTC_GetTime(&RtcHandle, &stimestructureget, RTC_FORMAT_BCD);
@@ -340,7 +340,7 @@ static void RTC_CalendarShow(void)
   HAL_RTC_GetTime(&RtcHandle, &stimestructureget, RTC_FORMAT_BIN);
   /* Get the RTC current Date */
   HAL_RTC_GetDate(&RtcHandle, &sdatestructureget, RTC_FORMAT_BIN);
-
+  
   /* Display time Format : hh:mm:ss */
   sprintf((char*)aShowTime,"%.2d:%.2d:%.2d", stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
   /* Display date Format : mm-dd-yy */
@@ -352,8 +352,8 @@ static void RTC_CalendarShow(void)
 /**
   * @brief  Returns the current time and sub second.
   * @param  Secondfraction: the sub second fraction.
-  * @param  RTC_TimeStructure : pointer to a RTC_TimeTypeDef structure that
-  *         contains the current time values.
+  * @param  RTC_TimeStructure : pointer to a RTC_TimeTypeDef structure that 
+  *         contains the current time values. 
   * @retval table : return current time and sub second in a table form
   */
 static Table_TypeDef RTC_Get_Time( RTC_TimeTypeDef* RTC_TimeStructure )
@@ -392,7 +392,7 @@ static void RTC_Time_display(uint8_t Line, uint32_t Color_x, Table_TypeDef table
 
   /* Set the Text Color */
   BSP_LCD_SetTextColor(Color_x);
-
+  
   /* Display Text */
   BSP_LCD_DisplayStringAt(0, Line, ptr, CENTER_MODE);
 }
@@ -427,7 +427,7 @@ static void RTC_TimeStampShow(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

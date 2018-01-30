@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    DMA2D/DMA2D_RegToMemWithLCD/Src/main.c
+  * @file    DMA2D/DMA2D_RegToMemWithLCD/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example provides a description of how to configure DMA2D peripheral
+  * @brief   This example provides a description of how to configure DMA2D peripheral 
   *          in Register to Memory transfer mode and display the result on LCD.
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup DMA2D_RegToMemWithLCD
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -78,7 +78,7 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
@@ -86,21 +86,21 @@ int main(void)
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
+  
   /*##-1- DMA2D configuration ################################################*/
-  DMA2D_Config();
-
+  DMA2D_Config();  
+  
   /*##-2- LCD Configuration ##################################################*/
-  LCD_Config();
-
-  /*##-3- Start DMA2D transfer ###############################################*/
+  LCD_Config();    
+  
+  /*##-3- Start DMA2D transfer ###############################################*/  
   if(HAL_DMA2D_Start_IT(&Dma2dHandle, 0xF0FF, (uint32_t)&aBufferResult, 100, 100) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 
-  /* Infinite loop */
+  /* Infinite loop */  
   while (1)
   {
   }
@@ -112,29 +112,29 @@ int main(void)
   *        1) Configure the transfer mode : register to memory
   *        2) Configure the color to be used to fill user defined area.
   *        3) Configure the output memory address at SRAM memory
-  *        4) Configure the data size : 100x100 (pixels)
+  *        4) Configure the data size : 100x100 (pixels) 
   * @retval
   *  None
   */
 
 static void DMA2D_Config(void)
-{
-
-  /* Register to memory mode with ARGB4444 as colorMode */
+{  
+ 
+  /* Register to memory mode with ARGB4444 as colorMode */  
   Dma2dHandle.Init.Mode         = DMA2D_R2M;
   Dma2dHandle.Init.ColorMode    = DMA2D_ARGB4444;
-  Dma2dHandle.Init.OutputOffset = 0x0;
+  Dma2dHandle.Init.OutputOffset = 0x0;     
 
   Dma2dHandle.XferCpltCallback  = TransferComplete;
   Dma2dHandle.XferErrorCallback = TransferError;
-  Dma2dHandle.Instance          = DMA2D;
-
+  Dma2dHandle.Instance          = DMA2D;    
+  
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&Dma2dHandle) != HAL_OK)
+  if(HAL_DMA2D_Init(&Dma2dHandle) != HAL_OK) 
   {
     /* Initialization Error */
-    Error_Handler();
-  }
+    Error_Handler(); 
+  }  
 }
 
 /**
@@ -143,42 +143,42 @@ static void DMA2D_Config(void)
   *        1) Configure the Pixel Clock for the LCD
   *        2) Configure the LTDC Timing and Polarity
   *        3) Configure the LTDC Layer 2 :
-  *           - ARGB4444 as pixel format
+  *           - ARGB4444 as pixel format  
   *           - The frame buffer is located at internal RAM : The output of DMA2D transfer
-  *           - The Layer size configuration : 100x100
+  *           - The Layer size configuration : 100x100  
   * @retval
   *  None
   */
 static void LCD_Config(void)
 {
-  static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+  static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;  
   static LTDC_HandleTypeDef        hltdc_F;
          LTDC_LayerCfgTypeDef      pLayerCfg;
-
+  
 /* LTDC Initialization -------------------------------------------------------*/
   /* DeInit */
   HAL_LTDC_DeInit(&hltdc_F);
-
+  
   /* Polarity configuration */
   /* Initialize the horizontal synchronization polarity as active low */
   hltdc_F.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-  /* Initialize the vertical synchronization polarity as active low */
-  hltdc_F.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-  /* Initialize the data enable polarity as active low */
-  hltdc_F.Init.DEPolarity = LTDC_DEPOLARITY_AL;
-  /* Initialize the pixel clock polarity as input pixel clock */
+  /* Initialize the vertical synchronization polarity as active low */ 
+  hltdc_F.Init.VSPolarity = LTDC_VSPOLARITY_AL; 
+  /* Initialize the data enable polarity as active low */ 
+  hltdc_F.Init.DEPolarity = LTDC_DEPOLARITY_AL; 
+  /* Initialize the pixel clock polarity as input pixel clock */  
   hltdc_F.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-
+  
   /* Timing configuration */
-  /* Horizontal synchronization width = Hsync - 1 */
+  /* Horizontal synchronization width = Hsync - 1 */  
   hltdc_F.Init.HorizontalSync = 40;
   /* Vertical synchronization height = Vsync - 1 */
   hltdc_F.Init.VerticalSync = 9;
   /* Accumulated horizontal back porch = Hsync + HBP - 1 */
   hltdc_F.Init.AccumulatedHBP = 42;
   /* Accumulated vertical back porch = Vsync + VBP - 1 */
-  hltdc_F.Init.AccumulatedVBP = 11;
-  /* Accumulated active width = Hsync + HBP + Active Width - 1 */
+  hltdc_F.Init.AccumulatedVBP = 11; 
+  /* Accumulated active width = Hsync + HBP + Active Width - 1 */ 
   hltdc_F.Init.AccumulatedActiveH = 283;
   /* Accumulated active height = Vsync + VBP + Active Heigh - 1 */
   hltdc_F.Init.AccumulatedActiveW = 522;
@@ -196,8 +196,8 @@ static void LCD_Config(void)
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
-  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-
+  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
+  
   /* Configure R,G,B component values for LCD background color */
   hltdc_F.Init.Backcolor.Blue = 0;
   hltdc_F.Init.Backcolor.Green = 0;
@@ -206,52 +206,52 @@ static void LCD_Config(void)
   hltdc_F.Instance = LTDC;
 
 /* Layer1 Configuration ------------------------------------------------------*/
-
-  /* Windowing configuration */
+  
+  /* Windowing configuration */ 
   /*
      WindowX0 = Horizontal start
-     WindowX1 = Horizontal stop
-     WindowY0 = Vertical start
-     WindowY1 = Vertical stop
+     WindowX1 = Horizontal stop      
+     WindowY0 = Vertical start 
+     WindowY1 = Vertical stop      
   */
   pLayerCfg.WindowX0 = 0;
   pLayerCfg.WindowX1 = 100;
   pLayerCfg.WindowY0 = 0;
   pLayerCfg.WindowY1 = 100;
-
-  /* Pixel Format configuration*/
+  
+  /* Pixel Format configuration*/ 
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB4444;
-
+  
   /* Start Address configuration : frame buffer is located at FLASH memory */
   pLayerCfg.FBStartAdress = (uint32_t)&aBufferResult;
-
+  
   /* Alpha constant (255 totally opaque) */
   pLayerCfg.Alpha = 255;
-
+  
   /* Default Color configuration (configure A,R,G,B component values) */
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.Backcolor.Blue = 0;
   pLayerCfg.Backcolor.Green = 0;
   pLayerCfg.Backcolor.Red = 0;
-
+  
   /* Configure blending factors */
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-
+  
   /* Configure the number of lines and number of pixels per line */
   pLayerCfg.ImageWidth = 100;
   pLayerCfg.ImageHeight = 100;
 
-  /* Configure the LTDC */
-  HAL_LTDC_Init(&hltdc_F);
+  /* Configure the LTDC */  
+  HAL_LTDC_Init(&hltdc_F); 
 
   /* Configure the Layer */
-  HAL_LTDC_ConfigLayer(&hltdc_F, &pLayerCfg, 1);
-}
+  HAL_LTDC_ConfigLayer(&hltdc_F, &pLayerCfg, 1);  
+}  
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -277,8 +277,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -295,14 +295,14 @@ static void SystemClock_Config(void)
 
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -322,9 +322,9 @@ static void Error_Handler(void)
 
 /**
   * @brief  DMA2D Transfer completed callback
-  * @param  hdma2d: DMA2D handle.
-  * @note   This example shows a simple way to report end of DMA2D transfer, and
-  *         you can add your own implementation.
+  * @param  hdma2d: DMA2D handle. 
+  * @note   This example shows a simple way to report end of DMA2D transfer, and 
+  *         you can add your own implementation. 
   * @retval None
   */
 static void TransferComplete(DMA2D_HandleTypeDef *hdma2d)
@@ -355,7 +355,7 @@ static void TransferError(DMA2D_HandleTypeDef *hdma2d)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

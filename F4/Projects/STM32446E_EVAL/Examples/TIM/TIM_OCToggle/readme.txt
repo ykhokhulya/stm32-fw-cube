@@ -1,11 +1,11 @@
 /**
   @page TIM_OCToggle TIM_OCToggle example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_OCToggle/readme.txt
+  * @file    TIM/TIM_OCToggle/readme.txt 
   * @author  MCD Application Team
-  * @brief   This example shows how to configure the Timer to generate four different
+  * @brief   This example shows how to configure the Timer to generate four different 
   *          signals with four different frequencies.
   ******************************************************************************
   *
@@ -34,15 +34,15 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-  This example shows how to configure the TIM peripheral to generate four different
+  This example shows how to configure the TIM peripheral to generate four different 
   signals with four different frequencies.
 
   The TIM1 frequency is set to SystemCoreClock, and the objective is
   to get TIM1 counter clock at 20 MHz so the Prescaler is computed as following:
      - Prescaler = (TIM1CLK /TIM1 counter clock) - 1
-
+   
   SystemCoreClock is set to 180 MHz for STM32F4xx Devices.
 
   The TIM1 CCR1 register value is equal to 40961:
@@ -66,15 +66,15 @@
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OCToggle/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_OCToggle/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_OCToggle/Inc/main.h                  Header for main.c module
+  - TIM/TIM_OCToggle/Inc/main.h                  Header for main.c module  
   - TIM/TIM_OCToggle/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_OCToggle/Src/main.c                  Main program
   - TIM/TIM_OCToggle/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -84,10 +84,10 @@
 @par Hardware and Software environment
 
   - This example runs on STM32F446xx devices.
-
-  - This example has been tested with STMicroelectronics STM32446E-EVAL
-    board and can be easily tailored to any other supported device
-    and development board.
+    
+  - This example has been tested with STMicroelectronics STM32446E-EVAL 
+    board and can be easily tailored to any other supported device 
+    and development board.      
 
   - STM32446E-EVAL Set-up
    Connect the following pins to an oscilloscope to monitor the different waveforms:
@@ -96,7 +96,7 @@
       - PA.10: (TIM1_CH3) ((pin 13 in CN10 connector))
       - PA.11: (TIM1_CH4) ((pin 17 in CN10 connector))
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

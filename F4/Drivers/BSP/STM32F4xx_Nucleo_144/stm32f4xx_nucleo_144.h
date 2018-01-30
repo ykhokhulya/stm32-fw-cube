@@ -1,11 +1,11 @@
-/**
+/** 
   ******************************************************************************
   * @file    stm32f4xx_nucleo_144.h
   * @author  MCD Application Team
   * @brief   This file contains definitions for:
-  *          - LEDs and push-button available on STM32F4XX-Nucleo-144 Kit
+  *          - LEDs and push-button available on STM32F4XX-Nucleo-144 Kit 
   *            from STMicroelectronics
-  *          - LCD, joystick and microSD available on Adafruit 1.8" TFT LCD
+  *          - LCD, joystick and microSD available on Adafruit 1.8" TFT LCD 
   *            shield (reference ID 802)
   ******************************************************************************
   * @attention
@@ -34,9 +34,9 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
-
+  ******************************************************************************  
+  */ 
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4XX_NUCLEO_144_H
 #define __STM32F4XX_NUCLEO_144_H
@@ -47,13 +47,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
+   
 /* To be defined only if the board is provided with the related shield */
 /* https://www.adafruit.com/products/802 */
 #ifndef ADAFRUIT_TFT_JOY_SD_ID802
 #define ADAFRUIT_TFT_JOY_SD_ID802
 #endif
-
+   
 /** @addtogroup BSP
   * @{
   */
@@ -64,12 +64,12 @@
 
 /** @addtogroup STM32F4XX_NUCLEO_144_LOW_LEVEL
   * @{
-  */
+  */ 
 
 /** @defgroup STM32F4XX_NUCLEO_144_LOW_LEVEL_Exported_Types STM32F4XX NUCLEO 144 LOW LEVEL Exported Types
   * @{
   */
-typedef enum
+typedef enum 
 {
   LED1 = 0,
   LED_GREEN = LED1,
@@ -79,21 +79,21 @@ typedef enum
   LED_RED = LED3
 }Led_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_USER = 0,
   /* Alias */
   BUTTON_KEY = BUTTON_USER
 }Button_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{  
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
 }ButtonMode_TypeDef;
 
-typedef enum
-{
+typedef enum 
+{ 
   JOY_NONE  = 0,
   JOY_SEL   = 1,
   JOY_DOWN  = 2,
@@ -104,15 +104,15 @@ typedef enum
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F4XX_NUCLEO_144_LOW_LEVEL_Exported_Constants STM32F4XX NUCLEO 144 LOW LEVEL Exported Constants
   * @{
-  */
+  */ 
 
-/**
-  * @brief Define for STM32F4XX_NUCLEO_144 board
-  */
+/** 
+  * @brief Define for STM32F4XX_NUCLEO_144 board  
+  */ 
 #if !defined (USE_STM32F4XX_NUCLEO_144)
  #define USE_STM32F4XX_NUCLEO_144
 #endif
@@ -125,30 +125,30 @@ typedef enum
 #define LED1_PIN                                GPIO_PIN_0
 #define LED1_GPIO_PORT                          GPIOB
 #define LED1_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOB_CLK_ENABLE()
-#define LED1_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOB_CLK_DISABLE()
+#define LED1_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOB_CLK_DISABLE()  
 
 #define LED2_PIN                                GPIO_PIN_7
 #define LED2_GPIO_PORT                          GPIOB
 #define LED2_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOB_CLK_ENABLE()
-#define LED2_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOB_CLK_DISABLE()
+#define LED2_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOB_CLK_DISABLE()  
 
 #define LED3_PIN                                GPIO_PIN_14
 #define LED3_GPIO_PORT                          GPIOB
 #define LED3_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOB_CLK_ENABLE()
-#define LED3_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOB_CLK_DISABLE()
+#define LED3_GPIO_CLK_DISABLE()                 __HAL_RCC_GPIOB_CLK_DISABLE()  
 
 #define LEDx_GPIO_CLK_ENABLE(__INDEX__)   do { if((__INDEX__) == 0) {__HAL_RCC_GPIOB_CLK_ENABLE();} else\
-                                                                    {__HAL_RCC_GPIOB_CLK_ENABLE();   }} while(0)
+                                                                    {__HAL_RCC_GPIOB_CLK_ENABLE();   }} while(0)	
 #define LEDx_GPIO_CLK_DISABLE(__INDEX__)  do { if((__INDEX__) == 0) {__HAL_RCC_GPIOB_CLK_DISABLE();} else\
-                                                                    {__HAL_RCC_GPIOB_CLK_DISABLE();   }} while(0)
+                                                                    {__HAL_RCC_GPIOB_CLK_DISABLE();   }} while(0)	
 /**
   * @}
-  */
-
+  */ 
+  
 /** @defgroup STM32F4XX_NUCLEO_144_LOW_LEVEL_BUTTON STM32F4XX NUCLEO 144 LOW LEVEL BUTTON
   * @{
-  */
-#define BUTTONn                                 1
+  */  
+#define BUTTONn                                 1  
 
 /**
  * @brief Key push-button
@@ -161,7 +161,7 @@ typedef enum
 #define USER_BUTTON_EXTI_IRQn                    EXTI15_10_IRQn
 
 #define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)      USER_BUTTON_GPIO_CLK_ENABLE()
-#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)     USER_BUTTON_GPIO_CLK_DISABLE()
+#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)     USER_BUTTON_GPIO_CLK_DISABLE() 
 
 /* Aliases */
 #define KEY_BUTTON_PIN                       USER_BUTTON_PIN
@@ -187,7 +187,7 @@ typedef enum
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F4XX_NUCLEO_144_LOW_LEVEL_BUS STM32F4XX NUCLEO 144 LOW LEVEL BUS
   * @{
@@ -214,7 +214,7 @@ typedef enum
    on accurate values, they just guarantee that the application will not remain
    stuck if the SPI communication is corrupted.
    You may modify these timeout values depending on CPU frequency and application
-   conditions (interrupts routines ...). */
+   conditions (interrupts routines ...). */   
 #define NUCLEO_SPIx_TIMEOUT_MAX                   1000
 
 #define NUCLEO_SPIx_CS_GPIO_PORT                        GPIOD
@@ -238,7 +238,7 @@ typedef enum
 #define LCD_CS_HIGH()     HAL_GPIO_WritePin(LCD_CS_GPIO_PORT, LCD_CS_PIN, GPIO_PIN_SET)
 #define LCD_DC_LOW()      HAL_GPIO_WritePin(LCD_DC_GPIO_PORT, LCD_DC_PIN, GPIO_PIN_RESET)
 #define LCD_DC_HIGH()     HAL_GPIO_WritePin(LCD_DC_GPIO_PORT, LCD_DC_PIN, GPIO_PIN_SET)
-
+     
 /**
   * @brief  SD Control Interface pins (shield D4)
   */
@@ -254,7 +254,7 @@ typedef enum
 #define LCD_CS_GPIO_PORT                           GPIOD
 #define LCD_CS_GPIO_CLK_ENABLE()                 __HAL_RCC_GPIOD_CLK_ENABLE()
 #define LCD_CS_GPIO_CLK_DISABLE()                __HAL_RCC_GPIOD_CLK_DISABLE()
-
+    
 /**
   * @brief  LCD Data/Command Interface pins (shield D8)
   */
@@ -270,9 +270,9 @@ typedef enum
   * @brief  ADCx Interface pins
   *         used to detect motion of Joystick available on Adafruit 1.8" TFT shield
   */
-
-/* For some Nucleo144 boards, Arduino UNO pin7 (A3) is connected to PF3 in others to PC01 */
-#if defined(ADC3)
+  
+/* For some Nucleo144 boards, Arduino UNO pin7 (A3) is connected to PF3 in others to PC01 */ 
+#if defined(ADC3) 
 #define NUCLEO_ADCx                          ADC3
 #define NUCLEO_ADCx_CLK_ENABLE()             __HAL_RCC_ADC3_CLK_ENABLE()
 #define NUCLEO_ADCx_CLK_DISABLE()            __HAL_RCC_ADC3_CLK_DISABLE()
@@ -288,7 +288,7 @@ typedef enum
 #define NUCLEO_ADCx_CLK_ENABLE()             __HAL_RCC_ADC1_CLK_ENABLE()
 #define NUCLEO_ADCx_CLK_DISABLE()            __HAL_RCC_ADC1_CLK_DISABLE()
 #define NUCLEO_ADCx_CHANNEL                  ADC_CHANNEL_11
-
+   
 #define NUCLEO_ADCx_GPIO_PORT                GPIOC
 #define NUCLEO_ADCx_GPIO_PIN                 GPIO_PIN_1
 #define NUCLEO_ADCx_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOC_CLK_ENABLE()
@@ -305,15 +305,15 @@ typedef enum
 
 /** @defgroup STM32F4XX_NUCLEO_144_LOW_LEVEL_Exported_Macros STM32F4XX NUCLEO 144 LOW LEVEL Exported Macros
   * @{
-  */
+  */  
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F4XX_NUCLEO_144_LOW_LEVEL_Exported_Functions STM32F4XX NUCLEO 144 LOW LEVEL Exported Functions
   * @{
   */
-uint32_t         BSP_GetVersion(void);
+uint32_t         BSP_GetVersion(void);  
 void             BSP_LED_Init(Led_TypeDef Led);
 void             BSP_LED_DeInit(Led_TypeDef Led);
 void             BSP_LED_On(Led_TypeDef Led);
@@ -328,14 +328,14 @@ JOYState_TypeDef BSP_JOY_GetState(void);
 void             BSP_JOY_DeInit(void);
 #endif /* HAL_ADC_MODULE_ENABLED */
 
+  
+/**
+  * @}
+  */ 
 
 /**
   * @}
-  */
-
-/**
-  * @}
-  */
+  */ 
 
 /**
   * @}

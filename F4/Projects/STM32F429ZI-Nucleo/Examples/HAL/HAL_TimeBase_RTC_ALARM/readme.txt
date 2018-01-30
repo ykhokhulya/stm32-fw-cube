@@ -1,13 +1,13 @@
 /**
   @page HAL_TimeBase_RTC_Alarm HAL TimeBase RTC Alarm
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt
+  * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the HAL TimeBase RTC Alarm example.
   ******************************************************************************
-  *
+  *                                  
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
   *   1. Redistributions of source code must retain the above copyright notice,
@@ -33,23 +33,23 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example describes how to customize the HAL time base using RTC Alarm instead
+This example describes how to customize the HAL time base using RTC Alarm instead 
 of Systick as main source of time base. The nucleo board user button (connected to EXTI Line13)
-will be used to Suspend or Resume tick increment.
+will be used to Suspend or Resume tick increment. 
 Each time the user button is pressed; EXTI Line13 interrupt is generated and in the ISR
 the uwIncrementState is checked:
-  1- If the uwIncrementState = 0: the tick increment is suspended by calling
+  1- If the uwIncrementState = 0: the tick increment is suspended by calling 
      HAL_SuspendTick() API (RTC alarm interrupt is disabled).
-  2- If the uwIncrementState = 1: the tick increment is Resumed by calling
+  2- If the uwIncrementState = 1: the tick increment is Resumed by calling 
      HAL_ResumeTick() API(RTC alarm interrupt is enabled).
 
-The alarm is configured to assert an interrupt when the RTC reaches 1 ms
+The alarm is configured to assert an interrupt when the RTC reaches 1 ms 
 
 The example brings, in user file, a new implementation of the following HAL weak functions:
 
-HAL_InitTick()
+HAL_InitTick() 
 HAL_SuspendTick()
 HAL_ResumeTick()
 
@@ -85,16 +85,16 @@ In an infinite loop, LED1, LED2 and LED3 toggles spaced out over 500ms delay
 @par Hardware and Software environment
 
   - This example runs on STM32F429xx devices
-
+    
   - This example has been tested with STMicroelectronics NUCLEO-F429ZI Rev.B board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.      
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the example 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

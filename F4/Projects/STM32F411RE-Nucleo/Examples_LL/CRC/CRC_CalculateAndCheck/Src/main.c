@@ -135,7 +135,7 @@ uint32_t Calculate_CRC(uint32_t BufferSize)
     data = (uint32_t)((aDataBuffer[4 * index + 3] << 24) | (aDataBuffer[4 * index + 2] << 16) | (aDataBuffer[4 * index + 1] << 8) | aDataBuffer[4 * index]);
     LL_CRC_FeedData32(CRC, data);
   }
-
+  
 
   /* Return computed CRC value */
   return(LL_CRC_ReadData32(CRC));
@@ -206,7 +206,7 @@ void LED_Blinking(uint32_t Period)
   /* Toggle IO in an infinite loop */
   while (1)
   {
-    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
+    LL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);  
     LL_mDelay(Period);
   }
 }

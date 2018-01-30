@@ -1,9 +1,9 @@
 /**
   @page TIM_TimeBase TIM example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/TIM/TIM_TimeBase/readme.txt
+  * @file    Examples_LL/TIM/TIM_TimeBase/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM_TimeBase example.
   ******************************************************************************
@@ -35,8 +35,8 @@
 
 @par Example Description
 
-This example shows how to configure the TIM peripheral to generate a time base;
-Example using the STM32F4xx TIM LL API,
+This example shows how to configure the TIM peripheral to generate a time base; 
+Example using the STM32F4xx TIM LL API, 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -65,13 +65,13 @@ Update interrupts are enabled. Within the update interrupt service routine pin P
 
 User push-button can be used to modify the time base period from 100 ms
 to 1 s in 100 ms steps. To do so, every time User push-button is pressed, the
-autoreload register (ARR) is updated. In up-counting update event is generated
-at each counter overflow (when the counter reaches the auto-reload value).
+autoreload register (ARR) is updated. In up-counting update event is generated 
+at each counter overflow (when the counter reaches the auto-reload value). 
 
 Finally the time base frequency is calculated as follows:
 time base frequency = TIM2 counter clock /((PSC + 1)*(ARR + 1)*(RCR + 1))
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_TimeBase/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - TIM/TIM_TimeBase/Inc/main.h                  Header for main.c module
@@ -84,12 +84,12 @@ time base frequency = TIM2 counter clock /((PSC + 1)*(ARR + 1)*(RCR + 1))
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

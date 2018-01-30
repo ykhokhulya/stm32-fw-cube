@@ -1,9 +1,9 @@
 /**
   @page I2C_OneBoard_Communication_IT_Init I2C example (IT Mode)
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/I2C/I2C_OneBoard_Communication_IT_Init/readme.txt
+  * @file    Examples_LL/I2C/I2C_OneBoard_Communication_IT_Init/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the I2C_OneBoard_Communication_IT_Init I2C example (IT Mode).
   ******************************************************************************
@@ -44,9 +44,9 @@ to configure GPIO and I2C peripherals using only one NUCLEO-F411RE.
 
 I2C1 Peripheral is configured in Slave mode with EXTI (Clock 400Khz, Own address 7-bit enabled).
 I2C2 Peripheral is configured in Master mode with EXTI (Clock 400Khz).
-GPIO associated to User push-button is linked with EXTI.
+GPIO associated to User push-button is linked with EXTI. 
 
-LED2 blinks quickly to wait for user-button press.
+LED2 blinks quickly to wait for user-button press. 
 
 Example execution:
 Press the User push-button to initiate a Start condition by Master.
@@ -74,7 +74,7 @@ In case of errors, LED2 is blinking.
 
 Connectivity, Communication, I2C, Master, Slave, Transmission, Reception, Fast mode
 
-@par Directory contents
+@par Directory contents 
 
   - I2C/I2C_OneBoard_Communication_IT_Init/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - I2C/I2C_OneBoard_Communication_IT_Init/Inc/main.h                  Header for main.c module
@@ -86,22 +86,22 @@ Connectivity, Communication, I2C, Master, Slave, Transmission, Reception, Fast m
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-F411RE Set-up
     - Connect GPIOs connected to I2C1 SCL/SDA (PB.6 and PB.7)
     to respectively SCL and SDA pins of I2C2 (PB.10 and PB.3).
-      - I2C1_SCL  PB.6 (CN10, pin 17) : connected to I2C2_SCL PB.10 (CN10, pin 25)
+      - I2C1_SCL  PB.6 (CN10, pin 17) : connected to I2C2_SCL PB.10 (CN10, pin 25) 
       - I2C1_SDA  PB.7 (CN7, pin 21) : connected to I2C2_SDA PB.3 (CN10, pin 31)
 
-  - Launch the program. Press User push-button to initiate a read request by Master
+  - Launch the program. Press User push-button to initiate a read request by Master 
       then Slave send a byte.
   - User can easily change the number of data to transfer by modifying
       the initialization of variables ubNbDataToTransmit and ubNbDataToReceive.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

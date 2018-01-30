@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('arm__common__tables_8c.html','');});
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -507,10 +507,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>Example code for the generation of the floating-point sine table: <pre>
-tableSize = 512;
-for(n = 0; n &lt; (tableSize + 1); n++)
-{
-     sinTable[n]=sin(2*pi*n/tableSize);
+tableSize = 512;    
+for(n = 0; n &lt; (tableSize + 1); n++)    
+{    
+     sinTable[n]=sin(2*pi*n/tableSize);    
 }</pre> </dd></dl>
 <dl class="section user"><dt></dt><dd>where pi value is 3.14159265358979 </dd></dl>
 
@@ -528,10 +528,10 @@ for(n = 0; n &lt; (tableSize + 1); n++)
       </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>Table values are in Q15 (1.15 fixed-point format) and generation is done in three steps. First, generate sin values in floating point: <pre>
-tableSize = 512;
-for(n = 0; n &lt; (tableSize + 1); n++)
-{
-     sinTable[n]= sin(2*pi*n/tableSize);
+tableSize = 512;      
+for(n = 0; n &lt; (tableSize + 1); n++)    
+{    
+     sinTable[n]= sin(2*pi*n/tableSize);    
 } </pre> where pi value is 3.14159265358979 </dd></dl>
 <dl class="section user"><dt></dt><dd>Second, convert floating-point to Q15 (Fixed point): (sinTable[i] * pow(2, 15)) </dd></dl>
 <dl class="section user"><dt></dt><dd>Finally, round to the nearest integer value: sinTable[i] += (sinTable[i] &gt; 0 ? 0.5 :-0.5); </dd></dl>
@@ -550,10 +550,10 @@ for(n = 0; n &lt; (tableSize + 1); n++)
       </table>
 </div><div class="memdoc">
 <dl class="section user"><dt></dt><dd>Table values are in Q31 (1.31 fixed-point format) and generation is done in three steps. First, generate sin values in floating point: <pre>
-tableSize = 512;
-for(n = 0; n &lt; (tableSize + 1); n++)
-{
-     sinTable[n]= sin(2*pi*n/tableSize);
+tableSize = 512;      
+for(n = 0; n &lt; (tableSize + 1); n++)    
+{    
+     sinTable[n]= sin(2*pi*n/tableSize);    
 } </pre> where pi value is 3.14159265358979 </dd></dl>
 <dl class="section user"><dt></dt><dd>Second, convert floating-point to Q31 (Fixed point): (sinTable[i] * pow(2, 31)) </dd></dl>
 <dl class="section user"><dt></dt><dd>Finally, round to the nearest integer value: sinTable[i] += (sinTable[i] &gt; 0 ? 0.5 :-0.5); </dd></dl>
@@ -686,7 +686,7 @@ for(n = 0; n &lt; (tableSize + 1); n++)
     <li class="footer">Generated on Tue Oct 27 2015 14:35:31 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

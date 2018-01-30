@@ -51,7 +51,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern TIM_HandleTypeDef    TimHandle;
+extern TIM_HandleTypeDef    TimHandle;  
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 

@@ -67,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)"
-               onblur="searchBox.OnSearchFieldFocus(false)"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <div id="nav-sync" class="sync"></div>
     </div>
   </div>
-  <div id="splitbar" style="-moz-user-select:none;"
+  <div id="splitbar" style="-moz-user-select:none;" 
        class="ui-resizable-handle">
   </div>
 </div>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('group___f_i_r___interpolate.html','');
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0"
+<iframe src="javascript:void(0)" frameborder="0" 
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -144,19 +144,19 @@ Components included in the FIR Interpolator functions</div></div>
 <p> After upsampling by a factor of <code>L</code>, the signal should be filtered by a lowpass filter with a normalized cutoff frequency of <code>1/L</code> in order to eliminate high frequency copies of the spectrum. The user of the function is responsible for providing the filter coefficients.</p>
 <p>The FIR interpolator functions provided in the CMSIS DSP Library combine the upsampler and FIR filter in an efficient manner. The upsampler inserts <code>L-1</code> zeros between each sample. Instead of multiplying by these zero values, the FIR filter is designed to skip them. This leads to an efficient implementation without any wasted effort. The functions operate on blocks of input and output data. <code>pSrc</code> points to an array of <code>blockSize</code> input values and <code>pDst</code> points to an array of <code>blockSize*L</code> output values.</p>
 <p>The library provides separate functions for Q15, Q31, and floating-point data types.</p>
-<dl class="section user"><dt>Algorithm: </dt><dd>The functions use a polyphase filter structure: <pre>
-   y[n] = b[0] * x[n] + b[L]   * x[n-1] + ... + b[L*(phaseLength-1)] * x[n-phaseLength+1]
-   y[n+1] = b[1] * x[n] + b[L+1] * x[n-1] + ... + b[L*(phaseLength-1)+1] * x[n-phaseLength+1]
-   ...
-   y[n+(L-1)] = b[L-1] * x[n] + b[2*L-1] * x[n-1] + ....+ b[L*(phaseLength-1)+(L-1)] * x[n-phaseLength+1]
+<dl class="section user"><dt>Algorithm: </dt><dd>The functions use a polyphase filter structure: <pre>    
+   y[n] = b[0] * x[n] + b[L]   * x[n-1] + ... + b[L*(phaseLength-1)] * x[n-phaseLength+1]    
+   y[n+1] = b[1] * x[n] + b[L+1] * x[n-1] + ... + b[L*(phaseLength-1)+1] * x[n-phaseLength+1]    
+   ...    
+   y[n+(L-1)] = b[L-1] * x[n] + b[2*L-1] * x[n-1] + ....+ b[L*(phaseLength-1)+(L-1)] * x[n-phaseLength+1]    
 </pre> This approach is more efficient than straightforward upsample-then-filter algorithms. With this method the computation is reduced by a factor of <code>1/L</code> when compared to using a standard FIR filter. </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to a coefficient array of size <code>numTaps</code>. <code>numTaps</code> must be a multiple of the interpolation factor <code>L</code> and this is checked by the initialization functions. Internally, the function divides the FIR filter's impulse response into shorter filters of length <code>phaseLength=numTaps/L</code>. Coefficients are stored in time reversed order. </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><pre>    
+   {b[numTaps-1], b[numTaps-2], b[N-2], ..., b[1], b[0]}    
 </pre> </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to a state array of size <code>blockSize + phaseLength - 1</code>. Samples in the state buffer are stored in the order: </dd></dl>
-<dl class="section user"><dt></dt><dd><pre>
-   {x[n-phaseLength+1], x[n-phaseLength], x[n-phaseLength-1], x[n-phaseLength-2]....x[0], x[1], ..., x[blockSize-1]}
+<dl class="section user"><dt></dt><dd><pre>    
+   {x[n-phaseLength+1], x[n-phaseLength], x[n-phaseLength-1], x[n-phaseLength-2]....x[0], x[1], ..., x[blockSize-1]}    
 </pre> The state variables are updated after each block of data is processed, the coefficients are untouched.</dd></dl>
 <dl class="section user"><dt>Instance Structure </dt><dd>The coefficients and state variables for a filter are stored together in an instance data structure. A separate instance structure must be defined for each filter. Coefficient arrays may be shared among several instances while state variable array should be allocated separately. There are separate instance structure declarations for each of the 3 supported data types.</dd></dl>
 <dl class="section user"><dt>Initialization Functions </dt><dd>There is also an associated initialization function for each data type. The initialization function performs the following operations:<ul>
@@ -165,10 +165,10 @@ Components included in the FIR Interpolator functions</div></div>
 <li>Checks to make sure that the length of the filter is a multiple of the interpolation factor. To do this manually without calling the init function, assign the follow subfields of the instance structure: L (interpolation factor), pCoeffs, phaseLength (numTaps / L), pState. Also set all of the values in pState to zero.</li>
 </ul>
 </dd></dl>
-<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. The code below statically initializes each of the 3 different data type filter instance structures <pre>
-<a class="el" href="structarm__fir__interpolate__instance__f32.html" title="Instance structure for the floating-point FIR interpolator.">arm_fir_interpolate_instance_f32</a> S = {L, phaseLength, pCoeffs, pState};
-<a class="el" href="structarm__fir__interpolate__instance__q31.html" title="Instance structure for the Q31 FIR interpolator.">arm_fir_interpolate_instance_q31</a> S = {L, phaseLength, pCoeffs, pState};
-<a class="el" href="structarm__fir__interpolate__instance__q15.html" title="Instance structure for the Q15 FIR interpolator.">arm_fir_interpolate_instance_q15</a> S = {L, phaseLength, pCoeffs, pState};
+<dl class="section user"><dt></dt><dd>Use of the initialization function is optional. However, if the initialization function is used, then the instance structure cannot be placed into a const data section. To place an instance structure into a const data section, the instance structure must be manually initialized. The code below statically initializes each of the 3 different data type filter instance structures <pre>    
+<a class="el" href="structarm__fir__interpolate__instance__f32.html" title="Instance structure for the floating-point FIR interpolator.">arm_fir_interpolate_instance_f32</a> S = {L, phaseLength, pCoeffs, pState};    
+<a class="el" href="structarm__fir__interpolate__instance__q31.html" title="Instance structure for the Q31 FIR interpolator.">arm_fir_interpolate_instance_q31</a> S = {L, phaseLength, pCoeffs, pState};    
+<a class="el" href="structarm__fir__interpolate__instance__q15.html" title="Instance structure for the Q15 FIR interpolator.">arm_fir_interpolate_instance_q15</a> S = {L, phaseLength, pCoeffs, pState};    
 </pre> where <code>L</code> is the interpolation factor; <code>phaseLength=numTaps/L</code> is the length of each of the shorter FIR filters used internally, <code>pCoeffs</code> is the address of the coefficient buffer; <code>pState</code> is the address of the state buffer. Be sure to set the values in the state buffer to zeros when doing static initialization.</dd></dl>
 <dl class="section user"><dt>Fixed-Point Behavior </dt><dd>Care must be taken when using the fixed-point versions of the FIR interpolate filter functions. In particular, the overflow and saturation behavior of the accumulator used in each function must be considered. Refer to the function specific documentation below for usage guidelines. </dd></dl>
 <h2 class="groupheader">Function Documentation</h2>
@@ -282,8 +282,8 @@ Components included in the FIR Interpolator functions</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The function returns ARM_MATH_SUCCESS if initialization was successful or ARM_MATH_LENGTH_ERROR if the filter length <code>numTaps</code> is not a multiple of the interpolation factor <code>L</code>.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[numTaps-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[numTaps-2], ..., b[1], b[0]}    
 </pre> The length of the filter <code>numTaps</code> must be a multiple of the interpolation factor <code>L</code>. </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to the array of state variables. <code>pState</code> is of length <code>(numTaps/L)+blockSize-1</code> words where <code>blockSize</code> is the number of input samples processed by each call to <code><a class="el" href="group___f_i_r___interpolate.html#ga9cae104c5cf60b4e7671c82264a8c12e" title="Processing function for the floating-point FIR interpolator.">arm_fir_interpolate_f32()</a></code>. </dd></dl>
 
@@ -351,8 +351,8 @@ Components included in the FIR Interpolator functions</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The function returns ARM_MATH_SUCCESS if initialization was successful or ARM_MATH_LENGTH_ERROR if the filter length <code>numTaps</code> is not a multiple of the interpolation factor <code>L</code>.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[numTaps-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[numTaps-2], ..., b[1], b[0]}    
 </pre> The length of the filter <code>numTaps</code> must be a multiple of the interpolation factor <code>L</code>. </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to the array of state variables. <code>pState</code> is of length <code>(numTaps/L)+blockSize-1</code> words where <code>blockSize</code> is the number of input samples processed by each call to <code><a class="el" href="group___f_i_r___interpolate.html#ga7962b5f9636e54899f75d0c5936800b5" title="Processing function for the Q15 FIR interpolator.">arm_fir_interpolate_q15()</a></code>. </dd></dl>
 
@@ -420,8 +420,8 @@ Components included in the FIR Interpolator functions</div></div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The function returns ARM_MATH_SUCCESS if initialization was successful or ARM_MATH_LENGTH_ERROR if the filter length <code>numTaps</code> is not a multiple of the interpolation factor <code>L</code>.</dd></dl>
 <p><b>Description:</b> </p>
-<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>
-   {b[numTaps-1], b[numTaps-2], b[numTaps-2], ..., b[1], b[0]}
+<dl class="section user"><dt></dt><dd><code>pCoeffs</code> points to the array of filter coefficients stored in time reversed order: <pre>    
+   {b[numTaps-1], b[numTaps-2], b[numTaps-2], ..., b[1], b[0]}    
 </pre> The length of the filter <code>numTaps</code> must be a multiple of the interpolation factor <code>L</code>. </dd></dl>
 <dl class="section user"><dt></dt><dd><code>pState</code> points to the array of state variables. <code>pState</code> is of length <code>(numTaps/L)+blockSize-1</code> words where <code>blockSize</code> is the number of input samples processed by each call to <code><a class="el" href="group___f_i_r___interpolate.html#gaac9c0f01ed91c53f7083995d7411f5ee" title="Processing function for the Q31 FIR interpolator.">arm_fir_interpolate_q31()</a></code>. </dd></dl>
 
@@ -541,7 +541,7 @@ Components included in the FIR Interpolator functions</div></div>
     <li class="footer">Generated on Tue Oct 27 2015 14:35:33 for CMSIS-DSP by ARM Ltd. All rights reserved.
 	<!--
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 
 	-->
 	</li>
   </ul>

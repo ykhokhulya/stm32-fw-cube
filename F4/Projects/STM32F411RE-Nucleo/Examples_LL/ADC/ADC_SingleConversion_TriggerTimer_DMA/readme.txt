@@ -1,9 +1,9 @@
 /**
   @page ADC_SingleConversion_TriggerTimer_DMA ADC example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/ADC/ADC_SingleConversion_TriggerTimer_DMA/readme.txt
+  * @file    Examples_LL/ADC/ADC_SingleConversion_TriggerTimer_DMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC_SingleConversion_TriggerTimer_DMA example.
   ******************************************************************************
@@ -34,11 +34,11 @@
   @endverbatim
 
 @par Example Description
-This example describes how to use a ADC peripheral to perform
-a single ADC conversion of a channel, at each trigger event from timer;
+This example describes how to use a ADC peripheral to perform 
+a single ADC conversion of a channel, at each trigger event from timer; 
 Conversion data are transferred by DMA into a table,
-indefinitely (circular mode);
-This example is based on the STM32F4xx ADC LL API;
+indefinitely (circular mode); 
+This example is based on the STM32F4xx ADC LL API; 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -77,7 +77,7 @@ Other peripherals used:
   Timer
 
 
-@par Directory contents
+@par Directory contents 
 
   - ADC/ADC_SingleConversion_TriggerTimer_DMA/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - ADC/ADC_SingleConversion_TriggerTimer_DMA/Inc/main.h                  Header for main.c module
@@ -90,12 +90,12 @@ Other peripherals used:
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

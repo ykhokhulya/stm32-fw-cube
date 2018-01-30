@@ -1,9 +1,9 @@
 /**
   @page CRYP_AES_CCM CRYP AES CCM example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CRYP/CRYP_AES_CCM/readme.txt
+  * @file    CRYP/CRYP_AES_CCM/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CRYP AES CCM encryption mode example.
   ******************************************************************************
@@ -33,10 +33,11 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
 This example provides a short description of how to use the CRYPTO peripheral to
 encrypt data using AES with Combined Cipher Machine (CCM).
+
 The AES-CCM mode requires:
 1. Plain text which will be authenticated and encrypted. Its size must be a multiple
    of 16 bytes. So if the original plain text size is not a multiple of 16 bytes
@@ -60,7 +61,7 @@ STM32 Eval board's LEDs can be used to monitor the encryption status:
  - LED1 is ON when encryption is right.
  - LED2 is ON when encryption is wrong.
 
-@note To ensure right functionality of this example, please ensure that used
+@note To ensure right functionality of this example, please ensure that used 
       buffers are 32-bit aligned, once enabling the DMA capability.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -68,16 +69,16 @@ STM32 Eval board's LEDs can be used to monitor the encryption status:
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - CRYP/CRYP_AES_CCM/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CRYP/CRYP_AES_CCM/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CRYP/CRYP_AES_CCM/Inc/main.h                  Main program header file
+  - CRYP/CRYP_AES_CCM/Inc/main.h                  Main program header file  
   - CRYP/CRYP_AES_CCM/Src/stm32f4xx_it.c          Interrupt handlers
   - CRYP/CRYP_AES_CCM/Src/main.c                  Main program
   - CRYP/CRYP_AES_CCM/Src/stm32f4xx_hal_msp.c     HAL MSP module
@@ -87,18 +88,19 @@ STM32 Eval board's LEDs can be used to monitor the encryption status:
 @par Hardware and Software environment
 
   - This example runs on STM32F439xx devices.
+  
+  - This example has been tested with STMicroelectronics STM32439I-EVAL RevB 
+    evaluation boards and can be easily tailored to any other supported device 
+    and development board.    
 
-  - This example has been tested with STMicroelectronics STM32439I-EVAL RevB
-    evaluation boards and can be easily tailored to any other supported device
-    and development board.
 
-
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
+ 

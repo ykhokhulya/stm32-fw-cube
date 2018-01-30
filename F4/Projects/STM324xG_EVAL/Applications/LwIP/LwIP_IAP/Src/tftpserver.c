@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -60,7 +60,7 @@ static __IO uint32_t total_count=0;
 
 /* Private function prototypes -----------------------------------------------*/
 
-static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf *pkt_buf,
+static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf *pkt_buf, 
                         const ip_addr_t *addr, u16_t port);
 
 static int IAP_tftp_process_write(struct udp_pcb *upcb, const ip_addr_t *to, int to_port);
@@ -79,8 +79,8 @@ static err_t IAP_tftp_send_ack_packet(struct udp_pcb *upcb, const ip_addr_t *to,
 
 
 /**
-  * @brief Returns the TFTP opcode
-  * @param buf: pointer on the TFTP packet
+  * @brief Returns the TFTP opcode 
+  * @param buf: pointer on the TFTP packet 
   * @retval None
   */
 static tftp_opcode IAP_tftp_decode_op(char *buf)
@@ -90,7 +90,7 @@ static tftp_opcode IAP_tftp_decode_op(char *buf)
 
 /**
   * @brief  Extracts the block number
-  * @param  buf: pointer on the TFTP packet
+  * @param  buf: pointer on the TFTP packet 
   * @retval block number
   */
 static u16_t IAP_tftp_extract_block(char *buf)
@@ -100,7 +100,7 @@ static u16_t IAP_tftp_extract_block(char *buf)
 }
 
 /**
-  * @brief Sets the TFTP opcode
+  * @brief Sets the TFTP opcode 
   * @param  buffer: pointer on the TFTP packet
   * @param  opcode: TFTP opcode
   * @retval None
@@ -112,8 +112,8 @@ static void IAP_tftp_set_opcode(char *buffer, tftp_opcode opcode)
 }
 
 /**
-  * @brief Sets the TFTP block number
-  * @param packet: pointer on the TFTP packet
+  * @brief Sets the TFTP block number 
+  * @param packet: pointer on the TFTP packet 
   * @param  block: block number
   * @retval None
   */
@@ -124,12 +124,12 @@ static void IAP_tftp_set_block(char* packet, u16_t block)
 }
 
 /**
-  * @brief Sends TFTP ACK packet
+  * @brief Sends TFTP ACK packet  
   * @param upcb: pointer on udp_pcb structure
   * @param to: pointer on the receive IP address structure
   * @param to_port: receive port number
   * @param block: block number
-  * @retval: err_t: error code
+  * @retval: err_t: error code 
   */
 static err_t IAP_tftp_send_ack_packet(struct udp_pcb *upcb, const ip_addr_t *to, int to_port, int block)
 {
@@ -138,7 +138,7 @@ static err_t IAP_tftp_send_ack_packet(struct udp_pcb *upcb, const ip_addr_t *to,
 
   /* create the maximum possible size packet that a TFTP ACK packet can be */
   char packet[TFTP_ACK_PKT_LEN];
-
+	
 	memset(packet, 0, TFTP_ACK_PKT_LEN *sizeof(char));
 
   /* define the first two bytes of the packet */
@@ -209,16 +209,16 @@ static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf
     /* copy packet payload to data_buffer */
     pbuf_copy_partial(pkt_buf, data_buffer, pkt_buf->len - TFTP_DATA_PKT_HDR_LEN,
                       TFTP_DATA_PKT_HDR_LEN);
-
-    total_count += pkt_buf->len - TFTP_DATA_PKT_HDR_LEN;
-
+    
+    total_count += pkt_buf->len - TFTP_DATA_PKT_HDR_LEN; 
+    
     count = (pkt_buf->len - TFTP_DATA_PKT_HDR_LEN)/4;
-    if (((pkt_buf->len - TFTP_DATA_PKT_HDR_LEN)%4)!=0)
+    if (((pkt_buf->len - TFTP_DATA_PKT_HDR_LEN)%4)!=0) 
     count++;
-
+     
     /* Write received data in Flash */
     FLASH_If_Write(&Flash_Write_Address, data_buffer ,count);
-
+       
     /* update our block number to match the block number just received */
     args->block++;
     /* update total bytes  */
@@ -233,9 +233,9 @@ static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf
     /* update our block number to match the block number just received  */
     args->block++;
   }
-
+  
   /* Send the appropriate ACK pkt*/
-  IAP_tftp_send_ack_packet(upcb, addr, port, args->block);
+  IAP_tftp_send_ack_packet(upcb, addr, port, args->block);   
 
   /* If the last write returned less than the maximum TFTP data pkt length,
    * then we've received the whole file and so we can quit (this is how TFTP
@@ -245,7 +245,7 @@ static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf
   {
     IAP_tftp_cleanup_wr(upcb, args);
     pbuf_free(pkt_buf);
-
+    
 #ifdef USE_LCD
     sprintf(message, "%d bytes ",(int)total_count);
     LCD_UsrLog("Tot bytes Received:, %s\n", message);
@@ -292,16 +292,16 @@ static int IAP_tftp_process_write(struct udp_pcb *upcb, const ip_addr_t *to, int
 
   /* set callback for receives on this UDP PCB (Protocol Control Block) */
   udp_recv(upcb, IAP_wrq_recv_callback, args);
-
+  
   total_count =0;
 
   /* init flash */
   FLASH_If_Init();
-
+  
   /* erase user flash area */
   FLASH_If_Erase(USER_FLASH_FIRST_PAGE_ADDRESS);
-
-  Flash_Write_Address = USER_FLASH_FIRST_PAGE_ADDRESS;
+ 
+  Flash_Write_Address = USER_FLASH_FIRST_PAGE_ADDRESS;    
   /* initiate the write transaction by sending the first ack */
   IAP_tftp_send_ack_packet(upcb, to, to_port, args->block);
 #ifdef USE_LCD
@@ -368,7 +368,7 @@ static void IAP_tftp_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf 
   }
   else
   {
-
+    
 #ifdef USE_LCD
     ptr = pkt_buf->payload;
     ptr = ptr +2;
@@ -385,7 +385,7 @@ static void IAP_tftp_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf 
     LCD_UsrLog("%s\n", message);
     LCD_UsrLog("  State: Erasing...\n");
 #endif
-
+     
     /* Start the TFTP write mode*/
     IAP_tftp_process_write(upcb_tftp_data, addr, port);
   }
@@ -394,7 +394,7 @@ static void IAP_tftp_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf 
 
 
 /**
-  * @brief  disconnect and close the connection
+  * @brief  disconnect and close the connection 
   * @param  upcb: pointer on udp_pcb structure
   * @param  args: pointer on tftp_connection arguments
   * @retval None
@@ -406,20 +406,20 @@ static void IAP_tftp_cleanup_wr(struct udp_pcb *upcb, tftp_connection_args *args
 
   /* Disconnect the udp_pcb */
   udp_disconnect(upcb);
-
+  
   /* close the connection */
   udp_remove(upcb);
-
+  
   /* reset the callback function */
   udp_recv(UDPpcb, IAP_tftp_recv_callback, NULL);
-
+ 
 }
 
 /* Global functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Creates and initializes a UDP PCB for TFTP receive operation
-  * @param  None
+  * @brief  Creates and initializes a UDP PCB for TFTP receive operation  
+  * @param  None  
   * @retval None
   */
 void IAP_tftpd_init(void)
@@ -444,7 +444,7 @@ void IAP_tftpd_init(void)
   {
     /* Initialize receive callback function  */
     udp_recv(UDPpcb, IAP_tftp_recv_callback, NULL);
-  }
+  } 
   else
   {
 #ifdef USE_LCD

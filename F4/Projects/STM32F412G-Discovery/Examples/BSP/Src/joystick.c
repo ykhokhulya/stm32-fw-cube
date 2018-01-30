@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/joystick.c
+  * @file    BSP/Src/joystick.c 
   * @author  MCD Application Team
-  * @brief   This example code shows how to use the joystick feature in the
+  * @brief   This example code shows how to use the joystick feature in the 
   *          stm32412g_discovery driver
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -61,22 +61,22 @@ static void Joystick_SetHint(void);
   * @retval None
   */
 void Joystick_demo (void)
-{
+{ 
 
   uint8_t status = 0;
 
   Joystick_SetHint();
-
+  
   status = BSP_JOY_Init(JOY_MODE_GPIO);
-
+  
   if (status != HAL_OK)
   {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, (uint8_t *)"ERROR", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, (uint8_t *)"Joystick cannot be initialized", CENTER_MODE);
   }
-
+  
   while (1)
   {
     if (status == HAL_OK)
@@ -105,7 +105,7 @@ void Joystick_SetCursorPosition(void)
   static uint16_t old_xPtr = 6;
   static uint16_t old_yPtr = HEADBAND_HEIGHT + 6;
 
-
+      
   switch(JoyState)
   {
   case JOY_UP:
@@ -171,31 +171,31 @@ void Joystick_SetCursorPosition(void)
   */
 static void Joystick_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set Joystick Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), HEADBAND_HEIGHT);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAt(0, 1, (uint8_t *)"Joystick", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_DisplayStringAt(0, 20, (uint8_t *)"Use the joystick", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 35, (uint8_t *)"to move the pointer", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 50, (uint8_t *)"inside the rectangle", CENTER_MODE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(5, HEADBAND_HEIGHT + 5, BSP_LCD_GetXSize() - 10, BSP_LCD_GetYSize() - HEADBAND_HEIGHT - 10);
 }
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.h
   * @author  MCD Application Team
-  * @brief   main application header file.
+  * @brief   main application header file. 
   ******************************************************************************
   * @attention
   *
@@ -31,7 +31,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 #ifndef __MAIN_H
 #define __MAIN_H

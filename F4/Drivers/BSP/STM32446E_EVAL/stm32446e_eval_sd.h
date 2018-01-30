@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32446E_EVAL_SD_H
@@ -40,7 +40,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32446e_eval.h"
@@ -48,75 +48,75 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM32446E_EVAL
   * @{
   */
-
+    
 /** @addtogroup STM32446E_EVAL_SD
   * @{
-  */
+  */    
 
 /** @defgroup STM32446E_EVAL_SD_Exported_Types STM32446E EVAL SD Exported Types
   * @{
   */
 
-/**
-  * @brief SD Card information structure
+/** 
+  * @brief SD Card information structure 
   */
 #define BSP_SD_CardInfo HAL_SD_CardInfoTypeDef
 /**
   * @}
   */
-
-/**
-  * @brief  SD status structure definition
-  */
+   
+/** 
+  * @brief  SD status structure definition  
+  */     
 #define   MSD_OK                        ((uint8_t)0x00)
 #define   MSD_ERROR                     ((uint8_t)0x01)
 #define   MSD_ERROR_SD_NOT_PRESENT      ((uint8_t)0x02)
 
-/**
-  * @brief  SD transfer state definition
-  */
+/** 
+  * @brief  SD transfer state definition  
+  */     
 #define   SD_TRANSFER_OK                ((uint8_t)0x00)
 #define   SD_TRANSFER_BUSY              ((uint8_t)0x01)
-
+   
 /** @defgroup STM32446E_EVAL_SD_Exported_Constants STM32446E EVAL SD Exported Constants
   * @{
-  */
+  */ 
 #define SD_PRESENT               ((uint8_t)0x01)
 #define SD_NOT_PRESENT           ((uint8_t)0x00)
 
 #define SD_DATATIMEOUT           ((uint32_t)100000000)
-
+    
 /* DMA definitions for SD DMA transfer */
 #define __DMAx_TxRx_CLK_ENABLE            __HAL_RCC_DMA2_CLK_ENABLE
 #define SD_DMAx_Tx_CHANNEL                DMA_CHANNEL_4
 #define SD_DMAx_Rx_CHANNEL                DMA_CHANNEL_4
-#define SD_DMAx_Tx_STREAM                 DMA2_Stream6
-#define SD_DMAx_Rx_STREAM                 DMA2_Stream3
+#define SD_DMAx_Tx_STREAM                 DMA2_Stream6  
+#define SD_DMAx_Rx_STREAM                 DMA2_Stream3  
 #define SD_DMAx_Tx_IRQn                   DMA2_Stream6_IRQn
 #define SD_DMAx_Rx_IRQn                   DMA2_Stream3_IRQn
 #define BSP_SD_IRQHandler                 SDIO_IRQHandler
-#define BSP_SD_DMA_Tx_IRQHandler          DMA2_Stream6_IRQHandler
-#define BSP_SD_DMA_Rx_IRQHandler          DMA2_Stream3_IRQHandler
+#define BSP_SD_DMA_Tx_IRQHandler          DMA2_Stream6_IRQHandler   
+#define BSP_SD_DMA_Rx_IRQHandler          DMA2_Stream3_IRQHandler 
 #define SD_DetectIRQHandler()             HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8)
 /**
   * @}
   */
-
+  
 /** @defgroup STM32446E_EVAL_SD_Exported_Macro STM32446E EVAL SD Exported Macro
   * @{
-  */
+  */ 
 /**
   * @}
   */
-
+   
 /** @defgroup STM32446E_EVAL_SD_Exported_Functions STM32446E EVAL SD Exported Functions
   * @{
-  */
+  */   
 uint8_t BSP_SD_Init(void);
 uint8_t BSP_SD_DeInit(void);
 uint8_t BSP_SD_ITConfig(void);
@@ -140,19 +140,19 @@ void    BSP_SD_ReadCpltCallback(void);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 #ifdef __cplusplus
 }

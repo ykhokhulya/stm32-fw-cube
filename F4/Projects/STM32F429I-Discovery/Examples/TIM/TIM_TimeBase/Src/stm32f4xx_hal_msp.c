@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    TIM/TIM_TimeBase/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   HAL MSP module.
+  * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
@@ -30,8 +30,8 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************
-  */
+  ******************************************************************************  
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -57,10 +57,10 @@
   */
 
 /**
-  * @brief TIM MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief TIM MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
+  *           - Peripheral's GPIO Configuration  
   * @param htim: TIM handle pointer
   * @retval None
   */
@@ -73,7 +73,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
   /*##-2- Configure the NVIC for TIMx ########################################*/
   /* Set the TIMx priority */
   HAL_NVIC_SetPriority(TIMx_IRQn, 0, 1);
-
+  
   /* Enable the TIMx global Interrupt */
   HAL_NVIC_EnableIRQ(TIMx_IRQn);
 }

@@ -32,23 +32,23 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 /** @addtogroup STM32412G_DISCOVERY
   * @{
   */
-
+    
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32412G_DISCOVERY_QSPI_H
 #define __STM32412G_DISCOVERY_QSPI_H
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
@@ -56,10 +56,10 @@
 
 /** @addtogroup STM32412G_DISCOVERY_QSPI
   * @{
-  */
+  */    
 
-
-/* Exported constants --------------------------------------------------------*/
+  
+/* Exported constants --------------------------------------------------------*/ 
 /** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Constants STM32412G Discovery QSPI Exported Constants
   * @{
   */
@@ -124,11 +124,11 @@ typedef struct {
   * @}
   */
 
-
+  
 /* Exported functions --------------------------------------------------------*/
 /** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Functions STM32412G Discovery QSPI Exported Functions
   * @{
-  */
+  */  
 uint8_t BSP_QSPI_Init       (void);
 uint8_t BSP_QSPI_DeInit     (void);
 uint8_t BSP_QSPI_Read       (uint8_t* pData, uint32_t ReadAddr, uint32_t Size);
@@ -148,11 +148,11 @@ void BSP_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi, void *Params);
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 #ifdef __cplusplus
 }
@@ -161,10 +161,10 @@ void BSP_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi, void *Params);
 #endif /* __STM32412G_DISCOVERY_QSPI_H */
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

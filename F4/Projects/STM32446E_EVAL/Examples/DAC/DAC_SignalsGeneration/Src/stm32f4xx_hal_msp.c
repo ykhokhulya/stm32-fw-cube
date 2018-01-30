@@ -56,8 +56,8 @@
   */
 
 /**
-  * @brief DAC MSP Initialization
-  *        This function configures the hardware resources used in this example:
+  * @brief DAC MSP Initialization 
+  *        This function configures the hardware resources used in this example: 
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration
   * @param hdac: DAC handle pointer

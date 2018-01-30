@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards_ComPolling/Inc/main.h
+  * @file    I2C/I2C_TwoBoards_ComPolling/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -32,7 +32,7 @@
   *
   ******************************************************************************
   */
-
+  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -43,13 +43,13 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* User can use this section to tailor I2Cx/I2Cx instance used and associated
+/* User can use this section to tailor I2Cx/I2Cx instance used and associated 
    resources */
 /* Definition for I2Cx clock resources */
 #define I2Cx                             I2C1
 #define I2Cx_CLK_ENABLE()                __HAL_RCC_I2C1_CLK_ENABLE()
 #define I2Cx_SDA_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE()
-#define I2Cx_SCL_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE()
+#define I2Cx_SCL_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE() 
 
 #define I2Cx_FORCE_RESET()               __HAL_RCC_I2C1_FORCE_RESET()
 #define I2Cx_RELEASE_RESET()             __HAL_RCC_I2C1_RELEASE_RESET()
@@ -66,7 +66,7 @@
 #define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
 #define RXBUFFERSIZE                      TXBUFFERSIZE
-
+  
 /* Exported macro ------------------------------------------------------------*/
 #define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
 /* Exported functions ------------------------------------------------------- */

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RCC/RCC_ClockConfig/Src/main.c
+  * @file    RCC/RCC_ClockConfig/Src/main.c 
   * @author  MCD Application Team
   * @brief   This example describes how to use the RCC HAL API to configure the
   *          system clock (SYSCLK) and modify the clock settings on run time.
@@ -43,7 +43,7 @@
 
 /** @addtogroup RCC_ClockConfig
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -77,16 +77,16 @@ int main(void)
   /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /* Initialize User button, will be used to trigger an interrupt each time it's pressed.
     In the ISR the PLL source will be changed from HSE to HSI, and vice versa. */
-  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
+  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);  
 
     /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -120,18 +120,18 @@ int main(void)
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
-  /* Output SYSCLK divided by 2 on MCO2 pin(PC9) */
+  
+  /* Output SYSCLK divided by 2 on MCO2 pin(PC9) */ 
   HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK, RCC_MCODIV_2);
-
-  /* Toggle LED3 and LED4 in an infinite loop */
+  
+  /* Toggle LED3 and LED4 in an infinite loop */  
   while (1)
   {
     /* Toggle LED3 */
@@ -152,7 +152,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == KEY_BUTTON_PIN)
   {
-    if(__HAL_RCC_GET_PLL_OSCSOURCE() == RCC_PLLCFGR_PLLSRC_HSI)
+    if(__HAL_RCC_GET_PLL_OSCSOURCE() == RCC_PLLCFGR_PLLSRC_HSI) 
     {
       /* Set SYSCLK frequency to 180 MHz, coming from the PLL which is clocked by the HSE */
       SystemClockHSE_Config();
@@ -168,7 +168,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 /**
   * @brief  Switch the PLL source from HSI to HSE, and select the PLL as SYSCLK
   *         source.
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -195,7 +195,7 @@ void SystemClockHSE_Config(void)
   {
     Error_Handler();
   }
-
+  
   /* -2- Enable HSE Oscillator, select it as PLL source and finally activate the PLL */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -210,26 +210,26 @@ void SystemClockHSE_Config(void)
     /* Initialization Error */
     Error_Handler();
   }
-
-  /* -3- Activate the Over Drive feature to reach 180 MHz as system clock frequency
+  
+  /* -3- Activate the Over Drive feature to reach 180 MHz as system clock frequency 
          (this feature is only available for STM32F42xxx/43xxx devices) */
   if(HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
-
+    
   /* -4- Select the PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
   }
-
+  
   /* -5- Optional: Disable HSI Oscillator (if the HSI is no more needed by the application)*/
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
@@ -244,7 +244,7 @@ void SystemClockHSE_Config(void)
 /**
   * @brief  Switch the PLL source from HSI to HSE, and select the PLL as SYSCLK
   *         source.
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSI)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -285,7 +285,7 @@ void SystemClockHSI_Config(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* -3- Activate the Over Drive feature to reach 180 MHz as system clock frequency
         (this feature is only available for STM32F42xxx/43xxx devices) */
   if(HAL_PWREx_EnableOverDrive() != HAL_OK)
@@ -298,13 +298,13 @@ void SystemClockHSI_Config(void)
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
   }
-
+  
   /* -5- Optional: Disable HSE Oscillator (if the HSE is no more needed by the application) */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_OFF;
@@ -352,10 +352,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

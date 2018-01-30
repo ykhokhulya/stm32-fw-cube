@@ -1,9 +1,9 @@
 /**
   @page I2C_OneBoard_AdvCommunication_DMAAndIT I2C (Master DMA Mode)
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/I2C/I2C_OneBoard_AdvCommunication_DMAAndIT/readme.txt
+  * @file    Examples_LL/I2C/I2C_OneBoard_AdvCommunication_DMAAndIT/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the I2C_OneBoard_AdvCommunication_DMAAndIT I2C example (Master DMA Mode).
   ******************************************************************************
@@ -44,12 +44,12 @@ to configure GPIO, DMA and I2C peripherals using only one NUCLEO-F411RE.
 
 I2C1 Peripheral is configured in Slave mode with EXTI (Clock 400Khz, Own address 7-bit enabled).
 I2C3 Peripheral is configured in Master mode with DMA (Clock 400Khz).
-GPIO associated to User push-button is linked with EXTI.
+GPIO associated to User push-button is linked with EXTI. 
 
-LED2 blinks quickly to wait for user-button press.
+LED2 blinks quickly to wait for user-button press. 
 
 Example execution:
-Press the User push-button to initiate a write request by Master through Handle_I2C_Master_Transmit() or
+Press the User push-button to initiate a write request by Master through Handle_I2C_Master_Transmit() or 
 through Handle_I2C_Master_TransmitReceive() routine depends on Command Code type.
 
 Command code type is decomposed in two categories :
@@ -147,7 +147,7 @@ In all cases, if an error occurs, LED2 is blinking slowly.
 Connectivity, Communication, I2C, DMA, Interrupt, Master, Slave, Transmission, Reception, Fast mode,
 command, acknowledgement
 
-@par Directory contents
+@par Directory contents 
 
   - I2C/I2C_OneBoard_AdvCommunication_DMAAndIT/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - I2C/I2C_OneBoard_AdvCommunication_DMAAndIT/Inc/main.h                  Header for main.c module
@@ -159,20 +159,20 @@ command, acknowledgement
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-F411RE Set-up
     - Connect GPIOs connected to I2C1 SCL/SDA (PB.6 and PB.7)
     to respectively SCL and SDA pins of I2C3 (PA.8 and PB.4).
-      - I2C1_SCL  PB.6 (CN10, pin 17) : connected to I2C3_SCL PA.8 (CN10, pin 23)
+      - I2C1_SCL  PB.6 (CN10, pin 17) : connected to I2C3_SCL PA.8 (CN10, pin 23) 
       - I2C1_SDA  PB.7 (CN7, pin 21) : connected to I2C3_SDA PB.4 (CN10, pin 27)
 
-  - Launch the program in debug mode to benefit of Terminal I/O information. Press User push-button to initiate a write request by Master
+  - Launch the program in debug mode to benefit of Terminal I/O information. Press User push-button to initiate a write request by Master 
       then Slave receive bytes.
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

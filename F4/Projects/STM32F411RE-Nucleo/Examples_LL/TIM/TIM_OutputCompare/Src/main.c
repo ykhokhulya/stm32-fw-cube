@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_OutputCompare/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example describes how to use a timer instance in output
+  * @brief   This example describes how to use a timer instance in output 
   *          compare mode using the STM32F4xx TIM LL API.
   *          Peripheral initialization done using LL unitary services functions.
   ******************************************************************************
@@ -93,7 +93,7 @@ int main(void)
 
   /* Initialize button in EXTI mode */
   UserButton_Init();
-
+  
   /* Configure the timer in output compare mode */
   Configure_TIMOutputCompare();
 
@@ -104,7 +104,7 @@ int main(void)
 }
 
 /**
-  * @brief  Configures the timer to generate an output compare signal on the
+  * @brief  Configures the timer to generate an output compare signal on the 
   *         OC1 output.
   * @note   Peripheral configuration is minimal configuration from reset values.
   *         Thus, some useless LL unitary functions calls below are provided as
@@ -131,55 +131,55 @@ __STATIC_INLINE void  Configure_TIMOutputCompare(void)
   /***********************************************/
   NVIC_SetPriority(TIM2_IRQn, 0);
   NVIC_EnableIRQ(TIM2_IRQn);
-
+  
   /******************************/
   /* Peripheral clocks enabling */
   /******************************/
   /* Enable the timer peripheral clock */
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
-
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2); 
+  
   /***************************/
   /* Time base configuration */
   /***************************/
   /* Set counter mode */
   /* Reset value is LL_TIM_COUNTERMODE_UP */
   //LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
-
+  
   /* Set the pre-scaler value to have TIM2 counter clock equal to 10 kHz */
   LL_TIM_SetPrescaler(TIM2, __LL_TIM_CALC_PSC(SystemCoreClock, 10000));
-
+  
   /* Set the auto-reload value to have a counter frequency of 10 Hz */
   /* TIM2CLK = SystemCoreClock / (APB prescaler & multiplier)               */
   TimOutClock = SystemCoreClock/2;
   LL_TIM_SetAutoReload(TIM2, __LL_TIM_CALC_ARR(TimOutClock, LL_TIM_GetPrescaler(TIM2), 10));
-
+    
   /*********************************/
   /* Output waveform configuration */
   /*********************************/
-  /* Set output compare mode: TOGGLE */
+  /* Set output compare mode: TOGGLE */ 
   LL_TIM_OC_SetMode(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_TOGGLE);
 
   /* Set output channel polarity: OC is active high */
   LL_TIM_OC_SetPolarity(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_OCPOLARITY_HIGH);
-
+  
   /* Set output compare active/inactive delay to half of the auto-reload value */
   LL_TIM_OC_SetCompareCH1(TIM2, (LL_TIM_GetAutoReload(TIM2) / 2));
-
+  
   /**************************/
   /* TIM2 interrupts set-up */
   /**************************/
   /* Enable the capture/compare interrupt for channel 1*/
   LL_TIM_EnableIT_CC1(TIM2);
-
+  
   /**********************************/
   /* Start output signal generation */
   /**********************************/
   /* Enable output channel 1 */
   LL_TIM_CC_EnableChannel(TIM2, LL_TIM_CHANNEL_CH1);
-
+    
   /* Enable counter */
   LL_TIM_EnableCounter(TIM2);
-
+  
   /* Force update generation */
   LL_TIM_GenerateEvent_UPDATE(TIM2);
 }
@@ -193,13 +193,13 @@ __STATIC_INLINE void Configure_OCMode(uint32_t OCMode)
 {
   /* Disable the counter */
   LL_TIM_DisableCounter(TIM2);
-
+  
   /* Reset the counter */
   LL_TIM_SetCounter(TIM2, 0);
-
+  
   /* Reset the compare match count */
   uwCompareMatchCount = 0;
-
+  
   /* Set the output level (active v.s. inactive) according to the new OC mode */
   switch (OCMode)
   {
@@ -208,19 +208,19 @@ __STATIC_INLINE void Configure_OCMode(uint32_t OCMode)
       /* Set the output channel to its inactive level (LOW)*/
       LL_TIM_OC_SetMode(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_FORCED_INACTIVE);
       break;
-
+      
     case LL_TIM_OCMODE_INACTIVE:
       /* Set the output channel to its active level (HIGH)*/
       LL_TIM_OC_SetMode(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_FORCED_ACTIVE);
       break;
-
+        
     default:
       break;
   }
-
+  
   /* Update the output channel mode */
   LL_TIM_OC_SetMode(TIM2, LL_TIM_CHANNEL_CH1, OCMode);
-
+  
   /* Re-enable the counter */
   LL_TIM_EnableCounter(TIM2);
 }
@@ -247,28 +247,28 @@ __STATIC_INLINE void LED_Init(void)
 
 /**
   * @brief  Configures User push-button in GPIO or EXTI Line Mode.
-  * @param  None
+  * @param  None  
   * @retval None
   */
 __STATIC_INLINE void UserButton_Init(void)
 {
   /* Enable the BUTTON Clock */
   USER_BUTTON_GPIO_CLK_ENABLE();
-
+  
   /* Configure GPIO for BUTTON */
   LL_GPIO_SetPinMode(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_MODE_INPUT);
   LL_GPIO_SetPinPull(USER_BUTTON_GPIO_PORT, USER_BUTTON_PIN, LL_GPIO_PULL_NO);
 
   /* Connect External Line to the GPIO*/
   USER_BUTTON_SYSCFG_SET_EXTI();
-
+    
   /* Enable a rising trigger EXTI line 13 Interrupt */
   USER_BUTTON_EXTI_LINE_ENABLE();
   USER_BUTTON_EXTI_FALLING_TRIG_ENABLE();
-
+    
   /* Configure NVIC for USER_BUTTON_EXTI_IRQn */
-  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn);
-  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);
+  NVIC_EnableIRQ(USER_BUTTON_EXTI_IRQn); 
+  NVIC_SetPriority(USER_BUTTON_EXTI_IRQn,0x03);  
 }
 
 /**
@@ -339,7 +339,7 @@ void UserButton_Callback(void)
 {
   /* Set new OC mode */
   iOCMode = (iOCMode + 1) % TIM_OC_MODES_NB;
-
+    
   /* Switch to next OC mode */
   Configure_OCMode(aOCMode[iOCMode]);
 }

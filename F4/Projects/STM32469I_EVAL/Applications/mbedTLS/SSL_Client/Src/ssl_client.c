@@ -1,12 +1,12 @@
- /**
+ /** 
   *
   *  Portions COPYRIGHT 2016 STMicroelectronics
   *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
   *
   ******************************************************************************
-  * @file    ssl_client.c
+  * @file    ssl_client.c 
   * @author  MCD Application Team
-  * @brief   SSL client application
+  * @brief   SSL client application 
   ******************************************************************************
   * @attention
   *
@@ -35,7 +35,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 #if !defined(MBEDTLS_CONFIG_FILE)
 #include "mbedtls/config.h"
@@ -48,7 +48,7 @@
 #else
 #include <stdio.h>
 #include <stdlib.h>
-#define mbedtls_time       time
+#define mbedtls_time       time 
 #define mbedtls_time_t     time_t
 #define mbedtls_fprintf    fprintf
 #define mbedtls_printf     printf
@@ -125,7 +125,7 @@ void SSL_Client(void const *argument)
   mbedtls_ctr_drbg_init(&ctr_drbg);
 
   mbedtls_printf( "\n  . Seeding the random number generator..." );
-
+  
   mbedtls_entropy_init( &entropy );
   len = strlen((char *)pers);
   if( ( ret = mbedtls_ctr_drbg_seed( &ctr_drbg, mbedtls_entropy_func, &entropy,
@@ -156,7 +156,7 @@ void SSL_Client(void const *argument)
    * 1. Start the connection
    */
   mbedtls_printf( "  . Connecting to tcp/%s/%s...", SERVER_NAME, SERVER_PORT );
-
+  
   if( ( ret = mbedtls_net_connect( &server_fd, SERVER_NAME,
                                        SERVER_PORT, MBEDTLS_NET_PROTO_TCP ) ) != 0 )
   {
@@ -170,7 +170,7 @@ void SSL_Client(void const *argument)
    * 2. Setup stuff
    */
   mbedtls_printf( "  . Setting up the SSL/TLS structure..." );
-
+  
   if( ( ret = mbedtls_ssl_config_defaults( &conf,
                   MBEDTLS_SSL_IS_CLIENT,
                   MBEDTLS_SSL_TRANSPORT_STREAM,
@@ -225,7 +225,7 @@ void SSL_Client(void const *argument)
 
   if( ( flags = mbedtls_ssl_get_verify_result( &ssl ) ) != 0 )
   {
-
+  
     mbedtls_printf( " failed\n" );
     mbedtls_x509_crt_verify_info( (char *)vrfy_buf, sizeof( vrfy_buf ), "  ! ", flags );
 
@@ -235,16 +235,16 @@ void SSL_Client(void const *argument)
   {
     mbedtls_printf( " ok\n" );
   }
-
+  
   /*
    * 6. Write the GET request
    */
-
+  
   mbedtls_printf( "  > Write to server:" );
-
+  
   sprintf( (char *) buf, GET_REQUEST );
   len = strlen((char *) buf);
-
+  
   while( ( ret = mbedtls_ssl_write( &ssl, buf, len ) ) <= 0 )
   {
     if( ret != MBEDTLS_ERR_SSL_WANT_READ && ret != MBEDTLS_ERR_SSL_WANT_WRITE )
@@ -272,7 +272,7 @@ void SSL_Client(void const *argument)
     {
       continue;
     }
-
+    
     if( ret == MBEDTLS_ERR_SSL_PEER_CLOSE_NOTIFY )
     {
       break;
@@ -305,7 +305,7 @@ exit:
   mbedtls_ssl_config_free( &conf );
   mbedtls_ctr_drbg_free( &ctr_drbg );
   mbedtls_entropy_free( &entropy );
-
+  
   if ((ret < 0) && (ret != MBEDTLS_ERR_SSL_PEER_CLOSE_NOTIFY))
   {
     Error_Handler();

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    IWDG/IWDG_Example/Src/stm32f4xx_it.c
+  * @file    IWDG/IWDG_Example/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@
 
 /** @addtogroup IWDG_Example
   * @{
-  */
+  */  
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -190,12 +190,12 @@ void EXTI15_10_IRQHandler(void)
   * @retval None
   */
 void TIM5_IRQHandler(void)
-{
+{ 
   HAL_TIM_IRQHandler(&TimInputCaptureHandle);
-  {
+  {    
     /* Get the Input Capture value */
     tmpCC4[uwCaptureNumber++] = HAL_TIM_ReadCapturedValue(&TimInputCaptureHandle, TIM_CHANNEL_4);
-
+    
     if (uwCaptureNumber >= 2)
     {
       /* Compute the period length */
@@ -217,10 +217,10 @@ void TIM5_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

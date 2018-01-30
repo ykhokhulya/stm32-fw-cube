@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/audio.c
+  * @file    BSP/Src/audio.c 
   * @author  MCD Application Team
-  * @brief   This example code shows how to use the audio feature in the
+  * @brief   This example code shows how to use the audio feature in the 
   *          stm32469i_eval driver
   ******************************************************************************
   * @attention
@@ -46,13 +46,13 @@
 
 /** @addtogroup BSP
   * @{
-  */
+  */ 
 
 
 
 /* Private define ------------------------------------------------------------*/
 
-/*Since SysTick is set to 1ms (unless to set it quicker) */
+/*Since SysTick is set to 1ms (unless to set it quicker) */ 
 /* to run up to 48khz, a buffer around 1000 (or more) is requested*/
 /* to run up to 96khz, a buffer around 2000 (or more) is requested*/
 #define AUDIO_BUFFER_SIZE       2048
@@ -67,26 +67,26 @@
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {
   AUDIO_STATE_IDLE = 0,
-  AUDIO_STATE_INIT,
-  AUDIO_STATE_PLAYING,
+  AUDIO_STATE_INIT,    
+  AUDIO_STATE_PLAYING,  
 }AUDIO_PLAYBACK_StateTypeDef;
 
 typedef enum {
-  AUDIO_ERROR_NONE = 0,
-  AUDIO_ERROR_NOTREADY,
-  AUDIO_ERROR_IO,
+  AUDIO_ERROR_NONE = 0, 
+  AUDIO_ERROR_NOTREADY,     
+  AUDIO_ERROR_IO,   
   AUDIO_ERROR_EOF,
 }AUDIO_ErrorTypeDef;
 
 typedef enum {
-  BUFFER_OFFSET_NONE = 0,
-  BUFFER_OFFSET_HALF,
-  BUFFER_OFFSET_FULL,
+  BUFFER_OFFSET_NONE = 0,  
+  BUFFER_OFFSET_HALF,  
+  BUFFER_OFFSET_FULL,     
 }BUFFER_StateTypeDef;
 
 typedef struct {
   uint8_t buff[AUDIO_BUFFER_SIZE];
-  uint32_t fptr;
+  uint32_t fptr;  
   BUFFER_StateTypeDef state;
 }AUDIO_BufferTypeDef;
 
@@ -113,22 +113,22 @@ AUDIO_ErrorTypeDef AUDIO_Start(void);
   * @retval None
   */
 void AudioPlay_demo (void)
-{
+{ 
   uint32_t *AudioFreq_ptr;
   uint8_t status = 0;
   uint8_t FreqStr[256] = {0};
-
+ 
   AudioFreq_ptr = AudioFreq+6; /*AF_48K*/
   uwPauseEnabledStatus = 1; /* 0 when audio is running, 1 when Pause is on */
   uwVolume = 50;
 
   Audio_SetHint();
-
+    
   status = BSP_JOY_Init(JOY_MODE_GPIO);
 
   if (status != IO_OK)
-  {
-    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+  {    
+    BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 100, (uint8_t *)"ERROR", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)"Joystick cannot be initialized", CENTER_MODE);
@@ -148,10 +148,10 @@ void AudioPlay_demo (void)
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)" Try to reset board ", CENTER_MODE);
   }
 
-  /*
-  Start playing the file from a circular buffer, once the DMA is enabled, it is
-  always in running state. Application has to fill the buffer with the audio data
-  using Transfer complete and/or half transfer complete interrupts callbacks
+  /* 
+  Start playing the file from a circular buffer, once the DMA is enabled, it is 
+  always in running state. Application has to fill the buffer with the audio data 
+  using Transfer complete and/or half transfer complete interrupts callbacks 
   (EVAL_AUDIO_TransferComplete_CallBack() or EVAL_AUDIO_HalfTransfer_CallBack()...
   */
   AUDIO_Start();
@@ -168,7 +168,7 @@ void AudioPlay_demo (void)
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 40, (uint8_t *)FreqStr, CENTER_MODE);
 
   /* IMPORTANT:
-     AUDIO_Process() is called by the SysTick Handler, as it should be called
+     AUDIO_Process() is called by the SysTick Handler, as it should be called 
      within a periodic process */
 
   /* Infinite loop */
@@ -184,7 +184,7 @@ void AudioPlay_demo (void)
       case JOY_UP:
         /* Increase volume by 5% */
         if (uwVolume < 95)
-        {
+        { 
           uwVolume += 5;
         }
         else
@@ -259,11 +259,11 @@ void AudioPlay_demo (void)
         BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
         HAL_Delay(200);
         break;
-
+        
       default:
         break;
     }
-
+    
     /* Toggle LED3 */
     BSP_LED_Toggle(LED3);
 
@@ -291,14 +291,14 @@ void AudioPlay_demo (void)
   */
 static void Audio_SetHint(void)
 {
-  /* Clear the LCD */
+  /* Clear the LCD */ 
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /* Set Audio Demo description */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 90);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_SetFont(&Font24);
   BSP_LCD_DisplayStringAt(0, 0, (uint8_t *)"AUDIO EXAMPLE", CENTER_MODE);
   BSP_LCD_SetFont(&Font12);
@@ -306,9 +306,9 @@ static void Audio_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"Use Joystick Up/Down    to change Volume   ", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"Use Joystick Left/Right to change Frequency", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 75, (uint8_t *)"Click on Joystick for Pause/Resume         ", CENTER_MODE);
-
+  
   /* Set the LCD Text Color */
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 100, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 110);
   BSP_LCD_DrawRect(11, 101, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 112);
 
@@ -316,14 +316,14 @@ static void Audio_SetHint(void)
 
 
 /**
-  * @brief  Starts Audio streaming.
+  * @brief  Starts Audio streaming.    
   * @param  None
   * @retval Audio error
-  */
+  */ 
 AUDIO_ErrorTypeDef AUDIO_Start(void)
 {
   uint32_t bytesread;
-
+  
   buffer_ctl.state = BUFFER_OFFSET_NONE;
   bytesread = GetData( (void *)AUDIO_FILE_ADDRESS,
                       0,
@@ -332,7 +332,7 @@ AUDIO_ErrorTypeDef AUDIO_Start(void)
   if(bytesread > 0)
   {
     BSP_AUDIO_OUT_Play((uint16_t*)&buffer_ctl.buff[0], AUDIO_BUFFER_SIZE);
-    audio_state = AUDIO_STATE_PLAYING;
+    audio_state = AUDIO_STATE_PLAYING;      
     buffer_ctl.fptr = bytesread;
     return AUDIO_ERROR_NONE;
   }
@@ -340,23 +340,23 @@ AUDIO_ErrorTypeDef AUDIO_Start(void)
 }
 
 /**
-  * @brief  Manages Audio process.
+  * @brief  Manages Audio process. 
   * @param  None
   * @retval Audio error
   */
 uint8_t AUDIO_Process(void)
 {
   uint32_t bytesread;
-  AUDIO_ErrorTypeDef error_state = AUDIO_ERROR_NONE;
-
+  AUDIO_ErrorTypeDef error_state = AUDIO_ERROR_NONE;  
+  
   switch(audio_state)
   {
   case AUDIO_STATE_PLAYING:
-
+    
     if(buffer_ctl.fptr >= AUDIO_FILE_SIZE)
     {
       /* Play audio sample again ... */
-      buffer_ctl.fptr = 0;
+      buffer_ctl.fptr = 0; 
       error_state = AUDIO_ERROR_EOF;
     }
 
@@ -367,19 +367,19 @@ uint8_t AUDIO_Process(void)
                           buffer_ctl.fptr,
                           &buffer_ctl.buff[0],
                           AUDIO_BUFFER_SIZE /2);
-
+      
       if( bytesread >0)
-      {
+      { 
         buffer_ctl.state = BUFFER_OFFSET_NONE;
-        buffer_ctl.fptr += bytesread;
+        buffer_ctl.fptr += bytesread; 
       }
     }
-
-    /* 2nd half buffer played; so fill it and continue playing from top */
+    
+    /* 2nd half buffer played; so fill it and continue playing from top */    
     if(buffer_ctl.state == BUFFER_OFFSET_FULL)
     {
       bytesread = GetData((void *)AUDIO_FILE_ADDRESS,
-                          buffer_ctl.fptr,
+                          buffer_ctl.fptr, 
                           &buffer_ctl.buff[AUDIO_BUFFER_SIZE /2],
                           AUDIO_BUFFER_SIZE /2);
       if( bytesread > 0)
@@ -389,12 +389,12 @@ uint8_t AUDIO_Process(void)
       }
     }
     break;
-
+    
   default:
     error_state = AUDIO_ERROR_NOTREADY;
     break;
   }
-
+  
   return (uint8_t) error_state;
 }
 
@@ -407,7 +407,7 @@ static uint32_t GetData(void *pdata, uint32_t offset, uint8_t *pbuf, uint32_t Nb
 {
   uint8_t *lptr = pdata;
   uint32_t ReadDataNbr;
-
+  
   ReadDataNbr = 0;
   while(((offset + ReadDataNbr) < AUDIO_FILE_SIZE) && (ReadDataNbr < NbrOfData))
   {
@@ -472,13 +472,13 @@ void BSP_AUDIO_OUT_Error_CallBack(void)
 }
 
 
+  
+/**
+  * @}
+  */ 
 
 /**
   * @}
-  */
-
-/**
-  * @}
-  */
-
+  */ 
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

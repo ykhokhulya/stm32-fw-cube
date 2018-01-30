@@ -132,14 +132,14 @@ int main(void)
 
   /* Configure the User Button in GPIO Mode */
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
-
+  
   /* Initialize DSI LCD */
-  lcd_status = BSP_LCD_Init();
+  lcd_status = BSP_LCD_Init(); 
   BSP_TEST_APPLI_ASSERT(lcd_status != LCD_OK);
 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_SelectLayer(0);
-
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
+  BSP_LCD_SelectLayer(0);  
+  
   if(BSP_LCD_GetXSize() > BSP_LCD_GetYSize())
   {
     lcd_display_orientation = LCD_ORIENTATION_LANDSCAPE;
@@ -356,32 +356,32 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
   if (GPIO_Pin == TS_INT_PIN)
   {
-    /* Communication with TS is done via I2C.
-    Often the sw requires ISRs (interrupt service routines) to be quick while communication
-    with I2C can be considered relatively long (depending on SW requirements).
-    Considering that the TS feature don’t need immediate reaction,
-	it is suggested to use polling mode instead of EXTI mode,
+    /* Communication with TS is done via I2C. 
+    Often the sw requires ISRs (interrupt service routines) to be quick while communication 
+    with I2C can be considered relatively long (depending on SW requirements). 
+    Considering that the TS feature don’t need immediate reaction, 
+	it is suggested to use polling mode instead of EXTI mode, 
     in order to avoid blocking I2C communication on interrupt service routines */
 
     /* Here an example of implementation is proposed which is a mix between pooling and exit mode:
     On ISR a flag is set (exti5_received), the main loop polls on the flag rather then polling the TS;
-    Mcu communicates with TS only when the flag has been set by ISR. This is just an example:
+    Mcu communicates with TS only when the flag has been set by ISR. This is just an example: 
     the users should choose they strategy depending on their application needs.*/
     exti5_received = 1;
   }
 
   if (GPIO_Pin == SD_DETECT_PIN)
   {
-    /* Communication with SD is done via I2C.
-    Often the sw requires ISRs (interrupt service routines) to be quick while communication
-    with I2C can be considered relatively long (depending on SW requirements).
-    Considering that the SD feature don’t need immediate reaction,
-	it is suggested to use polling mode instead of EXTI mode,
+    /* Communication with SD is done via I2C. 
+    Often the sw requires ISRs (interrupt service routines) to be quick while communication 
+    with I2C can be considered relatively long (depending on SW requirements). 
+    Considering that the SD feature don’t need immediate reaction, 
+	it is suggested to use polling mode instead of EXTI mode, 
     in order to avoid blocking I2C communication on interrupt service routines */
 
     /* Here an example of implementation is proposed which is a mix between pooling and exit mode:
     On ISR a flag is set (exti2_received), the main loop polls on the flag rather then polling the sd;
-    Mcu communicates with sd only when the flag has been set by ISR. This is just an example:
+    Mcu communicates with sd only when the flag has been set by ISR. This is just an example: 
     the users should choose they strategy depending on their application needs.*/
     exti2_received = 1;
   }

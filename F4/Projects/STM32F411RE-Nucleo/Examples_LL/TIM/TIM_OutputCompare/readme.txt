@@ -1,9 +1,9 @@
 /**
   @page TIM_OutputCompare TIM example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/TIM/TIM_OutputCompare/readme.txt
+  * @file    Examples_LL/TIM/TIM_OutputCompare/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM_OutputCompare example.
   ******************************************************************************
@@ -35,9 +35,9 @@
 
 @par Example Description
 
-This example shows how to configure the TIM peripheral to generate an output
+This example shows how to configure the TIM peripheral to generate an output 
 waveform in different output compare modes;
-Example using the STM32F4xx TIM LL API,
+Example using the STM32F4xx TIM LL API, 
 peripheral initialization done using LL unitary services functions
 for optimization purpose (performance and size).
 
@@ -69,7 +69,7 @@ NUCLEO-F411RE). Thus LED2 status (on/off) mirrors the timer output
 level (active v.s. inactive).
 
 User push-button can be used to change the output compare mode:
-  - When the output channel is configured in output compare toggle:  LED2
+  - When the output channel is configured in output compare toggle:  LED2 
     TOGGLES when the counter (CNT) matches the capture/compare register (CCR1).
   - When the output channel is configured in output compare active:  LED2 is
     switched ON when the counter (CNT) matches the capture/compare register
@@ -77,10 +77,10 @@ User push-button can be used to change the output compare mode:
   - When the output channel is configured in output compare inactive:  LED2 is
     switched OFF when the counter (CNT) matches the capture/compare register
     (CCR1).
-
+    
 Initially the output channel is configured in output compare toggle mode.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_OutputCompare/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - TIM/TIM_OutputCompare/Inc/main.h                  Header for main.c module
@@ -93,12 +93,12 @@ Initially the output channel is configured in output compare toggle mode.
 @par Hardware and Software environment
 
   - This example runs on STM32F411xx devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

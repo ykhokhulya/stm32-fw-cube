@@ -174,13 +174,13 @@ uint8_t BSP_TS_Init(uint16_t ts_SizeX, uint16_t ts_SizeY)
   if(ts_id1 != FT6206_ID_VALUE)
   {
     ts_id2 = ft6x06_ts_drv.ReadID(TS_I2C_ADDRESS_A02);
-    I2C_Address    = TS_I2C_ADDRESS_A02;
+    I2C_Address    = TS_I2C_ADDRESS_A02;    
   }
   else
   {
-    I2C_Address    = TS_I2C_ADDRESS;
+    I2C_Address    = TS_I2C_ADDRESS;    
   }
-
+  
   /* Scan FT6xx6 TouchScreen IC controller ID register by I2C Read       */
   /* Verify this is a FT6206 or FT6336G, otherwise this is an error case */
   if((ts_id1 == FT6206_ID_VALUE) || (ts_id2 == FT6206_ID_VALUE))
@@ -191,11 +191,11 @@ uint8_t BSP_TS_Init(uint16_t ts_SizeX, uint16_t ts_SizeY)
     /* Get LCD chosen orientation */
     if(ts_SizeX < ts_SizeY)
     {
-      ts_orientation = TS_SWAP_NONE;
+      ts_orientation = TS_SWAP_NONE;                
     }
     else
     {
-      ts_orientation = TS_SWAP_XY | TS_SWAP_Y;
+      ts_orientation = TS_SWAP_XY | TS_SWAP_Y;                 
     }
 
     if(ts_status == TS_OK)
@@ -284,10 +284,10 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
       if(ts_orientation & TS_SWAP_XY)
       {
         tmp = Raw_x[index];
-        Raw_x[index] = Raw_y[index];
+        Raw_x[index] = Raw_y[index]; 
         Raw_y[index] = tmp;
       }
-
+      
       if(ts_orientation & TS_SWAP_X)
       {
         Raw_x[index] = FT_6206_MAX_WIDTH - 1 - Raw_x[index];
@@ -297,7 +297,7 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
       {
         Raw_y[index] = FT_6206_MAX_HEIGHT - 1 - Raw_y[index];
       }
-
+            
       xDiff = Raw_x[index] > _x[index]? (Raw_x[index] - _x[index]): (_x[index] - Raw_x[index]);
       yDiff = Raw_y[index] > _y[index]? (Raw_y[index] - _y[index]): (_y[index] - Raw_y[index]);
 

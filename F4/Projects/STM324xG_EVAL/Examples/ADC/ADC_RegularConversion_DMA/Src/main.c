@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC_RegularConversion_DMA/Src/main.c
+  * @file    ADC/ADC_RegularConversion_DMA/Src/main.c 
   * @author  MCD Application Team
-  * @brief   This example describes how to use the DMA to transfer
+  * @brief   This example describes how to use the DMA to transfer 
   *          continuously converted data.
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
 
 /** @addtogroup ADC_RegularConversion_DMA
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -69,7 +69,7 @@ static void Error_Handler(void);
 int main(void)
 {
   ADC_ChannelConfTypeDef sConfig;
-
+  
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -77,17 +77,17 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
+  
   /* Configure the system clock to 144 MHz */
   SystemClock_Config();
-
+  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
-
+  
   /*##-1- Configure the ADC peripheral #######################################*/
   AdcHandle.Instance = ADCx;
-
+  
   AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle.Init.ScanConvMode = DISABLE;
@@ -100,13 +100,13 @@ int main(void)
   AdcHandle.Init.NbrOfConversion = 1;
   AdcHandle.Init.DMAContinuousRequests = ENABLE;
   AdcHandle.Init.EOCSelection = DISABLE;
-
+      
   if(HAL_ADC_Init(&AdcHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*##-2- Configure ADC regular channel ######################################*/
   /* Note: Considering IT occurring after each number of size of              */
   /*       "uhADCxConvertedValue"  ADC conversions (IT by DMA end             */
@@ -116,24 +116,24 @@ int main(void)
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
   sConfig.Offset = 0;
-
+  
   if(HAL_ADC_ConfigChannel(&AdcHandle, &sConfig) != HAL_OK)
   {
     /* Channel Configuration Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 
   /*##-3- Start the conversion process and enable interrupt ##################*/
   /* Note: Considering IT occurring after each number of ADC conversions      */
   /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
   /*       with sufficient duration to not create an overhead situation in    */
-  /*        IRQHandler. */
+  /*        IRQHandler. */ 
   if(HAL_ADC_Start_DMA(&AdcHandle, (uint32_t*)&uhADCxConvertedValue, 1) != HAL_OK)
   {
     /* Start Conversation Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /* Infinite loop */
   while (1)
   {
@@ -142,7 +142,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 144000000
   *            HCLK(Hz)                       = 144000000
@@ -168,8 +168,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
@@ -183,14 +183,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 6;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ 
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
 
   /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
@@ -216,10 +216,10 @@ static void Error_Handler(void)
 }
 
 /**
-  * @brief  Conversion complete callback in non blocking mode
+  * @brief  Conversion complete callback in non blocking mode 
   * @param  AdcHandle : AdcHandle handle
-  * @note   This example shows a simple way to report end of conversion, and
-  *         you can add your own implementation.
+  * @note   This example shows a simple way to report end of conversion, and 
+  *         you can add your own implementation.    
   * @retval None
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
@@ -237,7 +237,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

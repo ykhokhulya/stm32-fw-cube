@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    ADC/ADC_InjectedConversion_Interrupt/Src/stm32f4xx_it.c
+  * @file    ADC/ADC_InjectedConversion_Interrupt/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -38,7 +38,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-
+   
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -46,7 +46,7 @@
 
 /** @addtogroup ADC_InjectedConversion_Interrupt
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -189,7 +189,7 @@ void ADC_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

@@ -61,7 +61,7 @@
 #define RTC_ERROR_TIMEOUT 1
 
 /**
-  * @brief LED2
+  * @brief LED2 
   */
 
 #define LED2_PIN                           LL_GPIO_PIN_5

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    main.h
   * @author  MCD Application Team
-  * @brief   main application header file.
+  * @brief   main application header file. 
   ******************************************************************************
   * @attention
   *

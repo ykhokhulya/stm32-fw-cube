@@ -1,9 +1,9 @@
 /**
   @page TIM_InputCapture Input Capture example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    TIM/TIM_InputCapture/readme.txt
+  * @file    TIM/TIM_InputCapture/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the TIM_InputCapture example.
   ******************************************************************************
@@ -33,7 +33,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
   This example shows how to use the TIM peripheral to measure the frequency of
   an external signal.
@@ -42,9 +42,9 @@
   so the TIM1 counter clock is SystemCoreClock (Hz).
   SystemCoreClock is set to 180 MHz for STM32F469xx Devices.
 
-  TIM1 is configured in Input Capture Mode: the external signal is connected to
+  TIM1 is configured in Input Capture Mode: the external signal is connected to 
   TIM1 Channel2 used as input pin.
-  To measure the frequency we use the TIM1 CC2 interrupt request, so in the
+  To measure the frequency we use the TIM1 CC2 interrupt request, so in the 
   TIM1_CC_IRQHandler routine, the frequency of the external signal is computed.
 
   The "uwFrequency" variable contains the external signal frequency:
@@ -70,11 +70,11 @@
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.
 	  The LCD clear can be ensured by hardware through the board's power off/power on or by software calling the BSP_LCD_Reset() function.
 
-@par Directory contents
+@par Directory contents 
 
   - TIM/TIM_InputCapture/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - TIM/TIM_InputCapture/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - TIM/TIM_InputCapture/Inc/main.h                  Header for main.c module
+  - TIM/TIM_InputCapture/Inc/main.h                  Header for main.c module  
   - TIM/TIM_InputCapture/Src/stm32f4xx_it.c          Interrupt handlers
   - TIM/TIM_InputCapture/Src/main.c                  Main program
   - TIM/TIM_InputCapture/Src/stm32f4xx_hal_msp.c     HAL MSP file
@@ -86,17 +86,17 @@
   - This example runs on STM32F469xx/STM32F479xx devices.
 
   - In this example, the clock is set to 180 MHz.
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC
-    board and can be easily tailored to any other supported device
-    and development board.
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
+    board and can be easily tailored to any other supported device 
+    and development board.      
 
   - STM32469I-EVAL Set-up
     - Connect the external signal to measure to the TIM1 CH2 pin (PA.09 - Pin 43 of CN6 connector).
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

@@ -35,7 +35,7 @@
 
 @par Example Description
 
-This example provides a description of how to use the embedded LCD DSI controller
+This example provides a description of how to use the embedded LCD DSI controller 
 (using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board.
 
 The goal of this example is to display a QVGA landscape (320x240) images on LCD glass
@@ -44,9 +44,9 @@ in Command mode using a single buffer for display and for draw.
 Layer0 is initialized to display a brief description of the example. It will be
 used for images display also.
 
-Line Event callback (LTDC) is used to swap image to be draw to display buffer upon
+Line Event callback (LTDC) is used to swap image to be draw to display buffer upon  
 drawing complete refresh (V-SYNC). Each image is displayed for two secondes. The same
-buffer is used to draw and display image.
+buffer is used to draw and display image. 
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This
@@ -64,7 +64,7 @@ buffer is used to draw and display image.
   - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Inc/stm32f4xx_it.h                Interrupt handlers header file
   - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Inc/main.h                        Header for main.c module
   - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Inc/life_augmented_argb8888.h     Image 320x240 in ARGB8888 to display on LCD
-  - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Inc/image_320x240_argb8888.h      Image 320x240 in ARGB8888 to display on LCD
+  - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Inc/image_320x240_argb8888.h      Image 320x240 in ARGB8888 to display on LCD  
   - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Src/stm32f4xx_it.c                Interrupt handlers
   - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Src/main.c                        Main program
   - LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Src/stm32f4xx_hal_msp.c           HAL MSP file

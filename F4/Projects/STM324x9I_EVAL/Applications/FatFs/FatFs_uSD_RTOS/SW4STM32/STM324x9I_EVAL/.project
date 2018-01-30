@@ -217,6 +217,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/option/syscall.c</location>
 		</link>
-
+		
 	</linkedResources>
 </projectDescription>

@@ -1,12 +1,12 @@
-/**
+/** 
   *
   *  Portions COPYRIGHT 2016 STMicroelectronics
   *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
   *
   ******************************************************************************
-  * @file    ssl_server.c
+  * @file    ssl_server.c 
   * @author  MCD Application Team
-  * @brief   SSL server application
+  * @brief   SSL server application 
   ******************************************************************************
   * @attention
   *
@@ -35,7 +35,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 #if !defined(MBEDTLS_CONFIG_FILE)
 #include "mbedtls/config.h"
@@ -51,7 +51,7 @@
 #else
 #include <stdio.h>
 #define mbedtls_time       time
-#define mbedtls_time_t     time_t
+#define mbedtls_time_t     time_t 
 #define mbedtls_fprintf    fprintf
 #define mbedtls_printf     printf
 #endif
@@ -101,13 +101,13 @@ void SSL_Server(void const *argument)
 {
   int ret, len;
   UNUSED(argument);
-
+ 
 #ifdef MBEDTLS_MEMORY_BUFFER_ALLOC_C
   mbedtls_memory_buffer_alloc_init(memory_buf, sizeof(memory_buf));
 #endif
   mbedtls_net_init( &listen_fd );
   mbedtls_net_init( &client_fd );
-
+  
   mbedtls_ssl_init( &ssl );
   mbedtls_ssl_config_init( &conf );
 #if defined(MBEDTLS_SSL_CACHE_C)
@@ -121,7 +121,7 @@ void SSL_Server(void const *argument)
   /* Init the LED_Thread to know whether the application is running or not */
   osThreadDef(LedThread, LED_Thread, osPriorityLow, 0, configMINIMAL_STACK_SIZE);
   LedThreadId = osThreadCreate (osThread(LedThread), NULL);
-
+  
 #if defined(MBEDTLS_DEBUG_C)
   mbedtls_debug_set_threshold( DEBUG_LEVEL );
 #endif

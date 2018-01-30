@@ -37,17 +37,17 @@
 
 @par Example Description
 
-This example describes how to use the embedded LCD DSI controller
-(using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board and manage entry and exit in
+This example provides a description of how to use the embedded LCD DSI controller 
+(using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board and manage entry and exit in 
 DSI ULPM mode on data lane only. In this mode, the DSI PHY state machine is entering a low power state
-on data lane and allows to save some power when the LCD does not need to display.
+on data lane and allows to save some power when the LCD does not need to display. 
 When the display is needed again, the DSI ULPM on data lane is exited and display should operate as before.
 
 In this example a WVGA landscape picture (800x480) is displayed on LCD in DSI Mode Video Burst.
-On a USER button press from the user, the LCD display will be switched off. 100ms later,
-the DSI PHY Data lane will enter ULPM mode. After 2 seconds in Off mode, the ULPM on data lane
-will be exited, the LCD will be switched back on and display the same image as before with a
-text notifying that the exit from ULPM was successful.
+On a USER button press from the user, the LCD display will be switched off. 100ms later,  
+the DSI PHY Data lane will enter ULPM mode. After 2 seconds in Off mode, the ULPM on data lane 
+will be exited, the LCD will be switched back on and display the same image as before with a 
+text notifying that the exit from ULPM was successful. 
 
 The image candies_800x480_argb8888 is of format ARGB8888 and is initially copied from Flash to SDRAM Frame Buffer.
 The LTDC is reading continuously the LCD Frame buffer from SDRAM, sent it to DSI Host which sends it in burst mode (DCS commands)

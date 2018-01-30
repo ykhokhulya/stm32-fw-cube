@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    DMA2D/DMA2D_MemToMemWithBlending/Src/stm32f4xx_it.c
+  * @file    DMA2D/DMA2D_MemToMemWithBlending/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -51,7 +51,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern DMA2D_HandleTypeDef   Dma2dHandle;
+extern DMA2D_HandleTypeDef   Dma2dHandle;    
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -170,8 +170,8 @@ void SysTick_Handler(void)
   * @retval None
   */
 void DMA2D_IRQHandler(void)
-{
-  HAL_DMA2D_IRQHandler(&Dma2dHandle);
+{  
+  HAL_DMA2D_IRQHandler(&Dma2dHandle);  
 }
 
 /**

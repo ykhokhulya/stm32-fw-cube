@@ -16,7 +16,7 @@ Debian and this is a good place to be.
 - LCP adaptive echo, so that we don't send LCP echo request if we
   are receiving data from peer, can be enabled by setting PPP_LCP_ADAPTIVE
   to true.
-
+ 
 - IPCP no/replace default route option, were added in the early stage of
   the ppp port, but it wasn't really helpful and was disabled when adding
   the new API ppp_set_default() call, which gives the lwIP user control over

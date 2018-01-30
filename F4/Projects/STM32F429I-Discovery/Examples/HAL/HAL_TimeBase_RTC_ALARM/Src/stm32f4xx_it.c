@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/stm32f4xx_it.c
+  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Interrupt Service Routines.
   ******************************************************************************
@@ -43,7 +43,7 @@
 
 /** @addtogroup HAL_TimeBase_RTC_Alarm
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -180,7 +180,7 @@ void EXTI0_IRQHandler(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

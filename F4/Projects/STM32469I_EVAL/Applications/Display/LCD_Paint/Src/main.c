@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without
+  * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice,
+  * 1. Redistribution of source code must retain the above copyright notice, 
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other
-  *    contributors to this software may be used to endorse or promote products
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this
+  * 4. This software, including modifications and/or derivative works of this 
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under
-  *    this license is void and will automatically terminate your rights under
-  *    this license.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -65,7 +65,7 @@ typedef struct
   uint16_t bfReserved2;  /* reserved : must be 0 */
   uint32_t bOffBits;     /* species the offset in bytes from the bitmapfileheader to the bitmap bits */
   uint16_t Padding;      /* padding to multiple of 32 bits */
-
+  
 } BitMapFileHeader_Typedef;
 
 typedef struct
@@ -81,7 +81,7 @@ typedef struct
   uint32_t biYPelsPerMeter;  /* number of pixels per meter in y axis */
   uint32_t biClrUsed;        /* number of colors used by the bitmap */
   uint32_t biClrImportant;   /* number of colors that are important */
-
+  
 } BitMapFileInfoHeader_Typedef;
 
 /* Private define ------------------------------------------------------------*/
@@ -152,12 +152,12 @@ int main(void)
 
   /* Set Portrait orientation if needed, by default orientation is set to
      Landscape */
-
+  
   /* Initialize DSI LCD */
   BSP_LCD_Init(); /* Uncomment if default config (landscape orientation) is needed */
   while(lcd_status != LCD_OK);
 
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
 
   /* Clear the LCD Background layer */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
@@ -201,7 +201,7 @@ int main(void)
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t*)"FAT FS Error !!", CENTER_MODE);
     Error_Handler();
   }
-
+  
   /*##-4- Register the file system object to the FatFs module ################*/
   if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
   {
@@ -215,7 +215,7 @@ int main(void)
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t*)"FAT FS Error !!", CENTER_MODE);
     Error_Handler();
   }
-
+  
   /*##-5- Draw the menu ######################################################*/
   Draw_Menu();
 
@@ -485,36 +485,36 @@ void Save_Picture(void)
                      sizeof(uint16_t),
                      (void *)&bmpHeaderByteCnt);
       byteswritten += bmpHeaderByteCnt;
-
+      
       /* LSB of size in bytes of BMP file */
       tmp_size = (uint16_t)(bmpFileHeader.bfSize & 0x0000FFFF);
       res1 = f_write(&MyFile, (uint16_t *)&(tmp_size),
                      sizeof(uint16_t),
                      (void *)&bmpHeaderByteCnt);
       byteswritten += bmpHeaderByteCnt;
-
+      
       /* MSB of size in bytes of BMP file */
       tmp_size = (uint16_t)((bmpFileHeader.bfSize & 0xFFFF0000) >> 16);
       res1 = f_write(&MyFile, (uint16_t *)&(tmp_size),
                      sizeof(uint16_t),
                      (void *)&bmpHeaderByteCnt);
       byteswritten += bmpHeaderByteCnt;
-
+      
       res1 = f_write(&MyFile, (uint16_t *)&(bmpFileHeader.bfReserved1),
                      sizeof(uint16_t),
                      (void *)&bmpHeaderByteCnt);
       byteswritten += bmpHeaderByteCnt;
-
+      
       res1 = f_write(&MyFile, (uint16_t *)&(bmpFileHeader.bfReserved2),
                      sizeof(uint16_t),
                      (void *)&bmpHeaderByteCnt);
       byteswritten += bmpHeaderByteCnt;
-
+      
       res1 = f_write(&MyFile, (uint32_t *)&(bmpFileHeader.bOffBits),
                      sizeof(uint32_t),
                      (void *)&bmpHeaderByteCnt);
       byteswritten += bmpHeaderByteCnt;
-
+      
       if(res1 != FR_OK)
       {
       /* Reactivate LTDC */
@@ -533,7 +533,7 @@ void Save_Picture(void)
         res2 = f_write(&MyFile, (BitMapFileInfoHeader_Typedef *)&bmpFileInfoHeader,
                        sizeof(BitMapFileInfoHeader_Typedef),
                        (void *)&bmpFileInfoHeaderByteCnt);
-
+        
         if(res2 != FR_OK)
         {
           /* Reactivate LTDC */
@@ -556,7 +556,7 @@ void Save_Picture(void)
 
         /* Reactivate LTDC */
         LTDC_Operation(1);
-
+        
         if(res3 != FR_OK)
         {
           if(res3 == FR_DISK_ERR)
@@ -583,16 +583,16 @@ void Save_Picture(void)
       {
         /*##-4- Close the open BMP file ######################################*/
         f_close(&MyFile);
-
+        
         /* Success of the demo: no error occurrence */
         BSP_LED_On(LED1);
-
+        
         BSP_LCD_ClearStringLine(BSP_LCD_GetYSize() - 20);
         BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 20, (uint8_t*)"             BMP File Saved.", RIGHT_MODE);
-
+        
         /* Wait for 2s */
         HAL_Delay(2000);
-
+        
         BSP_LCD_ClearStringLine(BSP_LCD_GetYSize() - 20);
 
         /* Select Layer 1 */
@@ -651,7 +651,7 @@ static void Prepare_Picture(void)
   hdma2d_eval.LayerCfg[1].InputOffset = 0;
 
   hdma2d_eval.Instance = DMA2D;
-
+  
   /* DMA2D Initialization */
   if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK)
   {
@@ -660,14 +660,14 @@ static void Prepare_Picture(void)
       Error_Handler();
     }
   }
-  else
+  else 
   {
     Error_Handler();
   }
-
+  
   /* Go to start of last drawing pad useful line from LCD frame buffer */
   addrSrc += (((y1 * BSP_LCD_GetXSize()) + x0) * ARGB8888_BYTE_PER_PIXEL);
-
+  
   /* Copy and Convert picture from LCD frame buffer in ARGB8888 to Converted frame buffer in
    * RGB888 pixel format for all the useful lines of the drawing pad */
   for(lineCnt = y0; lineCnt <= y1; lineCnt++)
@@ -680,7 +680,7 @@ static void Prepare_Picture(void)
 
     /* Increment the destination address by one line RGB888, this will add one padding pixel */
     addrDst += ((x1 - x0) * RGB888_BYTE_PER_PIXEL) + RGB888_BYTE_PER_PIXEL;
-
+    
     /* Decrement the source address by one line */
     addrSrc -= (BSP_LCD_GetXSize() * ARGB8888_BYTE_PER_PIXEL);
   }
@@ -717,7 +717,7 @@ static void Update_Size(uint8_t size)
 
   /* Get the current text color */
   color = BSP_LCD_GetTextColor();
-
+  
   /* Update the selected size icon */
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_FillCircle(520, (BSP_LCD_GetYSize() - 35), 20);

@@ -62,10 +62,10 @@ int main(void)
 {
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
+  
   /* Add your application code here */
-
-
+  
+  
   /* Infinite loop */
   while (1)
   {
@@ -75,7 +75,7 @@ int main(void)
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE BEGIN    ============== */
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000

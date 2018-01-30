@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/TIM_PWMOutput/Inc/main.h
+  * @file    TIM/TIM_PWMOutput/Inc/main.h 
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -43,7 +43,7 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* User can use this section to tailor TIMx instance used and associated
+/* User can use this section to tailor TIMx instance used and associated 
    resources */
 /* Definition for TIMx clock resources */
 #define TIMx                           TIM3
@@ -52,7 +52,7 @@
 /* Definition for USARTx Pins */
 #define TIMx_CHANNEL_GPIO_PORT()       __HAL_RCC_GPIOC_CLK_ENABLE()
 #define GPIO_PIN_CHANNEL1              GPIO_PIN_6
-
+  
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

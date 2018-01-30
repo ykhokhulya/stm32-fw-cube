@@ -68,7 +68,7 @@ function deleteLink()
 {
   if (localStorageSupported()) {
     window.localStorage.setItem('navpath','');
-  }
+  } 
 }
 
 function cachedLink()
@@ -82,21 +82,21 @@ function cachedLink()
 
 function getScript(scriptName,func,show)
 {
-  var head = document.getElementsByTagName("head")[0];
+  var head = document.getElementsByTagName("head")[0]; 
   var script = document.createElement('script');
   script.id = scriptName;
   script.type = 'text/javascript';
-  script.onload = func;
-  script.src = scriptName+'.js';
-  if ($.browser.msie && $.browser.version<=8) {
+  script.onload = func; 
+  script.src = scriptName+'.js'; 
+  if ($.browser.msie && $.browser.version<=8) { 
     // script.onload does work with older versions of IE
     script.onreadystatechange = function() {
-      if (script.readyState=='complete' || script.readyState=='loaded') {
-        func(); if (show) showRoot();
+      if (script.readyState=='complete' || script.readyState=='loaded') { 
+        func(); if (show) showRoot(); 
       }
     }
   }
-  head.appendChild(script);
+  head.appendChild(script); 
 }
 
 function createIndent(o,domNode,node,level)
@@ -229,7 +229,7 @@ function newNode(o, po, text, link, childrenData, lastNode)
       a.onclick = function() { storeLink(link); }
     }
   } else {
-    if (childrenData != null)
+    if (childrenData != null) 
     {
       a.className = "nolink";
       a.href = "javascript:void(0)";
@@ -278,7 +278,7 @@ function expandNode(o, node, imm, showRoot)
     } else {
       if (!node.childrenVisited) {
         getNode(o, node);
-      } if (imm || ($.browser.msie && $.browser.version>8)) {
+      } if (imm || ($.browser.msie && $.browser.version>8)) { 
         // somehow slideDown jumps to the start of tree for IE9 :-(
         $(node.getChildrenUL()).show();
       } else {

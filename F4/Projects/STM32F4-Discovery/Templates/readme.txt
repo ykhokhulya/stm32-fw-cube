@@ -1,9 +1,9 @@
 /**
   @page Templates  Description of the Templates example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Templates/readme.txt
+  * @file    Templates/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the Templates example.
   ******************************************************************************
@@ -38,7 +38,7 @@
 This project provides a reference template that can be used to build any firmware application.
 
 This directory provides a reference template project that can be used to build any firmware application for
-STM32F407xx devices using STM32CubeF4 HAL and running on STM32F4-Discovery RevB & RevC board from STMicroelectronics.
+STM32F407xx devices using STM32CubeF4 HAL and running on STM32F4-Discovery RevB & RevC board from STMicroelectronics. 
 
 Two workspace are provided for STM32F4-Discovery(STM32F407xx devices) configuration.
 
@@ -47,35 +47,35 @@ Two workspace are provided for STM32F4-Discovery(STM32F407xx devices) configurat
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
-@par Directory contents
+@par Directory contents 
 
   - Templates/Src/main.c                 Main program
   - Templates/Src/system_stm32f4xx.c     STM32F4xx system clock configuration file
-  - Templates/Src/stm32f4xx_it.c         Interrupt handlers
+  - Templates/Src/stm32f4xx_it.c         Interrupt handlers 
   - Templates/Src/stm32f4xx_hal_msp.c    HAL MSP module
-  - Templates/Inc/main.h                 Main program header file
+  - Templates/Inc/main.h                 Main program header file  
   - Templates/Inc/stm32f4xx_hal_conf.h   HAL Configuration file
   - Templates/Inc/stm32f4xx_it.h         Interrupt handlers header file
 
-
-@par Hardware and Software environment
+        
+@par Hardware and Software environment  
 
   - This example runs on STM32F407xx devices.
-
-  - This example has been tested with STMicroelectronics STM32F4-Discovery RevB & RevC
-    boards and can be easily tailored to any other supported device
+    
+  - This example has been tested with STMicroelectronics STM32F4-Discovery RevB & RevC 
+    boards and can be easily tailored to any other supported device 
     and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

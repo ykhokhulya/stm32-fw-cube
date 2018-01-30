@@ -197,7 +197,7 @@ void Touchscreen_demo1(void)
 
 		} /* of while (exitTsUseCase == 0) */
 
-	} /* of if(status == TS_OK) */
+	} /* of if(status == TS_OK) */  
 }
 
 #if (TS_MULTI_TOUCH_SUPPORTED == 1)

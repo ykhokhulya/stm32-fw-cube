@@ -3,7 +3,7 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    ADC/ADC_InjectedConversion_Interrupt/readme.txt
+  * @file    ADC/ADC_InjectedConversion_Interrupt/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the ADC RegularConversion interrupt example.
   ******************************************************************************
@@ -33,26 +33,25 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
+How to interrupt continuous ADC regular channel conversion using ADC injected 
+channels, and how to get the result of this conversion.
 
-This example describes how to use the ADC in interrupt mode to convert data through
-the HAL API.
-
-This example describes how to interrupt continuous ADC1 regular ADC_CHANNEL_4 conversion
+This example describes how to interrupt continuous ADC1 regular ADC_CHANNEL_4 conversion 
 using ADC1 injected ADC_CHANNEL_12 and how to get the converted value of this conversion.
 
 The ADC1 is configured to convert continuously regular ADC_CHANNEL_4
 and convert injected ADC_CHANNEL_12 (connected to PC.02) when injected conversion starts
 (after one second of the start of regular channel).
 
-Each time a regular channel end of conversion occurs an interrupt is generated
-and the converted data of ADC1 DR register is affected to the uhADCxConvertedRegValue
+Each time a regular channel end of conversion occurs an interrupt is generated 
+and the converted data of ADC1 DR register is affected to the uhADCxConvertedRegValue 
 variable in the ADC conversion complete callback function. After one second of
-the start of regular ADC_CHANNEL_4 conversion the injected ADC_CHANNEL_12 conversion starts
-so regular conversion is temporary interrupted until the end of injected conversion.
-When the injected conversion is finished, an interrupt is generated, and the
-converted injected data of ADC1 DR register is affected to the uhADCxConvertedInjValue
+the start of regular ADC_CHANNEL_4 conversion the injected ADC_CHANNEL_12 conversion starts 
+so regular conversion is temporary interrupted until the end of injected conversion. 
+When the injected conversion is finished, an interrupt is generated, and the  
+converted injected data of ADC1 DR register is affected to the uhADCxConvertedInjValue  
 variable in the ADC conversion complete callback function.
 
 Conversion time (reference manual, Reset and Clock control part):
@@ -74,32 +73,32 @@ SB94 must be closed to use the potentiometer.
 STM32 Eval board's LEDs can be used to monitor the transfer status:
   - LED3 is ON when there are an error in initialization.
 
-@par Directory contents
+@par Directory contents 
 
   - ADC/ADC_InjectedConversion_Interrupt/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - ADC/ADC_InjectedConversion_Interrupt/Inc/stm32f4xx_it.h          DMA interrupt handlers header file
-  - ADC/ADC_InjectedConversion_Interrupt/Inc/main.h                  Header for main.c module
+  - ADC/ADC_InjectedConversion_Interrupt/Inc/main.h                  Header for main.c module  
   - ADC/ADC_InjectedConversion_Interrupt/Src/stm32f4xx_it.c          DMA interrupt handlers
   - ADC/ADC_InjectedConversion_Interrupt/Src/main.c                  Main program
-  - ADC/ADC_InjectedConversion_Interrupt/Src/stm32f4xx_hal_msp.c     HAL MSP file
+  - ADC/ADC_InjectedConversion_Interrupt/Src/stm32f4xx_hal_msp.c     HAL MSP file 
   - ADC/ADC_InjectedConversion_Interrupt/Src/system_stm32f4xx.c      STM32F4xx system source file
 
-@par Hardware and Software environment
+@par Hardware and Software environment 
 
   - This example runs on STM32F446xx devices.
-
+  
   - This example has been tested with STM32446E-EVAL board revB and can be
     easily tailored to any other supported device and development board.
 
   - STM32446E-EVAL Set-up
     - Use the Potentiometer (P2) of the Eval board (connected to  PA.04).
-    - Connect PC.02 to a power supply (do not forget to connect the power supply
+    - Connect PC.02 to a power supply (do not forget to connect the power supply 
       GND to the EVAL board GND)
-
-@par How to use it ?
+      
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the example
 

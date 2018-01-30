@@ -1,9 +1,9 @@
 /**
   @page GPIO_InfiniteLedToggling_Init GPIO example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    Examples_LL/GPIO/GPIO_InfiniteLedToggling_Init/readme.txt
+  * @file    Examples_LL/GPIO/GPIO_InfiniteLedToggling_Init/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the GPIO example.
   ******************************************************************************
@@ -49,7 +49,7 @@ In this example, HCLK is configured at 100 MHz.
 
 System, GPIO, Output, Alternate function, Push-pull, Toggle
 
-@par Directory contents
+@par Directory contents 
 
   - GPIO/GPIO_InfiniteLedToggling_Init/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - GPIO/GPIO_InfiniteLedToggling_Init/Inc/main.h                  Header for main.c module
@@ -62,12 +62,12 @@ System, GPIO, Output, Alternate function, Push-pull, Toggle
 @par Hardware and Software environment
 
   - This example runs on STM32F411xE devices.
-
+    
   - This example has been tested with NUCLEO-F411RE board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

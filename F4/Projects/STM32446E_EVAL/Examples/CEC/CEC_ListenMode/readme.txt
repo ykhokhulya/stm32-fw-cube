@@ -1,9 +1,9 @@
 /**
   @page CEC CEC_ListenMode example
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    CEC/CEC_ListenMode/readme.txt
+  * @file    CEC/CEC_ListenMode/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the CEC Listen Mode example.
   ******************************************************************************
@@ -33,12 +33,11 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Example Description 
 
-This example shows how to configure and use the CEC peripheral to receive and
-transmit messages between two boards while a third one (the spy device) listens
-but doesn't acknowledge the received messages.
-
+How to configure and use the CEC peripheral to receive and transmit messages 
+between two boards, while a third board (the spy device) listens but doesn't 
+acknowledge the received messages.
 
 - Hardware Description
 
@@ -100,25 +99,25 @@ Both Device_1 and Device_2 acknowledge the received messages.
 Accordingly, the following happens on the RX side (i.e. on both receiving boards,
 one which acknowledges the message and the other one which doesn't) in case of successful
 reception:
- - when User push-button is pressed on TX side,
-     * all RX side LEDs are turned off
+ - when User push-button is pressed on TX side, 
+     * all RX side LEDs are turned off 
  - when Joystick Selection push-button is pressed on TX side, on RX side
      *  LED1 and LED2 are turned on
-     *  LED3 and LED4 are turned off
- - when Joystick UP push-button is pressed on TX side,
+     *  LED3 and LED4 are turned off 
+ - when Joystick UP push-button is pressed on TX side, 
      *  all RX side LEDs are turned on
- - when Joystick DOWN push-button is pressed on TX side, on RX side
+ - when Joystick DOWN push-button is pressed on TX side, on RX side 
      * LED1 and LED2 are turned off
-     * LED3 and LED4 are turned on
+     * LED3 and LED4 are turned on    
 In case of unsuccessful reception, LED3 is turned on.
 
 
 In case Device_3 (the spy device) transmits, only Device_1 reacts
-to the received messages.
+to the received messages. 
 
 
-Practically, 2 EXTI lines (EXTI15_10 and EXTI0) are configured to
-generate an interrupt on each falling or rising edge.
+Practically, 2 EXTI lines (EXTI15_10 and EXTI0) are configured to 
+generate an interrupt on each falling or rising edge. 
 A specific message is then transmitted by the CEC IP
 and a LED connected to a specific MFX GPIO pin is toggled.
     - EXTI0 is mapped to MFX used to manage Joystick pins
@@ -129,37 +128,37 @@ Then, on TX side,
   - when falling edge is detected on EXTI15_10 due to line PC.13, LED1 toggles
   - when falling edge is detected on EXTI0-UP joystick button LED3 toggles
   - when falling edge is detected on EXTI0-DOWN joystick button LED4 toggles
-
+   
 
 In this example, HCLK is configured at 180 MHz.
 
 @Known Limitation: Currently there is an issue when pressing the joystick/button on Device_1,
   just after Device_3 has been used (button pressed): there will be a transmission error.
   It is necessary to use (press joystick/button) on Device_2, then Device_1 becomes operative again.
+  
 
-
-@par Directory contents
+@par Directory contents 
 
   - CEC/CEC_ListenMode/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - CEC/CEC_ListenMode/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CEC/CEC_ListenMode/Inc/main.h                  Header for main.c module
+  - CEC/CEC_ListenMode/Inc/main.h                  Header for main.c module  
   - CEC/CEC_ListenMode/Src/stm32f4xx_it.c          Interrupt handlers
   - CEC/CEC_ListenMode/Src/system_stm32f4xx.c      STM32F4xx system source file
   - CEC/CEC_ListenMode/Src/main.c                  Main program
   - CEC/CEC_ListenMode/Src/stm32f4xx_hal_msp.c     IP hardware resources initialization
-
+  
 @par Hardware and Software environment
 
   - This example runs on STM32F446xx Devices.
-
+    
   - This example has been tested with STM32446E-EVAL board and can be
-    easily tailored to any other supported device and development board.
+    easily tailored to any other supported device and development board.      
 
 
-@par How to use it ?
+@par How to use it ? 
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - in main.h: uncomment DEVICE_1 for first board, uncomment DEVICE_2 for second board, uncomment DEVICE_3 for third board
  - Rebuild all files and load your image into target memory
  - Be aware that PB6 pin is missing but PB3 is connected directly to it (SB23 is closed).

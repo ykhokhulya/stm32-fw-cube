@@ -97,7 +97,7 @@
 /** @defgroup STM32469I-EVAL_NOR_Private_Defines STM32469I EVAL NOR Private Defines
   * @{
   */
-
+  
 /**
   * @}
   */
@@ -253,7 +253,7 @@ uint8_t BSP_NOR_WriteData(uint32_t uwStartAddress, uint16_t* pData, uint32_t uwD
     uwStartAddress += 2;
     pData++;
   }
-
+  
   return NOR_STATUS_OK;
 }
 
@@ -318,7 +318,7 @@ uint8_t BSP_NOR_Erase_Chip(void)
   else
   {
     return NOR_STATUS_OK;
-  }
+  } 
 }
 
 /**

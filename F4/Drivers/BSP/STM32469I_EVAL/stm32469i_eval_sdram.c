@@ -156,7 +156,7 @@ uint8_t BSP_SDRAM_Init(void)
   Timing.LoadToActiveDelay    = 2;   /* TMRD: 2 Clock cycles */
   Timing.ExitSelfRefreshDelay = 7;   /* TXSR: min=70ns (7x11.11ns) */
   Timing.SelfRefreshTime      = 4;   /* TRAS: min=42ns (4x11.11ns) max=120k (ns) */
-  Timing.RowCycleDelay        = 7;   /* TRC:  min=70 (7x11.11ns) */
+  Timing.RowCycleDelay        = 7;   /* TRC:  min=70 (7x11.11ns) */ 
   Timing.WriteRecoveryTime    = 2;   /* TWR:  min=1+ 7ns (1+1x11.11ns) */
   Timing.RPDelay              = 2;   /* TRP:  20ns => 2x11.11ns */
   Timing.RCDDelay             = 2;   /* TRCD: 20ns => 2x11.11ns */

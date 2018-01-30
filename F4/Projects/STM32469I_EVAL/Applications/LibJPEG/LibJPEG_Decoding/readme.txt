@@ -1,9 +1,9 @@
 /**
   @page LibJPEG_Decoding LibJPEG decoding application
-
+  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    LibJPEG/LibJPEG_Decoding/readme.txt
+  * @file    LibJPEG/LibJPEG_Decoding/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the LibJPEG decoding application.
   ******************************************************************************
@@ -38,7 +38,7 @@
 
 @par Application Description
 
-This application demonstrates how to read a jpeg file from SDCard memory, decode it
+This application demonstrates how to read a jpeg file from SDCard memory, decode it 
 and display the final BMP image on the LCD.
 
 The JPEG images should be copied at the micro SD card's root.
@@ -48,11 +48,11 @@ The images must have the following properties:
  - named as "image.jpg"
  - 320*240 size
 
-The image size can be modified by changing IMAGE_WIDTH and IMAGE_HEIGHT defines
+The image size can be modified by changing IMAGE_WIDTH and IMAGE_HEIGHT defines 
 in "main.h" file to decode other resolution than 320x240.
 
 @note IMAGE_WIDTH and IMAGE_HEIGHT values must be lower or equal to LCD screen resolution.
- - LCD width  = 320
+ - LCD width  = 320 
  - LCD height = 240
 
 @note If the displayed image's colors are inverted, please uncomment "SWAP_RB" define in "main.h" file.
@@ -62,7 +62,7 @@ in "main.h" file to decode other resolution than 320x240.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-
+      
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
@@ -72,13 +72,13 @@ in "main.h" file to decode other resolution than 320x240.
     - LibJPEG/LibJPEG_Decoding/Inc/main.h                      Main program header file
     - LibJPEG/LibJPEG_Decoding/Inc/sd_diskio.h                 FatFS sd diskio driver header file
     - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_it.h              Interrupt handlers header file
-    - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_hal_conf.h        HAL Configuration file
+    - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_hal_conf.h        HAL Configuration file 
     - LibJPEG/LibJPEG_Decoding/Inc/ffconf.h                    FAT file system module configuration file
     - LibJPEG/LibJPEG_Decoding/Inc/decode.h                    Decoder header file
     - LibJPEG/LibJPEG_Decoding/Inc/jmorecfg.h                  Lib JPEG configuration file (advanced configuration)
     - LibJPEG/LibJPEG_Decoding/Inc/jconfig.h                   Lib JPEG configuration file
     - LibJPEG/LibJPEG_Decoding/Inc/jdata_conf.h                Write/Read methods definition
-    - LibJPEG/LibJPEG_Decoding/Src/main.c                      Main program
+    - LibJPEG/LibJPEG_Decoding/Src/main.c                      Main program  
     - LibJPEG/LibJPEG_Decoding/Src/sd_diskio.c                 FatFS sd diskio driver implementation
     - LibJPEG/LibJPEG_Decoding/Src/stm32f4xx_it.c              Interrupt handlers
     - LibJPEG/LibJPEG_Decoding/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
@@ -91,11 +91,11 @@ in "main.h" file to decode other resolution than 320x240.
   - This application runs on STM32F469xx and STM32F479xx devices.
 
   - This application has been tested with STMicroelectronics STM32469I-EVAL revC
-evaluation boards and can be easily tailored to any other supported device
+evaluation boards and can be easily tailored to any other supported device 
 and development board.
 
   - STM32469I-EVAL Set-up
-   - Connect a uSD Card to the Micro SD connector (CN17)
+   - Connect a uSD Card to the Micro SD connector (CN17) 
    - LED3 is ON if an error occurs.
 
 @note  When the uSD Card is used; the Camera module must be unplugged, this is due to
@@ -105,10 +105,10 @@ and development board.
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain
+ - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-
+                                   

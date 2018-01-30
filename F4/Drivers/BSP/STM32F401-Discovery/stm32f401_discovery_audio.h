@@ -32,7 +32,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F401_DISCOVERY_AUDIO_H
@@ -40,7 +40,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif
+#endif 
 
 /* Includes ------------------------------------------------------------------*/
 /* Include audio component Driver */
@@ -55,21 +55,21 @@
 /** @addtogroup STM32F401_DISCOVERY
   * @{
   */
-
+    
 /** @addtogroup STM32F401_DISCOVERY_AUDIO
   * @{
-  */
+  */    
 
 /** @defgroup STM32F401_DISCOVERY_AUDIO_Exported_Types STM32F401 DISCOVERY AUDIO Exported Types
   * @{
   */
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_AUDIO_OUT_Exported_Constants STM32F401 DISCOVERY AUDIO OUT Exported Constants
   * @{
-  */
+  */ 
 
 /*------------------------------------------------------------------------------
                           AUDIO OUT CONFIGURATION
@@ -131,7 +131,7 @@
 #define I2S2_DMAx_IRQ                   DMA1_Stream3_IRQn
 #define I2S2_DMAx_PERIPH_DATA_SIZE      DMA_PDATAALIGN_HALFWORD
 #define I2S2_DMAx_MEM_DATA_SIZE         DMA_MDATAALIGN_HALFWORD
-
+   
 #define I2S2_IRQHandler                 DMA1_Stream3_IRQHandler
 
 /* Select the interrupt preemption priority and subpriority for the IT/DMA interrupt */
@@ -143,7 +143,7 @@
 
 #define AUDIODATA_SIZE                  2   /* 16-bits audio data size */
 
-/* Audio status definition */
+/* Audio status definition */     
 #define AUDIO_OK                        0
 #define AUDIO_ERROR                     1
 #define AUDIO_TIMEOUT                   2
@@ -159,28 +159,28 @@
 /* PCM buffer output size */
 #define PCM_OUT_SIZE                          DEFAULT_AUDIO_IN_FREQ/1000
 #define CHANNEL_DEMUX_MASK                    0x55
-
+   
 /*------------------------------------------------------------------------------
                     OPTIONAL Configuration defines parameters
 ------------------------------------------------------------------------------*/
 
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_AUDIO_Exported_Variables STM32F401 DISCOVERY AUDIO Exported Variables
   * @{
-  */
+  */ 
 extern __IO uint16_t AudioInVolume;
 /**
   * @}
-  */
+  */ 
 
 /** @defgroup STM32F401_DISCOVERY_AUDIO_Exported_Macros STM32F401 DISCOVERY AUDIO Exported Macros
   * @{
   */
 #define DMA_MAX(_X_)                (((_X_) <= DMA_MAX_SZE)? (_X_):DMA_MAX_SZE)
-#define HTONS(A)  ((((uint16_t)(A) & 0xff00) >> 8) | (((uint16_t)(A) & 0x00ff) << 8))
+#define HTONS(A)  ((((uint16_t)(A) & 0xff00) >> 8) | (((uint16_t)(A) & 0x00ff) << 8))  
 
 /**
   * @}
@@ -188,7 +188,7 @@ extern __IO uint16_t AudioInVolume;
 
 /** @defgroup STM32F401_DISCOVERY_AUDIO_OUT_Exported_Functions STM32F401 DISCOVERY AUDIO OUT Exported Functions
   * @{
-  */
+  */ 
 uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
 uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size);
 void    BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size);
@@ -223,7 +223,7 @@ void  BSP_AUDIO_OUT_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 
 /** @defgroup STM32F401_DISCOVERY_AUDIO_IN_Exported_Functions STM32F401 DISCOVERY AUDIO IN Exported Functions
   * @{
-  */
+  */ 
 uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr);
 uint8_t BSP_AUDIO_IN_Record(uint16_t *pData, uint32_t Size);
 uint8_t BSP_AUDIO_IN_Stop(void);
@@ -244,13 +244,17 @@ void    BSP_AUDIO_IN_Error_Callback(void);
 
 /* These function can be modified in case the current settings (e.g. DMA stream)
    need to be changed for specific application needs */
-void  BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, uint32_t AudioFreq, void *Params);
+void  BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, uint32_t AudioFreq, void *Params);   
 void  BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params);
 void  BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 
 /**
   * @}
-  */
+  */ 
+
+/**
+  * @}
+  */ 
 
 /**
   * @}
@@ -258,11 +262,7 @@ void  BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 
 /**
   * @}
-  */
-
-/**
-  * @}
-  */
+  */ 
 
 #ifdef __cplusplus
 }

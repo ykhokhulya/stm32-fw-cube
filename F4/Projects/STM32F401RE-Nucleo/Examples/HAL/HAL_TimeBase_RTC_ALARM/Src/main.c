@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/main.c
+  * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/main.c 
   * @author  MCD Application Team
   * @brief   Main program body
   ******************************************************************************
@@ -66,7 +66,7 @@ int main(void)
 
   /* Configure LED2 */
   BSP_LED_Init(LED2);
-
+  
   /* Configure BUTTON_KEY */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   /* -3- Toggle LED2 in an Infinite loop */
@@ -92,7 +92,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Suspend tick increment */
       HAL_SuspendTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 1;
     }
@@ -100,7 +100,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
       /* Resume tick increment */
       HAL_ResumeTick();
-
+      
       /* Change the Push button state */
       uwIncrementState = 0;
     }
@@ -121,8 +121,8 @@ static void Error_Handler(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
-  *            System Clock source            = PLL (HSE_CRYSTAL or HSE_BYPASS)
+  *         The system Clock is configured as follow : 
+  *            System Clock source            = PLL (HSE_CRYSTAL or HSE_BYPASS) 
   *            SYSCLK(Hz)                     = 84000000
   *            HCLK(Hz)                       = 84000000
   *            AHB Prescaler                  = 1
@@ -143,14 +143,14 @@ void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
-
+  
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
+  
   /* Enable HSE Oscillator, select it as PLL source and finally activate the PLL */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-
-#ifdef HSE_CRYSTAL
+  
+#ifdef HSE_CRYSTAL  
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
 #elif defined (HSE_BYPASS)
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
@@ -166,13 +166,13 @@ void SystemClock_Config(void)
     /* Initialization Error */
     Error_Handler();
   }
-
+  
   /* Select the PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
@@ -201,10 +201,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-*/
+*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

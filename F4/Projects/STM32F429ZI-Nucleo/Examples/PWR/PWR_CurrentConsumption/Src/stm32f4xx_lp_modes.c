@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file    PWR/PWR_CurrentConsumption/stm32f4xx_lp_modes.c
+  * @file    PWR/PWR_CurrentConsumption/stm32f4xx_lp_modes.c 
   * @author  MCD Application Team
-  * @brief   This file provides firmware functions to manage the following
+  * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the STM32F4xx Low Power Modes:
   *           - Sleep Mode
   *           - STOP mode with RTC
@@ -49,7 +49,7 @@
 
 /** @addtogroup PWR_CurrentConsumption
   * @{
-  */
+  */ 
 
 #define PHY_PWR_DOWN       (1<<11)
 #define PHY_ADDRESS        0x00 /* default ADDR for PHY: LAN8742 */
@@ -70,11 +70,11 @@ static void SYSCLKConfig_STOP(void);
   * @brief  This function configures the system to enter Sleep mode for
   *         current consumption measurement purpose.
   *         Sleep Mode
-  *         ==========
+  *         ==========  
   *            - System Running at PLL (100MHz)
   *            - Flash 3 wait state
   *            - Instruction and Data caches ON
-  *            - Prefetch ON
+  *            - Prefetch ON   
   *            - Code running from Internal FLASH
   *            - All peripherals disabled.
   *            - Wakeup using EXTI Line (user Button)
@@ -109,16 +109,16 @@ void SleepMode_Measure(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Pin = GPIO_PIN_All;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 
   /* Disable GPIOs clock */
@@ -137,7 +137,7 @@ void SleepMode_Measure(void)
   /* Configure user Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 
-  /* Suspend Tick increment to prevent wakeup by Systick interrupt.
+  /* Suspend Tick increment to prevent wakeup by Systick interrupt. 
      Otherwise the Systick interrupt will wake up the device within 1ms (HAL time base) */
   HAL_SuspendTick();
 
@@ -146,16 +146,16 @@ void SleepMode_Measure(void)
 
   /* Resume Tick interrupt if disabled prior to sleep mode entry */
   HAL_ResumeTick();
-
+  
   /* Exit Ethernet Phy from LowPower mode */
   ETH_PhyExitFromPowerDownMode();
 }
 
 /**
-  * @brief  This function configures the system to enter Stop mode with RTC
+  * @brief  This function configures the system to enter Stop mode with RTC 
   *         clocked by LSE or LSI for current consumption measurement purpose.
   *         STOP Mode with RTC clocked by LSE/LSI
-  *         =====================================
+  *         =====================================   
   *           - RTC Clocked by LSE or LSI
   *           - Regulator in LP mode
   *           - HSI, HSE OFF and LSI OFF if not used as RTC Clock source
@@ -167,7 +167,7 @@ void SleepMode_Measure(void)
   */
 void StopMode_Measure(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct;
+  GPIO_InitTypeDef GPIO_InitStruct;  
 
   /* Disable USB Clock */
   __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
@@ -193,16 +193,16 @@ void StopMode_Measure(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Pin = GPIO_PIN_All;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 
   /* Disable GPIOs clock */
@@ -224,7 +224,7 @@ void StopMode_Measure(void)
   - Synch Prediv = Value according to source clock
   - OutPut = Output Disable
   - OutPutPolarity = High Polarity
-  - OutPutType = Open Drain */
+  - OutPutType = Open Drain */ 
   RTCHandle.Instance = RTC;
   RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
   RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
@@ -236,18 +236,18 @@ void StopMode_Measure(void)
   if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 
   /*## Configure the Wake up timer ###########################################*/
   /*  RTC Wakeup Interrupt Generation:
       Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter
+      Wakeup Time = Wakeup Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI)) * WakeUpCounter
       ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
 
       To configure the wake up timer to 20s the WakeUpCounter is set to 0xA017:
-        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16
+        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
         Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
         Wakeup Time = ~20s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~20s/0,488ms = 40983 = 0xA017 */
@@ -264,7 +264,7 @@ void StopMode_Measure(void)
   /*## Enter Stop Mode #######################################################*/
   HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
 
-  /* Configures system clock after wake-up from STOP: enable HSI, PLL and select
+  /* Configures system clock after wake-up from STOP: enable HSI, PLL and select 
      PLL as system clock source (HSI and PLL are disabled in STOP mode) */
   SYSCLKConfig_STOP();
 
@@ -275,15 +275,15 @@ void StopMode_Measure(void)
   if(HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 }
 
 /**
-  * @brief  This function configures the system to enter Stop mode with RTC
+  * @brief  This function configures the system to enter Stop mode with RTC 
   *         clocked by LSE or LSI for current consumption measurement purpose.
   *         STOP Mode with RTC clocked by LSE/LSI
-  *         =====================================
+  *         =====================================   
   *           - RTC Clocked by LSE or LSI
   *           - Regulator in LP mode
   *           - Under drive feature enabled
@@ -296,7 +296,7 @@ void StopMode_Measure(void)
   */
 void StopUnderDriveMode_Measure(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct;
+  GPIO_InitTypeDef GPIO_InitStruct;  
 
   /* Disable USB Clock */
   __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
@@ -322,16 +322,16 @@ void StopUnderDriveMode_Measure(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Pin = GPIO_PIN_All;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 
   /* Disable GPIOs clock */
@@ -353,7 +353,7 @@ void StopUnderDriveMode_Measure(void)
   - Synch Prediv = Value according to source clock
   - OutPut = Output Disable
   - OutPutPolarity = High Polarity
-  - OutPutType = Open Drain */
+  - OutPutType = Open Drain */ 
   RTCHandle.Instance = RTC;
   RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
   RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
@@ -365,18 +365,18 @@ void StopUnderDriveMode_Measure(void)
   if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 
   /*## Configure the Wake up timer ###########################################*/
   /*  RTC Wakeup Interrupt Generation:
       Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter
+      Wakeup Time = Wakeup Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI)) * WakeUpCounter
       ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
 
       To configure the wake up timer to 20s the WakeUpCounter is set to 0xA017:
-        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16
+        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
         Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
         Wakeup Time = ~20s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~20s/0,488ms = 40983 = 0xA017 */
@@ -393,7 +393,7 @@ void StopUnderDriveMode_Measure(void)
   /*## Enter under-drive Stop Mode ###########################################*/
   HAL_PWREx_EnterUnderDriveSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
 
-  /* Configures system clock after wake-up from STOP: enable HSI, PLL and select
+  /* Configures system clock after wake-up from STOP: enable HSI, PLL and select 
      PLL as system clock source (HSI and PLL are disabled in STOP mode) */
   SYSCLKConfig_STOP();
 
@@ -404,7 +404,7 @@ void StopUnderDriveMode_Measure(void)
   if(HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
 }
 
@@ -423,30 +423,30 @@ void StandbyMode_Measure(void)
 {
   /* Enable Power Clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
+  
   /* Allow access to Backup */
   HAL_PWR_EnableBkUpAccess();
 
   /* Reset RTC Domain */
   __HAL_RCC_BACKUPRESET_FORCE();
   __HAL_RCC_BACKUPRESET_RELEASE();
-
+  
   /* Disable all used wakeup sources: Pin1(PA.0) */
   HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
-
+  
   /* Clear all related wakeup flags */
   __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
-
+  
   /* Re-enable all used wakeup sources: Pin1(PA.0) */
   HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
 
   /*## Enter Standby Mode ####################################################*/
   /* Request to enter STANDBY mode  */
-  HAL_PWR_EnterSTANDBYMode();
+  HAL_PWR_EnterSTANDBYMode();  
 }
 
 /**
-  * @brief  This function configures the system to enter Standby mode with RTC
+  * @brief  This function configures the system to enter Standby mode with RTC 
   *         clocked by LSE or LSI for current consumption measurement purpose.
   *         STANDBY Mode with RTC clocked by LSE/LSI
   *         ========================================
@@ -467,54 +467,54 @@ void StandbyRTCMode_Measure(void)
   - Synch Prediv = Value according to source clock
   - OutPut = Output Disable
   - OutPutPolarity = High Polarity
-  - OutPutType = Open Drain */
-  RTCHandle.Instance = RTC;
+  - OutPutType = Open Drain */ 
+  RTCHandle.Instance = RTC;  
   RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
   RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
   RTCHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
   RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
   RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
   RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
-
+  
   if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*## Configure the Wake up timer ###########################################*/
   /*  RTC Wakeup Interrupt Generation:
       Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter
+      Wakeup Time = Wakeup Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI)) * WakeUpCounter
       ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
 
       To configure the wake up timer to 20s the WakeUpCounter is set to 0xA017:
-        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16
+        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
         Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
         Wakeup Time = ~20s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~20s/0,488ms = 40983 = 0xA017 */
   /* Disable Wake-up timer */
   HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle);
-
+  
   /*## Clear all related wakeup flags ########################################*/
   /* Clear PWR wake up Flag */
   __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
-
+  
   /* Clear RTC Wake Up timer Flag */
   __HAL_RTC_WAKEUPTIMER_CLEAR_FLAG(&RTCHandle, RTC_FLAG_WUTF);
-
+  
   /*## Setting the Wake up time ##############################################*/
   HAL_RTCEx_SetWakeUpTimer_IT(&RTCHandle, 0xA017, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
-
+  
   /*## Enter Standby Mode ####################################################*/
   /* Request to enter STANDBY mode  */
   HAL_PWR_EnterSTANDBYMode();
 }
 
 /**
-  * @brief  This function configures the system to enter Standby mode with RTC
-  *         clocked by LSE or LSI and with Backup SRAM ON for current consumption
+  * @brief  This function configures the system to enter Standby mode with RTC 
+  *         clocked by LSE or LSI and with Backup SRAM ON for current consumption 
   *         measurement purpose.
   *         STANDBY Mode with RTC clocked by LSE/LSI and BKPSRAM
   *         ====================================================
@@ -526,7 +526,7 @@ void StandbyRTCMode_Measure(void)
   * @retval None
   */
 void StandbyRTCBKPSRAMMode_Measure(void)
-{
+{   
   /*## Configure the RTC peripheral###########################################*/
   /* Configure RTC prescaler and RTC data registers as follows:
   - Hour Format = Format 24
@@ -534,7 +534,7 @@ void StandbyRTCBKPSRAMMode_Measure(void)
   - Synch Prediv = Value according to source clock
   - OutPut = Output Disable
   - OutPutPolarity = High Polarity
-  - OutPutType = Open Drain */
+  - OutPutType = Open Drain */ 
   RTCHandle.Instance = RTC;
   RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
   RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
@@ -542,42 +542,42 @@ void StandbyRTCBKPSRAMMode_Measure(void)
   RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
   RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
   RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
-
+  
   if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
+    Error_Handler(); 
   }
-
+  
   /*## Configure the Wake up timer ###########################################*/
   /*  RTC Wakeup Interrupt Generation:
       Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter
+      Wakeup Time = Wakeup Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI)) * WakeUpCounter
       ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
 
       To configure the wake up timer to 20s the WakeUpCounter is set to 0xA017:
-        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16
+        RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
         Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
         Wakeup Time = ~20s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~20s/0,488ms = 40983 = 0xA017 */
-
+   
   /* Disable Wake-up timer */
   HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle);
-
+  
   /*## Clear all related wakeup flags ########################################*/
   /* Clear PWR wake up Flag */
   __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
-
+  
   /* Clear RTC Wake Up timer Flag */
   __HAL_RTC_WAKEUPTIMER_CLEAR_FLAG(&RTCHandle, RTC_FLAG_WUTF);
-
+  
   /*## Setting the Wake up time ##############################################*/
   HAL_RTCEx_SetWakeUpTimer_IT(&RTCHandle, 0xA017, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
 
   /* Enable BKPRAM Clock */
   __HAL_RCC_BKPSRAM_CLK_ENABLE();
-
+  
   /* Enable the Backup SRAM low power Regulator */
   HAL_PWREx_EnableBkUpReg();
 
@@ -585,7 +585,7 @@ void StandbyRTCBKPSRAMMode_Measure(void)
   /* Request to enter STANDBY mode  */
   HAL_PWR_EnterSTANDBYMode();
 }
-
+    
 /**
   * @brief  Configures system clock after wake-up from STOP: enable HSI, PLL
   *         and select PLL as system clock source.
@@ -597,10 +597,10 @@ static void SYSCLKConfig_STOP(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   uint32_t pFLatency = 0;
-
+  
   /* Get the Oscillators configuration according to the internal RCC registers */
   HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
-
+  
   /* After wake-up from STOP reconfigure the system clock: Enable HSE and PLL */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
@@ -612,8 +612,8 @@ static void SYSCLKConfig_STOP(void)
 
   /* Get the Clocks configuration according to the internal RCC registers */
   HAL_RCC_GetClockConfig(&RCC_ClkInitStruct, &pFLatency);
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -633,56 +633,56 @@ void ETH_PhyEnterPowerDownMode(void)
 {
   ETH_HandleTypeDef heth;
   GPIO_InitTypeDef GPIO_InitStruct;
-  uint32_t phyregval = 0;
-
-  /* This part of code is used only when the ETH peripheral is disabled
-	   when the ETH is used in the application this initialization code
+  uint32_t phyregval = 0; 
+   
+  /* This part of code is used only when the ETH peripheral is disabled 
+	   when the ETH is used in the application this initialization code 
 	   is called in HAL_ETH_MspInit() function  ***********************/
-
+	
 	/* Enable GPIO clocks*/
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
-
+  
   /* Configure PA2: ETH_MDIO */
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_NOPULL; 
   GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
   GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_2;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
+  
   /* Configure PC1: ETH_MDC */
   GPIO_InitStruct.Pin = GPIO_PIN_1;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
+  
   /* Enable the ETH peripheral clocks */
   __HAL_RCC_ETH_CLK_ENABLE();
-
+  
   /* Set ETH Handle parameters */
   heth.Instance = ETH;
   heth.Init.PhyAddress = LAN8742A_PHY_ADDRESS;
 
   /* Configure MDC clock: the MDC Clock Range configuration
 	   depends on the system clock: 180Mhz/102 = 1.76MHz  */
-  /* MDC: a periodic clock that provides the timing reference for
+  /* MDC: a periodic clock that provides the timing reference for 
 	   the MDIO data transfer which shouldn't exceed the maximum frequency of 2.5 MHz.*/
   heth.Instance->MACMIIAR = (uint32_t)ETH_MACMIIAR_CR_Div102;
 
   /*****************************************************************/
-
-  /* ETH PHY configuration in Power Down mode **********************/
-
+  
+  /* ETH PHY configuration in Power Down mode **********************/ 
+  
   /* Read ETH PHY control register */
   HAL_ETH_ReadPHYRegister(&heth, PHY_BCR, &phyregval);
-
+  
   /* Set Power down mode bit */
   phyregval |= PHY_POWERDOWN;
-
+  
   /* Write new value to ETH PHY control register */
   HAL_ETH_WritePHYRegister(&heth, PHY_BCR, phyregval);
-
+  
   /*****************************************************************/
-
+  
   /* Disable periph CLKs */
   __HAL_RCC_GPIOA_CLK_DISABLE();
   __HAL_RCC_GPIOC_CLK_DISABLE();
@@ -691,7 +691,7 @@ void ETH_PhyEnterPowerDownMode(void)
 /**
   * @brief  This function wakeup the ETH PHY from the power down mode
   *         When exiting from StandBy mode and the ETH is used in the example
-  *         its better to call this function at the end of HAL_ETH_MspInit()
+  *         its better to call this function at the end of HAL_ETH_MspInit() 
   *         then remove the code that initialize the ETH CLKs ang GPIOs.
   * @param  None
   * @retval None
@@ -701,51 +701,51 @@ void ETH_PhyExitFromPowerDownMode(void)
    ETH_HandleTypeDef heth;
    GPIO_InitTypeDef GPIO_InitStruct;
    uint32_t phyregval = 0;
-
+   
   /* ETH CLKs and GPIOs initilization ******************************/
-  /* To be removed when the function is called from HAL_ETH_MspInit() when
+  /* To be removed when the function is called from HAL_ETH_MspInit() when 
      exiting from Standby mode */
-
+	
 	/* Enable GPIO clocks*/
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
-
+  
   /* Configure PA2 */
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_NOPULL; 
   GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
   GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_2;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
+  
   /* Configure PC1*/
   GPIO_InitStruct.Pin = GPIO_PIN_1;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
+  
   /* Enable ETH CLK */
   __HAL_RCC_ETH_CLK_ENABLE();
   /*****************************************************************/
-
+  
   /* ETH PHY configuration to exit Power Down mode *****************/
   /* Set ETH Handle parameters */
   heth.Instance = ETH;
   heth.Init.PhyAddress = LAN8742A_PHY_ADDRESS;
-
+  
   /* Configure MDC clock: the MDC Clock Range configuration
 	   depends on the system clock: 180Mhz/102 = 1.76MHz  */
-  /* MDC: a periodic clock that provides the timing reference for
+  /* MDC: a periodic clock that provides the timing reference for 
 	   the MDIO data transfer which shouldn't exceed the maximum frequency of 2.5 MHz.*/
-  heth.Instance->MACMIIAR = (uint32_t)ETH_MACMIIAR_CR_Div102;
-
+  heth.Instance->MACMIIAR = (uint32_t)ETH_MACMIIAR_CR_Div102; 
+	
   /* Read ETH PHY control register */
   HAL_ETH_ReadPHYRegister(&heth, PHY_BCR, &phyregval);
-
+  
   /* check if the PHY  is already in power down mode */
   if ((phyregval & PHY_POWERDOWN) != RESET)
   {
     /* Disable Power down mode */
     phyregval &= ~ PHY_POWERDOWN;
-
+    
     /* Write value to ETH PHY control register */
     HAL_ETH_WritePHYRegister(&heth, PHY_BCR, phyregval);
   }
@@ -754,10 +754,10 @@ void ETH_PhyExitFromPowerDownMode(void)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

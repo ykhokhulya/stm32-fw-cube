@@ -57,7 +57,7 @@
 /* Exported constants --------------------------------------------------------*/
 
 /**
-  * @brief LED1
+  * @brief LED1 
   */
 #define LED1_PIN                           LL_GPIO_PIN_0
 #define LED1_GPIO_PORT                     GPIOB
@@ -78,8 +78,8 @@
 #define USER_BUTTON_GPIO_CLK_ENABLE()           LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC)
 #define USER_BUTTON_EXTI_LINE                   LL_EXTI_LINE_13
 #define USER_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
-#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)
-#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)
+#define USER_BUTTON_EXTI_LINE_ENABLE()          LL_EXTI_EnableIT_0_31(USER_BUTTON_EXTI_LINE)   
+#define USER_BUTTON_EXTI_FALLING_TRIG_ENABLE()  LL_EXTI_EnableFallingTrig_0_31(USER_BUTTON_EXTI_LINE)   
 #define USER_BUTTON_SYSCFG_SET_EXTI()           do {                                                                     \
                                                   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);                  \
                                                   LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTC, LL_SYSCFG_EXTI_LINE13);  \

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    SMARTCARD/SMARTCARD_T0/Src/main.c
+  * @file    SMARTCARD/SMARTCARD_T0/Src/main.c 
   * @author  MCD Application Team
   * @brief   This sample code shows how to use STM32F4xx SMARTCARD HAL API to communicate
-  *          with card compatible with T0 protocol.
+  *          with card compatible with T0 protocol. 
   ******************************************************************************
   * @attention
   *
@@ -43,7 +43,7 @@
 
 /** @addtogroup SMARTCARD_T0
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -77,7 +77,7 @@ static void Error_Handler(void);
   * @retval None
   */
 int main(void)
-{
+{    
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -91,25 +91,25 @@ int main(void)
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-
+  
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-
-  SC_State SCState = SC_POWER_OFF;
+  
+  SC_State SCState = SC_POWER_OFF;     
 
   /* Configure Smartcard Interface GPIO pins */
   SC_IOConfig();
-
+	  
 /*-------------------------------- Idle task ---------------------------------*/
   while(1)
   {
-    /* Loop while no Smartcard is detected */
+    /* Loop while no Smartcard is detected */  
     while(CardInserted == 0)
     {
     }
-
+  
     /* Start SC Demo ---------------------------------------------------------*/
-
+    
     /* Wait A2R --------------------------------------------------------------*/
     SCState = SC_POWER_ON;
 
@@ -118,8 +118,8 @@ int main(void)
     SC_ADPU.Header.P1 = 0x00;
     SC_ADPU.Header.P2 = 0x00;
     SC_ADPU.Body.LC = 0x00;
-
-    while(SCState != SC_ACTIVE_ON_T0)
+   
+    while(SCState != SC_ACTIVE_ON_T0) 
     {
       SC_Handler(&SCState, &SC_ADPU, &SC_Response);
     }
@@ -141,8 +141,8 @@ int main(void)
     {
       SC_ADPU.Body.Data[i] = MasterRoot[i];
     }
-    while(i < LC_MAX)
-    {
+    while(i < LC_MAX) 
+    {    
       SC_ADPU.Body.Data[i++] = 0;
     }
     SC_ADPU.Body.LE = 0;
@@ -165,7 +165,7 @@ int main(void)
     /* Select ICCID ----------------------------------------------------------*/
     if(((SC_Response.SW1 << 8) | (SC_Response.SW2)) == SC_OP_TERMINATED)
     {
-      /* Check if the CHV1 is enabled */
+      /* Check if the CHV1 is enabled */   
       if((SC_Response.Data[13] & 0x80) == 0x00)
       {
         CHV1Status = 0x01;
@@ -181,8 +181,8 @@ int main(void)
       {
         SC_ADPU.Body.Data[i] = ICCID[i];
       }
-      while(i < LC_MAX)
-      {
+      while(i < LC_MAX) 
+      {    
         SC_ADPU.Body.Data[i++] = 0;
       }
       SC_ADPU.Body.LE = 0;
@@ -212,7 +212,7 @@ int main(void)
       {
         ICCID_Content[i] =  SC_Response.Data[i];
       }
-      /* Send APDU Command for GSMDir selection */
+      /* Send APDU Command for GSMDir selection */ 
       SC_ADPU.Header.CLA = SC_CLA_GSM11;
       SC_ADPU.Header.INS = SC_SELECT_FILE;
       SC_ADPU.Header.P1 = 0x00;
@@ -223,8 +223,8 @@ int main(void)
       {
         SC_ADPU.Body.Data[i] = GSMDir[i];
       }
-      while(i < LC_MAX)
-      {
+      while(i < LC_MAX) 
+      {    
         SC_ADPU.Body.Data[i++] = 0;
       }
       SC_ADPU.Body.LE = 0;
@@ -245,8 +245,8 @@ int main(void)
       {
         SC_ADPU.Body.Data[i] = IMSI[i];
       }
-      while(i < LC_MAX)
-      {
+      while(i < LC_MAX) 
+      {    
         SC_ADPU.Body.Data[i++] = 0;
       }
       SC_ADPU.Body.LE = 0;
@@ -278,13 +278,13 @@ int main(void)
         SC_ADPU.Header.P1 = 0x00;
         SC_ADPU.Header.P2 = 0x01;
         SC_ADPU.Body.LC = 0x08;
-
+ 
         for(i = 0; i < SC_ADPU.Body.LC; i++)
         {
           SC_ADPU.Body.Data[i] = CHV1[i];
         }
-        while(i < LC_MAX)
-        {
+        while(i < LC_MAX) 
+        {    
           SC_ADPU.Body.Data[i++] = 0;
         }
         SC_ADPU.Body.LE = 0;
@@ -307,8 +307,8 @@ int main(void)
         {
           SC_ADPU.Body.Data[i] = CHV1[i];
         }
-        while(i < LC_MAX)
-        {
+        while(i < LC_MAX) 
+        {    
           SC_ADPU.Body.Data[i++] = 0;
         }
         SC_ADPU.Body.LE = 0;
@@ -346,7 +346,7 @@ int main(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow :
+  *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 168000000
   *            HCLK(Hz)                       = 168000000
@@ -372,8 +372,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is
-     clocked below the maximum system frequency, to update the voltage scaling value
+  /* The voltage scaling allows optimizing the power consumption when the device is 
+     clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -390,14 +390,14 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+  
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
@@ -439,13 +439,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     BSP_LED_Toggle(LED2);
     BSP_LED_Toggle(LED3);
     BSP_LED_Toggle(LED4);
-
+    
     /* Smartcard detected */
     CardInserted = 1;
-
+    
     /* Enable CMDVCC */
     SC_PowerCmd(ENABLE);
-
+    
     /* Reset the card */
     SC_Reset(GPIO_PIN_RESET);
   }
@@ -464,7 +464,7 @@ void HAL_SMARTCARD_ErrorCallback(SMARTCARD_HandleTypeDef *hsc)
     /* Resend the byte that failed to be received (by the Smartcard) correctly */
     SC_ParityErrorHandler();
   }
-
+  
   if(HAL_SMARTCARD_GetError(hsc) & HAL_SMARTCARD_ERROR_PE)
   {
     /* Enable SC_USART RXNE Interrupt (until receiving the corrupted byte) */
@@ -472,16 +472,16 @@ void HAL_SMARTCARD_ErrorCallback(SMARTCARD_HandleTypeDef *hsc)
     /* Flush the SC_USART DR register */
     __HAL_SMARTCARD_FLUSH_DRREGISTER(hsc);
   }
-
+  
   if(HAL_SMARTCARD_GetError(hsc) & HAL_SMARTCARD_ERROR_NE)
   {
     __HAL_SMARTCARD_FLUSH_DRREGISTER(hsc);
   }
-
+  
   if(HAL_SMARTCARD_GetError(hsc) & HAL_SMARTCARD_ERROR_ORE)
   {
     __HAL_SMARTCARD_FLUSH_DRREGISTER(hsc);
-  }
+  } 
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -493,7 +493,7 @@ void HAL_SMARTCARD_ErrorCallback(SMARTCARD_HandleTypeDef *hsc)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{
+{ 
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -506,10 +506,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}
-  */
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
